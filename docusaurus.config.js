@@ -1,8 +1,10 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const dev = process.env.NODE_ENV !== "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -26,6 +28,33 @@ const config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  plugins: [
+    function LinariaPlugin(context, options) {
+      return {
+        name: "linaria-plugin",
+        configureWebpack(config, isServer) {
+          return {
+            module: {
+              rules: [
+                {
+                  test: /\.tsx$/,
+                  exclude: /node_modules/,
+                  use: [
+                    { loader: "babel-loader" },
+                    {
+                      loader: "@linaria/webpack-loader",
+                      options: { sourceMap: dev },
+                    },
+                  ],
+                },
+              ],
+            },
+          };
+        },
+      };
+    },
+  ],
 
   presets: [
     [
