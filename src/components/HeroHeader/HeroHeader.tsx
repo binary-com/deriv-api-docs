@@ -16,7 +16,6 @@ export const HeroHeader = () => {
         align-items: var(--text-align-center);
         padding-top: 4rem;
         
-
         @media screen and (max-width: 1024px) {
             margin-top: 4.7rem;
             padding-top: unset;
