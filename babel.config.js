@@ -4,6 +4,5 @@ module.exports = {
     "@babel/preset-react",
     "@babel/preset-typescript",
     "@linaria",
-    require.resolve("@docusaurus/core/lib/babel/preset"),
   ],
 };
