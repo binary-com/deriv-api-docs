@@ -87,7 +87,7 @@ export const HeroHeader = () => {
     `
 
     return (
-        <div className={heroImageStyle}>
+        <div data-testid="hero-header" className={heroImageStyle}>
             <div className={heroContainerStyle}>
                 <h1 className={heroHeaderStyle}>Deriv API</h1>
                 <h2 className={heroText}>
