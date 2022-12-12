@@ -16,7 +16,9 @@ export const HeroHeader = () => {
                     css={{
                         'margin-bottom': '1.2rem',
                         '@mobile': {
+                            'font-size': '32px',
                             'margin-bottom': '2.4rem',
+                            'text-align': 'left',
                         }
                     }}
                 >

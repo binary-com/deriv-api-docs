@@ -14,7 +14,7 @@ export const heroImageStyle = css`
         align-items: var(--text-align-center);
         padding-top: 40px;
         
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 992px) {
             margin-top: 47px;
             padding-top: unset;
         }
@@ -40,8 +40,9 @@ export const heroContainerStyle = css`
         padding: 160px 0;
         width: 100%;
 
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 992px) {
             width: 100%;
-            padding: 80px 20px;
+            padding: 80px 40px;
+            align-items: baseline;
         }
     `
