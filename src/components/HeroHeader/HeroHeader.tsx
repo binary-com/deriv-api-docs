@@ -14,11 +14,7 @@ export const HeroHeader = () => {
                     type="heading-1"
                     bold
                     css={{
-                        'margin-bottom': '1.2rem',
-                        '@mobile': {
-                            'font-size': '32px',
-                            'margin-bottom': '2.4rem',
-                        }
+                        '@mobile': { 'font-size': '32px' }
                     }}
                     role='heading'
                     aria-level={2}
@@ -31,10 +27,7 @@ export const HeroHeader = () => {
                     align="center"
                     css={{
                         'font-weight': 400,
-                        '@mobile': {
-                            'margin-bottom': '1.2rem',
-                            'text-align': 'left',
-                        }
+                        '@mobile': { 'text-align': 'left' }
                     }}
                     role='heading'
                     aria-level={7}
