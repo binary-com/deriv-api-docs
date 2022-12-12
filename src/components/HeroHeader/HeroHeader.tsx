@@ -3,7 +3,7 @@ import { Text } from '@deriv/ui';
 import {
     heroImageStyle,
     heroContainerStyle,
-} from './CSS.HeroHeader';
+} from './HeroHeader.styles';
 
 export const HeroHeader = () => {
     return (
@@ -12,7 +12,7 @@ export const HeroHeader = () => {
                 <Text
                     color="primary"
                     type="heading-1"
-                    bold="true"
+                    bold
                     css={{
                         'margin-bottom': '1.2rem',
                         '@mobile': {
@@ -20,6 +20,8 @@ export const HeroHeader = () => {
                             'margin-bottom': '2.4rem',
                         }
                     }}
+                    role='heading'
+                    aria-level={2}
                 >
                     Deriv API
                 </Text>
@@ -34,6 +36,8 @@ export const HeroHeader = () => {
                             'text-align': 'left',
                         }
                     }}
+                    role='heading'
+                    aria-level={7}
                 >
                     Use our powerful, flexible, and free API to build a custom trading <br />
                     platform - for yourself or for your business.
