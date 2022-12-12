@@ -13,12 +13,12 @@ describe('HeroHeader', () => {
         const hero_header = screen.getByTestId('hero-header');
         expect(hero_header).toBeInTheDocument();
     })
-    it('should render "Deriv API" text properly', () => {
+    it('should render hero title properly', () => {
         render(<HeroHeader />)
         const hero_title = screen.getByRole('heading', {level: 2});
         expect(hero_title).toBeInTheDocument();
     })
-    it("should render 'use our powerful, ....' text properly", () => {
+    it("should render hero subtitle text properly", () => {
         render(<HeroHeader />)
         const hero_subtitle = screen.getByRole('heading', {level: 7});
         expect(hero_subtitle).toBeInTheDocument();
