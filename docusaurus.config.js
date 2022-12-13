@@ -7,8 +7,8 @@ const dev = process.env.NODE_ENV !== "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
+  title: "Client Libraries",
+  tagline: "All in one comprehensive client libraries",
   url: "https://binary-com.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -85,7 +85,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "My Site",
+        title: "Client Libraries",
         logo: {
           alt: "My Site Logo",
           src: "img/logo.svg",
@@ -95,7 +95,7 @@ const config = {
             type: "doc",
             docId: "intro",
             position: "left",
-            label: "Tutorial",
+            label: "DOCUMENTATION",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
