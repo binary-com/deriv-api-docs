@@ -1,23 +1,48 @@
 import React from 'react';
+import { Text } from '@deriv/ui';
+import {
+    BenefitsContainer,
+    BenefitsIcons,
+    BenefitsImage,
+    SingleIconContainer
+} from './Benefits.styles';
 export const Benefits = () => {
+
+    const Icon = ({ icon }) => {
+        const icon_title = icon[0].toUpperCase() + icon.substring(1);
+        return (
+            <SingleIconContainer>
+                <BenefitsImage style={{ background: `url(/img/${icon}.svg) no-repeat` }} />
+                <Text
+                    css={{
+                        "font-size": "22px",
+                        color: "var(--colors-greyDark800)",
+                    }}
+                >
+                    {icon_title}
+                </Text>
+            </SingleIconContainer>
+        )
+    }
+
     return (
         <div className='main-page-row'>
-            <div className={`column-container ${styles.benefitsContainer}`}>
-                <h1>Benefits of using Deriv API</h1>
-                <div className={`container ${styles.benefitsIcons}`}>
-                    <div className='single-container'>
-                        <div className={`${styles.automationIcon} ${styles.image}`} />
-                        <p>Automation</p>
-                    </div>
-                    <div className='single-container'>
-                        <div className={`${styles.integrationIcon} ${styles.image}`} />
-                        <p>Easy integration</p>
-                    </div>
-                    <div className='single-container'>
-                        <div className={`${styles.executionIcon} ${styles.image}`} />
-                        <p>Fast execution</p>
-                    </div>
-                </div>
+            <BenefitsContainer>
+            <Text
+                    type='heading-2'
+                    align='center'
+                    bold
+                    css={{
+                        margin: "40px 0"
+                    }}
+            >
+                Benefits of using Deriv API
+            </Text>
+                <BenefitsIcons>
+                    <Icon icon='automation' />
+                    <Icon icon='integration' />
+                    <Icon icon='execution' />
+                </BenefitsIcons>
                 {/* <div className={styles.benefits}>
                     <div className={styles.personalisationContainer}>
                         <div className={styles.personalisationImage} />
@@ -42,7 +67,7 @@ export const Benefits = () => {
                         </div>
                     </div>
                 </div> */}
-            </div>
+            </BenefitsContainer>
         </div>
     );
 };

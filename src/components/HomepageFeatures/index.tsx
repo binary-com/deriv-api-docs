@@ -6,8 +6,8 @@ export default function HomepageFeatures() {
   return (
     <section>
       <div className="container">
-        <Benefits />
         <HeroHeader />
+        <Benefits />
       </div>
     </section>
   );
