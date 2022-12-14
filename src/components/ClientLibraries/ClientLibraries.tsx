@@ -12,7 +12,7 @@ import {
 
 export const ClientLibaries = () => {
   return (
-    <div className={clientLibrary}>
+    <div className={clientLibrary} data-testid="client-header">
       <div>
         <div className={iconJS}>
           <img src="/img/js-library.svg" />
