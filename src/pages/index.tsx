@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import { ClientLibaries } from '../components/ClientLibraries/ClientLibraries';
-
-
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
