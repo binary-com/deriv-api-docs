@@ -7,8 +7,8 @@ const dev = process.env.NODE_ENV !== "production";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Client Libraries",
-  tagline: "All in one comprehensive client libraries",
+  title: "Deriv API",
+  tagline: "Create your own apps",
   url: "https://binary-com.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -85,9 +85,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "Client Libraries",
+        title: "Deriv API",
         logo: {
-          alt: "My Site Logo",
+          alt: "Deriv API logo",
           src: "img/logo.svg",
         },
         items: [
@@ -95,7 +95,7 @@ const config = {
             type: "doc",
             docId: "intro",
             position: "left",
-            label: "DOCUMENTATION",
+            label: "Documentation",
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
