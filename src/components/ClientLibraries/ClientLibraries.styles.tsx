@@ -14,7 +14,7 @@ export const clientLibrary = css`
 `;
 
 export const header = css`
-    margin-bottom: 40px
+  margin-bottom: 40px;
 `;
 
 export const iconJS = css`
@@ -29,7 +29,7 @@ export const logo = css`
   justify-content: space-between;
 
   @media (max-width: 992px){
-    justify-content:center;
+    justify-content:center
     flex-wrap: wrap;
   }
 `;
