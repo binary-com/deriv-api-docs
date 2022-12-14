@@ -88,7 +88,7 @@ const config = {
         title: "Deriv API",
         logo: {
           alt: "Deriv API logo",
-          src: "img/logo.svg",
+          src: "img/deriv-logo.png",
         },
         items: [
           {
