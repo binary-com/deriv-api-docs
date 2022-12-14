@@ -2,6 +2,7 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "."
-  }
+    "baseUrl": ".",
+  },
+  "exclude": ["node_modules", "build", "**/__tests__/**/*", "**/*.js", "**/*.jsx"] // *** The files to not type check ***
 }
