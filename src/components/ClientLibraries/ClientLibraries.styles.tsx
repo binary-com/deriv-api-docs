@@ -7,10 +7,14 @@ export const clientLibrary = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 0;
+  padding: 8rem 0;
   width: 100%;
   background: #f5f7fa
   background-size: auto
+`;
+
+export const header = css`
+    margin-bottom: 40px
 `;
 
 export const iconJS = css`
@@ -23,6 +27,11 @@ export const iconJS = css`
 export const logo = css`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 992px){
+    justify-content:center;
+    flex-wrap: wrap;
+  }
 `;
 
 export const logoAndLink = css`

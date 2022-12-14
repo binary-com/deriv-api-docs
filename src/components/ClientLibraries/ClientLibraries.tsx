@@ -2,13 +2,13 @@ import React from "react";
 import { Text } from "@deriv/ui";
 import {
   clientLibrary,
+  header,
   iconJS,
   logo,
   logoAndLink,
   libraryGoTo,
   libraryChevron,
 } from "./ClientLibraries.styles";
-
 
 export const ClientLibaries = () => {
   return (
@@ -20,11 +20,8 @@ export const ClientLibaries = () => {
         <Text
           type="heading-2"
           bold
-          css={{
-            "margin-bottom": "40px",
-            "text-align": "center",
-            "@mobile": { "font-size": "32px" },
-          }}
+          align="center"
+          className={header}
           role="heading"
           aria-level={1}
         >
@@ -35,7 +32,7 @@ export const ClientLibaries = () => {
           align="center"
           css={{
             "font-weight": 400,
-            "@mobile": { "text-align": "left" },
+            "@mobile": { "text-align": "center" },
           }}
           role="heading"
           aria-level={4}
@@ -53,7 +50,7 @@ export const ClientLibaries = () => {
             >
               <img src="/img/js.svg"></img>
               <label>Go to the JavaScript library</label>
-              <img className={libraryChevron} src='/img/library-chevron.svg' />
+              <img className={libraryChevron} src="/img/library-chevron.svg" />
             </a>
           </div>
           <div className={logoAndLink}>
@@ -64,7 +61,7 @@ export const ClientLibaries = () => {
             >
               <img src="/img/py.svg"></img>
               <label>Go to the Python library</label>
-              <img className={libraryChevron} src='/img/library-chevron.svg' />
+              <img className={libraryChevron} src="/img/library-chevron.svg" />
             </a>
           </div>
           <div className={logoAndLink}>
@@ -75,7 +72,7 @@ export const ClientLibaries = () => {
             >
               <img src="/img/flutter.svg"></img>
               <label>Go to the Flutter library</label>
-              <img className={libraryChevron} src='/img/library-chevron.svg'/>
+              <img className={libraryChevron} src="/img/library-chevron.svg" />
             </a>
           </div>
         </div>
