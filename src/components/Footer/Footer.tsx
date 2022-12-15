@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Text } from "@deriv/ui";
-import { footerContainer, footerBody,link,communityButton } from "./Footer.styles";
+import { FooterContainer, FooterBody,Email} from "./Footer.styles";
 
 export const Footer = () => {
   const handleClick= (e)=>{
@@ -8,8 +8,8 @@ export const Footer = () => {
     window.location.href='https://binary.vanillacommunity.com/';
   }
   return (
-    <div data-testid="hero-header" className={footerContainer}>
-      <div className={footerBody}>
+    <FooterContainer data-testid="footer-text">
+      <FooterBody>
         <Text
           type="subtitle-1"
           bold
@@ -34,14 +34,13 @@ export const Footer = () => {
           Discuss ideas and share solutions with developers worldwide.
         </Text>
         <Button
-        className={communityButton}
         color= "monochrome"
         onClick={handleClick}
         >
             Join Our Community
         </Button>
-      </div>
-      <div className={footerBody}>
+      </FooterBody>
+      <FooterBody>
         <Text
         type="subtitle-1"
         bold
@@ -67,11 +66,11 @@ export const Footer = () => {
         role="heading"
         aria-level={7}
         >
-            Email us at <a className={link}> api-support@deriv.com</a>
+            Email us at <Email> api-support@deriv.com</Email>
             if you have any questions.
 
         </Text>
-      </div>
-    </div>
+      </FooterBody>
+    </FooterContainer>
   );
 };

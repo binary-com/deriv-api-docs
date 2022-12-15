@@ -1,6 +1,6 @@
-import { css } from "@linaria/core";
+import {styled} from "@linaria/react";
 
-export const footerContainer = css`
+export const FooterContainer = styled.div`
   background-color: var(--ifm-font-color-base);
   display: flex;
   flex-direction: row;
@@ -13,15 +13,11 @@ export const footerContainer = css`
   }
 `;
 
-export const footerBody = css`
+export const FooterBody = styled.div`
 display:flex
 flex-direction:column;
 align-items:center;
 `;
-export const link = css`
+export const Email = styled.a`
   color: var(--ifm-color-danger);
-`;
-
-export const communityButton = css`
-  border: 1px var(--ifm-color-secondary);
 `;
