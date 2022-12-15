@@ -1,6 +1,6 @@
-import { css } from "@linaria/core";
+import { styled } from "@linaria/react"
 
-export const clientLibrary = css`
+export const ClientLibrary = styled.div`
   background-repeat: no-repeat;
   background-position: var(--text-align-center);
   display: flex;
@@ -13,18 +13,14 @@ export const clientLibrary = css`
   background-size: auto
 `;
 
-export const header = css`
-  margin-bottom: 40px;
-`;
-
-export const iconJS = css`
+export const IconJS = styled.div`
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
   background-position: center;
 `;
 
-export const logo = css`
+export const LibraryLogo = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -34,18 +30,18 @@ export const logo = css`
   }
 `;
 
-export const logoAndLink = css`
+export const LogoAndLink = styled.div`
   padding: 1rem 2rem;
 `;
 
-export const libraryGoTo = css`
+export const LibraryGoTo = styled.a`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   color: #ff444f;
 `;
 
-export const libraryChevron = css`
+export const LibraryChevron = styled.img`
   background-repeat: no-repeat;
   background-position: var(--text-align-center);
   width: 1.2rem;
