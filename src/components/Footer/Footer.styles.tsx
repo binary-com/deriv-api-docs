@@ -6,6 +6,11 @@ export const footerContainer = css`
   flex-direction: row;
   padding: 2rem;
   justify-content: space-evenly;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    gap:2rem;
+  }
 `;
 
 export const footerBody = css`
@@ -14,5 +19,9 @@ flex-direction:column;
 align-items:center;
 `;
 export const link = css`
-  background-color: var(--ifm-color-danger);
+  color: var(--ifm-color-danger);
+`;
+
+export const communityButton = css`
+  border: 1px var(--ifm-color-secondary);
 `;

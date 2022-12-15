@@ -1,8 +1,12 @@
 import React from "react";
 import { Button, Text } from "@deriv/ui";
-import { footerContainer, footerBody,link } from "./Footer.styles";
+import { footerContainer, footerBody,link,communityButton } from "./Footer.styles";
 
 export const Footer = () => {
+  const handleClick= (e)=>{
+    e.preventDefault();
+    window.location.href='https://binary.vanillacommunity.com/';
+  }
   return (
     <div data-testid="hero-header" className={footerContainer}>
       <div className={footerBody}>
@@ -23,14 +27,16 @@ export const Footer = () => {
           css={{
             color: "$greyLight500",
             "font-weight": 400,
-            "@mobile": { "text-align": "left" },
+            "@mobile": { "font-size": "24px" },
           }}
           role="heading"
         >
           Discuss ideas and share solutions with developers worldwide.
         </Text>
         <Button
-        color="secondary"
+        className={communityButton}
+        color= "monochrome"
+        onClick={handleClick}
         >
             Join Our Community
         </Button>
@@ -41,7 +47,7 @@ export const Footer = () => {
         bold
         css={{
           color: "White",
-          "@mobile": { "font-size": "32px" },
+          "@mobile": { "font-size": "24px" },
         }}
         role="heading"
         aria-level={3}
