@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
-import { Footer } from '../footer';
+import { Footer } from '../Footer';
 
 beforeEach(() => {
   render(<Footer />);
