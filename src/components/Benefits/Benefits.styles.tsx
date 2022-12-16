@@ -90,7 +90,7 @@ export const InformationContainer = styled.div`
 export const InformationImage = styled.div`
   background-size: 100% auto;
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   width: 486px;
   height: 260px;
   @media screen and (max-width: 992px) {
