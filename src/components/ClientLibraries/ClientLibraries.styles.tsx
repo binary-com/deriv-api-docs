@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 
 export const ClientLibrary = styled.div`
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +44,7 @@ export const LibraryGoTo = styled.a`
 
 export const LibraryChevron = styled.img`
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   width: 1.2rem;
   height: 1.2rem;
   margin-left: 0.5rem;
