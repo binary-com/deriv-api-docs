@@ -6,9 +6,9 @@ export const FeaturesContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding: 0 0 20px 115px;
+  padding: 20px 0 20px 115px;
   @media (max-width: 992px) {
-    padding: 0 0 20px 0;
+    padding: 20px 0 20px 0;
   }
 `;
 export const FeaturesDescription = styled.div`

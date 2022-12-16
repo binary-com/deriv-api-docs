@@ -24,4 +24,8 @@ describe('ClientLibraries', () => {
     const api_list = screen.getByRole('list');
     expect(api_list).toBeInTheDocument();
   });
+  it('should render feature image', () => {
+    const image = screen.getByTestId('build-business');
+    expect(image).toHaveStyle('background: url(/img/api-featutes.png) no-repeat');
+  });
 });
