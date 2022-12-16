@@ -12,7 +12,7 @@ export const ClientLibrary = styled.div`
   background: var(--ifm-color-secondary-lighter);
   background-size: auto;
 `;
-//empty commit
+
 export const IconJS = styled.div`
   display: flex;
   justify-content: center;
