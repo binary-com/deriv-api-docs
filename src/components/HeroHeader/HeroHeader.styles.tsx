@@ -8,27 +8,27 @@ export const heroImageStyle = css`
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
-        height: 48.8rem;
+        height: 488px;
         display: flex;
         justify-content: var(--text-align-center);
         align-items: var(--text-align-center);
-        padding-top: 4rem;
+        padding-top: 40px;
         
         @media screen and (max-width: 992px) {
-            margin-top: 4.7rem;
+            margin-top: 47px;
             padding-top: unset;
         }
 
-        @media screen and (min-width: 32rem) and (max-width: 42.5rem) {
+        @media screen and (min-width: 320px) and (max-width: 425px) {
             background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
                 url(/img/header-mobile.png);
             background-repeat: no-repeat;
             background-position: var(--text-align-center);
-            height: 32.8rem;
+            height: 328px;
         }
         
         @media screen and (min-width: 320px) and (max-width: 375px) {
-            height: 37.8rem;
+            height: 378px;
         }
     `
 
@@ -37,12 +37,12 @@ export const heroContainerStyle = css`
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 16rem 0;
+        padding: 160px 0;
         width: 100%;
 
         @media screen and (max-width: 99.2rem) {
             width: 100%;
-            padding: 8rem 4rem;
+            padding: 80px 40px;
             align-items: baseline;
         }
     `
