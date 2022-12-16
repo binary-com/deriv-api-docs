@@ -3,10 +3,6 @@ import { Button, Text } from '@deriv/ui';
 import { FooterContainer, FooterBody, Email } from './Footer.styles';
 
 export const Footer = () => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    window.location.href = 'https://binary.vanillacommunity.com/';
-  };
   return (
     <FooterContainer data-testid='footer-text'>
       <FooterBody>
