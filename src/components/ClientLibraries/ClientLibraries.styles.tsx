@@ -9,7 +9,7 @@ export const ClientLibrary = styled.div`
   justify-content: center;
   padding: 8rem 0;
   width: 100%;
-  background: var(--ifm-color-secondary-lighter);
+  background: var(--ifm-background-color);
   background-size: auto;
 `;
 

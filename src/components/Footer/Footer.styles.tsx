@@ -1,7 +1,7 @@
-import {styled} from "@linaria/react";
+import { styled } from '@linaria/react';
 
 export const FooterContainer = styled.div`
-  background-color: var(--ifm-font-color-base);
+  background-color: var(--ifm-color-black);
   display: flex;
   flex-direction: row;
   padding: 2rem;
@@ -9,7 +9,7 @@ export const FooterContainer = styled.div`
 
   @media screen and (max-width: 992px) {
     flex-direction: column;
-    gap:2rem;
+    gap: 2rem;
   }
 `;
 

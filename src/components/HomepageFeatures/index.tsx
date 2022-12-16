@@ -9,8 +9,8 @@ export default function HomepageFeatures(): JSX.Element {
     <section className={styles.features}>
       <div>
         <HeroHeader />
-         <ClientLibaries />
-        <Footer/>
+        <ClientLibaries />
+        <Footer />
       </div>
     </section>
   );

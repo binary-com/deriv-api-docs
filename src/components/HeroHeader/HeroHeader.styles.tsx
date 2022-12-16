@@ -1,7 +1,6 @@
 import { styled } from '@linaria/react';
 
 export const HeroImageStyle = styled.div`
-
   background-color: var(--brown-02);
   background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)), url(/img/header.png);
   background-position: center;
@@ -38,7 +37,6 @@ export const HeroImageStyle = styled.div`
 `;
 
 export const HeroContainerStyle = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: center;
