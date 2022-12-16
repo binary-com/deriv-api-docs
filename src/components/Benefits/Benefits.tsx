@@ -15,7 +15,7 @@ export const Benefits = () => {
         const icon_title = icon[0].toUpperCase() + icon.substring(1);
         return (
             <SingleIconContainer>
-                <BenefitsImage style={{ background: `url(/img/${icon}.svg) no-repeat` }} />
+                <BenefitsImage data-testid={icon} style={{ background: `url(/img/${icon}.svg) no-repeat` }} />
                 <Text
                     css={{
                         "font-size": "22px",
@@ -30,7 +30,10 @@ export const Benefits = () => {
 
     const ImageContainer = ({ image }) => {
         return (
-            <InformationImage style={{ background: `url(/img/${image}.png) no-repeat` }} />
+            <InformationImage 
+                data-testid={image} 
+                style={{ background: `url(/img/${image}.png) no-repeat` }} 
+            />
         )
     }
 
