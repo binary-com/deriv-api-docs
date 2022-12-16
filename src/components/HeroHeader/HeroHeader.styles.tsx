@@ -18,19 +18,6 @@ export const HeroImageStyle = styled.div`
     padding-top: unset;
   }
 
-  @media screen and (max-width: 992px) {
-    margin-top: 47px;
-    padding-top: unset;
-  }
-
-  @media screen and (min-width: 320px) and (max-width: 425px) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
-      url(/img/header-mobile.png);
-    background-repeat: no-repeat;
-    background-position: var(--text-align-center);
-    height: 328px;
-  }
-
   @media screen and (min-width: 320px) and (max-width: 375px) {
     height: 378px;
   }

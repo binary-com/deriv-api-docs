@@ -3,10 +3,6 @@ import { Button, Text } from '@deriv/ui';
 import { FooterContainer, FooterBody, Email } from './Footer.styles';
 
 export const Footer = () => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    window.location.href = 'https://binary.vanillacommunity.com/';
-  };
   return (
     <FooterContainer data-testid='footer-text'>
       <FooterBody>
@@ -33,9 +29,13 @@ export const Footer = () => {
         >
           Discuss ideas and share solutions with developers worldwide.
         </Text>
-        <Button color='monochrome' onClick={handleClick}>
-          Join Our Community
-        </Button>
+        <a
+          data-testid='community-link'
+          style={{ textDecoration: 'none' }}
+          href='https://binary.vanillacommunity.com/'
+        >
+          <Button color='monochrome'>Join Our Community</Button>
+        </a>
       </FooterBody>
       <FooterBody>
         <Text
@@ -63,7 +63,7 @@ export const Footer = () => {
           role='heading'
           aria-level={7}
         >
-          Email us at <Email> api-support@deriv.com</Email>
+          Email us at <Email>api-support@deriv.com</Email>
           if you have any questions.
         </Text>
       </FooterBody>

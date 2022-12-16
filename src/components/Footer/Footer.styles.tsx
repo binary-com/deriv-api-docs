@@ -6,6 +6,7 @@ export const FooterContainer = styled.div`
   flex-direction: row;
   padding: 2rem;
   justify-content: space-evenly;
+  margin-top: 2.5rem;
 
   @media screen and (max-width: 992px) {
     flex-direction: column;
@@ -14,10 +15,11 @@ export const FooterContainer = styled.div`
 `;
 
 export const FooterBody = styled.div`
-display:flex
-flex-direction:column;
-align-items:center;
+  display:flex
+  flex-direction:column;
+  align-items:center;
 `;
 export const Email = styled.a`
   color: var(--ifm-color-danger);
+  padding: 0 5px;
 `;
