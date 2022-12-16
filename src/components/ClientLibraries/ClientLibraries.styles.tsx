@@ -24,8 +24,8 @@ export const LibraryLogo = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: 992px){
-    justify-content:center
+  @media (max-width: 992px) {
+    justify-content: center;
     flex-wrap: wrap;
   }
 `;

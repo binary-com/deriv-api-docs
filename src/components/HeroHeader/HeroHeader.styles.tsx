@@ -1,6 +1,6 @@
-import { css } from '@linaria/core';
+import { styled } from '@linaria/react';
 
-export const heroImageStyle = css`
+export const HeroImageStyle = styled.div`
   background-color: var(--brown-02);
   background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)), url(/img/header.png);
   background-position: center;
@@ -12,6 +12,11 @@ export const heroImageStyle = css`
   justify-content: var(--text-align-center);
   align-items: var(--text-align-center);
   padding-top: 40px;
+
+  @media screen and (max-width: 992px) {
+    margin-top: 47px;
+    padding-top: unset;
+  }
 
   @media screen and (max-width: 992px) {
     margin-top: 47px;
@@ -31,7 +36,7 @@ export const heroImageStyle = css`
   }
 `;
 
-export const heroContainerStyle = css`
+export const HeroContainerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
