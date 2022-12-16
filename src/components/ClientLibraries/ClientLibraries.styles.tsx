@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react"
+import { styled } from '@linaria/react';
 
 export const ClientLibrary = styled.div`
   background-repeat: no-repeat;
@@ -9,8 +9,8 @@ export const ClientLibrary = styled.div`
   justify-content: center;
   padding: 8rem 0;
   width: 100%;
-  background: #f5f7fa
-  background-size: auto
+  background: var(--ifm-color-secondary-lighter);
+  background-size: auto;
 `;
 
 export const IconJS = styled.div`
@@ -38,7 +38,7 @@ export const LibraryGoTo = styled.a`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  color: #ff444f;
+  color: var(--ifm-color-danger);
 `;
 
 export const LibraryChevron = styled.img`
