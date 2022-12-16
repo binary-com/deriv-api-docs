@@ -11,7 +11,6 @@ describe('Benefits', () => {
     
     afterEach(cleanup);
     
-
     it('should render the component', () => {
         const benefits = screen.getByTestId('benefits');
         expect(benefits).toBeInTheDocument();
