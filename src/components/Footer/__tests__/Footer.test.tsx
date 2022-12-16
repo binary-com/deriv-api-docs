@@ -1,33 +1,31 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import { Footer } from '../footer';
+import { cleanup, render, screen } from '@testing-library/react';
+import { Footer } from '../Footer';
 
-jest.mock('@linaria/core', () => ({
-  css: () => jest.fn(),
-}));
+beforeEach(() => {
+  render(<Footer />);
+});
+
+afterEach(cleanup);
 
 describe('HeroHeader', () => {
   it('should render properly', () => {
-    render(<Footer />);
     const hero_header = screen.getByTestId('footer-text');
     expect(hero_header).toBeInTheDocument();
   });
   it('should render Headings properly', () => {
-    render(<Footer />);
-    const footer_title = screen.getByRole('heading', { level: 2 });
+    const footer_title = screen.getByRole('heading', { level: 3 });
     expect(footer_title).toBeInTheDocument();
   });
   it('should render text properly', () => {
-    render(<Footer />);
     const footer_subtitle = screen.getByRole('heading', { level: 7 });
     expect(footer_subtitle).toBeInTheDocument();
   });
-
-  it('should redirect to the correct link onclick');
-  render(<Footer />);
-  expect(screen.getByText('Join our Community').closest('a')).toHaveAttribute(
-    'href',
-    'https://binary.vanillacommunity.com/',
-  );
+  it('should redirect to the correct link onclick', () => {
+    expect(screen.getByTestId('community-link')).toHaveAttribute(
+      'href',
+      'https://binary.vanillacommunity.com/',
+    );
+  });
 });

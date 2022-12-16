@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "start:auth": "npx netlify-cms-proxy-server",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "test": "jest",
@@ -25,6 +26,7 @@
     "@docusaurus/preset-classic": "2.2.0",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.2.1",
+    "netlify-cms-app": "^2.15.72",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
