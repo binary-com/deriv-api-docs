@@ -4,7 +4,12 @@ module.exports = {
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
   preset: 'ts-jest',
-    transform: {
-        '^.+\\.{ts,tsx}?$': 'ts-jest'
-    },
+  transform: {
+    '^.+\\.{ts,tsx}?$': 'ts-jest'
+  },
+  globals: {
+    'ts-jest': {
+      babelConfig: true
+    }
+  },
 };
