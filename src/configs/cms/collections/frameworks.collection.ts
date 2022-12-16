@@ -4,43 +4,43 @@ import {
   SOLIDJS_FRAMEWORK_COLLECTION_NAME,
   SVELTE_FRAMEWORK_COLLECTION_NAME,
   VUE_FRAMEWORK_COLLECTION_NAME,
-} from "../constants";
-import DocCollection from "./docs-collection.class";
-import { CmsCollection } from "netlify-cms-core";
+} from '../constants';
+import DocCollection from './docs-collection.class';
+import { CmsCollection } from 'netlify-cms-core';
 
 const react_framework_collection: CmsCollection = new DocCollection(
   REACT_FRAMEWORK_COLLECTION_NAME,
-  "React Documentations",
-  "React Documentation",
-  "docs/frameworks/react"
+  'React Documentations',
+  'React Documentation',
+  'docs/frameworks/react',
 );
 
 const angular_framework_collection: CmsCollection = new DocCollection(
   ANGULAR_FRAMEWORK_COLLECTION_NAME,
-  "Angular Documentations",
-  "Angular Documentation",
-  "docs/frameworks/angular"
+  'Angular Documentations',
+  'Angular Documentation',
+  'docs/frameworks/angular',
 );
 
 const solidjs_framework_collection: CmsCollection = new DocCollection(
   SOLIDJS_FRAMEWORK_COLLECTION_NAME,
-  "Solidjs Documentations",
-  "Solidjs Documentation",
-  "docs/frameworks/solidjs"
+  'Solidjs Documentations',
+  'Solidjs Documentation',
+  'docs/frameworks/solidjs',
 );
 
 const svelte_framework_collection: CmsCollection = new DocCollection(
   SVELTE_FRAMEWORK_COLLECTION_NAME,
-  "Svelte Documentations",
-  "Svelte Documentation",
-  "docs/frameworks/svelte"
+  'Svelte Documentations',
+  'Svelte Documentation',
+  'docs/frameworks/svelte',
 );
 
 const vue_framework_collection: CmsCollection = new DocCollection(
   VUE_FRAMEWORK_COLLECTION_NAME,
-  "Vue Documentations",
-  "Vue Documentation",
-  "docs/frameworks/vue"
+  'Vue Documentations',
+  'Vue Documentation',
+  'docs/frameworks/vue',
 );
 
 const frameworks_collections = [
