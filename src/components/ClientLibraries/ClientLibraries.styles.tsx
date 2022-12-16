@@ -39,6 +39,7 @@ export const LibraryGoTo = styled.a`
   flex-wrap: wrap;
   align-items: center;
   color: var(--ifm-color-danger);
+  gap: 10px;
 `;
 
 export const LibraryChevron = styled.img`

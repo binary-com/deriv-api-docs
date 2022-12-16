@@ -20,4 +20,5 @@ align-items:center;
 `;
 export const Email = styled.a`
   color: var(--ifm-color-danger);
+  padding: 0 5px;
 `;
