@@ -1,10 +1,10 @@
-import React from "react";
-import { Text } from "@deriv/ui";
-import { HeroImageStyle, HeroContainerStyle } from "./HeroHeader.styles";
+import React from 'react';
+import { Text } from '@deriv/ui';
+import { HeroImageStyle, HeroContainerStyle } from './HeroHeader.styles';
 
 export const HeroHeader = () => {
   return (
-    <HeroImageStyle data-testid="hero-header">
+    <HeroImageStyle data-testid='hero-header'>
       <HeroContainerStyle>
         <Text
           type='heading-1'
