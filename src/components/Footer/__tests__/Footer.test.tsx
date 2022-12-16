@@ -22,7 +22,6 @@ describe('HeroHeader', () => {
     const footer_subtitle = screen.getByRole('heading', { level: 7 });
     expect(footer_subtitle).toBeInTheDocument();
   });
-
   it('should redirect to the correct link onclick', () => {
     expect(screen.getByTestId('community-link')).toHaveAttribute(
       'href',
