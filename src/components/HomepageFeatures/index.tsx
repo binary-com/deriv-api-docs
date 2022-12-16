@@ -6,7 +6,7 @@ import { Footer } from '../Footer/Footer';
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
+      <div className='container'>
         <HeroHeader />
         <Footer/>
       </div>
