@@ -1,0 +1,5 @@
+.husky
+.docusaurus
+node_modules
+build
+coverage
