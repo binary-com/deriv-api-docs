@@ -1,8 +1,8 @@
 <h1 align="center">Deriv API</h1>
 
-This repository contains the various platforms of the Deriv application.
+This repository contains the information and code related to the Deriv API documentation.
 
-![CircleCI](https://img.shields.io/circleci/build/github/binary-com/deriv-app) ![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.16.0-blue.svg) ![Prerequisite](https://img.shields.io/badge/npm-%3E%3D7.21.0-blue.svg) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+![CircleCI](https://img.shields.io/circleci/build/github/binary-com/deriv-api-docs) ![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.16.0-blue.svg) ![Prerequisite]
 ![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/binary-com_deriv-app?server=https%3A%2F%2Fsonarcloud.io)
 ![Sonar Violations (short format)](https://img.shields.io/sonar/violations/binary-com_deriv-app?server=https%3A%2F%2Fsonarcloud.io)
 [![codecov](https://codecov.io/gh/binary-com/deriv-app/branch/dev/graph/badge.svg?token=LClg2rlZ4z)](https://codecov.io/gh/binary-com/deriv-app)
@@ -17,26 +17,16 @@ This repository contains the various platforms of the Deriv application.
   - [Package names](#package-names)
   - [Usage](#usage)
     - [Starting a Development Server](#starting-a-dev-server)
-    - [How to Clean Packages](#how-to-clean-packages)
-    - [Examples of Script Usage](#examples-of-script-usage)
     - [Release](#release)
 - [PR Guidelines](#pr-guidelines)
-- [FAQ](#faq)
 
 ## Other documents:
 
 - [General](docs/README.md) - Contains general philosophy and overview of this package
-- [Stylesheet guidelines](docs/Stylesheet/README.md) - Contains rules for CSS/SASS code style
-- [JavaScript guidelines](docs/JavaScript/README.md) - Contains rules for JS/JSX code style
-- [Modules docs](docs/Modules/README.md) - Contains implementation guides (i.e., scaffolding, code usage)
-- [e2e and performance testing docs](e2e_tests/README.md) - Contains documents for create and running e2e and performance tests
-- [Manage dependencies](docs/Dependencies/README.md)
-
-[comment]: <> (TODO: Refactor Clean Project to be under usage)
 
 ## Pre-installation
 
-Before running or contribute to this project, you need to have the setup of the following package in your environment.
+Before running or contributing to this project, you need to install the following packages for your environment
 
 - node >=16.16.0
 - npm >=7.21.0
@@ -68,7 +58,7 @@ Before running or contribute to this project, you need to have the setup of the 
 4.  **Install your dependencies:**
 
     ```sh
-    npm cssssssi
+    npm ci
     ```
 
 5.  **Build the project:**
