@@ -42,6 +42,7 @@ Before running or contribute to this project, you need to have the setup of the 
 - npm >=7.21.0
 - docusaurus >=2.0.0
 - linaria >=4.1.2
+- @deriv/ui >=0.1.0
 - git (for `contribution`)
 
 **Note**: `node -v` and `sudo node -v` should be the same version.
@@ -67,7 +68,7 @@ Before running or contribute to this project, you need to have the setup of the 
 4.  **Install your dependencies:**
 
     ```sh
-    npm i
+    npm cssssssi
     ```
 
 5.  **Build the project:**
@@ -76,10 +77,34 @@ Before running or contribute to this project, you need to have the setup of the 
     npm run build
     ```
 
+6.  **Serve the Build**
+
+    ```sh
+    npm run serve
+    ```
+
 <br />
+
 ### Starting a Development Server
 
+1. Core:
+
 If you wish to work on Core, simply run `npm run start`.
+
+2.  Netlify Proxy + Core :
+
+    1.  To work on cms configs, run:
+
+        ```sh
+        npm run start:auth
+        ```
+
+    2.  In a separate terminal, this will start the netlify-cms-proxy-server and will enable you to work with the cms locally.
+        and then run:
+
+        ```sh
+        npm run start
+        ```
 
 <br />
 
