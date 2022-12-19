@@ -28,7 +28,7 @@ export const Ways = styled.div`
     max-width: 628px;
     margin: 20px 12px;
     padding: 16px;
-    background-color: white;
+    background-color: var(--ifm-color-emphasis-0);
     box-shadow: 0 4px 8px rgb(14 14 14 / 10%);
   }
 

@@ -5,7 +5,7 @@ import { WaysContainer, WaysWrapper, Ways } from './WaysToEarn.styles';
 export const WaysToEarn = () => {
   return (
     <div className='main-page-row'>
-      <WaysContainer>
+      <WaysContainer data-testid='ways-to-earn'>
         <WaysWrapper>
           <div>
             <Text
