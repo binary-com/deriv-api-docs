@@ -64,7 +64,7 @@ export const ApiFeatures = () => {
             </FeatureOption>
           </FeatureList>
         </FeatureText>
-        <ApiFeaturesImage />
+        <ApiFeaturesImage data-testid='api-features-img' />
       </FeaturesDescription>
     </FeaturesContainer>
   );
