@@ -2,7 +2,8 @@
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!**/node_modules/**'],
-  coverageDirectory: 'coverage',
+  coverageDirectory: './coverage/',
+  coverageReporters: ['lcov'],
   testEnvironment: 'jsdom',
   preset: 'ts-jest',
   transform: {

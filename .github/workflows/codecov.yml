@@ -1,0 +1,32 @@
+name: Codecov Workflow
+on:
+  pull_request:
+    branches:
+      - '**'
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: install, bootstrap and make test coverage
+        run: |
+          npm ci
+          npm run build
+          npm run test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3.1.1
+        with:
+          directory: ./coverage
+          fail_ci_if_error: false
+          files: ./coverage/lcov.info
+          name: codecov-umbrella
+          verbose: true
