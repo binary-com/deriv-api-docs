@@ -7,6 +7,7 @@ const cms_backend: CmsBackend = {
   base_url: 'https://deriv-cms-external-oauth.binary.sx',
   auth_endpoint: 'api/begin',
   auth_scope: 'repo',
+  open_authoring: true,
   cms_label_prefix: 'content/',
 };
 
