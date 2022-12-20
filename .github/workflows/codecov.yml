@@ -18,10 +18,9 @@ jobs:
           node-version: 16.x
       - name: install, bootstrap and make test coverage
         run: |
-          npm install
-          npm run bootstrap
-          npm run build:all
-          npm run test:jest
+          npm ci
+          npm run build
+          npm run test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.1
