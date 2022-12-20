@@ -3,6 +3,7 @@ import { ClientLibaries } from '../ClientLibraries/ClientLibraries';
 import { HeroHeader } from '../HeroHeader/HeroHeader';
 import { Benefits } from '../Benefits/Benefits';
 import { Footer } from '../Footer/Footer';
+import { ApiFeatures } from '../ApiFeatures/ApiFeatures';
 import { IndexStyling } from './index.styles';
 import styles from './styles.module.css';
 
@@ -14,6 +15,7 @@ export default function HomepageFeatures() {
           <HeroHeader />
           <ClientLibaries />
           <Benefits />
+          <ApiFeatures />
           <Footer />
         </IndexStyling>
       </div>
