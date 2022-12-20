@@ -1,11 +1,13 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}", "!**/node_modules/**"],
-  coverageReporters: ['lcov'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!**/node_modules/**'],
   coverageDirectory: './coverage/',
-  testEnvironment: "jsdom",
+  coverageReporters: ['lcov'],
+  testEnvironment: 'jsdom',
   preset: 'ts-jest',
-    transform: {
-        '^.+\\.{ts,tsx}?$': 'ts-jest'
-    },
+  transform: {
+    '^.+\\.ts?$': ['ts-jest'],
+    '^.+\\.tsx?$': ['ts-jest', { babelConfig: true }],
+  },
 };
