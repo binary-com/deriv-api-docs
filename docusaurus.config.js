@@ -45,7 +45,7 @@ const config = {
                       loader: '@linaria/webpack-loader',
                       options: {
                         plugins: ['react-remove-properties', { properties: ['datatest-id'] }],
-                        sourceMap: dev, //empty commit
+                        sourceMap: dev,
                       },
                     },
                   ],
