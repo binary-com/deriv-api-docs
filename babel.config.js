@@ -6,4 +6,19 @@ module.exports = {
     '@linaria',
     require.resolve('@docusaurus/core/lib/babel/preset'),
   ],
+  env: {
+    production: {
+      plugins: [
+        [
+          'babel-plugin-jsx-remove-data-test-id',
+          {
+            attributes: 'data-testid',
+          },
+        ],
+      ],
+    },
+    test: {
+      plugins: [],
+    },
+  },
 };

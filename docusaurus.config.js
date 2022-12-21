@@ -43,7 +43,9 @@ const config = {
                     { loader: 'babel-loader' },
                     {
                       loader: '@linaria/webpack-loader',
-                      options: { sourceMap: dev },
+                      options: {
+                        sourceMap: dev,
+                      },
                     },
                   ],
                 },
@@ -67,7 +69,7 @@ const config = {
           showReadingTime: true,
         },
         theme: {
-          customCss:[require.resolve("./src/css/custom.css"),("./src/css/index.css")]
+          customCss: [require.resolve('./src/css/custom.css'), './src/css/index.css'],
         },
       }),
     ],
