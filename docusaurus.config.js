@@ -67,7 +67,7 @@ const config = {
           showReadingTime: true,
         },
         theme: {
-          customCss:[require.resolve("./src/css/custom.css"),("./src/css/index.css")]
+          customCss: [require.resolve('./src/css/custom.css'), './src/css/index.css'],
         },
       }),
     ],
@@ -89,7 +89,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
         ],
       },
       prism: {
