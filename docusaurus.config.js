@@ -65,9 +65,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
         },
-        blog: {
-          showReadingTime: true,
-        },
+        blog: false,
         theme: {
           customCss: [require.resolve('./src/css/custom.css'), './src/css/index.css'],
         },
@@ -91,7 +89,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
         ],
       },
       prism: {
