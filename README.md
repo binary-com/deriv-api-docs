@@ -2,10 +2,13 @@
 
 This repository contains the information and code related to the Deriv API documentation.
 
-![CircleCI](https://img.shields.io/circleci/build/github/binary-com/deriv-api-docs) ![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.16.0-blue.svg) ![Prerequisite]
+![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.16.0-blue.svg)
+[![codecov](https://codecov.io/gh/binary-com/deriv-api-docs/branch/master/graph/badge.svg?token=HXCKP3ZTWP)](https://codecov.io/gh/binary-com/deriv-api-docs)
+
+<!--
+![CircleCI](https://img.shields.io/circleci/build/github/binary-com/deriv-api-docs)
 ![Sonar Tech Debt](https://img.shields.io/sonar/tech_debt/binary-com_deriv-app?server=https%3A%2F%2Fsonarcloud.io)
-![Sonar Violations (short format)](https://img.shields.io/sonar/violations/binary-com_deriv-app?server=https%3A%2F%2Fsonarcloud.io)
-[![codecov](https://codecov.io/gh/binary-com/deriv-app/branch/dev/graph/badge.svg?token=LClg2rlZ4z)](https://codecov.io/gh/binary-com/deriv-app)
+![Sonar Violations (short format)](https://img.shields.io/sonar/violations/binary-com_deriv-app?server=https%3A%2F%2Fsonarcloud.io) -->
 
 **In this document**:
 
