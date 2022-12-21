@@ -47,7 +47,6 @@ const config = {
                         plugins: ['react-remove-properties', { properties: ['datatest-id'] }],
                         sourceMap: dev,
                       },
-                      exclude: /node_modules/,
                     },
                   ],
                 },
