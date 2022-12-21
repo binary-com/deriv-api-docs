@@ -2,14 +2,13 @@ import { styled } from '@linaria/react';
 
 export const ClientLibrary = styled.div`
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 8rem 0;
   width: 100%;
-  background: var(--ifm-background-color);
   background-size: auto;
 `;
 
@@ -44,7 +43,7 @@ export const LibraryGoTo = styled.a`
 
 export const LibraryChevron = styled.img`
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   width: 1.2rem;
   height: 1.2rem;
   margin-left: 0.5rem;

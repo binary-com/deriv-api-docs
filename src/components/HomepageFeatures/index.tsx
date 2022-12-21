@@ -2,6 +2,7 @@ import React from 'react';
 import { ClientLibaries } from '../ClientLibraries/ClientLibraries';
 import { HeroHeader } from '../HeroHeader/HeroHeader';
 import { Benefits } from '../Benefits/Benefits';
+import { WaysToEarn } from '../WaysToEarn/WaysToEarn';
 import { Footer } from '../Footer/Footer';
 import { ApiFeatures } from '../ApiFeatures/ApiFeatures';
 import { IndexStyling } from './index.styles';
@@ -15,6 +16,7 @@ export default function HomepageFeatures() {
           <HeroHeader />
           <ClientLibaries />
           <Benefits />
+          <WaysToEarn />
           <ApiFeatures />
           <Footer />
         </IndexStyling>

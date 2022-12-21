@@ -9,8 +9,8 @@ export const HeroImageStyle = styled.div`
   width: 100%;
   height: 488px;
   display: flex;
-  justify-content: var(--text-align-center);
-  align-items: var(--text-align-center);
+  justify-content: center;
+  align-items: center;
   padding-top: 40px;
 
   @media screen and (max-width: 992px) {
