@@ -15,7 +15,7 @@ const SinglePagesCollection: CmsCollection = {
     {
       name: 'app_reg',
       label: 'How to setup an Application',
-      file: 'docs/how_to_setup_an_app.md',
+      file: 'docs/setting_up_an_app.md',
       fields: [...default_doc_fields],
     },
     {
