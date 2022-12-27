@@ -17,14 +17,14 @@ A tick is a measure of minimum upward or downward movement in the price of a tra
 
 when you subscribe to this functionality every second you'll an object like so: 
 
-```jsonc
+```json
  {
-        "ask": 218.6403,
-        "bid": 218.6203,
-        "epoch": 1672127936,
-        "id": "c21e5fcf-b0c4-6c23-2254-437bcc3f6176",
-        "pip_size": 4,
-        "quote": 218.6303,
-        "symbol": "R_50"
+    "ask": 218.6403,
+    "bid": 218.6203,
+    "epoch": 1672127936,
+    "id": "c21e5fcf-b0c4-6c23-2254-437bcc3f6176",
+    "pip_size": 4,
+    "quote": 218.6303,
+    "symbol": "R_50"
  }
 ```
