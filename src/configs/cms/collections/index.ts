@@ -1,6 +1,5 @@
 import type { CmsCollection } from 'netlify-cms-core';
 import { CONCEPTS_COLLECTION_NAME, FAQ_POST_COLLECTION_NAME } from '../constants';
-import BlogPostCollection from './blog.collection';
 import derivapi_clients_collection from './deriv-api.collection';
 import DocCollection from './docs-collection.class';
 import frameworks_collections from './frameworks.collection';
@@ -24,7 +23,6 @@ const core_concepts_collection: CmsCollection = new DocCollection(
 
 const cms_collections: CmsCollection[] = [
   SinglePagesCollection,
-  BlogPostCollection,
   core_concepts_collection,
   ...languages_collections,
   ...frameworks_collections,
