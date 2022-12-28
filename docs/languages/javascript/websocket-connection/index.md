@@ -106,6 +106,8 @@ You just created your first demo project with websockets.
 The `ping` request is mostly used to test the connection or to keep it alive.
 :::
 
+### Keep Websocket Connection Alive
+
 By Defualt `Websocket connection` will be closed when no traffic is sent between them for more or less **180 seconds**. one way to keep the connection alive is to send `ping` request with interval of **120 seconds**, this way will keep the connection alive and active.
 
 Simple example setup would be like so:
