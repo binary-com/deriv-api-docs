@@ -15,3 +15,4 @@ Please checkout [build your app](https://api.deriv.com/docs/getting-started/buil
 
 :::caution
 We will update this page when the `App Manager Dashboard` is implemented.
+:::

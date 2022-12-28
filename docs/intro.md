@@ -32,3 +32,4 @@ If you decided that you want to use our `websocket server` with pure languages f
 
 :::caution
 We suggest using our [Client Libraries](category/deriv-api), since they give you better developer experience.
+:::
