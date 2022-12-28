@@ -3,7 +3,7 @@ title: Active Symbols
 hide_title: false
 draft: false
 sidebar_label: Active Symbols
-sidebar_position: 2
+sidebar_position: 4
 tags:
   - concepts
   - active-symbols

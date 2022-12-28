@@ -3,7 +3,7 @@ title: Residence List
 hide_title: false
 draft: false
 sidebar_label: Residence List
-sidebar_position: 0
+sidebar_position: 2
 tags:
   - concepts
   - resident-list
