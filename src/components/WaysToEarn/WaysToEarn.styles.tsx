@@ -1,11 +1,11 @@
-export const WaysContainer = styled.div`
+export const WaysContainer = `div
   margin-top: 20px;
   @media screen and (max-width: 992px) {
     margin-top: 0;
   }
 `;
 
-export const WaysWrapper = styled.div`
+export const WaysWrapper = `div
   width: 80%;
   display: flex;
   flex-wrap: wrap;
@@ -18,7 +18,7 @@ export const WaysWrapper = styled.div`
   }
 `;
 
-export const Ways = styled.div`
+export const Ways = `div
   span {
     display: flex;
     align-items: center;

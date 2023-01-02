@@ -1,7 +1,7 @@
-export const BenefitsContainer = styled.div`
+export const BenefitsContainer = `div
   width: 100%;
 `;
-export const BenefitsIcons = styled.div`
+export const BenefitsIcons = `div
   width: 100%;
   flex-wrap: nowrap;
   margin-bottom: 20px;
@@ -13,14 +13,14 @@ export const BenefitsIcons = styled.div`
   }
 `;
 
-export const SingleIconContainer = styled.div`
+export const SingleIconContainer = `div
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export const BenefitsImage = styled.div`
+export const BenefitsImage = `div
   background-size: contain;
   display: inline-block;
   width: 72px;
@@ -28,7 +28,7 @@ export const BenefitsImage = styled.div`
   margin: 8px;
 `;
 
-export const BenefitsInformation = styled.div`
+export const BenefitsInformation = `div
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -62,7 +62,7 @@ export const BenefitsInformation = styled.div`
     }
   }
 `;
-export const InformationContainer = styled.div`
+export const InformationContainer = `div
   display: flex;
   width: 100%;
   justify-content: space-evenly;
@@ -85,7 +85,7 @@ export const InformationContainer = styled.div`
   }
 `;
 
-export const InformationImage = styled.div`
+export const InformationImage = `div
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center;

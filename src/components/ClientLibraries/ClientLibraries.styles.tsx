@@ -1,4 +1,4 @@
-export const ClientLibrary = styled.div`
+export const ClientLibrary = `div
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
@@ -10,14 +10,14 @@ export const ClientLibrary = styled.div`
   background-size: auto;
 `;
 
-export const IconJS = styled.div`
+export const IconJS = `div
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
   background-position: center;
 `;
 
-export const LibraryLogo = styled.div`
+export const LibraryLogo = `div
   display: flex;
   justify-content: space-between;
 
@@ -27,11 +27,11 @@ export const LibraryLogo = styled.div`
   }
 `;
 
-export const LogoAndLink = styled.div`
+export const LogoAndLink = `div
   padding: 1rem 2rem;
 `;
 
-export const LibraryGoTo = styled.a`
+export const LibraryGoTo = `div
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -39,7 +39,7 @@ export const LibraryGoTo = styled.a`
   gap: 10px;
 `;
 
-export const LibraryChevron = styled.img`
+export const LibraryChevron = `img
   background-repeat: no-repeat;
   background-position: center;
   width: 1.2rem;

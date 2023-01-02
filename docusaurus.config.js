@@ -3,7 +3,6 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const dev = process.env.NODE_ENV !== 'production';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -28,7 +27,7 @@ const config = {
     locales: ['en'],
   },
 
-  plugins: ['@docusaurus/theme-live-codeblock'],
+  plugins: ['@docusaurus/theme-live-codeblock', 'docusaurus-plugin-sass'],
 
   presets: [
     [

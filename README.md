@@ -69,10 +69,17 @@ Before running or contributing to this project, you need to install the followin
     npm run build
     ```
 
-6.  **Serve the Build**
+6.  **Run the Build**
+    Run proxy server in seperate terminal
 
     ```sh
-    npm run serve
+    npm run start:auth
+    ```
+
+    After that, start the application in another terminal
+
+    ```sh
+    npm run start
     ```
 
 <br />

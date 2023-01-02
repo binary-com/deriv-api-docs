@@ -1,0 +1,57 @@
+.FeaturesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 20px 115px;
+    
+    @media (max-width: 992px) {
+        padding: 20px 0 20px 0;
+    }
+
+    .FeaturesDescription {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        width: 90%;
+        align-items: center;
+
+        .ApiFeaturesImage {
+            aspect-ratio: 4 / 2;
+            background-image: url(/img/api-featutes.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            display: inline-block;
+            width: 60rem;
+            margin-top: 1rem;
+        }
+
+        .FeatureText {
+            width: 486px;
+            margin-left: 40px;
+            padding: 0 10px;
+            box-sizing: border-box;
+
+            .FeatureList {
+                margin-left: -2rem;
+                line-height: 2rem;
+                font-weight: 500;
+
+                .FeatureOptions {
+                    align-items: center;
+                    list-style-type: none;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 4px;
+                    margin-bottom: 0.8rem;
+
+                    .FeatureContent {
+                        margin-bottom: 0;
+                        line-height: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}

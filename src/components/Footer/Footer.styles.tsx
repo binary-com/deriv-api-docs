@@ -1,4 +1,4 @@
-export const FooterContainer = styled.div`
+export const FooterContainer = `div
   background-color: var(--ifm-color-black);
   display: flex;
   flex-direction: row;
@@ -12,12 +12,12 @@ export const FooterContainer = styled.div`
   }
 `;
 
-export const FooterBody = styled.div`
+export const FooterBody = `div
   display:flex
   flex-direction:column;
   align-items:center;
 `;
-export const Email = styled.a`
+export const Email = `a
   color: var(--ifm-color-danger);
   padding: 0 5px;
 `;

@@ -1,20 +1,11 @@
 import React from 'react';
 import { Text } from '@deriv/ui';
-import {
-  ApiFeaturesImage,
-  FeatureList,
-  FeaturesContainer,
-  FeatureText,
-  FeatureContent,
-  FeatureOption,
-  FeaturesDescription,
-} from './ApiFeatures.styles';
-
+import styles from './ApiFeatures.module.scss';
 export const ApiFeatures = () => {
   return (
-    <FeaturesContainer data-testid='api-features'>
-      <FeaturesDescription>
-        <FeatureText>
+    <div className={styles.FeaturesContainer} data-testid='api-features'>
+      <div className={styles.FeaturesDescription}>
+        <div className={styles.FeatureText}>
           <Text type='heading-2' bold role='heading' aria-level={1}>
             Deriv API features
           </Text>
@@ -37,35 +28,35 @@ export const ApiFeatures = () => {
           >
             {"With our API, you'll be able to:"}
           </Text>
-          <FeatureList>
-            <FeatureOption>
+          <ul className={styles.FeatureList}>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>Trade digital options and multipliers</FeatureContent>
-            </FeatureOption>
-            <FeatureOption>
+              <div className={styles.FeatureContent}>Trade digital options and multipliers</div>
+            </li>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>Monitor real-time pricing</FeatureContent>
-            </FeatureOption>
-            <FeatureOption>
+              <div className={styles.FeatureContent}>Monitor real-time pricing</div>
+            </li>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>Buy/sell contracts</FeatureContent>
-            </FeatureOption>
-            <FeatureOption>
+              <div className={styles.FeatureContent}>Buy/sell contracts</div>
+            </li>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>{"Manage users' accounts"}</FeatureContent>
-            </FeatureOption>
-            <FeatureOption>
+              <div className={styles.FeatureContent}>{"Manage users' accounts"}</div>
+            </li>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>Monitor existing contracts</FeatureContent>
-            </FeatureOption>
-            <FeatureOption>
+              <div className={styles.FeatureContent}>Monitor existing contracts</div>
+            </li>
+            <li className={styles.FeatureOption}>
               <img src='/img/checklist-icon-red.svg'></img>
-              <FeatureContent>{"View users' historical transactions"}</FeatureContent>
-            </FeatureOption>
-          </FeatureList>
-        </FeatureText>
-        <ApiFeaturesImage data-testid='api-features-img' />
-      </FeaturesDescription>
-    </FeaturesContainer>
+              <div className={styles.FeatureContent}>{"View users' historical transactions"}</div>
+            </li>
+          </ul>
+        </div>
+        <div className={styles.ApiFeaturesImage} data-testid='api-features-img' />
+      </div>
+    </div>
   );
 };
