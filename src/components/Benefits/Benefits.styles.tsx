@@ -1,5 +1,3 @@
-import { styled } from '@linaria/react';
-
 export const BenefitsContainer = styled.div`
   width: 100%;
 `;

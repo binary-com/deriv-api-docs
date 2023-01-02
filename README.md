@@ -34,7 +34,6 @@ Before running or contributing to this project, you need to install the followin
 - node >=16.16.0
 - npm >=7.21.0
 - docusaurus >=2.0.0
-- linaria >=4.1.2
 - @deriv/ui >=0.1.0
 - git (for `contribution`)
 

@@ -1,5 +1,3 @@
-import { styled } from '@linaria/react';
-
 export const WaysContainer = styled.div`
   margin-top: 20px;
   @media screen and (max-width: 992px) {

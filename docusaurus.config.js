@@ -28,35 +28,7 @@ const config = {
     locales: ['en'],
   },
 
-  plugins: [
-    '@docusaurus/theme-live-codeblock',
-    function LinariaPlugin(context, options) {
-      return {
-        name: 'linaria-plugin',
-        configureWebpack(config, isServer) {
-          return {
-            module: {
-              rules: [
-                {
-                  test: /\.tsx$/,
-                  exclude: /node_modules/,
-                  use: [
-                    { loader: 'babel-loader' },
-                    {
-                      loader: '@linaria/webpack-loader',
-                      options: {
-                        sourceMap: dev,
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          };
-        },
-      };
-    },
-  ],
+  plugins: ['@docusaurus/theme-live-codeblock'],
 
   presets: [
     [

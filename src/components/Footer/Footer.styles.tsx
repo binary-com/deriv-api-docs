@@ -1,5 +1,3 @@
-import { styled } from '@linaria/react';
-
 export const FooterContainer = styled.div`
   background-color: var(--ifm-color-black);
   display: flex;

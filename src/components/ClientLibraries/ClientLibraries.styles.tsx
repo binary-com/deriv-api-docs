@@ -1,5 +1,3 @@
-import { styled } from '@linaria/react';
-
 export const ClientLibrary = styled.div`
   background-repeat: no-repeat;
   background-position: center;

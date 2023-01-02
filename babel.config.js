@@ -3,7 +3,6 @@ module.exports = {
     '@babel/preset-env',
     '@babel/preset-react',
     '@babel/preset-typescript',
-    '@linaria',
     require.resolve('@docusaurus/core/lib/babel/preset'),
   ],
   env: {
