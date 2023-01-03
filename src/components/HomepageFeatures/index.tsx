@@ -12,10 +12,10 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div>
         <div className={styles.IndexStyling}>
-          {/* <HeroHeader />
-          <ClientLibaries />
+          {/* <HeroHeader /> */}
+          {/* <ClientLibaries /> */}
           <Benefits />
-          <WaysToEarn /> */}
+          {/* <WaysToEarn /> */}
           <ApiFeatures />
           {/* <Footer /> */}
         </div>

@@ -3,3 +3,13 @@
     padding: 0;
     scroll-margin-top: 10rem;
 }
+
+/* Setting base rem size. 1rem = 10px */
+html {
+    font-size: 10px;
+}
+
+/* Setting base font size in rem */
+html * {
+    font-size: 1.6rem;
+}

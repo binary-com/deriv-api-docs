@@ -4,10 +4,10 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding: 20px 0 20px 115px;
+    padding: 2rem 0 2rem 11.5rem;
     
     @media (max-width: 992px) {
-        padding: 20px 0 20px 0;
+        padding: 2rem 0 2rem 0;
     }
 
     .FeaturesDescription {
@@ -28,14 +28,16 @@
         }
 
         .FeatureText {
-            width: 486px;
-            margin-left: 40px;
+            width: 48.6rem;
+            margin-left: 4rem;
             padding: 0 10px;
             box-sizing: border-box;
+            @media (max-width: 992px) {
+                margin-left: 0;
+            }
 
             .FeatureList {
                 margin-left: -2rem;
-                line-height: 2rem;
                 font-weight: 500;
 
                 .FeatureOptions {
@@ -43,12 +45,12 @@
                     list-style-type: none;
                     display: flex;
                     flex-direction: row;
-                    gap: 4px;
-                    margin-bottom: 0.8rem;
+                    gap: 0.4rem;
+                    margin: 1.6rem 0;
 
                     .FeatureContent {
                         margin-bottom: 0;
-                        line-height: 2rem;
+                        margin-left: 1rem;
                     }
                 }
             }
