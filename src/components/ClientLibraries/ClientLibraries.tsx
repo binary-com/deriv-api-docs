@@ -1,22 +1,15 @@
 import React from 'react';
 import { Text } from '@deriv/ui';
-import {
-  ClientLibrary,
-  IconJS,
-  LibraryLogo,
-  LogoAndLink,
-  LibraryGoTo,
-  LibraryChevron,
-} from './ClientLibraries.styles';
+import styles from './ClientLibraries.module.scss';
 
 export const ClientLibaries = () => {
   return (
     <div className='main-page-row'>
-      <ClientLibrary data-testid='client-header'>
+      <div className={styles.ClientLibrary} data-testid='client-header'>
         <div>
-          <IconJS>
+          <div className={styles.IconJS}>
             <img src='/img/js-library.svg' />
-          </IconJS>
+          </div>
           <Text
             type='heading-2'
             bold
@@ -42,31 +35,46 @@ export const ClientLibaries = () => {
             Use our powerful, flexible, and free API to build a custom trading <br />
             platform - for yourself or for your business.
           </Text>
-          <LibraryLogo>
-            <LogoAndLink>
-              <LibraryGoTo href='https://binary-com.github.io/deriv-api/' target='_blank'>
+          <div className={styles.LibraryLogo}>
+            <div className={styles.LogoAndLink}>
+              <a
+                className={styles.LibraryGoTo}
+                href='https://binary-com.github.io/deriv-api/'
+                rel='noreferrer'
+                target='_blank'
+              >
                 <img src='/img/js.svg'></img>
                 <label>Go to the JavaScript library</label>
-                <LibraryChevron src='/img/library-chevron.svg' />
-              </LibraryGoTo>
-            </LogoAndLink>
-            <LogoAndLink>
-              <LibraryGoTo href='https://binary-com.github.io/python-deriv-api/' target='_blank'>
+                <img className={styles.LibraryChevron} src='/img/library-chevron.svg' />
+              </a>
+            </div>
+            <div className={styles.LogoAndLink}>
+              <a
+                className={styles.LibraryGoTo}
+                href='https://binary-com.github.io/python-deriv-api/'
+                rel='noreferrer'
+                target='_blank'
+              >
                 <img src='/img/py.svg'></img>
                 <label>Go to the Python library</label>
-                <LibraryChevron src='/img/library-chevron.svg' />
-              </LibraryGoTo>
-            </LogoAndLink>
-            <LogoAndLink>
-              <LibraryGoTo href='https://github.com/deriv-com/flutter-deriv-api' target='_blank'>
+                <img className={styles.LibraryChevron} src='/img/library-chevron.svg' />
+              </a>
+            </div>
+            <div className={styles.LogoAndLink}>
+              <a
+                className={styles.LibraryGoTo}
+                href='https://github.com/deriv-com/flutter-deriv-api'
+                rel='noreferrer'
+                target='_blank'
+              >
                 <img src='/img/flutter.svg'></img>
                 <label>Go to the Flutter library</label>
-                <LibraryChevron src='/img/library-chevron.svg' />
-              </LibraryGoTo>
-            </LogoAndLink>
-          </LibraryLogo>
+                <img className={styles.LibraryChevron} src='/img/library-chevron.svg' />
+              </a>
+            </div>
+          </div>
         </div>
-      </ClientLibrary>
+      </div>
     </div>
   );
 };

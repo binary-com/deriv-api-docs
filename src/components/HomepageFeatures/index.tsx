@@ -13,7 +13,7 @@ export default function HomepageFeatures() {
       <div>
         <div className={styles.IndexStyling}>
           {/* <HeroHeader /> */}
-          {/* <ClientLibaries /> */}
+          <ClientLibaries />
           <Benefits />
           {/* <WaysToEarn /> */}
           <ApiFeatures />
