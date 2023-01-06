@@ -1,0 +1,105 @@
+@use 'src/css/utility' as *;
+
+.BenefitsContainer {
+    width: 100%;
+    
+    .BenefitsIcons {
+        width: 100%;
+        flex-wrap: nowrap;
+        margin-bottom: rem(2);
+        display: flex;
+        justify-content: space-evenly;
+
+        @media screen and (max-width: 992px) {
+            margin-top: rem(3);
+            flex-direction: column;
+        }
+    }
+
+    .BenefitsInformation {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 100%;
+        gap: rem(4);
+        margin: 0 auto;
+
+        h3 {
+            margin: rem(1.6) 0;
+        }
+
+        img {
+            margin-bottom: rem(4);
+        }
+
+        @media screen and (max-width: 992px) {
+            flex-wrap: wrap;
+            width: 90%;
+
+            div {
+            width: 100%;
+            }
+
+            h3 {
+            margin: rem(1.6) 0;
+            }
+
+            img {
+            height: auto;
+            }
+        }
+        .InformationContainer {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: rem(4);
+            &:first-child {
+                flex-direction: row-reverse;
+            }
+            div {
+                width: rem(46.8);
+            }
+            @media screen and (max-width: 992px) {
+                flex-direction: column;
+                &:first-child {
+                flex-direction: column-reverse;
+                }
+                div {
+                width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.SingleIconContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .BenefitsImage {
+        background-size: contain;
+        display: inline-block;
+        width: rem(7.2);
+        height: rem(7.2);
+        margin: rem(0.8);
+    }
+}
+
+.InformationImage {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: rem(48.6);
+    height: rem(26);
+    @media screen and (max-width: 992px) {
+        max-width: rem(48.6);
+        height: rem(22);
+    }
+    @media screen and (min-width: 320px) and (max-width: 375px) {
+        height: rem(15);
+    }
+}

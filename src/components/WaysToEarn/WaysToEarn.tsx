@@ -1,12 +1,12 @@
 import React from 'react';
 import { Badge, Text } from '@deriv/ui';
-import { WaysContainer, WaysWrapper, Ways } from './WaysToEarn.styles';
+import styles from './WaysToEarn.module.scss';
 
 export const WaysToEarn = () => {
   return (
     <div className='main-page-row'>
-      <WaysContainer data-testid='ways-to-earn'>
-        <WaysWrapper>
+      <div className={styles.WaysContainer} data-testid='ways-to-earn'>
+        <div className={styles.WaysWrapper}>
           <div>
             <Text
               type='heading-2'
@@ -20,7 +20,7 @@ export const WaysToEarn = () => {
             </Text>
           </div>
           <div>
-            <Ways>
+            <div className={styles.Ways}>
               <Badge
                 icon_src='/img/checklist-icon-red.svg'
                 label='regular'
@@ -33,8 +33,8 @@ export const WaysToEarn = () => {
                   to profit from every purchased contract.
                 </Text>
               </Badge>
-            </Ways>
-            <Ways>
+            </div>
+            <div className={styles.Ways}>
               <Badge
                 icon_src='/img/checklist-icon-red.svg'
                 label='regular'
@@ -47,8 +47,8 @@ export const WaysToEarn = () => {
                   via your app and the affiliate plan you select.
                 </Text>
               </Badge>
-            </Ways>
-            <Ways>
+            </div>
+            <div className={styles.Ways}>
               <Badge
                 icon_src='/img/checklist-icon-red.svg'
                 label='regular'
@@ -61,10 +61,10 @@ export const WaysToEarn = () => {
                   to earn commission on every payment you process for Deriv&apos;s clients.
                 </Text>
               </Badge>
-            </Ways>
+            </div>
           </div>
-        </WaysWrapper>
-      </WaysContainer>
+        </div>
+      </div>
     </div>
   );
 };

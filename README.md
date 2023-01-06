@@ -34,7 +34,6 @@ Before running or contributing to this project, you need to install the followin
 - node >=16.16.0
 - npm >=7.21.0
 - docusaurus >=2.0.0
-- linaria >=4.1.2
 - @deriv/ui >=0.1.0
 - git (for `contribution`)
 
@@ -70,10 +69,17 @@ Before running or contributing to this project, you need to install the followin
     npm run build
     ```
 
-6.  **Serve the Build**
+6.  **Run the Build**
+    Run proxy server in seperate terminal
 
     ```sh
-    npm run serve
+    npm run start:auth
+    ```
+
+    After that, start the application in another terminal
+
+    ```sh
+    npm run start
     ```
 
 <br />

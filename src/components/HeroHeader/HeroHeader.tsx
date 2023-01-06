@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text } from '@deriv/ui';
-import { HeroImageStyle, HeroContainerStyle } from './HeroHeader.styles';
+import styles from './HeroHeader.module.scss';
 
 export const HeroHeader = () => {
   return (
-    <HeroImageStyle data-testid='hero-header'>
-      <HeroContainerStyle>
+    <div className={styles.HeroImageStyle} data-testid='hero-header'>
+      <div className={styles.HeroContainerStyle}>
         <Text
           type='heading-1'
           bold
@@ -32,7 +32,7 @@ export const HeroHeader = () => {
           Use our powerful, flexible, and free API to build a custom trading <br />
           platform - for yourself or for your business.
         </Text>
-      </HeroContainerStyle>
-    </HeroImageStyle>
+      </div>
+    </div>
   );
 };

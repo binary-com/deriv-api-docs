@@ -1,0 +1,26 @@
+@use 'src/css/utility' as *;
+
+.FooterContainer {
+    background-color: var(--ifm-color-black);
+    display: flex;
+    flex-direction: row;
+    padding: rem(2);
+    justify-content: space-evenly;
+    margin-top: rem(2.5);
+
+    @media screen and (max-width: 992px) {
+        flex-direction: column;
+        gap: rem(2);
+    }
+
+    .FooterBody {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+
+        .Email {
+            color: var(--ifm-color-danger);
+            padding: 0 rem(0.5);
+        }
+    }
+}

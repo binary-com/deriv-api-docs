@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button, Text } from '@deriv/ui';
-import { FooterContainer, FooterBody, Email } from './Footer.styles';
+import styles from './Footer.module.scss';
 
 export const Footer = () => {
   return (
-    <FooterContainer data-testid='footer-text'>
-      <FooterBody>
+    <div className={styles.FooterContainer} data-testid='footer-text'>
+      <div className={styles.FooterBody}>
         <Text
           type='subtitle-1'
           bold
@@ -36,8 +36,8 @@ export const Footer = () => {
         >
           <Button color='monochrome'>Join Our Community</Button>
         </a>
-      </FooterBody>
-      <FooterBody>
+      </div>
+      <div className={styles.FooterBody}>
         <Text
           type='subtitle-1'
           bold
@@ -63,10 +63,10 @@ export const Footer = () => {
           role='heading'
           aria-level={7}
         >
-          Email us at <Email>api-support@deriv.com</Email>
+          Email us at <a className={styles.Email}>api-support@deriv.com</a>
           if you have any questions.
         </Text>
-      </FooterBody>
-    </FooterContainer>
+      </div>
+    </div>
   );
 };
