@@ -1,13 +1,14 @@
+@use 'src/css/utility' as *;
 .FeaturesContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding: 2rem 0 2rem 11.5rem;
+    padding: Rem(2) Rem(10);
     
     @media (max-width: 992px) {
-        padding: 2rem 0 2rem 0;
+        padding: Rem(2) 0;
     }
 
     .FeaturesDescription {
@@ -18,26 +19,25 @@
         align-items: center;
 
         .ApiFeaturesImage {
-            aspect-ratio: 4 / 2;
+            aspect-ratio: 4 / 2.5;
             background-image: url(/img/api-featutes.png);
             background-repeat: no-repeat;
             background-size: contain;
             display: inline-block;
-            width: 60rem;
-            margin-top: 1rem;
+            width: Rem(60);
+            margin-top: Rem(5);
         }
 
         .FeatureText {
-            width: 48.6rem;
-            margin-left: 4rem;
-            padding: 0 10px;
+            width: Rem(48.6);
+            padding: 0 Rem(1);
             box-sizing: border-box;
-            @media (max-width: 992px) {
-                margin-left: 0;
+            @media (min-width: 425px) {
+                margin-left: Rem(4);
             }
 
             .FeatureList {
-                margin-left: -2rem;
+                margin-left: Rem(-2);
                 font-weight: 500;
 
                 .FeatureOptions {
@@ -45,12 +45,12 @@
                     list-style-type: none;
                     display: flex;
                     flex-direction: row;
-                    gap: 0.4rem;
-                    margin: 1.6rem 0;
+                    gap: Rem(0.4);
+                    margin: Rem(1.6) 0;
 
                     .FeatureContent {
                         margin-bottom: 0;
-                        margin-left: 1rem;
+                        margin-left: Rem(1);
                     }
                 }
             }

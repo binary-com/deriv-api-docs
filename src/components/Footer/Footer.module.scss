@@ -1,14 +1,16 @@
+@use 'src/css/utility' as *;
+
 .FooterContainer {
     background-color: var(--ifm-color-black);
     display: flex;
     flex-direction: row;
-    padding: 2rem;
+    padding: Rem(2);
     justify-content: space-evenly;
-    margin-top: 2.5rem;
+    margin-top: Rem(2.5);
 
     @media screen and (max-width: 992px) {
         flex-direction: column;
-        gap: 2rem;
+        gap: Rem(2);
     }
 
     .FooterBody {
@@ -18,7 +20,7 @@
 
         .Email {
             color: var(--ifm-color-danger);
-            padding: 0 5px;
+            padding: 0 Rem(0.5);
         }
     }
 }

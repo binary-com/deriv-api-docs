@@ -41,7 +41,7 @@ const config = {
         },
         blog: false,
         theme: {
-          customCss: [require.resolve('./src/css/custom.css'), './src/css/index.css'],
+          customCss: [require.resolve('./src/css/custom.css'), './src/css/index.scss'],
         },
       }),
     ],

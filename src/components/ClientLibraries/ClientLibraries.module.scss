@@ -1,3 +1,5 @@
+@use 'src/css/utility' as *;
+
 .ClientLibrary {
     background-repeat: no-repeat;
     background-position: center;
@@ -5,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8rem 0;
+    padding: Rem(8) 0;
     width: 100%;
     background-size: auto;
 
@@ -26,21 +28,21 @@
         }
 
         .LogoAndLink {
-            padding: 1rem 2rem;
+            padding: Rem(1) Rem(2);
             
             .LibraryGoTo {
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
                 color: var(--ifm-color-danger);
-                gap: 10px;
+                gap: Rem(1);
 
                 .LibraryChevron {
                     background-repeat: no-repeat;
                     background-position: center;
-                    width: 1.2rem;
-                    height: 1.2rem;
-                    margin-left: 0.5rem;
+                    width: Rem(1.2);
+                    height: Rem(1.2);
+                    margin-left: Rem(0.5);
                 }
             }
         }

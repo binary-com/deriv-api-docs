@@ -1,0 +1,11 @@
+@use 'src/css/utility' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    scroll-margin-top: Rem(10);
+}
+
+.main-page-row:nth-child(even) {
+    background-color: var(--ifm-color-emphasis-100);
+}
