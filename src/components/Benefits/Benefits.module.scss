@@ -6,12 +6,12 @@
     .BenefitsIcons {
         width: 100%;
         flex-wrap: nowrap;
-        margin-bottom: Rem(2);
+        margin-bottom: rem(2);
         display: flex;
         justify-content: space-evenly;
 
         @media screen and (max-width: 992px) {
-            margin-top: Rem(3);
+            margin-top: rem(3);
             flex-direction: column;
         }
     }
@@ -22,15 +22,15 @@
         flex-direction: column;
         justify-content: space-evenly;
         width: 100%;
-        gap: Rem(4);
+        gap: rem(4);
         margin: 0 auto;
 
         h3 {
-            margin: Rem(1.6) 0;
+            margin: rem(1.6) 0;
         }
 
         img {
-            margin-bottom: Rem(4);
+            margin-bottom: rem(4);
         }
 
         @media screen and (max-width: 992px) {
@@ -42,7 +42,7 @@
             }
 
             h3 {
-            margin: Rem(1.6) 0;
+            margin: rem(1.6) 0;
             }
 
             img {
@@ -54,12 +54,12 @@
             width: 100%;
             justify-content: space-evenly;
             align-items: center;
-            gap: Rem(4);
+            gap: rem(4);
             &:first-child {
                 flex-direction: row-reverse;
             }
             div {
-                width: Rem(46.8);
+                width: rem(46.8);
             }
             @media screen and (max-width: 992px) {
                 flex-direction: column;
@@ -83,9 +83,9 @@
     .BenefitsImage {
         background-size: contain;
         display: inline-block;
-        width: Rem(7.2);
-        height: Rem(7.2);
-        margin: Rem(0.8);
+        width: rem(7.2);
+        height: rem(7.2);
+        margin: rem(0.8);
     }
 }
 
@@ -93,13 +93,13 @@
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
-    width: Rem(48.6);
-    height: Rem(26);
+    width: rem(48.6);
+    height: rem(26);
     @media screen and (max-width: 992px) {
-        max-width: Rem(48.6);
-        height: Rem(22);
+        max-width: rem(48.6);
+        height: rem(22);
     }
     @media screen and (min-width: 320px) and (max-width: 375px) {
-        height: Rem(15);
+        height: rem(15);
     }
 }
