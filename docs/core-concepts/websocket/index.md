@@ -1,6 +1,6 @@
 ---
 title: Websocket
-hide_title: false
+hide_title: true
 draft: false
 sidebar_label: Websocket
 sidebar_position: 0
