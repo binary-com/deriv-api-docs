@@ -1,7 +1,7 @@
 ---
-title: Setting up a deriv application
-sidebar_label: Setting up a deriv application
-sidebar_position: 2
+title: Setting up a Deriv Application
+sidebar_label: Setting up a Deriv Application
+sidebar_position: 6
 tags:
   - intro
   - application_setup

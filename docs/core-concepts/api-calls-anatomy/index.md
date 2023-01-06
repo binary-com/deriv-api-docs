@@ -1,6 +1,6 @@
 ---
 title: API Calls Anatomy
-hide_title: false
+hide_title: true
 draft: false
 sidebar_label: API Calls anatomy
 sidebar_position: 1
