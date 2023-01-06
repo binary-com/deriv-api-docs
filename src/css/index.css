@@ -13,3 +13,7 @@ html {
 html * {
     font-size: 1.6rem;
 }
+
+.main-page-row:nth-child(even) {
+    background-color: var(--ifm-color-emphasis-100);
+}

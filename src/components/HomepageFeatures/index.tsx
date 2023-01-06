@@ -10,16 +10,12 @@ import styles from './styles.module.scss';
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <div>
-        <div className={styles.IndexStyling}>
-          {/* <HeroHeader /> */}
-          <ClientLibaries />
-          <Benefits />
-          {/* <WaysToEarn /> */}
-          <ApiFeatures />
-          {/* <Footer /> */}
-        </div>
-      </div>
+      <HeroHeader />
+      <ClientLibaries />
+      <Benefits />
+      <WaysToEarn />
+      <ApiFeatures />
+      <Footer />
     </section>
   );
 }
