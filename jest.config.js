@@ -10,7 +10,7 @@ module.exports = {
     '!src/test-utils.tsx',
   ],
   coverageDirectory: './coverage/',
-  // coverageReporters: ['lcov'],
+  coverageReporters: ['lcov'],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(j|t)sx?$': ['ts-jest', { babelConfig: true }],
