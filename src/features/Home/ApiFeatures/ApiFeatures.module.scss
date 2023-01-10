@@ -1,0 +1,59 @@
+@use 'src/styles/utility' as *;
+.FeaturesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: rem(2) rem(10);
+
+  @media (max-width: 992px) {
+    padding: rem(2) 0;
+  }
+
+  .FeaturesDescription {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 90%;
+    align-items: center;
+
+    .ApiFeaturesImage {
+      aspect-ratio: 4 / 2.5;
+      background-image: url(/img/api-featutes.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: inline-block;
+      width: rem(60);
+      margin-top: rem(5);
+    }
+
+    .FeatureText {
+      width: rem(48.6);
+      padding: 0 rem(1);
+      box-sizing: border-box;
+      @media (min-width: 425px) {
+        margin-left: rem(4);
+      }
+
+      .FeatureList {
+        margin-left: rem(-2);
+        font-weight: 500;
+
+        .FeatureOptions {
+          align-items: center;
+          list-style-type: none;
+          display: flex;
+          flex-direction: row;
+          gap: rem(0.4);
+          margin: rem(1.6) 0;
+
+          .FeatureContent {
+            margin-bottom: 0;
+            margin-left: rem(1);
+          }
+        }
+      }
+    }
+  }
+}

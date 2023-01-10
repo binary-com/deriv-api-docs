@@ -1,26 +1,26 @@
-@use 'src/css/utility' as *;
+@use 'src/styles/utility' as *;
 
 .FooterContainer {
-    background-color: var(--ifm-color-black);
+  background-color: var(--ifm-color-black);
+  display: flex;
+  flex-direction: row;
+  padding: rem(2);
+  justify-content: space-evenly;
+  margin-top: rem(2.5);
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    gap: rem(2);
+  }
+
+  .FooterBody {
     display: flex;
-    flex-direction: row;
-    padding: rem(2);
-    justify-content: space-evenly;
-    margin-top: rem(2.5);
+    flex-direction: column;
+    align-items: center;
 
-    @media screen and (max-width: 992px) {
-        flex-direction: column;
-        gap: rem(2);
+    .Email {
+      color: var(--ifm-color-danger);
+      padding: 0 rem(0.5);
     }
-
-    .FooterBody {
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-
-        .Email {
-            color: var(--ifm-color-danger);
-            padding: 0 rem(0.5);
-        }
-    }
+  }
 }

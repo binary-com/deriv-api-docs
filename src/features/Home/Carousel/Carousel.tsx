@@ -1,6 +1,6 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Text } from '@deriv/ui';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { SlideContent } from './SlideContent/SlideContent';
 import styles from './Carousel.module.scss';
 import 'swiper/css';

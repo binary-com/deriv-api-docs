@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@deriv/ui';
 import React from 'react';
 import type { ReactNode } from 'react';
-import { RootContext } from '../components/contexts/root-context/RootContext';
+import RootContextProvider from '../contexts/root.context';
 
 type TRootProps = {
   children: ReactNode;
@@ -10,9 +10,9 @@ type TRootProps = {
 export default function Root({ children }: TRootProps) {
   return (
     <>
-      <RootContext>
+      <RootContextProvider>
         <ThemeProvider>{children}</ThemeProvider>
-      </RootContext>
+      </RootContextProvider>
     </>
   );
 }
