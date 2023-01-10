@@ -1,0 +1,16 @@
+@use 'src/css/utility' as *;
+.sliderContent {
+    text-align: left;
+    &:after {
+        box-sizing: border-box;
+        content: "\201c";
+        position: absolute;
+        font-size: rem(17);
+        font-weight: 700;
+        z-index: -1;
+        left: 0;
+        top: rem(-8);
+        color: lightgrey;
+        opacity: 56%;
+    }
+}
