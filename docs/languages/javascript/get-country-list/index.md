@@ -11,54 +11,110 @@ keywords:
 description: How to get list of countries in deriv api?
 ---
 
-### Create Project
-
-We're gonna create a simple `HTML` page with our javascript scripts which handles our websocket connection. create a directory for you next project:
-
-```bash
-mkdir deriv-websocket-demo
-```
-
-navigate to the `deriv-websocket-demo` folder:
-
-```bash
-cd deriv-websocket-demo
-```
-
-next create the needed files like so:
-
-```bash
-touch index.html index.css index.js
-```
-
-Now open the folder with your prefered code editor or IDE
-
-:::tip
-We suggest using [Visual Studio Code](https://code.visualstudio.com/) with [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) enabled, it will help you a lot going forward in implementations.
+:::caution
+You can learn more about countries [here](/docs/core-concepts/residence-list)
 :::
 
-Now Change the content of the files like so:
+To get countries list, please update the `open` event listener like so:
 
-```js title="index.js"
-console.log("we're gonna create websocket connection and all the other cool stuff here");
+```js
+websocket.addEventListener('open', (event) => {
+  console.log('websocket connection established: ', event);
+  const payload = JSON.stringify({
+    residence_list: 1,
+  });
+  websocket.send(payload);
+});
 ```
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deriv Html JS Demo</title>
-  </head>
-  <body>
-    <h2>Deriv Websocket API demo</h2>
-    <script src="index.js" async defer />
-  </body>
-</html>
+Now update the `message` event listener to render the data:
+
+```js
+websocket.addEventListener('message', (event) => {
+  const receivedMessage = JSON.parse(event.data);
+  console.log('get countries response', receivedMessage);
+});
 ```
 
-Now open the `index.html` file or use the [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+the response should be an object:
 
-This was just a simple project setup and didn't much related to `Deriv Websockets` at all, pleaes go to the next step.
+```json
+{
+  "echo_req": {
+    "req_id": 1,
+    "residence_list": 1
+  },
+  "msg_type": "residence_list",
+  "req_id": 1,
+  "residence_list": [
+    {
+      "identity": {
+        "services": {
+          "idv": {
+            "documents_supported": {},
+            "has_visual_sample": 0,
+            "is_country_supported": 0
+          },
+          "onfido": {
+            "documents_supported": {},
+            "is_country_supported": 0
+          }
+        }
+      },
+      "phone_idd": "35818",
+      "text": "Aland Islands",
+      "value": "ax"
+    },
+    {
+      "identity": {
+        "services": {
+          "idv": {
+            "documents_supported": {},
+            "has_visual_sample": 0,
+            "is_country_supported": 0
+          },
+          "onfido": {
+            "documents_supported": {
+              "driving_licence": {
+                "display_name": "Driving Licence"
+              },
+              "national_identity_card": {
+                "display_name": "National Identity Card"
+              },
+              "passport": {
+                "display_name": "Passport"
+              }
+            },
+            "is_country_supported": 1
+          }
+        }
+      },
+      "phone_idd": "355",
+      "text": "Albania",
+      "tin_format": ["^[A-Ta-t0-9]\\d{8}[A-Wa-w]$"],
+      "value": "al"
+    }
+  ]
+}
+```
+
+We this call, you'll get useful information for the supported countries, such as:
+
+- `2-letter` code for each country
+- `Identity` service providers for each country
+- Country Tax Identifier Format (`tin_format`)
+- etc
+
+This can be useful on account creation forms, in which you need to ask your users to provide validated information about their identity.
+
+:::caution
+For address, tax ID validations please the provided `tin_format` for the country.
+:::
+
+:::tip
+It's better if you get the list of countries before populating your form.
+:::
+
+:::danger
+We need detailed content about `IDV` and `ONFIDO` identity services, their differences and possibilities
+:::
