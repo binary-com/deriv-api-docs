@@ -2,6 +2,12 @@
 title: Websocket Connection
 sidebar_label: Websocket connection
 sidebar_position: 1
+tags:
+  - javascript
+keywords:
+  - js
+  - websocket-connection
+description: how to setup websocket connection with deriv api?
 ---
 
 :::caution
@@ -68,7 +74,7 @@ Now open the `index.html` file in our browser and checkout your Developer Consol
 Our websocket server provide `ping / pong` functionality, let's use it in our demo project to send and receive data. change the event listeners for `open` and `message` like so:
 
 :::caution
-The `send` function on websocket connection only receives `string`, `ArrayBuffer`, `Blog` and `TypedArray`, `DataView`, you can read more abou them [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send), which mean if we want to send an `object` we have stringify with `JSON.stringify` it first.
+The `send` function on websocket connection only receives `string`, `ArrayBuffer`, `Blob` and `TypedArray`, `DataView`, you can read more abou them [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send), which mean if we want to send an `object` we have stringify with `JSON.stringify` it first.
 :::
 
 ```js title="index.js"
@@ -113,9 +119,64 @@ By Defualt `Websocket connection` will be closed when no traffic is sent between
 Simple example setup would be like so:
 
 ```js title="index.js"
-const interval = 12000; // it's in milliseconds, which equals to 120 seconds
-setInterval(() => {
+const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
+let interval;
+websocket.addEventListener('open', (event) => {
+  console.log('websocket connection established: ', event);
   const sendMessage = JSON.stringify({ ping: 1 });
   websocket.send(sendMessage);
-}, interval);
+
+  // to Keep the connection alive
+  interval = setInterval(() => {
+    const sendMessage = JSON.stringify({ ping: 1 });
+    websocket.send(sendMessage);
+  }, ping_interval);
+});
+
+// subscribe to `close` event
+websocket.addEventListener('close', (event) => {
+  console.log('websocket connectioned closed: ', event);
+  clearInterval(interval);
+});
+```
+
+Now when the connection is `established` we start sending `ping` requests with `12000ms` intervals.
+
+your final code should be:
+
+```js title="index.js"
+const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
+const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
+let interval;
+
+// subscribe to `open` event
+websocket.addEventListener('open', (event) => {
+  console.log('websocket connection established: ', event);
+  const sendMessage = JSON.stringify({ ping: 1 });
+  websocket.send(sendMessage);
+
+  // to Keep the connection alive
+  interval = setInterval(() => {
+    const sendMessage = JSON.stringify({ ping: 1 });
+    websocket.send(sendMessage);
+  }, ping_interval);
+});
+
+// subscribe to `message` event
+websocket.addEventListener('message', (event) => {
+  const receivedMessage = JSON.parse(event.data);
+  console.log('new message received from server: ', receivedMessage);
+});
+
+// subscribe to `close` event
+websocket.addEventListener('close', (event) => {
+  console.log('websocket connectioned closed: ', event);
+  clearInterval(interval);
+});
+
+// subscribe to `error` event
+websocket.addEventListener('error', (event) => {
+  console.log('an error happend in our websocket connection', event);
+});
 ```
