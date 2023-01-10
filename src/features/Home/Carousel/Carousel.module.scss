@@ -1,0 +1,33 @@
+@use 'src/css/utility' as *;
+
+.carouselComponent {
+    margin: rem(16) 0 rem(8);
+
+    .carouselContainer {
+        display: flex;
+        flex-direction: row;
+        width: fit-content;
+        margin: 0 auto;
+        align-items: center;
+
+        .prev {
+            background-image: url(/static/img/arrow_left.svg);
+        }
+        
+        .next {
+            background-image: url(/static/img/arrow_right.svg);
+        }
+        
+        .control {
+            width: rem(5);
+            height: rem(5);
+            background-size: rem(2.5) rem(2.5);
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            &:active {
+                background-size: rem(2) rem(2);
+            }
+        }
+    }
+}

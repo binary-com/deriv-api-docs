@@ -5,6 +5,7 @@ import { Benefits } from '../Benefits/Benefits';
 import { WaysToEarn } from '../WaysToEarn/WaysToEarn';
 import { Footer } from '../Footer/Footer';
 import { ApiFeatures } from '../ApiFeatures/ApiFeatures';
+import { Carousel } from '@site/src/features/Home/Carousel/Carousel';
 import styles from './styles.module.scss';
 
 export default function HomepageFeatures() {
@@ -15,6 +16,7 @@ export default function HomepageFeatures() {
       <Benefits />
       <WaysToEarn />
       <ApiFeatures />
+      <Carousel />
       <Footer />
     </section>
   );
