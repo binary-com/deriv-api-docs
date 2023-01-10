@@ -15,7 +15,7 @@ description: How to get list of countries in deriv api?
 You can learn more about countries [here](/docs/core-concepts/residence-list)
 :::
 
-To get the countries list, please update the `open` event listener like so:
+To get the countries list, you can update the `open` event listener like so:
 
 ```js title="index.js"
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
