@@ -2,6 +2,12 @@
 title: Project Setup
 sidebar_label: Project Setup
 sidebar_position: 0
+tags:
+  - javascript
+keywords:
+  - js
+  - project-setup
+description: js deriv api project setup
 ---
 
 ### Create Project
@@ -54,4 +60,26 @@ console.log("we're gonna create websocket connection and all the other cool stuf
 
 Now open the `index.html` file or use the [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
-This was just a simple project setup and didn't much related to `Deriv Websockets` at all, pleaes go to the next step.
+This was just a simple project setup and didn't much related to `Deriv Websockets` at all, please go to the next step.
+
+your final code should be:
+
+```js title="index.js"
+console.log("we're gonna create websocket connection and all the other cool stuff here");
+```
+
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deriv Html JS Demo</title>
+  </head>
+  <body>
+    <h2>Deriv Websocket API demo</h2>
+    <script src="index.js" async defer />
+  </body>
+</html>
+```
