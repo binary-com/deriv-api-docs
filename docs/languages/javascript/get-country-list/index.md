@@ -128,7 +128,7 @@ We this call, you'll get useful information for the supported countries, such as
 This can be useful on account creation forms, in which you need to ask your users to provide validated information about their identity base on their country of residence.
 
 :::caution
-For address, tax ID validations please the provided `tin_format` for the country.
+For address, tax ID validations please use the provided `tin_format` for the country.
 :::
 
 The country of your users is important for our next steps, since with it you can determine which assets and features the client can use.
