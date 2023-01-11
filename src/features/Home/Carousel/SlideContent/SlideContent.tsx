@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './SlideContent.module.scss';
 
 type TSlideContent = {
-  name: string;
-  name_info: string;
-  content: string;
+  name: React.ReactNode;
+  name_info: React.ReactNode;
+  content: React.ReactNode;
 };
 
 export const SlideContent = ({ name, name_info, content }: TSlideContent) => (
