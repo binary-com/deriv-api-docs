@@ -13,11 +13,11 @@ module.exports = {
   coverageReporters: ['lcov'],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(j|t)sx?$': ['ts-jest', { babelConfig: true }],
-    '^.+\\.mjs$': ['babel-jest'],
+    '^.+\\.(j|t)sx?$': 'ts-jest',
+    '^.+\\.mjs$': 'babel-jest',
   },
+  transformIgnorePatterns: ['node_modules/(?!(@docusaurus|swiper|ssr-window|dom7)|@theme)'],
   moduleNameMapper: {
-    '\\.(css|scss)$': 'identity-obj-proxy',
     '@theme/(.*)': '@docusaurus/theme-classic/src/theme/$1',
 
     '@docusaurus/(ErrorBoundary|BrowserOnly|ComponentCreator|constants|ExecutionEnvironment|Head|Interpolate|isInternalUrl|Link|Noop|renderRoutes|router|Translate|use.*)':
@@ -27,11 +27,11 @@ module.exports = {
 
     '@docusaurus/plugin-content-docs/client': '@docusaurus/plugin-content-docs/src/client/index.ts',
     '@site/(.*)': '<rootDir>/$1',
+    '\\.(css|scss|sass|less)$': 'identity-obj-proxy',
   },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'mjs', 'json'],
   rootDir: '.',
   roots: ['<rootDir>'],
   modulePaths: ['<rootDir>'],
-  transformIgnorePatterns: ['node_modules/(?!(@docusaurus)|@theme)'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
