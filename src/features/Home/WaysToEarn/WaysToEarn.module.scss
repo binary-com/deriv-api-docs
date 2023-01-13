@@ -1,0 +1,48 @@
+@use 'src/styles/utility' as *;
+.WaysContainer {
+    margin-top: rem(2);
+    @media screen and (max-width: 992px) {
+        margin-top: 0;
+    }
+    
+    .WaysWrapper {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        margin: rem(16) auto 0 auto;
+        padding: rem(3) 0;
+        @media screen and (max-width: 992px) {
+          width: 100%;
+        }
+
+        .Ways {
+            
+            span {
+                display: flex;
+                align-items: center;
+                width: unset;
+                max-width: rem(62.8);
+                margin: rem(2) rem(1.2);
+                padding: rem(1.6);
+                background-color: var(--ifm-color-emphasis-0);
+                box-shadow: 0 rem(0.4) rem(0.8) rgb(14 14 14 / 10%);
+            }
+        
+            img {
+                width: auto;
+                height: rem(3.2);
+                margin-right: rem(1);
+            }
+        
+            @media screen and (max-width: 992px) {
+                span {
+                    max-width: rem(32.8);
+                    margin: rem(1.6);
+                    align-items: flex-start;
+                }
+            }
+        }
+    }
+}
