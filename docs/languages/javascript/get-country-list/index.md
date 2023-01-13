@@ -8,7 +8,7 @@ tags:
 keywords:
   - country_list
   - javascript
-description: How to get list of countries in deriv api?
+description: How to get the list of countries in Deriv api?
 ---
 
 :::caution
