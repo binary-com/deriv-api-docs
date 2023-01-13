@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from '@deriv/ui';
 import styles from './SlideContent.module.scss';
 
 type TSlideContent = {
@@ -10,12 +11,14 @@ type TSlideContent = {
 export const SlideContent = ({ name, name_info, content }: TSlideContent) => (
   <React.Fragment>
     <blockquote className={styles.sliderContent}>
-      <span>{content}</span>
+      <Text as='span' type='paragraph-1'>
+        {content}
+      </Text>
     </blockquote>
     <p className='blockquote-author'>
-      <span>
+      <Text as='span' type='paragraph-1'>
         <b>{name}</b>, {name_info}
-      </span>
+      </Text>
     </p>
   </React.Fragment>
 );
