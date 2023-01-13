@@ -1,0 +1,16 @@
+@use 'src/styles/utility' as *;
+@import 'swiper/scss';
+
+.swiper {
+    min-width: rem(32);
+    max-width: rem(58.6);
+    text-align: center;
+    cursor: pointer;
+    .swiper-slide {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -2,11 +2,12 @@
 
 .BenefitsContainer {
   width: 100%;
+  margin-top: rem(10);
 
   .BenefitsIcons {
     width: 100%;
     flex-wrap: nowrap;
-    margin-bottom: rem(2);
+    margin-bottom: rem(6.4);
     display: flex;
     justify-content: space-evenly;
 

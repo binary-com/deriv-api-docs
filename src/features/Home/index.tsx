@@ -4,8 +4,9 @@ import { Benefits } from './Benefits/Benefits';
 import { ClientLibraries } from './ClientLibraries/ClientLibraries';
 import { HeroHeader } from './HeroHeader/HeroHeader';
 import { WaysToEarn } from './WaysToEarn/WaysToEarn';
-import styles from './styles.module.scss';
+import { Carousel } from './Carousel/Carousel';
 import Footer from '@site/src/components/Footer';
+import styles from './styles.module.scss';
 
 export default function HomepageFeatures() {
   return (
@@ -15,6 +16,7 @@ export default function HomepageFeatures() {
       <Benefits />
       <WaysToEarn />
       <ApiFeatures />
+      <Carousel />
       <Footer />
     </section>
   );
