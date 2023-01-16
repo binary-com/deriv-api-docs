@@ -22,10 +22,4 @@ describe('Login', () => {
     const login_img = screen.getByRole('image');
     expect(login_img).toHaveStyle('background: /img/login.svg');
   });
-  // it('should redirect anonymous users to /auth/ when clicking on login button', async () => {
-  //   render(<Login />);
-  //   const button = screen.getByRole('button');
-  //   fireEvent.click(button);
-  //   await waitFor(() => expect(global.location.href).toContain('/oauth2/'));
-  // });
 });

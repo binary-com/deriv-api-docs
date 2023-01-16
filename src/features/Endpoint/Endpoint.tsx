@@ -18,7 +18,6 @@ const EndPoint = () => {
   const [server_url, setServerUrl] = useState('');
 
   const handleClick = () => {
-    console.log('Dataset: ', app_id, server_url);
     localStorage.setItem('config.app_id', app_id);
     localStorage.setItem('config.server_url', server_url);
   };
