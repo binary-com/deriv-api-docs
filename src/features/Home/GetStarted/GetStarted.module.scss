@@ -1,0 +1,72 @@
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 4rem;
+  }
+  .main-page-card {
+    width: 100%;
+    max-width: 31.6rem;
+    padding: 3.2rem 2.4rem;
+    border-radius: 4px;
+    box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
+    background-color: var(--white);
+    margin: 0 1.2rem;
+
+    .header {
+      display: flex;
+      width: 100%;
+      .guideIcon,
+      .signUpIcon,
+      .registerYourAppIcon {
+        width: 3.2rem;
+        height: 3.2rem;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+}
+
+.guideIcon,
+.signUpIcon,
+.registerYourAppIcon {
+  width: 3.2rem;
+  height: 3.2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.guideIcon {
+  background-image: url(/img/guide.svg);
+}
+
+.signUpIcon {
+  background-image: url(/img/sign-up.svg);
+}
+
+.registerYourAppIcon {
+  background-image: url(/img/register-your-app.svg);
+}
+
+.withPattern {
+  background-image: url(/img/pattern.svg);
+  object-fit: contain;
+}
+
+[data-state*='responsive.mobile'] {
+  .termConditions,
+  .termConditions a {
+    text-align: center;
+    max-width: 35rem;
+    font-size: var(--text-size-xs);
+    margin-top: 0;
+  }
+}

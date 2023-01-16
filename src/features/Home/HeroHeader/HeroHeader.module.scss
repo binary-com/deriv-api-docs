@@ -1,37 +1,37 @@
 @use 'src/styles/utility' as *;
 .HeroImageStyle {
-    background-color: var(--brown-02);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)), url(/img/header.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: rem(60);
+  background-color: var(--brown-02);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)), url(/img/header.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: rem(60);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: rem(4);
+
+  @media screen and (max-width: 992px) {
+    margin-top: rem(4.7);
+    padding-top: unset;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 375px) {
+    height: rem(37.8);
+  }
+  .HeroContainerStyle {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding-top: rem(4);
-  
+    justify-content: center;
+    padding: rem(16) 0;
+    width: 100%;
+
     @media screen and (max-width: 992px) {
-      margin-top: rem(4.7);
-      padding-top: unset;
+      width: 100%;
+      padding: rem(8) rem(4);
+      align-items: baseline;
     }
-  
-    @media screen and (min-width: 320px) and (max-width: 375px) {
-      height: rem(37.8);
-    }
-    .HeroContainerStyle {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: rem(16) 0;
-        width: 100%;
-      
-        @media screen and (max-width: 992px) {
-          width: 100%;
-          padding: rem(8) rem(4);
-          align-items: baseline;
-        }
-    }
+  }
 }
