@@ -10,7 +10,7 @@ const EndPoint = () => {
   } = useForm({ mode: 'onChange' });
 
   const default_endpoint = {
-    app_id: '31063',
+    app_id: ' 35014',
     server_url: 'green.binary.com',
   };
 
