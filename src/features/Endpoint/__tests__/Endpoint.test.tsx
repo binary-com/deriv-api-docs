@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, fireEvent, getByLabelText, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import EndPoint from '../Endpoint';
 
 describe('Login', () => {
@@ -24,6 +24,7 @@ describe('Login', () => {
     expect(server).toHaveValue('green.binary.com');
 
     const app_id = screen.getByPlaceholderText('e.g. 9999');
-    expect(app_id).toHaveValue('31063');
+
+    expect(app_id).toHaveValue('35014');
   });
 });
