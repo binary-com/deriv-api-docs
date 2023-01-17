@@ -1,35 +1,55 @@
-.column-container {
+.mainPageRow {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
   width: 100%;
+  height: fit-content;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding: 80px 0;
 
-  .card-container {
+  .columnContainer {
     display: flex;
-    flex-direction: row;
-    margin-bottom: 4rem;
-  }
-  .main-page-card {
+    flex-direction: column;
+    flex-wrap: nowrap;
     width: 100%;
-    max-width: 31.6rem;
-    padding: 3.2rem 2.4rem;
-    border-radius: 4px;
-    box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
-    background-color: var(--white);
-    margin: 0 1.2rem;
+    align-items: center;
+    justify-content: center;
 
-    .header {
+    .cardContainer {
       display: flex;
+      flex-direction: row;
+      margin-bottom: 40px;
+      @media screen and (max-width: 992px) {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+    .mainPageCard {
       width: 100%;
-      .guideIcon,
-      .signUpIcon,
-      .registerYourAppIcon {
-        width: 3.2rem;
-        height: 3.2rem;
-        background-repeat: no-repeat;
-        background-position: center;
+      max-width: 316px;
+      padding: 32px 24px;
+      border-radius: 4px;
+      box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
+      background-color: var(--ifm-color-white);
+      margin: 0 12px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--ifm-color-black);
+      margin-bottom: 0;
+
+      .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .guideIcon,
+        .signUpIcon,
+        .registerYourAppIcon {
+          width: 32px;
+          height: 32px;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
       }
     }
   }
@@ -59,14 +79,4 @@
 .withPattern {
   background-image: url(/img/pattern.svg);
   object-fit: contain;
-}
-
-[data-state*='responsive.mobile'] {
-  .termConditions,
-  .termConditions a {
-    text-align: center;
-    max-width: 35rem;
-    font-size: var(--text-size-xs);
-    margin-top: 0;
-  }
 }
