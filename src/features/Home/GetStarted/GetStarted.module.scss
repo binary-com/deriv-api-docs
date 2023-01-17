@@ -1,3 +1,5 @@
+@use 'src/styles/utility' as *;
+
 .mainPageRow {
   display: flex;
   flex-direction: column;
@@ -79,4 +81,8 @@
 .withPattern {
   background-image: url(/img/pattern.svg);
   object-fit: contain;
+}
+
+[data-theme='dark'] .dark {
+  color: var(--ifm-color-black);
 }

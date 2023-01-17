@@ -17,7 +17,7 @@ export const GetStarted = () => {
             data-testid='signUp'
           >
             <div className={styles.header}>
-              <Text type='subtitle-1' bold>
+              <Text type='subtitle-1' bold className={styles.dark}>
                 1. Sign up
               </Text>
               <div className={styles.signUpIcon} />
@@ -30,7 +30,7 @@ export const GetStarted = () => {
           </a>
           <a href='/app-registration' className={styles.mainPageCard} data-testid='register'>
             <div className={styles.header}>
-              <Text type='subtitle-1' bold>
+              <Text type='subtitle-1' bold className={styles.dark}>
                 2. Register your app
               </Text>
               <div className={styles.registerYourAppIcon} />
@@ -39,7 +39,7 @@ export const GetStarted = () => {
           </a>
           <a href='/docs/resources/api-guide/' className={styles.mainPageCard} data-testid='guide'>
             <div className={styles.header}>
-              <Text type='subtitle-1' bold>
+              <Text type='subtitle-1' bold className={styles.dark}>
                 3. Read our guide
               </Text>
               <div className={styles.guideIcon} />
