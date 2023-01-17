@@ -5,7 +5,7 @@ export const GetStarted = () => {
   return (
     <div className={`${styles.mainPageRow} ${styles.withPattern}`}>
       <div className={styles.columnContainer}>
-        <Text type='heading-2' bold data-testid='started-header' role='heading'>
+        <Text type='heading-2' bold data-testid='started-header' role='heading' as='h2'>
           Get started with our API in 3 simple steps:
         </Text>
         <div className={styles.cardContainer}>
@@ -17,7 +17,7 @@ export const GetStarted = () => {
             data-testid='signUp'
           >
             <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark}>
+              <Text type='subtitle-1' bold className={styles.dark} as='text'>
                 1. Sign up
               </Text>
               <div className={styles.signUpIcon} />
@@ -30,7 +30,7 @@ export const GetStarted = () => {
           </a>
           <a href='/app-registration' className={styles.mainPageCard} data-testid='register'>
             <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark}>
+              <Text type='subtitle-1' bold className={styles.dark} as='text'>
                 2. Register your app
               </Text>
               <div className={styles.registerYourAppIcon} />
@@ -39,7 +39,7 @@ export const GetStarted = () => {
           </a>
           <a href='/docs/resources/api-guide/' className={styles.mainPageCard} data-testid='guide'>
             <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark}>
+              <Text type='subtitle-1' bold className={styles.dark} as='text'>
                 3. Read our guide
               </Text>
               <div className={styles.guideIcon} />

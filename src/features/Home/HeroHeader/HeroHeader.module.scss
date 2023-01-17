@@ -1,6 +1,6 @@
 @use 'src/styles/utility' as *;
 .HeroImageStyle {
-  background-color: var(--brown-02);
+  background-color: var(--ifm-color-secondary-contrast-foreground);
   background-image: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)), url(/img/header.png);
   background-position: center;
   background-repeat: no-repeat;

@@ -8,7 +8,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 80px 0;
+  padding: rem(8) 0;
 
   .columnContainer {
     display: flex;
@@ -21,21 +21,21 @@
     .cardContainer {
       display: flex;
       flex-direction: row;
-      margin-bottom: 40px;
+      margin-bottom: rem(4);
       @media screen and (max-width: 992px) {
         flex-direction: column;
-        gap: 2rem;
+        gap: rem(2);
       }
     }
     .mainPageCard {
       width: 100%;
-      max-width: 316px;
-      padding: 32px 24px;
+      max-width: rem(31.6);
+      padding: rem(3.2) rem(2.4);
       border-radius: 4px;
       box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
       background-color: var(--ifm-color-white);
-      margin: 0 12px;
-      font-size: 16px;
+      margin: 0 rem(1.2);
+      font-size: rem(1.6);
       line-height: 1.5;
       color: var(--ifm-color-black);
       margin-bottom: 0;
@@ -47,8 +47,8 @@
         .guideIcon,
         .signUpIcon,
         .registerYourAppIcon {
-          width: 32px;
-          height: 32px;
+          width: rem(3.2);
+          height: rem(3.2);
           background-repeat: no-repeat;
           background-position: center;
         }
@@ -60,8 +60,8 @@
 .guideIcon,
 .signUpIcon,
 .registerYourAppIcon {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: rem(3.2);
+  height: rem(3.2);
   background-repeat: no-repeat;
   background-position: center;
 }
