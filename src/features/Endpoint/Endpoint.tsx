@@ -7,11 +7,11 @@ const EndPoint = () => {
   const {
     register,
     formState: { errors },
-  } = useForm({ mode: 'onChange' });
+  } = useForm({ mode: 'all' });
 
   const default_endpoint = {
     app_id: '35014',
-    server_url: 'green.binary.com',
+    server_url: 'green.binaryws.com',
   };
 
   const [app_id, setAppId] = useState('');
@@ -61,7 +61,9 @@ const EndPoint = () => {
                   required
                 />
                 {errors.server_url && (
-                  <span className={styles.errorMessage}>{errors.server_url?.message}</span>
+                  <span data-testid='server_error' className={styles.errorMessage}>
+                    {errors.server_url?.message}
+                  </span>
                 )}
               </div>
               <div className={styles.inputField}>
@@ -85,18 +87,21 @@ const EndPoint = () => {
                   required
                 />
                 {errors.app_id && (
-                  <span className={styles.errorMessage}>{errors.app_id?.message}</span>
+                  <span data-testid='app_id_error' className={styles.errorMessage}>
+                    {errors.app_id?.message}
+                  </span>
                 )}
               </div>
             </div>
             <div className={styles.buttons}>
-              <Button type='submit' color='primary'>
+              <Button type='submit' color='primary' disabled={Object.keys(errors)?.length > 0}>
                 Submit
               </Button>
               <span style={{ marginLeft: '1.6rem' }} />
               <Button
                 type='reset'
                 color='secondary'
+                role='reset'
                 onClick={() => {
                   localStorage.removeItem('config.app_id');
                   localStorage.removeItem('config.server_url');

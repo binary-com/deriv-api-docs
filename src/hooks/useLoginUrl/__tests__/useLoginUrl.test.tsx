@@ -10,4 +10,8 @@ describe('Login', () => {
     const { result } = renderHook(() => useLoginUrl('en'));
     expect(result.current.getUrl()).toContain('/oauth2/');
   });
+  it('Should return a string containing language "es"', () => {
+    const { result } = renderHook(() => useLoginUrl('es'));
+    expect(result.current.getUrl()).toContain('/oauth2/');
+  });
 });
