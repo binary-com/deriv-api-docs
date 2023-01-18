@@ -7,6 +7,7 @@ import { WaysToEarn } from './WaysToEarn/WaysToEarn';
 import { Carousel } from './Carousel/Carousel';
 import Footer from '@site/src/components/Footer';
 import styles from './styles.module.scss';
+import { GetStarted } from './GetStarted/GetStarted';
 
 export default function HomepageFeatures() {
   return (
@@ -15,6 +16,7 @@ export default function HomepageFeatures() {
       <ClientLibraries />
       <Benefits />
       <WaysToEarn />
+      <GetStarted />
       <ApiFeatures />
       <Carousel />
       <Footer />
