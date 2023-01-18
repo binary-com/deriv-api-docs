@@ -8,6 +8,7 @@ module.exports = {
     '!src/pages/**', // TODO: Fix the docusuarus module naming
     '!src/theme/**', // TODO: Fix the docusuarus module naming
     '!src/test-utils.tsx',
+    '!src/utils/**',
   ],
   coverageDirectory: './coverage/',
   coverageReporters: ['lcov'],

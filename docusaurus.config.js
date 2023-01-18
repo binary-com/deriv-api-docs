@@ -66,7 +66,7 @@ const config = {
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
           {
             to: '/auth',
-            position: 'left',
+            position: 'right',
             label: 'Login',
           },
         ],
