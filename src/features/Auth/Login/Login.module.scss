@@ -1,0 +1,17 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 10.5rem);
+
+  .loginImage {
+    margin: 9.5rem 0 1rem 1.6rem;
+    background-image: url(/img/login.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 12.8rem;
+    height: 12.8rem;
+  }
+}

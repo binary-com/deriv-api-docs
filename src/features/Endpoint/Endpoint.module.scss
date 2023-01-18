@@ -1,0 +1,104 @@
+.pageContent {
+  height: 140vh;
+  justify-content: center;
+  padding-top: 6rem;
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    position: relative;
+
+    .title {
+      text-align: center;
+      color: var(--ifm-font-color-base);
+      margin-top: 0.8rem;
+      margin-bottom: 6.08rem;
+      font-weight: 500;
+      font-size: 2.24rem;
+      line-height: 4.8rem;
+      width: 100%;
+    }
+    .customTextInput {
+      border-radius: 4px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      line-height: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
+      &:focus-within {
+        border-color: var(var(--ifm-font-color-base));
+      }
+      .inputField {
+        position: relative;
+        width: 50%;
+
+        input[type='text'],
+        input[type='number'] {
+          background: 0 0;
+          box-sizing: border-box;
+          color: var(--ifm-color-secondary-darkest);
+          display: block;
+          height: 4rem;
+          min-width: 0;
+          width: 100%;
+          border: none;
+          text-indent: 1.2rem;
+          &:not(:placeholder-shown) ~ label {
+            color: var(--ifm-color-secondary-darkest);
+            background-color: var(--white);
+            background-size: 1rem;
+            padding: 0 0.4rem;
+            transform: translateY(-2rem) scale(0.75);
+          }
+          &:focus {
+            outline: none;
+            & ~ label {
+              color: var(--ifm-color-secondary-darkest);
+              background-color: var(--white);
+              padding: 0 0.4rem;
+              transform: translateY(-2rem) scale(0.75);
+            }
+          }
+        }
+        .inlineLabel {
+          position: relative;
+          padding: 0.4rem 0.2rem;
+          display: inline-block;
+          font-size: var(--text-size-s);
+          margin-right: 0.5rem;
+          line-height: var(--text-lh-xl);
+          color: var(--black-01);
+          padding: 0.4rem 0.2rem;
+          background-color: var(--ifm-color-white);
+          pointer-events: none;
+          white-space: nowrap;
+          transform: translate(0.6rem, 1rem);
+        }
+        .textInput {
+          background: none;
+          border: 1px solid var(--ifm-color-secondary-darkest);
+          color: var(--ifm-color-black);
+          padding: 1rem 1rem 1rem 1rem;
+          width: 100%;
+          font-size: var(--text-size-s);
+        }
+        .errorMessage {
+          color: var(--ifm-color-danger);
+          font-size: var(--text-size-xs);
+          font-weight: 400;
+          padding-left: 1rem;
+        }
+      }
+    }
+    .buttons {
+      display: flex;
+      margin: 0.5rem;
+    }
+  }
+}
