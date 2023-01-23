@@ -68,22 +68,21 @@
         }
         .inlineLabel {
           position: relative;
-          padding: 0.4rem 0.2rem;
           display: inline-block;
           font-size: var(--text-size-s);
           margin-right: 0.5rem;
           line-height: var(--text-lh-xl);
           color: var(--black-01);
-          padding: 0.4rem 0.2rem;
-          background-color: var(--ifm-color-white);
+          padding: 0.2rem 0.4rem;
+          background-color: var(--ifm-color-secondary-darkest);
           pointer-events: none;
           white-space: nowrap;
-          transform: translate(0.6rem, 1rem);
+          transform: translate(0.6rem, 0.8rem);
         }
         .textInput {
           background: none;
           border: 1px solid var(--ifm-color-secondary-darkest);
-          color: var(--ifm-color-black);
+          color: var(--ifm-font-color-base);
           padding: 1rem 1rem 1rem 1rem;
           width: 100%;
           font-size: var(--text-size-s);

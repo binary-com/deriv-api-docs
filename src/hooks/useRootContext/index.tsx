@@ -1,4 +1,4 @@
-import { RootContext } from '@site/src/contexts/root.context';
+import { RootContext } from '@site/src/contexts/root/root.context';
 import { useContext } from 'react';
 
 const useRootContext = () => {

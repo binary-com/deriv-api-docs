@@ -1,16 +1,7 @@
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import '@testing-library/jest-dom';
-import {
-  act,
-  cleanup,
-  fireEvent,
-  getByTestId,
-  getByText,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
 import EndPoint from '../Endpoint';
+import userEvent from '@testing-library/user-event';
 
 describe('Endpoint', () => {
   beforeEach(() => {
@@ -19,13 +10,14 @@ describe('Endpoint', () => {
 
   afterEach(cleanup);
 
-  it('should render properly', () => {
-    const endpoint = screen.getByTestId('Endpoint');
+  it('should render form properly', () => {
+    const endpoint = screen.getByRole('form');
     expect(endpoint).toBeInTheDocument();
   });
   it('should render title properly', () => {
     const endpoint_text = screen.getByRole('heading');
     expect(endpoint_text).toBeInTheDocument();
+    expect(endpoint_text).toHaveTextContent('Change API endpoint');
   });
 
   it('should have default values in input fields', () => {
@@ -38,55 +30,75 @@ describe('Endpoint', () => {
 
   it('validate user inputs, and provides error messages for app id field', async () => {
     const app_id = screen.getByPlaceholderText('e.g. 9999');
-    await act(async () => {
-      fireEvent.change(app_id, {
-        target: { value: 'abcd' },
-      });
-    });
 
-    await act(async () => {
-      fireEvent.blur(app_id);
-    });
+    await userEvent.clear(app_id);
+    await userEvent.type(app_id, 'abcd');
 
-    expect(screen.getByTestId('app_id_error')).toBeInTheDocument();
+    const app_id_error = screen.getByTestId('app_id_error');
+
+    expect(app_id_error).toHaveTextContent('Please enter a valid app ID');
   });
 
   it('validate user inputs, and provides error messages for server field', async () => {
     const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
 
-    await act(async () => {
-      const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
-      fireEvent.change(server, {
-        target: { value: 'qa10@deriv.com' },
-      });
-    });
+    await userEvent.clear(server);
+    await userEvent.type(server, 'qa10@deriv.com');
 
-    await act(async () => {
-      fireEvent.blur(server);
-    });
+    const server_error = screen.getByTestId('server_error');
 
-    expect(screen.getByTestId('server_error')).toBeInTheDocument();
+    expect(server_error).toHaveTextContent('Please enter a valid server URL');
   });
 
   it('should validate submit button functionality', async () => {
     const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
+    const form = screen.getByRole('form');
+
+    await userEvent.clear(server);
+    await userEvent.type(server, 'blue.binaryws.com');
+
+    await userEvent.clear(app_id);
+    await userEvent.type(app_id, '31063');
 
     await act(async () => {
-      const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
-      fireEvent.change(server, {
-        target: { value: 'blue.binaryws.com' },
-      });
-      fireEvent.change(app_id, {
-        target: { value: '31063' },
-      });
-    });
-
-    await act(async () => {
-      fireEvent.submit(screen.getByTestId('Endpoint'));
+      fireEvent.submit(form);
     });
 
     expect(server).toHaveValue('blue.binaryws.com');
     expect(app_id).toHaveValue('31063');
+  });
+
+  it('Should remove app_id and server_url from localstorage on reset button click and reload the page', async () => {
+    const reset_button = screen.getByRole('button', { name: /reset/i });
+    await userEvent.click(reset_button);
+
+    expect(localStorage.removeItem).toHaveBeenCalledTimes(2);
+    expect(localStorage.removeItem).toHaveBeenCalledWith('config.app_id');
+    expect(localStorage.removeItem).toHaveBeenCalledWith('config.server_url');
+    expect(window.location.reload).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should have submit button as disabled on form error', async () => {
+    const app_id = screen.getByPlaceholderText('e.g. 9999');
+    const submit_button = screen.getByRole('button', { name: /submit/i });
+
+    await userEvent.clear(app_id);
+    await userEvent.type(app_id, 'abcd');
+    expect(submit_button).toBeDisabled();
+  });
+
+  it('Should have submit button enabled with no errors on the from', async () => {
+    const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
+    const app_id = screen.getByPlaceholderText('e.g. 9999');
+    const submit_button = screen.getByRole('button', { name: /submit/i });
+
+    await userEvent.clear(server);
+    await userEvent.type(server, 'blue.binaryws.com');
+
+    await userEvent.clear(app_id);
+    await userEvent.type(app_id, '31063');
+
+    expect(submit_button).toBeEnabled();
   });
 });
