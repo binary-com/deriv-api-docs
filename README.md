@@ -36,6 +36,7 @@ Before running or contributing to this project, you need to install the followin
 - docusaurus >=2.0.0
 - @deriv/ui >=0.1.0
 - git (for `contribution`)
+- docker-cli
 
 **Note**: `node -v` and `sudo node -v` should be the same version.
 
