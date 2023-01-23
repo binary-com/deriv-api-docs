@@ -86,3 +86,7 @@
 [data-theme='dark'] .dark {
   color: var(--ifm-color-black);
 }
+
+[data-theme='dark'] .withPattern {
+  background-image: unset;
+}
