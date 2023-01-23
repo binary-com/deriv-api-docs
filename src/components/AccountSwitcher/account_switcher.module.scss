@@ -1,10 +1,12 @@
+@use 'src/styles/utility' as *;
+
 /* reset */
 button {
   all: unset;
 }
 
 .DropdownMenuContent {
-  min-width: 220px;
+  min-width: rem(22);
   background-color: var(--ifm-color-emphasis-100);
   border-radius: 6px;
   padding: 5px;
