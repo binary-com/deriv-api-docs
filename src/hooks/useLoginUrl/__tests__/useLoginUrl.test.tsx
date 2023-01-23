@@ -80,17 +80,4 @@ describe('Use Login URL', () => {
     expect(generatedUrl).toContain('l=es');
     expect(generatedUrl).toBe('https://test.binary.ws/oauth2/authorize?app_id=12345&l=es');
   });
-
-  // it('Should return a string containing oauth2', () => {
-  //   const { result } = renderHook(() => useLoginUrl());
-  //   expect(result.current.getUrl('en')).toContain('/oauth2/');
-  // });
-  // it('Should return a string containing language "en"', () => {
-  //   const { result } = renderHook(() => useLoginUrl());
-  //   expect(result.current.getUrl('en')).toContain('/oauth2/');
-  // });
-  // it('Should return a string containing language "es"', () => {
-  //   const { result } = renderHook(() => useLoginUrl());
-  //   expect(result.current.getUrl('es')).toContain('/oauth2/');
-  // });
 });

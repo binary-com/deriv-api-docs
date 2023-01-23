@@ -14,18 +14,4 @@ export interface IRootContext {
   updateAccounts: (userAccounts: IUserAccount[]) => void;
 }
 
-export const RootContext = React.createContext<IRootContext>({
-  is_logged_in: false,
-  accounts: [],
-  updateAccounts: () => {
-    // will be updated in provider
-  },
-  updateCurrentAccount: () => {
-    // will be updated in provider
-  },
-  currentAccount: {
-    name: '',
-    token: '',
-    currency: '',
-  },
-});
+export const RootContext = React.createContext<IRootContext | null>(null);
