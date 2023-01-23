@@ -14,7 +14,7 @@ describe('GetStarted', () => {
     expect(get_started).toBeInTheDocument();
   });
   it('should render title properly', () => {
-    const started_header = screen.getByRole('heading');
+    const started_header = screen.getByRole('heading', { level: 2, name: /Get started with/ });
     expect(started_header).toHaveTextContent('Get started with our API in 3 simple steps:');
   });
   it('should navigate to the correct links on click', () => {

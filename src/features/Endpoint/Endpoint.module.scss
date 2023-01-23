@@ -1,25 +1,27 @@
+@use 'src/styles/utility' as *;
+
 .pageContent {
   height: 140vh;
   justify-content: center;
-  padding-top: 6rem;
+  padding-top: rem(6);
 
   .content {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    margin: 1rem;
-    padding: 1rem;
+    margin: rem(1);
+    padding: rem(1);
     position: relative;
 
     .title {
       text-align: center;
       color: var(--ifm-font-color-base);
-      margin-top: 0.8rem;
-      margin-bottom: 6.08rem;
+      margin-top: rem(0.8);
+      margin-bottom: rem(6.08);
       font-weight: 500;
-      font-size: 2.24rem;
-      line-height: 4.8rem;
+      font-size: rem(2.24);
+      line-height: rem(4.8);
       width: 100%;
     }
     .customTextInput {
@@ -30,7 +32,7 @@
       line-height: 16px;
       width: 100%;
       box-sizing: border-box;
-      padding: 1rem;
+      padding: rem(1);
       &:focus-within {
         border-color: var(var(--ifm-font-color-base));
       }
@@ -44,47 +46,46 @@
           box-sizing: border-box;
           color: var(--ifm-color-secondary-darkest);
           display: block;
-          height: 4rem;
+          height: rem(4);
           min-width: 0;
           width: 100%;
           border: none;
-          text-indent: 1.2rem;
+          text-indent: rem(1.2);
           &:not(:placeholder-shown) ~ label {
             color: var(--ifm-color-secondary-darkest);
             background-color: var(--white);
-            background-size: 1rem;
-            padding: 0 0.4rem;
-            transform: translateY(-2rem) scale(0.75);
+            background-size: rem(1);
+            padding: 0 rem(0.4);
+            transform: translateY(rem(-2)) scale(0.75);
           }
           &:focus {
             outline: none;
             & ~ label {
               color: var(--ifm-color-secondary-darkest);
               background-color: var(--white);
-              padding: 0 0.4rem;
-              transform: translateY(-2rem) scale(0.75);
+              padding: 0 rem(0.4);
+              transform: translateY(rem(-2)) scale(0.75);
             }
           }
         }
         .inlineLabel {
           position: relative;
-          padding: 0.4rem 0.2rem;
           display: inline-block;
           font-size: var(--text-size-s);
-          margin-right: 0.5rem;
+          margin-right: rem(0.5);
           line-height: var(--text-lh-xl);
           color: var(--black-01);
-          padding: 0.4rem 0.2rem;
-          background-color: var(--ifm-color-white);
+          padding: rem(0.2) rem(0.4);
+          background-color: var(--ifm-color-secondary-darkest);
           pointer-events: none;
           white-space: nowrap;
-          transform: translate(0.6rem, 1rem);
+          transform: translate(rem(0.6), rem(0.8));
         }
         .textInput {
           background: none;
           border: 1px solid var(--ifm-color-secondary-darkest);
-          color: var(--ifm-color-black);
-          padding: 1rem 1rem 1rem 1rem;
+          color: var(--ifm-font-color-base);
+          padding: rem(1);
           width: 100%;
           font-size: var(--text-size-s);
         }
@@ -92,13 +93,13 @@
           color: var(--ifm-color-danger);
           font-size: var(--text-size-xs);
           font-weight: 400;
-          padding-left: 1rem;
+          padding-left: rem(1);
         }
       }
     }
     .buttons {
       display: flex;
-      margin: 0.5rem;
+      margin: rem(0.5);
     }
   }
 }

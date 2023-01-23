@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text } from '@deriv/ui';
 import styles from './Endpoint.module.scss';
 
+const default_endpoint = {
+  app_id: '35014',
+  server_url: 'green.binaryws.com',
+};
+
+interface IEndpointFormValues {
+  app_id: string;
+  server_url: string;
+}
 const EndPoint = () => {
   const {
     register,
+    handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'all' });
+  } = useForm<IEndpointFormValues>({
+    mode: 'all',
+    defaultValues: {
+      server_url: localStorage.getItem('config.server_url') ?? default_endpoint.server_url,
+      app_id: localStorage.getItem('config.app_id') ?? default_endpoint.app_id,
+    },
+  });
 
-  const default_endpoint = {
-    app_id: '35014',
-    server_url: 'green.binaryws.com',
+  const onSubmit = (data: IEndpointFormValues) => {
+    localStorage.setItem('config.app_id', data.app_id);
+    localStorage.setItem('config.server_url', data.server_url);
   };
 
-  const [app_id, setAppId] = useState('');
-  const [server_url, setServerUrl] = useState('');
-
-  const handleClick = () => {
-    localStorage.setItem('config.app_id', app_id);
-    localStorage.setItem('config.server_url', server_url);
+  const onResetClicked = () => {
+    localStorage.removeItem('config.app_id');
+    localStorage.removeItem('config.server_url');
+    window.location.reload();
   };
 
-  useEffect(() => {
-    setAppId(localStorage.getItem('config.app_id') || default_endpoint.app_id);
-    setServerUrl(localStorage.getItem('config.server_url') || default_endpoint.server_url);
-  }, []);
   return (
     <React.Fragment>
-      <form
-        onSubmit={() => {
-          handleClick();
-        }}
-        data-testid='Endpoint'
-      >
+      <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
         <div className={styles.pageContent}>
-          <Text type='heading-2' align='center' bold role='heading'>
+          <Text type='heading-2' as={'h2'} align='center' bold role='heading'>
             Change API endpoint
           </Text>
           <div className={styles.content}>
             <div className={styles.customTextInput} id='custom-text-input'>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>Server_URL</label>
+                <label className={styles.inlineLabel}>Server URL</label>
                 <input
                   {...register('server_url', {
                     required: {
@@ -49,25 +54,23 @@ const EndPoint = () => {
                       message: 'Server is Required',
                     },
                     pattern: {
-                      value: /^([\w-]+\.)+[\w-]+(`[\w- ;,./?%&=])*?$/,
+                      value: /^([\w-]+\.)+[\w-]+(`[\w- ;,./?%&=])*?$/, // TODO: it's better to check if the server url contains qa or not ( for qa box server urls )
                       message: 'Please enter a valid server URL',
                     },
                   })}
                   name='server_url'
-                  value={server_url}
                   placeholder='e.g. frontend.binaryws.com'
                   className={styles.textInput}
-                  onChange={(e) => setServerUrl(e.target.value)}
                   required
                 />
                 {errors.server_url && (
                   <span data-testid='server_error' className={styles.errorMessage}>
-                    {errors.server_url?.message}
+                    {errors.server_url.message}
                   </span>
                 )}
               </div>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>App_id</label>
+                <label className={styles.inlineLabel}>App ID</label>
                 <input
                   {...register('app_id', {
                     required: {
@@ -81,33 +84,25 @@ const EndPoint = () => {
                   })}
                   name='app_id'
                   className={styles.textInput}
-                  value={app_id}
                   placeholder='e.g. 9999'
-                  onChange={(e) => setAppId(e.target.value)}
                   required
                 />
                 {errors.app_id && (
                   <span data-testid='app_id_error' className={styles.errorMessage}>
-                    {errors.app_id?.message}
+                    {errors.app_id.message}
                   </span>
                 )}
               </div>
             </div>
             <div className={styles.buttons}>
-              <Button type='submit' color='primary' disabled={Object.keys(errors)?.length > 0}>
+              <Button type='submit' color='primary' disabled={Object.keys(errors).length > 0}>
                 Submit
               </Button>
               <span style={{ marginLeft: '1.6rem' }} />
               <Button
                 type='reset'
                 color='secondary'
-                role='reset'
-                onClick={() => {
-                  localStorage.removeItem('config.app_id');
-                  localStorage.removeItem('config.server_url');
-                  location.replace('/app-registration/');
-                  window.location.reload();
-                }}
+                onClick={onResetClicked}
                 className={styles.resetButton}
               >
                 Reset to original settings

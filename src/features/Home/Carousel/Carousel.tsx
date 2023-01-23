@@ -55,7 +55,7 @@ export const Carousel = () => {
         </Swiper>
         <div
           className={`${styles.next} ${styles.control}`}
-          onClick={() => swiper.slidePrev()}
+          onClick={() => swiper.slideNext()}
           style={{ background: 'url(/img/arrow_right.svg) no-repeat' }}
           data-testid='carousel-arrow-next'
         />

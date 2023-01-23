@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
+const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -65,9 +65,8 @@ const config = {
           },
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
           {
-            to: '/auth',
+            type: 'custom-user-navar-item',
             position: 'right',
-            label: 'Login',
           },
         ],
       },
@@ -81,6 +80,21 @@ const config = {
          * Possible values: "top" | "bottom"
          */
         playgroundPosition: 'bottom',
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+      },
+      announcementBar: {
+        id: 'announcementBar-2', // Increment on change
+        content: `⭐️ This project is still in progress, we'll add more contents and features everyday, so stay tuned!`,
       },
     }),
 };

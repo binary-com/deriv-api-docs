@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  proxy:
+    container_name: nginx
+    restart: always
+    network_mode: host
+    build:
+      dockerfile: ./nginx/Dockerfile
