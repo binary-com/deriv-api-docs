@@ -1,0 +1,26 @@
+@use 'src/styles/utility' as *;
+.features {
+  width: 100%;
+}
+
+.featureSvg {
+  height: rem(2);
+  width: rem(2);
+}
+
+.playgroundPageWrapper {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+
+  .heading {
+    text-align: center;
+    margin-bottom: rem(4);
+  }
+  .playgroundApiJson {
+    display: flex;
+    flex-direction: column;
+    margin-right: rem(2.4);
+    width: 50%;
+  }
+}
