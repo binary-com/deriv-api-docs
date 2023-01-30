@@ -16,7 +16,7 @@ const appDelete = async (created_app_id) => {
   });
   console.log('A token is still required');
   // TODO: Assign new token to delete apps.
-  await api.authorize('GqD5jIEjuQWMBR8');
+  await api.authorize('');
   await api.appDelete(created_app_id);
   await api.disconnect();
 };

@@ -8,7 +8,7 @@ const getApps = async () => {
     lang: 'EN',
     app_id: '1089', // TODO: replace
   });
-  await api.authorize('GqD5jIEjuQWMBR8');
+  await api.authorize('');
   const apps = await api.appList();
   await api.disconnect();
   return apps;
