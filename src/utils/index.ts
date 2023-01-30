@@ -19,6 +19,14 @@ export const getAppId = (isLocalHost: boolean) => {
 };
 
 /**
+ * @description use this when you wanna check if the application is running on browser (not ssr)
+ * @returns {boolean} true if the application is running in the browser ( not ssr )
+ */
+export const getIsBrowser = () => {
+  return typeof window !== 'undefined';
+};
+
+/**
  * @description based on the received query params after successful login, generates the array of user's accounts
  * @param searchParams the query params in the auth path when user does the login successfully
  * @returns {IUserAccount[]} array of user accounts

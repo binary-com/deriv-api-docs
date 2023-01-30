@@ -1,4 +1,4 @@
-import { getAccountsFromSearchParams, getAppId, getIsLocalhost } from '..';
+import { getAccountsFromSearchParams, getAppId, getIsBrowser, getIsLocalhost } from '..';
 
 describe('Utils', () => {
   describe('Get App ID', () => {
@@ -29,6 +29,13 @@ describe('Utils', () => {
       window.location.hostname = 'deriv-api-docs.binary.sx';
       const isLocalHost = getIsLocalhost();
       expect(isLocalHost).toBeFalsy();
+    });
+  });
+
+  describe('Get Is Browser', () => {
+    it('Should be truthy', () => {
+      const isBrowser = getIsBrowser();
+      expect(isBrowser).toBeTruthy();
     });
   });
 
