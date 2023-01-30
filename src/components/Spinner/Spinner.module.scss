@@ -1,0 +1,33 @@
+.spinner {
+  position: relative;
+  width: var(--spinner-width);
+  height: var(--spinner-height);
+  border-radius: 100%;
+  background-image: linear-gradient(
+    to right,
+    var(--red-01),
+    var(--white),
+    var(--white)
+  );
+  animation: rotating 0.5s linear infinite;
+  &:before {
+    content: "";
+    left: 50%;
+    top: 50%;
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    background-color: var(--white);
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

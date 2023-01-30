@@ -30,7 +30,7 @@ const Footer = () => {
           Discuss ideas and share solutions with developers worldwide.
         </Text>
         <a
-          data-testid={'community-link'}
+          data-testid='community-link'
           style={{ textDecoration: 'none' }}
           href='https://binary.vanillacommunity.com/'
         >

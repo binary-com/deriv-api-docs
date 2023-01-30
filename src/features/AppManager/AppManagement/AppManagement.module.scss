@@ -1,0 +1,146 @@
+.manageApps {
+    display: inline-block;
+
+    table {
+        border-spacing: 0;
+        width: 100%;
+        padding: 0 5rem;
+    }
+
+    thead {
+        background-color: var(--gray-02);
+        height: 5rem;
+    }
+
+    th,
+    td {
+        text-align: var(--text-align-left);
+        padding: 1.6rem;
+        min-width: 12rem;
+        max-width: 20rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    td:nth-child(3) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.64rem;
+    }
+
+    td:last-child,
+    th:last-child {
+        white-space: nowrap;
+        padding: 0 1rem;
+    }
+
+    td:first-child,
+    th:first-child {
+        padding-left: 3.2rem;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: var(--gray-03);
+    }
+}
+
+[data-state~='registration.logged_in.manage_tab'] .manageApps {
+    display: inline-block;
+    overflow: auto;
+    width: 100%;
+    max-height: 50rem;
+}
+
+[data-state~='registration.logged_in.manage_tab.loadingApps.empty'] .manageApps {
+    visibility: hidden;
+}
+
+[data-state*='responsive.mobile'] .manageApps table {
+    width: 100%;
+}
+
+[data-state~='responsive.desktopLaptopM'] .manageApps {
+    width: 65rem;
+}
+
+@mixin actionIcon {
+    background-repeat: no-repeat;
+    background-position: var(--text-align-center);
+    background-size: contain;
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+    padding: 0 0.8rem;
+}
+
+.deleteApp {
+    background-image: url(/img/delete.svg);
+    @include actionIcon;
+}
+
+.updateApp {
+    background-image: url(/img/edit.svg);
+    @include actionIcon;
+}
+
+.appActions {
+    display: flex;
+    justify-content: var(--text-align-left);
+    margin: 3rem;
+}
+
+.tooltip {
+    position: relative;
+
+    .tooltipText {
+        visibility: hidden;
+        width: 13rem;
+        height: 1.5rem;
+        background-color: var(--border-normal);
+        border-radius: 4px;
+        color: var(--app-registration-tab-active-font);
+        text-align: var(--text-align-center);
+        border-radius: 4px;
+        padding: 0.5rem 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        font-size: var(--text-size-xxs);
+        left: 50%;
+        margin-left: -5.5rem;
+        opacity: 0;
+        transition: opacity 1s;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -0.5rem;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--border-normal) transparent transparent transparent;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-0.2rem);
+
+        .tooltipText {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+.scope {
+    border: 1.6px solid var(--border-normal);
+    border-radius: 4px;
+    padding: 0.24rem 0.24rem;
+    font-size: 1.1rem;
+}
+
+.adminScope {
+    border: 1.6px solid var(--teal-01);
+    color: var(--teal-01);
+}

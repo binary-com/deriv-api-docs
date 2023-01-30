@@ -1,0 +1,218 @@
+@use 'src/styles/utility' as *;
+
+fieldset .customTextInput:last-child {
+    margin-top: rem(1.5);
+}
+
+.customTextInput {
+    align-items: center;
+    border: 1px solid var(--colors-greyLight400);
+    border-radius: 4px;
+    display: flex;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    &:focus-within {
+        border-color: var(--colors-blue400);
+    }
+    &:hover {
+        border: 1px solid var(--colors-greyLight600);;
+    }
+    label {
+        position: absolute;
+        color: var(--colors-greyLight600);
+        left: rem(1.2);
+        pointer-events: none;
+        transform-origin: top left;
+        transition: all 0.25s ease;
+        white-space: nowrap;
+    }
+    input[type='text'],
+    input[type='number'] {
+        background: 0 0;
+        box-sizing: border-box;
+        color: var(--ifm-color-emphasis-1000);
+        display: block;
+        height: rem(4);
+        min-width: 0;
+        width: 100%;
+        border: none;
+        text-indent: rem(1.2);
+        &:not(:placeholder-shown) ~ label {
+            color: var(--colors-blue400);
+            background-color: var(--ifm-color-emphasis-0);
+            padding: 0 rem(0.4);
+            transform: translateY(rem(-2)) scale(0.75);
+        }
+        &:focus {
+            outline: none;
+            & ~ label {
+                color: var(--colors-blue400);
+                background-color: var(--ifm-color-emphasis-0);
+                padding: 0 rem(0.4);
+                transform: translateY(rem(-2)) scale(0.75);
+            }
+        }
+    }
+}
+
+.frmNewApplication {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .formContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        input[type='number'],
+        input[type='text'] {
+            height: rem(4);
+        }
+        input[type='number'] {
+            appearance: none;
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+        fieldset input[type='text'] {
+            padding: 0;
+            width: 100%;
+            margin-bottom: 0 !important;
+        }
+        .helperText {
+            width: 100%;
+            padding-left: rem(1.2);
+            color: var(--colors-greyLight600);
+            margin-bottom: 0;
+        }
+        .expandForm {
+            width: 80%;
+            left: 0;
+            display: flex;
+            padding: rem(4) 0 rem(1);
+
+            .expandFormCheckbox {
+                margin-right: rem(1.6);
+                transform: scale(1.23);
+                padding: rem(0.9);
+                top: rem(0.1);
+                position: relative;
+            }
+        }
+        .expandableForm {
+            width: 80%;
+            fieldset {
+                width: 100%;
+            }
+            .termsOfConditionRegister {
+                margin-top: rem(3.5);
+            }
+            .scopes {
+                margin-top: rem(4);
+                .scopesField {
+                    width: 96%;
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: rem(1.6);
+                    align-items: center;
+                    justify-self: center;
+                }
+            }
+            .registerAppButtonContainer {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-top: rem(2.5);
+                flex-wrap: wrap-reverse;
+                gap: 1.6rem;
+            }
+        }
+        .formHeaderContainer {
+            display: flex;
+            padding: rem(1) 0;
+            margin-top: rem(1.5);
+            flex-direction: column;
+            .registerFormHeader {
+                margin-right: rem(0.5);
+                margin-bottom: rem(1.6);
+            }
+            .description {
+                margin-bottom: rem(1.6);
+            }
+        }
+    }
+}
+
+.scopeItem {
+    border: 1.6px solid var(--ifm-color-emphasis-800);
+    border-radius: 6.4px;
+    padding: rem(1.28) rem(0.64);
+}
+
+[data-state~='registration.logged_in.register_tab.unfolded_form'] .expandableForm {
+    display: flex;
+    flex-direction: column;
+}
+
+[data-state~='registration.logged_in.update_mode'] .customTextInput .apiTokenInput[readonly] {
+    color: var(--border-normal);
+    cursor: not-allowed;
+    & ~ label {
+        color: var(--ifm-color-emphasis-800) !important;
+    }
+}
+
+[data-state*='responsive.mobile'] {
+    .formContent {
+        width: 100%;
+    }
+    .infoIcon:hover .tooltip {
+        width: 14rem;
+        transform: translate(-19%, calc(-100% - rem(1)));
+    }
+}
+
+input[type='checkbox'] {
+    position: absolute;
+    top: rem(0.2);
+    left: rem(0.2);
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.customCheckboxContainer {
+    position: relative;
+    height: rem(1.5);
+    min-width: rem(1.5);
+    margin-right: rem(1.5);
+    z-index: 0;
+    margin-bottom: auto;
+    .customCheckbox {
+        position: absolute;
+        background-image: url(/img/check.svg);
+        background-repeat: no-repeat;
+        display: inline-block;
+        border: 2px solid var(--ifm-color-emphasis-600);
+        min-width: rem(1.5);
+        height: rem(1.5);
+        border-radius: 2px;
+        transition: background-color 0.25s, border-color 0.25s;
+        top: rem(0.5);
+        z-index: 1;
+    }
+    input:checked + .customCheckbox {
+        background-color: var(--colors-coral500);
+        border-color: var(--colors-coral500);
+    }
+}
