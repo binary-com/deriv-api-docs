@@ -37,6 +37,10 @@
         color: var(--ifm-color-danger);
         gap: rem(1);
 
+        label {
+          cursor: pointer;
+        }
+
         .LibraryChevron {
           background-repeat: no-repeat;
           background-position: center;
