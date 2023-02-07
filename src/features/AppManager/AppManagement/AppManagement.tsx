@@ -4,8 +4,8 @@ import { useTable, useSortBy } from 'react-table';
 import { useDeleteApp } from '@site/src/hooks/useDeleteApp';
 import { useApps } from '@site/src/hooks/useApps';
 import { SkeletonText } from '@site/src/components/SkeletonText';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
-import AppManagementEmptyLazy from './AppManagementEmpty/AppManagementEmptyLazy';
+import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
+import AppManagementEmpty from './AppManagementEmpty';
 import DeleteAppDialog from './DeleteAppDialog';
 import '../AppManager.module.scss';
 import styles from './AppManagement.module.scss';
@@ -22,51 +22,6 @@ type TRow = {
   row: {
     original: { app_id: number };
   };
-};
-
-const Scopes = ({ values }: TScopes) => {
-  console.log(values);
-  return (
-    <React.Fragment>
-      {values.map((scopes: string): React.ReactElement => {
-        return (
-          <span className={`${styles.scope}  ${scopes === 'admin' ? styles.adminScope : ''}`}>
-            {scopes.charAt(0).toUpperCase() + scopes.slice(1).replace('_', ' ')}
-          </span>
-        );
-      })}
-    </React.Fragment>
-  );
-};
-
-const SkeletonRows = () => {
-  const Skeleton = () => (
-    <tr>
-      <td>
-        <SkeletonText />
-      </td>
-      <td>
-        <SkeletonText />
-      </td>
-      <td>
-        <SkeletonText />
-      </td>
-      <td>
-        <SkeletonText />
-      </td>
-      <td>
-        <SkeletonText />
-      </td>
-    </tr>
-  );
-  // return 5 skeletons
-  return (
-    <React.Fragment>
-      {[...Array(5)].map((_, i) => (
-        <Skeleton key={i} />
-      ))}
-    </React.Fragment>
-  );
 };
 
 export default function AppManagement() {
@@ -166,7 +121,51 @@ export default function AppManagement() {
         </table>
       </div>
       {dialog_is_open && <DeleteAppDialog deleteApp={deleteApp} />}
-      {is_empty_state && <AppManagementEmptyLazy />}
+      {is_empty_state && <AppManagementEmpty />}
     </React.Fragment>
   );
 }
+
+const Scopes = ({ values }: TScopes) => {
+  return (
+    <React.Fragment>
+      {values.map((scopes: string): React.ReactElement => {
+        return (
+          <span className={`${styles.scope}  ${scopes === 'admin' ? styles.adminScope : ''}`}>
+            {scopes.charAt(0).toUpperCase() + scopes.slice(1).replace('_', ' ')}
+          </span>
+        );
+      })}
+    </React.Fragment>
+  );
+};
+
+const SkeletonRows = () => {
+  const Skeleton = () => (
+    <tr data-testid='loading-skeleton'>
+      <td>
+        <SkeletonText />
+      </td>
+      <td>
+        <SkeletonText />
+      </td>
+      <td>
+        <SkeletonText />
+      </td>
+      <td>
+        <SkeletonText />
+      </td>
+      <td>
+        <SkeletonText />
+      </td>
+    </tr>
+  );
+  // return 5 skeletons
+  return (
+    <React.Fragment>
+      {[...Array(5)].map((_, i) => (
+        <Skeleton key={i} />
+      ))}
+    </React.Fragment>
+  );
+};

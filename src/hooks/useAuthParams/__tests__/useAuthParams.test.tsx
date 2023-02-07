@@ -5,11 +5,11 @@ import useAuthParams from '..';
 
 const mockUpdateAccounts = jest.fn();
 
-const useRootContext = jest.fn().mockImplementation(() => ({
+const mockUseRootContext = jest.fn().mockImplementation(() => ({
   updateAccounts: mockUpdateAccounts,
 }));
 
-React.useContext = useRootContext;
+React.useContext = mockUseRootContext;
 
 const wrapper = ({ children }) => <RootContextProvider>{children}</RootContextProvider>;
 

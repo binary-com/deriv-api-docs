@@ -1,6 +1,6 @@
 import DerivAPIBasic from '@deriv/deriv-api/dist/DerivAPIBasic';
 import { useQuery } from 'react-query';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
+import { useAppManagerContext } from '../useAppManagerContext';
 
 const getApps = async () => {
   const api = new DerivAPIBasic({
@@ -27,8 +27,8 @@ export const useApps = () => {
       }
       setIsLoadingApps(false);
     },
-    onError: (data) => {
-      console.log(data);
+    onError: (error) => {
+      console.warn(error);
     },
   });
 };

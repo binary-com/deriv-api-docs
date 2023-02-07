@@ -1,9 +1,10 @@
 import React from 'react';
-import RegisterAppDialogError from './RegisterAppDialogError/RegisterAppDialogError';
+import { RegisterAppDialogError } from './RegisterAppDialogError';
 import { Text, Button } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { useRegisterOrUpdateApp } from '@site/src/hooks/useRegisterOrUpdate';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
+import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
+import { useStateClass } from '@site/src/hooks/useStateClass';
 import styles from './AppRegistrationForm.module.scss';
 
 interface FormData {
@@ -31,11 +32,11 @@ export default function AppRegistrationForm() {
   const { registerApp, isLoading, error } = useRegisterOrUpdateApp();
   const is_updating: boolean = manager_state === 'UPDATE_STATE';
   const is_registering: boolean = manager_state === 'REGISTER_STATE' || manager_state === '';
+
   React.useEffect(() => {
     if (is_registering) reset();
     if (is_updating) {
       const { name, app_markup_percentage, redirect_uri, verification_uri, scopes } = updating_row;
-      // setValue('api_token_input', token1());
 
       setValue('api_token_input', '');
       setValue('app_name', name);
@@ -72,7 +73,7 @@ export default function AppRegistrationForm() {
                 Paste your API token with the admin scope here.
               </Text>
             </div>
-            <div className='api-token-wrapper'>
+            <div className={`api-token-wrapper ${useStateClass(styles)}`}>
               <div className={styles.customTextInput} id='custom-text-input'>
                 <input
                   {...register('api_token_input', {
@@ -96,7 +97,9 @@ export default function AppRegistrationForm() {
                 </label>
               </div>
               {errors.api_token_input && (
-                <span className='error-message'>{errors.api_token_input.message}</span>
+                <Text as='span' type='paragraph-1' className='error-message'>
+                  {errors.api_token_input.message}
+                </Text>
               )}
               <div className='api-token-warning' />
               <div className='first'>
@@ -121,7 +124,9 @@ export default function AppRegistrationForm() {
                   </label>
                 </div>
                 {errors.app_name && (
-                  <span className='error-message'>{errors.app_name.message}</span>
+                  <Text as='span' type='paragraph-1' className='error-message'>
+                    {errors.app_name.message}
+                  </Text>
                 )}
               </div>
             </div>
@@ -133,10 +138,10 @@ export default function AppRegistrationForm() {
                   Markup
                 </h4>
                 <div className={styles.description}>
-                  <span>
+                  <Text as='span' type='paragraph-1'>
                     You can earn commission by adding a markup to the price of each trade. Enter
                     your markup percentage here.
-                  </span>
+                  </Text>
                 </div>
               </div>
               <div className='input-container'>
@@ -144,10 +149,6 @@ export default function AppRegistrationForm() {
                   <div className={styles.customTextInput} id='custom-text-input'>
                     <input
                       {...register('app_markup_percentage', {
-                        required: {
-                          value: true,
-                          message: 'Enter a markup value.',
-                        },
                         pattern: {
                           value: /^((([0-4]\.([0-9]([0-9])?)?))||([5]\.([0]([0])?)?)||([0-5]))$/,
                           message:
@@ -167,7 +168,7 @@ export default function AppRegistrationForm() {
                       onWheel={(e: any) => e.target.blur()}
                     />
                     <label data-testid='markup-label' htmlFor='app_markup_percentage'>
-                      Markup percentage (required)
+                      Markup percentage (optional)
                     </label>
                   </div>
                   <Text as='p' type='paragraph-1' className={styles.helperText}>
@@ -175,27 +176,25 @@ export default function AppRegistrationForm() {
                     number up to 5. Maximum: 5.00%.
                   </Text>
                   {errors.app_markup_percentage && (
-                    <span className='error-message'>{errors.app_markup_percentage.message}</span>
+                    <Text as='span' type='paragraph-1' className='error-message'>
+                      {errors.app_markup_percentage.message}
+                    </Text>
                   )}
                 </div>
               </div>
               <div className={styles.formHeaderContainer}>
                 <h4 className={styles.registerFormHeader}>OAuth details</h4>
                 <div className={styles.description}>
-                  <span>
+                  <Text as='span' type='paragraph-1'>
                     This allows clients to log in to your app using their Deriv accounts without an
                     API token.
-                  </span>
+                  </Text>
                 </div>
               </div>
               <div className='input-container'>
                 <div className={styles.customTextInput} id='custom-text-input'>
                   <input
                     {...register('app_redirect_uri', {
-                      required: {
-                        value: true,
-                        message: 'Enter your authorisation URL.',
-                      },
                       maxLength: {
                         value: 255,
                         message: 'Your website URL cannot exceed 255 characters.',
@@ -211,7 +210,7 @@ export default function AppRegistrationForm() {
                     data-testid='authorisation-input'
                   />
                   <label data-testid='authorisation-label' htmlFor='app_redirect_uri'>
-                    Authorisation URL (required)
+                    Authorisation URL (optional)
                   </label>
                 </div>
                 <p className={styles.helperText}>
@@ -226,10 +225,6 @@ export default function AppRegistrationForm() {
                 <div className={styles.customTextInput} id='custom-text-input'>
                   <input
                     {...register('app_verification_uri', {
-                      required: {
-                        value: true,
-                        message: 'Enter an URL.',
-                      },
                       maxLength: {
                         value: 255,
                         message: 'Your verification URL cannot exceed 255 characters.',
@@ -245,7 +240,7 @@ export default function AppRegistrationForm() {
                     data-testid='verification-input'
                   />
                   <label data-testid='verification-label' htmlFor='app_verification_uri'>
-                    Verification URL (required)
+                    Verification URL (optional)
                   </label>
                 </div>
               </div>
@@ -296,6 +291,7 @@ export default function AppRegistrationForm() {
                   <input
                     {...register('trading_information_scope')}
                     id='trading_information-scope'
+                    data-testid='trading-info-scope'
                     type='checkbox'
                   />
                   <span className={styles.customCheckbox} />
@@ -307,7 +303,12 @@ export default function AppRegistrationForm() {
               </div>
               <div className={styles.scopesField}>
                 <div className={styles.customCheckboxContainer}>
-                  <input {...register('payments_scope')} id='payments-scope' type='checkbox' />
+                  <input
+                    {...register('payments_scope')}
+                    id='payments-scope'
+                    data-testid='payments-scope'
+                    type='checkbox'
+                  />
                   <span className={styles.customCheckbox} />
                 </div>
                 <label htmlFor='payments-scope'>
@@ -317,7 +318,12 @@ export default function AppRegistrationForm() {
               </div>
               <div className={`${styles.scopesField} mb-0`}>
                 <div className={styles.customCheckboxContainer}>
-                  <input {...register('admin_scope')} id='admin-scope' type='checkbox' />
+                  <input
+                    {...register('admin_scope')}
+                    id='admin-scope'
+                    data-testid='admin-scope'
+                    type='checkbox'
+                  />
                   <span className={styles.customCheckbox} />
                 </div>
                 <label htmlFor='admin-scope'>

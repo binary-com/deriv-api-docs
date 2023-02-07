@@ -1,76 +1,66 @@
+@use 'src/styles/utility' as *;
+
 .manageApps {
+    width: 100%;
     display: inline-block;
+    overflow: auto;
+    max-height: calc(100vh - rem(30));
 
     table {
         border-spacing: 0;
+        display: table;
         width: 100%;
-        padding: 0 5rem;
     }
 
     thead {
-        background-color: var(--gray-02);
-        height: 5rem;
+        background-color: var(--ifm-color-emphasis-200);
+        border: 3px solid var(--ifm-color-emphasis-200);
+        height: rem(5);
     }
 
     th,
     td {
-        text-align: var(--text-align-left);
-        padding: 1.6rem;
-        min-width: 12rem;
-        max-width: 20rem;
+        text-align: left;
+        padding: rem(1.6);
+        min-width: rem(14.4);
         overflow: hidden;
         text-overflow: ellipsis;
+        border: none;
     }
 
     td:nth-child(3) {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.64rem;
+        gap: rem(0.64);
     }
 
     td:last-child,
     th:last-child {
         white-space: nowrap;
-        padding: 0 1rem;
+        padding: 0 rem(1);
     }
 
     td:first-child,
     th:first-child {
-        padding-left: 3.2rem;
+        padding-left: rem(3.2);
     }
 
-    tbody tr:nth-child(even) {
-        background-color: var(--gray-03);
+    tbody tr {
+        border: none;
+        &:nth-child(even) {
+            background-color: var(--ifm-color-emphasis-100);
+        }
     }
-}
-
-[data-state~='registration.logged_in.manage_tab'] .manageApps {
-    display: inline-block;
-    overflow: auto;
-    width: 100%;
-    max-height: 50rem;
-}
-
-[data-state~='registration.logged_in.manage_tab.loadingApps.empty'] .manageApps {
-    visibility: hidden;
-}
-
-[data-state*='responsive.mobile'] .manageApps table {
-    width: 100%;
-}
-
-[data-state~='responsive.desktopLaptopM'] .manageApps {
-    width: 65rem;
 }
 
 @mixin actionIcon {
     background-repeat: no-repeat;
-    background-position: var(--text-align-center);
+    background-position: center;
     background-size: contain;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: rem(1.6);
+    height: rem(1.6);
     cursor: pointer;
-    padding: 0 0.8rem;
+    padding: 0 rem(0.8);
 }
 
 .deleteApp {
@@ -85,8 +75,8 @@
 
 .appActions {
     display: flex;
-    justify-content: var(--text-align-left);
-    margin: 3rem;
+    justify-content: space-around;
+    margin: rem(3);
 }
 
 .tooltip {
@@ -94,32 +84,30 @@
 
     .tooltipText {
         visibility: hidden;
-        width: 13rem;
-        height: 1.5rem;
-        background-color: var(--border-normal);
+        height: rem(1.5);
+        background-color: var(--ifm-color-emphasis-200);
+        color: var(--ifm-color-emphasis-1000);
+        text-align: center;
         border-radius: 4px;
-        color: var(--app-registration-tab-active-font);
-        text-align: var(--text-align-center);
-        border-radius: 4px;
-        padding: 0.5rem 0;
         position: absolute;
         z-index: 1;
-        bottom: 125%;
-        font-size: var(--text-size-xxs);
-        left: 50%;
-        margin-left: -5.5rem;
         opacity: 0;
         transition: opacity 1s;
+        font-size: 10px;
+        transform: translateX(50%);
+        right: 50%;
+        bottom: rem(2.4);
 
         &::after {
             content: '';
             position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -0.5rem;
+            bottom: rem(-1.16);
+            right: 50%;
+            transform: translateX(50%);
+            margin-left: rem(-0.5);
             border-width: 5px;
             border-style: solid;
-            border-color: var(--border-normal) transparent transparent transparent;
+            border-color: var(--ifm-color-emphasis-600) transparent transparent transparent;
         }
     }
 
@@ -134,13 +122,13 @@
 }
 
 .scope {
-    border: 1.6px solid var(--border-normal);
+    border: 1.6px solid var(--ifm-color-emphasis-400);
     border-radius: 4px;
-    padding: 0.24rem 0.24rem;
-    font-size: 1.1rem;
+    padding: rem(0.24) rem(0.24);
+    font-size: rem(1.1);
 }
 
 .adminScope {
-    border: 1.6px solid var(--teal-01);
-    color: var(--teal-01);
+    border: 1.6px solid var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
 }

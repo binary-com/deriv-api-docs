@@ -3,7 +3,7 @@ import DerivAPIBasic from '@deriv/deriv-api/dist/DerivAPIBasic';
 import { useMutation } from 'react-query';
 // import { stateService, updatingRow } from '../state/stateSignal';
 // import { server_url, app_id } from '../state/storageSignals';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
+import { useAppManagerContext } from '../useAppManagerContext';
 import { TUpdatingRow } from '@site/src/contexts/AppManager.context';
 
 interface MapFormDataToScopeT {

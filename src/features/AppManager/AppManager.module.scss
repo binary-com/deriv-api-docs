@@ -13,6 +13,7 @@
       width: 100%;
       display: flex;
       align-items: center;
+      padding-bottom: rem(2);
     }
 
     .appRegistrationHeader {
@@ -29,16 +30,15 @@
 .app-btn {
   background-image: url("/img/delete.svg");
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
-  background-size: 1.6rem;
+  background-position: center;
+  background-size: rem(1.6);
   background-origin: content-box;
   background-clip: content-box;
   background-color: transparent;
   border: none;
   border-radius: 4px;
-  font-size: var(--text-size-xs);
-  font-weight: var(--text-weight-bold);
-  width: 3.2rem;
+  font-weight: bold;
+  width: rem(3.2);
 }
 
 .app-btn span {
@@ -46,7 +46,7 @@
 }
 
 .bold {
-  font-weight: var(--text-weight-bold);
+  font-weight: bold;
 }
 
 .delete-icon {
@@ -55,20 +55,6 @@
 
 .update-icon {
   background-image: url("/img/edit.svg");
-}
-
-/* make app-remove-btn disabled when data-state logged_in.manage_tab.loading */
-[data-state~="registration.logged_in.manage_tab.loading"] .app-remove-btn {
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
-[data-state~="registration.logged_out"] .app-registration-login {
-  display: flex;
-  flex-direction: column;
-  align-items: var(--text-align-center);
-  justify-content: var(--text-align-center);
-  height: calc(100vh - 10.5rem);
 }
 
 .dialog-wrapper {
@@ -87,123 +73,82 @@
 .dialog {
   position: absolute;
   top: 50%;
-  left: calc(50% - 1.6rem);
+  left: calc(50% - rem(1.6));
   transform: translate(-50%, -50%);
-  width: 32rem;
+  width: rem(32);
   height: auto;
-  background-color: var(--white);
+  background-color: var(--ifm-color-emphasis-0);
   border-radius: 16px;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 rem(1) rgba(0, 0, 0, 0.5);
   justify-content: space-between;
 }
 
 .dialog-delete {
-  width: 32rem;
+  width: rem(32);
 }
 
 .dialog-update {
-  width: 32rem;
-  height: 70rem;
+  width: rem(32);
+  height: rem(70);
 }
 
 .dialog-update-input {
-  padding: 2rem;
+  padding: rem(2);
 }
 
 .dialog-update-scopes {
-  padding: 2rem;
+  padding: rem(2);
 }
 
 .dialog-header {
   width: 100%;
-  height: 5rem;
+  height: rem(5);
   display: flex;
   justify-content: flex-end;
-  align-items: var(--text-align-center);
+  align-items: center;
 }
 
 .dialog-header img {
-  padding: 2.6rem 1.8rem;
+  padding: rem(2.6) rem(1.8);
   cursor: pointer;
 }
 
 .dialog-body {
   width: 100%;
   display: flex;
-  justify-content: var(--text-align-center);
-  align-items: var(--text-align-center);
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
 .dialog-body-delete {
-  align-items: var(--text-align-center);
+  align-items: center;
 }
 
 .dialog-body .dialog-body-delete img {
-  margin-bottom: 2.4rem;
+  margin-bottom: rem(2.4);
 }
 
 .dialog-body .dialog-body-delete h3 {
-  margin-bottom: 0.8rem;
+  margin-bottom: rem(0.8);
 }
 
 .dialog-footer {
   width: 100%;
   display: flex;
-  justify-content: var(--text-align-center);
-  align-items: var(--text-align-center);
-  margin-top: 2.4rem;
-  margin-bottom: 3.7rem;
-}
-
-/* red "No, keep it" button with white text */
-.dialog-btn-submit {
-  background-color: var(--red-01);
-  color: var(--white);
-  font-weight: var(--text-weight-bold);
-  height: 4rem;
-  border: none;
-  border-radius: 4px;
-  padding: 1rem 1.6rem 1rem 1.6rem;
-}
-
-.dialog-btn-submit:hover {
-  background-color: var(--red-01);
-}
-
-/* white "Yes, delete" button with black text */
-.dialog-btn-cancel {
-  background-color: var(--white);
-  color: black;
-  font-weight: var(--text-weight-bold);
-  border: 0.1rem solid var(--gray-05);
-  height: 4rem;
-  border-radius: 4px;
-  padding: 1rem 1.6rem 1rem 1.6rem;
-  margin-right: 2.4rem;
-}
-
-/* add hover color to "Yes, delete" */
-.dialog-btn-cancel:hover {
-  background-color: var(--gray-02);
+  justify-content: center;
+  align-items: center;
+  margin-top: rem(2.4);
+  margin-bottom: rem(3.7);
 }
 
 .dialog-success {
-  width: 10rem;
-  height: 10rem;
+  width: rem(10);
+  height: rem(10);
 }
 
 .dialog-question {
-  text-align: var(--text-align-center);
-}
-
-[data-state~="registration.logged_in"] .app-registration-logged-in {
-  display: flex;
-  flex-direction: column;
-  align-items: var(--text-align-center);
-  justify-content: var(--text-align-center);
-  width: 100%;
-  margin: 12.5rem 0 4rem 0;
+  text-align: center;
 }
 
 fieldset {
@@ -212,7 +157,7 @@ fieldset {
   border: none;
 
   .first {
-    margin-top: 2rem;
+    margin-top: rem(2);
   }
 }
 
@@ -222,39 +167,30 @@ fieldset {
 }
 
 .login-image {
-  margin-top: 9.5rem;
-  margin-bottom: 1.6rem;
+  margin-top: rem(9.5);
+  margin-bottom: rem(1.6);
   background-image: url(/img/login.svg);
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
-  width: 12.8rem;
-  height: 12.8rem;
+  background-position: center;
+  width: rem(12.8);
+  height: rem(12.8);
 }
 
 .login-title {
-  font-size: 1.6rem;
-  margin-bottom: 4rem;
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
-  text-align: var(--text-align-center);
-}
-
-.main-register-btn {
-  padding: 1rem 1.6rem;
-  border-radius: 4px;
-  background-color: var(--red-01);
-  text-decoration: none;
-  font-weight: 700;
-  color: var(--white);
+  font-size: rem(1.6);
+  margin-bottom: rem(4);
+  padding-left: rem(1.6);
+  padding-right: rem(1.6);
+  text-align: center;
 }
 
 .no-apps {
   display: flex;
   flex-direction: column;
-  justify-content: var(--text-align-center);
-  align-items: var(--text-align-center);
-  width: calc(32rem - 3.2rem);
+  justify-content: center;
+  align-items: center;
+  width: calc(rem(32) - rem(3.2));
   position: relative;
   margin: 0 auto;
 }
@@ -263,91 +199,22 @@ fieldset {
   display: none;
 }
 
-[data-state~="registration.logged_in.manage_tab.loadingApps.empty"] .no-apps-wrapper {
-  display: inline-block;
-  visibility: visible;
-}
-
 .no-apps-wrapper {
-  width: calc(100% - 3.2rem);
+  width: calc(100% - rem(3.2));
   position: absolute;
   height: auto;
-}
-
-[data-state~="registration.logged_in.register_tab"] .register-app {
-  display: flex;
-  flex-direction: column;
-  align-items: var(--text-align-center);
-  justify-content: var(--text-align-center);
-}
-
-.registered-apps-tabs {
-  display: flex;
-  padding: 4rem 0;
-}
-
-.registered-apps-tabs button {
-  border: none;
-  background-color: transparent;
-  color: var(--gray-05);
-  border-bottom: 1px solid var(--gray-05);
-  padding: 1rem 2rem;
-}
-
-[data-state~="registration.logged_in.manage_tab"] .manage-button,
-[data-state~="registration.logged_in.register_tab"] .register-button {
-  font-weight: bold;
-  color: var(--text-01);
-  border-bottom: 3px solid var(--red-01);
-}
-
-[data-state~="registration.logged_in.update_mode"] .register-button {
-  pointer-events: none;
-  visibility: hidden;
-  position: relative;
-}
-
-[data-state~="registration.logged_in.update_mode"] .register-button::before {
-  visibility: visible;
-  content: "Update your application";
-  font-weight: var(--text-weight-bold);
-  color: var(--text-01);
-  border-bottom: 3px solid var(--red-01);
-  position: absolute;
-  padding: 1rem 0;
-  width: 100%;
-  right: 0;
-  top: 0;
-  bottom: -0.1rem;
-}
-
-[data-state~="registration.logged_in.update_mode"] .register-app {
-  display: flex;
-  flex-direction: column;
-  align-items: var(--text-align-center);
-  justify-content: var(--text-align-center);
-}
-
-[data-state~="registration.logged_in.update_mode"] .expandable-form {
-  display: flex;
-  flex-direction: column;
 }
 
 .register-app fieldset input[type="text"] {
   padding: 0;
   width: 100%;
-  text-indent: 1.2rem;
+  text-indent: rem(1.2);
   margin-bottom: 0 !important;
 }
 
 /* make registration-dialog display none */
 .registration-dialog {
   display: none;
-}
-
-/*  display register-app when [data-state] success */
-[data-state~="registration.logged_in.register_tab.unfolded_form.submitting_registration.registration_success"] .registration-dialog {
-  display: flex;
 }
 
 .register-login-button {
@@ -360,78 +227,65 @@ fieldset {
 
 .tooltip:after {
   background: transparent;
-  height: 1.5rem;
+  height: rem(1.5);
   content: " ";
   position: absolute;
   left: 0;
   width: inherit;
-  bottom: -1.5rem;
-  padding: 0 0.8rem;
+  bottom: rem(-1.5);
+  padding: 0 rem(0.8);
 }
 
 .app-registration-signout {
   display: none;
 }
 
-[data-state*="responsive.mobile"] {
-  &[data-state~="registration.logged_in"] .app-registration-logged-in {
-    margin-top: 8rem;
-  }
-}
-
-[data-state~="responsive.mobileL"],
-[data-state~="responsive.mobileTablet"],
-[data-state*="responsive.desktop"] {
+@media screen and (min-width: 425px) {
   .dialog {
-    width: 38.5rem;
+    width: rem(38.5);
   }
 
   .dialog-delete,
   .dialog-update {
-    width: 32rem;
+    width: rem(32);
   }
 }
 
-[data-state~="responsive.mobileTablet"],
-[data-state*="responsive.desktop"] {
+@media screen and (min-width: 768px) {
   .app-registration-login {
     height: 100vh;
   }
 
   .dialog-delete {
-    width: 43.3rem;
+    width: rem(43.3);
   }
 
   .dialog-update {
-    width: 43.3rem;
-    height: 64rem;
+    width: rem(43.3);
+    height: rem(64);
   }
 
-  .dialog-warning {
-    margin-bottom: 2.4rem;
-  }
-
-  .login-title {
-    font-size: var(--text-size-sm);
-    margin-bottom: 2.4rem;
+  .login-title,
+  .dialog-warning  {
+    margin-bottom: rem(2.4);
   }
 
   .no-apps-wrapper {
-    width: calc(100% - 12.5rem);
+    width: calc(100% - rem(12.5));
     position: relative;
   }
 
   .no-apps {
-    padding-top: 7.2rem;
+    padding-top: rem(7.2);
     margin: 0 auto;
     position: relative;
   }
 
   .no-apps-text {
-    width: 39rem;
+    width: rem(39);
   }
 
   .expandable-form .register-app-button {
-    padding: 1.2rem 2rem;
+    padding: rem(1.2) rem(2);
   }
 }

@@ -1,13 +1,15 @@
+@use 'src/styles/utility' as *;
+
 .spinner {
   position: relative;
-  width: var(--spinner-width);
-  height: var(--spinner-height);
+  width: rem(10);
+  height: rem(10);
   border-radius: 100%;
   background-image: linear-gradient(
     to right,
-    var(--red-01),
-    var(--white),
-    var(--white)
+    var(--colors-coral600),
+    var(--ifm-color-emphasis-100),
+    var(--ifm-color-emphasis-100)
   );
   animation: rotating 0.5s linear infinite;
   &:before {
@@ -17,7 +19,7 @@
     width: 70%;
     height: 70%;
     position: absolute;
-    background-color: var(--white);
+    background-color: var(--colors-greyLight100);
     border-radius: 100%;
     transform: translate(-50%, -50%);
   }

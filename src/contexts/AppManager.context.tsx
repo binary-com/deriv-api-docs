@@ -26,11 +26,7 @@ type TAppManagerContextProps = {
   children: React.ReactNode;
 };
 
-const AppManagerContext = React.createContext<TAppManagerContext>({});
-
-export const useAppManagerContext = () => {
-  return React.useContext(AppManagerContext);
-};
+export const AppManagerContext = React.createContext<TAppManagerContext>({});
 
 const AppManagerContextProvider = ({ children }: TAppManagerContextProps) => {
   const [manager_state, setManagerState] = React.useState('REGISTER_STATE');

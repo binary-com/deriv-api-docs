@@ -92,7 +92,7 @@ describe('AppRegistrationForm', () => {
     expect(info_text).toBeInTheDocument();
 
     // Testing to see if parts of the input render properly
-    const markup_field = screen.getByLabelText(/markup percentage \(required\)/i);
+    const markup_field = screen.getByLabelText(/markup percentage \(optional\)/i);
     expect(markup_field).toBeInTheDocument();
 
     // Testing to see if the interactive input UI works
@@ -110,12 +110,6 @@ describe('AppRegistrationForm', () => {
       /Your markup value must be equal to or above 0.00 and no more than 5.00/i,
     );
     expect(error_message).toBeInTheDocument();
-
-    fireEvent.change(markup_field, { target: { value: '' } });
-    fireEvent.blur(markup_field);
-
-    const error_message2 = await screen.findByText(/enter a markup value/i);
-    expect(error_message2).toBeInTheDocument();
   });
 
   it('should render authorisation URL field', async () => {
@@ -130,20 +124,15 @@ describe('AppRegistrationForm', () => {
     );
     expect(info_text).toBeInTheDocument();
 
-    const authorisation_field = screen.getByLabelText(/authorisation url \(required\)/i);
+    const authorisation_field = screen.getByLabelText(/authorisation url \(optional\)/i);
     expect(authorisation_field).toBeInTheDocument();
 
     // Checking if the error message works
-    fireEvent.blur(authorisation_field);
-
-    const error_message = await screen.findByText(/Enter your authorisation URL/i);
-    expect(error_message).toBeInTheDocument();
-
     fireEvent.change(authorisation_field, { target: { value: 'abcd' } });
     fireEvent.blur(authorisation_field);
 
-    const error_message2 = await screen.findByText(/Enter a valid URL/i);
-    expect(error_message2).toBeInTheDocument();
+    const error_message = await screen.findByText(/Enter a valid URL/i);
+    expect(error_message).toBeInTheDocument();
 
     // Testing to see if the interactive input UI works
     fireEvent.focus(authorisation_field);
@@ -157,20 +146,15 @@ describe('AppRegistrationForm', () => {
 
   it('should render verification URL field', async () => {
     // Testing to see if parts of the input render properly
-    const verification_field = screen.getByLabelText(/verification url \(required\)/i);
+    const verification_field = screen.getByLabelText(/verification url \(optional\)/i);
     expect(verification_field).toBeInTheDocument();
 
     // Checking if the error message works
-    fireEvent.blur(verification_field);
-
-    const error_message = await screen.findByText(/Enter an URL/i);
-    expect(error_message).toBeInTheDocument();
-
     fireEvent.change(verification_field, { target: { value: 'abcd' } });
     fireEvent.blur(verification_field);
 
-    const error_message2 = await screen.findByText(/Enter a valid URL/i);
-    expect(error_message2).toBeInTheDocument();
+    const error_message = await screen.findByText(/Enter a valid URL/i);
+    expect(error_message).toBeInTheDocument();
 
     // Testing to see if the interactive input UI works
     fireEvent.focus(verification_field);
@@ -227,7 +211,7 @@ describe('AppRegistrationForm', () => {
 
   it('should render the terms of conditions', () => {
     const terms_of_conditions = screen.getByText(
-      /By registering your application, you acknowledge that you've read and accepted the Deriv API terms and conditions/i,
+      /By registering your application, you acknowledge that/i,
     );
     expect(terms_of_conditions).toBeInTheDocument();
   });

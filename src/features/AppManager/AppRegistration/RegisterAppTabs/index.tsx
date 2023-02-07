@@ -1,23 +1,25 @@
 import React from 'react';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
+import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
+import { useStateClass } from '@site/src/hooks/useStateClass';
+import styles from './RegisterAppTabs.module.scss';
 
 export default function RegisteredAppTabs() {
   const { setManagerState } = useAppManagerContext();
   return (
-    <div className='registered-apps-tabs'>
+    <div className={`${styles.registeredAppsTabs} ${useStateClass(styles)}`}>
       <button
         onClick={() => setManagerState('REGISTER_STATE')}
         id='register_button'
-        className='register-button'
+        className={styles.registerButton}
       >
-        <label>Register your application</label>
+        <label>Register application</label>
       </button>
       <button
         onClick={() => setManagerState('MANAGE_STATE')}
         id='manage_button'
-        className='manage-button'
+        className={styles.manageButton}
       >
-        <label>Manage existing applications</label>
+        <label>Manage applications</label>
       </button>
     </div>
   );

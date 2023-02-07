@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './AppManagementEmpty.module.scss';
-import { useAppManagerContext } from '@site/src/contexts/AppManager.context';
+import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
 import { Button } from '@deriv/ui';
 
 export default function AppManagementEmpty() {
   const { setManagerState } = useAppManagerContext();
   return (
-    <div className={styles.noAppsWrapper}>
+    <div className={styles.noAppsWrapper} data-testid='management-empty'>
       <div className={styles.noApps}>
         <div className={styles.noAppsIcon} />
         <div className={styles.noAppsText}>

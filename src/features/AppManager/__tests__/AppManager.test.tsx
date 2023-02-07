@@ -2,6 +2,12 @@ import React from 'react';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import { AppManager } from '../AppManager';
 
+jest.mock('@site/src/hooks/useRootContext', () => {
+  return jest.fn(() => ({
+    is_logged_in: true,
+  }));
+});
+
 describe('AppManager parent component', () => {
   beforeEach(() => {
     render(<AppManager />);
@@ -21,9 +27,9 @@ describe('AppManager parent component', () => {
     expect(main_title).toBeInTheDocument();
   });
 
-  it('Renders the subtitle', async () => {
-    const subtitle = await screen.getByText(
-      /register your app, get an app id, and start using the deriv api/i,
+  it('Renders the subtitle', () => {
+    const subtitle = screen.getByText(
+      /Register your app, get an app ID, and start using the Deriv API/i,
     );
     expect(subtitle).toBeInTheDocument();
   });

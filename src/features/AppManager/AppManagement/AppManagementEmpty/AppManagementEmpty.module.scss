@@ -1,46 +1,48 @@
+@use 'src/styles/utility' as *;
+
 .noAppsWrapper {
-  width: calc(100% - 3.2rem);
+  width: calc(100% - rem(3.2));
 }
 
 .noApps {
-  padding-top: 7.2rem;
+  padding-top: rem(7.2);
   margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: var(var(--text-align-center));
-  align-items: var(--text-align-center);
-  width: calc(32rem - 3.2rem);
+  justify-content: var(center);
+  align-items: center;
+  width: calc(rem(32) - rem(3.2));
   position: relative;
   margin: 0 auto;
 }
 
 .noAppsIcon {
-  margin-top: 1.6rem;
-  margin-bottom: 2rem;
+  margin-top: rem(1.6);
+  margin-bottom: rem(2);
   background-image: url(/img/table-empty.svg);
   background-repeat: no-repeat;
-  background-position: var(--text-align-center);
+  background-position: center;
   background-size: contain;
-  width: 10rem;
-  height: 10rem;
+  width: rem(10);
+  height: rem(10);
 }
 
 .noAppsText {
-  text-align: var(--text-align-center);
+  text-align: center;
 }
 
 [data-state*="responsive.desktop"] {
   .noAppsWrapper {
-    width: calc(100% - 12.5rem);
+    width: calc(100% - rem(12.5));
     position: relative;
   }
   .noApps {
-    padding-top: 7.2rem;
+    padding-top: rem(7.2);
     margin: 0 auto;
     position: relative;
   }
   .noAppsText {
-    width: 39rem;
+    width: rem(39);
   }
 }

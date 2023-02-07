@@ -10,7 +10,6 @@ fieldset .customTextInput:last-child {
     border-radius: 4px;
     display: flex;
     position: relative;
-    width: 100%;
     box-sizing: border-box;
     &:focus-within {
         border-color: var(--colors-blue400);
@@ -32,7 +31,6 @@ fieldset .customTextInput:last-child {
         background: 0 0;
         box-sizing: border-box;
         color: var(--ifm-color-emphasis-1000);
-        display: block;
         height: rem(4);
         min-width: 0;
         width: 100%;
@@ -45,7 +43,7 @@ fieldset .customTextInput:last-child {
             transform: translateY(rem(-2)) scale(0.75);
         }
         &:focus {
-            outline: none;
+            outline-color: none;
             & ~ label {
                 color: var(--colors-blue400);
                 background-color: var(--ifm-color-emphasis-0);
@@ -67,7 +65,7 @@ fieldset .customTextInput:last-child {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 80%;
+        width: 100%;
         input[type='number'],
         input[type='text'] {
             height: rem(4);
@@ -130,7 +128,7 @@ fieldset .customTextInput:last-child {
                 width: 100%;
                 margin-top: rem(2.5);
                 flex-wrap: wrap-reverse;
-                gap: 1.6rem;
+                gap: rem(1.6);
             }
         }
         .formHeaderContainer {
@@ -155,25 +153,20 @@ fieldset .customTextInput:last-child {
     padding: rem(1.28) rem(0.64);
 }
 
-[data-state~='registration.logged_in.register_tab.unfolded_form'] .expandableForm {
-    display: flex;
-    flex-direction: column;
-}
-
-[data-state~='registration.logged_in.update_mode'] .customTextInput .apiTokenInput[readonly] {
-    color: var(--border-normal);
+.updateState .customTextInput .apiTokenInput[readonly] {
+    color: var(--ifm-color-emphasis-500);
     cursor: not-allowed;
     & ~ label {
-        color: var(--ifm-color-emphasis-800) !important;
+        color: var(--ifm-color-emphasis-500) !important;
     }
 }
 
-[data-state*='responsive.mobile'] {
+@media screen and (min-width: 320px) and (max-width: 1024px) {
     .formContent {
         width: 100%;
     }
     .infoIcon:hover .tooltip {
-        width: 14rem;
+        width: rem(14);
         transform: translate(-19%, calc(-100% - rem(1)));
     }
 }
@@ -204,6 +197,7 @@ input[type='checkbox'] {
         background-repeat: no-repeat;
         display: inline-block;
         border: 2px solid var(--ifm-color-emphasis-600);
+        background-color: var(--colors-greyLight100);
         min-width: rem(1.5);
         height: rem(1.5);
         border-radius: 2px;
