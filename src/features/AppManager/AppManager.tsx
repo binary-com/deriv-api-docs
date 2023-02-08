@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from './AppManager.module.scss';
+import useRootContext from '@site/src/hooks/useRootContext';
 import RegisteredAppTabs from './AppRegistration/RegisterAppTabs';
 import AppRegistrationForm from './AppRegistration/AppRegistrationForm/AppRegistrationForm';
-import useRootContext from '@site/src/hooks/useRootContext';
 import { Text } from '@deriv/ui';
-import { AppManagementLazy } from './AppManagement/AppManagementLazy';
-import { RegisterAppDialogSuccess } from './AppRegistration/RegisterAppDialogSuccess';
-import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
 import { Login } from '../Auth/Login/Login';
+import { AppManagementLazy } from './AppManagement/AppManagementLazy';
+import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
+import { RegisterAppDialogSuccess } from './AppRegistration/RegisterAppDialogSuccess';
 
 export const AppManager = () => {
+  const { is_logged_in } = useRootContext();
   const { manager_state } = useAppManagerContext();
-  // const { is_logged_in } = useRootContext();
-  const is_logged_in = true;
   const is_updating = manager_state === 'UPDATE_STATE';
   const is_managing = manager_state === 'MANAGE_STATE';
   const is_registering = manager_state === 'REGISTER_STATE' || manager_state === '';
+
   return (
     <div id='app-registration-machine' data-testid='app-manager' className={styles.registerAppForm}>
       {is_logged_in ? (
