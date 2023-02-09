@@ -1,20 +1,21 @@
 import React from 'react';
 import { cleanup, render, screen } from '@site/src/test-utils';
-import RootContextProvider from '@site/src/contexts/root/root.context.provider';
 import userEvent from '@testing-library/user-event';
 import AccountSwitcher from '..';
-import useRootContext from '@site/src/hooks/useRootContext';
 import useLogout from '@site/src/hooks/useLogout';
+import useAuthContext from '@site/src/hooks/useAuthContext';
+import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import AuthProvider from '@site/src/contexts/auth/auth.provider';
 
-jest.mock('@site/src/hooks/useRootContext');
+jest.mock('@site/src/hooks/useAuthContext');
 jest.mock('@site/src/hooks/useLogout');
 
 const mockUseLogout = useLogout as jest.MockedFunction<typeof useLogout>;
-const mockUseRootContext = useRootContext as jest.MockedFunction<typeof useRootContext>;
+const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
 
 const mockLogout = jest.fn();
-const mockUpdateAccounts = jest.fn();
-const mockUpdateCurrentAccount = jest.fn();
+const mockUpdateLoginAccounts = jest.fn();
+const mockUpdateCurrentLoginAccount = jest.fn();
 
 const fake_accounts = [
   {
@@ -37,23 +38,23 @@ mockUseLogout.mockImplementation(() => {
 
 describe('HeroHeader', () => {
   beforeEach(() => {
-    mockUseRootContext.mockImplementation(() => {
+    mockUseAuthContext.mockImplementation(() => {
       return {
-        accounts: fake_accounts,
-        currentAccount: {
+        loginAccounts: fake_accounts,
+        currentLoginAccount: {
           currency: 'USD',
           name: 'CR111111',
           token: 'first_token',
         },
         is_logged_in: true,
-        updateAccounts: mockUpdateAccounts,
-        updateCurrentAccount: mockUpdateCurrentAccount,
+        updateLoginAccounts: mockUpdateLoginAccounts,
+        updateCurrentLoginAccount: mockUpdateCurrentLoginAccount,
       };
     });
     render(
-      <RootContextProvider>
+      <AuthProvider>
         <AccountSwitcher />
-      </RootContextProvider>,
+      </AuthProvider>,
     );
   });
 
@@ -78,23 +79,23 @@ describe('HeroHeader', () => {
 
   it('Should render Accounts when no account is selected', () => {
     cleanup();
-    mockUseRootContext.mockImplementation(() => {
+    mockUseAuthContext.mockImplementation(() => {
       return {
-        accounts: fake_accounts,
-        currentAccount: {
+        loginAccounts: fake_accounts,
+        currentLoginAccount: {
           currency: '',
           name: '',
           token: '',
         },
         is_logged_in: false,
-        updateAccounts: mockUpdateAccounts,
-        updateCurrentAccount: mockUpdateCurrentAccount,
+        updateLoginAccounts: mockUpdateLoginAccounts,
+        updateCurrentLoginAccount: mockUpdateCurrentLoginAccount,
       };
     });
     render(
-      <RootContextProvider>
+      <AuthProvider>
         <AccountSwitcher />
-      </RootContextProvider>,
+      </AuthProvider>,
     );
 
     const accounts_button = screen.getByRole('button', { name: /accounts/i });
@@ -117,6 +118,20 @@ describe('HeroHeader', () => {
   });
 
   it('Should update current account on menu item click', async () => {
+    mockUseAuthContext.mockImplementation(() => {
+      return {
+        loginAccounts: fake_accounts,
+        currentLoginAccount: {
+          currency: 'USD',
+          name: 'CR111111',
+          token: 'first_token',
+        },
+        is_logged_in: true,
+        updateAccounts: mockUpdateLoginAccounts,
+        updateCurrentAccount: mockUpdateCurrentLoginAccount,
+      };
+    });
+
     const current_account_button = screen.getByRole('button', { name: /USD/i });
     await userEvent.click(current_account_button);
 
@@ -124,9 +139,9 @@ describe('HeroHeader', () => {
 
     await userEvent.click(first_menu_item);
 
-    expect(mockUpdateCurrentAccount).toHaveBeenCalledTimes(1);
+    expect(mockUpdateCurrentLoginAccount).toHaveBeenCalledTimes(1);
 
-    expect(mockUpdateCurrentAccount).toHaveBeenCalledWith({
+    expect(mockUpdateCurrentLoginAccount).toHaveBeenCalledWith({
       currency: 'ETH',
       name: 'CR2222222',
       token: 'second_token',

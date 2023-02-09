@@ -40,3 +40,13 @@
 .main-page-row:nth-child(even) {
   background-color: var(--ifm-color-emphasis-100);
 }
+
+.loading {
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
