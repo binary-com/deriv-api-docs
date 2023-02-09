@@ -1,17 +1,21 @@
-import RootContextProvider from '@site/src/contexts/root/root.context.provider';
 import { act, renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 import useAuthParams from '..';
+import AuthProvider from '@site/src/contexts/auth/auth.provider';
+import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import useAuthContext from '../../useAuthContext';
 
-const mockUpdateAccounts = jest.fn();
+jest.mock('@site/src/hooks/useAuthContext');
 
-const mockUseRootContext = jest.fn().mockImplementation(() => ({
-  updateAccounts: mockUpdateAccounts,
+const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
+
+const wrapper = ({ children }) => <AuthProvider>{children}</AuthProvider>;
+
+const mockUpdateLoginAccounts = jest.fn();
+
+mockUseAuthContext.mockImplementation(() => ({
+  updateLoginAccounts: mockUpdateLoginAccounts,
 }));
-
-React.useContext = mockUseRootContext;
-
-const wrapper = ({ children }) => <RootContextProvider>{children}</RootContextProvider>;
 
 describe('Use Auth Params', () => {
   afterEach(() => {
@@ -39,8 +43,8 @@ describe('Use Auth Params', () => {
       },
     ];
 
-    expect(mockUpdateAccounts).toBeCalledTimes(1);
-    expect(mockUpdateAccounts).toBeCalledWith(expected_accounts);
+    expect(mockUpdateLoginAccounts).toBeCalledTimes(1);
+    expect(mockUpdateLoginAccounts).toBeCalledWith(expected_accounts);
   });
 
   it('Should not update accounts in context with empty string as query params', () => {
@@ -49,6 +53,6 @@ describe('Use Auth Params', () => {
       result.current.checkUrlParams('');
     });
 
-    expect(mockUpdateAccounts).not.toBeCalled();
+    expect(mockUpdateLoginAccounts).not.toBeCalled();
   });
 });

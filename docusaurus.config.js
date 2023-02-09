@@ -69,6 +69,7 @@ const config = {
             type: 'custom-user-navar-item',
             position: 'right',
           },
+          { to: 'app-manager', label: 'App Manager', position: 'left' },
         ],
       },
       prism: {

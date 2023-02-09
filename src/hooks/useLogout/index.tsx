@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
-import useRootContext from '../useRootContext';
+import useAuthContext from '../useAuthContext';
 
 const useLogout = () => {
-  const { updateAccounts } = useRootContext();
+  const { updateLoginAccounts } = useAuthContext();
 
   // we clean up everything related to the user here, for now it's just user's account
   // later on we should clear user tokens as well
   const logout = useCallback(() => {
-    updateAccounts([]);
-  }, [updateAccounts]);
+    updateLoginAccounts([]);
+  }, [updateLoginAccounts]);
 
   return { logout };
 };

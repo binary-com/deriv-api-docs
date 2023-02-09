@@ -2,7 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@deriv/ui';
 import type { ReactNode } from 'react';
-import RootContextProvider from '@site/src/contexts/root/root.context.provider';
+import AuthProvider from '../contexts/auth/auth.provider';
 
 type TRootProps = {
   children: ReactNode;
@@ -14,9 +14,9 @@ export default function Root({ children }: TRootProps) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RootContextProvider>
+        <AuthProvider>
           <ThemeProvider>{children}</ThemeProvider>
-        </RootContextProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   );
