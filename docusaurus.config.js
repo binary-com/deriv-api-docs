@@ -96,6 +96,18 @@ const config = {
         id: 'announcementBar-2', // Increment on change
         content: `⭐️ This project is still in progress, we'll add more contents and features everyday, so stay tuned!`,
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'JDS4ZIG1QX',
+
+        // Public API key: it is safe to commit it
+        apiKey: 'bf870ebe6082496067ad277a68e2a52c',
+
+        indexName: 'deriv_api_website',
+
+        // Optional: see doc section below
+        contextualSearch: true,
+      },
     }),
 };
 
