@@ -18,27 +18,6 @@ mockUseCreateToken.mockImplementation(() => {
   };
 });
 
-// const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
-
-// mockUseAuthContext.mockImplementation(() => ({
-//   is_authorized: true,
-// }));
-
-// jest.mock('@site/src/features/AppManager/ApiToken/hooks/useTokenPage');
-
-// const mockUseTokenPage = useTokenPage as jest.MockedFunction<typeof useTokenPage>;
-
-// let tokens: TTokensArrayType = [];
-
-// const mockUpdateTokens = jest.fn().mockImplementation((updatedTokens) => {
-//   tokens = updatedTokens;
-// });
-
-// mockUseTokenPage.mockImplementation(() => ({
-//   tokens,
-//   updateTokens: mockUpdateTokens,
-// }));
-
 const scopes = [
   {
     name: 'read',

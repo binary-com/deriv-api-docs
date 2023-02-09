@@ -64,13 +64,7 @@ const scopes: TScope[] = [
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    register,
-    setValue,
-    getValues,
-  } = useForm<TApiTokenForm>({
+  const { handleSubmit, register, setValue, getValues } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
     mode: 'all',
   });
