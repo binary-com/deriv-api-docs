@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './AppManager.module.scss';
-import useRootContext from '@site/src/hooks/useRootContext';
 import RegisteredAppTabs from './AppRegistration/RegisterAppTabs';
 import AppRegistrationForm from './AppRegistration/AppRegistrationForm/AppRegistrationForm';
+import ApiToken from './ApiToken';
 import { Text } from '@deriv/ui';
 import { Login } from '../Auth/Login/Login';
 import { AppManagementLazy } from './AppManagement/AppManagementLazy';
@@ -10,10 +10,12 @@ import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
 import { RegisterAppDialogSuccess } from './AppRegistration/RegisterAppDialogSuccess';
 
 export const AppManager = () => {
-  const { is_logged_in } = useRootContext();
+  // const { is_logged_in } = useAuthContext();
   const { manager_state } = useAppManagerContext();
+  const is_logged_in = true;
   const is_updating = manager_state === 'UPDATE_STATE';
   const is_managing = manager_state === 'MANAGE_STATE';
+  const is_adding_token = manager_state === 'TOKEN_STATE';
   const is_registering = manager_state === 'REGISTER_STATE' || manager_state === '';
 
   return (
@@ -36,6 +38,7 @@ export const AppManager = () => {
             </div>
           )}
           {is_managing && <AppManagementLazy />}
+          {is_adding_token && <ApiToken />}
         </div>
       ) : (
         <Login />

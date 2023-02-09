@@ -1,22 +1,14 @@
 import DerivAPIBasic from '@deriv/deriv-api/dist/DerivAPIBasic';
+import useWS from '../useWs';
 import { useQuery } from 'react-query';
 import { useAppManagerContext } from '../useAppManagerContext';
-
-const getApps = async () => {
-  const api = new DerivAPIBasic({
-    endpoint: 'ws.binaryws.com', // TODO: replace
-    lang: 'EN',
-    app_id: '1089', // TODO: replace
-  });
-  await api.authorize('');
-  const apps = await api.appList();
-  await api.disconnect();
-  return apps;
-};
+import apiManager from '@site/src/configs/websocket';
 
 export const useApps = () => {
+  // const { data, send, error, is_loading } = useWS('app_list')
   const { setIsEmptyState, setIsLoadingApps, is_loading_apps } = useAppManagerContext();
-  return useQuery('apps', getApps, {
+
+  return useQuery('apps', apiManager.api.app_list, {
     enabled: is_loading_apps,
     onSuccess: (data) => {
       const isEmpty = data?.app_list?.length === 0;

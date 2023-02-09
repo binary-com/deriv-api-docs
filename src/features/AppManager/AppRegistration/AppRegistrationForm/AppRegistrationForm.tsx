@@ -2,9 +2,10 @@ import React from 'react';
 import { RegisterAppDialogError } from './RegisterAppDialogError';
 import { Text, Button } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
-import { useRegisterOrUpdateApp } from '@site/src/hooks/useRegisterOrUpdate';
+// import { useRegisterOrUpdateApp } from '@site/src/hooks/useRegisterOrUpdate';
 import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
 import { useStateClass } from '@site/src/hooks/useStateClass';
+import useWS from '@site/src/hooks/useWs';
 import styles from './AppRegistrationForm.module.scss';
 
 interface FormData {
@@ -29,7 +30,7 @@ export default function AppRegistrationForm() {
     setValue,
   } = useForm<FormData>({ mode: 'onBlur' });
   const { setManagerState, manager_state, updating_row } = useAppManagerContext();
-  const { registerApp, isLoading, error } = useRegisterOrUpdateApp();
+  const { data, is_loading, error, send } = useWS('app_register');
   const is_updating: boolean = manager_state === 'UPDATE_STATE';
   const is_registering: boolean = manager_state === 'REGISTER_STATE' || manager_state === '';
 
@@ -58,8 +59,11 @@ export default function AppRegistrationForm() {
       <form
         className={styles.frmNewApplication}
         id='frmNewApplication'
-        onSubmit={handleSubmit((data) => {
-          registerApp(data);
+        onSubmit={handleSubmit((form_data) => {
+          send({
+            name: form_data.app_name,
+            scopes: ['read'], // TODO: Have to update the scopes with the form data scopes
+          });
         })}
         data-testid='app-registration-form'
       >
@@ -355,7 +359,7 @@ export default function AppRegistrationForm() {
                     Cancel
                   </Button>
                 )}
-                <Button role='button' disabled={isLoading || Object.keys(errors)?.length > 0}>
+                <Button role='button' disabled={is_loading || Object.keys(errors)?.length > 0}>
                   {registerButtonMessage}
                 </Button>
               </React.Fragment>

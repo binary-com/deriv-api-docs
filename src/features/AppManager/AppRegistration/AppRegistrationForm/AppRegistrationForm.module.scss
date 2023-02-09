@@ -171,18 +171,18 @@ fieldset .customTextInput:last-child {
     }
 }
 
-input[type='checkbox'] {
-    position: absolute;
-    top: rem(0.2);
-    left: rem(0.2);
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    opacity: 0;
-    cursor: pointer;
-}
+// input[type='checkbox'] {
+//     position: absolute;
+//     top: rem(0.2);
+//     left: rem(0.2);
+//     right: 0;
+//     bottom: 0;
+//     width: 100%;
+//     height: 100%;
+//     z-index: 2;
+//     opacity: 0;
+//     cursor: pointer;
+// }
 
 .customCheckboxContainer {
     position: relative;

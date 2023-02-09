@@ -5,7 +5,8 @@
     padding: rem(1) 0 rem(2) 0;
 
     &.manageState .manageButton,
-    &.registerState .registerButton {
+    &.registerState .registerButton,
+    &.tokenState .tokenButton {
         font-weight: bold;
         color: var(--ifm-color-emphasis-1000);
         border-bottom: 3px solid var(--colors-coral600); 

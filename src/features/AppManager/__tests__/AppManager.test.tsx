@@ -2,7 +2,7 @@ import React from 'react';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import { AppManager } from '../AppManager';
 
-jest.mock('@site/src/hooks/useRootContext', () => {
+jest.mock('@site/src/hooks/useAuthContext', () => {
   return jest.fn(() => ({
     is_logged_in: true,
   }));

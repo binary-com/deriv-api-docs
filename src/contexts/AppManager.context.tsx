@@ -29,7 +29,7 @@ type TAppManagerContextProps = {
 export const AppManagerContext = React.createContext<TAppManagerContext>({});
 
 const AppManagerContextProvider = ({ children }: TAppManagerContextProps) => {
-  const [manager_state, setManagerState] = React.useState('REGISTER_STATE');
+  const [manager_state, setManagerState] = React.useState('TOKEN_STATE');
   const [dialog_state, setDialogState] = React.useState('');
   const [updating_row, setUpdatingRow] = React.useState({});
   const [is_empty_state, setIsEmptyState] = React.useState(false);

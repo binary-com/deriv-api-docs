@@ -8,6 +8,13 @@ export default function RegisteredAppTabs() {
   return (
     <div className={`${styles.registeredAppsTabs} ${useStateClass(styles)}`}>
       <button
+        onClick={() => setManagerState('TOKEN_STATE')}
+        id='token_button'
+        className={styles.tokenButton}
+      >
+        <label>Manage tokens</label>
+      </button>
+      <button
         onClick={() => setManagerState('REGISTER_STATE')}
         id='register_button'
         className={styles.registerButton}

@@ -5,10 +5,12 @@ import { useDeleteApp } from '@site/src/hooks/useDeleteApp';
 import { useApps } from '@site/src/hooks/useApps';
 import { SkeletonText } from '@site/src/components/SkeletonText';
 import { useAppManagerContext } from '@site/src/hooks/useAppManagerContext';
+import useWS from '@site/src/hooks/useWs';
 import AppManagementEmpty from './AppManagementEmpty';
 import DeleteAppDialog from './DeleteAppDialog';
 import '../AppManager.module.scss';
 import styles from './AppManagement.module.scss';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 
 type TScopes = {
   values?: string[];
@@ -29,9 +31,16 @@ export default function AppManagement() {
     useAppManagerContext();
   const [app_id, setAppId] = React.useState(null);
   const { deleteApp } = useDeleteApp(app_id);
-  const { data, isLoading } = useApps();
+  const { data, is_loading, error, send } = useWS('app_list');
   const dialog_is_open = dialog_state === 'DIALOG_DELETE';
-  const table_data = React.useMemo(() => data?.app_list || [], [data]);
+  const table_data = React.useMemo(() => data || [], [data]);
+
+  const { is_authorized } = useAuthContext();
+
+  React.useEffect(() => {
+    if (is_authorized) send();
+  }, [send]);
+
   const columns = React.useMemo(
     () => [
       {
@@ -106,7 +115,7 @@ export default function AppManagement() {
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {isLoading && <SkeletonRows />}
+            {is_loading && <SkeletonRows />}
             {rows.map((row) => {
               prepareRow(row);
               return (
