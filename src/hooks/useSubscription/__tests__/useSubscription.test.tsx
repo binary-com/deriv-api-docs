@@ -16,7 +16,7 @@ describe('Use WS', () => {
   });
 
   it('Should unsubscribe properly', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useSubscription('exchange_rates'));
+    const { result } = renderHook(() => useSubscription('exchange_rates'));
 
     expect(result.current.is_loading).toBeFalsy();
 
@@ -167,5 +167,46 @@ describe('Use WS', () => {
         tUSDT: 1.000005000025,
       },
     });
+  });
+
+  it('Should catch errors', async () => {
+    const { result } = renderHook(() => useSubscription('exchange_rates'));
+
+    expect(result.current.is_loading).toBeFalsy();
+
+    act(() => {
+      result.current.subscribe({
+        base_currency: 'USD',
+      });
+    });
+    expect(result.current.is_loading).toBeTruthy();
+    expect(result.current.is_subscribed).toBeTruthy();
+
+    await expect(wsServer).toReceiveMessage({
+      exchange_rates: 1,
+      base_currency: 'USD',
+      req_id: 1,
+      subscribe: 1,
+    });
+
+    wsServer.send({
+      echo_req: {
+        base_currency: 'USD',
+        exchange_rates: 1,
+        req_id: 1,
+        subscribe: 1,
+      },
+      error: {
+        message: 'this is an error',
+      },
+      msg_type: 'exchange_rates',
+      req_id: 1,
+      subscription: {
+        id: '2f39f7e7-d986-33f2-080a-b0ee50cfb85c',
+      },
+    });
+
+    expect(result.current.error).toEqual({ message: 'this is an error' });
+    expect(result.current.is_loading).toBeFalsy();
   });
 });

@@ -11,12 +11,7 @@ const useWS = <T extends TSocketEndpointNames>(name: T) => {
       setIsLoading(true);
       try {
         const response = await apiManager.augmentedSend(name, data);
-        // based on the tests this condition might not even be satisfied, but for now I'll leave it here ( we have to do manual testing for different kind of calls)
-        if (response?.error) {
-          setError(response.error);
-        } else {
-          setData(response[name] as TSocketResponseData<T>);
-        }
+        setData(response[name] as TSocketResponseData<T>);
       } catch (e) {
         setError(e);
       } finally {

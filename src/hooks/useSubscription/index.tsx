@@ -30,12 +30,7 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
     (data: Parameters<typeof apiManager.augmentedSubscribe<T>>[1]) => {
       setIsLoading(true);
       setSubscribed(true);
-
-      try {
-        setSubscriber(apiManager.augmentedSubscribe(name, data).subscribe(onData, onError));
-      } catch (e) {
-        setError(e);
-      }
+      setSubscriber(apiManager.augmentedSubscribe(name, data).subscribe(onData, onError));
     },
     [name, onData, onError],
   );
