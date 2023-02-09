@@ -4,11 +4,11 @@ import { Login } from '../features/Auth/Login/Login';
 import useAuthParams from '../hooks/useAuthParams';
 import { useEffect } from 'react';
 import { Redirect, useLocation } from '@docusaurus/router';
-import useRootContext from '../hooks/useRootContext';
+import useAuthContext from '../hooks/useAuthContext';
 
-export default function Home(): JSX.Element {
+export default function Auth(): JSX.Element {
   const { search } = useLocation(); // to get the search params
-  const { is_logged_in } = useRootContext();
+  const { is_logged_in } = useAuthContext();
   const { checkUrlParams } = useAuthParams();
 
   useEffect(() => {

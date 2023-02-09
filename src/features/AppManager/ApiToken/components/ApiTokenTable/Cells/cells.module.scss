@@ -1,0 +1,26 @@
+@use 'src/styles/utility' as *;
+
+.scopes_cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(1);
+
+  .scope_pill {
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: rem(0.5);
+  }
+
+  .scope_admin_pill {
+    color: rgb(32, 208, 205);
+    border: 1px solid rgb(32, 208, 205);
+  }
+}
+
+.lastused_cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: rem(1);
+}
