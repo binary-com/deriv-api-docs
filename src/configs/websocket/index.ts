@@ -7,7 +7,7 @@ import {
   TSocketSubscribableEndpointNames,
 } from './types';
 import { Observable } from 'rxjs';
-import { getServerConfig } from '@site/src/utils';
+import { getIsBrowser, getServerConfig } from '@site/src/utils';
 
 export type TDerivApi = {
   send: (...requestData: unknown[]) => Promise<unknown>;
@@ -76,7 +76,9 @@ export class ApiManager {
     return this.derivApi;
   }
 }
-
-const apiManager = ApiManager.getInstance();
+let apiManager: ApiManager;
+if (getIsBrowser()) {
+  apiManager = ApiManager.getInstance();
+}
 
 export default apiManager;

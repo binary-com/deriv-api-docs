@@ -9,12 +9,15 @@ import {
   USER_ACCOUNTS_SESSION_STORAGE_KEY,
   USER_SESSION_STORAGE_KEY,
 } from '@site/src/utils/constants';
+import { getIsBrowser } from '@site/src/utils';
 
 type TAuthProviderProps = {
   children: ReactNode;
 };
 
-apiManager.init();
+if (getIsBrowser()) {
+  apiManager.init();
+}
 
 const AuthProvider = ({ children }: TAuthProviderProps) => {
   const [is_logged_in, setIsLoggedIn] = useState(false);
