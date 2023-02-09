@@ -17,7 +17,6 @@ export interface IAuthContext {
   currentLoginAccount: IUserLoginAccount;
   updateCurrentLoginAccount: (userAccount: IUserLoginAccount) => void;
   userAccounts: IUserAccounts;
-  updateUserAccounts: (accounts: IUserAccounts) => void;
   user: IUser;
 }
 

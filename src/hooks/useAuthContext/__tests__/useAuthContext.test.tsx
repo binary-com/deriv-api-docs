@@ -4,9 +4,55 @@ import {
   CURRENT_LOGIN_ACCOUNT_SESSION_STORAGE_KEY,
   LOGIN_ACCOUNTS_SESSION_STORAGE_KEY,
 } from '@site/src/utils/constants';
+import makeMockSocket from '@site/src/__mocks__/socket.mock';
 import { act, renderHook, RenderHookResult, cleanup } from '@testing-library/react-hooks';
+import { WS } from 'jest-websocket-mock';
 import React, { ReactNode } from 'react';
 import useAuthContext from '..';
+
+const connection = makeMockSocket();
+
+const authorize_response = {
+  authorize: {
+    account_list: [
+      {
+        account_type: 'trading',
+        created_at: 1647509550,
+        currency: 'USD',
+        is_disabled: 0,
+        is_virtual: 0,
+        landing_company_name: 'svg',
+        loginid: 'CR0000000',
+        trading: {},
+      },
+    ],
+    balance: 10000,
+    country: 'id',
+    currency: 'USD',
+    email: 'test@jest.com',
+    fullname: 'michio uchiha',
+    is_virtual: 1,
+    landing_company_fullname: 'Test Jest Deriv Limited',
+    landing_company_name: 'virtual',
+    local_currencies: {
+      IDR: {
+        fractional_digits: 2,
+      },
+    },
+    loginid: 'VRTC0000000',
+    preferred_language: 'EN',
+    scopes: ['read', 'trade', 'payments', 'trading_information', 'admin'],
+    trading: {},
+    upgradeable_landing_companies: ['svg'],
+    user_id: 1234567,
+  },
+  echo_req: {
+    authorize: 'test_token',
+    req_id: 1,
+  },
+  msg_type: 'authorize',
+  req_id: 1,
+};
 
 const fakeAccounts: IUserLoginAccount[] = [
   {
@@ -25,17 +71,24 @@ const wrapper = ({ children }) => <AuthProvider>{children}</AuthProvider>;
 
 describe('Root Context', () => {
   let view: RenderHookResult<{ children: ReactNode }, IAuthContext>;
+  let wsServer: WS;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     view = renderHook(() => useAuthContext(), { wrapper });
+    wsServer = await connection.setup();
   });
 
   afterEach(() => {
     cleanup();
+    connection.tearDown();
   });
 
-  it('Should have is_logged_in as falsy', () => {
+  it('Should have is_logged_in falsy', () => {
     expect(view.result.current.is_logged_in).toBeFalsy();
+  });
+
+  it('Should have is_authorized falsy', () => {
+    expect(view.result.current.is_authorized).toBeFalsy();
   });
 
   it('Should have empty array for accounts as initial value', () => {
@@ -50,13 +103,27 @@ describe('Root Context', () => {
     });
   });
 
-  it('Should update accounts in state', () => {
+  it('Should update accounts in state', async () => {
+    const { result, waitForNextUpdate } = view;
+
     act(() => {
-      view.result.current.updateLoginAccounts(fakeAccounts);
+      result.current.updateLoginAccounts(fakeAccounts);
     });
 
     expect(view.result.current.loginAccounts.length).toBe(2);
     expect(view.result.current.loginAccounts).toStrictEqual(fakeAccounts);
+
+    await expect(wsServer).toReceiveMessage({ authorize: 'test_token', req_id: 1 });
+
+    wsServer.send(authorize_response);
+
+    await waitForNextUpdate();
+
+    const { account_list, ...user } = authorize_response.authorize;
+
+    expect(result.current.userAccounts).toEqual(account_list);
+    expect(result.current.user).toEqual(user);
+    expect(result.current.is_authorized).toBeTruthy();
   });
 
   it('Should update accounts in session storage', () => {

@@ -44,15 +44,11 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
 
   const updateAuthorize = useCallback(async () => {
     if (currentLoginAccount.token) {
-      try {
-        const { authorize } = await apiManager.authorize(currentLoginAccount.token);
-        setIsAuthorized(true);
-        const { account_list, ...user } = authorize;
-        setUserAccounts(account_list);
-        setUser(user);
-      } catch (error) {
-        console.error(error);
-      }
+      const { authorize } = await apiManager.authorize(currentLoginAccount.token);
+      setIsAuthorized(true);
+      const { account_list, ...user } = authorize;
+      setUserAccounts(account_list);
+      setUser(user);
     }
   }, [currentLoginAccount.token, setUser, setUserAccounts]);
 
@@ -61,13 +57,6 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
       updateAuthorize();
     }
   }, [is_authorized, updateAuthorize]);
-
-  const updateUserAccounts = useCallback(
-    (accounts: IUserAccounts) => {
-      setUserAccounts(accounts);
-    },
-    [setUserAccounts],
-  );
 
   const updateLoginAccounts = useCallback(
     (loginAccounts: IUserLoginAccount[]) => {
@@ -104,7 +93,6 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
       currentLoginAccount,
       updateCurrentLoginAccount,
       userAccounts,
-      updateUserAccounts,
       user,
     };
   }, [
@@ -115,7 +103,6 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     updateCurrentLoginAccount,
     updateLoginAccounts,
     userAccounts,
-    updateUserAccounts,
     user,
   ]);
 
