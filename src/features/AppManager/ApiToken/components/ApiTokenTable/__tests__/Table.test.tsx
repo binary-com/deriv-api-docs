@@ -1,7 +1,8 @@
-import { TTokenColumn, TTokensArrayType } from '@site/src/contexts/tokenPage/types';
 import { render, screen, cleanup, within } from '@site/src/test-utils';
+import { TTokensArrayType } from '@site/src/types';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { TTokenColumn } from '..';
 import useDeleteToken from '../../../hooks/useDeleteToken';
 import ApiLastUsedCell from '../Cells/table.lastused.cell';
 import ApiScopesCell from '../Cells/table.scopes.cell';
@@ -100,6 +101,34 @@ describe('Table', () => {
     const lastusedCellsContent = lastusedCells.map((item) => item.firstChild.textContent);
 
     expect(lastusedCellsContent).toEqual(['2022-02-04', '2022-10-04']);
+  });
+
+  it('Should render Never when lastused time is empty', () => {
+    cleanup();
+
+    const tokens: TTokensArrayType = [
+      {
+        display_name: '111111',
+        last_used: '',
+        scopes: ['read', 'trade'],
+        token: 'token_1',
+        valid_for_ip: '',
+      },
+    ];
+    render(
+      <Table
+        columns={tableColumns}
+        data={tokens}
+        initialState={{ hiddenColumns: ['valid_for_ip'] }}
+      />,
+    );
+    const lastusedCells = screen.getAllByTestId('lastused-cell');
+
+    expect(lastusedCells.length).toBe(1);
+
+    const lastusedCellsContent = lastusedCells.map((item) => item.firstChild.textContent);
+
+    expect(lastusedCellsContent).toEqual(['Never']);
   });
 
   it('Should delete token on delete button clicked', async () => {

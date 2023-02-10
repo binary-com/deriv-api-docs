@@ -20,12 +20,6 @@ export class ApiManager {
   private derivApi: TDerivApi;
 
   public static instance: ApiManager;
-  public static getInstance() {
-    if (!ApiManager.instance) {
-      ApiManager.instance = new ApiManager();
-    }
-    return ApiManager.instance;
-  }
 
   public init() {
     if (!this.socket) {
@@ -78,7 +72,7 @@ export class ApiManager {
 }
 let apiManager: ApiManager;
 if (getIsBrowser()) {
-  apiManager = ApiManager.getInstance();
+  apiManager = new ApiManager();
 }
 
 export default apiManager;
