@@ -1,5 +1,4 @@
 import AuthProvider from '@site/src/contexts/auth/auth.provider';
-import TokenPageProvider from '@site/src/contexts/tokenPage/token-page.provider';
 import makeMockSocket from '@site/src/__mocks__/socket.mock';
 import { cleanup, renderHook, act } from '@testing-library/react-hooks';
 import { WS } from 'jest-websocket-mock';
@@ -7,14 +6,15 @@ import React from 'react';
 import useCreateToken from '../useCreateToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
-import useTokenPage from '../useTokenPage';
-import { TTokensArrayType } from '@site/src/contexts/tokenPage/types';
+import ApiTokenProvider from '@site/src/contexts/api-token/api-token.provider';
+import { TTokensArrayType } from '@site/src/types';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const connection = makeMockSocket();
 
 const wrapper = ({ children }) => (
   <AuthProvider>
-    <TokenPageProvider>{children}</TokenPageProvider>
+    <ApiTokenProvider>{children}</ApiTokenProvider>
   </AuthProvider>
 );
 
@@ -26,9 +26,11 @@ mockUseAuthContext.mockImplementation(() => ({
   is_authorized: true,
 }));
 
-jest.mock('../useTokenPage');
+jest.mock('@site/src/hooks/useApiToken');
 
-const mockUseTokenPage = useTokenPage as jest.MockedFunction<typeof useTokenPage>;
+const mockUseApiToken = useApiToken as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useApiToken>>
+>;
 
 let tokens: TTokensArrayType = [];
 
@@ -36,7 +38,7 @@ const mockUpdateTokens = jest.fn().mockImplementation((updatedTokens) => {
   tokens = updatedTokens;
 });
 
-mockUseTokenPage.mockImplementation(() => ({
+mockUseApiToken.mockImplementation(() => ({
   tokens,
   updateTokens: mockUpdateTokens,
 }));
@@ -56,6 +58,9 @@ describe('Use Create Token', () => {
   it('Should create token', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useCreateToken(), { wrapper });
 
+    // since ApiProvider is getting the tokens on render we have to skip this message for server like so:
+    await wsServer.nextMessage;
+
     act(() => {
       result.current.createToken('test', ['read', 'trade']);
     });
@@ -64,7 +69,7 @@ describe('Use Create Token', () => {
       api_token: 1,
       new_token: 'test',
       new_token_scopes: ['read', 'trade'],
-      req_id: 1,
+      req_id: 2,
     });
 
     wsServer.send({
@@ -75,7 +80,7 @@ describe('Use Create Token', () => {
             display_name: 'test',
             last_used: '',
             scopes: ['read', 'trade'],
-            token: 'r3ScTjzYwbfoLyz',
+            token: 'test',
             valid_for_ip: '',
           },
         ],
@@ -84,10 +89,10 @@ describe('Use Create Token', () => {
         api_token: 1,
         new_token: 'test',
         new_token_scopes: ['read', 'trade'],
-        req_id: 1,
+        req_id: 2,
       },
       msg_type: 'api_token',
-      req_id: 1,
+      req_id: 2,
     });
 
     await waitForNextUpdate();
@@ -98,7 +103,7 @@ describe('Use Create Token', () => {
         display_name: 'test',
         last_used: '',
         scopes: ['read', 'trade'],
-        token: 'r3ScTjzYwbfoLyz',
+        token: 'test',
         valid_for_ip: '',
       },
     ]);
@@ -109,7 +114,7 @@ describe('Use Create Token', () => {
           display_name: 'test',
           last_used: '',
           scopes: ['read', 'trade'],
-          token: 'r3ScTjzYwbfoLyz',
+          token: 'test',
           valid_for_ip: '',
         },
       ]),

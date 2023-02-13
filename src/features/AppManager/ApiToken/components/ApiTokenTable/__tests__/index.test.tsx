@@ -1,33 +1,24 @@
+import useApiToken from '@site/src/hooks/useApiToken';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import React from 'react';
 import ApiTokenTable from '..';
-import useGetTokens from '../../../hooks/useGetTokens';
-import useTokenPage from '../../../hooks/useTokenPage';
 
-jest.mock('../../../hooks/useGetTokens');
+jest.mock('@site/src/hooks/useApiToken');
 
-const mockUseGetToken = useGetTokens as jest.MockedFunction<
-  () => Partial<ReturnType<typeof useGetTokens>>
->;
-
-jest.mock('../../../hooks/useTokenPage');
-
-const mockUseTokenPage = useTokenPage as jest.MockedFunction<
-  () => Partial<ReturnType<typeof useTokenPage>>
+const mockUseApiToken = useApiToken as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useApiToken>>
 >;
 
 describe('Api Token Table', () => {
   afterEach(() => {
     cleanup();
+    jest.clearAllMocks();
   });
 
   it('Should render loading when isLoadingTokens is truthy ', async () => {
-    mockUseGetToken.mockImplementationOnce(() => ({
-      isLoadingTokens: true,
-    }));
-
-    mockUseTokenPage.mockImplementationOnce(() => ({
+    mockUseApiToken.mockImplementationOnce(() => ({
       tokens: [],
+      isLoadingTokens: true,
     }));
 
     render(<ApiTokenTable />);
@@ -37,12 +28,9 @@ describe('Api Token Table', () => {
   });
 
   it('Should not render loading when isLoadingTokens is falsy', async () => {
-    mockUseGetToken.mockImplementationOnce(() => ({
-      isLoadingTokens: false,
-    }));
-
-    mockUseTokenPage.mockImplementationOnce(() => ({
+    mockUseApiToken.mockImplementationOnce(() => ({
       tokens: [],
+      isLoadingTokens: false,
     }));
 
     render(<ApiTokenTable />);

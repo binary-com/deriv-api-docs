@@ -1,20 +1,20 @@
 import AuthProvider from '@site/src/contexts/auth/auth.provider';
-import TokenPageProvider from '@site/src/contexts/tokenPage/token-page.provider';
 import makeMockSocket from '@site/src/__mocks__/socket.mock';
 import { cleanup, renderHook, act } from '@testing-library/react-hooks';
 import { WS } from 'jest-websocket-mock';
 import React from 'react';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
-import useTokenPage from '../useTokenPage';
-import { TTokensArrayType } from '@site/src/contexts/tokenPage/types';
 import useDeleteToken from '../useDeleteToken';
+import ApiTokenProvider from '@site/src/contexts/api-token/api-token.provider';
+import useApiToken from '@site/src/hooks/useApiToken';
+import { TTokensArrayType } from '@site/src/types';
 
 const connection = makeMockSocket();
 
 const wrapper = ({ children }) => (
   <AuthProvider>
-    <TokenPageProvider>{children}</TokenPageProvider>
+    <ApiTokenProvider>{children}</ApiTokenProvider>
   </AuthProvider>
 );
 
@@ -26,16 +26,18 @@ mockUseAuthContext.mockImplementation(() => ({
   is_authorized: true,
 }));
 
-jest.mock('../useTokenPage');
+jest.mock('@site/src/hooks/useApiToken');
 
-const mockUseTokenPage = useTokenPage as jest.MockedFunction<typeof useTokenPage>;
+const mockUseApiToken = useApiToken as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useApiToken>>
+>;
 
 let tokens: TTokensArrayType = [
   {
     display_name: 'test',
     last_used: '',
     scopes: ['read', 'trade'],
-    token: 'lWUXvbeFMGhOW59',
+    token: 'test',
     valid_for_ip: '',
   },
 ];
@@ -44,7 +46,7 @@ const mockUpdateTokens = jest.fn().mockImplementation((updatedTokens) => {
   tokens = updatedTokens;
 });
 
-mockUseTokenPage.mockImplementation(() => ({
+mockUseApiToken.mockImplementation(() => ({
   tokens,
   updateTokens: mockUpdateTokens,
 }));
@@ -64,14 +66,17 @@ describe('Use Create Token', () => {
   it('Should delete token token', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useDeleteToken(), { wrapper });
 
+    // since ApiProvider is getting the tokens on render we have to skip this message for server like so:
+    await wsServer.nextMessage;
+
     act(() => {
-      result.current.deleteToken('lWUXvbeFMGhOW59');
+      result.current.deleteToken('test');
     });
 
     await expect(wsServer).toReceiveMessage({
       api_token: 1,
-      delete_token: 'lWUXvbeFMGhOW59',
-      req_id: 1,
+      delete_token: 'test',
+      req_id: 2,
     });
 
     wsServer.send({
@@ -79,9 +84,9 @@ describe('Use Create Token', () => {
         delete_token: 1,
         tokens: [],
       },
-      echo_req: { api_token: 1, delete_token: 'lWUXvbeFMGhOW59', req_id: 1 },
+      echo_req: { api_token: 1, delete_token: 'test', req_id: 2 },
       msg_type: 'api_token',
-      req_id: 1,
+      req_id: 2,
     });
 
     await waitForNextUpdate();

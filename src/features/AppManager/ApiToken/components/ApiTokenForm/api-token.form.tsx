@@ -6,8 +6,8 @@ import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
 import ApiTokenCard from '../ApiTokenCard/api-token.card';
 import useCreateToken from '@site/src/features/AppManager/ApiToken/hooks/useCreateToken';
-import { TScopes } from '@site/src/contexts/tokenPage/types';
 import { Circles } from 'react-loader-spinner';
+import { TScopes } from '@site/src/types';
 
 const schema = yup
   .object({
