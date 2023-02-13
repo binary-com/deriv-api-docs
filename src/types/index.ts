@@ -8,5 +8,3 @@ export type TTokenType = ArrayElement<TTokensArrayType>;
 export type TScopesArrayType = TTokenType['scopes'];
 
 export type TScopes = ArrayElement<TScopesArrayType>;
-
-export type TTokenColumn = Column<TTokenType>;

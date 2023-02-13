@@ -1,13 +1,15 @@
-import { TTokenColumn } from '@site/src/contexts/tokenPage/types';
 import React, { HTMLAttributes } from 'react';
 import { Circles } from 'react-loader-spinner';
-import useGetTokens from '../../hooks/useGetTokens';
-import useTokenPage from '../../hooks/useTokenPage';
 import ApiLastUsedCell from './Cells/table.lastused.cell';
 import ApiScopesCell from './Cells/table.scopes.cell';
 import ApiTokenCell from './Cells/table.token.cell';
 import Table from './Table';
 import styles from './api-table.module.scss';
+import useApiToken from '@site/src/hooks/useApiToken';
+import { Column } from 'react-table';
+import { TTokenType } from '@site/src/types';
+
+export type TTokenColumn = Column<TTokenType>;
 
 const tableColumns: TTokenColumn[] = [
   {
@@ -36,8 +38,7 @@ const tableColumns: TTokenColumn[] = [
 ];
 
 const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
-  const { tokens } = useTokenPage();
-  const { isLoadingTokens } = useGetTokens();
+  const { tokens, isLoadingTokens } = useApiToken();
 
   return (
     <div className={styles.api_table} {...props}>

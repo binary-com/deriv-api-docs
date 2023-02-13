@@ -3,7 +3,7 @@ import React from 'react';
 import { CellProps } from 'react-table';
 import styles from './cells.module.scss';
 import clsx from 'clsx';
-import { TTokenType } from '../../../../../../contexts/tokenPage/types';
+import { TTokenType } from '@site/src/types';
 
 const ApiScopesCell = ({ value }: React.PropsWithChildren<CellProps<TTokenType, string[]>>) => {
   return (

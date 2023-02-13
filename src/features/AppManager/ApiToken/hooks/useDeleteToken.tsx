@@ -1,12 +1,12 @@
+import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useWS from '@site/src/hooks/useWs';
 import { useCallback, useEffect } from 'react';
-import useTokenPage from './useTokenPage';
 
 const useDeleteToken = () => {
   const { send, data, is_loading, error } = useWS('api_token');
   const { is_authorized } = useAuthContext();
-  const { updateTokens } = useTokenPage();
+  const { updateTokens } = useApiToken();
 
   const deleteToken = useCallback(
     (token: string) => {
