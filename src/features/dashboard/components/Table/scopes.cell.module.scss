@@ -1,0 +1,13 @@
+@use 'src/styles/utility' as *;
+
+.scope {
+  border: 1.6px solid var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+  padding: rem(0.24) rem(0.24);
+  font-size: rem(1.1);
+}
+
+.adminScope {
+  border: 1.6px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}

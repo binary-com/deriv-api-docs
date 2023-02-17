@@ -1,6 +1,8 @@
+import { AppManagerContext } from '@site/src/contexts/app-manager/app-manager.context';
 import React from 'react';
-import { AppManagerContext } from '@site/src/contexts/AppManager.context';
 
-export const useAppManagerContext = () => {
+const useAppManagerContext = () => {
   return React.useContext(AppManagerContext);
 };
+
+export default useAppManagerContext;

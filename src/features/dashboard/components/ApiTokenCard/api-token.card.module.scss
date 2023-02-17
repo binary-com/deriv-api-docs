@@ -1,0 +1,20 @@
+@use 'src/styles/utility' as *;
+
+.api_token_card {
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: rem(1);
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: rem(0.4);
+
+  padding: rem(1);
+  &_input {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: rem(1);
+  }
+}

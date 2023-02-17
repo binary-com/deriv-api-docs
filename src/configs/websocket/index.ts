@@ -15,9 +15,12 @@ export type TDerivApi = {
   authorize: (requestData: AuthorizeRequest) => Promise<AuthorizeResponse>;
 };
 
+const PING_INTERVAL = 12000;
+
 export class ApiManager {
   private socket: WebSocket;
   private derivApi: TDerivApi;
+  private pingInterval: NodeJS.Timer;
 
   public static instance: ApiManager;
   public static getInstance() {
@@ -33,6 +36,7 @@ export class ApiManager {
       this.socket = new WebSocket(`wss://${serverUrl}/websockets/v3?app_id=${appId}`);
     }
     this.derivApi = new DerivAPIBasic({ connection: this.socket });
+    this.registerKeepAlive();
   }
 
   public augmentedSend<T extends TSocketEndpointNames>(
@@ -55,9 +59,31 @@ export class ApiManager {
     return this.derivApi.authorize({ authorize: token });
   }
 
-  public reset(appId: string, url: string) {
+  private registerKeepAlive() {
+    if (this.pingInterval) {
+      clearInterval(this.pingInterval);
+    }
+    this.socket.addEventListener('open', () => {
+      this.pingInterval = setInterval(() => {
+        this.socket.send(JSON.stringify({ ping: 1 }));
+      }, PING_INTERVAL);
+    });
+
+    this.socket.addEventListener('close', () => {
+      clearInterval(this.pingInterval);
+    });
+
+    this.socket.addEventListener('error', () => {
+      clearInterval(this.pingInterval);
+    });
+  }
+
+  public reset(appId: string, url: string, registerKeepAlive = false) {
     this.socket = new WebSocket(`wss://${url}/websockets/v3?app_id=${appId}`);
     this.derivApi = new DerivAPIBasic({ connection: this.socket });
+    if (registerKeepAlive) {
+      this.registerKeepAlive();
+    }
   }
 
   set connection(newConnection: WebSocket) {

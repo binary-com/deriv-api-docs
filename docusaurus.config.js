@@ -63,7 +63,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: 'app-registration', label: 'Manage apps', position: 'left' },
+          { to: 'dashboard', label: 'Dashboard', position: 'left' },
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
           {
             type: 'custom-api-token-navbar-item',

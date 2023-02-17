@@ -12,9 +12,11 @@ const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<I
 const wrapper = ({ children }) => <AuthProvider>{children}</AuthProvider>;
 
 const mockUpdateLoginAccounts = jest.fn();
+const mockUpdateCurrentLoginAccount = jest.fn();
 
 mockUseAuthContext.mockImplementation(() => ({
   updateLoginAccounts: mockUpdateLoginAccounts,
+  updateCurrentLoginAccount: mockUpdateCurrentLoginAccount,
 }));
 
 describe('Login', () => {

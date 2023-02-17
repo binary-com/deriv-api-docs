@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { IUserLoginAccount } from '../contexts/auth/auth.context';
+import { TScopes } from '../types';
 import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
 
 /**
@@ -98,4 +99,54 @@ export const getServerConfig = () => {
 
 export const generateLoginUrl = (language: string, serverUrl: string, appId: string) => {
   return `https://${serverUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
+};
+
+interface IScopesLike {
+  admin: boolean;
+  read: boolean;
+  trade: boolean;
+  trading_information: boolean;
+  payments: boolean;
+}
+
+export const scopesObjectToArray = (scopesObject: IScopesLike) => {
+  const keys = Object.keys(scopesObject) as Array<TScopes>;
+  const scopes = keys.filter((key) => scopesObject[key]);
+
+  // const scopes: TScopes[] = [];
+  // if (scopesObject.admin) {
+  //   scopes.push('admin');
+  // }
+  // if (scopesObject.payments) {
+  //   scopes.push('payments');
+  // }
+  // if (scopesObject.read) {
+  //   scopes.push('read');
+  // }
+  // if (scopesObject.trade) {
+  //   scopes.push('trade');
+  // }
+  // if (scopesObject.trading_information) {
+  //   scopes.push('trading_information');
+  // }
+
+  return scopes;
+};
+
+export const scopesArrayToObject = (scopes: string[]) => {
+  const scopesObject: IScopesLike = {
+    admin: false,
+    read: false,
+    trade: false,
+    trading_information: false,
+    payments: false,
+  };
+  scopes.forEach((scope) => {
+    scopesObject[scope] = true;
+  });
+  return scopesObject;
+};
+
+export const findVirtualAccount = (accounts: IUserLoginAccount[]) => {
+  return accounts.find((item) => item.name.includes('VRTC'));
 };
