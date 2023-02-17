@@ -65,6 +65,11 @@ const fakeAccounts: IUserLoginAccount[] = [
     token: 'test_token2',
     currency: 'ETH',
   },
+  {
+    name: 'VRTC123456',
+    token: 'fake_virtual_account_token',
+    currency: 'USD',
+  },
 ];
 
 const wrapper = ({ children }) => <AuthProvider>{children}</AuthProvider>;
@@ -110,10 +115,10 @@ describe('Root Context', () => {
       result.current.updateLoginAccounts(fakeAccounts);
     });
 
-    expect(view.result.current.loginAccounts.length).toBe(2);
+    expect(view.result.current.loginAccounts.length).toBe(3);
     expect(view.result.current.loginAccounts).toStrictEqual(fakeAccounts);
 
-    await expect(wsServer).toReceiveMessage({ authorize: 'test_token', req_id: 1 });
+    await expect(wsServer).toReceiveMessage({ authorize: 'fake_virtual_account_token', req_id: 1 });
 
     wsServer.send(authorize_response);
 
@@ -141,8 +146,8 @@ describe('Root Context', () => {
       view.result.current.updateLoginAccounts(fakeAccounts);
     });
     expect(view.result.current.currentLoginAccount).toStrictEqual({
-      name: 'test',
-      token: 'test_token',
+      name: 'VRTC123456',
+      token: 'fake_virtual_account_token',
       currency: 'USD',
     });
   });
@@ -154,8 +159,8 @@ describe('Root Context', () => {
 
     expect(sessionStorage.__STORE__[CURRENT_LOGIN_ACCOUNT_SESSION_STORAGE_KEY]).toStrictEqual(
       JSON.stringify({
-        name: 'test',
-        token: 'test_token',
+        name: 'VRTC123456',
+        token: 'fake_virtual_account_token',
         currency: 'USD',
       }),
     );
