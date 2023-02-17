@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 import { Modal } from '@deriv/ui';
 
-type TError = {
+export type TError = {
   error?: {
     code: string;
     message: string;
@@ -15,24 +15,16 @@ type TRegisterAppDialogError = {
 };
 
 export const RegisterAppDialogError = ({ error, onClose }: TRegisterAppDialogError) => {
-  const [isOpen, setIsOpen] = useState(true);
-
   const actionButtons: TModalActionButton[] = [
     {
       id: 1,
       text: 'Got it',
       color: 'secondary',
       onClick: () => {
-        setIsOpen(false);
         onClose();
       },
     },
   ];
-
-  const onOpenChange = (open: boolean) => {
-    setIsOpen(open);
-    onClose();
-  };
 
   const catchError = () => {
     if (error && error.error?.code === 'InvalidToken') {
@@ -43,7 +35,7 @@ export const RegisterAppDialogError = ({ error, onClose }: TRegisterAppDialogErr
   };
 
   return (
-    <Modal open={isOpen} onOpenChange={onOpenChange}>
+    <Modal defaultOpen>
       <Modal.Portal>
         <Modal.Overlay />
         <Modal.DialogContent
