@@ -1,7 +1,7 @@
 import { Text } from '@deriv/ui';
 import * as Tabs from '@radix-ui/react-tabs';
 import { TDashboardTab } from '@site/src/contexts/app-manager/app-manager.context';
-import useAppManagerContext from '@site/src/hooks/useAppManagerContext';
+import useAppManager from '@site/src/hooks/useAppManager';
 import React from 'react';
 import AppManagement from '../../manage-apps';
 import ApiToken from '../../manage-tokens';
@@ -37,7 +37,7 @@ const tabs: TTab[] = [
 ];
 
 const AppManagerTabs = () => {
-  const { currentTab, updateCurrentTab } = useAppManagerContext();
+  const { currentTab, updateCurrentTab } = useAppManager();
 
   return (
     <div className={styles.app_dashboard} id={'app-manager-dashboard'}>

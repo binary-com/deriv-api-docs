@@ -1,11 +1,11 @@
-import useAppManagerContext from '@site/src/hooks/useAppManagerContext';
+import useAppManager from '@site/src/hooks/useAppManager';
 import React, { useEffect } from 'react';
 import AppsTable from '../components/AppsTable';
 import LoadingTable from '../components/LoadingTable';
 import styles from './manage-apps.module.scss';
 
 const AppManagement = () => {
-  const { getApps, apps } = useAppManagerContext();
+  const { getApps, apps } = useAppManager();
 
   useEffect(() => {
     getApps();

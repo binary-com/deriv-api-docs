@@ -1,6 +1,6 @@
 import { ApplicationObject } from '@deriv/api-types';
 import { Button, Modal } from '@deriv/ui';
-import useAppManagerContext from '@site/src/hooks/useAppManagerContext';
+import useAppManager from '@site/src/hooks/useAppManager';
 import useWS from '@site/src/hooks/useWs';
 import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import React, { useCallback, useEffect } from 'react';
@@ -17,7 +17,7 @@ interface IUpdateAppDialog {
 
 const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const { send: updateApp, is_loading, data, error, clear } = useWS('app_update');
-  const { getApps } = useAppManagerContext();
+  const { getApps } = useAppManager();
 
   const scopes = scopesArrayToObject(app.scopes);
   const initialValues: Partial<IRegisterAppForm> = {

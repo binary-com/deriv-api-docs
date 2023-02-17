@@ -1,10 +1,10 @@
-import useAppManagerContext from '@site/src/hooks/useAppManagerContext';
+import useAppManager from '@site/src/hooks/useAppManager';
 import useWS from '@site/src/hooks/useWs';
 import { useCallback } from 'react';
 
 export const useDeleteApp = () => {
   const { send, is_loading } = useWS('app_delete');
-  const { getApps } = useAppManagerContext();
+  const { getApps } = useAppManager();
 
   const deleteApp = useCallback(
     async (appId: number) => {

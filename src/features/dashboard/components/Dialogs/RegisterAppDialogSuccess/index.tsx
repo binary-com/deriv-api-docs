@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 import { Modal } from '@deriv/ui';
-import useAppManagerContext from '@site/src/hooks/useAppManagerContext';
+import useAppManager from '@site/src/hooks/useAppManager';
 
 interface IRegisterAppDialogSuccessProps {
   isUpdating?: boolean;
@@ -9,7 +9,7 @@ interface IRegisterAppDialogSuccessProps {
 
 export const RegisterAppDialogSuccess = ({ isUpdating }: IRegisterAppDialogSuccessProps) => {
   const [isOpen, setIsOpen] = useState(true);
-  const { updateCurrentTab } = useAppManagerContext();
+  const { updateCurrentTab } = useAppManager();
 
   const description = useMemo(
     () =>

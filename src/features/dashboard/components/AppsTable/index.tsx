@@ -1,7 +1,7 @@
 import { ApplicationObject } from '@deriv/api-types';
 import React, { HTMLAttributes, useCallback, useState } from 'react';
 import { Cell, Column } from 'react-table';
-import AppManagementEmpty from '../NoApps';
+import NoApps from '../NoApps';
 import DeleteAppDialog from '../Dialogs/DeleteAppDialog';
 import UpdateAppDialog from '../Dialogs/UpdateAppDialog';
 import Table from '../Table';
@@ -78,7 +78,7 @@ const AppsTable = ({ apps }: AppsTableProps) => {
       </>
     );
   }
-  return <AppManagementEmpty />;
+  return <NoApps />;
 };
 
 export default AppsTable;
