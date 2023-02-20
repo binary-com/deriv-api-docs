@@ -1,36 +1,31 @@
 import { SkeletonText } from '@site/src/components/SkeletonText';
 import React, { HTMLAttributes } from 'react';
 
-const Skeleton = () => (
+interface ISkeletonRow {
+  columnCount: number;
+}
+
+const SkeletonRow = ({ columnCount }: ISkeletonRow) => (
   <tr data-testid='loading-skeleton-row'>
-    <td>
-      <SkeletonText />
-    </td>
-    <td>
-      <SkeletonText />
-    </td>
-    <td>
-      <SkeletonText />
-    </td>
-    <td>
-      <SkeletonText />
-    </td>
-    <td>
-      <SkeletonText />
-    </td>
+    {[...Array(columnCount)].map((_, i) => (
+      <td data-testid={'loading-table-column'} key={i}>
+        <SkeletonText />
+      </td>
+    ))}
   </tr>
 );
 
 interface ILoadingTableProps extends HTMLAttributes<HTMLTableElement> {
   rowCount: number;
+  columnCount?: number;
 }
 
-const LoadingTable = ({ rowCount }: ILoadingTableProps) => {
+const LoadingTable = ({ rowCount, columnCount = 5 }: ILoadingTableProps) => {
   return (
     <table>
       <tbody>
         {[...Array(rowCount)].map((_, i) => (
-          <Skeleton key={i} />
+          <SkeletonRow columnCount={columnCount} key={i} />
         ))}
       </tbody>
     </table>
