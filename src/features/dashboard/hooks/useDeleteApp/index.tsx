@@ -3,7 +3,7 @@ import useWS from '@site/src/hooks/useWs';
 import { useCallback } from 'react';
 
 export const useDeleteApp = () => {
-  const { send, is_loading } = useWS('app_delete');
+  const { data, send, is_loading } = useWS('app_delete');
   const { getApps } = useAppManager();
 
   const deleteApp = useCallback(
@@ -17,5 +17,6 @@ export const useDeleteApp = () => {
   return {
     isLoading: is_loading,
     deleteApp,
+    data,
   };
 };
