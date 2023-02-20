@@ -36,7 +36,7 @@ const tabs: TTab[] = [
   },
 ];
 
-const AppManagerTabs = () => {
+const DashboardTabs = () => {
   const { currentTab, updateCurrentTab } = useAppManager();
 
   return (
@@ -73,4 +73,4 @@ const AppManagerTabs = () => {
   );
 };
 
-export default AppManagerTabs;
+export default DashboardTabs;

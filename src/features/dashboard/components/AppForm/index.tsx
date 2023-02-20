@@ -32,7 +32,7 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
 
   return (
     <React.Fragment>
-      <form className={styles.apps_form} onSubmit={handleSubmit(submit)}>
+      <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
         <div className={styles.formContent}>
           <div className={styles.formHeaderContainer}>
             <Text as='p' type='paragraph-1' bold>
@@ -49,9 +49,10 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                 placeholder={'Please select Api Token'}
                 defaultValue={''}
                 id='api_token_input'
+                data-testid={'select-token'}
               >
                 <option value={''}>Please select Api Token</option>
-                {adminTokens?.map((item) => (
+                {adminTokens.map((item) => (
                   <option key={item.display_name} value={item.display_name}>
                     {item.display_name}
                   </option>
@@ -96,8 +97,6 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                     className='last'
                     defaultValue={0}
                     placeholder=' '
-                    // eslint-disable-next-line
-                    onWheel={(e: any) => e.target.blur()}
                   />
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>

@@ -12,7 +12,7 @@ const useRegisterApp = () => {
     [send],
   );
 
-  return { registerApp };
+  return { registerApp, data, is_loading };
 };
 
 export default useRegisterApp;

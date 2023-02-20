@@ -6,7 +6,9 @@ import DeleteAppDialog from '..';
 
 jest.mock('@site/src/features/dashboard/hooks/useDeleteApp');
 
-const mockUseDeleteApp = useDeleteApp as jest.MockedFunction<typeof useDeleteApp>;
+const mockUseDeleteApp = useDeleteApp as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useDeleteApp>>
+>;
 
 const mockDeleteApp = jest.fn();
 

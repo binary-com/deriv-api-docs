@@ -11,7 +11,7 @@ const NoApps = () => {
   }, [updateCurrentTab]);
 
   return (
-    <div className={styles.noAppsWrapper}>
+    <div className={styles.noAppsWrapper} data-testid={'no-apps'}>
       <div className={styles.noApps}>
         <div className={styles.noAppsIcon} />
         <div className={styles.noAppsText}>
