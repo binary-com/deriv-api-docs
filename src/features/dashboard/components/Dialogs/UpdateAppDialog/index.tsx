@@ -7,7 +7,6 @@ import React, { useCallback, useEffect } from 'react';
 import { IRegisterAppForm } from '../../../types';
 import AppForm from '../../AppForm';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
-import { RegisterAppDialogSuccess } from '../RegisterAppDialogSuccess';
 import styles from './update-app-dialog.module.scss';
 
 interface IUpdateAppDialog {
@@ -95,7 +94,6 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
             />
           </div>
           {error && <RegisterAppDialogError error={error} onClose={clear} />}
-          {data && <RegisterAppDialogSuccess />}
         </Modal.PageContent>
       </Modal.Portal>
     </Modal>

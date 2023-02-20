@@ -46,7 +46,7 @@ const AppRegistration = () => {
     <>
       <AppForm renderButtons={renderButtons} submit={onSubmit} />
       {error && <RegisterAppDialogError error={error} onClose={clear} />}
-      {data && <RegisterAppDialogSuccess />}
+      {data && <RegisterAppDialogSuccess onClose={clear} />}
     </>
   );
 };
