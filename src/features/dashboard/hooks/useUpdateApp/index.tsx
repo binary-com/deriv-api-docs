@@ -3,7 +3,7 @@ import useWS from '@site/src/hooks/useWs';
 import { useCallback } from 'react';
 
 const useUpdateApp = () => {
-  const { send, data, is_loading, error } = useWS('app_update');
+  const { send, data, is_loading } = useWS('app_update');
 
   const updateApp = useCallback(
     (data: TSocketRequestCleaned<'app_update'>) => {
@@ -12,7 +12,7 @@ const useUpdateApp = () => {
     [send],
   );
 
-  return { updateApp };
+  return { updateApp, data, is_loading };
 };
 
 export default useUpdateApp;
