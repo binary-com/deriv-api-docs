@@ -53,7 +53,6 @@
           text-indent: rem(1.2);
           &:not(:placeholder-shown) ~ label {
             color: var(--ifm-color-secondary-darkest);
-            background-color: var(--white);
             background-size: rem(1);
             padding: 0 rem(0.4);
             transform: translateY(rem(-2)) scale(0.75);
@@ -62,7 +61,6 @@
             outline-color: none;
             & ~ label {
               color: var(--ifm-color-secondary-darkest);
-              background-color: var(--white);
               padding: 0 rem(0.4);
               transform: translateY(rem(-2)) scale(0.75);
             }

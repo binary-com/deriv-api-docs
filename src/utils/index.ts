@@ -112,24 +112,6 @@ interface IScopesLike {
 export const scopesObjectToArray = (scopesObject: IScopesLike) => {
   const keys = Object.keys(scopesObject) as Array<TScopes>;
   const scopes = keys.filter((key) => scopesObject[key]);
-
-  // const scopes: TScopes[] = [];
-  // if (scopesObject.admin) {
-  //   scopes.push('admin');
-  // }
-  // if (scopesObject.payments) {
-  //   scopes.push('payments');
-  // }
-  // if (scopesObject.read) {
-  //   scopes.push('read');
-  // }
-  // if (scopesObject.trade) {
-  //   scopes.push('trade');
-  // }
-  // if (scopesObject.trading_information) {
-  //   scopes.push('trading_information');
-  // }
-
   return scopes;
 };
 
