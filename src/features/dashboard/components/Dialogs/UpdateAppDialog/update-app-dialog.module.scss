@@ -1,0 +1,14 @@
+@use 'src/styles/utility' as *;
+
+.update_dialog {
+  height: 80vh;
+  overflow: auto;
+  width: 80vw;
+  .update_app_content {
+    margin: rem(2);
+  }
+  .buttons {
+    display: flex;
+    gap: rem(1);
+  }
+}

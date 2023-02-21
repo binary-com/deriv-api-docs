@@ -1,0 +1,12 @@
+@use 'src/styles/utility' as *;
+
+.lastused_cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: rem(1);
+  & div {
+    flex: 1;
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen } from '@site/src/test-utils';
+import { cleanup, render } from '@site/src/test-utils';
 import type { RenderResult } from '@site/src/test-utils';
 import HomepageFeatures from '..';
 

@@ -1,0 +1,48 @@
+@use 'src/styles/utility' as *;
+#app-manager-dashboard {
+  table {
+    border-spacing: 0;
+    display: table;
+    width: 100%;
+  }
+
+  thead {
+    background-color: var(--ifm-color-emphasis-200);
+    border: 3px solid var(--ifm-color-emphasis-200);
+    height: rem(5);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: rem(1.6);
+    min-width: rem(14.4);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+  }
+
+  td:nth-child(3) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(0.64);
+  }
+
+  td:last-child,
+  th:last-child {
+    white-space: nowrap;
+    padding: 0 rem(1);
+  }
+
+  td:first-child,
+  th:first-child {
+    padding-left: rem(3.2);
+  }
+
+  tbody tr {
+    border: none;
+    &:nth-child(even) {
+      background-color: var(--ifm-color-emphasis-100);
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@deriv/ui';
 import React from 'react';
+import { ThemeProvider } from '@deriv/ui';
 import type { ReactNode } from 'react';
 import AuthProvider from '../contexts/auth/auth.provider';
 import ApiTokenProvider from '../contexts/api-token/api-token.provider';

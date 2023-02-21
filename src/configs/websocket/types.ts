@@ -13,7 +13,7 @@ export type TSocketResponseData<T extends TSocketEndpointNames> =
 
 export type TSocketRequest<T extends TSocketEndpointNames> = TSocketEndpoints[T]['request'];
 
-type TSocketRequestCleaned<T extends TSocketEndpointNames> = Omit<
+export type TSocketRequestCleaned<T extends TSocketEndpointNames> = Omit<
   TSocketRequest<T>,
   | (T extends KeysMatching<TSocketRequest<T>, 1> ? T : never)
   | 'passthrough'

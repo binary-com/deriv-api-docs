@@ -9,7 +9,7 @@ import {
   USER_ACCOUNTS_SESSION_STORAGE_KEY,
   USER_SESSION_STORAGE_KEY,
 } from '@site/src/utils/constants';
-import { getIsBrowser } from '@site/src/utils';
+import { findVirtualAccount, getIsBrowser } from '@site/src/utils';
 
 type TAuthProviderProps = {
   children: ReactNode;
@@ -62,7 +62,12 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     (loginAccounts: IUserLoginAccount[]) => {
       setLoginAccounts(loginAccounts);
       if (loginAccounts.length) {
-        setCurrentLoginAccount(loginAccounts[0]);
+        const virtualAccount = findVirtualAccount(loginAccounts);
+        if (virtualAccount) {
+          setCurrentLoginAccount(virtualAccount);
+        } else {
+          setCurrentLoginAccount(loginAccounts[0]);
+        }
       }
     },
     [setCurrentLoginAccount, setLoginAccounts],
