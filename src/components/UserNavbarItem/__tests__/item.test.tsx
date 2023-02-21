@@ -1,11 +1,12 @@
+import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 import useLoginUrl from '@site/src/hooks/useLoginUrl';
 import useLogout from '@site/src/hooks/useLogout';
-import useRootContext from '@site/src/hooks/useRootContext';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import React from 'react';
 import UserNavbarItem from '..';
 
-jest.mock('@site/src/hooks/useRootContext');
+jest.mock('@site/src/hooks/useAuthContext');
 jest.mock('@site/src/hooks/useLogout');
 jest.mock('@site/src/hooks/useLoginUrl');
 
@@ -15,7 +16,7 @@ const mockUpdateCurrentAccount = jest.fn();
 const mockGetUrl = jest.fn().mockReturnValue('https://www.example.com');
 
 const mockUseLogout = useLogout as jest.MockedFunction<typeof useLogout>;
-const mockUseRootContext = useRootContext as jest.MockedFunction<typeof useRootContext>;
+const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
 const mockUseLoginUrl = useLoginUrl as jest.MockedFunction<typeof useLoginUrl>;
 
 mockUseLogout.mockImplementation(() => {
@@ -45,17 +46,17 @@ const fake_accounts = [
 
 describe('User NavBar item', () => {
   describe('Given device type is mobile', () => {
-    mockUseRootContext.mockImplementation(() => {
+    mockUseAuthContext.mockImplementation(() => {
       return {
-        accounts: fake_accounts,
-        currentAccount: {
+        loginAccounts: fake_accounts,
+        currentLoginAccount: {
           currency: 'USD',
           name: 'CR111111',
           token: 'first_token',
         },
         is_logged_in: true,
-        updateAccounts: mockUpdateAccounts,
-        updateCurrentAccount: mockUpdateCurrentAccount,
+        updateLoginAccounts: mockUpdateAccounts,
+        updateCurrentLoginAccount: mockUpdateCurrentAccount,
       };
     });
     beforeEach(() => {
@@ -74,17 +75,17 @@ describe('User NavBar item', () => {
   });
 
   describe('Given device type is desktop', () => {
-    mockUseRootContext.mockImplementation(() => {
+    mockUseAuthContext.mockImplementation(() => {
       return {
-        accounts: fake_accounts,
-        currentAccount: {
+        loginAccounts: fake_accounts,
+        currentLoginAccount: {
           currency: 'USD',
           name: 'CR111111',
           token: 'first_token',
         },
         is_logged_in: true,
-        updateAccounts: mockUpdateAccounts,
-        updateCurrentAccount: mockUpdateCurrentAccount,
+        updateLoginAccounts: mockUpdateAccounts,
+        updateCurrentLoginAccount: mockUpdateCurrentAccount,
       };
     });
     beforeEach(() => {

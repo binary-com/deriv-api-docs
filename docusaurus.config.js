@@ -63,7 +63,12 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
+          { to: 'dashboard', label: 'Dashboard', position: 'left' },
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
+          {
+            type: 'custom-api-token-navbar-item',
+            position: 'right',
+          },
           {
             type: 'custom-user-navar-item',
             position: 'right',

@@ -1,0 +1,36 @@
+@use 'src/styles/utility' as *;
+
+.skeleton {
+  background-image: linear-gradient(to right, var(--ifm-color-emphasis-0), var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-200));
+  padding: rem(1);
+  height: rem(2);
+  margin-bottom: rem(1.6);
+  width: rem(10);
+  position: relative;
+}
+
+.skeleton:before {
+  content: " ";
+  background-image: linear-gradient(to right, var(--ifm-color-emphasis-200), var(--ifm-color-emphasis-100), var(--ifm-color-emphasis-0));
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: loading-skeleton;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes loading-skeleton {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,9 @@
+@use 'src/styles/utility' as *;
+
+.manage_tokens {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  gap: rem(3);
+  overflow: auto;
+}
