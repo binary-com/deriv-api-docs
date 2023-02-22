@@ -2,20 +2,14 @@ import { Button } from '@deriv/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useLogout from '@site/src/hooks/useLogout';
+import useAccountSelector from '@site/src/hooks/useAccountSelector';
 import React, { useCallback } from 'react';
 import styles from './account_switcher.module.scss';
 
 const AccountSwitcher = () => {
-  const { loginAccounts, currentLoginAccount, updateCurrentLoginAccount } = useAuthContext();
+  const { loginAccounts, currentLoginAccount } = useAuthContext();
+  const { onSelectItem } = useAccountSelector();
   const { logout } = useLogout();
-
-  const onSelectItem = useCallback(
-    (accountName: string) => {
-      const selected = loginAccounts.find((item) => item.name === accountName);
-      updateCurrentLoginAccount(selected);
-    },
-    [loginAccounts, updateCurrentLoginAccount],
-  );
 
   return (
     <>

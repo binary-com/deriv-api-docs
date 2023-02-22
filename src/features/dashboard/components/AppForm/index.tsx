@@ -3,8 +3,10 @@ import React, { ReactNode, useMemo } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import useApiToken from '@site/src/hooks/useApiToken';
 import { appRegisterSchema, IRegisterAppForm } from '../../types';
+import useApiToken from '@site/src/hooks/useApiToken';
+import useAuthContext from '@site/src/hooks/useAuthContext';
+import useAccountSelector from '@site/src/hooks/useAccountSelector';
 import styles from './app-form.module.scss';
 
 type TAppFormProps = {
@@ -24,6 +26,8 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
     resolver: yupResolver(appRegisterSchema),
     defaultValues: initialValues,
   });
+  const { loginAccounts, currentLoginAccount } = useAuthContext();
+  const { onSelectItem } = useAccountSelector();
   const { tokens } = useApiToken();
 
   const adminTokens = useMemo(() => {
@@ -34,37 +38,58 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
         <div className={styles.formContent}>
-          <div className={styles.formHeaderContainer}>
-            <Text as='p' type='paragraph-1' bold>
-              App information
-            </Text>
-            <Text as='p' type='paragraph-1'>
-              Select your api token ( it should have admin scope )
-            </Text>
-          </div>
-          <div className={`api-token-wrapper`}>
-            <div id='custom-text-input'>
-              <select
-                {...register('api_token')}
-                placeholder={'Please select Api Token'}
-                defaultValue={''}
-                id='api_token_input'
-                data-testid={'select-token'}
-              >
-                <option value={''}>Please select Api Token</option>
-                {adminTokens.map((item) => (
-                  <option key={item.display_name} value={item.display_name}>
-                    {item.display_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {errors.api_token && (
-              <Text as='span' type='paragraph-1' className='error-message'>
-                {errors.api_token.message}
-              </Text>
-            )}
-            <div className='first'>
+          <div>
+            <div className={styles.apiTokenWrapper}>
+              <div className={styles.formHeaderContainer}>
+                <Text as='p' type='paragraph-1' bold>
+                  App information
+                </Text>
+                <Text as='p' type='paragraph-1'>
+                  Select your api token ( it should have admin scope )
+                </Text>
+              </div>
+              <div className={styles.customSelectField}>
+                <select
+                  {...register('currency_account')}
+                  placeholder={'Choose your account'}
+                  defaultValue={''}
+                  id='api_token_input'
+                  data-testid={'select-token'}
+                  onChange={(e) => onSelectItem(e.target.value)}
+                  required
+                >
+                  <option value={''}>Choose your account</option>
+                  {loginAccounts.map((accountItem) => (
+                    <option key={accountItem.name} value={accountItem.name}>
+                      {accountItem.name}
+                    </option>
+                  ))}
+                </select>
+                <div className='select-label'>Choose your account</div>
+              </div>
+              <div className={styles.customSelectField}>
+                <select
+                  {...register('api_token')}
+                  placeholder={'Please select Api Token'}
+                  defaultValue={''}
+                  id='api_token_input'
+                  data-testid={'select-token'}
+                  required
+                >
+                  <option value={''}>Choose your API token with the admin scope</option>
+                  {adminTokens.map((item) => (
+                    <option key={item.display_name} value={item.display_name}>
+                      {item.display_name}
+                    </option>
+                  ))}
+                </select>
+                <div className='select-label'>Choose your API token with the admin scope</div>
+                {errors.api_token && (
+                  <Text as='span' type='paragraph-1' className='error-message'>
+                    {errors.api_token.message}
+                  </Text>
+                )}
+              </div>
               <div className={styles.customTextInput} id='custom-text-input'>
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>
@@ -75,8 +100,6 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                 </Text>
               )}
             </div>
-          </div>
-          <div>
             <div className={styles.formHeaderContainer}>
               <h4>Markup</h4>
               <div>

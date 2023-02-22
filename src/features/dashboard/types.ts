@@ -13,6 +13,10 @@ export const appRegisterSchema = yup.object({
   payments: yup.boolean(),
   trading_information: yup.boolean(),
   admin: yup.boolean(),
+  currency_account: yup
+    .string()
+    .required('Choose an account that has tokens with the admin scope.')
+    .max(255, 'Your API token cannot exceed 255 characters.'),
   api_token: yup
     .string()
     .required('Select Your API token (with the Admin scope) to register your app.')
@@ -21,12 +25,12 @@ export const appRegisterSchema = yup.object({
     .string()
     .required('This is required')
     .max(255, 'Your website URL cannot exceed 255 characters.')
-    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[yourname].com)'),
+    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[YourDomainName].com)'),
   verification_uri: yup
     .string()
     .required('This is required')
     .max(255, 'Your website URL cannot exceed 255 characters.')
-    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[yourname].com)'),
+    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[YourDomainName].com)'),
   app_markup_percentage: yup
     .string()
     .max(4, 'Your markup value cannot be more than 4 characters.')
