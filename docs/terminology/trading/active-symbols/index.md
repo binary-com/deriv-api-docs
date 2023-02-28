@@ -13,7 +13,7 @@ keywords:
 description: What is active active symbols in deriv api
 ---
 
-Basically it's the List of all currently active symbols (underlying markets upon which contracts are available for trading). you'll need this through out your application since it's what determines your [Tick](/docs/core-concepts/tick/) stream request.
+Basically it's the List of all currently active symbols (underlying markets upon which contracts are available for trading). you'll need this through out your application since it's what determines your [Tick](/docs/terminology/trading/tick/) stream request.
 
 when you get the `active_symbols` you'll get :
 
