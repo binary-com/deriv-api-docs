@@ -16,7 +16,7 @@ description: What is a tick in deriv api
 
 A tick is a measure of minimum upward or downward movement in the price of a trading commodity. We subscribe to the ticks functionality from the Deriv API web socket, which will return new tick data every second.
 
-the example response for the `R_50` [Symbol](/docs/core-concepts/active-symbols/) to this functionality every second you'll an object like so:
+the example response for the `R_50` [Symbol](/docs/terminology/trading/active-symbols/) to this functionality every second you'll an object like so:
 
 ```json
 {
