@@ -73,8 +73,9 @@ const config = {
             type: 'custom-user-navar-item',
             position: 'right',
           },
+          { to: 'app-manager', label: 'App Manager', position: 'left' },
           {
-            to: '/apiexplorer',
+            to: 'apiexplorer',
             position: 'left',
             label: 'API Explorer',
           },

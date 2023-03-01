@@ -17,7 +17,7 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {},
+  "rules": { "no-loss-of-precision": "off", "@typescript-eslint/no-loss-of-precision": "off" },
   "settings": {
     "react": {
       "version": "detect"

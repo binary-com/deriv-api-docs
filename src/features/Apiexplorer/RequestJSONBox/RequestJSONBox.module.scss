@@ -1,0 +1,72 @@
+@use 'src/styles/utility' as *;
+
+.playgroundBox {
+  border-radius: 6px;
+  border: none;
+  margin-left: rem(0.5);
+  margin-top: rem(2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .inlineLabel {
+    position: absolute;
+    top: -0.3rem;
+    left: 1rem;
+    font-size: rem(0.8);
+    padding: rem(0.2) rem(0.4);
+    background-color: var(--ifm-color-white);
+  }
+
+  .formContent {
+    display: flex;
+    flex-direction: column;
+
+    .appRegistrationSubheader {
+      align-self: flex-start;
+      margin-bottom: rem(1.6);
+      font-size: rem(2.4);
+      text-align: left;
+      line-height: var(--text-lh-m);
+      color: #151717;
+    }
+
+    .btnWrapper {
+      display: flex;
+      justify-content: center;
+      gap: rem(0.5);
+      padding: rem(2);
+    }
+  }
+
+  .textareaRequest {
+    border-radius: 4px;
+    resize: none;
+  }
+
+  .playgroundRequest {
+    min-height: rem(20);
+    padding: rem(1) rem(1.2);
+    border: none;
+    color: #5d5381;
+    border: 1px solid #d6dadb;
+  }
+
+  .registrationRequest {
+    min-height: rem(11.9);
+    padding: rem(1);
+    border: solid 1px #d6dadb;
+    font-size: rem(1.6);
+  }
+
+  .playgroundConsole {
+    margin-top: 0.2rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    width: 100%;
+  }
+}
+
+.modal {
+  padding: rem(1);
+}

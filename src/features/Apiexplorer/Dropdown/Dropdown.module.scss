@@ -93,3 +93,17 @@
     }
   }
 }
+
+[data-theme='dark'] .dropdownBtn {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}
+
+[data-theme='dark'] .dropdownContent {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}
+[data-theme='dark'] .dropdownItem {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}
