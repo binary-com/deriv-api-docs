@@ -58,7 +58,7 @@
             transform: translateY(rem(-2)) scale(0.75);
           }
           &:focus {
-            outline-color: none;
+            outline-color: unset;
             & ~ label {
               color: var(--ifm-color-secondary-darkest);
               padding: 0 rem(0.4);

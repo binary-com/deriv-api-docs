@@ -4,7 +4,7 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 const useAccountSelector = () => {
   const { loginAccounts, updateCurrentLoginAccount } = useAuthContext();
 
-  const onSelectItem = useCallback(
+  const onSelectAccount = useCallback(
     (accountName: string) => {
       const selected = loginAccounts.find((item) => item.name === accountName);
       updateCurrentLoginAccount(selected);
@@ -12,7 +12,7 @@ const useAccountSelector = () => {
     [loginAccounts, updateCurrentLoginAccount],
   );
 
-  return { onSelectItem };
+  return { onSelectAccount };
 };
 
 export default useAccountSelector;

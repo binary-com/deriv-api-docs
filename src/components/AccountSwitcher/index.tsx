@@ -8,7 +8,7 @@ import styles from './account_switcher.module.scss';
 
 const AccountSwitcher = () => {
   const { loginAccounts, currentLoginAccount } = useAuthContext();
-  const { onSelectItem } = useAccountSelector();
+  const { onSelectAccount } = useAccountSelector();
   const { logout } = useLogout();
 
   return (
@@ -34,7 +34,7 @@ const AccountSwitcher = () => {
                 key={accountItem.name}
                 className={styles.DropdownMenuItem}
                 onSelect={() => {
-                  onSelectItem(accountItem.name);
+                  onSelectAccount(accountItem.name);
                 }}
               >
                 {`${accountItem.name} - ${accountItem.currency}`}

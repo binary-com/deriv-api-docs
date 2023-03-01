@@ -3,6 +3,17 @@ import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
 import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
 
+export const CURRENCY_MAP = new Map([
+  ['Demo', { icon: 'demo', name: 'Demo' }],
+  ['UST', { icon: 'tether', name: 'Tether Omni' }],
+  ['eUSDT', { icon: 'tether', name: 'Tether ERC20' }],
+  ['BTC', { icon: 'bitcoin', name: 'Bitcoin' }],
+  ['ETH', { icon: 'ethereum', name: 'Ethereum' }],
+  ['LTC', { icon: 'litecoin', name: 'Litecoin' }],
+  ['USDC', { icon: 'usdcoin', name: 'USD Coin' }],
+  ['USD', { icon: 'usdollar', name: 'US Dollar' }],
+]);
+
 /**
  *
  * @returns {boolean} return true if the window hostname contains `localhost`
