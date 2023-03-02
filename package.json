@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start:auth": "npx netlify-cms-proxy-server",
     "start": "docker compose up -d && docusaurus start --no-open",
-    "dev": "docusaurus start",
+    "start:dev": "docusaurus start",
     "build": "docusaurus build",
     "test": "jest",
     "swizzle": "docusaurus swizzle",
