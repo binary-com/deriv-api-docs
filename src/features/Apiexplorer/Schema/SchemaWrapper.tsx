@@ -1,9 +1,10 @@
 import React from 'react';
 import SchemaHeader from './SchemaHeader';
 import SchemaBody from './SchemaBody';
+import { TInfo } from '@site/src/types';
 
 type TSchemaWrapper = {
-  info: { title: string; description: string; auth_required: number; auth_scopes: string[] };
+  info: TInfo;
 };
 
 const SchemaWrapper = ({ info }: TSchemaWrapper) => {

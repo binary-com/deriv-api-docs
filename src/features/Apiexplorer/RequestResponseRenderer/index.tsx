@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import useWS from '@site/src/hooks/useWs';
-import ReactJson from 'react-json-view';
 import { Button, Modal } from '@deriv/ui';
 import style from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { useCallback } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 interface IDataThingyProps<T extends TSocketEndpointNames> {
   name: T;
   reqData?: string;
@@ -66,13 +66,20 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
         data-testid='playgroundConsole'
       >
         {res && (
-          <div>
-            {data !== null ? (
-              <ReactJson src={data} theme='tube' />
-            ) : (
-              <ReactJson src={error} theme='tube' />
-            )}
-          </div>
+          <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => {
+              const ReactJson = require('react-json-view').default;
+              return (
+                <div>
+                  {data !== null ? (
+                    <ReactJson src={data} theme='tube' />
+                  ) : (
+                    <ReactJson src={error} theme='tube' />
+                  )}
+                </div>
+              );
+            }}
+          </BrowserOnly>
         )}
       </div>
     );

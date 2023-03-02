@@ -2,15 +2,15 @@
 import React from 'react';
 import styles from './Schema.module.scss';
 import RecursiveProperties from './RecursiveProperties';
-import ReactJson from 'react-json-view';
 import { TSourceButton } from './SchemaObjectContent';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type SchemaBodyObject = {
   jsonSchema: JSONSchematType;
 };
 
 type JSONSchematType = {
-  properties: any;
+  properties: Record<string, unknown>;
   default?: any;
 };
 
@@ -42,7 +42,14 @@ const Properities: React.FC<SchemaBodyObject> = ({ jsonSchema }) => {
   return (
     <div>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
-      {is_code_open && <ReactJson src={JSON.parse(data)} theme='tube' />}
+      {is_code_open && (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+          {() => {
+            const ReactJson = require('react-json-view').default;
+            return <ReactJson src={JSON.parse(data)} theme='tube' />;
+          }}
+        </BrowserOnly>
+      )}
       {!is_code_open && (
         <RecursiveProperties
           is_open

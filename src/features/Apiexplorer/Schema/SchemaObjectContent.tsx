@@ -2,7 +2,7 @@ import React from 'react';
 import RecursiveProperties from './RecursiveProperties';
 import SchemaDescription from './SchemaDescription';
 import styles from './Schema.module.scss';
-import ReactJson from 'react-json-view';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 // Header component
 type TSchemeBodyHeader = {
@@ -204,7 +204,14 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
       {/* Description */}
       <SchemaDescription description={description} />
       {/* RecursiveProperties */}
-      {is_code_open && <ReactJson src={JSON.parse(data)} theme='tube' />}
+      {is_code_open && (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+          {() => {
+            const ReactJson = require('react-json-view').default;
+            return <ReactJson src={JSON.parse(data)} theme='tube' />;
+          }}
+        </BrowserOnly>
+      )}
       {!is_code_open && (
         <RecursiveProperties
           is_open={is_open_object}

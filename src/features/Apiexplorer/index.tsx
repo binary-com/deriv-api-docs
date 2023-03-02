@@ -6,16 +6,17 @@ import { playground_requests } from '@site/src/utils/playground_requests';
 import SchemaWrapper from './Schema/SchemaWrapper';
 import { useHistory, useLocation } from '@docusaurus/router';
 import RequestJSONBox from './RequestJSONBox';
+import { TInfo } from '@site/src/types';
 
 export default function ApiExplorerFeatures() {
   const [text_data, setTextData] = useState({
     request: '',
     selected_value: 'Select API Call - Version 3',
-    name: '',
+    name: null,
   });
   const [selected, setSelected] = useState('Select API Call - Version 3');
   const [response_info, setResponseInfo] = useState({});
-  const [request_info, setRequestInfo] = useState({});
+  const [request_info, setRequestInfo] = useState<TInfo>({});
   const history = useHistory();
   const { hash, pathname } = useLocation();
 
