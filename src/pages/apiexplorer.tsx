@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import ApiExplorerFeatures from '@site/src/features/ApiExplorer';
+import ApiExplorerFeatures from '../features/ApiExplorer';
 
 export default function ApiExplorer() {
   return (
