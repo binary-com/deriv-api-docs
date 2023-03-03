@@ -5,13 +5,12 @@ import RecursiveProperties from './RecursiveProperties';
 import { TSourceButton } from './SchemaObjectContent';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-type SchemaBodyObject = {
-  jsonSchema: JSONSchematType;
-};
-
-type JSONSchematType = {
-  properties: Record<string, unknown>;
-  default?: any;
+export type JSONSchematType = {
+  jsonSchema: {
+    properties?: Record<string, unknown>;
+    default?: any;
+    info?: Record<string, never>;
+  };
 };
 
 const SourceButton = ({ is_code_open, setIsCodeOpen }: TSourceButton) => {
@@ -27,7 +26,7 @@ const SourceButton = ({ is_code_open, setIsCodeOpen }: TSourceButton) => {
   );
 };
 
-const Properities: React.FC<SchemaBodyObject> = ({ jsonSchema }) => {
+const Properities = ({ jsonSchema }: JSONSchematType) => {
   React.useEffect(() => {
     setIsCodeOpen(false);
   }, [jsonSchema]);
@@ -61,7 +60,7 @@ const Properities: React.FC<SchemaBodyObject> = ({ jsonSchema }) => {
   );
 };
 
-const SchemaBody: React.FC<SchemaBodyObject> = ({ jsonSchema }) => {
+const SchemaBody = ({ jsonSchema }: JSONSchematType) => {
   return (
     <div className={styles.schemaBody}>
       <Properities jsonSchema={jsonSchema} />
