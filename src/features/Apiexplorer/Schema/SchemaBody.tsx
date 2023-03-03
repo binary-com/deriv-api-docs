@@ -9,7 +9,7 @@ export type JSONSchematType = {
   jsonSchema: {
     properties?: Record<string, unknown>;
     default?: any;
-    info?: Record<string, never>;
+    info?: any;
   };
 };
 
