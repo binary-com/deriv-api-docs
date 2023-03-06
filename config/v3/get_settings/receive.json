@@ -65,6 +65,11 @@
           "description": "Epoch of user's birthday (note: Only available for users who have at least one real account)",
           "type": ["integer", "null"]
         },
+        "dxtrade_user_exception": {
+          "description": "Boolean value 1 or 0, indicating if user email belong to dxtrade exception list.",
+          "type": "integer",
+          "enum": [0, 1]
+        },
         "email": {
           "description": "User Email",
           "type": "string",

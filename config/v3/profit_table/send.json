@@ -19,6 +19,7 @@
       "items": {
         "type": "string",
         "enum": [
+          "ACCU",
           "ASIAND",
           "ASIANU",
           "CALL",

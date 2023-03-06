@@ -56,8 +56,9 @@
           "properties": {
             "high_barrier": {
               "description": "High barrier calculated based on current spot",
-              "type": "number",
-              "examples": [4.9358253e-5]
+              "type": "string",
+              "pattern": "^[+-]?[0-9]+\\.?[0-9]*$",
+              "examples": [42.123]
             },
             "last_tick_epoch": {
               "description": "Epoch of last tick considered for stat chart",
@@ -65,8 +66,9 @@
             },
             "low_barrier": {
               "description": "Low barrier calculated based on current spot",
-              "type": "number",
-              "examples": [4.9358253e-5]
+              "type": "string",
+              "pattern": "^[+-]?[0-9]+\\.?[0-9]*$",
+              "examples": [42.123]
             },
             "maximum_payout": {
               "description": "Maximum payout that user can get out of a contract, contract will close automatically if payout reaches this number",
