@@ -1,31 +1,20 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
-import { CURRENCY_MAP } from '@site/src/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { appRegisterSchema, IRegisterAppForm } from '../../types';
-import CurrencyIcon from '@site/src/components/CurrencyIcon';
-import useApiToken from '@site/src/hooks/useApiToken';
-import useAuthContext from '@site/src/hooks/useAuthContext';
-import useTokenSelector from '@site/src/hooks/useTokenSelector';
-import useAccountSelector from '@site/src/hooks/useAccountSelector';
+import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
+import SelectedToken from '@site/src/components/CustomSelectDropdown/token-dropdown/SelectedToken';
+import TokenDropdown from '@site/src/components/CustomSelectDropdown/token-dropdown/TokenDropdown';
+import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-dropdown/SelectedAccount';
+import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-dropdown/AccountDropdown';
 import styles from './app-form.module.scss';
-
-type TIsNotDemoCurrency = {
-  name: string;
-  currency: string;
-};
 
 type TAppFormProps = {
   initialValues?: Partial<IRegisterAppForm>;
   isUpdating?: boolean;
   renderButtons: () => ReactNode;
   submit: (data: IRegisterAppForm) => void;
-};
-
-type TTokenItem = {
-  scopes?: ('read' | 'trade' | 'payments' | 'trading_information' | 'admin')[];
-  display_name?: string;
 };
 
 const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
@@ -38,57 +27,6 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
     resolver: yupResolver(appRegisterSchema),
     defaultValues: initialValues,
   });
-  const [token_name, setTokenName] = useState('');
-  const [user_account, setUserAccount] = useState('');
-  const [is_toggle_dropdown, setToggleDropdown] = useState(false);
-  const { onSelectToken } = useTokenSelector();
-  const { onSelectAccount } = useAccountSelector();
-  const { tokens, currentToken } = useApiToken();
-  const { loginAccounts, currentLoginAccount } = useAuthContext();
-  const toggle_dropdown = is_toggle_dropdown ? styles.active : styles.inactive;
-
-  const filterAndSelectToken = () => {
-    for (let i = 0; i < tokens.length; i++) {
-      const token_item = Object.values(tokens[i]);
-      if (token_item.includes(token_name)) onSelectToken(tokens[i]);
-    }
-  };
-
-  useEffect(() => {
-    if (user_account !== '') onSelectAccount(user_account);
-  }, [user_account]);
-
-  useEffect(() => {
-    if (token_name !== '') filterAndSelectToken();
-  }, [token_name]);
-
-  const adminTokens = useMemo(() => {
-    return tokens.filter((item) => item.scopes.includes('admin'));
-  }, [tokens]);
-
-  const current_admin_token = currentToken?.display_name && currentToken.scopes.includes('admin');
-
-  const selectAccount = (name: string) => {
-    setUserAccount(name);
-    setToggleDropdown(!is_toggle_dropdown);
-  };
-
-  const getCurrencyName = (currency: string) => CURRENCY_MAP.get(currency).name;
-
-  const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
-    const currency = account.name.includes('VRTC') ? 'Demo' : account.currency;
-    return currency;
-  };
-
-  const isNotCurrentAccount = (account_name: string) => {
-    return account_name !== currentLoginAccount.name;
-  };
-
-  const isNotCurrentToken = (token_item: TTokenItem) => {
-    const is_not_admin_token =
-      token_item.display_name !== currentToken.display_name && token_item.scopes.includes('admin');
-    return is_not_admin_token;
-  };
 
   return (
     <React.Fragment>
@@ -104,91 +42,16 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                   Select your api token ( it should have admin scope )
                 </Text>
               </div>
+              <CustomSelectDropdown register={register('currency_account')}>
+                <SelectedAccount />
+                <AccountDropdown />
+              </CustomSelectDropdown>
+              <CustomSelectDropdown register={register('api_token')}>
+                <SelectedToken />
+                <TokenDropdown />
+              </CustomSelectDropdown>
               <div className={styles.customSelectField}>
-                <div
-                  tabIndex={0}
-                  className={styles.selectWrapper}
-                  onClick={() => setToggleDropdown(!is_toggle_dropdown)}
-                  onKeyDown={(e) => e.key === 'ArrowDown' && setToggleDropdown(!is_toggle_dropdown)}
-                >
-                  <div className={styles.selectedAccount}>
-                    <CurrencyIcon currency={isNotDemoCurrency(currentLoginAccount)} />
-                    <div className={styles.accountInfoContainer}>
-                      <div className={styles.accountType}>
-                        {getCurrencyName(currentLoginAccount?.currency)}
-                      </div>
-                      <div className={styles.accountId}>{currentLoginAccount?.name}</div>
-                    </div>
-                  </div>
-                  <div className='select-label'>Choose your account</div>
-                  <input
-                    {...register('currency_account')}
-                    type='hidden'
-                    value={currentLoginAccount?.name ? currentLoginAccount.name : ''}
-                    id='api_token_input'
-                    data-testid={'select-account'}
-                  />
-                  <div className={`${styles.customSelectDropdown} ${toggle_dropdown}`}>
-                    {loginAccounts.map((accountItem) => (
-                      <React.Fragment key={accountItem.name}>
-                        {isNotCurrentAccount(accountItem.name) && (
-                          <div
-                            tabIndex={0}
-                            className={styles.customSelectItem}
-                            onClick={() => selectAccount(accountItem.name)}
-                            onKeyDown={(e) => e.key === 'Enter' && selectAccount(accountItem.name)}
-                          >
-                            <CurrencyIcon currency={isNotDemoCurrency(accountItem)} />
-                            <div className={styles.accountInfoContainer}>
-                              <div className={styles.accountType}>
-                                {getCurrencyName(isNotDemoCurrency(accountItem))}
-                              </div>
-                              <div className={styles.accountId}>{accountItem.name}</div>
-                            </div>
-                          </div>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-                <Text as='span' type='paragraph-1' className='error-message'>
-                  This account doesn&lsquo;t have API tokens with the admin scope. Choose another
-                  account.
-                </Text>
-              </div>
-              <div className={styles.customSelectField}>
-                <div className={styles.selectWrapper}>
-                  <select
-                    {...register('currency_account')}
-                    placeholder={'Choose your account'}
-                    defaultValue={''}
-                    id='api_token_input'
-                    data-testid={'select-account'}
-                    onChange={(e) => onSelectAccount(e.target.value)}
-                    required
-                  >
-                    <option value={currentLoginAccount?.name ? currentLoginAccount.name : ''}>
-                      {currentLoginAccount?.name ? currentLoginAccount.name : 'Choose your account'}
-                    </option>
-                    {loginAccounts.map((accountItem) => (
-                      <React.Fragment key={accountItem.name}>
-                        {isNotCurrentAccount(accountItem.name) && (
-                          <option key={accountItem.name} value={accountItem.name}>
-                            {accountItem.name}
-                          </option>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </select>
-                </div>
-                <div className='select-label'>Choose your account</div>
-                <Text as='span' type='paragraph-1' className='error-message'>
-                  This account doesn&lsquo;t have API tokens with the admin scope. Choose another
-                  account.
-                </Text>
-              </div>
-              <div className={styles.customSelectField}>
-                <div className={styles.selectWrapper}>
+                {/* <div className={styles.selectWrapper}>
                   <select
                     {...register('api_token')}
                     placeholder={'Please select Api Token'}
@@ -213,7 +76,7 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                       </React.Fragment>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 <div className='select-label'>Choose your API token with the admin scope</div>
                 {errors.api_token && (
                   <Text as='span' type='paragraph-1' className='error-message'>

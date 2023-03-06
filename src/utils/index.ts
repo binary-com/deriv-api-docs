@@ -14,6 +14,18 @@ export const CURRENCY_MAP = new Map([
   ['USD', { icon: 'usdollar', name: 'US Dollar' }],
 ]);
 
+export const getCurrencyName = (currency: string) => CURRENCY_MAP.get(currency).name;
+
+type TIsNotDemoCurrency = {
+  name: string;
+  currency: string;
+};
+
+export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
+  const currency = account.name.includes('VRTC') ? 'Demo' : account.currency;
+  return currency;
+};
+
 /**
  *
  * @returns {boolean} return true if the window hostname contains `localhost`
