@@ -28,7 +28,7 @@
       font-size: rem(2.4);
       text-align: left;
       line-height: var(--text-lh-m);
-      color: #151717;
+      color: var(--ifm-font-color-base);
     }
 
     .btnWrapper {
@@ -48,14 +48,14 @@
     min-height: rem(20);
     padding: rem(1) rem(1.2);
     border: none;
-    color: #5d5381;
-    border: 1px solid #d6dadb;
+    color: var(--ifm-color-info-contrast-foreground);
+    border: 1px solid var(--ifm-color-secondary-darker);
   }
 
   .registrationRequest {
     min-height: rem(11.9);
     padding: rem(1);
-    border: solid 1px #d6dadb;
+    border: solid 1px var(--ifm-color-secondary-darker);
     font-size: rem(1.6);
   }
 

@@ -1,25 +1,9 @@
 @use 'src/styles/utility' as *;
 
-.array {
-  color: #ff8fc8;
-}
-
-.number {
-  color: #acb2ff;
-}
-
-.string {
-  color: #21d169;
-}
-
-.integer {
-  color: #f8c272;
-}
-
 .schemaRole {
   font-size: rem(1.4);
   line-height: rem(1.4);
-  color: #21d169;
+  color: var(--ifm-color-success-light);
   border: none;
   margin: 0.8rem 0.8rem 0 0;
   padding: 0.6rem 0.8rem;
@@ -77,7 +61,7 @@
 
   button {
     position: relative;
-    color: #9ed178 !important;
+    color: var(--ifm-color-success-lightest) !important;
     background-color: var(--ifm-color-black);
     border: none;
     padding: rem(1);
@@ -160,7 +144,7 @@
         height: fit-content;
         font-size: rem(1.4);
         line-height: rem(1.4);
-        color: #21d169;
+        color: var(--ifm-color-success-light);
         border: none;
         padding: 0.6rem 0.8rem;
         border-radius: 4px;
@@ -168,10 +152,10 @@
       }
 
       .schemaItems {
-        color: #9ed178;
+        color: var(--ifm-color-success-lightest);
         font-size: rem(1.4);
         line-height: rem(1.4);
-        color: #21d169;
+        color: var(--ifm-color-success-light);
         border: none;
         margin: 0.8rem 0.8rem 0 0;
         padding: 0.6rem 0.8rem;
@@ -187,12 +171,12 @@
         .schemaBodyPattern {
           width: 100%;
           font-size: rem(1.1);
-          color: #556b2f;
+          color: var(--ifm-color-success-darker);
           margin: 0 1rem;
         }
 
         .schemaPatternType {
-          color: #21d169;
+          color: var(--ifm-color-success-light);
           font-size: rem(1.4);
           font-weight: 400;
         }
@@ -202,7 +186,7 @@
     .schemaBodyDescription {
       display: inline-block;
       white-space: break-spaces;
-      color: #c2c2c2;
+      color: var(--ifm-color-secondary-darkest);
       margin-top: rem(1);
       font-size: rem(1.4);
       line-height: rem(2);
@@ -253,11 +237,11 @@
     .defaultValueLabel,
     .schemaDefaultValue {
       font-size: rem(1.4);
-      color: #c2c2c2;
+      color: var(--ifm-color-secondary-darkest);
     }
 
     .schemaDefaultValue {
-      border: 2px solid #c2c2c2;
+      border: 2px solidvar(--ifm-color-secondary-darkest);
       border-radius: 4px;
       padding: rem(0.3);
     }
@@ -272,7 +256,7 @@
     .enumLabel {
       font-size: rem(1.4);
       line-height: rem(1.4);
-      color: #c2c2c2;
+      color: var(--ifm-color-secondary-darkest);
     }
 
     .enumType {
@@ -304,7 +288,7 @@
 
 .sourceButton {
   opacity: 0;
-  color: #f0f1f3a3;
+  color: var(--ifm-color-secondary-darker);
   font-family: lucida console, Monaco, monospace;
   position: absolute;
   padding: rem(0.2);
@@ -328,7 +312,7 @@
 
 .sourceButtonMain {
   opacity: 0;
-  color: #f0f1f3a3;
+  color: var(--ifm-color-secondary-darkest);
   font-family: lucida console, Monaco, monospace;
   padding: rem(0.2);
   left: rem(23);
