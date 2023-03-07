@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { appRegisterSchema, IRegisterAppForm } from '../../types';
 import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
+import useApiToken from '@site/src/hooks/useApiToken';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 import SelectedToken from '@site/src/components/CustomSelectDropdown/token-dropdown/SelectedToken';
 import TokenDropdown from '@site/src/components/CustomSelectDropdown/token-dropdown/TokenDropdown';
 import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-dropdown/SelectedAccount';
@@ -28,6 +30,11 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
     defaultValues: initialValues,
   });
 
+  const { currentToken } = useApiToken();
+  const { currentLoginAccount } = useAuthContext();
+
+  const admin_token = currentToken.scopes.includes('admin') && currentToken.token;
+
   return (
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
@@ -42,48 +49,22 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                   Select your api token ( it should have admin scope )
                 </Text>
               </div>
-              <CustomSelectDropdown register={register('currency_account')}>
+              <CustomSelectDropdown
+                label='Your account'
+                value={currentLoginAccount.name}
+                register={register('currency_account')}
+              >
                 <SelectedAccount />
                 <AccountDropdown />
               </CustomSelectDropdown>
-              <CustomSelectDropdown register={register('api_token')}>
+              <CustomSelectDropdown
+                label='Choose your API token with the admin scope'
+                value={admin_token}
+                register={register('api_token')}
+              >
                 <SelectedToken />
                 <TokenDropdown />
               </CustomSelectDropdown>
-              <div className={styles.customSelectField}>
-                {/* <div className={styles.selectWrapper}>
-                  <select
-                    {...register('api_token')}
-                    placeholder={'Please select Api Token'}
-                    defaultValue={''}
-                    id='api_token_input'
-                    data-testid={'select-token'}
-                    onChange={(e) => setTokenName(e.target.value)}
-                    required
-                  >
-                    <option value={current_admin_token ? currentToken.display_name : ''}>
-                      {current_admin_token
-                        ? currentToken.display_name
-                        : 'Choose your API token with the admin scope'}
-                    </option>
-                    {adminTokens.map((item) => (
-                      <React.Fragment key={item.display_name}>
-                        {isNotCurrentToken(item) && (
-                          <option key={item.display_name} value={item.display_name}>
-                            {item.display_name}
-                          </option>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </select>
-                </div> */}
-                <div className='select-label'>Choose your API token with the admin scope</div>
-                {errors.api_token && (
-                  <Text as='span' type='paragraph-1' className='error-message'>
-                    {errors.api_token.message}
-                  </Text>
-                )}
-              </div>
               <div className={styles.customTextInput} id='custom-text-input'>
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>

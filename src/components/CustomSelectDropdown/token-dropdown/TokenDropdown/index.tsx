@@ -1,12 +1,8 @@
 import React, { useMemo } from 'react';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useTokenSelector from '@site/src/hooks/useTokenSelector';
+import { TTokenType } from '@site/src/types';
 import styles from './token_dropdown.module.scss';
-
-type TTokenItem = {
-  scopes?: ('read' | 'trade' | 'payments' | 'trading_information' | 'admin')[];
-  display_name?: string;
-};
 
 const TokenDropdown = () => {
   const { currentToken, tokens } = useApiToken();
@@ -16,7 +12,7 @@ const TokenDropdown = () => {
     return tokens.filter((item) => item.scopes.includes('admin'));
   }, [tokens]);
 
-  const isNotCurrentToken = (token_item: TTokenItem) => {
+  const isNotCurrentToken = (token_item: TTokenType) => {
     const is_not_admin_token =
       token_item.display_name !== currentToken.display_name && token_item.scopes.includes('admin');
     return is_not_admin_token;

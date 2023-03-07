@@ -1,12 +1,13 @@
-import { ApplicationObject } from '@deriv/api-types';
-import { Button, Modal } from '@deriv/ui';
-import useAppManager from '@site/src/hooks/useAppManager';
-import useWS from '@site/src/hooks/useWs';
-import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import React, { useCallback, useEffect } from 'react';
-import { IRegisterAppForm } from '../../../types';
 import AppForm from '../../AppForm';
+import useWS from '@site/src/hooks/useWs';
+import useAppManager from '@site/src/hooks/useAppManager';
+import { Button, Modal } from '@deriv/ui';
+import { hasFormUri } from '@site/src/utils';
+import { IRegisterAppForm } from '../../../types';
+import { ApplicationObject } from '@deriv/api-types';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
+import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import styles from './update-app-dialog.module.scss';
 
 interface IUpdateAppDialog {
@@ -55,8 +56,8 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
       updateApp({
         app_update: data.app_id,
         name,
-        redirect_uri,
-        verification_uri,
+        ...hasFormUri(redirect_uri),
+        ...hasFormUri(verification_uri),
         app_markup_percentage: Number(app_markup_percentage),
         scopes: selectedScopes,
       });

@@ -23,21 +23,28 @@ export const appRegisterSchema = yup.object({
     .max(255, 'Your API token cannot exceed 255 characters.'),
   redirect_uri: yup
     .string()
-    .required('This is required')
     .max(255, 'Your website URL cannot exceed 255 characters.')
-    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[YourDomainName].com)'),
+    .notRequired()
+    .matches(urlRegex, {
+      message: 'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+      excludeEmptyString: true,
+    }),
   verification_uri: yup
     .string()
-    .required('This is required')
     .max(255, 'Your website URL cannot exceed 255 characters.')
-    .matches(urlRegex, 'Enter a valid URL. (Example: https://www.[YourDomainName].com)'),
+    .notRequired()
+    .matches(urlRegex, {
+      message: 'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+      excludeEmptyString: true,
+    }),
   app_markup_percentage: yup
     .string()
     .max(4, 'Your markup value cannot be more than 4 characters.')
     .matches(
       markupPercentageRegex,
       'Your markup value must be equal to or above 0.00 and no more than 5.00.',
-    ),
+    )
+    .required('Enter a markup value'),
   app_id: yup.number(),
 });
 

@@ -10,7 +10,9 @@ const SelectedAccount = () => {
     <div className={styles.selectedAccount}>
       <CurrencyIcon currency={isNotDemoCurrency(currentLoginAccount)} />
       <div className={styles.accountInfoContainer}>
-        <span className={styles.accountType}>{getCurrencyName(currentLoginAccount?.currency)}</span>
+        <span className={styles.accountType}>
+          {getCurrencyName(isNotDemoCurrency(currentLoginAccount))}
+        </span>
         <span className={styles.accountId}>{currentLoginAccount?.name}</span>
       </div>
     </div>

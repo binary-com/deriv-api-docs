@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import useAccountSelector from '@site/src/hooks/useAccountSelector';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import CurrencyIcon from '@site/src/components/CurrencyIcon';
