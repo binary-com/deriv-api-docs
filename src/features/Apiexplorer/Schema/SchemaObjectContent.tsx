@@ -5,7 +5,7 @@ import styles from './Schema.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 // Header component
-type TSchemeBodyHeader = {
+type TSchemaBodyHeader = {
   key_value: string;
   type: string;
   defaultValue: string;
@@ -30,7 +30,7 @@ const SchemaBodyHeader = ({
   title,
   is_open_object,
   setIsOpenObject,
-}: TSchemeBodyHeader) => {
+}: TSchemaBodyHeader) => {
   let typeClassName;
   switch (type) {
     case 'number':
@@ -67,8 +67,10 @@ const SchemaBodyHeader = ({
     });
   }
 
-  const is_type_with_enumlabel = _enum && type && type !== 'object' && typeof type !== 'object';
-  const is_only_type = !_enum && type && type !== 'object' && typeof type !== 'object';
+  const is_not_an_object = type && type !== 'object' && typeof type !== 'object';
+
+  const is_type_with_enumlabel = _enum && is_not_an_object;
+  const is_only_type = !_enum && is_not_an_object;
 
   return (
     <div

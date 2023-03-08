@@ -3,7 +3,7 @@
 .playgroundContent {
   height: fit-content;
   width: 100%;
-  margin-top: 4rem;
+  margin-top: rem(4);
   overflow-x: hidden;
 
   .pageWrapper {
@@ -17,12 +17,12 @@
       flex-wrap: wrap;
       height: fit-content;
       width: 100%;
-      margin-top: 4rem;
+      margin-top: rem(4);
       .playgroundPageWrapper {
         display: flex;
         justify-content: center;
         width: 95%;
-        gap: 2rem;
+        gap: rem(2);
         @media screen and (max-width: 1024px) {
           flex-direction: column;
           align-items: center;

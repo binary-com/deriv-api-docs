@@ -1,5 +1,5 @@
 @use 'src/styles/utility' as *;
 
 .api_table {
-  min-height: 10rem;
+  min-height: rem(10);
 }

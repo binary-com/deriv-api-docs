@@ -11,8 +11,8 @@
 
   .inlineLabel {
     position: absolute;
-    top: -0.3rem;
-    left: 1rem;
+    top: rem(-0.3);
+    left: rem(1);
     font-size: rem(0.8);
     padding: rem(0.2) rem(0.4);
     background-color: var(--ifm-color-white);
@@ -60,7 +60,7 @@
   }
 
   .playgroundConsole {
-    margin-top: 0.2rem;
+    margin-top: rem(0.2);
     max-height: 60vh;
     overflow-y: auto;
     width: 100%;

@@ -6,6 +6,7 @@ import style from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { useCallback } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import { Circles } from 'react-loader-spinner';
 interface IDataThingyProps<T extends TSocketEndpointNames> {
   name: T;
   reqData?: string;
@@ -55,7 +56,13 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
     if (is_loading) {
       return (
         <div>
-          <h1>Loading........</h1>
+          <Circles
+            height='100'
+            width='100'
+            color='#d44c0d'
+            ariaLabel='circles-loading'
+            wrapperClass='loading'
+          />
         </div>
       );
     }
@@ -66,7 +73,17 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
         data-testid='playgroundConsole'
       >
         {res && (
-          <BrowserOnly fallback={<div>Loading...</div>}>
+          <BrowserOnly
+            fallback={
+              <Circles
+                height='100'
+                width='100'
+                color='#d44c0d'
+                ariaLabel='circles-loading'
+                wrapperClass='loading'
+              />
+            }
+          >
             {() => {
               const ReactJson = require('react-json-view').default;
               return (

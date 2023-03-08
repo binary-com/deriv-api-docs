@@ -5,8 +5,8 @@
   line-height: rem(1.4);
   color: var(--ifm-color-success-light);
   border: none;
-  margin: 0.8rem 0.8rem 0 0;
-  padding: 0.6rem 0.8rem;
+  margin: rem(0.8) rem(0.8) 0 0;
+  padding: rem(0.6) rem(0.8);
   border-radius: 4px;
   background-color: rgba(0, 255, 104, 0.16);
 }
@@ -126,7 +126,7 @@
       flex-direction: row;
       color: var(--ifm-color-white);
       font-size: rem(1.6);
-      margin: 0 0.8rem 0 0;
+      margin: 0 rem(0.8) 0 0;
       font-weight: 700;
       width: 100%;
 
@@ -146,7 +146,7 @@
         line-height: rem(1.4);
         color: var(--ifm-color-success-light);
         border: none;
-        padding: 0.6rem 0.8rem;
+        padding: rem(0.6) rem(0.8);
         border-radius: 4px;
         background-color: rgba(0, 255, 104, 0.16);
       }
@@ -157,8 +157,8 @@
         line-height: rem(1.4);
         color: var(--ifm-color-success-light);
         border: none;
-        margin: 0.8rem 0.8rem 0 0;
-        padding: 0.6rem 0.8rem;
+        margin: rem(0.8) rem(0.8) 0 0;
+        padding: rem(0.6) rem(0.8);
         white-space: nowrap;
         border-radius: 4px;
       }

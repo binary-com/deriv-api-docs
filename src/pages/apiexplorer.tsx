@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import ApiExplorerFeatures from '../features/Apiexplorer';
 
-export default function ApiExplorer() {
+const ApiExplorer = () => {
   return (
     <Layout title={'API Explorer'} description='Deriv API documentation'>
       <main>
@@ -10,4 +10,6 @@ export default function ApiExplorer() {
       </main>
     </Layout>
   );
-}
+};
+
+export default ApiExplorer;

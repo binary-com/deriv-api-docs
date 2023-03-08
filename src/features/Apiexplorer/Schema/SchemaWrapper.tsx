@@ -1,9 +1,9 @@
 import React from 'react';
 import SchemaHeader from './SchemaHeader';
-import SchemaBody, { JSONSchematType } from './SchemaBody';
+import SchemaBody, { JSONSchemaType } from './SchemaBody';
 
 type TSchemaWrapper = {
-  info: JSONSchematType['jsonSchema']['info'];
+  info: JSONSchemaType['jsonSchema']['info'];
 };
 
 const SchemaWrapper = ({ info }: TSchemaWrapper) => {

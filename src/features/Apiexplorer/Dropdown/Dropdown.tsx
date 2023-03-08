@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { playground_requests } from '@site/src/utils/playground_requests';
 import styles from './Dropdown.module.scss';
 
-export type TDropdown = {
+type TDropdown = {
   selected: string;
   setSelected: (string) => void;
   selected_value: string;
   handleChange: (event, string) => void;
 };
 
-export type TDropdownList = {
+type TDropdownList = {
   selected: string;
   setSelected: (string) => void;
   selected_value: string;
@@ -19,7 +19,7 @@ export type TDropdownList = {
   setSearchResults: (string) => void;
 };
 
-export const DropdownList = ({
+const DropdownList = ({
   selected,
   setSelected,
   handleChange,
