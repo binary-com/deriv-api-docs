@@ -6,7 +6,7 @@ const SelectedToken = () => {
 
   return (
     <React.Fragment>
-      {currentToken.scopes.includes('admin') && <label>{currentToken.display_name}</label>}
+      {currentToken?.scopes?.includes('admin') && <label>{currentToken.display_name}</label>}
     </React.Fragment>
   );
 };

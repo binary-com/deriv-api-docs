@@ -1,6 +1,6 @@
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
-import { scopesObjectToArray, hasFormUri } from '@site/src/utils';
+import { scopesObjectToArray } from '@site/src/utils';
 import React, { useCallback } from 'react';
 import AppForm from '../components/AppForm';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
@@ -13,6 +13,8 @@ const AppRegistration = () => {
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
+      const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
+      const has_verification_uri = verification_uri !== '' && { verification_uri };
 
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
@@ -23,8 +25,8 @@ const AppRegistration = () => {
       });
       registerApp({
         name,
-        ...hasFormUri(redirect_uri),
-        ...hasFormUri(verification_uri),
+        ...has_redirect_uri,
+        ...has_verification_uri,
         app_markup_percentage: Number(app_markup_percentage),
         scopes: selectedScopes,
       });

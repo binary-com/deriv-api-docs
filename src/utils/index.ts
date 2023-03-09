@@ -26,11 +26,6 @@ export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
   return currency;
 };
 
-// The redirect and verification URI's are optional,
-// this helper function helps making these values optional
-// in the form data object.
-export const hasFormUri = (uri: string) => uri !== '' && { uri };
-
 /**
  *
  * @returns {boolean} return true if the window hostname contains `localhost`

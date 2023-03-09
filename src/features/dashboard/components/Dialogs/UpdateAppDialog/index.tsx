@@ -3,7 +3,6 @@ import AppForm from '../../AppForm';
 import useWS from '@site/src/hooks/useWs';
 import useAppManager from '@site/src/hooks/useAppManager';
 import { Button, Modal } from '@deriv/ui';
-import { hasFormUri } from '@site/src/utils';
 import { IRegisterAppForm } from '../../../types';
 import { ApplicationObject } from '@deriv/api-types';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
@@ -45,6 +44,8 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
+      const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
+      const has_verification_uri = verification_uri !== '' && { verification_uri };
 
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
@@ -56,8 +57,8 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
       updateApp({
         app_update: data.app_id,
         name,
-        ...hasFormUri(redirect_uri),
-        ...hasFormUri(verification_uri),
+        ...has_redirect_uri,
+        ...has_verification_uri,
         app_markup_percentage: Number(app_markup_percentage),
         scopes: selectedScopes,
       });
@@ -88,6 +89,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
         >
           <div className={styles.update_app_content}>
             <AppForm
+              is_update_mode
               renderButtons={renderButtons}
               submit={onSubmit}
               initialValues={initialValues}

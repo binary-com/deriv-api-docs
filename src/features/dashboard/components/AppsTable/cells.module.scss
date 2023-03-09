@@ -3,11 +3,14 @@
 @mixin actionIcon {
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
-  width: rem(1.6);
-  height: rem(1.6);
+  background-size: rem(2);
+  // width: rem(1.6);
+  // height: rem(1.6);
   cursor: pointer;
-  padding: 0 rem(0.8);
+  padding: rem(2) rem(2);
+  border-radius: 100%;
+  background-color: var(--colors-greyLight200);
+  border: 2px solid var(--colors-greyLight400);
 }
 
 .deleteApp {

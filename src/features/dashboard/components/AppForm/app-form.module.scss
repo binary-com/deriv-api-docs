@@ -71,6 +71,19 @@ fieldset .customTextInput:last-child {
     align-items: center;
     justify-content: center;
     width: 100%;
+    &.noAdmin {
+      .apiTokenWrapper {
+        ~ div,
+        .customTextInput {
+          opacity: 0.2;
+          pointer-events: none;
+        }
+      }
+    }
+    .disableTokenDropdown {
+      opacity: 0.2;
+      pointer-events: none;
+    }
     .helperText {
       width: 100%;
       padding-left: rem(1);

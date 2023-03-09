@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { appRegisterSchema, IRegisterAppForm } from '../../types';
+import { appRegisterSchema, appEditSchema, IRegisterAppForm } from '../../types';
 import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
@@ -17,54 +17,97 @@ type TAppFormProps = {
   isUpdating?: boolean;
   renderButtons: () => ReactNode;
   submit: (data: IRegisterAppForm) => void;
+  is_update_mode?: boolean;
 };
 
-const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
+const AppForm = ({
+  initialValues,
+  submit,
+  renderButtons,
+  is_update_mode = false,
+}: TAppFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegisterAppForm>({
     mode: 'onBlur',
-    resolver: yupResolver(appRegisterSchema),
+    resolver: yupResolver(is_update_mode ? appEditSchema : appRegisterSchema),
     defaultValues: initialValues,
   });
 
-  const { currentToken } = useApiToken();
+  const { currentToken, tokens } = useApiToken();
   const { currentLoginAccount } = useAuthContext();
 
-  const admin_token = currentToken.scopes.includes('admin') && currentToken.token;
+  const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
+
+  const accountHasAdminToken = () => {
+    const admin_check_array = [];
+    tokens.forEach((token) => {
+      const has_admin_scope = token?.scopes?.includes('admin');
+      has_admin_scope ? admin_check_array.push(true) : admin_check_array.push(false);
+    });
+    return admin_check_array.includes(true);
+  };
+
+  const AccountErrorMessage = () => (
+    <React.Fragment>
+      {!accountHasAdminToken() && (
+        <Text as='span' type='paragraph-1' className='error-message'>
+          This account doesn&apos;t have API tokens with the admin scope. Choose another account.
+        </Text>
+      )}
+    </React.Fragment>
+  );
 
   return (
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
-        <div className={styles.formContent}>
+        <div
+          className={`${styles.formContent} ${
+            !admin_token && !is_update_mode ? styles.noAdmin : ''
+          }`}
+        >
           <div>
             <div className={styles.apiTokenWrapper}>
               <div className={styles.formHeaderContainer}>
                 <Text as='p' type='paragraph-1' bold>
                   App information
                 </Text>
-                <Text as='p' type='paragraph-1'>
-                  Select your api token ( it should have admin scope )
-                </Text>
+                {!is_update_mode && (
+                  <Text as='p' type='paragraph-1'>
+                    Select your api token ( it should have admin scope )
+                  </Text>
+                )}
               </div>
-              <CustomSelectDropdown
-                label='Your account'
-                value={currentLoginAccount.name}
-                register={register('currency_account')}
-              >
-                <SelectedAccount />
-                <AccountDropdown />
-              </CustomSelectDropdown>
-              <CustomSelectDropdown
-                label='Choose your API token with the admin scope'
-                value={admin_token}
-                register={register('api_token')}
-              >
-                <SelectedToken />
-                <TokenDropdown />
-              </CustomSelectDropdown>
+              {!is_update_mode && (
+                <React.Fragment>
+                  <CustomSelectDropdown
+                    label='Your account'
+                    value={currentLoginAccount.name}
+                    register={register('currency_account')}
+                    is_error={!accountHasAdminToken()}
+                  >
+                    <SelectedAccount />
+                    <AccountDropdown />
+                    <AccountErrorMessage />
+                  </CustomSelectDropdown>
+                  <div
+                    className={
+                      !accountHasAdminToken() && !is_update_mode ? styles.disableTokenDropdown : ''
+                    }
+                  >
+                    <CustomSelectDropdown
+                      label='Choose your API token with the admin scope'
+                      value={admin_token}
+                      register={register('api_token')}
+                    >
+                      <SelectedToken />
+                      <TokenDropdown />
+                    </CustomSelectDropdown>
+                  </div>
+                </React.Fragment>
+              )}
               <div className={styles.customTextInput} id='custom-text-input'>
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>
@@ -217,7 +260,7 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
             <div className={styles.termsOfConditionRegister}>
               <span>
                 By registering your application, you acknowledge that you&lsquo;ve read and accepted
-                the Deriv API
+                the Deriv API{' '}
               </span>
               <a
                 href='https://deriv.com/tnc/business-partners-api-user.pdf'

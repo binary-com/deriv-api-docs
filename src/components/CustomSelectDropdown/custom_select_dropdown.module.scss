@@ -3,14 +3,6 @@
 .customSelectField {
     position: relative;
     .dropdownWrapper {
-        &.active {
-            display: inline-block;
-        }
-    
-        &.inactive {
-            display: none;
-        }
-
         .dropdown {
             position: absolute;
             max-height: 200px;
@@ -38,8 +30,10 @@
         padding: 0 rem(3) 0 rem(1);
         color: var(--ifm-color-emphasis-1000);
         border: 1px solid var(--colors-greyLight400);
-        background-color: var(--ifm-color-emphasis-0);
-  
+        
+        &.error {
+            border: 1px solid var(--colors-coral600);
+        }
         &:hover {
             border-color: var(--ifm-color-emphasis-500);
         }
@@ -60,12 +54,23 @@
             width: 40px;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: var(--ifm-color-emphasis-0);
             background-image: url(/static/img/arrow_down.svg);
             border-radius: 3px;
             pointer-events: none;
+            transform: rotate(0deg);
+            transition: transform .2s;
         }
-
+        &.active {
+            &:after {
+                transform: rotate(180deg);
+            } 
+            .dropdownWrapper {
+                display: inline-block;
+            }
+        }
+        &.inactive .dropdownWrapper {
+            display: none;
+        }
         .selectLabel {
             color: var(--colors-greyLight600);
             width: 100%;
@@ -74,9 +79,8 @@
             &.active {
                 color: var(--ifm-color-emphasis-1000);
                 position: absolute;
-                z-index: 1;
                 font-size: rem(1.2);
-                background-color: white;
+                background-color: var(--ifm-color-emphasis-0);
                 bottom: rem(3.7);
                 left: rem(1);
                 padding: 0 rem(0.4);

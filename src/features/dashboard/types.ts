@@ -3,7 +3,7 @@ import * as yup from 'yup';
 const markupPercentageRegex = /^((([0-4]\.([0-9]([0-9])?)?))||([5]\.([0]([0])?)?)||([0-5]))$/;
 const urlRegex = /^[a-z][a-z0-9.+-]*:\/\/[0-9a-zA-Z.-]+[%/\w .-]*$/;
 
-export const appRegisterSchema = yup.object({
+const base_schema = {
   name: yup
     .string()
     .required('Enter your app name.')
@@ -13,14 +13,6 @@ export const appRegisterSchema = yup.object({
   payments: yup.boolean(),
   trading_information: yup.boolean(),
   admin: yup.boolean(),
-  currency_account: yup
-    .string()
-    .required('Choose an account that has tokens with the admin scope.')
-    .max(255, 'Your API token cannot exceed 255 characters.'),
-  api_token: yup
-    .string()
-    .required('Select Your API token (with the Admin scope) to register your app.')
-    .max(255, 'Your API token cannot exceed 255 characters.'),
   redirect_uri: yup
     .string()
     .max(255, 'Your website URL cannot exceed 255 characters.')
@@ -46,6 +38,20 @@ export const appRegisterSchema = yup.object({
     )
     .required('Enter a markup value'),
   app_id: yup.number(),
+};
+
+export const appEditSchema = yup.object(base_schema);
+
+export const appRegisterSchema = yup.object({
+  ...base_schema,
+  currency_account: yup
+    .string()
+    .required('Choose an account that has tokens with the admin scope.')
+    .max(255, 'Your API token cannot exceed 255 characters.'),
+  api_token: yup
+    .string()
+    .required('Select Your API token (with the Admin scope) to register your app.')
+    .max(255, 'Your API token cannot exceed 255 characters.'),
 });
 
 export type IRegisterAppForm = yup.InferType<typeof appRegisterSchema>;
