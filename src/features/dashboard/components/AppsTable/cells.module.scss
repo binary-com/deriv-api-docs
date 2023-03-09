@@ -4,8 +4,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: rem(2);
-  // width: rem(1.6);
-  // height: rem(1.6);
   cursor: pointer;
   padding: rem(2) rem(2);
   border-radius: 100%;
@@ -43,7 +41,7 @@
     z-index: 1;
     opacity: 0;
     transition: opacity 1s;
-    font-size: 10px;
+    font-size: rem(1);
     transform: translateX(50%);
     right: 50%;
     bottom: rem(2.4);
