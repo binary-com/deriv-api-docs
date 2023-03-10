@@ -44,14 +44,8 @@ export const appEditSchema = yup.object(base_schema);
 
 export const appRegisterSchema = yup.object({
   ...base_schema,
-  currency_account: yup
-    .string()
-    .required('Choose an account that has tokens with the admin scope.')
-    .max(255, 'Your API token cannot exceed 255 characters.'),
-  api_token: yup
-    .string()
-    .required('Select Your API token (with the Admin scope) to register your app.')
-    .max(255, 'Your API token cannot exceed 255 characters.'),
+  currency_account: yup.string(),
+  api_token: yup.string(),
 });
 
 export type IRegisterAppForm = yup.InferType<typeof appRegisterSchema>;

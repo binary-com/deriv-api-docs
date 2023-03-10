@@ -6,7 +6,9 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppForm from '..';
 
+// jest.mock('@site/src/hooks/useTokenSelector');
 jest.mock('@site/src/hooks/useApiToken');
+jest.mock('@site/src/utils');
 
 const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
@@ -38,6 +40,7 @@ const fakeTokens: TTokensArrayType = [
 
 mockUseApiToken.mockImplementation(() => ({
   tokens: fakeTokens,
+  updateCurrentToken: jest.fn(),
 }));
 
 const renderButtons = () => {
@@ -58,18 +61,6 @@ describe('App Form', () => {
   afterEach(() => {
     cleanup();
     jest.clearAllMocks();
-  });
-
-  it('Should show error message for empty api token select', async () => {
-    const submitButton = screen.getByText('Update Application');
-
-    await userEvent.click(submitButton);
-
-    const tokenErrorText = await screen.findByText(
-      'Select Your API token (with the Admin scope) to register your app.',
-    );
-
-    expect(tokenErrorText).toBeInTheDocument();
   });
 
   it('Should show error message for empty app name', async () => {
@@ -154,7 +145,11 @@ describe('App Form', () => {
       name: 'Verification URL (optional)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
+    await userEvent.click(selectTokenOption);
+
+    const tokenOption = screen.getByText('second');
+
+    await userEvent.click(tokenOption);
     await userEvent.type(tokenNameInput, 'test app name');
     await userEvent.type(appRedirectUrlInput, 'https://example.com');
     await userEvent.type(appVerificationUrlInput, 'https://example.com');

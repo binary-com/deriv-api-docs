@@ -123,8 +123,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
         Name your token and click on Create to generate your token.
       </Text>
-      <input type='text' name='name' {...register('name')} />
-      <Button type='submit'>Create Token</Button>
+      <div className={styles.customTextInput}>
+        <input type='text' name='name' {...register('name')} />
+        <Button type='submit'>Create</Button>
+      </div>
     </form>
   );
 };
