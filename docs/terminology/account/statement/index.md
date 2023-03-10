@@ -6,11 +6,15 @@ sidebar_label: Statement
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - statement
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - statement
+  - terminology
+description: What is the Statement API call?
 ---
 
-What is statement in deriv applications?
+### What is the Statement API call?
+
+Retrieve a summary of account transactions, according to given search criteria.

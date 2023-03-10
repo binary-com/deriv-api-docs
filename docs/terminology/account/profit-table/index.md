@@ -1,16 +1,22 @@
 ---
-title: Profit Table
+title: Profit table
 hide_title: false
 draft: false
-sidebar_label: Profit Table
+sidebar_label: Profit table
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - profit
+  - table
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - profit
+  - table
+  - terminology
+description: What is the Profit Table API call?
 ---
 
-What is Profit Table in deriv applications?
+What is the Profit Table API call?
+
+Retrieve a summary of account Profit Table, according to given search criteria.

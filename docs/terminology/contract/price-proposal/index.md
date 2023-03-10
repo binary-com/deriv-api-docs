@@ -1,16 +1,22 @@
 ---
-title: Price Proposal
+title: Price proposal
 hide_title: false
 draft: false
-sidebar_label: Price Proposal
+sidebar_label: Price proposal
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - price
+  - proposal
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - price
+  - proposal
+  - terminology
+description: What is the Price proposal API call?
 ---
 
-What is Price Proposal in deriv applications?
+### What is the Price proposal API call?
+
+Gets latest price for a specific contract.
