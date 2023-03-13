@@ -19,4 +19,4 @@ description: What is the Buy Contract API call?
 
 ### What is the Buy Contract API call?
 
-Buy a Contract
+Buy a Contract.

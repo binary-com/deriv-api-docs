@@ -6,11 +6,17 @@ sidebar_label: Payment Methods
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - payment
+  - methods
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - payment
+  - methods
+  - terminology
+description: What is the Payment Methods API call?
 ---
 
-What is Payment Methods in deriv applications?
+### What is the Payment Methods API call?
+
+Will return a list payment methods available for the given country. If the request is authenticated the client's residence country will be used.
