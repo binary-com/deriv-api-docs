@@ -46,7 +46,6 @@ const EndPoint = () => {
           <div className={styles.content}>
             <div className={styles.customTextInput} id='custom-text-input'>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>Server URL</label>
                 <input
                   {...register('server_url', {
                     required: {
@@ -63,14 +62,14 @@ const EndPoint = () => {
                   className={styles.textInput}
                   required
                 />
+                <label className={styles.inlineLabel}>Server URL</label>
                 {errors.server_url && (
-                  <span data-testid='server_error' className={styles.errorMessage}>
+                  <div data-testid='server_error' className={styles.errorMessage}>
                     {errors.server_url.message}
-                  </span>
+                  </div>
                 )}
               </div>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>App ID</label>
                 <input
                   {...register('app_id', {
                     required: {
@@ -87,10 +86,11 @@ const EndPoint = () => {
                   placeholder='e.g. 9999'
                   required
                 />
+                <label className={styles.inlineLabel}>App ID</label>
                 {errors.app_id && (
-                  <span data-testid='app_id_error' className={styles.errorMessage}>
+                  <div data-testid='app_id_error' className={styles.errorMessage}>
                     {errors.app_id.message}
-                  </span>
+                  </div>
                 )}
               </div>
             </div>
