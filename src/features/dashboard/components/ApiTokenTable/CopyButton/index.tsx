@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../token-cell.module.scss';
 import CopyTokenDialog from '../CopyTokenDialog';
 
-type THasAdminScope = {
+type TCopyButton = {
   cell: {
     value: string;
     row: {
@@ -13,7 +13,7 @@ type THasAdminScope = {
   };
 };
 
-const CopyButton = ({ cell }: THasAdminScope) => {
+const CopyButton = ({ cell }: TCopyButton) => {
   const [is_copying_token, setIsCopyingToken] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
 
