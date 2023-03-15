@@ -27,7 +27,6 @@
     .customTextInput {
       border-radius: 4px;
       align-items: center;
-      border-radius: 4px;
       display: flex;
       flex-direction: column;
       line-height: 16px;
@@ -67,8 +66,8 @@
           background-color: var(--colors-primary-background);
           pointer-events: none;
           white-space: nowrap;
-          left: 10px;
-          top: -8px;
+          left: rem(1);
+          top: rem(-0.8);
         }
         .textInput {
           background: none;
