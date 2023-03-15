@@ -10,6 +10,7 @@ import SelectedToken from '@site/src/components/CustomSelectDropdown/token-dropd
 import TokenDropdown from '@site/src/components/CustomSelectDropdown/token-dropdown/TokenDropdown';
 import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-dropdown/SelectedAccount';
 import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-dropdown/AccountDropdown';
+import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
 
 type TAppFormProps = {
@@ -204,54 +205,43 @@ const AppForm = ({
                   </div>
                 </div>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('read')} id='read-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox name='read' id='read-scope' register={register('read')} />
                 <label htmlFor='read-scope'>
                   <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('trade')} id='trade-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox name='trade' id='trade-scope' register={register('trade')} />
                 <label htmlFor='trade-scope'>
                   <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your clients&apos;
                   behalf.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input
-                    {...register('trading_information')}
-                    id='trading_information-scope'
-                    type='checkbox'
-                  />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox
+                  name='trading_information'
+                  id='trading_information-scope'
+                  register={register('trading_information')}
+                />
                 <label htmlFor='trading_information-scope'>
                   <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
                   trading information, including their account balance.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('payments')} id='payments-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox
+                  name='payments'
+                  id='payments-scope'
+                  register={register('payments')}
+                />
                 <label htmlFor='payments-scope'>
                   <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on your
                   clients&rsquo; behalf.
                 </label>
               </div>
-              <div className={`${styles.customCheckboxContainer} mb-0`}>
-                <div>
-                  <input {...register('admin')} id='admin-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={`${styles.customCheckboxWrapper} mb-0`}>
+                <CustomCheckbox name='admin' id='admin-scope' register={register('admin')} />
                 <label htmlFor='admin-scope'>
                   <b>Admin</b>: Full account access, including the access to manage security tokens.
                 </label>

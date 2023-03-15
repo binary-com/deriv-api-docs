@@ -1,23 +1,20 @@
 import React, { useMemo, useCallback } from 'react';
-import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 import { Modal } from '@deriv/ui';
-import { useDeleteApp } from '../../../hooks/useDeleteApp';
+import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 
-type TDeleteAppDialogProps = {
-  appId: number;
-  onClose: () => void;
+type TDeleteTokendialog = {
+  setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onDelete: () => void;
 };
 
-const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
-  const { deleteApp } = useDeleteApp();
-
+const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => {
   const onOpenChange = useCallback(
     (open: boolean) => {
       if (!open) {
-        onClose();
+        setToggleModal(false);
       }
     },
-    [onClose],
+    [setToggleModal],
   );
 
   const actionButtons: TModalActionButton[] = useMemo(
@@ -27,8 +24,8 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
         text: 'Yes, delete',
         color: 'primary',
         onClick: () => {
-          deleteApp(appId);
-          onClose();
+          setToggleModal(false);
+          onDelete();
         },
       },
       {
@@ -36,11 +33,11 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
         text: 'No, keep it',
         color: 'secondary',
         onClick: () => {
-          onClose();
+          setToggleModal(false);
         },
       },
     ],
-    [appId, deleteApp, onClose],
+    [setToggleModal],
   );
 
   return (
@@ -48,8 +45,8 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
       <Modal.Portal>
         <Modal.Overlay />
         <Modal.DialogContent
-          title='Delete app'
-          content='Are you sure you want to delete this app?'
+          title='Deleting token'
+          content='Are you sure you want to delete this token?'
           action_buttons={actionButtons}
           has_close_button
         />
@@ -58,4 +55,4 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
   );
 };
 
-export default DeleteAppDialog;
+export default DeleteTokenDialog;

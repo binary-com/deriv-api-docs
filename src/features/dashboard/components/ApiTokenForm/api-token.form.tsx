@@ -1,13 +1,13 @@
-import { Button, Text } from '@deriv/ui';
 import React, { HTMLAttributes, useCallback } from 'react';
+import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
+import { Circles } from 'react-loader-spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { scopesObjectToArray } from '@site/src/utils';
+import ApiTokenCard from '../ApiTokenCard';
+import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
-import ApiTokenCard from '../ApiTokenCard';
-import { Circles } from 'react-loader-spinner';
-import { scopesObjectToArray } from '@site/src/utils';
-import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 
 const schema = yup
   .object({

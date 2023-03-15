@@ -131,8 +131,12 @@ fieldset .customTextInput:last-child {
   }
 }
 
-.customCheckboxContainer {
+.customCheckboxWrapper {
   display: flex;
   gap: rem(1);
   margin: rem(1) 0;
+  
+  label {
+    cursor: pointer;
+  }
 }
