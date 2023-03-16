@@ -17,8 +17,8 @@ const ApiTokenCard = ({ register, name, label, description, ...rest }: IApiToken
   return (
     <div className={clsx(styles.api_token_card)} {...rest}>
       <div className={styles.api_token_card_input}>
-        <CustomCheckbox name={name} register={register(name)} />
-        <label data-testid={'card-label'} htmlFor={name}>
+        <CustomCheckbox name={name} id={`${name}-scope`} register={register(name)} />
+        <label data-testid={'card-label'} htmlFor={`${name}-scope`}>
           {label}
         </label>
       </div>

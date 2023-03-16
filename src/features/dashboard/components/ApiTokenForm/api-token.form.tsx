@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback } from 'react';
+import React, { HTMLAttributes, useCallback, useState } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -75,7 +75,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       const selectedTokenScope = scopesObjectToArray({
         admin: data.admin,
         payments: data.payments,
-        read: data.trade,
+        read: data.read,
         trade: data.trade,
         trading_information: data.trading_information,
       });
@@ -94,38 +94,56 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
 
   return (
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
-      <Circles
-        height='100'
-        width='100'
-        color='#d44c0d'
-        ariaLabel='circles-loading'
-        wrapperClass='loading'
-        visible={isCreatingToken}
-      />
-      <Text as={'p'} type={'paragraph-1'} data-testid={'first-step-title'}>
-        Select scopes based on the access you need.
-      </Text>
-      <div className={styles.card_wrapper}>
-        {scopes.map((item) => (
-          <ApiTokenCard
-            data-testid={`api-token-card-${item.name}`}
-            key={item.name}
-            name={item.name}
-            label={item.label}
-            description={item.description}
-            onClick={() => {
-              onCardClick(item.name);
-            }}
-            register={register}
-          />
-        ))}
-      </div>
-      <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
-        Name your token and click on Create to generate your token.
-      </Text>
-      <div className={styles.customTextInput}>
-        <input type='text' name='name' {...register('name')} />
-        <Button type='submit'>Create</Button>
+      <div className={styles.steps_line} />
+      <div>
+        <Circles
+          height='100'
+          width='100'
+          color='#d44c0d'
+          ariaLabel='circles-loading'
+          wrapperClass='loading'
+          visible={isCreatingToken}
+        />
+        <div className={styles.step_title}>
+          <div className={`${styles.first_step} ${styles.step}`}>
+            <Text as={'p'} type={'paragraph-1'} data-testid={'first-step-title'}>
+              Select scopes based on the access you need.
+            </Text>
+          </div>
+        </div>
+        <div className={styles.card_wrapper}>
+          {scopes.map((item) => (
+            <ApiTokenCard
+              data-testid={`api-token-card-${item.name}`}
+              key={item.name}
+              name={item.name}
+              label={item.label}
+              description={item.description}
+              onClick={() => {
+                onCardClick(item.name);
+              }}
+              register={register}
+            />
+          ))}
+        </div>
+        <div className={styles.step_title}>
+          <div className={`${styles.second_step} ${styles.step}`}>
+            <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
+              Name your token and click on Create to generate your token.
+            </Text>
+          </div>
+        </div>
+        <div className={styles.customTextInput}>
+          <input type='text' name='name' {...register('name')} />
+          <Button type='submit'>Create</Button>
+        </div>
+        <div className={styles.step_title}>
+          <div className={`${styles.third_step} ${styles.step}`}>
+            <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>
+              Copy and paste the token into the app.
+            </Text>
+          </div>
+        </div>
       </div>
     </form>
   );

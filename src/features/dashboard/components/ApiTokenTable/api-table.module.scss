@@ -1,5 +1,8 @@
 @use 'src/styles/utility' as *;
 
 .api_table {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: rem(30);
   min-height: 10rem;
 }

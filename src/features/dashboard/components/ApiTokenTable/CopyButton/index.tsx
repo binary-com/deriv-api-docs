@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
-import styles from '../token-cell.module.scss';
 import CopyTokenDialog from '../CopyTokenDialog';
+import { CellProps } from 'react-table';
+import { TTokenType } from '@site/src/types';
+import styles from '../token-cell.module.scss';
 
-type TCopyButton = {
-  cell: {
-    value: string;
-    row: {
-      original: {
-        scopes: string[];
-      };
-    };
-  };
-};
-
-const CopyButton = ({ cell }: TCopyButton) => {
-  const [is_copying_token, setIsCopyingToken] = useState(false);
+const CopyButton = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, string>>) => {
   const [toggle_modal, setToggleModal] = useState(false);
-
+  const [is_copying_token, setIsCopyingToken] = useState(false);
   const is_copying = is_copying_token ? styles.is_copying : '';
-
   const has_admin_scope = cell.row?.original?.scopes?.includes('admin');
 
   const copiedToken = () => {

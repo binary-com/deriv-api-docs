@@ -50,7 +50,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
         payments: data.payments,
-        read: data.trade,
+        read: data.read,
         trade: data.trade,
         trading_information: data.trading_information,
       });

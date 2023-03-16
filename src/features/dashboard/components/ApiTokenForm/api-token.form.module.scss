@@ -1,5 +1,53 @@
 @use 'src/styles/utility' as *;
 
+form {
+  display: flex;
+  .steps_line {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 1px;
+    background-color: var(--colors-coral500);
+    margin-right: rem(2);
+  }
+  .step_title {
+    position: relative;
+    .step {
+      &::before {
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: rem(2.4);
+        height: rem(2.4);
+        left: rem(-3.2);
+        border-radius: 100%;
+        background-color: var(--colors-coral500);
+      }
+      &.first_step {
+        margin-bottom: rem(2.4);
+        &::before { 
+          content: '1';
+        }
+      }
+      &.second_step {
+        margin: rem(2.4) 0;
+        &::before {
+          content: '2';
+        }
+      }
+      &.third_step {
+        margin-top: rem(2.4);
+        &::before {
+          content: '3';
+        }
+      }
+    }
+  }
+}
+
 .customTextInput {
   align-items: center;
   border: 1px solid var(--colors-greyLight400);

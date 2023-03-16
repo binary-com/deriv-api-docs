@@ -17,7 +17,6 @@
     align-items: center;
     gap: rem(1);
     button {
-        cursor: pointer;
         position: relative;
         width: rem(1.5);
         height: rem(1.5);
@@ -28,6 +27,7 @@
         border-radius: 100%;
         padding: rem(0.3);
         &.copy_button {
+            cursor: copy;
             background-image: url(/img/copy.svg);
         }
         &:hover {
@@ -59,8 +59,11 @@
                 left: 50%;
             }
         }
-        &.eye_button:hover::after {
-            content: 'Hide this token';
+        &.eye_button {
+            cursor: pointer;
+            &:hover::after {
+                content: 'Hide this token';
+            }
         }
         &.copy_button {
             &:hover::after {

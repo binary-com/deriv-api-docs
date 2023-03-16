@@ -11,7 +11,7 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
     const TOKEN_LENGTH = 14;
     const element_array = [];
     for (let i = 0; i <= TOKEN_LENGTH; i++) {
-      element_array.push(<div className={styles.hidden_character} />);
+      element_array.push(<div key={i} className={styles.hidden_character} />);
     }
     return <div className={styles.hidden_container}>{element_array}</div>;
   };
@@ -19,6 +19,7 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
   return (
     <div data-testid={'token-cell'} className={styles.token_cell}>
       <div>{is_hiding_token ? <HiddenToken /> : cell.value}</div>
+      {/* TODO: Have to fix this typescript error (don't know solution yet) */}
       <CopyButton cell={cell} />
       <button
         onClick={() => setIsHidingToken(!is_hiding_token)}

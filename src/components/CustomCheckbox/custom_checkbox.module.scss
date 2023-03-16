@@ -1,6 +1,9 @@
 @use 'src/styles/utility' as *;
 
 .customCheckboxContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     height: rem(1.6);
     min-width: rem(1.6);
@@ -20,7 +23,13 @@
         z-index: 1;
     }
     input {
-        visibility: hidden;
+        // The original checkbox has to be hidden, but still be clickable
+        // Hence, opacity 0 is used instead of visibility or display
+        cursor: pointer;
+        opacity: 0;
+        z-index: 2;
+        width: rem(1.5);
+        height: rem(1.5);
         position: absolute;
         &:checked + .customCheckbox {
             background-image: url(/img/check.svg);

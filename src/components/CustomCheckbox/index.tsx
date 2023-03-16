@@ -8,11 +8,13 @@ type TCustomCheckbox = {
   register: UseFormRegisterReturn;
 };
 
-const CustomCheckbox = ({ name, register, id = null }: TCustomCheckbox) => (
-  <div className={styles.customCheckboxContainer}>
-    <input name={name} id={id} type={'checkbox'} {...register} />
-    <span className={styles.customCheckbox} />
-  </div>
-);
+const CustomCheckbox = ({ name, register, id = null }: TCustomCheckbox) => {
+  return (
+    <div className={styles.customCheckboxContainer}>
+      <input name={name} id={id} type='checkbox' {...register} />
+      <span className={styles.customCheckbox} />
+    </div>
+  );
+};
 
 export default CustomCheckbox;

@@ -11,7 +11,7 @@ const ScopesCell = <T extends object>({
         return (
           <span
             key={scopes}
-            className={`${styles.scope}  ${scopes === 'admin' ? styles.adminScope : ''}`}
+            className={`${styles.scope} ${scopes === 'admin' ? styles.adminScope : ''}`}
           >
             {scopes.charAt(0).toUpperCase() + scopes.slice(1).replace('_', ' ')}
           </span>
