@@ -36,6 +36,10 @@ const EndPoint = () => {
     window.location.reload();
   };
 
+  const current_url = `wss://${localStorage.getItem(
+    'config.server_url',
+  )}/websockets/v3?app_id=${localStorage.getItem('config.app_id')}&l=EN&brand=deriv`;
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
@@ -93,6 +97,10 @@ const EndPoint = () => {
                   </div>
                 )}
               </div>
+            </div>
+            <div className={styles.currentUrl}>
+              <span className={styles.urlLabel}>Connected to :</span>
+              <div className={styles.urlLink}>{current_url}</div>
             </div>
             <div className={styles.buttons}>
               <Button type='submit' color='primary' disabled={Object.keys(errors).length > 0}>

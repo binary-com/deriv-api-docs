@@ -63,7 +63,7 @@
           line-height: var(--text-lh-xl);
           color: var(--colors-greyLight600);
           padding: rem(0.2) rem(0.4);
-          background-color: var(--colors-primary-background);
+          background-color: var(--ifm-background-surface-color);
           pointer-events: none;
           white-space: nowrap;
           left: rem(1);
@@ -95,6 +95,25 @@
           font-weight: 400;
           padding: rem(0.5) rem(1);
         }
+      }
+    }
+    .currentUrl {
+      display: flex;
+      flex-direction: row;
+      font-size: var(--text-size-sm);
+      padding: 1rem;
+
+      .urlLabel {
+        font-weight: 700;
+        font-size: var(--text-size-sm);
+      }
+      .urlLink {
+        border-radius: 4px;
+        padding: 0.2rem 0.4rem;
+        color: #c7254e; //var(--wine-01);
+        font-size: 90%;
+        border: 1px solid #f0f1f3a3;
+        font-weight: 400;
       }
     }
     .buttons {
