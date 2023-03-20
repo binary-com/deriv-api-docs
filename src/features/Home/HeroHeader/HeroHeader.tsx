@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@deriv/ui';
+import { Button, Text } from '@deriv/ui';
 import styles from './HeroHeader.module.scss';
 
 export const HeroHeader = () => {
@@ -32,7 +32,13 @@ export const HeroHeader = () => {
           Use our powerful, flexible, and free API to build a custom trading <br />
           platform - for yourself or for your business.
         </Text>
+        <a href='/docs/intro'>
+          <Button type='button' className={styles.HeroButton}>
+            Getting started
+          </Button>
+        </a>
       </div>
     </div>
   );
 };
+// onClick={handleClick}
