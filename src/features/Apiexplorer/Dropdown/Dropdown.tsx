@@ -1,22 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { playground_requests } from '@site/src/utils/playground_requests';
 import styles from './Dropdown.module.scss';
+import clsx from 'clsx';
+import { useOnClickOutside } from 'usehooks-ts';
 
 type TDropdown = {
   selected: string;
-  setSelected: (string) => void;
+  setSelected: (value: string) => void;
   selected_value: string;
-  handleChange: (event, string) => void;
+  handleChange: (event: React.MouseEvent<HTMLOptionElement, MouseEvent>, value: string) => void;
 };
 
 type TDropdownList = {
   selected: string;
-  setSelected: (string) => void;
+  setSelected: (value: string) => void;
   selected_value: string;
-  handleChange: (event, string) => void;
+  handleChange: (event: React.MouseEvent<HTMLOptionElement, MouseEvent>, value: string) => void;
+
   searchResults: string;
-  setIsActive: (boolean) => void;
-  setSearchResults: (string) => void;
+  setIsActive: (value: boolean) => void;
+  setSearchResults: (result: string) => void;
 };
 
 const DropdownList = ({
@@ -57,9 +60,9 @@ const DropdownList = ({
                 setIsActive(false);
                 handleChange(e, option.name);
               }}
-              className={`${styles.dropdownItem}  ${
-                selected === option.title ? styles.dropdownSelected : ''
-              }`}
+              className={clsx(styles.dropdownItem, {
+                [styles.dropdownSelected]: selected === option.title,
+              })}
               data-testid={`apiDropdownItems{option.name}`}
             >
               {option.title}
@@ -89,19 +92,14 @@ export const Dropdown = ({ selected, setSelected, handleChange, selected_value }
     setSearchResults('');
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, []);
+  useOnClickOutside(ref, handleClickOutside);
 
   return (
     <div>
       <div className={styles.dropdown} ref={ref}>
         <div className={styles.dropdownBtn} onClick={handleToggleDropdown} data-testid='dropdown'>
           <span>{selected_value}</span>
-          <span className={`${styles.arrow} ${isActive ? styles.down : ''}`} />
+          <span className={clsx(styles.arrow, { [styles.down]: isActive })} />
         </div>
         {isActive && (
           <div className={`${styles.dropdownContent} ${toggle ? styles.show : ''}`}>

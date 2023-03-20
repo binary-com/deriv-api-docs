@@ -2,8 +2,8 @@
 import React from 'react';
 import styles from './Schema.module.scss';
 import RecursiveProperties from './RecursiveProperties';
-import { TSourceButton } from './SchemaObjectContent';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import SourceButton from './SourceButton';
 
 export type JSONSchemaType = {
   jsonSchema: {
@@ -11,19 +11,6 @@ export type JSONSchemaType = {
     default?: any;
     info?: any;
   };
-};
-
-const SourceButton = ({ is_code_open, setIsCodeOpen }: TSourceButton) => {
-  return (
-    <div
-      onClick={() => setIsCodeOpen(!is_code_open)}
-      className={styles.sourceButtonMain}
-      title='JSON'
-    >
-      {'{'}
-      {'}'}
-    </div>
-  );
 };
 
 const Properities = ({ jsonSchema }: JSONSchemaType) => {
@@ -41,15 +28,14 @@ const Properities = ({ jsonSchema }: JSONSchemaType) => {
   return (
     <div>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
-      {is_code_open && (
+      {is_code_open ? (
         <BrowserOnly fallback={<div>Loading...</div>}>
           {() => {
             const ReactJson = require('react-json-view').default;
             return <ReactJson src={JSON.parse(data)} theme='tube' />;
           }}
         </BrowserOnly>
-      )}
-      {!is_code_open && (
+      ) : (
         <RecursiveProperties
           is_open
           properties={jsonSchema.properties}

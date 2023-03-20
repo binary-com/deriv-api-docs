@@ -1,11 +1,12 @@
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
+import clsx from 'clsx';
 import React from 'react';
 import RequestResponseRenderer from '../RequestResponseRenderer';
 import style from './RequestJSONBox.module.scss';
 
 interface TRequestJSONBox<T extends TSocketEndpointNames> {
-  handleChange: (e) => void;
-  request_example: any;
+  handleChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+  request_example: string;
   name: T;
   auth_required: number;
 }
@@ -22,7 +23,7 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
         <label className={style.inlineLabel}>Request JSON</label>
         <textarea
           id='playground-request'
-          className={`${style.textareaRequest} ${style.playgroundRequest}`}
+          className={clsx(style.textareaRequest, style.playgroundRequest)}
           placeholder={'Request JSON'}
           onChange={handleChange}
           value={request_example}
