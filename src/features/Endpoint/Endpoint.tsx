@@ -36,9 +36,9 @@ const EndPoint = () => {
     window.location.reload();
   };
 
-  const current_url = `wss://${localStorage.getItem(
-    'config.server_url',
-  )}/websockets/v3?app_id=${localStorage.getItem('config.app_id')}&l=EN&brand=deriv`;
+  const server_url = localStorage.getItem('config.server_url');
+  const app_id = localStorage.getItem('config.app_id');
+  const current_url = `wss://${server_url}/websockets/v3?app_id=${app_id}&l=EN&brand=deriv`;
 
   return (
     <React.Fragment>
