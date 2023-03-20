@@ -6,11 +6,15 @@ sidebar_label: Portfolio
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - portfolio
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - portfolio
+  - terminology
+description: What is the Portfolio API call?
 ---
 
-What is Portfolio in deriv applications?
+### What is the Portfolio API call?
+
+Receive information about my current portfolio of outstanding options.

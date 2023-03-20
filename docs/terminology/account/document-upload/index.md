@@ -6,11 +6,17 @@ sidebar_label: Document Upload
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - document
+  - upload
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - document
+  - upload
+  - terminology
+description: What is the Document Upload API call?
 ---
 
-What is Document Upload in deriv applications?
+### What is the Document Upload API call?
+
+Request KYC information from client

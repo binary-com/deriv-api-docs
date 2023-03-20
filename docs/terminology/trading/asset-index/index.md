@@ -1,16 +1,24 @@
 ---
-title: Asset Index
+title: Asset index
 hide_title: false
 draft: false
-sidebar_label: Asset Index
+sidebar_label: Asset index
 sidebar_position: 4
 tags:
   - concepts
-  - active-symbols
+  - asset
+  - index
+  - terminology
 keywords:
   - concepts
-  - active-symbols
-description: What is active active symbols in deriv api
+  - asset
+  - index
+  - terminology
+description: What is the Asset index API call?
 ---
 
-What is Asset Index in deriv applications?
+### What is the Asset index API call?
+
+Retrieve a list of all available underlyings and the corresponding contract types and duration boundaries.
+
+If the user is logged in, only the assets available for that user's landing company will be returned.
