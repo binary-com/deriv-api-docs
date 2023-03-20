@@ -17,6 +17,6 @@ keywords:
 description: What is the Profit Table API call?
 ---
 
-What is the Profit Table API call?
+### What is the Profit Table API call?
 
 Retrieve a summary of account Profit Table, according to given search criteria.

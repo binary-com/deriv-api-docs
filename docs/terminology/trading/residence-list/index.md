@@ -1,17 +1,25 @@
 ---
-title: Residence List
+title: Countries List
 hide_title: false
 draft: false
-sidebar_label: Residence List
+sidebar_label: Countries List
 sidebar_position: 2
 tags:
   - concepts
-  - resident-list
+  - countries
+  - resident
+  - list
+  - terminology
 keywords:
   - concepts
-  - resident-list
-description: what is resident list in dervi api
+  - countries
+  - resident
+  - list
+  - terminology
+description: what is the Countries List API call?
 ---
+
+### What is the Countries List API call?
 
 List of countries and 2-letter country codes, suitable for populating the account opening form.
 
@@ -62,4 +70,4 @@ the example list can be something like so:
 ]
 ```
 
-You can read more about the `Resident List` on [API Explorer - Resident List](https://api.deriv.com/api-explorer#residence_list)
+You can read more about the `Countries List` on [API Explorer - Countries List](https://api.deriv.com/api-explorer#residence_list)
