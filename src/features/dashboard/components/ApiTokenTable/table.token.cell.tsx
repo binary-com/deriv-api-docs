@@ -19,11 +19,11 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
   return (
     <div data-testid={'token-cell'} className={styles.token_cell}>
       <div>{is_hiding_token ? <HiddenToken /> : cell.value}</div>
-      {/* TODO: Have to fix this typescript error (don't know solution yet) */}
       <CopyButton cell={cell} />
       <button
         onClick={() => setIsHidingToken(!is_hiding_token)}
         className={styles.eye_button}
+        data-testid='eye-button'
         style={{
           backgroundImage: is_hiding_token ? 'url(/img/eye_closed.svg)' : 'url(/img/eye_open.svg)',
         }}

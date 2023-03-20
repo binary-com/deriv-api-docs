@@ -2,7 +2,7 @@ import React from 'react';
 import { CURRENCY_MAP } from '@site/src/utils';
 
 const CurrencyIcon = ({ currency }: { currency: string }) => {
-  const icon = CURRENCY_MAP.get(currency)?.icon;
+  const icon = CURRENCY_MAP?.get(currency)?.icon;
 
   return (
     <img

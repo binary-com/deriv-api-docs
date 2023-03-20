@@ -10,7 +10,7 @@ const AccountDropdown = () => {
   const { loginAccounts, currentLoginAccount } = useAuthContext();
 
   const isNotCurrentAccount = (account_name: string) => {
-    return account_name !== currentLoginAccount.name;
+    return account_name !== currentLoginAccount?.name;
   };
 
   return (

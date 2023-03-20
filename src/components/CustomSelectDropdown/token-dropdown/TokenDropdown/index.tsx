@@ -14,7 +14,8 @@ const TokenDropdown = () => {
 
   const isNotCurrentToken = (token_item: TTokenType) => {
     const is_not_admin_token =
-      token_item.display_name !== currentToken.display_name && token_item.scopes.includes('admin');
+      token_item?.display_name !== currentToken?.display_name &&
+      token_item?.scopes.includes('admin');
     return is_not_admin_token;
   };
 

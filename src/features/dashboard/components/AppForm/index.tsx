@@ -83,25 +83,29 @@ const AppForm = ({
               </div>
               {!is_update_mode && (
                 <React.Fragment>
-                  <CustomSelectDropdown
-                    label='Your account'
-                    value={currentLoginAccount.name}
-                    register={register('currency_account')}
-                    is_error={!accountHasAdminToken()}
-                  >
-                    <SelectedAccount />
-                    <AccountDropdown />
-                    <AccountErrorMessage />
-                  </CustomSelectDropdown>
+                  <div data-testid='select-account'>
+                    <CustomSelectDropdown
+                      label='Your account'
+                      value={currentLoginAccount?.name}
+                      register={register('currency_account')}
+                      is_error={!accountHasAdminToken()}
+                    >
+                      <SelectedAccount />
+                      <AccountDropdown />
+                      <AccountErrorMessage />
+                    </CustomSelectDropdown>
+                  </div>
                   <div
                     className={
                       !accountHasAdminToken() && !is_update_mode ? styles.disableTokenDropdown : ''
                     }
+                    data-testid='select-token'
                   >
                     <CustomSelectDropdown
                       label='Choose your API token with the admin scope'
                       value={admin_token}
                       register={register('api_token')}
+                      data-testid='select-token'
                     >
                       <SelectedToken />
                       <TokenDropdown />

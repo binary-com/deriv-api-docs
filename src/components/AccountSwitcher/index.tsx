@@ -3,7 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useLogout from '@site/src/hooks/useLogout';
 import useAccountSelector from '@site/src/hooks/useAccountSelector';
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from './account_switcher.module.scss';
 
 const AccountSwitcher = () => {
