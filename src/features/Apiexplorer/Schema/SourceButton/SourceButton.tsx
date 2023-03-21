@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Schema.module.scss';
+import styles from './SourceButton.module.scss';
 
 type TSourceButton = {
   is_code_open: boolean;

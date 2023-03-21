@@ -36,7 +36,7 @@ export const getIsBrowser = () => {
 export const getAccountsFromSearchParams = (searchParams: string) => {
   let accountCount = 0;
   const params = new URLSearchParams(searchParams);
-  const accounts: IUserLoginLoginAccount[] = [];
+  const accounts: IUserLoginAccount[] = [];
 
   for (const key of params.keys()) {
     if (key.includes('acct')) {

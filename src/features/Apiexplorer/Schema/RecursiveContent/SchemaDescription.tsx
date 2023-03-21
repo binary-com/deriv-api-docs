@@ -1,6 +1,6 @@
 import React from 'react';
-import { HighlightCode } from './HighlightCode';
-import styles from './Schema.module.scss';
+import { HighlightCode } from '../HighlightCode';
+import styles from '../Schema.module.scss';
 
 export type SchemaDescriptionTypes = {
   description: string;

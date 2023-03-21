@@ -1,9 +1,0 @@
-@use 'src/styles/utility' as *;
-
-.card_wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: rem(1.6);
-  padding-bottom: rem(2);
-  padding-right: rem(2);
-}

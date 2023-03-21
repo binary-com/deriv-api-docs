@@ -4,7 +4,7 @@ import styles from './Dropdown.module.scss';
 import clsx from 'clsx';
 import { useOnClickOutside } from 'usehooks-ts';
 
-type TDropdown = {
+export type TDropdown = {
   selected: string;
   setSelected: (value: string) => void;
   selected_value: string;

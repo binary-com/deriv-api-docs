@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import RecursiveProperties from './RecursiveProperties';
 import SchemaDescription from './SchemaDescription';
-import styles from './Schema.module.scss';
+import styles from '../Schema.module.scss';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import SourceButton from './SourceButton';
+import SourceButton from '../SourceButton/SourceButton';
 import SchemaBodyHeader from './SchemaBodyHeader';
 
 type TSchemaObjectContent = {

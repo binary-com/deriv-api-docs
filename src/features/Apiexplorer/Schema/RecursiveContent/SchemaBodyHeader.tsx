@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Schema.module.scss';
+import styles from '../Schema.module.scss';
 import clsx from 'clsx';
 
 type TSchemaBodyHeader = {

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 import styles from './Schema.module.scss';
-import RecursiveProperties from './RecursiveProperties';
+import RecursiveProperties from './RecursiveContent/RecursiveProperties';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import SourceButton from './SourceButton';
+import SourceButton from './SourceButton/SourceButton';
 
 export type JSONSchemaType = {
   jsonSchema: {
