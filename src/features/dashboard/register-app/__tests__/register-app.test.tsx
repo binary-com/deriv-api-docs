@@ -9,14 +9,6 @@ import { WS } from 'jest-websocket-mock';
 import { ApplicationObject } from '@deriv/api-types';
 import { render, screen, cleanup } from '@site/src/test-utils';
 
-jest.mock('@site/src/utils', () => ({
-  getIsBrowser: () => jest.fn(),
-  getCurrencyName: () => jest.fn(),
-  getServerConfig: () => jest.fn(),
-  isNotDemoCurrency: () => jest.fn(),
-  scopesObjectToArray: () => jest.fn(),
-}));
-
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<
@@ -24,6 +16,7 @@ const mockUseAuthContext = useAuthContext as jest.MockedFunction<
 >;
 
 mockUseAuthContext.mockImplementation(() => ({
+  updateCurrentLoginAccount: () => jest.fn(),
   currentLoginAccount: {
     name: 'account1',
     token: 'testtoken1',
@@ -50,6 +43,7 @@ const mockUseApiToken = useApiToken as jest.MockedFunction<
 >;
 
 mockUseApiToken.mockImplementation(() => ({
+  updateCurrentToken: () => jest.fn(),
   tokens: [
     {
       display_name: 'first',
@@ -149,7 +143,21 @@ describe('Update App Dialog', () => {
       name: 'Verification URL (optional)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
+    const selectAccountOption = screen.getByTestId('select-account');
+
+    await userEvent.click(selectAccountOption);
+
+    const userAccount = screen.getByText('account2');
+
+    await userEvent.click(userAccount);
+
+    await userEvent.click(selectTokenOption);
+
+    const selectToken = screen.getByText('second');
+
+    await userEvent.click(selectToken);
+
+    await userEvent.click(selectTokenOption);
     await userEvent.clear(tokenNameInput);
     await userEvent.type(tokenNameInput, 'test app name updated');
     await userEvent.type(appRedirectUrlInput, 'https://example.com');
@@ -215,8 +223,6 @@ describe('Update App Dialog', () => {
       name: 'Verification URL (optional)',
     });
 
-    // TODO: Make the user select the mocked user account
-    // TODO: Make the user select the mocked token with admin scope
     await userEvent.click(selectAccountOption);
 
     const userAccount = screen.getByText('account2');

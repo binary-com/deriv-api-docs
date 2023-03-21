@@ -1,8 +1,8 @@
-import { Button } from '@deriv/ui';
-import useWS from '@site/src/hooks/useWs';
-import { scopesObjectToArray } from '@site/src/utils';
 import React, { useCallback } from 'react';
+import useWS from '@site/src/hooks/useWs';
 import AppForm from '../components/AppForm';
+import { Button } from '@deriv/ui';
+import { scopesObjectToArray } from '@site/src/utils';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
 import { IRegisterAppForm } from '../types';
