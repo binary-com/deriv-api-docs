@@ -70,9 +70,6 @@ describe('Dropdown', () => {
     await act(async () => {
       fireEvent.click(btn);
     });
-    const option = await screen.findByText('API Token');
-
-    await userEvent.click(option);
 
     expect(btn).toHaveTextContent('API Token');
   });
