@@ -9,6 +9,15 @@ export const GetStarted = () => {
           Get started with our API in 3 simple steps:
         </Text>
         <div className={styles.cardContainer}>
+          <a href='/docs/resources/api-guide/' className={styles.mainPageCard} data-testid='guide'>
+            <div className={styles.header}>
+              <Text type='subtitle-1' bold className={styles.dark} as='h2'>
+                1. Learn about our API
+              </Text>
+              <div className={styles.guideIcon} />
+            </div>
+            <div className='content'>Understand basic concepts and terminologies.</div>
+          </a>
           <a
             target='_blank'
             href='https://deriv.com/signup/'
@@ -18,7 +27,7 @@ export const GetStarted = () => {
           >
             <div className={styles.header}>
               <Text type='subtitle-1' bold className={styles.dark} as='h2'>
-                1. Sign up
+                2. Sign up
               </Text>
               <div className={styles.signUpIcon} />
             </div>
@@ -31,23 +40,11 @@ export const GetStarted = () => {
           <a href='/app-registration' className={styles.mainPageCard} data-testid='register'>
             <div className={styles.header}>
               <Text type='subtitle-1' bold className={styles.dark} as='h2'>
-                2. Register your app
+                3. Register your app
               </Text>
               <div className={styles.registerYourAppIcon} />
             </div>
             <div className='content'>Fill out the registration form to start using Deriv API.</div>
-          </a>
-          <a href='/docs/resources/api-guide/' className={styles.mainPageCard} data-testid='guide'>
-            <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark} as='h2'>
-                3. Read our guide
-              </Text>
-              <div className={styles.guideIcon} />
-            </div>
-            <div className='content'>
-              Our API quick start guide covers the essentials you need to start building your app
-              right away.
-            </div>
           </a>
         </div>
         <span className={styles.termConditions}>
