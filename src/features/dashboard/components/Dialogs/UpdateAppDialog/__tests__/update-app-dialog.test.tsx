@@ -115,13 +115,10 @@ describe('Update App Dialog', () => {
   it('Should update application on submit click', async () => {
     const submitButton = screen.getByText('Update Application');
 
-    const selectTokenOption = screen.getByTestId('select-token');
-
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
     await userEvent.clear(tokenNameInput);
     await userEvent.type(tokenNameInput, 'test app name updated');
 
@@ -168,13 +165,10 @@ describe('Update App Dialog', () => {
   it('Should render error on error response', async () => {
     const submitButton = screen.getByText('Update Application');
 
-    const selectTokenOption = screen.getByTestId('select-token');
-
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
     await userEvent.clear(tokenNameInput);
     await userEvent.type(tokenNameInput, 'test app wrong name fake');
 

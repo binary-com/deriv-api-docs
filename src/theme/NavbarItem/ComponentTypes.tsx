@@ -12,6 +12,6 @@ import ApiTokenNavbarItem from '@site/src/components/ApiTokenNavbarItem';
 // We have to provide custom in the name of the component
 export default {
   ...ComponentTypes,
-  'custom-user-navar-item': UserNavbarItem,
+  'custom-user-navbar-item': UserNavbarItem,
   'custom-api-token-navbar-item': ApiTokenNavbarItem,
 };

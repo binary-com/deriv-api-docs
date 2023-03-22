@@ -37,6 +37,7 @@ fieldset .customTextInput:last-child {
     width: 100%;
     border: none;
     text-indent: rem(1.2);
+    font-size: rem(1.6);
     &:not(:placeholder-shown) ~ label {
       color: var(--colors-blue400);
       background-color: var(--ifm-color-emphasis-0);
@@ -44,7 +45,9 @@ fieldset .customTextInput:last-child {
       transform: translateY(rem(-2)) scale(0.75);
     }
     &:focus {
-      outline-color: none;
+      outline-color: unset;
+      outline: 1px solid var(--colors-blue500);
+      border-radius: 3px;
       & ~ label {
         color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
@@ -61,22 +64,25 @@ fieldset .customTextInput:last-child {
   justify-content: center;
   align-items: center;
   width: 100%;
+
   .formContent {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
-
-    select {
-      padding: 0 rem(3) 0 rem(1);
-      border: 1px solid #e0e0e0;
-      border-radius: 3px;
-      line-height: 36px;
-      height: rem(4);
-      background-color: var(--ifm-color-emphasis-0);
-      margin: rem(1) 0;
-      color: var(--ifm-color-emphasis-1000);
+    &.noAdmin {
+      .apiTokenWrapper {
+        ~ div,
+        .customTextInput {
+          opacity: 0.2;
+          pointer-events: none;
+        }
+      }
+    }
+    .disableTokenDropdown {
+      opacity: 0.2;
+      pointer-events: none;
     }
     .helperText {
       width: 100%;
@@ -84,16 +90,25 @@ fieldset .customTextInput:last-child {
       color: var(--colors-greyLight600);
       margin-bottom: 0;
     }
-    .formHeaderContainer {
+    .apiTokenWrapper {
       display: flex;
-      padding: rem(1) 0;
-      margin-top: rem(1.5);
       flex-direction: column;
+      gap: rem(2);
+      margin-bottom: rem(2);
+      .formHeaderContainer {
+        display: flex;
+        padding: rem(1) 0;
+        margin-top: rem(1.5);
+        flex-direction: column;
+      }
     }
   }
 }
 .submit_container {
   margin: rem(1) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .scopeItem {
   border: 1.6px solid var(--ifm-color-emphasis-800);
@@ -116,8 +131,12 @@ fieldset .customTextInput:last-child {
   }
 }
 
-.customCheckboxContainer {
+.customCheckboxWrapper {
   display: flex;
   gap: rem(1);
   margin: rem(1) 0;
+  
+  label {
+    cursor: pointer;
+  }
 }

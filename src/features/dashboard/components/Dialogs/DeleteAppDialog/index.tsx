@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 import { Modal } from '@deriv/ui';
 import { useDeleteApp } from '../../../hooks/useDeleteApp';
@@ -10,6 +10,15 @@ type TDeleteAppDialogProps = {
 
 const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
   const { deleteApp } = useDeleteApp();
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (!open) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   const actionButtons: TModalActionButton[] = useMemo(
     () => [
@@ -35,7 +44,7 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
   );
 
   return (
-    <Modal open={true}>
+    <Modal defaultOpen onOpenChange={onOpenChange}>
       <Modal.Portal>
         <Modal.Overlay />
         <Modal.DialogContent

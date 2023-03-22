@@ -2,20 +2,14 @@ import { Button } from '@deriv/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import { TTokenType } from '@site/src/types';
-import React, { useCallback } from 'react';
+import useTokenSelector from '@site/src/hooks/useTokenSelector';
+import React from 'react';
 import styles from './api_token_switcher.module.scss';
 
 const ApiTokenNavbarItem = () => {
   const { is_logged_in, is_authorized } = useAuthContext();
-  const { tokens, currentToken, updateCurrentToken, isLoadingTokens } = useApiToken();
-
-  const onSelectItem = useCallback(
-    (token: TTokenType) => {
-      updateCurrentToken(token);
-    },
-    [updateCurrentToken],
-  );
+  const { tokens, currentToken, isLoadingTokens } = useApiToken();
+  const { onSelectToken } = useTokenSelector();
 
   if (!is_logged_in || !is_authorized || isLoadingTokens) {
     return null;
@@ -41,7 +35,7 @@ const ApiTokenNavbarItem = () => {
               key={tokenItem.token}
               className={styles.DropdownMenuItem}
               onSelect={() => {
-                onSelectItem(tokenItem);
+                onSelectToken(tokenItem);
               }}
             >
               {`${tokenItem.display_name}`}

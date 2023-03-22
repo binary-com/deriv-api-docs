@@ -70,7 +70,7 @@ const config = {
             position: 'right',
           },
           {
-            type: 'custom-user-navar-item',
+            type: 'custom-user-navbar-item',
             position: 'right',
           },
           {

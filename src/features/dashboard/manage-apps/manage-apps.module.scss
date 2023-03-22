@@ -4,7 +4,7 @@
   width: 100%;
   display: inline-block;
   overflow: auto;
-  max-height: calc(100vh - rem(30));
+  max-height: calc(100vh - rem(35));
 }
 
 @mixin actionIcon {
@@ -47,7 +47,7 @@
     z-index: 1;
     opacity: 0;
     transition: opacity 1s;
-    font-size: 10px;
+    font-size: rem(1);
     transform: translateX(50%);
     right: 50%;
     bottom: rem(2.4);

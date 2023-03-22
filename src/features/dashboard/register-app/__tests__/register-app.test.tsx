@@ -1,12 +1,40 @@
-import { ApplicationObject } from '@deriv/api-types';
+import React from 'react';
+import userEvent from '@testing-library/user-event';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAppManager from '@site/src/hooks/useAppManager';
-import { render, screen, cleanup } from '@site/src/test-utils';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 import makeMockSocket from '@site/src/__mocks__/socket.mock';
-import userEvent from '@testing-library/user-event';
-import { WS } from 'jest-websocket-mock';
-import React from 'react';
 import AppRegistration from '..';
+import { WS } from 'jest-websocket-mock';
+import { ApplicationObject } from '@deriv/api-types';
+import { render, screen, cleanup } from '@site/src/test-utils';
+
+jest.mock('@site/src/hooks/useAuthContext');
+
+const mockUseAuthContext = useAuthContext as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAuthContext>>
+>;
+
+mockUseAuthContext.mockImplementation(() => ({
+  updateCurrentLoginAccount: () => jest.fn(),
+  currentLoginAccount: {
+    name: 'account1',
+    token: 'testtoken1',
+    currency: 'USD',
+  },
+  loginAccounts: [
+    {
+      name: 'account1',
+      token: 'testtoken1',
+      currency: 'USD',
+    },
+    {
+      name: 'account2',
+      token: 'testtoken2',
+      currency: 'USD',
+    },
+  ],
+}));
 
 jest.mock('@site/src/hooks/useApiToken');
 
@@ -15,6 +43,7 @@ const mockUseApiToken = useApiToken as jest.MockedFunction<
 >;
 
 mockUseApiToken.mockImplementation(() => ({
+  updateCurrentToken: () => jest.fn(),
   tokens: [
     {
       display_name: 'first',
@@ -114,7 +143,21 @@ describe('Update App Dialog', () => {
       name: 'Verification URL (optional)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
+    const selectAccountOption = screen.getByTestId('select-account');
+
+    await userEvent.click(selectAccountOption);
+
+    const userAccount = screen.getByText('account2');
+
+    await userEvent.click(userAccount);
+
+    await userEvent.click(selectTokenOption);
+
+    const selectToken = screen.getByText('second');
+
+    await userEvent.click(selectToken);
+
+    await userEvent.click(selectTokenOption);
     await userEvent.clear(tokenNameInput);
     await userEvent.type(tokenNameInput, 'test app name updated');
     await userEvent.type(appRedirectUrlInput, 'https://example.com');
@@ -165,6 +208,8 @@ describe('Update App Dialog', () => {
   it('Should render error on error response', async () => {
     const submitButton = screen.getByRole('submit');
 
+    const selectAccountOption = screen.getByTestId('select-account');
+
     const selectTokenOption = screen.getByTestId('select-token');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
@@ -178,7 +223,19 @@ describe('Update App Dialog', () => {
       name: 'Verification URL (optional)',
     });
 
-    await userEvent.selectOptions(selectTokenOption, 'second');
+    await userEvent.click(selectAccountOption);
+
+    const userAccount = screen.getByText('account2');
+
+    await userEvent.click(userAccount);
+
+    await userEvent.click(selectTokenOption);
+
+    const selectToken = screen.getByText('second');
+
+    await userEvent.click(selectToken);
+
+    await userEvent.click(selectTokenOption);
     await userEvent.clear(tokenNameInput);
     await userEvent.type(tokenNameInput, 'test app wrong name fake');
     await userEvent.type(appRedirectUrlInput, 'https://example.com');
@@ -202,7 +259,7 @@ describe('Update App Dialog', () => {
         app_register: 1,
         name: 'test app wrong name fake',
         redirect_uri: 'https://example.com',
-        req_id: 4,
+        req_id: 1,
         scopes: [],
         verification_uri: 'https://example.com',
       },

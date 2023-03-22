@@ -1,16 +1,32 @@
 @use 'src/styles/utility' as *;
 
 .api_token_card {
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
-  cursor: pointer;
   align-items: flex-start;
   flex-direction: column;
   gap: rem(1);
   border: 1px solid var(--ifm-color-emphasis-400);
   border-radius: rem(0.4);
+  padding: rem(1.6);
 
-  padding: rem(1);
+  p {
+    font-size: var(--fontSizes-2xs);
+  }
+
+  .warning_container {
+    display: flex;
+    gap: rem(1);
+    background-color : #FFAD3A29;
+    padding: rem(0.8);
+    font-size: var(--fontSizes-2xs);
+    img {
+      width: rem(2);
+      height: rem(2);
+    }
+  }
+
   &_input {
     display: flex;
     justify-content: flex-start;

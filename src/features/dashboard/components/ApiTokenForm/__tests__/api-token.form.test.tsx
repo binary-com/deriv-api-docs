@@ -96,7 +96,7 @@ describe('Home Page', () => {
 
     await userEvent.type(nameInput, 'test create token');
 
-    const submitButton = screen.getByRole('button', { name: /Create Token/i });
+    const submitButton = screen.getByRole('button', { name: /Create/i });
     await userEvent.click(submitButton);
 
     expect(mockCreateToken).toHaveBeenCalledTimes(1);

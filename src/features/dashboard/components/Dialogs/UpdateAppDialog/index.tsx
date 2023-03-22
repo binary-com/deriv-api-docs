@@ -1,12 +1,12 @@
-import { ApplicationObject } from '@deriv/api-types';
-import { Button, Modal } from '@deriv/ui';
-import useAppManager from '@site/src/hooks/useAppManager';
-import useWS from '@site/src/hooks/useWs';
-import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import React, { useCallback, useEffect } from 'react';
-import { IRegisterAppForm } from '../../../types';
 import AppForm from '../../AppForm';
+import useWS from '@site/src/hooks/useWs';
+import useAppManager from '@site/src/hooks/useAppManager';
+import { Button, Modal } from '@deriv/ui';
+import { IRegisterAppForm } from '../../../types';
+import { ApplicationObject } from '@deriv/api-types';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
+import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import styles from './update-app-dialog.module.scss';
 
 interface IUpdateAppDialog {
@@ -44,19 +44,21 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
+      const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
+      const has_verification_uri = verification_uri !== '' && { verification_uri };
 
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
         payments: data.payments,
-        read: data.trade,
+        read: data.read,
         trade: data.trade,
         trading_information: data.trading_information,
       });
       updateApp({
         app_update: data.app_id,
         name,
-        redirect_uri,
-        verification_uri,
+        ...has_redirect_uri,
+        ...has_verification_uri,
         app_markup_percentage: Number(app_markup_percentage),
         scopes: selectedScopes,
       });
@@ -87,6 +89,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
         >
           <div className={styles.update_app_content}>
             <AppForm
+              is_update_mode
               renderButtons={renderButtons}
               submit={onSubmit}
               initialValues={initialValues}

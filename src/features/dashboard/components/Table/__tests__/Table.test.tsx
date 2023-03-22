@@ -1,4 +1,4 @@
-import { render, screen, cleanup, within } from '@site/src/test-utils';
+import { render, screen, cleanup, within, fireEvent } from '@site/src/test-utils';
 import { TTokensArrayType } from '@site/src/types';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
@@ -80,8 +80,14 @@ describe('Table', () => {
   });
 
   it('Should render token cells properly', () => {
-    const tokenCells = screen.getAllByTestId('token-cell');
+    const eyeButtons = screen.getAllByTestId('eye-button');
+    expect(eyeButtons[0]).toBeInTheDocument();
 
+    eyeButtons.forEach((button) => {
+      fireEvent.click(button);
+    });
+
+    const tokenCells = screen.getAllByTestId('token-cell');
     expect(tokenCells.length).toBe(2);
 
     const tokenCellsTextContent = tokenCells.map((item) => item.textContent);
@@ -138,6 +144,9 @@ describe('Table', () => {
     const deleteButton = withinFirstCell.getByRole('button');
 
     await userEvent.click(deleteButton);
+
+    const modalButton = screen.getByText(/Yes, delete/i);
+    await userEvent.click(modalButton);
 
     expect(mockDeleteToken).toHaveBeenCalledTimes(1);
     expect(mockDeleteToken).toHaveBeenCalledWith('token_1');

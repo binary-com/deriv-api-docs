@@ -1,10 +1,16 @@
-import React, { ReactNode, useMemo } from 'react';
-
+import React, { ReactNode } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { appRegisterSchema, appEditSchema, IRegisterAppForm } from '../../types';
+import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
 import useApiToken from '@site/src/hooks/useApiToken';
-import { appRegisterSchema, IRegisterAppForm } from '../../types';
+import useAuthContext from '@site/src/hooks/useAuthContext';
+import SelectedToken from '@site/src/components/CustomSelectDropdown/token-dropdown/SelectedToken';
+import TokenDropdown from '@site/src/components/CustomSelectDropdown/token-dropdown/TokenDropdown';
+import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-dropdown/SelectedAccount';
+import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-dropdown/AccountDropdown';
+import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
 
 type TAppFormProps = {
@@ -12,59 +18,101 @@ type TAppFormProps = {
   isUpdating?: boolean;
   renderButtons: () => ReactNode;
   submit: (data: IRegisterAppForm) => void;
+  is_update_mode?: boolean;
 };
 
-const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
+const AppForm = ({
+  initialValues,
+  submit,
+  renderButtons,
+  is_update_mode = false,
+}: TAppFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IRegisterAppForm>({
     mode: 'onBlur',
-    resolver: yupResolver(appRegisterSchema),
+    resolver: yupResolver(is_update_mode ? appEditSchema : appRegisterSchema),
     defaultValues: initialValues,
   });
-  const { tokens } = useApiToken();
 
-  const adminTokens = useMemo(() => {
-    return tokens.filter((item) => item.scopes.includes('admin'));
-  }, [tokens]);
+  const { currentToken, tokens } = useApiToken();
+  const { currentLoginAccount } = useAuthContext();
+
+  const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
+
+  const accountHasAdminToken = () => {
+    const admin_check_array = [];
+    tokens.forEach((token) => {
+      const has_admin_scope = token?.scopes?.includes('admin');
+      has_admin_scope ? admin_check_array.push(true) : admin_check_array.push(false);
+    });
+    return admin_check_array.includes(true);
+  };
+
+  const AccountErrorMessage = () => (
+    <React.Fragment>
+      {!accountHasAdminToken() && (
+        <Text as='span' type='paragraph-1' className='error-message'>
+          This account doesn&apos;t have API tokens with the admin scope. Choose another account.
+        </Text>
+      )}
+    </React.Fragment>
+  );
 
   return (
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
-        <div className={styles.formContent}>
-          <div className={styles.formHeaderContainer}>
-            <Text as='p' type='paragraph-1' bold>
-              App information
-            </Text>
-            <Text as='p' type='paragraph-1'>
-              Select your api token ( it should have admin scope )
-            </Text>
-          </div>
-          <div className={`api-token-wrapper`}>
-            <div id='custom-text-input'>
-              <select
-                {...register('api_token')}
-                placeholder={'Please select Api Token'}
-                defaultValue={''}
-                id='api_token_input'
-                data-testid={'select-token'}
-              >
-                <option value={''}>Please select Api Token</option>
-                {adminTokens.map((item) => (
-                  <option key={item.display_name} value={item.display_name}>
-                    {item.display_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {errors.api_token && (
-              <Text as='span' type='paragraph-1' className='error-message'>
-                {errors.api_token.message}
-              </Text>
-            )}
-            <div className='first'>
+        <div
+          className={`${styles.formContent} ${
+            !admin_token && !is_update_mode ? styles.noAdmin : ''
+          }`}
+        >
+          <div>
+            <div className={styles.apiTokenWrapper}>
+              <div className={styles.formHeaderContainer}>
+                <Text as='p' type='paragraph-1' bold>
+                  App information
+                </Text>
+                {!is_update_mode && (
+                  <Text as='p' type='paragraph-1'>
+                    Select your api token ( it should have admin scope )
+                  </Text>
+                )}
+              </div>
+              {!is_update_mode && (
+                <React.Fragment>
+                  <div data-testid='select-account'>
+                    <CustomSelectDropdown
+                      label='Your account'
+                      value={currentLoginAccount?.name}
+                      register={register('currency_account')}
+                      is_error={!accountHasAdminToken()}
+                    >
+                      <SelectedAccount />
+                      <AccountDropdown />
+                      <AccountErrorMessage />
+                    </CustomSelectDropdown>
+                  </div>
+                  <div
+                    className={
+                      !accountHasAdminToken() && !is_update_mode ? styles.disableTokenDropdown : ''
+                    }
+                    data-testid='select-token'
+                  >
+                    <CustomSelectDropdown
+                      label='Choose your API token with the admin scope'
+                      value={admin_token}
+                      register={register('api_token')}
+                      data-testid='select-token'
+                    >
+                      <SelectedToken />
+                      <TokenDropdown />
+                    </CustomSelectDropdown>
+                  </div>
+                </React.Fragment>
+              )}
               <div className={styles.customTextInput} id='custom-text-input'>
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>
@@ -75,8 +123,6 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                 </Text>
               )}
             </div>
-          </div>
-          <div>
             <div className={styles.formHeaderContainer}>
               <h4>Markup</h4>
               <div>
@@ -163,54 +209,43 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
                   </div>
                 </div>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('read')} id='read-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox name='read' id='read-scope' register={register('read')} />
                 <label htmlFor='read-scope'>
                   <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('trade')} id='trade-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox name='trade' id='trade-scope' register={register('trade')} />
                 <label htmlFor='trade-scope'>
                   <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your clients&apos;
                   behalf.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input
-                    {...register('trading_information')}
-                    id='trading_information-scope'
-                    type='checkbox'
-                  />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox
+                  name='trading_information'
+                  id='trading_information-scope'
+                  register={register('trading_information')}
+                />
                 <label htmlFor='trading_information-scope'>
                   <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
                   trading information, including their account balance.
                 </label>
               </div>
-              <div className={styles.customCheckboxContainer}>
-                <div>
-                  <input {...register('payments')} id='payments-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={styles.customCheckboxWrapper}>
+                <CustomCheckbox
+                  name='payments'
+                  id='payments-scope'
+                  register={register('payments')}
+                />
                 <label htmlFor='payments-scope'>
                   <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on your
                   clients&rsquo; behalf.
                 </label>
               </div>
-              <div className={`${styles.customCheckboxContainer} mb-0`}>
-                <div>
-                  <input {...register('admin')} id='admin-scope' type='checkbox' />
-                  <span className={styles.customCheckbox} />
-                </div>
+              <div className={`${styles.customCheckboxWrapper} mb-0`}>
+                <CustomCheckbox name='admin' id='admin-scope' register={register('admin')} />
                 <label htmlFor='admin-scope'>
                   <b>Admin</b>: Full account access, including the access to manage security tokens.
                 </label>
@@ -219,7 +254,7 @@ const AppForm = ({ initialValues, submit, renderButtons }: TAppFormProps) => {
             <div className={styles.termsOfConditionRegister}>
               <span>
                 By registering your application, you acknowledge that you&lsquo;ve read and accepted
-                the Deriv API
+                the Deriv API{' '}
               </span>
               <a
                 href='https://deriv.com/tnc/business-partners-api-user.pdf'

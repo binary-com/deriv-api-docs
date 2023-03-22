@@ -29,7 +29,7 @@
       align-items: center;
       display: flex;
       flex-direction: column;
-      line-height: 16px;
+      line-height: rem(1.6);
       width: 100%;
       box-sizing: border-box;
       padding: rem(1);
@@ -54,6 +54,14 @@
             background-color: var(--ifm-color-emphasis-0);
             padding: 0 rem(0.4);
             transform: translateY(rem(-2)) scale(0.75);
+          }
+          &:focus {
+            outline-color: unset;
+            & ~ label {
+              color: var(--ifm-color-secondary-darkest);
+              padding: 0 rem(0.4);
+              transform: translateY(rem(-2)) scale(0.75);
+            }
           }
         }
         .inlineLabel {
