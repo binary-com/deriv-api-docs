@@ -117,9 +117,9 @@ const AppForm = ({
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>
               </div>
-              {errors.name && (
+              {errors && errors?.name && (
                 <Text as='span' type='paragraph-1' className='error-message'>
-                  {errors.name.message}
+                  {errors.name?.message}
                 </Text>
               )}
             </div>
@@ -150,9 +150,9 @@ const AppForm = ({
                   If you don&lsquo;t want to earn a markup, enter 0 here. Otherwise, enter a number
                   up to 5. Maximum: 5.00%.
                 </Text>
-                {errors.app_markup_percentage && (
+                {errors && errors?.app_markup_percentage && (
                   <Text as='span' type='paragraph-1' className='error-message'>
-                    {errors.app_markup_percentage.message}
+                    {errors.app_markup_percentage?.message}
                   </Text>
                 )}
               </div>
@@ -180,8 +180,8 @@ const AppForm = ({
                 *Please note that this URL will be used as the OAuth redirect URL for the OAuth
                 authorization.
               </p>
-              {errors.redirect_uri && (
-                <span className='error-message'>{errors.redirect_uri.message}</span>
+              {errors && errors?.redirect_uri && (
+                <span className='error-message'>{errors.redirect_uri?.message}</span>
               )}
             </div>
 
@@ -195,8 +195,8 @@ const AppForm = ({
                 />
                 <label htmlFor='app_verification_uri'>Verification URL (optional)</label>
               </div>
-              {errors.verification_uri && (
-                <span className='error-message'>{errors.verification_uri.message}</span>
+              {errors && errors?.verification_uri && (
+                <span className='error-message'>{errors.verification_uri?.message}</span>
               )}
             </div>
 
