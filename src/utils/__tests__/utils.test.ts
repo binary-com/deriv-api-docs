@@ -1,7 +1,31 @@
 import * as utils from '@site/src/utils';
 import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
-const { getAccountsFromSearchParams, getAppId, getIsBrowser, getIsLocalhost, getServerConfig } =
-  utils;
+const {
+  getAccountsFromSearchParams,
+  getAppId,
+  getIsBrowser,
+  getIsLocalhost,
+  getServerConfig,
+  getCurrencyObject,
+} = utils;
+
+describe('Get an object with currency data', () => {
+  jest.mock('@site/src/utils', () => ({
+    CURRENCY_MAP: new Map([['UST', { icon: 'tether', name: 'Tether Omni' }]]),
+  }));
+
+  it('should return currency data', () => {
+    const currency_data = getCurrencyObject('UST');
+    expect(currency_data.icon).toBe('tether');
+    expect(currency_data.name).toBe('Tether Omni');
+  });
+
+  it('should return placeholder information when currency does not exist', () => {
+    const currency_data = getCurrencyObject('FAKECURRENCY');
+    expect(currency_data.icon).toBe('placeholder_icon');
+    expect(currency_data.name).toBe('Currency');
+  });
+});
 
 describe('Get App ID', () => {
   it("Should return 35074 when it's called in localhost environment", () => {

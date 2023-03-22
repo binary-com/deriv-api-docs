@@ -3,7 +3,7 @@ import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
 import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
 
-export const CURRENCY_MAP = new Map([
+const CURRENCY_MAP = new Map([
   ['Demo', { icon: 'demo', name: 'Demo' }],
   ['UST', { icon: 'tether', name: 'Tether Omni' }],
   ['eUSDT', { icon: 'tether', name: 'Tether ERC20' }],
@@ -12,9 +12,22 @@ export const CURRENCY_MAP = new Map([
   ['LTC', { icon: 'litecoin', name: 'Litecoin' }],
   ['USDC', { icon: 'usdcoin', name: 'USD Coin' }],
   ['USD', { icon: 'usdollar', name: 'US Dollar' }],
+  ['EUR', { icon: 'euro', name: 'Euro' }],
+  ['GBP', { icon: 'gbp', name: 'British Pound' }],
+  ['AUD', { icon: 'aud', name: 'Australian Dollar' }],
 ]);
 
-export const getCurrencyName = (currency: string) => CURRENCY_MAP.get(currency).name;
+export const getCurrencyObject = (currency: string) => {
+  const currencyObject = CURRENCY_MAP.get(currency);
+  if (!currencyObject) {
+    return {
+      icon: 'placeholder_icon',
+      name: 'Currency',
+    };
+  }
+
+  return currencyObject;
+};
 
 type TIsNotDemoCurrency = {
   name: string;
@@ -22,7 +35,7 @@ type TIsNotDemoCurrency = {
 };
 
 export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
-  const currency = account.name.includes('VRTC') ? 'Demo' : account.currency;
+  const currency = account?.name?.includes('VRTC') ? 'Demo' : account?.currency;
   return currency;
 };
 
