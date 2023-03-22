@@ -33,5 +33,18 @@
       padding: rem(8) rem(4);
       align-items: baseline;
     }
+    .HeroButton {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-top: rem(1.6);
+      padding: rem(1) rem(1.6);
+      width: rem(13.6);
+      height: rem(2.6);
+      background: #ff444f;
+      border-radius: rem(1.5);
+      font-size: rem(1.6);
+    }
   }
 }

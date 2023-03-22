@@ -73,6 +73,11 @@ const config = {
             type: 'custom-user-navbar-item',
             position: 'right',
           },
+          {
+            to: 'apiexplorer',
+            position: 'left',
+            label: 'API Explorer',
+          },
         ],
       },
       prism: {

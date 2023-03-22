@@ -1,0 +1,109 @@
+@use 'src/styles/utility' as *;
+.dropdown {
+  user-select: none;
+  border: 1px solid var(--ifm-color-gray-400);
+  position: relative;
+  overflow-x: hidden;
+
+  .arrow {
+    background-size: rem(2.2);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-image: url(/img/arrow_up.svg);
+    transform: rotate(-180deg);
+    transition: transform 0.2s;
+    width: rem(2.2);
+    height: rem(2.2);
+    &.down {
+      transform: rotate(0deg);
+    }
+  }
+
+  .dropdownBtn {
+    padding: rem(0.5) rem(0.5);
+    background: var(--ifm-color-white);
+    color: var(--ifm-color-black);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    font-size: rem(1.6);
+  }
+
+  .dropdownContent {
+    position: relative;
+    top: 110%;
+    padding-top: rem(1);
+    left: 0;
+    background: var(--ifm-color-white);
+    color: var(--ifm-color-black);
+    overflow: auto;
+    overflow-x: hidden;
+
+    .dropdownSearch {
+      padding: rem(0.4);
+      margin: rem(1);
+      width: 97%;
+      box-sizing: border-box;
+      border: 1px solid var(--ifm-color-gray-300);
+    }
+
+    .dropdownSelect {
+      padding: 0;
+      margin: rem(0.5);
+      color: var(--ifm-color-gray-300);
+      font-size: rem(1.6);
+    }
+
+    .dropdownStart {
+      padding: 0;
+      margin: rem(0.5);
+      font-weight: bold;
+      color: var(--ifm-color-black);
+      font-size: rem(1.6);
+    }
+
+    .dropdownSelected {
+      background: var(--ifm-color-gray-400);
+    }
+
+    .dropdownList {
+      max-height: rem(70);
+      overflow: auto;
+    }
+
+    .dropdownItem {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      padding: rem(0.6);
+      user-select: none;
+      color: var(--ifm-color-black);
+      cursor: pointer;
+      padding: rem(1);
+      cursor: pointer;
+      font-size: rem(1.6);
+      transition: all 0.2s;
+      &:hover {
+        background: var(--ifm-color-primary);
+        color: var(--ifm-color-white);
+      }
+    }
+  }
+}
+
+[data-theme='dark'] .dropdownBtn {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}
+
+[data-theme='dark'] .dropdownContent {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}
+[data-theme='dark'] .dropdownItem {
+  color: var(--ifm-color-white);
+  background-color: var(--ifm-color-black);
+}

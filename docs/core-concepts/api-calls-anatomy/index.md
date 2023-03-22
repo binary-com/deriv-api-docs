@@ -3,7 +3,7 @@ title: API Calls Anatomy
 hide_title: true
 draft: false
 sidebar_label: API Calls anatomy
-sidebar_position: 1
+sidebar_position: 5
 tags:
   - concept
 keywords:
