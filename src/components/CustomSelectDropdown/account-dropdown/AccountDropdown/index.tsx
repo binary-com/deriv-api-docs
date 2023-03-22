@@ -2,7 +2,7 @@ import React from 'react';
 import useAccountSelector from '@site/src/hooks/useAccountSelector';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import CurrencyIcon from '@site/src/components/CurrencyIcon';
-import { getCurrencyName, isNotDemoCurrency } from '@site/src/utils';
+import { getCurrencyObject, isNotDemoCurrency } from '@site/src/utils';
 import styles from './account_dropdown.module.scss';
 
 const AccountDropdown = () => {
@@ -27,7 +27,7 @@ const AccountDropdown = () => {
               <CurrencyIcon currency={isNotDemoCurrency(accountItem)} />
               <div className={styles.accountInfoContainer}>
                 <div className={styles.accountType}>
-                  {getCurrencyName(isNotDemoCurrency(accountItem))}
+                  {getCurrencyObject(isNotDemoCurrency(accountItem)).name}
                 </div>
                 <div className={styles.accountId}>{accountItem.name}</div>
               </div>

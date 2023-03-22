@@ -8,7 +8,9 @@ import AppForm from '..';
 
 // jest.mock('@site/src/hooks/useTokenSelector');
 jest.mock('@site/src/hooks/useApiToken');
-jest.mock('@site/src/utils');
+jest.mock('@site/src/utils', () => ({
+  ...jest.requireActual('@site/src/utils'),
+}));
 
 const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
