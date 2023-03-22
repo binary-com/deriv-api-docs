@@ -181,7 +181,7 @@ const AppForm = ({
                 authorization.
               </p>
               {errors && errors?.redirect_uri && (
-                <span className='error-message'>{errors.redirect_uri.message}</span>
+                <span className='error-message'>{errors.redirect_uri?.message}</span>
               )}
             </div>
 
@@ -196,7 +196,7 @@ const AppForm = ({
                 <label htmlFor='app_verification_uri'>Verification URL (optional)</label>
               </div>
               {errors && errors?.verification_uri && (
-                <span className='error-message'>{errors.verification_uri.message}</span>
+                <span className='error-message'>{errors.verification_uri?.message}</span>
               )}
             </div>
 
