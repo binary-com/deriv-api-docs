@@ -22,13 +22,10 @@ describe('GetStarted', () => {
       'href',
       'https://deriv.com/signup/',
     );
-    expect(screen.getByTestId('register').closest('a')).toHaveAttribute(
-      'href',
-      '/app-registration',
-    );
+    expect(screen.getByTestId('register').closest('a')).toHaveAttribute('href', '/dashboard');
     expect(screen.getByTestId('guide').closest('a')).toHaveAttribute(
       'href',
-      '/docs/resources/api-guide/',
+      '/docs/category/guides',
     );
   });
 });
