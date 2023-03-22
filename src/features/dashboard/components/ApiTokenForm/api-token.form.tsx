@@ -79,7 +79,6 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trade: data.trade,
         trading_information: data.trading_information,
       });
-      console.log(selectedTokenScope);
       createToken(name, selectedTokenScope);
     },
     [createToken],
