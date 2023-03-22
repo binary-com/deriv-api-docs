@@ -36,6 +36,10 @@ const EndPoint = () => {
     window.location.reload();
   };
 
+  const server_url = localStorage.getItem('config.server_url') ?? default_endpoint.server_url;
+  const app_id = localStorage.getItem('config.app_id') ?? default_endpoint.app_id;
+  const current_url = `wss://${server_url}/websockets/v3?app_id=${app_id}&l=EN&brand=deriv`;
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
@@ -46,7 +50,6 @@ const EndPoint = () => {
           <div className={styles.content}>
             <div className={styles.customTextInput} id='custom-text-input'>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>Server URL</label>
                 <input
                   {...register('server_url', {
                     required: {
@@ -63,14 +66,14 @@ const EndPoint = () => {
                   className={styles.textInput}
                   required
                 />
+                <label className={styles.inlineLabel}>Server URL</label>
                 {errors.server_url && (
-                  <span data-testid='server_error' className={styles.errorMessage}>
+                  <div data-testid='server_error' className={styles.errorMessage}>
                     {errors.server_url.message}
-                  </span>
+                  </div>
                 )}
               </div>
               <div className={styles.inputField}>
-                <label className={styles.inlineLabel}>App ID</label>
                 <input
                   {...register('app_id', {
                     required: {
@@ -87,12 +90,17 @@ const EndPoint = () => {
                   placeholder='e.g. 9999'
                   required
                 />
+                <label className={styles.inlineLabel}>App ID</label>
                 {errors.app_id && (
-                  <span data-testid='app_id_error' className={styles.errorMessage}>
+                  <div data-testid='app_id_error' className={styles.errorMessage}>
                     {errors.app_id.message}
-                  </span>
+                  </div>
                 )}
               </div>
+            </div>
+            <div className={styles.currentUrl}>
+              <span className={styles.urlLabel}>Connected to :</span>
+              <div className={styles.urlLink}>{current_url}</div>
             </div>
             <div className={styles.buttons}>
               <Button type='submit' color='primary' disabled={Object.keys(errors).length > 0}>
