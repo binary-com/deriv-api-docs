@@ -73,6 +73,11 @@ const config = {
             type: 'custom-user-navar-item',
             position: 'right',
           },
+          {
+            to: 'apiexplorer',
+            position: 'left',
+            label: 'API Explorer',
+          },
         ],
       },
       prism: {

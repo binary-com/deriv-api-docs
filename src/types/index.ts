@@ -8,3 +8,10 @@ export type TTokenType = ArrayElement<TTokensArrayType>;
 export type TScopesArrayType = TTokenType['scopes'];
 
 export type TScopes = ArrayElement<TScopesArrayType>;
+
+export type TInfo = {
+  title?: string;
+  description?: string;
+  auth_required?: number;
+  auth_scopes?: string[];
+};

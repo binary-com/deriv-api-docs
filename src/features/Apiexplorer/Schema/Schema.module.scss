@@ -1,0 +1,291 @@
+@use 'src/styles/utility' as *;
+
+.schemaRole {
+  font-size: rem(1.4);
+  line-height: rem(1.4);
+  color: var(--ifm-color-success-light);
+  border: none;
+  margin: rem(0.8) rem(0.8) 0 0;
+  padding: rem(0.6) rem(0.8);
+  border-radius: 4px;
+  background-color: rgba(0, 255, 104, 0.16);
+}
+
+.schemaCode {
+  color: var(--ifm-color-white);
+  font-size: rem(1.4);
+}
+
+.schemaSubText {
+  line-height: rem(1.5);
+  font-size: rem(1.6);
+}
+
+.schemaHeader {
+  padding: rem(2.4);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border: none;
+  background: #151717;
+
+  .schemaTitle {
+    font-size: var(rem(2.4));
+    color: var(--ifm-color-white);
+  }
+
+  .schemaDescription {
+    display: flex;
+    padding: rem(0.5) 0;
+    gap: rem(2);
+    justify-content: space-between;
+    color: var(--ifm-color-white);
+
+    .schemaAuthRequired {
+      width: 40%;
+    }
+  }
+}
+
+.schemaBodyKeyLabel {
+  color: var(--ifm-color-white);
+}
+
+.schemaObjectContent {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  p {
+    color: var(--ifm-color-white);
+  }
+
+  button {
+    position: relative;
+    color: var(--ifm-color-success-lightest) !important;
+    background-color: var(--ifm-color-black);
+    border: none;
+    padding: rem(1);
+    border-radius: 4px;
+    font-size: rem(1.4);
+  }
+}
+
+.schemaObjectHeader {
+  flex-direction: column !important;
+
+  .schemaObjectBody {
+    padding: rem(0.8) rem(1.6);
+    width: 100%;
+    box-sizing: border-box;
+    height: fit-content;
+    opacity: 0;
+    display: none;
+
+    &.objectOpen {
+      opacity: 1;
+      gap: rem(2.4);
+      margin-top: rem(1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .schemaObjectDescription {
+      font-weight: normal;
+      font-size: rem(1.4);
+    }
+
+    .schemaBodyHeader {
+      flex-direction: column;
+    }
+  }
+}
+
+.schemaBody {
+  background-color: #282a35;
+  padding: rem(2.8) rem(2.3);
+
+  .schemaBodySignature {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .schemaBodyDescription + .schemaBodyDescription {
+      text-indent: rem(1.6);
+      padding: rem(1);
+      color: var(--ifm-color-white);
+      background-color: rgba(219, 219, 219, 0.05) !important;
+      border-radius: 4px;
+    }
+
+    .schemaBodySignature {
+      padding: 1rem 1.6rem;
+    }
+
+    .schemaBodyHeader {
+      display: flex;
+      flex-direction: row;
+      color: var(--ifm-color-white);
+      font-size: rem(1.6);
+      margin: 0 rem(0.8) 0 0;
+      font-weight: 700;
+      width: 100%;
+
+      .schemaBodyType {
+        display: flex;
+        width: fit-content;
+        font-size: rem(1.4);
+        font-weight: 400;
+        align-items: center;
+        width: 100%;
+      }
+
+      .schemaEnums {
+        width: fit-content;
+        height: fit-content;
+        font-size: rem(1.4);
+        line-height: rem(1.4);
+        color: var(--ifm-color-success-light);
+        border: none;
+        padding: rem(0.6) rem(0.8);
+        border-radius: 4px;
+        background-color: rgba(0, 255, 104, 0.16);
+      }
+
+      .schemaItems {
+        color: var(--ifm-color-success-lightest);
+        font-size: rem(1.4);
+        line-height: rem(1.4);
+        color: var(--ifm-color-success-light);
+        border: none;
+        margin: rem(0.8) rem(0.8) 0 0;
+        padding: rem(0.6) rem(0.8);
+        white-space: nowrap;
+        border-radius: 4px;
+      }
+
+      .schemaRegexContainer {
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+
+        .schemaBodyPattern {
+          width: 100%;
+          font-size: rem(1.1);
+          color: var(--ifm-color-success-darker);
+          margin: 0 1rem;
+        }
+
+        .schemaPatternType {
+          color: var(--ifm-color-success-light);
+          font-size: rem(1.4);
+          font-weight: 400;
+        }
+      }
+    }
+
+    .schemaBodyDescription {
+      display: inline-block;
+      white-space: break-spaces;
+      color: var(--ifm-color-secondary-darkest);
+      margin-top: rem(1);
+      font-size: rem(1.4);
+      line-height: rem(2);
+      margin-bottom: rem(2.4);
+
+      &.objectOpen {
+        margin-bottom: rem(1);
+      }
+    }
+
+    .schemaRole {
+      background-color: rgba(255, 255, 255, 0.16);
+      border: none;
+      font-size: rem(1.4);
+      font-weight: 400;
+      line-height: rem(2.4);
+      color: var(--ifm-color-white);
+      height: fit-content;
+      padding: rem(0.5) rem(0.5);
+      margin: 0 rem(0.5);
+    }
+  }
+
+  .enumFlex {
+    font-size: rem(1.4);
+    display: flex;
+    gap: rem(0.8);
+    width: 100%;
+
+    strong {
+      font-size: rem(1.6);
+    }
+
+    > p {
+      display: flex;
+      color: var(--ifm-color-white);
+      min-width: 35%;
+      margin-bottom: unset;
+      align-items: center;
+    }
+
+    .defaultValue {
+      display: flex;
+      align-items: center;
+      gap: rem(0.5);
+    }
+
+    .defaultValueLabel,
+    .schemaDefaultValue {
+      font-size: rem(1.4);
+      color: var(--ifm-color-secondary-darkest);
+    }
+
+    .schemaDefaultValue {
+      border: 2px solidvar(--ifm-color-secondary-darkest);
+      border-radius: 4px;
+      padding: rem(0.3);
+    }
+
+    .enumContainer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: rem(0.8);
+      align-items: center;
+    }
+
+    .enumLabel {
+      font-size: rem(1.4);
+      line-height: rem(1.4);
+      color: var(--ifm-color-secondary-darkest);
+    }
+
+    .enumType {
+      font-size: rem(1.4);
+    }
+
+    .enumLabel,
+    .enumType {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.schemaBodySignature {
+  &:hover {
+    > .sourceButton {
+      opacity: 1;
+    }
+  }
+
+  > .schemaBodySignature {
+    background-color: rgba(219, 219, 219, 0.05) !important;
+    border-radius: 4px;
+    margin-bottom: rem(1);
+  }
+}
+
+.schemaHeader:hover + .schemaBody .sourceButtonMain {
+  opacity: 1;
+}

@@ -8,8 +8,6 @@ const useWS = <T extends TSocketEndpointNames>(name: T) => {
   const [data, setData] = useState<TSocketResponseData<T>>();
 
   const clear = useCallback(() => {
-    console.log('clear all data');
-
     setError(null);
     setData(null);
   }, []);

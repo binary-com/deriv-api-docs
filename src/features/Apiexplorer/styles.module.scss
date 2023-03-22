@@ -1,0 +1,46 @@
+@use 'src/styles/utility' as *;
+
+.playgroundContent {
+  height: fit-content;
+  width: 100%;
+  margin-top: rem(4);
+  overflow-x: hidden;
+
+  .pageWrapper {
+    display: flex;
+    color: var(--ifm-color-emphasis-1000);
+
+    .playground {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: fit-content;
+      width: 100%;
+      margin-top: rem(4);
+      .playgroundPageWrapper {
+        display: flex;
+        justify-content: center;
+        width: 95%;
+        gap: rem(2);
+        @media screen and (max-width: 1024px) {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+.playgroundApiJson {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2.4rem;
+  width: 50%;
+}
+
+.playgroundApiDocs {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2rem;
+}
