@@ -4,7 +4,7 @@ import { Dropdown } from './Dropdown/Dropdown';
 import styles from './styles.module.scss';
 import SchemaWrapper from './Schema/SchemaWrapper';
 import RequestJSONBox from './RequestJSONBox';
-import UseDynamicImportJSON from '@site/src/hooks/dynamicImport';
+import useDynamicImportJSON from '@site/src/hooks/dynamicImport';
 
 export default function ApiExplorerFeatures() {
   const {
@@ -15,7 +15,7 @@ export default function ApiExplorerFeatures() {
     request_info,
     response_info,
     handleTextAreaInput,
-  } = UseDynamicImportJSON();
+  } = useDynamicImportJSON();
   return (
     <div className={styles.playgroundContent}>
       <Text type='heading-1' as='h1' css={{ 'text-align': 'center' }}>

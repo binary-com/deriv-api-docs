@@ -3,7 +3,7 @@ import styles from './SourceButton.module.scss';
 
 type TSourceButton = {
   is_code_open: boolean;
-  setIsCodeOpen: (boolean) => void;
+  setIsCodeOpen: (value: boolean) => void;
 };
 
 const SourceButton = ({ is_code_open, setIsCodeOpen }: TSourceButton) => {

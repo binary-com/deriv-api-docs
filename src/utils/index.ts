@@ -31,7 +31,7 @@ export const getIsBrowser = () => {
 /**
  * @description based on the received query params after successful login, generates the array of user's accounts
  * @param searchParams the query params in the auth path when user does the login successfully
- * @returns {IUserLoginLoginAccount[]} array of user accounts
+ * @returns {IUserLoginAccount[]} array of user accounts
  */
 export const getAccountsFromSearchParams = (searchParams: string) => {
   let accountCount = 0;

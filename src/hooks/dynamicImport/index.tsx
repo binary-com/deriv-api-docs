@@ -3,7 +3,7 @@ import { TInfo } from '@site/src/types';
 import { playground_requests } from '@site/src/utils/playground_requests';
 import { useCallback, useEffect, useState } from 'react';
 
-const UseDynamicImportJSON = () => {
+const useDynamicImportJSON = () => {
   const [text_data, setTextData] = useState({
     request: '',
     selected_value: 'Select API Call - Version 3',
@@ -95,4 +95,4 @@ const UseDynamicImportJSON = () => {
   };
 };
 
-export default UseDynamicImportJSON;
+export default useDynamicImportJSON;
