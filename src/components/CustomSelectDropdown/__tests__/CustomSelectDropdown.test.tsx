@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 const registerMock = jest.fn();
 
-describe('', () => {
+describe('CustomSelectDropdown', () => {
   it('should be able to render the component', () => {
     render(
       <CustomSelectDropdown label='test' value='test' register={registerMock()}>
