@@ -5,7 +5,10 @@ import styles from './token-cell.module.scss';
 import CopyButton from './CopyButton';
 
 const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, string>>) => {
+  console.log(cell);
   const [is_hiding_token, setIsHidingToken] = useState(true);
+  const has_admin_scope = cell.row?.original?.scopes?.includes('admin');
+  const token = cell.value;
 
   const HiddenToken = () => {
     const TOKEN_LENGTH = 14;
@@ -19,7 +22,7 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
   return (
     <div data-testid={'token-cell'} className={styles.token_cell}>
       <div>{is_hiding_token ? <HiddenToken /> : cell.value}</div>
-      <CopyButton cell={cell} />
+      <CopyButton has_admin={has_admin_scope} value={token} />
       <button
         onClick={() => setIsHidingToken(!is_hiding_token)}
         className={styles.eye_button}
