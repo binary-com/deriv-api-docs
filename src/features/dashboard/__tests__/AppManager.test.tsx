@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { AppManager } from '..';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useApiToken from '@site/src/hooks/useApiToken';
+import { render, screen } from '@testing-library/react';
+import { AppManager } from '..';
 import { useTable } from 'react-table';
 
 jest.mock('@site/src/hooks/useAuthContext');
