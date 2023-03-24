@@ -33,7 +33,7 @@ mockReactTable.mockImplementation(() => ({
 }));
 
 describe('AppManager', () => {
-  it('shows the dashboard', () => {
+  it('shows the login screen', () => {
     mockUseAuthContext.mockImplementation(() => ({
       is_logged_in: false,
     }));
@@ -46,7 +46,7 @@ describe('AppManager', () => {
     expect(login).toBeInTheDocument();
   });
 
-  it('shows the login screen', () => {
+  it('shows the dashboard', () => {
     mockUseAuthContext.mockImplementation(() => ({
       is_logged_in: true,
     }));
