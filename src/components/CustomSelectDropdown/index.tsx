@@ -36,7 +36,7 @@ const CustomSelectDropdown = ({
         onClick={() => setToggleDropdown(!is_toggle_dropdown)}
         onKeyDown={(e) => e.key === 'ArrowDown' && setToggleDropdown(!is_toggle_dropdown)}
         className={`${styles.selectWrapper} ${toggle_dropdown} ${is_error ? styles.error : ''}`}
-        data-testid='custom-dropdown'
+        data-testid={`dt_custom_dropdown_${value}`}
       >
         <label className={`${styles.selectLabel} ${value ? styles.active : ''}`}>{label}</label>
         <SelectInput />

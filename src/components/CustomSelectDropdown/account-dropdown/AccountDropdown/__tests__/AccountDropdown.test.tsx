@@ -4,10 +4,11 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 import userEvent from '@testing-library/user-event';
 import AuthProvider from '@site/src/contexts/auth/auth.provider';
 import { render } from '@testing-library/react';
+import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
 
-const fake_accounts = [
+const fake_accounts: IUserLoginAccount[] = [
   {
     currency: 'USD',
     name: 'CR111111',
@@ -46,5 +47,10 @@ describe('AccountDropdown', () => {
     await userEvent.keyboard('{Tab}{Enter}');
 
     expect(mockUpdateCurrentLoginAccount).toBeCalledTimes(1);
+    expect(mockUpdateCurrentLoginAccount).toHaveBeenCalledWith({
+      currency: 'ETH',
+      name: 'CR2222222',
+      token: 'second_token',
+    });
   });
 });

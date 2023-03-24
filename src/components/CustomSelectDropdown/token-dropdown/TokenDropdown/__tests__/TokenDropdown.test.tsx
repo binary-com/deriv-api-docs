@@ -27,7 +27,7 @@ const mockUpdateCurrentToken = jest.fn();
 mockUseApiToken.mockImplementation(() => ({
   currentToken: {
     display_name: 'test_token1',
-    token: 'abcdefg12345',
+    token: 'tokenvalue1',
     scopes: ['admin', 'read'],
   },
   tokens: [
@@ -55,5 +55,10 @@ describe('AccountDropdown', () => {
     await userEvent.keyboard('{Tab}{Enter}');
 
     expect(mockUpdateCurrentToken).toBeCalledTimes(1);
+    expect(mockUpdateCurrentToken).toHaveBeenCalledWith({
+      display_name: 'test_token2',
+      token: 'tokenvalue2',
+      scopes: ['admin', 'read', 'trade'],
+    });
   });
 });
