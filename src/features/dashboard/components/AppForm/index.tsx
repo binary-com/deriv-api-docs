@@ -210,45 +210,47 @@ const AppForm = ({
                 </div>
               </div>
               <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox name='read' id='read-scope' register={register('read')} />
-                <label htmlFor='read-scope'>
-                  <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
-                </label>
+                <CustomCheckbox name='read' id='read-scope' register={register('read')}>
+                  <label htmlFor='read-scope'>
+                    <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
+                  </label>
+                </CustomCheckbox>
               </div>
               <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox name='trade' id='trade-scope' register={register('trade')} />
-                <label htmlFor='trade-scope'>
-                  <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your clients&apos;
-                  behalf.
-                </label>
+                <CustomCheckbox name='trade' id='trade-scope' register={register('trade')}>
+                  <label htmlFor='trade-scope'>
+                    <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your
+                    clients&apos; behalf.
+                  </label>
+                </CustomCheckbox>
               </div>
               <div className={styles.customCheckboxWrapper}>
                 <CustomCheckbox
                   name='trading_information'
                   id='trading_information-scope'
                   register={register('trading_information')}
-                />
-                <label htmlFor='trading_information-scope'>
-                  <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
-                  trading information, including their account balance.
-                </label>
+                >
+                  <label htmlFor='trading_information-scope'>
+                    <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
+                    trading information, including their account balance.
+                  </label>
+                </CustomCheckbox>
               </div>
               <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox
-                  name='payments'
-                  id='payments-scope'
-                  register={register('payments')}
-                />
-                <label htmlFor='payments-scope'>
-                  <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on your
-                  clients&rsquo; behalf.
-                </label>
+                <CustomCheckbox name='payments' id='payments-scope' register={register('payments')}>
+                  <label htmlFor='payments-scope'>
+                    <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on
+                    your clients&rsquo; behalf.
+                  </label>
+                </CustomCheckbox>
               </div>
               <div className={`${styles.customCheckboxWrapper} mb-0`}>
-                <CustomCheckbox name='admin' id='admin-scope' register={register('admin')} />
-                <label htmlFor='admin-scope'>
-                  <b>Admin</b>: Full account access, including the access to manage security tokens.
-                </label>
+                <CustomCheckbox name='admin' id='admin-scope' register={register('admin')}>
+                  <label htmlFor='admin-scope'>
+                    <b>Admin</b>: Full account access, including the access to manage security
+                    tokens.
+                  </label>
+                </CustomCheckbox>
               </div>
             </div>
             <div className={styles.termsOfConditionRegister}>

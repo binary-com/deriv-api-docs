@@ -20,7 +20,7 @@ describe('Home Page', () => {
       />,
     );
 
-    const label = screen.getByTestId('card-label');
+    const label = screen.getByTestId('card-label-admin');
     expect(label).toBeInTheDocument();
     expect(label.textContent).toMatch(/Admin Label/i);
   });

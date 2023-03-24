@@ -11,6 +11,10 @@
   border-radius: rem(0.4);
   padding: rem(1.6);
 
+  label {
+    pointer-events: none;
+  }
+
   p {
     font-size: var(--fontSizes-2xs);
   }
