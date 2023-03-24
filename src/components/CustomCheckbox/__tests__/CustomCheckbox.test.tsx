@@ -21,6 +21,9 @@ describe('CustomCheckbox', () => {
   it('should render the checkbox', () => {
     const custom_checkbox_parent = screen.getByTestId('custom-checkbox-test');
     expect(custom_checkbox_parent).toBeInTheDocument();
+
+    const label = screen.getByText('this is a test label');
+    expect(label).toBeInTheDocument();
   });
 
   it('should check the checkbox', async () => {
