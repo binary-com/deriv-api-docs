@@ -27,16 +27,21 @@ describe('CustomCheckbox', () => {
     const custom_checkbox_parent = screen.getByTestId('custom-checkbox-test');
     const checkbox = custom_checkbox_parent.children[0].children[0];
 
+    expect(checkbox).not.toBeChecked();
+
     await userEvent.click(checkbox);
+
     expect(checkbox).toBeChecked();
   });
 
   it('should check the checkbox when clicking the label', async () => {
     const label = screen.getByText('this is a test label');
-    await userEvent.click(label);
-
     const custom_checkbox_parent = screen.getByTestId('custom-checkbox-test');
     const checkbox = custom_checkbox_parent.children[0].children[0];
+
+    expect(checkbox).not.toBeChecked();
+
+    await userEvent.click(label);
 
     expect(checkbox).toBeChecked();
   });
