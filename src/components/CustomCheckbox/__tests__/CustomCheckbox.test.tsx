@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomCheckbox from '..';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const registerMock = jest.fn();
@@ -28,7 +28,8 @@ describe('CustomCheckbox', () => {
 
   it('should check the checkbox', async () => {
     const custom_checkbox_parent = screen.getByTestId('custom-checkbox-test');
-    const checkbox = custom_checkbox_parent.children[0].children[0];
+    const within_checkbox_parent = within(custom_checkbox_parent);
+    const checkbox = within_checkbox_parent.getByRole<HTMLInputElement>('checkbox');
 
     expect(checkbox).not.toBeChecked();
 
@@ -40,7 +41,8 @@ describe('CustomCheckbox', () => {
   it('should check the checkbox when clicking the label', async () => {
     const label = screen.getByText('this is a test label');
     const custom_checkbox_parent = screen.getByTestId('custom-checkbox-test');
-    const checkbox = custom_checkbox_parent.children[0].children[0];
+    const within_checkbox_parent = within(custom_checkbox_parent);
+    const checkbox = within_checkbox_parent.getByRole<HTMLInputElement>('checkbox');
 
     expect(checkbox).not.toBeChecked();
 
