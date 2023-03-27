@@ -10,14 +10,13 @@ type TCustomCheckbox = {
 };
 
 const CustomCheckbox = ({ name, register, id = null, children }: TCustomCheckbox) => {
-  const Label = () => children;
   return (
     <div className={styles.customCheckboxContainer} data-testid={`custom-checkbox-${name}`}>
       <div>
         <input name={name} id={id} type='checkbox' {...register} />
         <span className={styles.customCheckbox} />
       </div>
-      <Label />
+      {children}
     </div>
   );
 };
