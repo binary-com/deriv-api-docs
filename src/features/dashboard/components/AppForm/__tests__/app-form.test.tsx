@@ -6,7 +6,6 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppForm from '..';
 
-// jest.mock('@site/src/hooks/useTokenSelector');
 jest.mock('@site/src/hooks/useApiToken');
 jest.mock('@site/src/utils', () => ({
   ...jest.requireActual('@site/src/utils'),

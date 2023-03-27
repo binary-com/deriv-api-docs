@@ -6,6 +6,7 @@ import useLogout from '@site/src/hooks/useLogout';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import AuthProvider from '@site/src/contexts/auth/auth.provider';
+import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
 jest.mock('@site/src/hooks/useLogout');
@@ -17,7 +18,7 @@ const mockLogout = jest.fn();
 const mockUpdateLoginAccounts = jest.fn();
 const mockUpdateCurrentLoginAccount = jest.fn();
 
-const fake_accounts = [
+const fake_accounts: IUserLoginAccount[] = [
   {
     currency: 'USD',
     name: 'CR111111',

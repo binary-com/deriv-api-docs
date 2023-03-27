@@ -5,6 +5,7 @@ import useLogout from '@site/src/hooks/useLogout';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import React from 'react';
 import UserNavbarItem from '..';
+import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
 jest.mock('@site/src/hooks/useLogout');
@@ -31,7 +32,7 @@ mockUseLoginUrl.mockImplementation(() => {
   };
 });
 
-const fake_accounts = [
+const fake_accounts: IUserLoginAccount[] = [
   {
     currency: 'USD',
     name: 'CR111111',
