@@ -98,9 +98,9 @@ const config = {
         },
       },
       colorMode: {
-        defaultMode: 'dark',
-        disableSwitch: false,
-        respectPrefersColorScheme: true,
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
       },
       announcementBar: {
         id: 'announcementBar-2', // Increment on change
