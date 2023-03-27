@@ -10,6 +10,10 @@
     padding-top: rem(0.8);
     z-index: 0;
     margin-bottom: auto;
+    label {
+        cursor: pointer;
+        margin-left: rem(2.5);
+    }
     .customCheckbox {
         position: absolute;
         background-repeat: no-repeat;
