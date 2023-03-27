@@ -5,7 +5,6 @@ import styles from './token-cell.module.scss';
 import CopyButton from './CopyButton';
 
 const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, string>>) => {
-  console.log(cell);
   const [is_hiding_token, setIsHidingToken] = useState(true);
   const has_admin_scope = cell.row?.original?.scopes?.includes('admin');
   const token = cell.value;
