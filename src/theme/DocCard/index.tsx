@@ -5,7 +5,7 @@ import { findFirstCategoryLink, useDocById } from '@docusaurus/theme-common/inte
 import { translate } from '@docusaurus/Translate';
 import type { Props } from '@theme/DocCard';
 
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs';
 
 function CardContainer({ href, children }: { href: string; children: ReactNode }): JSX.Element {
