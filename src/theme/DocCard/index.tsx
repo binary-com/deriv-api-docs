@@ -8,15 +8,15 @@ import type { Props } from '@theme/DocCard';
 import styles from './styles.module.scss';
 import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs';
 
-function CardContainer({ href, children }: { href: string; children: ReactNode }): JSX.Element {
+const CardContainer = ({ href, children }: { href: string; children: ReactNode }) => {
   return (
     <Link href={href} className={clsx('card padding--lg', styles.cardContainer)}>
       {children}
     </Link>
   );
-}
+};
 
-function CardLayout({
+const CardLayout = ({
   href,
   icon,
   title,
@@ -26,7 +26,7 @@ function CardLayout({
   icon: ReactNode;
   title: string;
   description?: string;
-}): JSX.Element {
+}) => {
   return (
     <CardContainer href={href}>
       <h2 className={clsx('text--truncate', styles.cardTitle)} title={title}>
@@ -39,9 +39,9 @@ function CardLayout({
       )}
     </CardContainer>
   );
-}
+};
 
-function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element | null {
+const CardCategory = ({ item }: { item: PropSidebarItemCategory }) => {
   const href = findFirstCategoryLink(item);
 
   // Unexpected: categories that don't have a link have been filtered upfront
@@ -65,14 +65,14 @@ function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element 
       )}
     />
   );
-}
+};
 
-function CardLink({ item }: { item: PropSidebarItemLink }): JSX.Element {
+const CardLink = ({ item }: { item: PropSidebarItemLink }) => {
   const doc = useDocById(item.docId ?? undefined);
   return <CardLayout href={item.href} icon='' title={item.label} description={doc?.description} />;
-}
+};
 
-export default function DocCard({ item }: Props): JSX.Element {
+const DocCard = ({ item }: Props) => {
   switch (item.type) {
     case 'link':
       return <CardLink item={item} />;
@@ -81,4 +81,6 @@ export default function DocCard({ item }: Props): JSX.Element {
     default:
       throw new Error(`unknown item type ${JSON.stringify(item)}`);
   }
-}
+};
+
+export default DocCard;
