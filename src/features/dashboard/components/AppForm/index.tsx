@@ -42,8 +42,6 @@ const AppForm = ({
   const { currentToken, tokens } = useApiToken();
   const { currentLoginAccount } = useAuthContext();
 
-  console.log(isNotDemoCurrency(currentLoginAccount));
-
   const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
 
   const accountHasAdminToken = () => {
