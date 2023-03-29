@@ -7,7 +7,7 @@ import useTokenSelector from '@site/src/hooks/useTokenSelector';
 import React from 'react';
 import styles from './api_token_switcher.module.scss';
 
-const CreateToken = () => {
+export const CreateToken = () => {
   return (
     <Link className={styles.CreateToken} to='/dashboard'>
       Please create a token
