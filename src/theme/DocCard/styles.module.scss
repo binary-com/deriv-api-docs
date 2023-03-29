@@ -1,0 +1,41 @@
+@use 'src/styles/utility' as *;
+
+.cardContainer {
+  --ifm-link-color: var(--ifm-color-emphasis-800);
+  --ifm-link-hover-color: var(--ifm-color-emphasis-700);
+  --ifm-link-hover-decoration: none;
+
+  box-shadow: 0 rem(1.2) rem(1.6) rem(-0.4) rgba(14, 14, 14, 0.08),
+    rem(0) rem(0.4) rem(0.6) rem(-0.2) rgba(14, 14, 14, 0.03) !important;
+  border-radius: rem(1.6);
+  color: rgba(65, 70, 82, 1);
+  transition: all var(--ifm-transition-fast) ease;
+  transition-property: border, box-shadow;
+}
+
+.cardContainer:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 rem(0.3) rem(0.6) 0 rgb(0 0 0 / 20%);
+}
+
+.cardContainer::after {
+  content: url(/img/arrow_right_red.svg);
+  position: relative;
+  top: rem(1.2);
+  left: 98%;
+}
+
+.cardContainer *:last-child {
+  margin-bottom: 0;
+}
+
+.cardTitle {
+  font-size: var(--ifm-h2-font-size) !important;
+  line-height: rem(3.6);
+}
+
+.cardDescription {
+  margin-top: rem(0.8);
+  line-height: rem(2.4);
+  font-size: var(--ifm-h4-font-size);
+}
