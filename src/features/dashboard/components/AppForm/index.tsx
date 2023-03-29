@@ -12,6 +12,8 @@ import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-d
 import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-dropdown/AccountDropdown';
 import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
+import { isNotDemoCurrency } from '@site/src/utils';
+import clsx from 'clsx';
 
 type TAppFormProps = {
   initialValues?: Partial<IRegisterAppForm>;
@@ -40,6 +42,8 @@ const AppForm = ({
   const { currentToken, tokens } = useApiToken();
   const { currentLoginAccount } = useAuthContext();
 
+  console.log(isNotDemoCurrency(currentLoginAccount));
+
   const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
 
   const accountHasAdminToken = () => {
@@ -49,6 +53,12 @@ const AppForm = ({
       has_admin_scope ? admin_check_array.push(true) : admin_check_array.push(false);
     });
     return admin_check_array.includes(true);
+  };
+
+  const disableMarkup = () => {
+    let isDisabled;
+    isNotDemoCurrency(currentLoginAccount) === 'Demo' ? (isDisabled = true) : (isDisabled = false);
+    return isDisabled;
   };
 
   const AccountErrorMessage = () => (
@@ -129,12 +139,19 @@ const AppForm = ({
                 <Text as='span' type='paragraph-1'>
                   You can earn commission by adding a markup to the price of each trade. Enter your
                   markup percentage here.
+                  <br />
+                  <b>NOTE: Markup is only available for real accounts</b>
                 </Text>
               </div>
             </div>
             <div>
               <div>
-                <div className={styles.customTextInput} id='custom-text-input'>
+                <div
+                  className={clsx(styles.customTextInput, {
+                    [styles.disableTokenDropdown]: disableMarkup(),
+                  })}
+                  id='custom-text-input'
+                >
                   <input
                     {...register('app_markup_percentage')}
                     type='number'
@@ -143,6 +160,7 @@ const AppForm = ({
                     className='last'
                     defaultValue={0}
                     placeholder=' '
+                    disabled={disableMarkup()}
                   />
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>
