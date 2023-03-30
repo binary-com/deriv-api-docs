@@ -76,3 +76,11 @@ h6 {
   color: var(--colors-coral600);
   text-decoration: none;
 }
+
+.navbar {
+  padding: rem(1.3) 0 rem(2.3) rem(3.9);
+}
+
+.navbar__brand {
+  margin-right: rem(5);
+}
