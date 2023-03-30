@@ -52,10 +52,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Deriv API',
         logo: {
           alt: 'Deriv API logo',
-          src: 'img/deriv-logo.png',
+          src: 'img/derivlogo.svg',
         },
         items: [
           {
@@ -65,6 +64,11 @@ const config = {
             label: 'Documentation',
           },
           { to: 'dashboard', label: 'Dashboard', position: 'left' },
+          {
+            to: 'apiexplorer',
+            position: 'left',
+            label: 'API Explorer',
+          },
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
           {
             type: 'custom-api-token-navbar-item',
@@ -73,11 +77,6 @@ const config = {
           {
             type: 'custom-user-navbar-item',
             position: 'right',
-          },
-          {
-            to: 'apiexplorer',
-            position: 'left',
-            label: 'API Explorer',
           },
         ],
       },
