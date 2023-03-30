@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@site/src/test-utils';
 
 import React from 'react';
-import ApiTokenNavbarItem from '..';
+import ApiTokenNavbarItem, { CreateToken } from '..';
 import { TTokensArrayType } from '@site/src/types';
 
 jest.mock('@site/src/hooks/useApiToken');
@@ -122,7 +122,7 @@ describe('Api Token Navbar Item', () => {
     ];
 
     mockUseApiToken.mockImplementation(() => ({
-      tokens: fake_tokens,
+      tokens: [...fake_tokens],
       currentToken: {
         display_name: 'first_token',
         last_used: '',
@@ -138,10 +138,11 @@ describe('Api Token Navbar Item', () => {
     const current_account_button = screen.getByRole('button');
     await userEvent.click(current_account_button);
     const menu_items = screen.getAllByRole('menuitem');
+    const tokens = menu_items.slice(0, 2);
 
-    expect(menu_items.length).toBe(2);
+    expect(menu_items.length).toBe(3);
 
-    for (const [index, item] of menu_items.entries()) {
+    for (const [index, item] of tokens.entries()) {
       expect(item).toHaveTextContent(`${fake_tokens[index].display_name}`);
     }
   });
