@@ -138,7 +138,6 @@ describe('Api Token Navbar Item', () => {
     const current_account_button = screen.getByRole('button');
     await userEvent.click(current_account_button);
     const menu_items = screen.getAllByRole('menuitem');
-    //menu_items.pop();
     const tokens = menu_items.slice(0, 2);
 
     expect(menu_items.length).toBe(3);

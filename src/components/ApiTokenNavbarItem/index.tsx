@@ -7,13 +7,11 @@ import useTokenSelector from '@site/src/hooks/useTokenSelector';
 import React from 'react';
 import styles from './api_token_switcher.module.scss';
 
-export const CreateToken = () => {
-  return (
-    <Link className={styles.CreateToken} to='/dashboard'>
-      Please create a token
-    </Link>
-  );
-};
+export const CreateToken = () => (
+  <Link className={styles.CreateToken} to='/dashboard'>
+    Please create a token
+  </Link>
+);
 
 const ApiTokenNavbarItem = () => {
   const { is_logged_in, is_authorized } = useAuthContext();
@@ -48,7 +46,7 @@ const ApiTokenNavbarItem = () => {
                   onSelectToken(tokenItem);
                 }}
               >
-                {`${tokenItem.display_name}`}
+                {tokenItem.display_name}
               </DropdownMenu.Item>
             ))}
             <DropdownMenu.Item className={styles.DropdownMenuItem}>
