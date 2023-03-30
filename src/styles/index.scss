@@ -70,3 +70,9 @@ h6 {
   justify-content: center;
   align-items: center;
 }
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--colors-coral600);
+  text-decoration: none;
+}
