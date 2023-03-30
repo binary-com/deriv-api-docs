@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -53,11 +53,11 @@ const AppForm = ({
     return admin_check_array.includes(true);
   };
 
-  const disableMarkup = () => {
+  const disableMarkup = useMemo(() => {
     let isDisabled;
     isNotDemoCurrency(currentLoginAccount) === 'Demo' ? (isDisabled = true) : (isDisabled = false);
     return isDisabled;
-  };
+  }, [currentLoginAccount]);
 
   const AccountErrorMessage = () => (
     <React.Fragment>
@@ -146,7 +146,7 @@ const AppForm = ({
               <div>
                 <div
                   className={clsx(styles.customTextInput, {
-                    [styles.disableTokenDropdown]: disableMarkup(),
+                    [styles.disableTokenDropdown]: disableMarkup,
                   })}
                   id='custom-text-input'
                 >
@@ -158,7 +158,7 @@ const AppForm = ({
                     className='last'
                     defaultValue={0}
                     placeholder=' '
-                    disabled={disableMarkup()}
+                    disabled={disableMarkup}
                   />
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>
