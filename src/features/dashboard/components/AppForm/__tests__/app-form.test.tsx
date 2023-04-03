@@ -15,32 +15,8 @@ const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
 >;
 
-const fakeTokens: TTokensArrayType = [
-  {
-    display_name: 'first',
-    last_used: '',
-    scopes: ['read', 'trade'],
-    token: 'first_token',
-    valid_for_ip: '',
-  },
-  {
-    display_name: 'second',
-    last_used: '2023-01-19 15:09:39',
-    scopes: ['read', 'trade', 'payments', 'trading_information', 'admin'],
-    token: 'first_token',
-    valid_for_ip: '',
-  },
-  {
-    display_name: 'third',
-    last_used: '',
-    scopes: ['read', 'trade', 'payments', 'admin'],
-    token: 'third_token',
-    valid_for_ip: '',
-  },
-];
-
 mockUseApiToken.mockImplementation(() => ({
-  tokens: fakeTokens,
+  tokens: [],
   updateCurrentToken: jest.fn(),
 }));
 
@@ -62,6 +38,34 @@ describe('App Form', () => {
   afterEach(() => {
     cleanup();
     jest.clearAllMocks();
+  });
+
+  it('Should show error message for having no admin token', async () => {
+    const fakeTokens: TTokensArrayType = [
+      {
+        display_name: 'first',
+        last_used: '',
+        scopes: ['read', 'trade'],
+        token: 'first_token',
+        valid_for_ip: '',
+      },
+      {
+        display_name: 'second',
+        last_used: '',
+        scopes: ['read', 'trade'],
+        token: 'second_token',
+        valid_for_ip: '',
+      },
+    ];
+
+    mockUseApiToken.mockImplementation(() => ({
+      tokens: fakeTokens,
+      updateCurrentToken: jest.fn(),
+    }));
+
+    const errorText = screen.getByText(/have API tokens with the admin scope/i);
+
+    expect(errorText).toBeInTheDocument();
   });
 
   it('Should show error message for empty app name', async () => {
@@ -112,6 +116,35 @@ describe('App Form', () => {
   });
 
   it('Should show error message for wrong value', async () => {
+    const fakeTokens: TTokensArrayType = [
+      {
+        display_name: 'first',
+        last_used: '',
+        scopes: ['read', 'trade'],
+        token: 'first_token',
+        valid_for_ip: '',
+      },
+      {
+        display_name: 'second',
+        last_used: '2023-01-19 15:09:39',
+        scopes: ['read', 'trade', 'payments', 'trading_information', 'admin'],
+        token: 'second_token',
+        valid_for_ip: '',
+      },
+      {
+        display_name: 'third',
+        last_used: '',
+        scopes: ['read', 'trade', 'payments', 'admin'],
+        token: 'third_token',
+        valid_for_ip: '',
+      },
+    ];
+
+    mockUseApiToken.mockImplementation(() => ({
+      tokens: fakeTokens,
+      updateCurrentToken: jest.fn(),
+    }));
+
     const submitButton = screen.getByText('Update Application');
 
     const appMarkupPercentageInput = screen.getByRole<HTMLInputElement>('spinbutton', {
