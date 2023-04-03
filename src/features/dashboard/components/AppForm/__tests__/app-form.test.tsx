@@ -63,7 +63,9 @@ describe('App Form', () => {
       updateCurrentToken: jest.fn(),
     }));
 
-    const errorText = screen.getByText(/have API tokens with the admin scope/i);
+    const errorText = screen.getByText(
+      /This account doesn't have API tokens with the admin scope. Choose another account./i,
+    );
 
     expect(errorText).toBeInTheDocument();
   });
