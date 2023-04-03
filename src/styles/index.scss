@@ -16,6 +16,10 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --doc-sidebar-width: 283px; //not changing
+  --ifm-menu-color: #414652;
+  --ifm-menu-link-sublist-icon: url(/img/arrow_sidebar.svg);
+  --ifm-menu-link-padding-vertical: 9px;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -83,4 +87,35 @@ h6 {
 
 .navbar__brand {
   margin-right: rem(5);
+}
+
+.menu__list {
+  margin-top: 50px;
+  height: 460px;
+}
+
+.menu__link {
+  font-size: 14px;
+  font-weight: var(--ifm-font-weight-normal);
+}
+
+.menu__caret:before {
+  background: var(--ifm-menu-link-sublist-icon);
+  filter: var(--ifm-menu-link-sublist-icon-filter);
+  height: 12px;
+  transform: rotateZ(90deg);
+  width: 8.72px;
+}
+
+.menu__list-item--collapsed .menu__link--sublist:after,
+.menu__list-item--collapsed .menu__caret:before {
+  transform: rotateZ(0deg);
+}
+
+.menu__link--active {
+  color: #ff444f;
+}
+
+.clean-btn {
+  margin-right: 33px;
 }
