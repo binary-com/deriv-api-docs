@@ -10,15 +10,7 @@ export const Carousel = () => {
 
   return (
     <div data-testid='carousel-component' className={`${styles.carouselComponent} carousel`}>
-      <Text
-        type='heading-2'
-        as='h1'
-        align='center'
-        bold
-        css={{
-          'margin-bottom': '5rem',
-        }}
-      >
+      <Text type='heading-2' as='h1' align='center' bold className={styles.carouselHeading}>
         See what our clients say
       </Text>
       <div className={styles.carouselContainer}>
