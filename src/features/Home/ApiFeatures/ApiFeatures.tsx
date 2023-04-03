@@ -31,27 +31,27 @@ export const ApiFeatures = () => {
           </Text>
           <ul className={styles.FeatureList}>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>Trade digital options and multipliers</div>
             </li>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>Monitor real-time pricing</div>
             </li>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>Buy/sell contracts</div>
             </li>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>{"Manage user's accounts"}</div>
             </li>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>Monitor existing contracts</div>
             </li>
             <li className={styles.FeatureOptions}>
-              <img src='/img/checklist-icon-red.svg'></img>
+              <img src='/img/checklist-icon-grey.svg'></img>
               <div className={styles.FeatureContent}>{"View user's historical transactions"}</div>
             </li>
           </ul>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text } from '@deriv/ui';
+import { Text } from '@deriv/ui';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -34,7 +34,7 @@ const Footer = () => {
           style={{ textDecoration: 'none' }}
           href='https://binary.vanillacommunity.com/'
         >
-          <Button color='monochrome'>Join Our Community</Button>
+          <button className={styles.communityButton}>Join Our Community</button>
         </a>
       </div>
       <div className={styles.FooterBody}>

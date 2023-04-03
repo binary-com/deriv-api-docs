@@ -53,6 +53,18 @@
           background-position: center;
         }
       }
+      .arrow {
+        display: flex;
+        position: relative;
+        justify-content: end;
+        top: rem(4);
+      }
+      .arrowMiddle {
+        display: flex;
+        position: relative;
+        justify-content: end;
+        top: rem(1.5);
+      }
     }
   }
 }
@@ -64,29 +76,4 @@
   height: rem(3.2);
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.guideIcon {
-  background-image: url(/img/guide.svg);
-}
-
-.signUpIcon {
-  background-image: url(/img/sign-up.svg);
-}
-
-.registerYourAppIcon {
-  background-image: url(/img/register-your-app.svg);
-}
-
-.withPattern {
-  background-image: url(/img/pattern.svg);
-  object-fit: contain;
-}
-
-[data-theme='dark'] .dark {
-  color: var(--ifm-color-black);
-}
-
-[data-theme='dark'] .withPattern {
-  background-image: unset;
 }

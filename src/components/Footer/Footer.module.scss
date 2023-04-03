@@ -1,7 +1,7 @@
 @use 'src/styles/utility' as *;
 
 .FooterContainer {
-  background-color: var(--ifm-color-black);
+  background-color: #414652;
   display: flex;
   flex-direction: row;
   padding: rem(2);
@@ -21,6 +21,13 @@
     .Email {
       color: var(--ifm-color-danger);
       padding: 0 rem(0.5);
+    }
+    .communityButton {
+      color: var(--ifm-color-white);
+      border: 2px solid var(--ifm-color-secondary-darkest);
+      padding: rem(0.5);
+      border-radius: rem(1);
+      font-weight: bold;
     }
   }
 }
