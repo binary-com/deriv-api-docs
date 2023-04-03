@@ -30,15 +30,7 @@ export const Benefits = () => {
   return (
     <div data-testid='benefits' className='main-page-row'>
       <div className={styles.BenefitsContainer}>
-        <Text
-          type='heading-2'
-          as={'h2'}
-          align='center'
-          bold
-          css={{
-            margin: '4rem 0',
-          }}
-        >
+        <Text type='heading-2' as={'h2'} align='center' bold className={styles.Heading}>
           Benefits of using Deriv API
         </Text>
         <div className={styles.BenefitsIcons}>
