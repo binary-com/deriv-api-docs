@@ -1,33 +1,13 @@
 import React from 'react';
 import { Text } from '@deriv/ui';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { SlideContent } from './SlideContent/SlideContent';
+import NextButton from './NextButton';
+import PrevButton from './PrevButton';
 import styles from './Carousel.module.scss';
 import './swiper-custom.scss';
 
 export const Carousel = () => {
-  const PrevButton = () => {
-    const swiper = useSwiper();
-    return (
-      <div
-        className={`${styles.prev} ${styles.control}`}
-        onClick={() => swiper.slidePrev()}
-        data-testid='carousel-arrow-prev'
-      />
-    );
-  };
-
-  const NextButton = () => {
-    const swiper = useSwiper();
-    return (
-      <div
-        className={`${styles.next} ${styles.control}`}
-        onClick={() => swiper.slideNext()}
-        data-testid='carousel-arrow-next'
-      />
-    );
-  };
-
   return (
     <div data-testid='carousel-component' className={`${styles.carouselComponent} carousel`}>
       <Text type='heading-2' as='h1' align='center' bold className={styles.carouselHeading}>

@@ -15,30 +15,5 @@
     margin: 0 auto;
     align-items: center;
     overflow: visible;
-    .control {
-      width: rem(5);
-      height: rem(5);
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      &:active {
-        background-size: rem(2) rem(2);
-      }
-      &.next {
-        background: url(/img/arrow_right.svg) no-repeat;
-        background-size: rem(2.5) rem(2.5);
-        background-position: center;
-        overflow: auto;
-        right: 0;
-      }
-      &.prev {
-        background: url(/img/arrow_left.svg) no-repeat;
-        background-size: rem(2.5) rem(2.5);
-        background-position: center;
-        left: 0;
-      }
-    }
   }
 }
