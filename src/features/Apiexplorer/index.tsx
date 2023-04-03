@@ -18,7 +18,7 @@ export default function ApiExplorerFeatures() {
   } = useDynamicImportJSON();
   return (
     <div className={styles.playgroundContent}>
-      <Text type='heading-1' as='h1' css={{ 'text-align': 'center' }}>
+      <Text type='heading-1' as='h1' className={styles.heading}>
         API Explorer
       </Text>
       <div className={styles.pageWrapper}>

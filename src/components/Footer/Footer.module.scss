@@ -17,6 +17,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .FooterContent {
+      color: var(--ifm-color-white);
+      @media screen and (max-width: 992px) {
+        font-size: rem(2);
+      }
+    }
+    .FooterBodyContent {
+      color: var(--ifm-color-secondary-darkest);
+      font-weight: 400;
+      @media screen and (max-width: 992px) {
+        font-size: rem(1.5);
+      }
+    }
 
     .Email {
       color: var(--ifm-color-danger);

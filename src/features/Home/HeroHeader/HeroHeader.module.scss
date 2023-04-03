@@ -34,6 +34,21 @@
       padding: rem(8) rem(4);
       align-items: baseline;
     }
+    .heading {
+      color: var(--ifm-color-white);
+      @media screen and (max-width: 992px) {
+        font-size: rem(2);
+      }
+    }
+
+    .subHeading {
+      color: var(--ifm-color-white);
+      font-weight: 400;
+
+      @media screen and (max-width: 992px) {
+        text-align: left;
+      }
+    }
     .HeroButton {
       display: flex;
       flex-direction: row;

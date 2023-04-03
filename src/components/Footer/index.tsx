@@ -6,27 +6,10 @@ const Footer = () => {
   return (
     <div className={styles.FooterContainer} data-testid='footer-text'>
       <div className={styles.FooterBody}>
-        <Text
-          type='subtitle-1'
-          as={'h1'}
-          bold
-          css={{
-            color: 'White',
-            '@mobile': { 'font-size': '32px' },
-          }}
-        >
+        <Text type='subtitle-1' as={'h1'} bold className={styles.FooterContent}>
           Get Connected
         </Text>
-        <Text
-          type='paragraph-1'
-          align='center'
-          as={'h2'}
-          css={{
-            color: '$greyLight500',
-            'font-weight': 400,
-            '@mobile': { 'font-size': '24px' },
-          }}
-        >
+        <Text type='paragraph-1' align='center' as={'h2'} className={styles.FooterBodyContent}>
           Discuss ideas and share solutions with developers worldwide.
         </Text>
         <a
@@ -38,27 +21,10 @@ const Footer = () => {
         </a>
       </div>
       <div className={styles.FooterBody}>
-        <Text
-          type='subtitle-1'
-          bold
-          css={{
-            color: 'White',
-            '@mobile': { 'font-size': '24px' },
-          }}
-        >
+        <Text type='subtitle-1' bold className={styles.FooterContent}>
           {"We're here to help"}
         </Text>
-        <Text
-          type='paragraph-1'
-          align='center'
-          css={{
-            color: '$greyLight500',
-            'font-weight': 400,
-            display: 'flex',
-            flexWrap: 'wrap',
-            '@mobile': { 'text-align': 'left' },
-          }}
-        >
+        <Text type='paragraph-1' align='center' className={styles.FooterBodyContent}>
           Email us at{' '}
           <a className={styles.Email} href={'mailto:api-support@deriv.com'}>
             api-support@deriv.com
