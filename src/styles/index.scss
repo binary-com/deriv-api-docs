@@ -90,21 +90,20 @@ h6 {
 }
 
 .menu__list {
-  margin-top: 50px;
-  height: 460px;
+  margin-top: rem(5);
 }
 
 .menu__link {
-  font-size: 14px;
+  font-size: rem(1.4);
   font-weight: var(--ifm-font-weight-normal);
 }
 
 .menu__caret:before {
   background: var(--ifm-menu-link-sublist-icon);
   filter: var(--ifm-menu-link-sublist-icon-filter);
-  height: 12px;
+  height: rem(1.2);
   transform: rotateZ(90deg);
-  width: 8.72px;
+  width: rem(0.872);
 }
 
 .menu__list-item--collapsed .menu__link--sublist:after,
@@ -117,5 +116,5 @@ h6 {
 }
 
 .clean-btn {
-  margin-right: 33px;
+  margin-right: rem(3.3);
 }
