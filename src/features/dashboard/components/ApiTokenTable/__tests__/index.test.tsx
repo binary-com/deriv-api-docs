@@ -88,7 +88,7 @@ describe('DeleteTokenDialog', () => {
     const delete_button = await screen.findByTestId('dt_delete_button_0');
     expect(delete_button).toBeInTheDocument();
 
-    userEvent.click(delete_button);
+    await userEvent.click(delete_button);
 
     const delete_modal = await screen.findByText(/Are you sure you want to delete this token?/i);
     expect(delete_modal).toBeInTheDocument();
