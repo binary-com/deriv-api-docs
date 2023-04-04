@@ -12,7 +12,7 @@ export const ClientLibraries = () => {
           </div>
           <Text
             type='heading-2'
-            as={'h1'}
+            as={'h2'}
             bold
             align='center'
             aria-level={1}
@@ -21,7 +21,7 @@ export const ClientLibraries = () => {
             Comprehensive all-in-one client library
           </Text>
           <Text
-            type='subtitle-1'
+            type='subtitle-2'
             as={'h2'}
             align='center'
             className={styles.SubHeading}

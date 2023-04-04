@@ -57,6 +57,19 @@ h6 {
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
+.swiper {
+  padding: 0 rem(4) !important;
+  width: rem(32) !important;
+  @media screen and (min-width: 600px) {
+    width: rem(55) !important;
+  }
+}
+
 .loading {
   position: absolute;
   width: 100%;

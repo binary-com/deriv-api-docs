@@ -7,7 +7,14 @@ export const GetStarted = () => {
   return (
     <div className={`${styles.mainPageRow} ${styles.withPattern}`}>
       <div className={styles.columnContainer}>
-        <Text type='heading-2' bold data-testid='started-header' role='heading' as='h2'>
+        <Text
+          className={styles.getStartedHeading}
+          type='heading-2'
+          bold
+          data-testid='started-header'
+          role='heading'
+          as='h2'
+        >
           Get started with our API in 3 simple steps:
         </Text>
         <div className={styles.cardContainer}>

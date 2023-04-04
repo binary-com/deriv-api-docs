@@ -1,7 +1,10 @@
 @use 'src/styles/utility' as *;
 
 .carouselComponent {
-  margin: rem(16) 0 rem(16);
+  .carouselHeading {
+    margin-bottom: rem(6);
+    padding: 0 rem(2.5);
+  }
 
   .carouselContainer {
     display: flex;
@@ -9,18 +12,6 @@
     width: fit-content;
     margin: 0 auto;
     align-items: center;
-    .carouselHeading {
-      margin-bottom: rem(6);
-    }
-    .control {
-      width: rem(5);
-      height: rem(5);
-      background-size: rem(2.5) rem(2.5);
-      background-position: center;
-      cursor: pointer;
-      &:active {
-        background-size: rem(2) rem(2);
-      }
-    }
+    overflow: visible;
   }
 }

@@ -11,13 +11,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    margin: rem(16) auto 0 auto;
-    padding: rem(3) 0;
+    margin: 0 auto;
     @media screen and (max-width: 992px) {
       width: 100%;
     }
     .WaysHeading {
       max-width: 384px;
+      margin-bottom: rem(2.5);
+      padding: 0 rem(2);
     }
 
     .Ways {
