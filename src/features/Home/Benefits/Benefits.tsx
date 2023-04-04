@@ -62,12 +62,11 @@ export const Benefits = () => {
             <ImageContainer image='build-business' />
             <div>
               <Text
-                bold
                 css={{
-                  'margin-top': '4rem',
                   'font-size': 'var(--fontSizes-2xl)',
                   '@mobile': { 'font-size': 'var(--fontSizes-lg)' },
                 }}
+                bold
               >
                 Build a business and earn more
               </Text>
