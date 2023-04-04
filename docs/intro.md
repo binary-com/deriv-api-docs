@@ -10,7 +10,7 @@ Our Documentation is divided in several sections:
 - [Core Concepts](category/core-concepts)
 - [Languages](category/languages)
 - [Client libraries](category/client-libraries)
-- [Frequently Asked Questions](category/frequently-asked-questions)
+- [FAQ](category/faq)
 - [Guides](category/guides)
 
 ### Quick Start
