@@ -84,7 +84,7 @@ describe('DeleteTokenDialog', () => {
     expect(token_row).toBeInTheDocument();
   });
 
-  it('show DeleteTokenDialog when pressing the delete button', async () => {
+  it('Shows the dialog when pressing the delete button', async () => {
     const delete_button = await screen.findByTestId('dt_delete_button_0');
     expect(delete_button).toBeInTheDocument();
 
@@ -94,7 +94,7 @@ describe('DeleteTokenDialog', () => {
     expect(delete_modal).toBeInTheDocument();
   });
 
-  it('Dialog should be closed when pressing the close button', async () => {
+  it('Should close the dialog when pressing the close button', async () => {
     const delete_button = await screen.findByTestId('dt_delete_button_0');
     expect(delete_button).toBeInTheDocument();
 
@@ -110,7 +110,7 @@ describe('DeleteTokenDialog', () => {
     expect(delete_modal).not.toBeInTheDocument();
   });
 
-  it("Dialog should be closed when pressing the 'No, keep it' button", async () => {
+  it("Should close the dialog when pressing the 'No, keep it' button", async () => {
     const delete_button = await screen.findByTestId('dt_delete_button_0');
     expect(delete_button).toBeInTheDocument();
 
@@ -125,7 +125,7 @@ describe('DeleteTokenDialog', () => {
     expect(delete_modal).not.toBeInTheDocument();
   });
 
-  it("Delete the token and close the dialog when pressing the 'Yes, delete' button", async () => {
+  it("Deletes the token and closes the dialog when pressing the 'Yes, delete' button", async () => {
     const delete_button = await screen.findByTestId('dt_delete_button_0');
     expect(delete_button).toBeInTheDocument();
 
