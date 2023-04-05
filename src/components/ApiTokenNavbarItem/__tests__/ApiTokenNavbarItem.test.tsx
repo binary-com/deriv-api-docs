@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@site/src/test-utils';
 
 import React from 'react';
-import ApiTokenNavbarItem, { CreateToken } from '..';
+import ApiTokenNavbarItem from '..';
 import { TTokensArrayType } from '@site/src/types';
 
 jest.mock('@site/src/hooks/useApiToken');
