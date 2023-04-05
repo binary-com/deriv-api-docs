@@ -40,10 +40,7 @@ export default function DocPageLayoutSidebar({
         hiddenSidebarContainer && styles.docSidebarContainerHidden,
       )}
       onTransitionEnd={(e) => {
-        const has_no_sidebar_container = !e.currentTarget.classList.contains(
-          styles.docSidebarContainer!,
-        );
-        if (has_no_sidebar_container) {
+        if (!e.currentTarget.classList.contains(styles.docSidebarContainer!)) {
           return;
         }
 
