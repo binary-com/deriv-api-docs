@@ -16,7 +16,6 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --doc-sidebar-width: 283px; //not changing
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
@@ -112,7 +111,7 @@ h6 {
 }
 
 .menu__link--active {
-  color: #ff444f;
+  color: var(--colors-coral600);
 }
 
 .clean-btn {
