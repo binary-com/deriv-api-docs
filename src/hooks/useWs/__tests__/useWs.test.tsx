@@ -205,4 +205,39 @@ describe('Use WS', () => {
       req_id: 1,
     });
   });
+
+  it('Should be able to clear the websocket call', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useWS('ping'));
+
+    expect(result.current.is_loading).toBeFalsy();
+
+    act(() => {
+      result.current.send();
+    });
+    expect(result.current.is_loading).toBeTruthy();
+
+    await expect(wsServer).toReceiveMessage({ ping: 1, req_id: 1 });
+
+    wsServer.send({
+      echo_req: {
+        ping: 1,
+        req_id: 1,
+      },
+      msg_type: 'ping',
+      ping: 'pong',
+      req_id: 1,
+    });
+
+    await waitForNextUpdate();
+
+    expect(result.current.is_loading).toBeFalsy();
+
+    expect(result.current.data).toBe('pong');
+
+    act(() => {
+      result.current.clear();
+    });
+
+    expect(result.current.data).toBe(null);
+  });
 });
