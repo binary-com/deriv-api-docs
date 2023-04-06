@@ -31,7 +31,7 @@ describe('App Management', () => {
 
     render(<AppManagement />);
 
-    const loadingRow = screen.getAllByTestId('loading-skeleton-row');
+    const loadingRow = screen.getAllByTestId('dt_loading_skeleton_row');
 
     expect(mockGetApps).toBeCalledTimes(1);
 

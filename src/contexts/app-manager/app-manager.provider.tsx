@@ -25,8 +25,10 @@ const AppManagerContextProvider = ({ children }: TAppManagerContextProps) => {
   }, []);
 
   useEffect(() => {
-    setApps(updatedApps);
-  }, [updatedApps]);
+    if (apps?.length === 0 || apps === undefined) {
+      setApps(updatedApps);
+    }
+  }, [apps, updatedApps]);
 
   const context_object: TAppManagerContext = useMemo(() => {
     return {

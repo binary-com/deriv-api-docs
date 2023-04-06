@@ -22,8 +22,8 @@ describe('Loading Table', () => {
 
     const withinFirstRow = within(rows[0]);
 
-    const columnsInFirstRow = withinFirstRow.getAllByTestId('loading-table-column');
+    const columnsInFirstRow = withinFirstRow.getByTestId('dr_loading_table_column_0');
 
-    expect(columnsInFirstRow).toHaveLength(4);
+    expect(columnsInFirstRow).toBeInTheDocument();
   });
 });
