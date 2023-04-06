@@ -1,5 +1,5 @@
 :root {
-  --ifm-menu-link-sublist-icon2: url(/img/arrow_sidebar.svg);
+  --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
 }
 
 .tocCollapsibleButton {
@@ -13,7 +13,7 @@
 
 .tocCollapsibleButton::after {
   content: '';
-  background: var(--ifm-menu-link-sublist-icon2);
+  background: var(--ifm-menu-link-sublist-icon-2);
   filter: var(--ifm-menu-link-sublist-icon-filter);
   height: 12px;
   width: 8.72px;
