@@ -22,7 +22,7 @@ export const ClientLibraries = () => {
           </Text>
           <Text
             type='subtitle-2'
-            as={'h2'}
+            as={'h3'}
             align='center'
             className={styles.SubHeading}
             aria-level={4}
