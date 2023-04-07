@@ -1,13 +1,13 @@
 @use 'src/styles/utility' as *;
 
 .features {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: rem(15);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
 }
 
 .featureSvg {
-    height: 20rem;
-    width: 20rem;
+  height: 20rem;
+  width: 20rem;
 }
