@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, getByPlaceholderText, render, screen, waitFor } from '@testing-library/react';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
@@ -34,8 +34,18 @@ describe('RequestResponseRenderer', () => {
   });
 
   it('should render textarea', () => {
-    const textarea = screen.getByPlaceholderText('Request JSON');
+    const newProps = {
+      handleChange: jest.fn(),
+      request_example: '',
+      name: '' as TSocketEndpointNames,
+      auth_required: 0,
+    };
+    cleanup();
+    render(<RequestJSONBox {...newProps} />);
+    const textarea = screen.getByLabelText('Request JSON');
+    const placeholder = screen.getAllByPlaceholderText('Request JSON');
     expect(textarea).toBeInTheDocument();
+    expect(placeholder).toHaveLength(1);
   });
 
   it('should render response renderer component', async () => {
