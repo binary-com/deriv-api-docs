@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Translate from '@docusaurus/Translate';
 import type { Props } from '@theme/TOCCollapsible/CollapseButton';
 
-import styles from './styles.module.scss';
+import styles from './styles.module.css';
 
 export default function TOCCollapsibleCollapseButton({ collapsed, ...props }: Props): JSX.Element {
   return (

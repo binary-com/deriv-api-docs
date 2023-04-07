@@ -110,10 +110,16 @@ h6 {
   transform: rotateZ(0deg);
 }
 
-.menu__link--active {
+.menu__link--active,
+.menu__link--active:hover {
   color: var(--colors-coral600);
 }
 
 .menu__caret {
   margin-right: rem(3.3);
+}
+
+aside.theme-doc-sidebar-container {
+  height: 100vh;
+  width: rem(28.3);
 }
