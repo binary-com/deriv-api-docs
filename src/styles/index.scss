@@ -123,3 +123,18 @@ aside.theme-doc-sidebar-container {
   height: 100vh;
   width: rem(28.3);
 }
+
+[class*='tocCollapsibleButton'] {
+  box-sizing: border-box;
+}
+
+[class*='tocCollapsibleButton']::after {
+  background: var(--ifm-menu-link-sublist-icon-2) !important;
+  height: 12px !important;
+  width: 8.72px !important;
+  transform: rotate(90deg) !important;
+}
+
+[class*='tocCollapsibleButtonExpanded']::after {
+  transform: rotate(270deg) !important;
+}
