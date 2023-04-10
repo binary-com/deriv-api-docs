@@ -69,9 +69,9 @@ Every Call has several `Optional` fields as well, `passthrough` and `req_id` are
 
 Whatever you pass to this field will be returned back to you on `response` object, this can be helpful when you need to simulate stateful flow for your `requests` and `responses`.
 
-#### Req Id Field
+#### `req_id` Field
 
-You may want to `tag` your requests and pass them through our `websocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
+You may need to `tag` your requests and pass them through our `websocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
 
 :::caution
 There may be other optional fields for a request which are only related to that API call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
@@ -152,11 +152,11 @@ The response for the `Residence List` call:
 
 Here the `residence_list` is the `method name` and it contains the actual data you requested. rest of the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
 
-### The `echo_req` Field
+#### The `echo_req` Field
 
 This `Field` contains the exact `Request Data` you sent to the server.
 
-### The `msg_type` Field
+#### The `msg_type` Field
 
 This `Field` helps you determine which message data you're getting on `message` event of the websocket connection. for example your `onmessage` event handler for you websocket connection is `Javascript` would be:
 
@@ -177,7 +177,7 @@ socket.onmessage = (event) => {
 }
 ```
 
-### The `req_id` Field
+#### The `req_id` Field
 
 This is the `Optional` passed to the `Request Data`, you can use it for `validation`, `synchronization`, `caching`, etc.
 
