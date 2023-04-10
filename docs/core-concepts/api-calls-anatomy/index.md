@@ -17,7 +17,7 @@ Every API call has the send functionality and several API calls provide the subs
 
 ### Subscribe
 
-Several API calls provide `subscribe` functionality, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), you'll get the updated values and data.
+Several API calls provide `subscribe` functionality, they create stream of messages for you, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), you'll get the updated values and data.
 
 These API calls have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and server will continue to send the requested data until you call the `forget`  for your API call you want to `unsubscribe` or `forget`.
 
