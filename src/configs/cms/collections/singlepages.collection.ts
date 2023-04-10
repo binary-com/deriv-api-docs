@@ -13,21 +13,15 @@ const SinglePagesCollection: CmsCollection = {
       fields: [...default_doc_fields],
     },
     {
-      name: 'app_reg',
-      label: 'Application Setup',
-      file: 'docs/application_setup.md',
-      fields: [...default_doc_fields],
-    },
-    {
       name: 'language-intro',
       label: 'Language Introduction',
       file: 'docs/languages/intro.md',
       fields: [...default_doc_fields],
     },
     {
-      name: 'dervi-api-intro',
-      label: 'Deriv API Introduction',
-      file: 'docs/deriv-api/intro.md',
+      name: 'client-libraries-intro',
+      label: 'Client Libraries Introduction',
+      file: 'docs/client-libraries/intro.md',
       fields: [...default_doc_fields],
     },
     {
@@ -37,9 +31,9 @@ const SinglePagesCollection: CmsCollection = {
       fields: [...default_doc_fields],
     },
     {
-      name: 'guides-intro',
-      label: 'Guides Introduction',
-      file: 'docs/guides/intro.md',
+      name: 'app_reg',
+      label: 'Application Setup',
+      file: 'docs/application_setup.md',
       fields: [...default_doc_fields],
     },
   ],
