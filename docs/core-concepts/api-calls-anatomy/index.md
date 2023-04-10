@@ -29,7 +29,7 @@ For more information on forget API call please check [Forget](https://api.deriv.
 
 ### Send
 
-When you call an API call with `send` functionality, server will only send back the requested data one time. so if you want to get the updated data you have to send the API call again, usually this method will be used based on other other calls responses or even UI events such as `Click`, `Scroll`, etc.
+If you call an API call with `send` functionality, server will only send back the requested data one time. so if you need to get the updated data you have to send the API call again, usually this method will be used based on other other API call responses or UI events such as `Click`, `Scroll`, etc.
 
 ## Request Data
 
@@ -40,7 +40,7 @@ In order to make it easier for you to handle the `request` and `response` flow o
 Every `request` has a `method name` field which gets usually a `number` or `1` as value.
 
 :::caution
-API Call Method Name is always required. this field determines the data you get from server.
+API Call Method Name is always required. this field determines the data you'll get from our websocket server.
 :::
 
 ### Required Fields
@@ -54,12 +54,12 @@ Request data for this call is like so:
 ```ts
 {
   residence_list: 1; // Api Call Method Name
-  passthrough?: object;
-  req_id?: number;
+  passthrough?: object; // Optional
+  req_id?: number; // Optional
 }
 ```
 
-The `residence_list` field is the `method name` for the call and is required, there may be other required fields which are related to type of the request you wanna send. if you want to know more about `Residence List` and other API calls please check [them](https://api.deriv.com/api-explorer#residence_list) out here.
+The `residence_list` field is the `method name` for the call and is required, there may be other required fields which are related to type of the request you wanna send. if you want to know more about `Residence List` and other API calls please check them out in [API Explorer](https://api.deriv.com/api-explorer#residence_list).
 
 ### Optional Fields
 
@@ -84,14 +84,69 @@ When you get the response for the call, there will be a `Field` with the same na
 The response for the `Residence List` call:
 
 ```js
-const response = {
+{
   echo_req: {
     req_id: 1,
     residence_list: 1,
   },
   msg_type: 'residence_list',
   req_id: 1,
-  residence_list: [...],
+  residence_list: [
+       {
+            "identity": {
+                "services": {
+                    "idv": {
+                        "documents_supported": {},
+                        "has_visual_sample": 0,
+                        "is_country_supported": 0
+                    },
+                    "onfido": {
+                        "documents_supported": {
+                            "driving_licence": {
+                                "display_name": "Driving Licence"
+                            }
+                        },
+                        "is_country_supported": 0
+                    }
+                }
+            },
+            "phone_idd": "35818",
+            "text": "Aland Islands",
+            "value": "ax"
+        },
+        {
+            "identity": {
+                "services": {
+                    "idv": {
+                        "documents_supported": {},
+                        "has_visual_sample": 0,
+                        "is_country_supported": 0
+                    },
+                    "onfido": {
+                        "documents_supported": {
+                            "driving_licence": {
+                                "display_name": "Driving Licence"
+                            },
+                            "national_identity_card": {
+                                "display_name": "National Identity Card"
+                            },
+                            "passport": {
+                                "display_name": "Passport"
+                            }
+                        },
+                        "is_country_supported": 1
+                    }
+                }
+            },
+            "phone_idd": "355",
+            "text": "Albania",
+            "tin_format": [
+                "^[A-Ta-t0-9]\\d{8}[A-Wa-w]$"
+            ],
+            "value": "al"
+        },
+        // ....
+  ],
 };
 ```
 
