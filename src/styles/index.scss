@@ -6,6 +6,9 @@
  * work well for content-centric websites.
  */
 /* You can override the default Infima variables here. */
+/* Note: !important used to override node_modules css classes 
+   in order to avoid swizzling the whole component just to modify few classes */
+
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -130,8 +133,8 @@ aside.theme-doc-sidebar-container {
 
 [class*='tocCollapsibleButton']::after {
   background: var(--ifm-menu-link-sublist-icon-2) !important;
-  height: 12px !important;
-  width: 8.72px !important;
+  height: rem(1.2) !important;
+  width: rem(0.872) !important;
   transform: rotate(90deg) !important;
 }
 
