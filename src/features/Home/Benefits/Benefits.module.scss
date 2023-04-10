@@ -2,7 +2,11 @@
 
 .BenefitsContainer {
   width: 100%;
-  margin-top: rem(10);
+
+  .Heading {
+    margin-bottom: rem(4);
+    padding: 0 rem(2);
+  }
 
   .BenefitsIcons {
     width: 100%;

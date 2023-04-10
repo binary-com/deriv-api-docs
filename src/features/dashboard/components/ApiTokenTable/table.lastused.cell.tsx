@@ -22,7 +22,11 @@ const ApiLastUsedCell = ({
     <div className={styles.lastused_cell} data-testid={'lastused-cell'}>
       <div>{value ? formatDate(value) : 'Never'}</div>
       <div>
-        <button onClick={() => setToggleModal(!toggle_modal)} className={styles.delete_button} />
+        <button
+          onClick={() => setToggleModal(!toggle_modal)}
+          className={styles.delete_button}
+          data-testid={`dt_delete_button_${row.id}`}
+        />
         {toggle_modal && <DeleteTokenDialog onDelete={onDelete} setToggleModal={setToggleModal} />}
       </div>
     </div>

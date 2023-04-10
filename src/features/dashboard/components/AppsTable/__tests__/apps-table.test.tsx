@@ -90,6 +90,24 @@ describe('Apps Table', () => {
     expect(deleteDialogTitle).not.toBeInTheDocument();
   });
 
+  it('opens modal for delete app and closes it with close button', async () => {
+    const actionCells = await screen.findAllByTestId('app-action-cell');
+    const firstActionCell = actionCells[0];
+
+    const withinActionCell = within(firstActionCell);
+    const openDeleteDialogButton = withinActionCell.getByTestId('delete-app-button');
+    await userEvent.click(openDeleteDialogButton);
+
+    const deleteDialogTitle = await screen.findByText('Are you sure you want to delete this app?');
+    expect(deleteDialogTitle).toBeInTheDocument();
+
+    // test-id provided by Deriv UI library component
+    const modal_button = screen.getByTestId('close-button');
+    await userEvent.click(modal_button);
+
+    expect(deleteDialogTitle).not.toBeInTheDocument();
+  });
+
   it('Should open edit dialog form on edit button', async () => {
     const actionCells = await screen.findAllByTestId('app-action-cell');
     const firstActionCell = actionCells[0];

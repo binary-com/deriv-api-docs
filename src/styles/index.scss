@@ -42,10 +42,6 @@
   scroll-margin-top: rem(10);
 }
 
-.main-page-row:nth-child(even) {
-  background-color: var(--ifm-color-emphasis-100);
-}
-
 .error-message {
   color: var(--colors-coral600) !important;
 }
@@ -65,6 +61,19 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+.swiper {
+  padding: 0 rem(4) !important;
+  width: rem(32) !important;
+  @media screen and (min-width: 600px) {
+    width: rem(55) !important;
+  }
 }
 
 .loading {

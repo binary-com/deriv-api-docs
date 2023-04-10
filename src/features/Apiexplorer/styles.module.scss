@@ -6,6 +6,10 @@
   margin-top: rem(4);
   overflow-x: hidden;
 
+  .heading {
+    text-align: center;
+  }
+
   .pageWrapper {
     display: flex;
     color: var(--ifm-color-emphasis-1000);

@@ -12,24 +12,19 @@ export const ClientLibraries = () => {
           </div>
           <Text
             type='heading-2'
-            as={'h1'}
+            as={'h2'}
             bold
             align='center'
             aria-level={1}
-            css={{
-              'margin-bottom': '40px',
-            }}
+            className={styles.Heading}
           >
             Comprehensive all-in-one client library
           </Text>
           <Text
-            type='subtitle-1'
+            type='subtitle-2'
             as={'h2'}
             align='center'
-            css={{
-              'font-weight': 400,
-              '@mobile': { 'text-align': 'center' },
-            }}
+            className={styles.SubHeading}
             aria-level={4}
           >
             Use our powerful, flexible, and free API to build a custom trading <br />

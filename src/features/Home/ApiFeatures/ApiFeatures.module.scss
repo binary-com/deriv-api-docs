@@ -5,12 +5,6 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding: rem(2) rem(10);
-  margin-top: rem(16);
-
-  @media (max-width: 992px) {
-    padding: rem(2) 0;
-  }
 
   .FeaturesDescription {
     display: flex;
@@ -33,10 +27,16 @@
       width: rem(48.6);
       padding: 0 rem(1);
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: rem(2);
       @media (min-width: 425px) {
         margin-left: rem(4);
       }
-
+      .FeatureParagraph {
+        font-weight: 500;
+        line-height: rem(3);
+      }
       .FeatureList {
         margin-left: rem(-2);
         font-weight: 500;

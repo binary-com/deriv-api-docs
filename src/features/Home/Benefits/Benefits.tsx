@@ -30,15 +30,7 @@ export const Benefits = () => {
   return (
     <div data-testid='benefits' className='main-page-row'>
       <div className={styles.BenefitsContainer}>
-        <Text
-          type='heading-2'
-          as={'h2'}
-          align='center'
-          bold
-          css={{
-            margin: '4rem 0',
-          }}
-        >
+        <Text type='heading-2' as={'h2'} align='center' bold className={styles.Heading}>
           Benefits of using Deriv API
         </Text>
         <div className={styles.BenefitsIcons}>
@@ -70,12 +62,11 @@ export const Benefits = () => {
             <ImageContainer image='build-business' />
             <div>
               <Text
-                bold
                 css={{
-                  'margin-top': '4rem',
                   'font-size': 'var(--fontSizes-2xl)',
                   '@mobile': { 'font-size': 'var(--fontSizes-lg)' },
                 }}
+                bold
               >
                 Build a business and earn more
               </Text>
