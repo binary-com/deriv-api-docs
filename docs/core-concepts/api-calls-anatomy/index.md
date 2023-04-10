@@ -23,7 +23,7 @@ Several API calls provide `subscribe` functionality, which means when you subscr
 
 When you call an API call with `send` functionality, server will only send back the requested data one time. so if you want to get the updated data you have to send the API call again, usually this method will be used based on other other calls responses or even UI events such as `Click`, `Scroll`, etc.
 
-## Request Data Anatomy
+## Request Data
 
 In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization, etc.
 
@@ -69,11 +69,12 @@ You may want to `tag` your requests and pass them through our `websocket` calls.
 There may be other optional fields for a request which are only related to that API call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
 :::
 
-## Response Data Anatomy
+## Response Data
 
 When you get the response for the call, there will be a `Field` with the same name as the `method name`. and it contains the actual data.
 
 The response for the `Residence List` call:
+
 ```js
 const response = {
   echo_req: {
@@ -112,6 +113,7 @@ socket.onmessage = (event) => {
   }
 }
 ```
+
 ### The `req_id` Field
 
 This is the `Optional` passed to the `Request Data`, you can use it for `validation`, `synchronization`, `caching`, etc.
