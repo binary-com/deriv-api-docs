@@ -3,7 +3,7 @@ title: API Calls Anatomy
 hide_title: true
 draft: false
 sidebar_label: API Calls anatomy
-sidebar_position: 5
+sidebar_position: 1
 tags:
   - concept
 keywords:
@@ -11,31 +11,28 @@ keywords:
   - concept
 description: Deriv API calls Anatomy
 ---
+## Subscribe and Send
 
-## API Call Types
+Every API call has the send functionality and several API calls provide the subscribe functionality.
 
-We provide two types of API calls, `Subscription` and `Send Once` ( Fire and Forget )
+### Subscribe
 
-### Subscription
+Several API calls provide `subscribe` functionality, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), you'll get the updated values and data, these API calls have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and they'll continue to send the requested data until you call the `forget` API call with API call name for example [Tick History](https://api.deriv.com/api-explorer#ticks_history). usually data provided by this type of calls will be considered as data source for other API calls or features.
 
-Some API calls provide `subscription` ability, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), these API calls have an `optional` `subscription` field, which if you pass `1` to them, the subscription starts. most of the time data provided by this type of calls will be considered as data source for other calls or features.
+### Send
 
-### Send Once
-
-`Send Once` API calls are just for getting some data as the name says for once. so if you want to get the updated data you have to send the API call again and get the updated data, most of the time API calls of this type will be used based on other other calls responses or even UI event events such as `Click`, `Scroll`, etc.
-
-In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use them for caching, validation, request and response synchronization, etc.
+When you call an API call with `send` functionality, server will only send back the requested data one time. so if you want to get the updated data you have to send the API call again, usually this method will be used based on other other calls responses or even UI events such as `Click`, `Scroll`, etc.
 
 ## Request Data Anatomy
 
-Request data anatomy means the `data` you send to the `websocket_connection.send` function, it doesn't matter if it's a `subscription` or a just `send once` request.
+In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization, etc.
 
-### Identifier Field
+### API Call Method Name
 
-Every `request` has an `Identifier` field which is `unique` which gets usually a `number` or `1` as value.
+Every `request` has a `method name` field which gets usually a `number` or `1` as value.
 
 :::caution
-Identifier field is always required.
+API Call Method Name is always required. this field determines the data you get from server.
 :::
 
 ### Required Fields
@@ -47,14 +44,14 @@ Every request data has several required fields which you must provide them and t
 Request data for this call is like so:
 
 ```ts
-interface IAssetIndex {
-  residence_list: 1; // it must always be `1`
+{
+  residence_list: 1; // Api Call Method Name
   passthrough?: object;
   req_id?: number;
 }
 ```
 
-The `residence_list` field is the `Identifier Field` for the call and is required here, there may other required fields which are related to type of the request you wanna send. if you want to know more about `Residence List` check [it](https://api.deriv.com/api-explorer#residence_list) out here.
+The `residence_list` field is the `method name` for the call and is required, there may be other required fields which are related to type of the request you wanna send. if you want to know more about `Residence List` and other API calls please check [them](https://api.deriv.com/api-explorer#residence_list) out here.
 
 ### Optional Fields
 
@@ -62,26 +59,21 @@ Every Call has several `Optional` fields as well, `passthrough` and `req_id` are
 
 #### Passthrough Field
 
-Whatever you pass to this field will be returned back to you on `response` object, this can be helpful when you wanna simulate some kinda stateful like flow for your `requests` and `responses`.
+Whatever you pass to this field will be returned back to you on `response` object, this can be helpful when you need to simulate stateful flow for your `requests` and `responses`.
 
 #### Req Id Field
 
-You may want to `tag` your requests and pass them through our `websocket` calls. you can do it by passing a `number` to this field. it can be helpful when you wanna map `requests` to `responses`.
-
-:::tip
-`passthrough` and `req_id` are always optional and present in any API call.
-:::
+You may want to `tag` your requests and pass them through our `websocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
 
 :::caution
-There may be other optional fields for a request which are only related to that api call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
+There may be other optional fields for a request which are only related to that API call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
 :::
 
 ## Response Data Anatomy
 
-When you get the response for the call, there will be a `Field` with the same name as the `Identifier`. and it contains the actual data.
+When you get the response for the call, there will be a `Field` with the same name as the `method name`. and it contains the actual data.
 
-The response for the `Residence List` Call would be something like so:
-
+The response for the `Residence List` call:
 ```js
 const response = {
   echo_req: {
@@ -94,15 +86,15 @@ const response = {
 };
 ```
 
-Here the `residence_list` is the `Identifier Field` and it contains the actual data you requested. the array is removed here for brevity sake, you can check the actual real response [here](https://api.deriv.com/api-explorer#residence_list).
+Here the `residence_list` is the `method name` and it contains the actual data you requested. the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
 
 ### The `echo_req` Field
 
-As you can see this `Field` contains the exact `Request Data` you sent to the server.
+This `Field` contains the exact `Request Data` we sent to the server.
 
 ### The `msg_type` Field
 
-This `Field` help you understand what kind of message you're getting on `message` event of the websocket connection. for example your `onmessage` event handler can be something like this:
+This `Field` helps you determine which message data you're getting on `message` event of the websocket connection. for example your `onmessage` event handler for you websocket connection is `Javascript` would be:
 
 ```js
 socket.onmessage = (event) => {
@@ -112,7 +104,7 @@ socket.onmessage = (event) => {
     case "residence_list":
       console.log("The residence list is : ",receivedMessage.residence_list)
       break;
-    case "some_other_request_identifier"
+    case "other_request_identifier"
       console.log("the response", receivedMessage.some_other_request_identifier)
     default:
       console.log("receivedMessage", receivedMessage)
@@ -120,9 +112,6 @@ socket.onmessage = (event) => {
   }
 }
 ```
-
-So based on the `msg_type` you get in the response, you can update your logic.
-
 ### The `req_id` Field
 
 This is the `Optional` passed to the `Request Data`, you can use it for `validation`, `synchronization`, `caching`, etc.
