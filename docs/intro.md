@@ -1,7 +1,7 @@
 ---
 title: intro
 hide_title: false
-draft: true
+draft: false
 sidebar_label: Introduction
 sidebar_position: 0
 keywords:
