@@ -9,17 +9,20 @@ keywords:
   - getting-started-deriv-api
 description: how to use deriv api, deriv api gettting started
 ---
+
 Our Documentation is divided in several sections:
 
-* [Setting up a deriv app](/docs/application_setup.md)
-* [Terminology](category/terminolog)
-* [Core Concepts](category/core-concepts)
-* [Languages](category/languages)
-* [Client Libraries](category/client-libraries)
-* [Guides](category/guides)
-* [FAQ](category/faq)
+- [Setting up a deriv app](/docs/application_setup.md)
+- [Terminology](category/terminology)
+- [Core Concepts](category/core-concepts)
+- [Languages](category/languages)
+- [Client Libraries](category/client-libraries)
+- [Guides](category/guides)
+- [FAQ](category/faq)
 
 ### Quick Start
+
+# Introduction
 
 Please skim through our [Core Concept](category/core-concepts) and [Terminology](category/terminology) pages, these pages will help you get familiar with our `websocket server api` features, the concepts introduced in these pages are not related to any of our frameworks or libraries, so in order to use our `websocket server api` in an efficient way it's better if you grasp all the information provided there.
 
