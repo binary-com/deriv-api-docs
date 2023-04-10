@@ -1,5 +1,5 @@
 ---
-title: intro
+title: Introduction
 hide_title: false
 draft: false
 sidebar_label: Introduction
