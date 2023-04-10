@@ -63,16 +63,16 @@ const mockUseAppManager = useAppManager as jest.MockedFunction<
   () => Partial<ReturnType<typeof useAppManager>>
 >;
 
-jest.mock('react-table');
+// jest.mock('react-table');
 
-const mockReactTable = useTable as jest.MockedFunction<() => Partial<ReturnType<typeof useTable>>>;
+// const mockReactTable = useTable as jest.MockedFunction<() => Partial<ReturnType<typeof useTable>>>;
 
-mockReactTable.mockImplementation(() => ({
-  getTableProps: jest.fn(),
-  getTableBodyProps: jest.fn(),
-  rows: [],
-  headerGroups: [],
-}));
+// mockReactTable.mockImplementation(() => ({
+//   getTableProps: jest.fn(),
+//   getTableBodyProps: jest.fn(),
+//   rows: [],
+//   headerGroups: [],
+// }));
 
 describe('AppManager', () => {
   afterEach(() => {
@@ -116,15 +116,17 @@ describe('AppManager', () => {
 
   it('Should be able to switch to a different tab', async () => {
     const mockUpdatecurrentTab = jest.fn();
+    const mockGetApps = jest.fn();
 
     mockUseAppManager.mockImplementation(() => ({
       updateCurrentTab: mockUpdatecurrentTab,
       apps: fakeApplications,
-      getApps: jest.fn(),
+      getApps: mockGetApps,
     }));
 
     mockUseAuthContext.mockImplementation(() => ({
       is_logged_in: true,
+      is_authorized: true,
       currentLoginAccount: {
         currency: 'USD',
         name: 'CR111111',
@@ -156,6 +158,8 @@ describe('AppManager', () => {
     expect(manage_application_button).toBeInTheDocument();
 
     await userEvent.click(manage_application_button);
+
+    expect(mockGetApps).toHaveBeenCalledTimes(1);
 
     const manage_apps_page = await screen.findByText('first app');
 
