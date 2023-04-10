@@ -1,8 +1,8 @@
 ---
-title: Getting Started
+title: intro
 hide_title: false
 draft: true
-sidebar_label: Getting Started
+sidebar_label: Introduction
 sidebar_position: 0
 keywords:
   - deriv-api
