@@ -7,7 +7,7 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 import { useCallback } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { Circles } from 'react-loader-spinner';
-interface IResponseRendererProps<T extends TSocketEndpointNames> {
+export interface IResponseRendererProps<T extends TSocketEndpointNames> {
   name: T;
   reqData?: string;
   auth: number;
@@ -20,8 +20,8 @@ type TPlaygroundSection<T extends TSocketEndpointNames> = {
   error: unknown;
 };
 
-const LoginModal = (visible) => {
-  if (visible) {
+export const LoginModal = (visible) => {
+  if (visible?.visible) {
     return (
       <Modal defaultOpen>
         <Modal.Portal>
@@ -33,6 +33,7 @@ const LoginModal = (visible) => {
       </Modal>
     );
   }
+  return null;
 };
 
 const PlaygroundSection = <T extends TSocketEndpointNames>({
@@ -58,7 +59,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
     <div
       id='playground-console'
       className={style.playgroundConsole}
-      data-testid='playgroundConsole'
+      data-testid='playground-section'
     >
       {responseState && (
         <BrowserOnly
