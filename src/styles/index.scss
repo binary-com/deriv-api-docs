@@ -1,4 +1,6 @@
 @use 'src/styles/utility' as *;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -10,6 +12,8 @@
    in order to avoid swizzling the whole component just to modify few classes */
 
 :root {
+  --ibm-font-family-base: 'IBM Plex Sans', sans-serif;
+  --ibm-font-family-header: 'Ubuntu', sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -62,7 +66,10 @@ h6 {
   margin: 0;
   padding: 0;
 }
-
+h1,
+h2 {
+  font-family: 'Ubuntu', sans-serif;
+}
 html,
 body {
   overflow-x: hidden;

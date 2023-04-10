@@ -11,11 +11,13 @@
   background-size: auto;
 
   .Heading {
-    margin: rem(2) 0;
+    margin: rem(1) 0;
     padding: 0 rem(2);
   }
   .SubHeading {
     font-weight: 400;
+    margin: rem(2) 0;
+    padding: 0 rem(2);
     @media (max-width: 992px) {
       text-align: center;
     }
