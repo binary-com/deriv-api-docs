@@ -150,11 +150,11 @@ The response for the `Residence List` call:
 };
 ```
 
-Here the `residence_list` is the `method name` and it contains the actual data you requested. the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
+Here the `residence_list` is the `method name` and it contains the actual data you requested. rest of the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
 
 ### The `echo_req` Field
 
-This `Field` contains the exact `Request Data` we sent to the server.
+This `Field` contains the exact `Request Data` you sent to the server.
 
 ### The `msg_type` Field
 
