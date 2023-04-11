@@ -48,6 +48,19 @@ You need a token with `admin` scope to create application.
 
 In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
 
+![](/img/register_application.png)
+
+| App Information Field | Description                                                                               |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| Account               | The account you want to create the application with                                       |
+| API Token             | The API token you want to create the application with                                     |
+| App Name              | Application Name                                                                          |
+| Markup                | You can earn commission by adding a markup to the price of each trade                     |
+| Authorization URL     | This allows clients to log in to your app using their Deriv accounts without an API token |
+| Verification URL      | This URL will be used as the OAuth redirect URL for the OAuth authorization.              |
+
+
+
 **To create an application follow these steps:**
 
 1. Select the account you want to create the application with.
@@ -56,14 +69,5 @@ In Dashboard select **Register application** tab and create you application with
 4. Fill the **Markup** and **OAuth details** fields.
 5. Select the **Authorization Scopes** needed by your application
 6. Click **Click Register Application**
-
-| App Information Field     | Description|
-| ------------------- |  -------------------|
-| Account | The account you want to create the application with |
-| API Token | The API token you want to create the application with |
-| App Name | Application Name|
-| Markup | You can earn commission by adding a markup to the price of each trade|
-| Authorization URL|This allows clients to log in to your app using their Deriv accounts without an API token|
-| Verification URL| This URL will be used as the OAuth redirect URL for the OAuth authorization.|
 
 Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
