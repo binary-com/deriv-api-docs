@@ -30,7 +30,7 @@ For the reviewer, Links in this section will be provided in the future.
 
 #### Deriv Account
 
-If you don't have a deriv account already you can visit the Sign Up page and create one, it's completly free. and if you already have an account please login with your account. for testing purposes and to accidental prevent money loss, make sure you're using your demo account not the real one for now.
+If you don't have a deriv account already you can visit the Sign Up page and create one, it's completly free. and if you already have an account please login with your account. for testing purposes and to prevent accidental money loss, make sure you're using your demo account not the real one for now.
 
 #### Deriv API Token
 
