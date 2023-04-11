@@ -28,10 +28,6 @@ You have to make sure you have all the requirements mentioned bellow to continue
 Please refer to [Setting up a Deriv Application](docs/application_setup) for detailed instruction how to create Deriv API token and Applications
 :::
 
-## Authentication Process
-
-Third-party developers can authorize calls to the API in two different ways: via API token or via OAuth2.
-
 ### API Token
 
 An API token is a unique identifier of a client that requests access from a server. It's the simplest way of authorization.
@@ -60,7 +56,7 @@ Here is the visual representation of how the OAuth authorization connection work
 
 ![OAuth flow](/img/how_oauth_works.png "OAuth flow")
 
-## Sign In / Sign Up
+## Authentication Process
 
 In order to Authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application** tab in the **OAuth details** fields and then Add a login button on your website or app and direct users to **`https://oauth.binary.com/oauth2/authorize?app_id=your_app_id`** where your_app_id is the ID of your app.
 
