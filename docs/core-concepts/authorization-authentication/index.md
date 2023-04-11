@@ -68,8 +68,89 @@ In order to Authenticate your user, specify the URL that will be used as the OAu
 
 ![Deriv OAuth Login](/img/oauth_login.png "Deriv OAuth Login")
 
-Once a user signs up, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
-`https://[YOUR_WEBSITE_URL]/redirect/?acct1=cr799393& token1=a1-f7pnteezo4jzhpxclctizt27hyeot&cur1=usd& acct2=vrtc1859315& token2=a1clwe3vfuuus5kraceykdsoqm4snfq& cur2=usd&state=`
 
-In the parameters of the URL you will see all the accounts and the session token for each account.
-Pass these tokens to the Authorize API call in order to perform actions on behalf of the account.
+
+## Authorization Process
+
+Once a user signs up / signs in, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
+
+`https://[YOUR_WEBSITE_URL]/redirect/?acct1=cr799393& token1=a1-f7pnteezo4jzhpxclctizt27hyeot&cur1=usd& acct2=vrtc1859315& token2=a1clwe3vfuuus5kraceykdsoqm4snfq& cur2=usd`
+
+
+
+The query params in the redirect URL are the user's accounts and their related session tokens. you can map the query params to an array like so:
+```js
+const user_accounts = [
+    {
+        account: "cr799393",
+        token: "a1-f7pnteezo4jzhpxclctizt27hyeot",
+        currency: "usd"
+    },
+    {
+        account: "vrtc1859315",
+        token: "a1clwe3vfuuus5kraceykdsoqm4snfq",
+        currency: "usd"
+    },
+]
+```
+To authorize the user, based on the user's **Selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the correct **Session Token**:
+```js
+{
+  "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
+}
+```
+
+The respnose for the `authorize` call would be an object like so:
+```js
+{
+    "account_list": [
+      {
+        "account_type": "trading",
+        "created_at": 1647509550,
+        "currency": "USD",
+        "is_disabled": 0,
+        "is_virtual": 0,
+        "landing_company_name": "svg",
+        "loginid": "CR799393",
+        "trading": {}
+      },
+      {
+        "account_type": "trading",
+        "created_at": 1664132232,
+        "currency": "ETH",
+        "is_disabled": 0,
+        "is_virtual": 0,
+        "landing_company_name": "svg",
+        "loginid": "VRTC1859315",
+        "trading": {}
+      },
+    ],
+    "balance": 0,
+    "country": "id",
+    "currency": "USD",
+    "email": "user_mail@email_provider.com",
+    "fullname": " John Doe",
+    "is_virtual": 0,
+    "landing_company_fullname": "Deriv (SVG) LLC",
+    "landing_company_name": "svg",
+    "local_currencies": {
+      "IDR": {
+        "fractional_digits": 2
+      }
+    },
+    "loginid": "CR799393",
+    "preferred_language": "EN",
+    "scopes": [
+      "read",
+      "trade",
+      "trading_information",
+      "payments",
+      "admin"
+    ],
+    "trading": {},
+    "upgradeable_landing_companies": [
+      "svg"
+    ],
+    "user_id": 12345678
+  }
+```
