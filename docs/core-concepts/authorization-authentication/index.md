@@ -36,14 +36,14 @@ If you don't have a deriv account already you can visit the Sign Up page and cre
 
 Please visit our Dashboard to create your API token, in the **Manage Tokens** tab create your token with the appropriate access level required by your application features.
 
-![](/img/token_api.png)
+![deriv API token creation](/img/token_api.png "deriv API token creation")
+
+:::caution
+You need a token with \`admin\` scope to create application.
+:::
 
 #### Deriv App ID
 
 In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
 
-![](/img/create_app_id.png)
-
-:::caution
-You need a token with \`admin\` scope to create application.
-:::
+![create deriv application](/img/create_app_id.png "deriv application creation")
