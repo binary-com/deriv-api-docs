@@ -17,28 +17,30 @@ Every API call has the send functionality and several API calls provide the subs
 
 ### Subscribe
 
-Several API calls provide `subscribe` functionality, they create stream of messages for you, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), you'll get the updated values and data.
+Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream of data of this particular API call. An example of an API call you can subscribe too, is [Tick History](https://api.deriv.com/api-explorer#ticks_history). If you subscribe to this call, every second or so, you will get a new updated set of tick history data.
 
-In the message stream from `subscribe` there is a field called `subscription`, this is the `Stream ID`. with this ID you can identity the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
+In the message stream from `subscribe` there is a field called `subscription`, this is the `Stream ID`. with this ID you can identify the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
 
 These API calls have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and server will continue to send the requested data until you call the `forget`  for your API call you want to `unsubscribe` or `forget`.
 
 Usually data provided by this type of calls will be considered as data source for other API calls or features.
 
 ### Send
-If you call an API call with `send` functionality, server will only send back the requested data one time. so if you need to get the updated data you have to send the API call again, usually this method will be used based on other other API call responses or UI events such as `Click`, `Scroll`, etc.
+
+If you call the API with the `send` functionality, then the server will only send back the requested data one time. In order to get updated data you have to send the API call again. Usually, this method is used when you get other API call responses or UI events such as `Click`, `Scroll` and more.
 
 ### Forget
-If you want to stop the message Stream created by `subscribe` you have to call `Forget` API call with the correct `Stream ID`, or you can call `Forget All` API call to stop streams by their `Method name`.
+
+If you want to stop the message Stream created by `subscribe`, you will have to call the `Forget` API call with the correct `Stream ID`. Otherwise, you can use the `Forget All` API call to stop streams by their `Method name`.
 
 :::caution
-For more information on forget API call please check [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) out in API explorer.
+For more information on the `Forget` API call, you can have a look at [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) in the API explorer.
 :::
 
 
 ## Request Data
 
-In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization, etc.
+In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for Caching, validation, request and response synchronization are some of the things you can use it for.
 
 #### API Call Method Name
 
@@ -64,15 +66,15 @@ Request data for this call is like so:
 }
 ```
 
-The `residence_list` field is the `method name` for the call and is required, there may be other required fields which are related to type of the request you wanna send. if you want to know more about `Residence List` and other API calls please check them out in [API Explorer](https://api.deriv.com/api-explorer#residence_list).
+The `residence_list` field is the `method name` for the call and is required. There may be other required fields which are related to this type of the request you want to send. if you want to know more about `Residence List` and other API calls please check them out in the [API Explorer](https://api.deriv.com/api-explorer#residence_list).
 
 ### Optional Fields
 
 Every Call has several `Optional` fields as well, `passthrough` and `req_id` are always part of the request data but you can choose to opt-out and not use them.
 
-#### Passthrough Field
+#### `passthrough` Field
 
-Whatever you pass to this field will be returned back to you on `response` object, this can be helpful when you need to simulate stateful flow for your `requests` and `responses`.
+Whatever you pass to this field will be returned back to you inside a `response` object, this can be helpful when you need to simulate a stateful flow for your `requests` and `responses`.
 
 #### `req_id` Field
 
@@ -163,7 +165,7 @@ This `Field` contains the exact `Request Data` you sent to the server.
 
 #### The `msg_type` Field
 
-This `Field` helps you determine which message data you're getting on `message` event of the websocket connection. for example your `onmessage` event handler for you websocket connection is `Javascript` would be:
+This `Field` helps you determine which `message` data you're getting on the message event of the websocket connection. For example, your `onmessage` event handler for your websocket connection in `Javascript` would be:
 
 ```js
 socket.onmessage = (event) => {
