@@ -105,9 +105,17 @@ body {
   }
 }
 
-[class*='docMainContainer'] .container {
-  padding-top: rem(4) !important;
-  margin: 0 rem(4) !important;
+main[class*='docMainContainer'] .container {
+  padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
+  margin: 0 rem(4);
+}
+
+div[class*='sidebarViewport'] {
+  position: fixed;
+  svg[class*='expandButtonIcon'] {
+    position: absolute;
+    left: rem(0.5);
+  }
 }
 
 .loading {
@@ -123,8 +131,10 @@ body {
 .navbar {
   height: rem(7.2);
   padding: rem(2) rem(4);
+  &__inner .navbar__items:first-child a {
+    font-weight: normal;
+  }
   &__link {
-  font-weight: normal !important;
     &--active,
     &:hover {
       color: var(--colors-coral600);
