@@ -12,7 +12,7 @@ keywords:
   - deriv-authorization
 description: deriv api authentication and authorization
 ---
-Without authentication and authorization you'll only get access to roughly half of our API calls and features. for example in order to buy contracts or utilize the \`Copy Trading\` features you have to authenticate and authorize your users.
+Without authentication and authorization you'll only get access to roughly half of our API calls and features. for example in order to buy contracts or utilize the `Copy Trading` features you have to authenticate and authorize your users.
 
 ## Before we start
 
@@ -24,34 +24,8 @@ You have to make sure you have all the requirements mentioned bellow to continue
 2. Deriv API Token with the appropriate access level
 3. Deriv App ID 
 
-:::danger
-For the reviewer, Links in this section will be provided in the future.
-:::
-
-#### Deriv Account
-
-If you don't have a deriv account already you can visit the Sign Up page and create one, it's completly free. and if you already have an account please login with your account. for testing purposes and to prevent accidental money loss, make sure you're using your demo account not the real one for now.
-
-#### Deriv API Token
-
-Please visit our Dashboard to create your API token, in the **Manage Tokens** tab create your token with the appropriate access level required by your application features.
-
-![deriv API token creation](/img/token_api.png "deriv API token creation")
-
-:::caution
-You need a token with \`admin\` scope to create application.
-:::
-
-#### Deriv App ID
-
-In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
-
-Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
-
-![create deriv application](/img/create_app_id.png "deriv application creation")
-
-:::caution
-For detailed instructions on how to create deriv applications, please refer to [Setting up a Deriv Application](docs/application_setup)
+:::note
+Please refer to [Setting up a Deriv Application](docs/application_setup) for detailed instruction how to create Deriv API token and Applications
 :::
 
 ## Authentication Process
