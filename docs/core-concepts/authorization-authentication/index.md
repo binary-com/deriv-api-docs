@@ -40,7 +40,9 @@ Please visit our Dashboard to create your API token, in the **Manage Tokens** ta
 
 #### Deriv App ID
 
-In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in **Manage application** tab as well.
+In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
+
+![](/img/create_app_id.png)
 
 :::caution
 You need a token with \`admin\` scope to create application.
