@@ -69,3 +69,7 @@ In order to Authenticate your user, specify the URL that will be used as the OAu
 ![Deriv OAuth Login](/img/oauth_login.png "Deriv OAuth Login")
 
 Once a user signs up, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
+`https://[YOUR_WEBSITE_URL]/redirect/?acct1=cr799393& token1=a1-f7pnteezo4jzhpxclctizt27hyeot&cur1=usd& acct2=vrtc1859315& token2=a1clwe3vfuuus5kraceykdsoqm4snfq& cur2=usd&state=`
+
+In the parameters of the URL you will see all the accounts and the session token for each account.
+Pass these tokens to the Authorize API call in order to perform actions on behalf of the account.
