@@ -89,7 +89,7 @@ const user_accounts = [
     },
 ]
 ```
-To authorize the user, based on the user's **Selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the correct **Session Token**:
+To authorize the user, based on the user's **Selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the **Selected** account's **Session Token**:
 ```js
 {
   "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
