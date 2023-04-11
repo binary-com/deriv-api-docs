@@ -1,18 +1,18 @@
 import React, { ReactNode, useMemo } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
+import { isNotDemoCurrency } from '@site/src/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { appRegisterSchema, appEditSchema, IRegisterAppForm } from '../../types';
-import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import CustomSelectDropdown from '@site/src/components/CustomSelectDropdown';
 import SelectedToken from '@site/src/components/CustomSelectDropdown/token-dropdown/SelectedToken';
 import TokenDropdown from '@site/src/components/CustomSelectDropdown/token-dropdown/TokenDropdown';
 import SelectedAccount from '@site/src/components/CustomSelectDropdown/account-dropdown/SelectedAccount';
 import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-dropdown/AccountDropdown';
 import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
-import { isNotDemoCurrency } from '@site/src/utils';
 import clsx from 'clsx';
 
 type TAppFormProps = {
