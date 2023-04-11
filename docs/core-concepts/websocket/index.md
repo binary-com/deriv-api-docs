@@ -23,7 +23,7 @@ WebSocket is especially great for services that require continuous data exchange
 
 To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss`  in the url:
 ```js
-let socket = new WebSocket('wss://green.binaryws.com/websockets/v3?app_id=1089');
+let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
 
 :::caution
