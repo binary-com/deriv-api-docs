@@ -16,7 +16,7 @@ Without authentication and authorization you'll only get access to roughly half 
 
 ## Before we start
 
-You have to make sure you have all the requirements mentioned bellow to continue with `authorization` and `authentication`.
+You have to make sure you have all the requirements mentioned bellow to continue.
 
 ### Requirements
 
@@ -64,15 +64,11 @@ In order to Authenticate your user, specify the URL that will be used as the OAu
 
 ![Deriv OAuth Login](/img/oauth_login.png "Deriv OAuth Login")
 
-
-
-## Authorization Process
-
 Once a user signs up / signs in, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
 
 `https://[YOUR_WEBSITE_URL]/redirect/?acct1=cr799393& token1=a1-f7pnteezo4jzhpxclctizt27hyeot&cur1=usd& acct2=vrtc1859315& token2=a1clwe3vfuuus5kraceykdsoqm4snfq& cur2=usd`
 
-
+## Authorization Process
 
 The query params in the redirect URL are the user's accounts and their related session tokens. you can map the query params to an array like so:
 ```js
@@ -89,14 +85,14 @@ const user_accounts = [
     },
 ]
 ```
-To authorize the user, based on the user's **Selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the **Selected** account's **Session Token**:
+To authorize the user, based on the user's **Selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the user's **Selected** account **Session Token**:
 ```js
 {
   "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
 }
 ```
 
-The respnose for the `authorize` call would be an object like so:
+The response for the `authorize` call would be an object like so:
 ```js
 {
     "account_list": [
