@@ -146,7 +146,7 @@ body {
 .menu__link {
   font-size: rem(1.4);
   font-weight: var(--ifm-font-weight-normal);
-  line-height: 1.5;
+  line-height: rem(2);
 }
 
 .menu__caret:before {
