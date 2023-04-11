@@ -181,15 +181,14 @@ div[class*='sidebarViewport'] {
   margin-right: rem(3.3);
 }
 
-[class*='tocCollapsibleButton'] {
+button[class*='tocCollapsibleButton'] {
   box-sizing: border-box;
-}
-
-[class*='tocCollapsibleButton']::after {
-  background: var(--ifm-menu-link-sublist-icon-2) !important;
-  height: rem(1.2) !important;
-  width: rem(0.872) !important;
-  transform: rotate(90deg) !important;
+  &::after {
+    background: var(--ifm-menu-link-sublist-icon-2) !important;
+    height: rem(1.2) !important;
+    width: rem(0.872) !important;
+    transform: rotate(90deg) !important;
+  }
 }
 
 [class*='tocCollapsibleButtonExpanded']::after {
