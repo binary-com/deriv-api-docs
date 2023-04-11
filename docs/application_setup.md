@@ -24,22 +24,16 @@ Please visit our Dashboard to create your API token, in the **Manage Tokens** ta
 
 
 
-\| Scope | Description |
-
-\| ----------- | ----------- |
-
-\| Read | This scope will allow third-party apps to view your account activity, settings, limits, balance sheets, trade purchase history, and more. |
-
-\| Trade | This scope will allow third-party apps to buy and sell contracts for you, renew your expired purchases, and top up your demo accounts. |
-
-\| Payments | This scope will allow third-party apps to withdraw to payment agents and make inter-account transfers for you. |
-
-\| Trading Information | This scope will allow third-party apps to view your trading history. |
-
-\| Admin | This scope will allow third-party apps to open accounts for you, manage your settings and token usage, and more.|
+| Scope | Description |
+| ----------- | ----------- |
+| Read | This scope will allow third-party apps to view your account activity, settings, limits, balance sheets, trade purchase history, and more. |
+| Trade | This scope will allow third-party apps to buy and sell contracts for you, renew your expired purchases, and top up your demo accounts. |
+| Payments | This scope will allow third-party apps to withdraw to payment agents and make inter-account transfers for you. |
+| Trading Information | This scope will allow third-party apps to view your trading history. |
+| Admin | This scope will allow third-party apps to open accounts for you, manage your settings and token usage, and more.|
 
 :::caution
-You need a token with \`admin\` scope to create application.
+You need a token with `admin` scope to create application.
 :::
 
 #### Deriv App ID
