@@ -75,3 +75,6 @@ In Dashboard select **Register application** tab and create you application with
 6. Click **Click Register Application**
 
 Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
+For example, if your domain is **`https://example.com`** and your **Authorization and Authentication* is being handled by **`/verfiy`**, your URLs will be:
+
+**`https://example.com/verify`**
