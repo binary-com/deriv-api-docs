@@ -31,7 +31,3 @@ You need a token with \`admin\` scope to create application.
 In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
 
 Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
-
-:::caution
-For detailed instructions on how to create deriv applications, please refer to [Setting up a Deriv Application](docs/application_setup)
-:::
