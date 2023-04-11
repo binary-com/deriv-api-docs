@@ -154,3 +154,4 @@ The respnose for the `authorize` call would be an object like so:
     "user_id": 12345678
   }
 ```
+Now user is authorized and you use Deriv API calls on behalf of the account.
