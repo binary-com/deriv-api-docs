@@ -52,8 +52,6 @@ You need a token with `admin` scope to create application.
 
 In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
 
-![](/img/register_application.png)
-
 | App Information Field | Description                                                                               |
 | --------------------- | ----------------------------------------------------------------------------------------- |
 | Account               | The account you want to create the application with                                       |
@@ -62,8 +60,6 @@ In Dashboard select **Register application** tab and create you application with
 | Markup                | You can earn commission by adding a markup to the price of each trade                     |
 | Authorization URL     | This allows clients to log in to your app using their Deriv accounts without an API token |
 | Verification URL      | This URL will be used as the OAuth redirect URL for the OAuth authorization.              |
-
-
 
 **To create an application follow these steps:**
 
@@ -76,6 +72,6 @@ In Dashboard select **Register application** tab and create you application with
 
 Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
 
-For example, if your domain is **`https://example.com`** and your **Authorization and Authentication* is being handled by **`/verfiy`**, your URLs will be:
+For example, if your domain is **`https://example.com`** and your **Authorization and Authentication* is being handled by** `/verfiy`\*\*, your URLs will be:
 
 **`https://example.com/verify`**
