@@ -19,23 +19,28 @@ Every API call has the send functionality and several API calls provide the subs
 
 Several API calls provide `subscribe` functionality, they create stream of messages for you, which means when you subscribe to them every time that particular event happens for example [Tick History](https://api.deriv.com/api-explorer#ticks_history), you'll get the updated values and data.
 
+In the message stream from `subscribe` there is a field called `subscription`, this is the `Stream ID`. with this ID you can identity the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
+
 These API calls have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and server will continue to send the requested data until you call the `forget`  for your API call you want to `unsubscribe` or `forget`.
 
 Usually data provided by this type of calls will be considered as data source for other API calls or features.
+
+### Send
+If you call an API call with `send` functionality, server will only send back the requested data one time. so if you need to get the updated data you have to send the API call again, usually this method will be used based on other other API call responses or UI events such as `Click`, `Scroll`, etc.
+
+### Forget
+If you want to stop the message Stream created by `subscribe` you have to call `Forget` API call with the correct `Stream ID`, or you can call `Forget All` API call to stop streams by their `Method name`.
 
 :::caution
 For more information on forget API call please check [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) out in API explorer.
 :::
 
-### Send
-
-If you call an API call with `send` functionality, server will only send back the requested data one time. so if you need to get the updated data you have to send the API call again, usually this method will be used based on other other API call responses or UI events such as `Click`, `Scroll`, etc.
 
 ## Request Data
 
 In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization, etc.
 
-### API Call Method Name
+#### API Call Method Name
 
 Every `request` has a `method name` field which gets usually a `number` or `1` as value.
 
