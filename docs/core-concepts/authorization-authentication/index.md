@@ -66,7 +66,7 @@ The access level for each API token has to match the required access level of ea
 
 For example, on the screenshot below, you can see that to be able to use the Account Status, a token with read access level must be used.
 
-![](/img/scope_api_explorer.png)
+![](/img/acc_status_scope_api_explorer.png)
 
 Following the authorization of a Websocket connection, subsequent calls on that connection will be considered user actions.
 
