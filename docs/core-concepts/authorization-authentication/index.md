@@ -62,4 +62,4 @@ Here is the visual representation of how the OAuth authorization connection work
 
 ## Sign In / Sign Up
 
-In order to Authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application&& tab in the **OAuth details** fields and then Add a login button on your website or app and direct users to **https://oauth.binary.com/oauth2/authorize?app_id=your_app_id** where your_app_id is the ID of your app.
+In order to Authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application** tab in the **OAuth details** fields and then Add a login button on your website or app and direct users to **https://oauth.binary.com/oauth2/authorize?app_id=your_app_id** where your_app_id is the ID of your app.
