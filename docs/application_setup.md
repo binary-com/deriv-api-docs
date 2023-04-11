@@ -22,7 +22,9 @@ If you don't have a deriv account already you can visit the Sign Up page and cre
 To create Deriv Applications you need an API Token with **admin** scope in the account you want to create your application with
 :::
 
-#### Deriv API Token
+## How to create Deriv API Token
+
+
 
 Please visit our Dashboard to create your API token, in the **Manage Tokens** tab create your token with the appropriate access level required by your application features.
 
@@ -48,7 +50,9 @@ To create a new API Token, follow these steps:
 You need a token with `admin` scope to create application.
 :::
 
-#### Deriv Application
+## How to create Deriv Application
+
+
 
 In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
 
