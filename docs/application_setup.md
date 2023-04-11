@@ -18,6 +18,10 @@ For the reviewer, Links in this section will be provided in the future.
 
 If you don't have a deriv account already you can visit the Sign Up page and create one, it's completely free. and if you already have an account please login with your account. for testing purposes and to prevent accidental money loss, make sure you're using your demo account not the real one for now.
 
+:::caution
+To create Deriv Applications you need an API Token with **admin** scope in the account you want to create your application with
+:::
+
 #### Deriv API Token
 
 Please visit our Dashboard to create your API token, in the **Manage Tokens** tab create your token with the appropriate access level required by your application features.
