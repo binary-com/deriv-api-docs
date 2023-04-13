@@ -7,10 +7,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: rem(8) 0;
   width: 100%;
   background-size: auto;
 
+  .Heading {
+    margin: rem(1) 0;
+    padding: 0 rem(2);
+  }
+  .SubHeading {
+    font-weight: 400;
+    margin: rem(2) 0;
+    padding: 0 rem(2);
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+  }
   .IconJS {
     display: flex;
     justify-content: center;

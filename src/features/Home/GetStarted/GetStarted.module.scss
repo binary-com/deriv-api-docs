@@ -8,7 +8,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: rem(8) 0;
 
   .columnContainer {
     display: flex;
@@ -18,10 +17,20 @@
     align-items: center;
     justify-content: center;
 
+    .getStartedHeading {
+      text-align: center;
+      padding: 0 rem(2.5) rem(4) rem(2.5);
+    }
+
+    .termConditions {
+      padding: 0 rem(2.5);
+    }
+
     .cardContainer {
       display: flex;
       flex-direction: row;
       margin-bottom: rem(4);
+      gap: rem(2.4);
       @media screen and (max-width: 992px) {
         flex-direction: column;
         gap: rem(2);
@@ -34,11 +43,11 @@
       border-radius: 4px;
       box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
       background-color: var(--ifm-color-white);
-      margin: 0 rem(1.2);
       font-size: rem(1.6);
       line-height: 1.5;
       color: var(--ifm-color-black);
       margin-bottom: 0;
+      position: relative;
 
       .header {
         display: flex;
@@ -53,6 +62,19 @@
           background-position: center;
         }
       }
+      .arrow {
+        display: flex;
+        position: absolute;
+        justify-content: end;
+        bottom: rem(2);
+        right: rem(2);
+      }
+      .arrowMiddle {
+        display: flex;
+        position: relative;
+        justify-content: end;
+        top: rem(1.5);
+      }
     }
   }
 }
@@ -64,29 +86,4 @@
   height: rem(3.2);
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.guideIcon {
-  background-image: url(/img/guide.svg);
-}
-
-.signUpIcon {
-  background-image: url(/img/sign-up.svg);
-}
-
-.registerYourAppIcon {
-  background-image: url(/img/register-your-app.svg);
-}
-
-.withPattern {
-  background-image: url(/img/pattern.svg);
-  object-fit: contain;
-}
-
-[data-theme='dark'] .dark {
-  color: var(--ifm-color-black);
-}
-
-[data-theme='dark'] .withPattern {
-  background-image: unset;
 }
