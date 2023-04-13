@@ -4,7 +4,7 @@ import useTokenSelector from '@site/src/hooks/useTokenSelector';
 import { TTokenType } from '@site/src/types';
 import styles from './token_dropdown.module.scss';
 
-const TokenDropdown = ({ admin_only = false }: { admin_only: boolean }) => {
+const TokenDropdown = ({ admin_only = false }: { admin_only?: boolean }) => {
   const { currentToken, tokens } = useApiToken();
   const { onSelectToken } = useTokenSelector();
 
