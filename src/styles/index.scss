@@ -16,7 +16,9 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --text-profit-success: #4bb4b3;
+  --demo-account: #377CFC;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --nav-height: 60px;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -39,6 +41,11 @@
 
 .error-message {
   color: var(--colors-coral600) !important;
+}
+
+/* reset */
+button {
+  all: unset;
 }
 
 a {
@@ -81,8 +88,15 @@ body {
   align-items: center;
 }
 
+.navbar-sidebar {
+  ul > div {
+    display: none;
+  }
+}
+
 .navbar {
   padding: 0 rem(1.5);
+  height: var(--nav-height);
 }
 
 .navbar__link:hover,
@@ -93,4 +107,23 @@ body {
 
 .navbar__brand {
   margin-right: rem(5);
+}
+
+.navbar__items--right {
+  gap: rem(1);
+}
+
+main[class*='docMainContainer'] .container {
+  padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
+  margin: 0 rem(4);
+}
+
+@media (max-width: 768px) {
+  .navbar__logo {
+    width: rem(7.4);
+  }
+  
+  .navbar__toggle {
+    width: rem(1.2);
+  }
 }

@@ -1,62 +1,58 @@
-import { Button } from '@deriv/ui';
 import Link from '@docusaurus/Link';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import useTokenSelector from '@site/src/hooks/useTokenSelector';
-import React from 'react';
+import TokenDropdown from '../CustomSelectDropdown/token-dropdown/TokenDropdown';
+import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
+import React, { useState, useRef } from 'react';
 import styles from './api_token_switcher.module.scss';
 
 export const CreateToken = () => (
-  <Link className={styles.CreateToken} to='/dashboard'>
-    Please create a token
-  </Link>
+  <div className={styles.tokenContainer}>
+    <Link className={styles.createToken} to='/dashboard'>
+      Add new token
+    </Link>
+  </div>
 );
 
 const ApiTokenNavbarItem = () => {
   const { is_logged_in, is_authorized } = useAuthContext();
   const { tokens, currentToken, isLoadingTokens } = useApiToken();
-  const { onSelectToken } = useTokenSelector();
+  const [is_toggle_dropdown, setToggleDropdown] = useState(false);
+  const toggle_dropdown = is_toggle_dropdown ? styles.active : '';
+  const one_token = tokens.length <= 1 ? styles.oneToken : '';
+
+  const dropdownRef = useRef(null);
+  useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
 
   if (!is_logged_in || !is_authorized || isLoadingTokens) {
     return null;
   }
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger className='navbar__item navbar__link' asChild>
-        <Button type='button' color={'tertiary'}>
-          {currentToken ? `Selected Token: ${currentToken.display_name}` : <CreateToken />}
-        </Button>
-      </DropdownMenu.Trigger>
-
-      {currentToken && (
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content
-            className={styles.DropdownMenuContent}
-            sideOffset={20}
-            alignOffset={-50}
-            align={'end'}
-          >
-            {tokens.map((tokenItem) => (
-              <DropdownMenu.Item
-                key={tokenItem.token}
-                className={styles.DropdownMenuItem}
-                onSelect={() => {
-                  onSelectToken(tokenItem);
-                }}
-              >
-                {tokenItem.display_name}
-              </DropdownMenu.Item>
-            ))}
-            <DropdownMenu.Item className={styles.DropdownMenuItem}>
-              <CreateToken />
-            </DropdownMenu.Item>
-            <DropdownMenu.Arrow className={styles.DropdownMenuArrow} />
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
+    <div ref={dropdownRef} className={styles.tokenDropdownContainer}>
+      {currentToken ? (
+        <button
+          className={`${styles.tokenDropdownButton} ${toggle_dropdown} ${one_token}`}
+          type='button'
+          onClick={() => {
+            setToggleDropdown((prev) => !prev);
+          }}
+        >
+          {currentToken.display_name}
+        </button>
+      ) : (
+        <CreateToken />
       )}
-    </DropdownMenu.Root>
+
+      {is_toggle_dropdown && tokens.length > 1 && (
+        <div className={styles.tokenDropdownWrapper}>
+          <div className={styles.tokenDropdown}>
+            <TokenDropdown />
+          </div>
+          <CreateToken />
+        </div>
+      )}
+    </div>
   );
 };
 

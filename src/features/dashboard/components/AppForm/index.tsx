@@ -116,7 +116,7 @@ const AppForm = ({
                       data-testid='select-token'
                     >
                       <SelectedToken />
-                      <TokenDropdown />
+                      <TokenDropdown admin_only />
                     </CustomSelectDropdown>
                   </div>
                 </React.Fragment>

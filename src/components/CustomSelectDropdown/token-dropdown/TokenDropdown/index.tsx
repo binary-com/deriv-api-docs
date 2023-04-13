@@ -1,39 +1,46 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useTokenSelector from '@site/src/hooks/useTokenSelector';
 import { TTokenType } from '@site/src/types';
 import styles from './token_dropdown.module.scss';
 
-const TokenDropdown = () => {
+const TokenDropdown = ({ admin_only = false }: { admin_only: boolean }) => {
   const { currentToken, tokens } = useApiToken();
   const { onSelectToken } = useTokenSelector();
 
-  const adminTokens = useMemo(() => {
-    return tokens.filter((item) => item.scopes.includes('admin'));
-  }, [tokens]);
+  const isAdmin = (token_item: TTokenType) => token_item?.scopes.includes('admin');
 
   const isNotCurrentToken = (token_item: TTokenType) => {
-    const is_not_admin_token =
-      token_item?.display_name !== currentToken?.display_name &&
-      token_item?.scopes.includes('admin');
+    const is_not_admin_token = token_item?.display_name !== currentToken?.display_name;
     return is_not_admin_token;
+  };
+
+  const adminOrAllTokens = (token_item: TTokenType) =>
+    admin_only
+      ? isNotCurrentToken(token_item) && isAdmin(token_item)
+      : isNotCurrentToken(token_item);
+
+  const AdminTokens = ({ item }: { item: TTokenType }) => {
+    return (
+      <React.Fragment key={item.display_name}>
+        {adminOrAllTokens(item) && (
+          <div
+            tabIndex={0}
+            className={styles.customSelectItem}
+            onClick={() => onSelectToken(item)}
+            onKeyDown={(e) => e.key === 'Enter' && onSelectToken(item)}
+          >
+            {item.display_name}
+          </div>
+        )}
+      </React.Fragment>
+    );
   };
 
   return (
     <React.Fragment>
-      {adminTokens.map((item) => (
-        <React.Fragment key={item.display_name}>
-          {isNotCurrentToken(item) && (
-            <div
-              tabIndex={0}
-              className={styles.customSelectItem}
-              onClick={() => onSelectToken(item)}
-              onKeyDown={(e) => e.key === 'Enter' && onSelectToken(item)}
-            >
-              {item.display_name}
-            </div>
-          )}
-        </React.Fragment>
+      {tokens.map((item: TTokenType) => (
+        <AdminTokens key={item.display_name} item={item} />
       ))}
     </React.Fragment>
   );
