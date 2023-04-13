@@ -1,4 +1,6 @@
 @use 'src/styles/utility' as *;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -6,7 +8,12 @@
  * work well for content-centric websites.
  */
 /* You can override the default Infima variables here. */
+/* Note: !important used to override node_modules css classes 
+   in order to avoid swizzling the whole component just to modify few classes */
+
 :root {
+  --ibm-font-family-base: 'IBM Plex Sans', sans-serif;
+  --ibm-font-family-header: 'Ubuntu', sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -18,7 +25,13 @@
   --text-profit-success: #4bb4b3;
   --demo-account: #377CFC;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
   --nav-height: 60px;
+=======
+  --ifm-menu-color: #414652;
+  --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
+  --ifm-menu-link-padding-vertical: 9px;
+>>>>>>> 2e6b28de0622a37aa9de8309328605ad22de1dff
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -37,6 +50,16 @@
   margin: 0;
   padding: 0;
   scroll-margin-top: rem(10);
+  font-family: var(--ibm-font-family-base);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ibm-font-family-header);
 }
 
 .error-message {
@@ -64,7 +87,10 @@ h6 {
   margin: 0;
   padding: 0;
 }
-
+h1,
+h2 {
+  font-family: 'Ubuntu', sans-serif;
+}
 html,
 body {
   overflow-x: hidden;
@@ -126,4 +152,52 @@ main[class*='docMainContainer'] .container {
   .navbar__toggle {
     width: rem(1.2);
   }
+.menu__list {
+  margin-top: rem(5);
+}
+
+.menu__link {
+  font-size: rem(1.4);
+  font-weight: var(--ifm-font-weight-normal);
+}
+
+.menu__caret:before {
+  background: var(--ifm-menu-link-sublist-icon-2);
+  filter: var(--ifm-menu-link-sublist-icon-filter);
+  height: rem(1.2);
+  transform: rotateZ(90deg);
+  width: rem(0.872);
+}
+
+.menu__list-item--collapsed .menu__link--sublist:after,
+.menu__list-item--collapsed .menu__caret:before {
+  transform: rotateZ(0deg);
+}
+
+.menu__link--active,
+.menu__link--active:hover {
+  color: var(--colors-coral600);
+}
+
+.menu__caret {
+  margin-right: rem(3.3);
+}
+
+aside.theme-doc-sidebar-container {
+  width: rem(28.3);
+}
+
+[class*='tocCollapsibleButton'] {
+  box-sizing: border-box;
+}
+
+[class*='tocCollapsibleButton']::after {
+  background: var(--ifm-menu-link-sublist-icon-2) !important;
+  height: rem(1.2) !important;
+  width: rem(0.872) !important;
+  transform: rotate(90deg) !important;
+}
+
+[class*='tocCollapsibleButtonExpanded']::after {
+  transform: rotate(270deg) !important;
 }

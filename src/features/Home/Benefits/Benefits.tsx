@@ -35,8 +35,22 @@ export const Benefits = () => {
         </Text>
         <div className={styles.BenefitsIcons}>
           <Icon icon='automation' />
-          <Icon icon='integration' />
-          <Icon icon='execution' />
+          <div className={styles.SingleIconContainer}>
+            <div
+              className={styles.BenefitsImage}
+              data-testid={'integration'}
+              style={{ background: `url(/img/integration.svg) no-repeat` }}
+            />
+            <Text type='subtitle-2'>Easy Integration</Text>
+          </div>
+          <div className={styles.SingleIconContainer}>
+            <div
+              className={styles.BenefitsImage}
+              data-testid={'execution'}
+              style={{ background: `url(/img/execution.svg) no-repeat` }}
+            />
+            <Text type='subtitle-2'>Fast Execution</Text>
+          </div>
         </div>
         <div className={styles.BenefitsInformation}>
           <div className={styles.InformationContainer}>

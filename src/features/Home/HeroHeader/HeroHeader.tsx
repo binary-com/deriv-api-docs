@@ -12,7 +12,7 @@ export const HeroHeader = () => {
         <Text
           type='subtitle-1'
           align='center'
-          as={'h2'}
+          as={'h3'}
           aria-level={7}
           className={styles.subHeading}
         >

@@ -9,8 +9,8 @@ Our Documentation is divided in several sections:
 - [Setting up a deriv app](/docs/application_setup.md)
 - [Core Concepts](category/core-concepts)
 - [Languages](category/languages)
-- [Client libraries](category/client-libraries)
-- [Frequently Asked Questions](category/frequently-asked-questions)
+- [Client Libraries](category/client-libraries)
+- [FAQ](category/faq)
 - [Guides](category/guides)
 
 ### Quick Start

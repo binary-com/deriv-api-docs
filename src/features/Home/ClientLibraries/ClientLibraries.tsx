@@ -18,17 +18,17 @@ export const ClientLibraries = () => {
             aria-level={1}
             className={styles.Heading}
           >
-            Comprehensive all-in-one client library
+            Comprehensive all-in-one <br /> client library
           </Text>
           <Text
             type='subtitle-2'
-            as={'h2'}
+            as={'h3'}
             align='center'
             className={styles.SubHeading}
             aria-level={4}
           >
-            Use our powerful, flexible, and free API to build a custom trading <br />
-            platform - for yourself or for your business.
+            Simplify your development processes and get your app up and running <br />
+            faster with the client library of your choice.
           </Text>
           <div className={styles.LibraryLogo}>
             <div className={styles.LogoAndLink}>
