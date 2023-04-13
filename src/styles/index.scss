@@ -1,4 +1,6 @@
 @use 'src/styles/utility' as *;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -10,6 +12,8 @@
    in order to avoid swizzling the whole component just to modify few classes */
 
 :root {
+  --ibm-font-family-base: 'IBM Plex Sans', sans-serif;
+  --ibm-font-family-header: 'Ubuntu', sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -22,6 +26,7 @@
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
+  --doc-sidebar-width: 283px !important;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -40,10 +45,16 @@
   margin: 0;
   padding: 0;
   scroll-margin-top: rem(10);
+  font-family: var(--ibm-font-family-base);
 }
 
-.main-page-row:nth-child(even) {
-  background-color: var(--ifm-color-emphasis-100);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ibm-font-family-header);
 }
 
 .error-message {
@@ -65,6 +76,22 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
+}
+h1,
+h2 {
+  font-family: 'Ubuntu', sans-serif;
+}
+html,
+body {
+  overflow-x: hidden;
+}
+
+.swiper {
+  padding: 0 rem(4) !important;
+  width: rem(32) !important;
+  @media screen and (min-width: 600px) {
+    width: rem(55) !important;
+  }
 }
 
 .loading {
@@ -124,7 +151,6 @@ h6 {
 
 aside.theme-doc-sidebar-container {
   height: 100vh;
-  width: rem(28.3);
 }
 
 [class*='tocCollapsibleButton'] {
