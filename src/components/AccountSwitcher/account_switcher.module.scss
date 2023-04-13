@@ -81,11 +81,44 @@
   }
 
   .accountDropdownContainer {
+    display: flex;
     position: absolute;
     background-color: var(--colors-greyLight100);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05), 0px 16px 20px rgba(0, 0, 0, 0.05);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    gap: rem(0.8);
+    width: rem(32);
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    > div:not(:last-child) {
+      margin: 0 rem(0.8);
+    }
+    > div:nth-child(2) {
+      background-color: var(--ifm-color-emphasis-200);
+      align-items: center;
+      font-size: rem(1.4);
+      transition: background-color 0.2s;
+      border-radius: 3px;
+      padding: rem(1);
+      > div {
+        line-height: rem(2);
+        span {
+          font-size: rem(1.4);
+          &:nth-child(1) {
+            font-weight: bold;
+          }
+          &:nth-child(2) {
+            color: var(--ifm-color-emphasis-600);
+          }
+        }
+      }
+      img {
+        width: rem(3.2);
+        height: rem(3.2);
+      }
+    }
 
     @media (max-width: 768px) {
       // no other way of overwriting the code from the original component
@@ -101,57 +134,21 @@
       padding: rem(0.5) rem(1.5);
       justify-content: space-between;
       align-items: center;
-      img {
-        width: rem(2.6);
-        height: rem(2.6);
+      .closeDropdown {
+        width: rem(2);
+        height: rem(2);
         border-radius: 100%;
         padding: rem(0.5);
+        background-image: url('/img/arrow_up.svg');
+        background-size: rem(2);
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
         &:hover {
           background-color: var(--ifm-color-emphasis-100);
           transition: background-color 0.2s;
-          cursor: pointer;
         }
       }
-    }
-
-    &.active {
-      display: flex;
-      gap: rem(0.8);
-      width: rem(32);
-      right: 0;
-      top: 100%;
-      flex-direction: column;
-      > div:not(:last-child) {
-        margin: 0 rem(0.8);
-      }
-      > div:nth-child(2) {
-        background-color: var(--ifm-color-emphasis-200);
-        align-items: center;
-        font-size: rem(1.4);
-        transition: background-color 0.2s;
-        border-radius: 3px;
-        padding: rem(1);
-        > div {
-          line-height: rem(2);
-          span {
-            font-size: rem(1.4);
-            &:nth-child(1) {
-              font-weight: bold;
-            }
-            &:nth-child(2) {
-              color: var(--ifm-color-emphasis-600);
-            }
-          }
-        }
-        img {
-          width: rem(3.2);
-          height: rem(3.2);
-        }
-      }
-    }
-
-    &.inactive {
-      display: none;
     }
   }
 }

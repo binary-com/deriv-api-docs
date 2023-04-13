@@ -71,15 +71,27 @@ describe('HeroHeader', () => {
   });
 
   it('Should call do logout on logout button click', async () => {
-    const current_account_button = screen.getByRole('button', { name: /CR111111/i });
+    const current_account_button = await screen.findByRole('button', { name: /CR111111/i });
 
     await userEvent.click(current_account_button);
 
-    const logout_button = screen.getByRole('button', { name: /log out/i });
+    const logout_button = await screen.findByRole('button', { name: /log out/i });
 
     await userEvent.click(logout_button);
 
     expect(mockLogout).toHaveBeenCalledTimes(1);
+  });
+
+  it('should be able to close the dropdown by clicking on the arrow', async () => {
+    const current_account_button = await screen.findByRole('button', { name: /CR111111/i });
+
+    await userEvent.click(current_account_button);
+
+    const close_dropdown_button = await screen.findByTestId('dt_close_dropdown_arrow');
+
+    await userEvent.click(close_dropdown_button);
+
+    expect(close_dropdown_button).not.toBeVisible();
   });
 
   it('Should render Accounts when no account is selected', () => {

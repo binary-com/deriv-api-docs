@@ -1,6 +1,7 @@
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import userEvent from '@testing-library/user-event';
+import useAppManager from '@site/src/hooks/useAppManager';
 import { render, screen } from '@site/src/test-utils';
 
 import React from 'react';
@@ -17,6 +18,18 @@ jest.mock('@site/src/hooks/useAuthContext');
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<
   () => Partial<ReturnType<typeof useAuthContext>>
 >;
+
+jest.mock('@site/src/hooks/useAppManager');
+
+const mockUseAppManager = useAppManager as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAppManager>>
+>;
+
+const mockUpdateCurrentTab = jest.fn();
+
+mockUseAppManager.mockImplementation(() => ({
+  updateCurrentTab: mockUpdateCurrentTab,
+}));
 
 describe('Api Token Navbar Item', () => {
   it('Should NOT render anything when user is not logged in or is not authenticated', () => {
@@ -94,6 +107,17 @@ describe('Api Token Navbar Item', () => {
     const currentTokenButton = screen.getByRole('link', { name: /add new token/i });
 
     expect(currentTokenButton).toBeInTheDocument();
+  });
+
+  it('Should update app manager page when clicking on add new token', async () => {
+    render(<ApiTokenNavbarItem />);
+
+    const create_token = await screen.findByText(/add new token/i);
+
+    await userEvent.click(create_token);
+
+    expect(mockUpdateCurrentTab).toHaveBeenCalledTimes(1);
+    expect(mockUpdateCurrentTab).toHaveBeenCalledWith('MANAGE_TOKENS');
   });
 
   it('Should render token in drop down', async () => {

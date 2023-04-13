@@ -29,21 +29,32 @@ const AccountSwitcher = () => {
           ? `${currentLoginAccount.name}`
           : 'Accounts'}
       </button>
-      <div className={`${styles.accountDropdownContainer} ${dropdown_toggle}`}>
-        <div className={styles.dropdownHeader}>
-          <h5>Deriv account</h5>
-          <img src='/img/arrow_up.svg' onClick={() => setToggleDropdown((prev) => !prev)} />
+      {is_toggle_dropdown && (
+        <div className={`${styles.accountDropdownContainer} ${dropdown_toggle}`}>
+          <div className={styles.dropdownHeader}>
+            <h5>Deriv account</h5>
+            <button
+              onClick={() => setToggleDropdown((prev) => !prev)}
+              className={styles.closeDropdown}
+              data-testid='dt_close_dropdown_arrow'
+            />
+          </div>
+          <SelectedAccount />
+          <div onClick={() => setToggleDropdown(false)}>
+            <AccountDropdown />
+          </div>
+          <div className={styles.logoutButtonContainer}>
+            <button
+              onClick={logout}
+              type='button'
+              color={'tertiary'}
+              className={styles.logoutButton}
+            >
+              Log out
+            </button>
+          </div>
         </div>
-        <SelectedAccount />
-        <div onClick={() => setToggleDropdown(false)}>
-          <AccountDropdown />
-        </div>
-        <div className={styles.logoutButtonContainer}>
-          <button onClick={logout} type='button' color={'tertiary'} className={styles.logoutButton}>
-            Log out
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
