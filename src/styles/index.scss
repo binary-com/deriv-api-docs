@@ -22,6 +22,7 @@
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
+  --doc-sidebar-width: 283px !important;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -124,7 +125,6 @@ h6 {
 
 aside.theme-doc-sidebar-container {
   height: 100vh;
-  width: rem(28.3);
 }
 
 [class*='tocCollapsibleButton'] {

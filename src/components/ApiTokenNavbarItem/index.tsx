@@ -4,20 +4,32 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useTokenSelector from '@site/src/hooks/useTokenSelector';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './api_token_switcher.module.scss';
+import useAppManager from '@site/src/hooks/useAppManager';
+import { boolean } from 'yup';
 
-export const CreateToken = () => (
-  <Link className={styles.CreateToken} to='/dashboard'>
-    Please create a token
-  </Link>
-);
-
+export const CreateToken = () => {
+  const { updateCurrentTab } = useAppManager();
+  return (
+    <>
+      {/* need a way to find out if we are on dashboard, 
+      then if already on dashboard check the val of currentTab
+      if on manage-tokens already then disable the button */}
+      <Link
+        className={styles.CreateToken}
+        to='/dashboard'
+        onClick={() => updateCurrentTab('MANAGE_TOKENS')}
+      >
+        Add new token
+      </Link>
+    </>
+  );
+};
 const ApiTokenNavbarItem = () => {
   const { is_logged_in, is_authorized } = useAuthContext();
   const { tokens, currentToken, isLoadingTokens } = useApiToken();
   const { onSelectToken } = useTokenSelector();
-
   if (!is_logged_in || !is_authorized || isLoadingTokens) {
     return null;
   }
@@ -25,9 +37,12 @@ const ApiTokenNavbarItem = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger className='navbar__item navbar__link' asChild>
-        <Button type='button' color={'tertiary'}>
+        {/* <Button type='button' color={'tertiary'} onClick={onAddClick}>
           {currentToken ? `Selected Token: ${currentToken.display_name}` : <CreateToken />}
-        </Button>
+        </Button> */}
+        <button>
+          {currentToken ? `Selected Token: ${currentToken.display_name}` : <CreateToken />}
+        </button>
       </DropdownMenu.Trigger>
 
       {currentToken && (

@@ -1,4 +1,4 @@
-import { Text } from '@deriv/ui';
+import { Button, Text } from '@deriv/ui';
 import * as Tabs from '@radix-ui/react-tabs';
 import { TDashboardTab } from '@site/src/contexts/app-manager/app-manager.context';
 import useAppManager from '@site/src/hooks/useAppManager';
@@ -7,6 +7,7 @@ import AppManagement from '../../manage-apps';
 import ApiToken from '../../manage-tokens';
 import AppRegistration from '../../register-app';
 import styles from './tabs.module.scss';
+import Link from '@docusaurus/Link';
 
 type TTab = {
   id: number;
@@ -15,7 +16,7 @@ type TTab = {
   content: () => JSX.Element;
 };
 
-const tabs: TTab[] = [
+export const tabs: TTab[] = [
   {
     id: 0,
     value: 'MANAGE_TOKENS',
@@ -36,7 +37,12 @@ const tabs: TTab[] = [
   },
 ];
 
-const DashboardTabs = () => {
+export const AddToken = () => {
+  const { updateCurrentTab } = useAppManager();
+  return <Link onClick={() => updateCurrentTab('MANAGE_TOKENS')}>Add new token</Link>;
+};
+
+export const DashboardTabs = () => {
   const { currentTab, updateCurrentTab } = useAppManager();
 
   return (
@@ -69,6 +75,7 @@ const DashboardTabs = () => {
           ))}
         </>
       </Tabs.Root>
+      <AddToken />
     </div>
   );
 };
