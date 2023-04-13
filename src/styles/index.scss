@@ -25,13 +25,10 @@
   --text-profit-success: #4bb4b3;
   --demo-account: #377CFC;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
   --nav-height: 60px;
-=======
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
->>>>>>> 2e6b28de0622a37aa9de8309328605ad22de1dff
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -144,14 +141,6 @@ main[class*='docMainContainer'] .container {
   margin: 0 rem(4);
 }
 
-@media (max-width: 768px) {
-  .navbar__logo {
-    width: rem(7.4);
-  }
-  
-  .navbar__toggle {
-    width: rem(1.2);
-  }
 .menu__list {
   margin-top: rem(5);
 }
@@ -200,4 +189,14 @@ aside.theme-doc-sidebar-container {
 
 [class*='tocCollapsibleButtonExpanded']::after {
   transform: rotate(270deg) !important;
+}
+
+@media (max-width: 768px) {
+  .navbar__logo {
+    width: rem(7.4);
+  }
+  
+  .navbar__toggle {
+    width: rem(1.2);
+  }
 }
