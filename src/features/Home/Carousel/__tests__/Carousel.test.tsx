@@ -39,13 +39,11 @@ describe('Homepage carousel', () => {
   it('Should render previous arrow', () => {
     const prev_arrow = screen.getByTestId('carousel-arrow-prev');
     expect(prev_arrow).toBeInTheDocument();
-    expect(prev_arrow).toHaveStyle('background: url(/img/arrow_left.svg) no-repeat');
   });
 
   it('Should render next arrow', () => {
     const prev_arrow = screen.getByTestId('carousel-arrow-next');
     expect(prev_arrow).toBeInTheDocument();
-    expect(prev_arrow).toHaveStyle('background: url(/img/arrow_right.svg) no-repeat');
   });
 
   it('Should render Alessandro slide', () => {

@@ -20,7 +20,9 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
   return (
     <div className={style.playgroundBox}>
       <div className={style.formContent}>
-        <label className={style.inlineLabel}>Request JSON</label>
+        <label htmlFor='playground-request' className={style.inlineLabel}>
+          Request JSON
+        </label>
         <textarea
           id='playground-request'
           className={clsx(style.textareaRequest, style.playgroundRequest)}

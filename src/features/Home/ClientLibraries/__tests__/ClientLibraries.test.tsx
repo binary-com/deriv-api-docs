@@ -20,7 +20,7 @@ describe('ClientLibraries', () => {
   it('should render subtitle text properly', () => {
     const client_subtitle = screen.getByRole('heading', { level: 4 });
     expect(client_subtitle).toHaveTextContent(
-      'Use our powerful, flexible, and free API to build a custom trading platform - for yourself or for your business.',
+      'Simplify your development processes and get your app up and running faster with the client library of your choice.',
     );
   });
   it('should navigate to the correct links on click', () => {

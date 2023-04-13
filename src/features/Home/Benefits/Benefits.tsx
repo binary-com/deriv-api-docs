@@ -30,21 +30,27 @@ export const Benefits = () => {
   return (
     <div data-testid='benefits' className='main-page-row'>
       <div className={styles.BenefitsContainer}>
-        <Text
-          type='heading-2'
-          as={'h2'}
-          align='center'
-          bold
-          css={{
-            margin: '4rem 0',
-          }}
-        >
+        <Text type='heading-2' as={'h2'} align='center' bold className={styles.Heading}>
           Benefits of using Deriv API
         </Text>
         <div className={styles.BenefitsIcons}>
           <Icon icon='automation' />
-          <Icon icon='integration' />
-          <Icon icon='execution' />
+          <div className={styles.SingleIconContainer}>
+            <div
+              className={styles.BenefitsImage}
+              data-testid={'integration'}
+              style={{ background: `url(/img/integration.svg) no-repeat` }}
+            />
+            <Text type='subtitle-2'>Easy Integration</Text>
+          </div>
+          <div className={styles.SingleIconContainer}>
+            <div
+              className={styles.BenefitsImage}
+              data-testid={'execution'}
+              style={{ background: `url(/img/execution.svg) no-repeat` }}
+            />
+            <Text type='subtitle-2'>Fast Execution</Text>
+          </div>
         </div>
         <div className={styles.BenefitsInformation}>
           <div className={styles.InformationContainer}>
@@ -70,12 +76,11 @@ export const Benefits = () => {
             <ImageContainer image='build-business' />
             <div>
               <Text
-                bold
                 css={{
-                  'margin-top': '4rem',
                   'font-size': 'var(--fontSizes-2xl)',
                   '@mobile': { 'font-size': 'var(--fontSizes-lg)' },
                 }}
+                bold
               >
                 Build a business and earn more
               </Text>
