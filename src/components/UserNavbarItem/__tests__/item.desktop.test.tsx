@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from '@site/src/test-utils';
 import React from 'react';
 import UserNavbarDesktopItem from '../item.desktop';
+import userEvent from '@testing-library/user-event';
 
 describe('User Navbar Desktop Item', () => {
   describe('Given user is logged out', () => {
@@ -31,8 +32,13 @@ describe('User Navbar Desktop Item', () => {
     });
 
     it('Should render Logout Button', () => {
-      const logout_button = screen.getByRole('button', { name: /logout/i });
-      expect(logout_button).toHaveTextContent('Logout');
+      const accounts_button = screen.getByRole('button', { name: /accounts/i });
+      expect(accounts_button).toBeInTheDocument();
+
+      userEvent.click(accounts_button);
+
+      const logout_button = screen.getByRole('button', { name: /Log out/i });
+      expect(logout_button).toHaveTextContent('Log out');
     });
   });
 });

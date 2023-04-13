@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@site/src/test-utils';
 
 import React from 'react';
-import ApiTokenNavbarItem, { CreateToken } from '..';
+import ApiTokenNavbarItem from '..';
 import { TTokensArrayType } from '@site/src/types';
 
 jest.mock('@site/src/hooks/useApiToken');
@@ -74,7 +74,7 @@ describe('Api Token Navbar Item', () => {
 
     expect(currentTokenButton).toBeInTheDocument();
 
-    expect(currentTokenButton).toHaveTextContent(`Selected Token: first_token`);
+    expect(currentTokenButton).toHaveTextContent('first_token');
   });
 
   it('Should render please create token when current token is empty', () => {
@@ -91,11 +91,9 @@ describe('Api Token Navbar Item', () => {
 
     render(<ApiTokenNavbarItem />);
 
-    const currentTokenButton = screen.getByRole('button');
+    const currentTokenButton = screen.getByRole('link', { name: /add new token/i });
 
     expect(currentTokenButton).toBeInTheDocument();
-
-    expect(currentTokenButton).toHaveTextContent(`Please create a token`);
   });
 
   it('Should render token in drop down', async () => {
@@ -140,10 +138,10 @@ describe('Api Token Navbar Item', () => {
     const menu_items = screen.getAllByRole('menuitem');
     const tokens = menu_items.slice(0, 2);
 
-    expect(menu_items.length).toBe(3);
+    expect(menu_items.length).toBe(1);
 
     for (const [index, item] of tokens.entries()) {
-      expect(item).toHaveTextContent(`${fake_tokens[index].display_name}`);
+      expect(item).toHaveTextContent(`${fake_tokens[index + 1].display_name}`);
     }
   });
 
@@ -190,7 +188,7 @@ describe('Api Token Navbar Item', () => {
     const currentTokenButton = screen.getByRole('button');
     await userEvent.click(currentTokenButton);
 
-    const first_menu_item = screen.getByRole('menuitem', { name: /michio_app_pages/i });
+    const first_menu_item = screen.getByText(/michio_app_pages/i);
 
     await userEvent.click(first_menu_item);
 

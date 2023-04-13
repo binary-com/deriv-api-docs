@@ -27,6 +27,7 @@ const TokenDropdown = ({ admin_only = false }: { admin_only?: boolean }) => {
           <div
             tabIndex={0}
             className={styles.customSelectItem}
+            role='menuitem'
             onClick={() => onSelectToken(item)}
             onKeyDown={(e) => e.key === 'Enter' && onSelectToken(item)}
           >
