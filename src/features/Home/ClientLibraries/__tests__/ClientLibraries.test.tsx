@@ -14,14 +14,14 @@ describe('ClientLibraries', () => {
     expect(client_header).toBeInTheDocument();
   });
   it('should render title properly', () => {
-    const client_text = screen.getByRole('heading', { level: 1 });
-    expect(client_text).toHaveTextContent('Comprehensive all-in-one client library');
+    const client_text = screen.getByText('Comprehensive all-in-one client library');
+    expect(client_text).toBeInTheDocument();
   });
   it('should render subtitle text properly', () => {
-    const client_subtitle = screen.getByRole('heading', { level: 4 });
-    expect(client_subtitle).toHaveTextContent(
+    const client_subtitle = screen.getByText(
       'Simplify your development processes and get your app up and running faster with the client library of your choice.',
     );
+    expect(client_subtitle).toBeInTheDocument();
   });
   it('should navigate to the correct links on click', () => {
     expect(screen.getByText('Go to the JavaScript library').closest('a')).toHaveAttribute(

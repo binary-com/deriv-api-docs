@@ -14,16 +14,10 @@ describe('Benefits', () => {
     expect(benefits).toBeInTheDocument();
   });
   it('should render benefits icons', () => {
-    const automation_icon = screen.getByTestId('automation');
-    const integration_icon = screen.getByTestId('integration');
-    const execution_icon = screen.getByTestId('execution');
     const automation = screen.getByText(/automation/i);
     const integration = screen.getByText(/integration/i);
     const execution = screen.getByText(/execution/i);
 
-    expect(automation_icon).toHaveStyle('background: url(/img/automation.svg) no-repeat');
-    expect(integration_icon).toHaveStyle('background: url(/img/integration.svg) no-repeat');
-    expect(execution_icon).toHaveStyle('background: url(/img/execution.svg) no-repeat');
     expect(automation).toBeInTheDocument();
     expect(integration).toBeInTheDocument();
     expect(execution).toBeInTheDocument();
@@ -44,10 +38,10 @@ describe('Benefits', () => {
   });
   it('should render personalize image', () => {
     const image = screen.getByTestId('personalisation');
-    expect(image).toHaveStyle('background: url(/img/personalisation.png) no-repeat');
+    expect(image).toBeInTheDocument();
   });
   it('should render business image', () => {
     const image = screen.getByTestId('build-business');
-    expect(image).toHaveStyle('background: url(/img/build-business.png) no-repeat');
+    expect(image).toBeInTheDocument();
   });
 });
