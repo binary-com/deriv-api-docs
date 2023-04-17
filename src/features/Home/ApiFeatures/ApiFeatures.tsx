@@ -3,9 +3,9 @@ import { Text } from '@deriv/ui';
 import styles from './ApiFeatures.module.scss';
 export const ApiFeatures = () => {
   return (
-    <div className={styles.FeaturesContainer} data-testid='api-features'>
-      <div className={styles.FeaturesDescription}>
-        <div className={styles.FeatureText}>
+    <article className={styles.FeaturesContainer} data-testid='api-features'>
+      <section className={styles.FeatureText}>
+        <header>
           <Text type='heading-2' as={'h2'} bold aria-level={1}>
             Deriv API features
           </Text>
@@ -16,6 +16,8 @@ export const ApiFeatures = () => {
           <Text type='paragraph-1' className={styles.FeatureParagraph} role={'note'}>
             {"With our API, you'll be able to:"}
           </Text>
+        </header>
+        <section>
           <ul className={styles.FeatureList}>
             <li className={styles.FeatureOptions}>
               <img src='/img/checklist-icon-grey.svg'></img>
@@ -42,9 +44,13 @@ export const ApiFeatures = () => {
               <div className={styles.FeatureContent}>{"View user's historical transactions"}</div>
             </li>
           </ul>
-        </div>
-        <div className={styles.ApiFeaturesImage} data-testid='api-features-img' />
-      </div>
-    </div>
+        </section>
+      </section>
+      <img
+        src='/img/api-featutes.png'
+        className={styles.ApiFeaturesImage}
+        data-testid='api-features-img'
+      />
+    </article>
   );
 };

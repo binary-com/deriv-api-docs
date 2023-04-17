@@ -37,17 +37,44 @@
       }
     }
     .mainPageCard {
+      display: flex;
+      flex-direction: column;
+      gap: rem(2.7);
       width: 100%;
       max-width: rem(31.6);
       padding: rem(3.2) rem(2.4);
       border-radius: 4px;
-      box-shadow: 0 0.4rem 0.8rem 0 rgb(14, 14, 14, 0.1);
+      box-shadow: 0 rem(0.7) rem(1.3) 0 rgb(14, 14, 14, 0.1);
       background-color: var(--ifm-color-white);
       font-size: rem(1.6);
       line-height: 1.5;
       color: var(--ifm-color-black);
       margin-bottom: 0;
       position: relative;
+      transition: box-shadow .2s;
+
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: rem(0.8);
+      }
+
+      .cardIcon {
+        width: rem(4.5);
+      }
+
+      .arrowIcon {
+        display: flex;
+        justify-content: end;
+        > img {
+          width: rem(0.8);
+        }
+      }
+
+      &:hover {
+        text-decoration: none;
+        box-shadow: 0 rem(0.2) rem(0.2) 0 rgb(0, 0, 0, 0.3);
+      }
 
       .header {
         display: flex;

@@ -11,7 +11,7 @@ import { GetStarted } from './GetStarted/GetStarted';
 
 export default function HomepageFeatures() {
   return (
-    <section className={styles.features}>
+    <main className={styles.features}>
       <HeroHeader />
       <ClientLibraries />
       <Benefits />
@@ -20,6 +20,6 @@ export default function HomepageFeatures() {
       <ApiFeatures />
       <Carousel />
       <Footer />
-    </section>
+    </main>
   );
 }

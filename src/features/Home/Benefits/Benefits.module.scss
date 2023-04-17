@@ -12,11 +12,16 @@
     width: 100%;
     flex-wrap: nowrap;
     margin-bottom: rem(6.4);
+    gap: rem(3);
     display: flex;
     justify-content: space-evenly;
+    padding: 0 rem(1);
 
     @media screen and (max-width: 992px) {
       margin-top: rem(3);
+    }
+
+    @media screen and (max-width: 425px) {
       flex-direction: column;
     }
   }
@@ -57,21 +62,33 @@
     .InformationContainer {
       display: flex;
       width: 100%;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
-      gap: rem(4);
+      gap: rem(6);
+      @media screen and (max-width: 992px) {
+        > img {
+          width: 100%;
+        }
+      }
       &:first-child {
         flex-direction: row-reverse;
       }
-      div {
+      .InformationContent {
         width: rem(46.8);
+        > h1 {
+          margin-bottom: rem(0.8);
+        }
+        > p {
+          line-height: rem(3.6);
+          font-size: rem(2.4);
+        }
       }
       @media screen and (max-width: 992px) {
         flex-direction: column;
         &:first-child {
           flex-direction: column-reverse;
         }
-        div {
+        .InformationContent {
           width: 100%;
         }
       }

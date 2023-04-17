@@ -5,8 +5,8 @@ import Link from '@docusaurus/Link';
 
 export const GetStarted = () => {
   return (
-    <div className={`${styles.mainPageRow} ${styles.withPattern}`}>
-      <div className={styles.columnContainer}>
+    <article className={`${styles.mainPageRow} ${styles.withPattern}`}>
+      <section className={styles.columnContainer}>
         <Text
           className={styles.getStartedHeading}
           type='heading-2'
@@ -17,19 +17,18 @@ export const GetStarted = () => {
         >
           Get started with our API in 3 simple steps:
         </Text>
-        <div className={styles.cardContainer}>
+        <nav className={styles.cardContainer}>
           <Link to='/docs/category/guides' className={styles.mainPageCard} data-testid='guide'>
-            <img src='/img/guide.svg' />
-            <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark} as='h2'>
+            <img src='/img/guide.svg' className={styles.cardIcon} />
+            <section>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 1. Learn about our API
               </Text>
-            </div>
-            <div className='content'>Understand basic concepts and terminologies.</div>
-            <div className={styles.arrow}>
-              {' '}
-              <img src='img/home-arrow.svg' />{' '}
-            </div>
+              <p>Understand basic concepts and terminologies.</p>
+            </section>
+            <figure className={styles.arrowIcon}>
+              <img src='img/home-arrow.svg' />
+            </figure>
           </Link>
           <Link
             target='_blank'
@@ -38,34 +37,30 @@ export const GetStarted = () => {
             className={styles.mainPageCard}
             data-testid='signUp'
           >
-            <img src='/img/sign-up.svg' />
-            <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark} as='h2'>
+            <img src='/img/sign-up.svg' className={styles.cardIcon} />
+            <section>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 2. Sign up
               </Text>
-            </div>
-            <div className='content hide-on-mobile'>
-              Create a free Deriv account to access our API (or use your Binary.com login details).
-            </div>
-            <div className={styles.arrowMiddle}>
-              {' '}
-              <img src='img/home-arrow.svg' />{' '}
-            </div>
+              <p>Create a free Deriv account to access our API.</p>
+            </section>
+            <figure className={styles.arrowIcon}>
+              <img src='img/home-arrow.svg' />
+            </figure>
           </Link>
           <Link to='/dashboard' className={styles.mainPageCard} data-testid='register'>
-            <img src='/img/register-your-app.svg' />
-            <div className={styles.header}>
-              <Text type='subtitle-1' bold className={styles.dark} as='h2'>
+            <img src='/img/register-your-app.svg' className={styles.cardIcon} />
+            <section>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 3. Register your app
               </Text>
-            </div>
-            <div className='content'>Fill out the registration form to start using Deriv API.</div>
-            <div className={styles.arrow}>
-              {' '}
-              <img src='img/home-arrow.svg' />{' '}
-            </div>
+              <p>Fill out the registration form to start using Deriv API.</p>
+            </section>
+            <figure className={styles.arrowIcon}>
+              <img src='img/home-arrow.svg' />
+            </figure>
           </Link>
-        </div>
+        </nav>
         <span className={styles.termConditions}>
           By using our API, you confirm that you have read and agreed to our
           <Link
@@ -77,7 +72,7 @@ export const GetStarted = () => {
             terms and conditions.
           </Link>
         </span>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
