@@ -90,7 +90,7 @@ h6 {
 }
 h1,
 h2 {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--ubuntu-font-family-header);
 }
 html,
 body {
@@ -103,6 +103,10 @@ body {
   @media screen and (min-width: 600px) {
     width: rem(55) !important;
   }
+}
+
+div[class*='admonitionHeading'] {
+  font-family: var(--ubuntu-font-family-header);
 }
 
 main[class*='docMainContainer'] .container {
