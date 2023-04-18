@@ -63,6 +63,8 @@ h6,
 a,
 button {
   font-family: var(--ubuntu-font-family);
+}
+
 ul li a,
 nav a,
 nav a div {
@@ -93,6 +95,7 @@ a {
     color: var(--colors-coral600);
   }
 }
+
 p,
 h1,
 h2,
@@ -103,10 +106,12 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
 h1,
 h2 {
   font-family: var(--ubuntu-font-family);
 }
+
 html,
 body {
   overflow-x: hidden;
