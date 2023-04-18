@@ -20,13 +20,14 @@
     gap: rem(1);
     .FooterContent {
       font-family: 'Ubuntu', sans-serif;
+      font-size: rem(3.2);
       color: var(--ifm-color-white);
       @media screen and (max-width: 992px) {
         font-size: rem(2);
       }
     }
     .FooterBodyContent {
-      color: var(--ifm-color-secondary-darkest);
+      color: var(--ifm-color-white);
       font-weight: 400;
       @media screen and (max-width: 992px) {
         font-size: rem(1.5);
@@ -43,6 +44,7 @@
       border: 2px solid var(--ifm-color-secondary-darkest);
       padding: rem(0.5);
       border-radius: rem(1);
+      font-size: rem(1.4);
       font-weight: bold;
     }
   }

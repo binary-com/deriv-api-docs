@@ -15,13 +15,13 @@ describe('Home Page', () => {
 
   it('should render the page section', () => {
     const { container } = render_result;
-    const main_section = container.querySelector('section');
+    const main_section = container.querySelector('main');
     expect(main_section).toBeInTheDocument();
   });
 
   it('should render section with features class', () => {
     const { container } = render_result;
-    const main_section = container.querySelector('section');
+    const main_section = container.querySelector('main');
     expect(main_section).toHaveAttribute('class', 'features');
   });
 });

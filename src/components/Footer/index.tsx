@@ -4,14 +4,14 @@ import styles from './Footer.module.scss';
 
 const Footer = () => {
   return (
-    <div className={styles.FooterContainer} data-testid='footer-text'>
-      <div className={styles.FooterBody}>
-        <Text type='subtitle-1' as={'h1'} bold className={styles.FooterContent}>
-          Get Connected
+    <footer className={styles.FooterContainer} data-testid='footer-text'>
+      <section className={styles.FooterBody}>
+        <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
+          Get connected
         </Text>
-        <Text type='paragraph-1' align='center' as={'h2'} className={styles.FooterBodyContent}>
+        <p className={styles.FooterBodyContent}>
           Discuss ideas and share solutions with developers worldwide.
-        </Text>
+        </p>
         <a
           data-testid='community-link'
           style={{ textDecoration: 'none' }}
@@ -19,20 +19,20 @@ const Footer = () => {
         >
           <button className={styles.communityButton}>Join Our Community</button>
         </a>
-      </div>
-      <div className={styles.FooterBody}>
-        <Text type='subtitle-1' bold className={styles.FooterContent}>
-          {"We're here to help"}
+      </section>
+      <section className={styles.FooterBody}>
+        <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
+          We&apos;re here to help
         </Text>
         <Text type='paragraph-1' align='center' className={styles.FooterBodyContent}>
           Email us at{' '}
           <a className={styles.Email} href={'mailto:api-support@deriv.com'}>
             api-support@deriv.com
-          </a>{' '}
-          if you have any questions.
+          </a>
+          <p>if you have any questions.</p>
         </Text>
-      </div>
-    </div>
+      </section>
+    </footer>
   );
 };
 export default Footer;

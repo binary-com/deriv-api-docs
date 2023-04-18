@@ -12,5 +12,8 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        span {
+            font-size: rem(1.4);
+        }
     }
 }

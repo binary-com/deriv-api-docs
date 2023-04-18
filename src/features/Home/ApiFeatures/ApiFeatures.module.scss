@@ -1,58 +1,57 @@
 @use 'src/styles/utility' as *;
 .FeaturesContainer {
   display: flex;
-  flex-direction: column;
   width: 100%;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: rem(2);
 
-  .FeaturesDescription {
+  > img {
+    padding: 0 rem(2);
+  }
+
+  .ApiFeaturesImage {
+    display: inline-block;
+    width: rem(60);
+  }
+
+  .FeatureText {
+    width: rem(48.6);
+    padding: 0 rem(1);
+    box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 90%;
-    align-items: center;
+    flex-direction: column;
+    gap: rem(2);
 
-    .ApiFeaturesImage {
-      aspect-ratio: 4 / 2.5;
-      background-image: url(/img/api-featutes.png);
-      background-repeat: no-repeat;
-      background-size: contain;
-      display: inline-block;
-      width: rem(60);
-      margin-top: rem(5);
-    }
-
-    .FeatureText {
-      width: rem(48.6);
-      padding: 0 rem(1);
-      box-sizing: border-box;
+    header {
       display: flex;
       flex-direction: column;
       gap: rem(2);
-      @media (min-width: 425px) {
-        margin-left: rem(4);
-      }
-      .FeatureParagraph {
-        font-weight: 500;
-        line-height: rem(3);
-      }
-      .FeatureList {
-        margin-left: rem(-2);
-        font-weight: 500;
+    }
 
-        .FeatureOptions {
-          align-items: center;
-          list-style-type: none;
-          display: flex;
-          flex-direction: row;
-          gap: rem(0.4);
-          margin: rem(1.6) 0;
+    @media (min-width: 425px) {
+      margin-left: rem(4);
+    }
+    .FeatureParagraph {
+      font-weight: 500;
+      line-height: rem(3);
+    }
+    .FeatureList {
+      margin-left: rem(-2);
+      font-weight: 500;
 
-          .FeatureContent {
-            margin-bottom: 0;
-            margin-left: rem(1);
-          }
+      .FeatureOptions {
+        align-items: center;
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        gap: rem(0.4);
+        margin: rem(1.6) 0;
+
+        .FeatureContent {
+          margin-bottom: 0;
+          margin-left: rem(1);
         }
       }
     }

@@ -9,11 +9,13 @@ import './swiper-custom.scss';
 
 export const Carousel = () => {
   return (
-    <div data-testid='carousel-component' className={`${styles.carouselComponent} carousel`}>
-      <Text type='heading-2' as='h1' align='center' bold className={styles.carouselHeading}>
-        See what our clients say
-      </Text>
-      <div className={styles.carouselContainer}>
+    <article data-testid='carousel-component' className={`${styles.carouselComponent} carousel`}>
+      <header>
+        <Text type='heading-2' as='h1' align='center' bold className={styles.carouselHeading}>
+          See what our clients say
+        </Text>
+      </header>
+      <section className={styles.carouselContainer}>
         <Swiper spaceBetween={100} slidesPerView={1} loop>
           <PrevButton />
           <div>
@@ -43,7 +45,7 @@ export const Carousel = () => {
           </div>
           <NextButton />
         </Swiper>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };

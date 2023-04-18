@@ -1,6 +1,5 @@
 @use 'src/styles/utility' as *;
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -13,7 +12,7 @@
 
 :root {
   --ibm-font-family-base: 'IBM Plex Sans', sans-serif;
-  --ubuntu-font-family-header: 'Ubuntu', sans-serif;
+  --ubuntu-font-family: 'Ubuntu', sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -44,10 +43,14 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+// Be very careful adding new things to the star selector.
 * {
   margin: 0;
   padding: 0;
-  scroll-margin-top: rem(10);
+  box-sizing: border-box;
+}
+
+html {
   font-family: var(--ibm-font-family-base);
 }
 
@@ -57,10 +60,15 @@ h3,
 h4,
 h5,
 h6,
+a,
+button {
+  font-family: var(--ubuntu-font-family);
+}
+
 ul li a,
 nav a,
 nav a div {
-  font-family: var(--ubuntu-font-family-header);
+  font-family: var(--ubuntu-font-family);
 }
 
 h1,
@@ -87,6 +95,7 @@ a {
     color: var(--colors-coral600);
   }
 }
+
 p,
 h1,
 h2,
@@ -97,10 +106,12 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
 h1,
 h2 {
-  font-family: var(--ubuntu-font-family-header);
+  font-family: var(--ubuntu-font-family);
 }
+
 html,
 body {
   overflow-x: hidden;
@@ -115,7 +126,7 @@ body {
 }
 
 div[class*='admonitionHeading'] {
-  font-family: var(--ubuntu-font-family-header);
+  font-family: var(--ubuntu-font-family);
 }
 
 main[class*='docMainContainer'] .container {

@@ -16,14 +16,14 @@ describe('HeroHeader', () => {
     expect(hero_header).toBeInTheDocument();
   });
   it('should render main heading properly', () => {
-    const footer_title = screen.getByRole('heading', { level: 1 });
-    expect(footer_title).toHaveTextContent('Get Connected');
+    const footer_title = screen.getByText('Get connected');
+    expect(footer_title).toBeInTheDocument();
   });
   it('should render the header description properly', () => {
-    const footer_description = screen.getByRole('heading', { level: 2 });
-    expect(footer_description).toHaveTextContent(
+    const footer_description = screen.getByText(
       'Discuss ideas and share solutions with developers worldwide.',
     );
+    expect(footer_description).toBeInTheDocument();
   });
   it('should render community link properly', () => {
     const community_link = screen.getByTestId('community-link');
@@ -43,8 +43,7 @@ describe('HeroHeader', () => {
 
   it('should render support section properly', () => {
     const support_text = screen.getByText(/^Email us at/i);
-    expect(support_text).toHaveTextContent(
-      'Email us at api-support@deriv.com if you have any questions.',
-    );
+    expect(support_text).toHaveTextContent(/Email us at api-support@deriv.com/i);
+    expect(support_text).toHaveTextContent(/if you have any questions./i);
   });
 });
