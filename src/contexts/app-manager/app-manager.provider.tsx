@@ -11,6 +11,7 @@ type TAppManagerContextProps = {
 const AppManagerContextProvider = ({ children }: TAppManagerContextProps) => {
   const [apps, setApps] = useState<ApplicationObject[]>([]);
   const [currentTab, setCurrentTab] = useState<TDashboardTab>('MANAGE_TOKENS');
+  const [is_dashboard, setIsDashboard] = useState(false);
   const { getAllApps, apps: updatedApps } = useGetApps();
   const { is_authorized } = useAuthContext();
 
@@ -34,8 +35,10 @@ const AppManagerContextProvider = ({ children }: TAppManagerContextProps) => {
       getApps,
       currentTab,
       updateCurrentTab,
+      setIsDashboard,
+      is_dashboard,
     };
-  }, [apps, currentTab, getApps, updateCurrentTab]);
+  }, [apps, currentTab, getApps, updateCurrentTab, setIsDashboard, is_dashboard]);
 
   return <AppManagerContext.Provider value={context_object}>{children}</AppManagerContext.Provider>;
 };
