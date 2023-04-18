@@ -1,6 +1,6 @@
 @use 'src/styles/utility' as *;
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 
 /**
  * Any CSS included here will be global. The classic template
@@ -13,7 +13,7 @@
 
 :root {
   --ibm-font-family-base: 'IBM Plex Sans', sans-serif;
-  --ibm-font-family-header: 'Ubuntu', sans-serif;
+  --ubuntu-font-family-header: 'Ubuntu', sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -56,8 +56,20 @@ h2,
 h3,
 h4,
 h5,
+h6,
+ul li a,
+nav a,
+nav a div {
+  font-family: var(--ubuntu-font-family-header);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-  font-family: var(--ibm-font-family-header);
+  font-weight: bold;
 }
 
 .error-message {
@@ -87,7 +99,7 @@ h6 {
 }
 h1,
 h2 {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--ubuntu-font-family-header);
 }
 html,
 body {
@@ -102,6 +114,23 @@ body {
   }
 }
 
+div[class*='admonitionHeading'] {
+  font-family: var(--ubuntu-font-family-header);
+}
+
+main[class*='docMainContainer'] .container {
+  padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
+  margin: 0 rem(4);
+}
+
+div[class*='sidebarViewport'] {
+  position: fixed;
+  svg[class*='expandButtonIcon'] {
+    position: absolute;
+    left: rem(0.5);
+  }
+}
+
 .loading {
   position: absolute;
   width: 100%;
@@ -112,25 +141,31 @@ body {
   align-items: center;
 }
 
-.navbar-sidebar {
-  ul > div {
-    display: none;
-  }
-}
-
 .navbar {
   padding: 0 rem(1.5);
   height: var(--nav-height);
-}
+  &__inner .navbar__items:first-child a {
+    font-weight: normal;
+  }
+  &__link {
+    &--active,
+    &:hover {
+      color: var(--colors-coral600);
+      text-decoration: none;
+    }
+  }
+  &__brand {
+    margin-right: rem(5);
+  }
+  &__logo {
+    width: rem(12);
+  }
 
-.navbar__link:hover,
-.navbar__link--active {
-  color: var(--colors-coral600);
-  text-decoration: none;
-}
-
-.navbar__brand {
-  margin-right: rem(5);
+  .navbar-sidebar {
+    ul > div {
+      display: none;
+    }
+  }
 }
 
 .navbar__items--right {
@@ -140,15 +175,19 @@ body {
 main[class*='docMainContainer'] .container {
   padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
   margin: 0 rem(4);
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 }
 
 .menu__list {
-  margin-top: rem(5);
+  margin-top: rem(9);
 }
 
 .menu__link {
   font-size: rem(1.4);
   font-weight: var(--ifm-font-weight-normal);
+  line-height: rem(2);
 }
 
 .menu__caret:before {
@@ -173,19 +212,14 @@ main[class*='docMainContainer'] .container {
   margin-right: rem(3.3);
 }
 
-aside.theme-doc-sidebar-container {
-  height: 100vh;
-}
-
 [class*='tocCollapsibleButton'] {
   box-sizing: border-box;
-}
-
-[class*='tocCollapsibleButton']::after {
-  background: var(--ifm-menu-link-sublist-icon-2) !important;
-  height: rem(1.2) !important;
-  width: rem(0.872) !important;
-  transform: rotate(90deg) !important;
+  &::after {
+    background: var(--ifm-menu-link-sublist-icon-2) !important;
+    height: rem(1.2) !important;
+    width: rem(0.872) !important;
+    transform: rotate(90deg) !important;
+  }
 }
 
 [class*='tocCollapsibleButtonExpanded']::after {
