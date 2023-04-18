@@ -1,6 +1,7 @@
 import React from 'react';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useApiToken from '@site/src/hooks/useApiToken';
+import useAppManager from '@site/src/hooks/useAppManager';
 import { render, screen } from '@testing-library/react';
 import { AppManager } from '..';
 import { useTable } from 'react-table';
@@ -19,6 +20,16 @@ const mockUseApiToken = useApiToken as jest.MockedFunction<
 
 mockUseApiToken.mockImplementation(() => ({
   updateTokens: jest.fn(),
+}));
+
+jest.mock('@site/src/hooks/useAppManager');
+
+const mockUseAppManager = useAppManager as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAppManager>>
+>;
+
+mockUseAppManager.mockImplementation(() => ({
+  setIsDashboard: jest.fn(),
 }));
 
 jest.mock('react-table');

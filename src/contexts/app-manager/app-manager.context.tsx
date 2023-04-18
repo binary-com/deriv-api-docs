@@ -1,5 +1,5 @@
 import { ApplicationObject } from '@deriv/api-types';
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
 export type TDashboardTab = 'MANAGE_TOKENS' | 'REGISTER_APP' | 'MANAGE_APPS';
 
@@ -8,6 +8,8 @@ export type TAppManagerContext = {
   getApps: () => void;
   currentTab: TDashboardTab;
   updateCurrentTab: (tab: TDashboardTab) => void;
+  is_dashboard: boolean;
+  setIsDashboard: Dispatch<SetStateAction<boolean>>;
 };
 
 export const AppManagerContext = createContext<TAppManagerContext | null>(null);

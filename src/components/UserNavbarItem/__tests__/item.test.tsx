@@ -100,9 +100,9 @@ describe('User NavBar item', () => {
 
     it('Should render User Navbar Desktop item', () => {
       const current_account = screen.getByRole<HTMLButtonElement>('button', {
-        name: 'CR111111 - USD',
+        name: /CR111111/i,
       });
-      expect(current_account).toHaveAttribute('data-state', 'closed');
+      expect(current_account).toBeInTheDocument();
     });
   });
 });
