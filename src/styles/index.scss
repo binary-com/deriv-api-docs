@@ -22,7 +22,10 @@
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
+  --text-profit-success: #4bb4b3;
+  --demo-account: #377CFC;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --nav-height: 60px;
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
@@ -59,6 +62,11 @@ h6 {
 
 .error-message {
   color: var(--colors-coral600) !important;
+}
+
+/* reset */
+button {
+  all: unset;
 }
 
 a {
@@ -104,18 +112,34 @@ body {
   align-items: center;
 }
 
+.navbar-sidebar {
+  ul > div {
+    display: none;
+  }
+}
+
+.navbar {
+  padding: 0 rem(1.5);
+  height: var(--nav-height);
+}
+
 .navbar__link:hover,
 .navbar__link--active {
   color: var(--colors-coral600);
   text-decoration: none;
 }
 
-.navbar {
-  padding: rem(1.3) 0 rem(2.3) rem(3.9);
-}
-
 .navbar__brand {
   margin-right: rem(5);
+}
+
+.navbar__items--right {
+  gap: rem(1);
+}
+
+main[class*='docMainContainer'] .container {
+  padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
+  margin: 0 rem(4);
 }
 
 .menu__list {
@@ -166,4 +190,14 @@ aside.theme-doc-sidebar-container {
 
 [class*='tocCollapsibleButtonExpanded']::after {
   transform: rotate(270deg) !important;
+}
+
+@media (max-width: 768px) {
+  .navbar__logo {
+    width: rem(7.4);
+  }
+  
+  .navbar__toggle {
+    width: rem(1.2);
+  }
 }

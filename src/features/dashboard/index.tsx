@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Login } from '../Auth/Login/Login';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import DashboardTabs from './components/Tabs';
-import AppManagerContextProvider from '@site/src/contexts/app-manager/app-manager.provider';
+import useAppManager from '@site/src/hooks/useAppManager';
 
 export const AppManager = () => {
   const { is_logged_in } = useAuthContext();
+  const { setIsDashboard, is_dashboard } = useAppManager();
 
-  return (
-    <AppManagerContextProvider>
-      {is_logged_in ? <DashboardTabs /> : <Login />}
-    </AppManagerContextProvider>
-  );
+  useEffect(() => {
+    setIsDashboard(true);
+    return () => {
+      setIsDashboard(false);
+    };
+  }, [setIsDashboard]);
+
+  return <React.Fragment>{is_logged_in ? <DashboardTabs /> : <Login />}</React.Fragment>;
 };

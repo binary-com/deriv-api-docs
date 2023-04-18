@@ -21,6 +21,7 @@ const AccountDropdown = () => {
             <div
               tabIndex={0}
               className={styles.customSelectItem}
+              role='menuitem'
               onClick={() => onSelectAccount(accountItem.name)}
               onKeyDown={(e) => e.key === 'Enter' && onSelectAccount(accountItem.name)}
             >
