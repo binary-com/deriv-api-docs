@@ -15,7 +15,8 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
 
   const onData = useCallback(
     (response: TSocketResponse<T>) => {
-      setData(response[name === 'ticks' ? 'tick' : name] as TSocketResponseData<T>);
+      const key = response['msg_type'] ?? name;
+      setData(response[key] as TSocketResponseData<T>);
       setIsLoading(false);
     },
     [name],
