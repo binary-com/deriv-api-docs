@@ -17,7 +17,8 @@ const useWS = <T extends TSocketEndpointNames>(name: T) => {
       setIsLoading(true);
       try {
         const response = await apiManager.augmentedSend(name, data);
-        setData(response[name] as TSocketResponseData<T>);
+        const key = response['msg_type'] ?? name;
+        setData(response[key] as TSocketResponseData<T>);
       } catch (e) {
         setError(e);
       } finally {

@@ -1,8 +1,10 @@
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import RequestResponseRenderer from '../RequestResponseRenderer';
 import style from './RequestJSONBox.module.scss';
+import SubscribeRenderer from '../SubscribeRenderer';
+import { TSocketSubscribableEndpointNames } from '@site/src/configs/websocket/types';
 
 interface TRequestJSONBox<T extends TSocketEndpointNames> {
   handleChange: React.ChangeEventHandler<HTMLTextAreaElement>;
@@ -17,6 +19,10 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
   name,
   auth_required,
 }: TRequestJSONBox<T>) {
+  const is_subscribe = useMemo(() => {
+    return request_example?.includes('subscribe');
+  }, [request_example]);
+
   return (
     <div className={style.playgroundBox}>
       <div className={style.formContent}>
@@ -30,7 +36,15 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
           onChange={handleChange}
           value={request_example}
         ></textarea>
-        <RequestResponseRenderer name={name} reqData={request_example} auth={auth_required} />
+        {is_subscribe ? (
+          <SubscribeRenderer
+            name={name as TSocketSubscribableEndpointNames}
+            reqData={request_example}
+            auth={auth_required}
+          />
+        ) : (
+          <RequestResponseRenderer name={name} reqData={request_example} auth={auth_required} />
+        )}
       </div>
     </div>
   );
