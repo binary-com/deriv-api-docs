@@ -8,6 +8,8 @@
     transition: background-color 0.2s;
     border-radius: 3px;
     padding: rem(1);
+    height: rem(4);
+    line-height: rem(2);
     
     &:hover {
         cursor: pointer;

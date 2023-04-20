@@ -1,5 +1,30 @@
 @use 'src/styles/utility' as *;
 
+.LogInButton {
+  color: var(--colors-coral500);
+  font-weight: bold;
+  display: flex;
+  @media (max-width: 996px) {
+    align-items: center;
+    border: 2px solid var(--colors-coral500);
+    border-radius: rem(1.6);
+    padding: rem(1) rem(1.6);
+    height: rem(4);
+  }
+}
+
+.SignUpButton {
+  color: var(--ifm-color-emphasis-0);
+  background-color: var(--colors-coral500);
+  border-radius: 16px;
+  padding: rem(1) rem(1.6);
+  transition: background-color .2s;
+  &:hover {
+    color: var(--ifm-color-emphasis-0);
+    background-color: var(--colors-coral700);
+  }
+}
+
 .UserNavbarItem {
   cursor: pointer;
 }

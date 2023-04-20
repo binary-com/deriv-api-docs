@@ -38,8 +38,8 @@
         &:checked + .customCheckbox {
             background-image: url(/img/check.svg);
             background-position: center;
-            background-color: var(--colors-coral600);
-            border-color: var(--colors-coral600);
+            background-color: var(--colors-coral500);
+            border-color: var(--colors-coral500);
         }
     }
 }
