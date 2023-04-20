@@ -27,8 +27,7 @@ let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
 
 :::caution
-Always prefer `wss://`
-The `wss://` protocol is not only encrypted, but also more reliable.
+Always prefer `wss://`. The `wss://` protocol is not only encrypted, but also more reliable.
 
 That’s because ws:// data is not encrypted, visible for any intermediary. Old proxy servers do not know about WebSocket, they may see “strange” headers and abort the connection.
 
@@ -51,32 +50,32 @@ const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
 const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 
 socket.onopen = function (e) {
-  alert('[open] Connection established');
-  alert('Sending to server');
+  console.log('[open] Connection established');
+  console.log('Sending to server');
   const sendMessage = JSON.stringify({ ping: 1 });
   websocket.send(sendMessage);
 };
 
 socket.onmessage = function (event) {
-  alert(`[message] Data received from server: ${event.data}`);
+  console.log(`[message] Data received from server: ${event.data}`);
 };
 
 socket.onclose = function (event) {
   if (event.wasClean) {
-    alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+    consloe.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
   } else {
     // e.g. server process killed or network down
     // event.code is usually 1006 in this case
-    alert('[close] Connection died');
+    console.log('[close] Connection died');
   }
 };
 
 socket.onerror = function (error) {
-  alert(`[error]`);
+  console.log(`[error]`);
 };
 ```
 
-## Why do we need websocket and when sould we avoid it?
+## Why do we need websocket and when should we avoid it?
 
 Websocket are an essential client-server communication tool and one needs to be fully aware of its utility and avoid scenarios to benefit from its utmost potential. It’s explained extensively in the next section.
 
@@ -92,7 +91,7 @@ Use WebSocket When You Are:
 
 Now that it’s clear where Websocket should be used, don’t forget to know the cases where it should be avoided and keep yourself away from tons of operational hassles.
 
-Websocket shouldn’t be taken on board when old data fetching is the need of the hour or need data only for one-time processing. In these cases, using HTTP protocols is a wise choice.
+Websocket shouldn’t be taken onboard when old data fetching is the need of the hour or need data only for one-time processing. In these cases, using HTTP protocols is a wise choice.
 
 ## Websocket vs HTTP
 
