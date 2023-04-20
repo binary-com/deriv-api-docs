@@ -3,7 +3,7 @@
 .LogInButton {
   color: var(--colors-coral500);
   font-weight: bold;
-  display: flex;
+  display: flex !important;
   @media (max-width: 996px) {
     align-items: center;
     border: 2px solid var(--colors-coral500);

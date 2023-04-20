@@ -20,7 +20,11 @@ const UserNavbarItem = ({ mobile }: IProps) => {
     setAuthUrl(url);
   }, [getUrl]);
 
-  return <UserNavbarDesktopItem authUrl={authUrl} is_logged_in={is_logged_in} logout={logout} />;
+  return (
+    !mobile && (
+      <UserNavbarDesktopItem authUrl={authUrl} is_logged_in={is_logged_in} logout={logout} />
+    )
+  );
 };
 
 export default UserNavbarItem;
