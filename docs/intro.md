@@ -4,6 +4,8 @@ hide_title: false
 draft: false
 sidebar_label: Introduction
 sidebar_position: 0
+tags:
+  - introduction
 keywords:
   - deriv
   - api
@@ -32,7 +34,7 @@ Using our [Client Libraries](category/client-libraries) is optional and you can 
 
 ### Using our websocket server with just languages features
 
-If you want to use our websocket server api with a specific coding language, then have a look at the [Languages Section](category/languages) Section and continue your journey from there.
+If you want to use our websocket server api with a specific coding language, then have a look at the [Languages Section](category/languages) and continue your journey from there.
 
 :::caution
 We suggest using our [Client Libraries](category/client-libraries), since they give you better developer experience.
