@@ -42,7 +42,7 @@ describe('User Navbar Desktop Item', () => {
     });
 
     it('Should render login link navbar item', async () => {
-      const login_nav_button = screen.getByRole<HTMLAnchorElement>('link', { name: /login/i });
+      const login_nav_button = screen.getByRole<HTMLAnchorElement>('link', { name: /log in/i });
       expect(login_nav_button).toHaveAttribute('href', 'https://www.example.com');
     });
   });
