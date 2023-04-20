@@ -1,6 +1,6 @@
 @use 'src/styles/utility' as *;
 
-.LogInButton {
+.navbar__item .LogInButton {
   color: var(--colors-coral500);
   font-weight: bold;
   display: flex;
