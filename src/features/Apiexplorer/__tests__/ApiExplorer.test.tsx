@@ -1,9 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import ApiExplorerFeatures from '..';
-import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import { render, screen } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
@@ -44,7 +46,15 @@ describe('ApiExplorerFeatures', () => {
   });
 
   it('should render schemawrapper', () => {
-    const schemawrapper = screen.getByTestId('playgroundDocs');
-    expect(schemawrapper).toBeInTheDocument();
+    act(async () => {
+      const playground_select = await screen.findByText(/select api call/i);
+      await userEvent.click(playground_select);
+
+      const select_option = await screen.findByText(/active symbols/i);
+      await userEvent.click(select_option);
+
+      const schemawrapper = screen.getByTestId('playgroundDocs');
+      expect(schemawrapper).toBeInTheDocument();
+    });
   });
 });

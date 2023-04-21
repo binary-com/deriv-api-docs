@@ -1,5 +1,9 @@
 @use 'src/styles/utility' as *;
 
+.schemaContainer {
+  position: relative;
+}
+
 .playgroundContent {
   height: fit-content;
   width: 100%;
@@ -20,8 +24,8 @@
       flex-direction: row;
       flex-wrap: wrap;
       height: fit-content;
-      width: 100%;
       margin-top: rem(4);
+      width: 100%;
       .playgroundPageWrapper {
         display: flex;
         justify-content: center;
@@ -35,16 +39,23 @@
     }
   }
 }
+
 .playgroundApiJson {
   display: flex;
   flex-direction: column;
-  margin-right: 2.4rem;
   width: 50%;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 .playgroundApiDocs {
   display: flex;
   flex-direction: column;
+  gap: rem(2);
+  margin-bottom: rem(1);
   width: 50%;
-  gap: 2rem;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 }
