@@ -147,6 +147,15 @@ div[class*='sidebarViewport'] {
   }
 }
 
+.modal-overlay {
+  > div {
+    z-index: 1000;
+  }
+  div[role="dialog"] {
+    z-index: 1001;
+  }
+}
+
 .loading {
   position: absolute;
   width: 100%;

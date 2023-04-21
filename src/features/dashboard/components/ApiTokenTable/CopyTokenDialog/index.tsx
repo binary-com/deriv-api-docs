@@ -43,14 +43,16 @@ const CopyTokenDialog = ({ setToggleModal, copyToken }: TCopyTokenDialog) => {
   return (
     <Modal defaultOpen onOpenChange={onOpenChange}>
       <Modal.Portal>
-        <Modal.Overlay />
-        <Modal.DialogContent
-          has_close_button
-          content={
-            'Be careful who you share this token with. Anyone with this token can perform the following actions on your account: Add accounts, Create or delete API tokens for trading and withdrawals, Modify account settings.'
-          }
-          action_buttons={actionButtons}
-        />
+        <div className='modal-overlay'>
+          <Modal.Overlay />
+          <Modal.DialogContent
+            has_close_button
+            content={
+              'Be careful who you share this token with. Anyone with this token can perform the following actions on your account: Add accounts, Create or delete API tokens for trading and withdrawals, Modify account settings.'
+            }
+            action_buttons={actionButtons}
+          />
+        </div>
       </Modal.Portal>
     </Modal>
   );

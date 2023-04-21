@@ -29,10 +29,16 @@ export const LoginModal = (visible) => {
     return (
       <Modal defaultOpen>
         <Modal.Portal>
-          <Modal.Overlay />
-          <Modal.PageContent title={'Authorization Required'} has_close_button has_title_separator>
-            <div className={style.modal}>Please Login to fetch Response</div>
-          </Modal.PageContent>
+          <div className='modal-overlay'>
+            <Modal.Overlay />
+            <Modal.PageContent
+              title={'Authorization Required'}
+              has_close_button
+              has_title_separator
+            >
+              <div className={style.modal}>Please Login to fetch Response</div>
+            </Modal.PageContent>
+          </div>
         </Modal.Portal>
       </Modal>
     );
