@@ -16,9 +16,10 @@ export default function ApiExplorerFeatures() {
     response_info,
     handleTextAreaInput,
   } = useDynamicImportJSON();
+  const has_info = Object.keys(request_info).length === 0;
   return (
     <div className={styles.playgroundContent}>
-      <Text type='heading-1' as='h1' className={styles.heading}>
+      <Text type='heading-2' as='h1' className={styles.heading}>
         API Explorer
       </Text>
       <div className={styles.pageWrapper}>
@@ -40,14 +41,20 @@ export default function ApiExplorerFeatures() {
                 />
               </div>
             </div>
-            <div id='playground' data-testid='playgroundDocs' className={styles.playgroundApiDocs}>
-              <div className={styles.playgroundReqSchema}>
-                <SchemaWrapper info={request_info} />
+            {!has_info && (
+              <div
+                id='playground'
+                data-testid='playgroundDocs'
+                className={styles.playgroundApiDocs}
+              >
+                <div className={styles.schemaContainer}>
+                  <SchemaWrapper info={request_info} />
+                </div>
+                <div className={styles.schemaContainer}>
+                  <SchemaWrapper info={response_info} />
+                </div>
               </div>
-              <div className={styles.playgroundResSchema}>
-                <SchemaWrapper info={response_info} />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
