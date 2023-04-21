@@ -7,7 +7,7 @@ const NavbarSeparator = () => {
   return (
     <React.Fragment>
       {is_logged_in && (
-        <div className={styles.separatorContainer}>
+        <div className={styles.separatorContainer} data-testid='dt_navbar_separator'>
           <div className={styles.navbarSeparator} />
         </div>
       )}
