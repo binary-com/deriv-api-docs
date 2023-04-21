@@ -37,13 +37,15 @@ export const RegisterAppDialogError = ({ error, onClose }: TRegisterAppDialogErr
   return (
     <Modal defaultOpen>
       <Modal.Portal>
-        <Modal.Overlay />
-        <Modal.DialogContent
-          title='Error!'
-          content={catchError()}
-          action_buttons={actionButtons}
-          has_close_button
-        />
+        <div className='modal-overlay'>
+          <Modal.Overlay />
+          <Modal.DialogContent
+            title='Error!'
+            content={catchError()}
+            action_buttons={actionButtons}
+            has_close_button
+          />
+        </div>
       </Modal.Portal>
     </Modal>
   );

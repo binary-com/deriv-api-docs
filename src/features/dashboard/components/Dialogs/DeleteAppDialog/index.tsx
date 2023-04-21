@@ -46,13 +46,15 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
   return (
     <Modal defaultOpen onOpenChange={onOpenChange}>
       <Modal.Portal>
-        <Modal.Overlay />
-        <Modal.DialogContent
-          title='Delete app'
-          content='Are you sure you want to delete this app?'
-          action_buttons={actionButtons}
-          has_close_button
-        />
+        <div className='modal-overlay'>
+          <Modal.Overlay />
+          <Modal.DialogContent
+            title='Delete app'
+            content='Are you sure you want to delete this app?'
+            action_buttons={actionButtons}
+            has_close_button
+          />
+        </div>
       </Modal.Portal>
     </Modal>
   );
