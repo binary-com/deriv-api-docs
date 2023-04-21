@@ -17,11 +17,13 @@ All API calls have a send functionality for making a request and receiving a res
 
 ### Subscribe
 
-Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream of data of this particular API call. An example of an API call you can subscribe too, is [Tick History](https://api.deriv.com/api-explorer#ticks_history). If you subscribe to this call, every second or so, you will get a new updated set of tick history data.
+Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream of data of this particular API call.
+
+Some of these API calls automatically subscribes (e.g. [ticks](https://api.deriv.com/api-explorer#ticks)), and some have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and server will continue to send the requested data until you unsubscribe by calling the `Forget` or `Forget all` API calls.
+
+For example, you can call [Tick History](https://api.deriv.com/api-explorer#ticks_history) to receive tick history data. But when you add the `subscribe` option to this call, you will receive the tick history data you requested in the first response, and you will continue to receive a new response every time there is a new tick published by the server for the given symbol.
 
 In the message stream from `subscribe` there is a field called `subscription`, this is the `Stream ID`. with this ID you can identify the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
-
-These API calls have an `optional` `subscribe` field, and if you pass `1` to them, the subscription will start and server will continue to send the requested data until you call the `forget`  for your API call you want to `unsubscribe` or `forget`.
 
 Usually data provided by this type of calls will be considered as data source for other API calls or features.
 
