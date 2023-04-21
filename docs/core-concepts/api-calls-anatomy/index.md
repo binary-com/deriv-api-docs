@@ -25,7 +25,7 @@ For example, you can call [Tick History](https://api.deriv.com/api-explorer#tick
 
 In the message stream from `subscribe` there is a field called `subscription`, this is the `Stream ID`. with this ID you can identify the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
 
-Usually data provided by this type of calls will be considered as data source for other API calls or features.
+The data provided by API calls with the `subscribe` functionality can be used as a data source for other API calls and features.
 
 ### Send
 
@@ -42,7 +42,7 @@ For more information on the `Forget` API call, you can have a look at [Forget](h
 
 ## Request Data
 
-In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for Caching, validation, request and response synchronization are some of the things you can use it for.
+In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization are some of the things you can use it for.
 
 #### API Call Method Name
 
