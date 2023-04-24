@@ -24,6 +24,7 @@
 
     .termConditions {
       padding: 0 rem(2.5);
+      font-size: rem(1.2);
     }
 
     .cardContainer {
@@ -51,12 +52,17 @@
       color: var(--ifm-color-black);
       margin-bottom: 0;
       position: relative;
-      transition: box-shadow .2s;
+      transition: box-shadow 0.2s;
 
       section {
         display: flex;
         flex-direction: column;
         gap: rem(0.8);
+
+        > p {
+          font-family: var(--ibm-font-family-base);
+          font-size: rem(1.4);
+        }
       }
 
       .cardIcon {

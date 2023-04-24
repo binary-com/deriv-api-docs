@@ -77,10 +77,11 @@
         width: rem(46.8);
         > h1 {
           margin-bottom: rem(0.8);
+          font-size: rem(2.4);
         }
         > p {
           line-height: rem(3.6);
-          font-size: rem(2.4);
+          font-size: rem(1.8);
         }
       }
       @media screen and (max-width: 992px) {
