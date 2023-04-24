@@ -263,3 +263,25 @@ main[class*='docMainContainer'] .container {
 .HeroImageStyle_src-features-Home-HeroHeader-HeroHeader-module {
   margin-top: 0px !important;
 }
+
+@media screen and (max-width: 992px) {
+  .HeroContainerStyle_src-features-Home-HeroHeader-HeroHeader-module {
+    align-items: center !important;
+  }
+  .heading_src-features-Home-HeroHeader-HeroHeader-module {
+    font-size: 32px !important;
+  }
+  .SubHeading_src-features-Home-HeroHeader-HeroHeader-module {
+    text-align: center !important;
+    font-size: 16px !important;
+    margin-top: 8px !important;
+  }
+  .HeroButton_src-features-Home-HeroHeader-HeroHeader-module {
+    font-size: 14px !important;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 415px) {
+  .HeroImageStyle_src-features-Home-HeroHeader-HeroHeader-module {
+    height: 350px !important;
+  }
+}
