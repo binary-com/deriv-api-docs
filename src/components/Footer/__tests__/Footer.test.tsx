@@ -34,7 +34,7 @@ describe('HeroHeader', () => {
     const community_link = screen.getByTestId('community-link');
     const { getByRole } = within(community_link);
     const button = getByRole('button');
-    expect(button).toHaveTextContent('Join Our Community');
+    expect(button).toHaveTextContent('Join our community');
   });
   it('should render footer body texts properly', () => {
     const help_text = screen.getByText(/^we're here to help$/i);
