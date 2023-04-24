@@ -28,6 +28,11 @@
       display: flex;
       flex-direction: column;
       gap: rem(2);
+      @media screen and (max-width: 992px) {
+        > h2 {
+          text-align: center;
+        }
+      }
     }
 
     @media (min-width: 425px) {
@@ -40,6 +45,9 @@
     .FeatureList {
       margin-left: rem(-2);
       font-weight: 500;
+      @media screen and (max-width: 992px) {
+        font-size: rem(1.4);
+      }
 
       .FeatureOptions {
         align-items: center;

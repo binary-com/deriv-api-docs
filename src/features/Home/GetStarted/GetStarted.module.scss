@@ -24,7 +24,9 @@
 
     .termConditions {
       padding: 0 rem(2.5);
-      font-size: rem(1.2);
+      @media screen and (max-width: 992px) {
+        font-size: rem(1.2);
+      }
     }
 
     .cardContainer {
@@ -61,7 +63,9 @@
 
         > p {
           font-family: var(--ibm-font-family-base);
-          font-size: rem(1.4);
+          @media screen and (max-width: 992px) {
+            font-size: rem(1.4);
+          }
         }
       }
 
