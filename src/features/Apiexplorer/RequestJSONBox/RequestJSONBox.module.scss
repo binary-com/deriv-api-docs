@@ -58,15 +58,4 @@
     border: solid 1px var(--ifm-color-secondary-darker);
     font-size: rem(1.6);
   }
-
-  .playgroundConsole {
-    margin-top: rem(0.2);
-    max-height: 60vh;
-    overflow-y: auto;
-    width: 100%;
-  }
-}
-
-.modal {
-  padding: rem(1);
 }

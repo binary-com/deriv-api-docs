@@ -1,101 +1,17 @@
-import React, { useState } from 'react';
-import { TSocketEndpointNames, TSocketResponseData } from '@site/src/configs/websocket/types';
+import React, { useState, useCallback, useEffect } from 'react';
+import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
+import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
-import { Button, Modal } from '@deriv/ui';
-import style from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import { useCallback } from 'react';
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import { Circles } from 'react-loader-spinner';
+import PlaygroundSection from './PlaygroundSection';
+import LoginDialog from '../LoginDialog';
+import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
+
 export interface IResponseRendererProps<T extends TSocketEndpointNames> {
   name: T;
   reqData?: string;
   auth: number;
 }
-
-type TPlaygroundSection<T extends TSocketEndpointNames> = {
-  loader: boolean;
-  responseState: boolean;
-  data: TSocketResponseData<T>;
-  error: unknown;
-};
-
-export const LoginModal = (visible) => {
-  if (visible?.visible) {
-    return (
-      <Modal defaultOpen>
-        <Modal.Portal>
-          <div className='modal-overlay'>
-            <Modal.Overlay />
-            <Modal.PageContent
-              title={'Authorization Required'}
-              has_close_button
-              has_title_separator
-            >
-              <div className={style.modal}>Please Login to fetch Response</div>
-            </Modal.PageContent>
-          </div>
-        </Modal.Portal>
-      </Modal>
-    );
-  }
-  return null;
-};
-
-const PlaygroundSection = <T extends TSocketEndpointNames>({
-  loader,
-  responseState,
-  data,
-  error,
-}: TPlaygroundSection<T>) => {
-  if (loader) {
-    return (
-      <div>
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-        />
-      </div>
-    );
-  }
-  return (
-    <div
-      id='playground-console'
-      className={style.playgroundConsole}
-      data-testid='playground-section'
-    >
-      {responseState && (
-        <BrowserOnly
-          fallback={
-            <Circles
-              height='100'
-              width='100'
-              color='#d44c0d'
-              ariaLabel='circles-loading'
-              wrapperClass='loading'
-            />
-          }
-        >
-          {() => {
-            const ReactJson = require('react-json-view').default;
-            return (
-              <div>
-                {data !== null ? (
-                  <ReactJson src={data} theme='tube' />
-                ) : (
-                  <ReactJson src={error} theme='tube' />
-                )}
-              </div>
-            );
-          }}
-        </BrowserOnly>
-      )}
-    </div>
-  );
-};
 
 function RequestResponseRenderer<T extends TSocketEndpointNames>({
   name,
@@ -104,11 +20,31 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { data, is_loading, send, clear, error } = useWS<T>(name);
+  const [toggle_modal, setToggleModal] = useState(false);
   const [responseState, setResponseState] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setToggleModal(true);
+    }
+  }, [error]);
+
+  const parseRequestJSON = () => {
+    let request_data;
+
+    try {
+      request_data = JSON.parse(reqData);
+    } catch (error) {
+      console.error('Could not parse the JSON data while trying to send the request: ', error);
+    }
+
+    return request_data;
+  };
 
   const handleClick = useCallback(() => {
     clear();
-    send(JSON.parse(reqData));
+    console.log(parseRequestJSON());
+    send(parseRequestJSON());
     setResponseState(true);
   }, [reqData, send, clear]);
 
@@ -119,7 +55,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
 
   return (
     <div>
-      <div className={style.btnWrapper}>
+      <div className={styles.btnWrapper}>
         <Button color='primary' onClick={handleClick}>
           Send Request
         </Button>
@@ -127,8 +63,8 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && auth == 1 ? (
-        <LoginModal visible={error} />
+      {!is_logged_in && auth == 1 && toggle_modal ? (
+        <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection
           loader={is_loading}

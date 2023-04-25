@@ -52,7 +52,7 @@ describe('RequestResponseRenderer', () => {
     const primaryButton = screen.getByRole('button', { name: /Send Request/i });
     const secondaryButton = screen.getByRole('button', { name: /clear/i });
     await userEvent.click(primaryButton);
-    const playgroundSection = screen.getByTestId('playground-section');
+    const playgroundSection = screen.getByTestId('dt_playground_section');
     expect(playgroundSection).toBeInTheDocument();
     expect(primaryButton).toBeInTheDocument();
     expect(secondaryButton).toBeInTheDocument();

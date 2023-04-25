@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { act, cleanup, render, screen } from '@testing-library/react';
 import { Dropdown, TDropdown } from '../Dropdown';
 import userEvent from '@testing-library/user-event';
 
@@ -11,42 +11,66 @@ const mockProps: TDropdown = {
   selected_value: 'Select API Call - Version 3',
 };
 
-describe('Dropdown', () => {
-  beforeEach(() => {
-    render(<Dropdown {...mockProps} />);
-  });
+jest.mock('@site/src/utils/playground_requests', () => ({
+  ...jest.requireActual('@site/src/utils/playground_requests'),
+}));
 
+describe('Dropdown', () => {
   afterEach(() => {
     cleanup();
     jest.clearAllMocks();
   });
 
-  it('should render properly', () => {
+  it('should render the Dropdown', () => {
+    render(<Dropdown {...mockProps} />);
     const dropdown = screen.getByTestId('dropdown');
     expect(dropdown).toBeInTheDocument();
   });
 
   it('should have initial value as "Select API Call - Version 3"', () => {
+    render(<Dropdown {...mockProps} />);
     const initial_text = screen.getByText(/Select API Call - Version 3/i);
     expect(initial_text).toBeInTheDocument();
   });
 
   it('should render the options on click ', async () => {
-    const btn = screen.getByTestId('dropdown');
+    render(<Dropdown {...mockProps} />);
+    const select = await screen.findByText(/Select API Call/i);
+    await userEvent.click(select);
 
-    await act(async () => {
-      fireEvent.click(btn);
-    });
-    const search_bar = screen.getByRole('textbox');
-
-    expect(search_bar).toBeInTheDocument();
+    const option_list = await screen.findByText(/active symbols/i);
+    expect(option_list).toBeVisible();
   });
-  it('should test filter option correctly', async () => {
-    const btn = screen.getByTestId('dropdown');
 
-    await act(async () => {
-      fireEvent.click(btn);
-    });
+  it('should close the dropdown when selecting an option ', async () => {
+    render(<Dropdown {...mockProps} />);
+    const select = await screen.findByText(/Select API Call/i);
+    await userEvent.click(select);
+
+    const option_list = await screen.findByText(/active symbols/i);
+    expect(option_list).toBeVisible();
+
+    await userEvent.click(option_list);
+    expect(option_list).not.toBeVisible();
+  });
+
+  it('should close the dropdown when clicking outside of the element', async () => {
+    render(<Dropdown {...mockProps} />);
+    const select = await screen.findByText(/Select API Call/i);
+    await userEvent.click(select);
+
+    const option_list = await screen.findByText(/active symbols/i);
+    expect(option_list).toBeVisible();
+
+    await userEvent.click(document.body);
+    expect(option_list).not.toBeVisible();
+  });
+
+  it('should test filter option correctly', async () => {
+    render(<Dropdown {...mockProps} />);
+    const select = await screen.findByText(/Select API Call/i);
+    await userEvent.click(select);
+
     const search_bar = screen.getByRole('textbox');
 
     await userEvent.clear(search_bar);
@@ -55,22 +79,5 @@ describe('Dropdown', () => {
     const options = screen.getAllByText('Active Symbols');
 
     expect(options.length).toBe(1);
-  });
-
-  it('should display the API Call name on the Dropdown when Clicked', async () => {
-    const newProps = {
-      selected: 'API Token',
-      setSelected: jest.fn(),
-      handleChange: jest.fn(),
-      selected_value: 'API Token',
-    };
-    cleanup();
-    render(<Dropdown {...newProps} />);
-    const btn = screen.getByTestId('dropdown');
-    await act(async () => {
-      fireEvent.click(btn);
-    });
-
-    expect(btn).toHaveTextContent('API Token');
   });
 });
