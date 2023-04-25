@@ -67,6 +67,16 @@
   }
 }
 
-.modal {
-  padding: rem(1);
+.wrapper {
+  width: rem(44);
+  .modal {
+    padding-left: rem(2.4);
+  }
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: end;
+    padding: rem(2.4);
+    gap: rem(2);
+  }
 }

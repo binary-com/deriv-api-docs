@@ -7,6 +7,7 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 import { useCallback } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { Circles } from 'react-loader-spinner';
+import useLoginUrl from '@site/src/hooks/useLoginUrl';
 export interface IResponseRendererProps<T extends TSocketEndpointNames> {
   name: T;
   reqData?: string;
@@ -21,6 +22,15 @@ type TPlaygroundSection<T extends TSocketEndpointNames> = {
 };
 
 export const LoginModal = (visible) => {
+  const { getUrl } = useLoginUrl();
+
+  const handleClick = () => {
+    location.assign(getUrl('en'));
+  };
+
+  const handleSignUp = () => {
+    location.assign('https://deriv.com/signup/');
+  };
   if (visible?.visible) {
     return (
       <Modal defaultOpen>
@@ -30,9 +40,17 @@ export const LoginModal = (visible) => {
             <Modal.PageContent
               title={'Authorization Required'}
               has_close_button
-              has_title_separator
+              className={style.wrapper}
             >
-              <div className={style.modal}>Please Login to fetch Response</div>
+              <div className={style.modal}>Log in or sign up to continue</div>
+              <div className={style.buttonWrapper}>
+                <Button color='tertiary' onClick={handleSignUp}>
+                  Sign up
+                </Button>
+                <Button color='primary' onClick={handleClick}>
+                  Login
+                </Button>
+              </div>
             </Modal.PageContent>
           </div>
         </Modal.Portal>
