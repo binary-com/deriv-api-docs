@@ -107,11 +107,12 @@
       > div {
         line-height: rem(2);
         span {
-          font-size: rem(1.4);
           &:nth-child(1) {
+            font-size: rem(1.4);
             font-weight: bold;
           }
           &:nth-child(2) {
+            font-size: rem(1);
             color: var(--ifm-color-emphasis-600);
           }
         }

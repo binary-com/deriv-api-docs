@@ -83,9 +83,6 @@
     &.oneToken::after {
       display: none;
     }
-    @media (max-width: 768px) {
-      font-size: rem(1.2);
-    }
     @media (max-width: 1200px) {
       margin: 0 auto;
     }
