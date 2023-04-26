@@ -16,6 +16,10 @@ export default function ApiExplorerFeatures() {
     response_info,
     handleTextAreaInput,
   } = useDynamicImportJSON();
+
+  console.log('name: ', text_data.name);
+  console.log('response_info: ', response_info);
+
   const has_info = Object.keys(request_info).length === 0;
   return (
     <div className={styles.playgroundContent}>
@@ -37,7 +41,7 @@ export default function ApiExplorerFeatures() {
                   request_example={text_data.request}
                   handleChange={handleTextAreaInput}
                   name={text_data.name}
-                  auth_required={request_info.auth_required}
+                  auth={request_info.auth_required}
                 />
               </div>
             </div>

@@ -13,7 +13,7 @@ export type JSONSchemaType = {
   };
 };
 
-const Properities = ({ jsonSchema }: JSONSchemaType) => {
+const Properties = ({ jsonSchema }: JSONSchemaType) => {
   React.useEffect(() => {
     setIsCodeOpen(false);
   }, [jsonSchema]);
@@ -49,7 +49,7 @@ const Properities = ({ jsonSchema }: JSONSchemaType) => {
 const SchemaBody = ({ jsonSchema }: JSONSchemaType) => {
   return (
     <div className={styles.schemaBody}>
-      <Properities jsonSchema={jsonSchema} />
+      <Properties jsonSchema={jsonSchema} />
     </div>
   );
 };

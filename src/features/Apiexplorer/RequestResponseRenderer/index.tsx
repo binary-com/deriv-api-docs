@@ -21,13 +21,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   const { is_logged_in } = useAuthContext();
   const { data, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
-  const [responseState, setResponseState] = useState(false);
-
-  useEffect(() => {
-    if (error) {
-      setToggleModal(true);
-    }
-  }, [error]);
+  const [response_state, setResponseState] = useState(false);
 
   const parseRequestJSON = () => {
     let request_data;
@@ -42,14 +36,15 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   };
 
   const handleClick = useCallback(() => {
+    if (auth === 1) setToggleModal(true);
     clear();
-    console.log(parseRequestJSON());
     send(parseRequestJSON());
     setResponseState(true);
-  }, [reqData, send, clear]);
+  }, [reqData, send, clear, auth]);
 
   const handleClear = () => {
     clear();
+    setToggleModal(false);
     setResponseState(false);
   };
 
@@ -63,12 +58,12 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && auth == 1 && toggle_modal ? (
+      {!is_logged_in && toggle_modal ? (
         <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection
           loader={is_loading}
-          responseState={responseState}
+          response_state={response_state}
           data={data}
           error={error}
         />

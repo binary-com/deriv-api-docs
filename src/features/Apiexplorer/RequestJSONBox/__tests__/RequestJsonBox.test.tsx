@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, getByPlaceholderText, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
@@ -16,7 +16,7 @@ describe('RequestResponseRenderer', () => {
     handleChange: jest.fn(),
     request_example: '{"app_list": 1}',
     name: 'app_list' as TSocketEndpointNames,
-    auth_required: 0,
+    auth: 0,
   };
 
   beforeEach(() => {
@@ -38,7 +38,7 @@ describe('RequestResponseRenderer', () => {
       handleChange: jest.fn(),
       request_example: '',
       name: '' as TSocketEndpointNames,
-      auth_required: 0,
+      auth: 0,
     };
     cleanup();
     render(<RequestJSONBox {...newProps} />);

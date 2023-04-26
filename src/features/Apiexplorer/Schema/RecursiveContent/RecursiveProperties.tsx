@@ -16,7 +16,7 @@ const RecursiveProperties = ({ is_open, properties, value }: TRecursivePropertie
   if (!keys) {
     return (
       <React.Fragment>
-        <SchemaDescription description={value.description} />
+        <SchemaDescription description={value?.description} />
       </React.Fragment>
     );
   }

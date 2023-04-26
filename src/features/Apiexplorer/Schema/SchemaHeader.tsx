@@ -28,6 +28,7 @@ const AuthRequired = ({ auth_scopes: scopes }: AuthRequiredProps) => {
     </div>
   );
 };
+
 const SchemaHeader = ({ title, description, auth_required, auth_scopes }: SchemaHeaderProps) => {
   return (
     <div className={styles.schemaHeader}>

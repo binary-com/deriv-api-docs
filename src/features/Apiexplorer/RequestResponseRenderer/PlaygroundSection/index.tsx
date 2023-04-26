@@ -6,14 +6,14 @@ import styles from './PlaygroundSection.module.scss';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
-  responseState: boolean;
+  response_state: boolean;
   data: TSocketResponseData<T>;
   error: unknown;
 };
 
 const PlaygroundSection = <T extends TSocketEndpointNames>({
   loader,
-  responseState,
+  response_state,
   data,
   error,
 }: TPlaygroundSection<T>) => {
@@ -36,7 +36,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {responseState && (
+      {response_state && (
         <BrowserOnly
           fallback={
             <Circles
