@@ -14,7 +14,7 @@
     top: calc(var(--nav-height) - rem(0.1));
     left: 0;
     right: 0;
-    height: rem(3.4);
+    height: rem(4);
     border-bottom: 1px solid var(--ifm-color-emphasis-200);
     background-color: var(--ifm-color-emphasis-0);
   }
@@ -33,6 +33,7 @@
       justify-content: center;
       font-weight: bold;
       gap: rem(1);
+      font-family: var(--ibm-font-family-base);
       &::before {
         content: '';
         display: inline-block;

@@ -23,9 +23,11 @@
 
   .logoutButtonContainer {
     display: flex;
+    font-family: var(--ubuntu-font-family);
     justify-content: flex-end;
     border-top: 2px solid var(--ifm-color-emphasis-200);
     padding: rem(1) rem(2.5);
+    height: rem(5.2);
 
     button.logoutButton {
       display: flex;
