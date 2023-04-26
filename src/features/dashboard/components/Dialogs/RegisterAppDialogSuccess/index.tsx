@@ -36,16 +36,18 @@ export const RegisterAppDialogSuccess = ({ onClose }: IRegisterAppDialogSuccessP
   return (
     <Modal defaultOpen>
       <Modal.Portal>
-        <Modal.Overlay />
-        <Modal.DialogContent
-          title='Success!'
-          content={
-            'You have successfully registered your application. You can now start using Deriv API.'
-          }
-          action_buttons={actionButtons}
-          has_close_button
-          should_prevent_close_on_click_outside
-        />
+        <div className='modal-overlay'>
+          <Modal.Overlay />
+          <Modal.DialogContent
+            title='Success!'
+            content={
+              'You have successfully registered your application. You can now start using Deriv API.'
+            }
+            action_buttons={actionButtons}
+            has_close_button
+            should_prevent_close_on_click_outside
+          />
+        </div>
       </Modal.Portal>
     </Modal>
   );

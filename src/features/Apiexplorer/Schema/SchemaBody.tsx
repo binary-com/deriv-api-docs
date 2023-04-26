@@ -26,7 +26,7 @@ const Properities = ({ jsonSchema }: JSONSchemaType) => {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
       {is_code_open ? (
         <BrowserOnly fallback={<div>Loading...</div>}>
@@ -42,7 +42,7 @@ const Properities = ({ jsonSchema }: JSONSchemaType) => {
           value={jsonSchema.properties}
         />
       )}
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -80,24 +80,26 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   return (
     <Modal defaultOpen onOpenChange={onOpenChange}>
       <Modal.Portal>
-        <Modal.Overlay />
-        <Modal.PageContent
-          title={'Update App'}
-          has_close_button
-          has_title_separator
-          className={styles.update_dialog}
-        >
-          <div className={styles.update_app_content}>
-            <AppForm
-              is_update_mode
-              renderButtons={renderButtons}
-              submit={onSubmit}
-              initialValues={initialValues}
-              isUpdating
-            />
-          </div>
-          {error && <RegisterAppDialogError error={error} onClose={clear} />}
-        </Modal.PageContent>
+        <div className='modal-overlay'>
+          <Modal.Overlay />
+          <Modal.PageContent
+            title={'Update App'}
+            has_close_button
+            has_title_separator
+            className={styles.update_dialog}
+          >
+            <div className={styles.update_app_content}>
+              <AppForm
+                is_update_mode
+                renderButtons={renderButtons}
+                submit={onSubmit}
+                initialValues={initialValues}
+                isUpdating
+              />
+            </div>
+            {error && <RegisterAppDialogError error={error} onClose={clear} />}
+          </Modal.PageContent>
+        </div>
       </Modal.Portal>
     </Modal>
   );
