@@ -6,14 +6,28 @@ import { IUserNavbarItemProps } from './item.types';
 import styles from './UserNavbarItem.module.scss';
 
 const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) => {
-  const classNames = clsx('navbar__item navbar__link', styles.UserNavbarItem);
+  const logInButtonClasses = clsx(
+    'navbar__item navbar__link',
+    styles.UserNavbarItem,
+    styles.LogInButton,
+  );
+  const signUpButtonClasses = clsx(
+    'navbar__item navbar__link',
+    styles.UserNavbarItem,
+    styles.SignUpButton,
+  );
 
   return is_logged_in ? (
     <AccountSwitcher />
   ) : (
-    <Link to={authUrl} className={classNames} target='_self'>
-      Login
-    </Link>
+    <React.Fragment>
+      <Link to={authUrl} className={logInButtonClasses} target='_self'>
+        Log in
+      </Link>
+      <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses} target='_self'>
+        Sign up
+      </Link>
+    </React.Fragment>
   );
 };
 

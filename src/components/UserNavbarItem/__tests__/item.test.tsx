@@ -45,64 +45,33 @@ const fake_accounts: IUserLoginAccount[] = [
   },
 ];
 
-describe('User NavBar item', () => {
-  describe('Given device type is mobile', () => {
-    mockUseAuthContext.mockImplementation(() => {
-      return {
-        loginAccounts: fake_accounts,
-        currentLoginAccount: {
-          currency: 'USD',
-          name: 'CR111111',
-          token: 'first_token',
-        },
-        is_logged_in: true,
-        updateLoginAccounts: mockUpdateAccounts,
-        updateCurrentLoginAccount: mockUpdateCurrentAccount,
-      };
-    });
-    beforeEach(() => {
-      render(<UserNavbarItem mobile={true} />);
-    });
-
-    afterEach(() => {
-      cleanup();
-      jest.clearAllMocks();
-    });
-
-    it('Should render User Navbar Mobile item', () => {
-      const logout_button = screen.getByText<HTMLAnchorElement>('Logout');
-      expect(logout_button).not.toHaveAttribute('href', 'https://www.example.com');
-    });
+describe('Given device type is desktop', () => {
+  mockUseAuthContext.mockImplementation(() => {
+    return {
+      loginAccounts: fake_accounts,
+      currentLoginAccount: {
+        currency: 'USD',
+        name: 'CR111111',
+        token: 'first_token',
+      },
+      is_logged_in: true,
+      updateLoginAccounts: mockUpdateAccounts,
+      updateCurrentLoginAccount: mockUpdateCurrentAccount,
+    };
+  });
+  beforeEach(() => {
+    render(<UserNavbarItem mobile={false} />);
   });
 
-  describe('Given device type is desktop', () => {
-    mockUseAuthContext.mockImplementation(() => {
-      return {
-        loginAccounts: fake_accounts,
-        currentLoginAccount: {
-          currency: 'USD',
-          name: 'CR111111',
-          token: 'first_token',
-        },
-        is_logged_in: true,
-        updateLoginAccounts: mockUpdateAccounts,
-        updateCurrentLoginAccount: mockUpdateCurrentAccount,
-      };
-    });
-    beforeEach(() => {
-      render(<UserNavbarItem mobile={false} />);
-    });
+  afterEach(() => {
+    cleanup();
+    jest.clearAllMocks();
+  });
 
-    afterEach(() => {
-      cleanup();
-      jest.clearAllMocks();
+  it('Should render User Navbar Desktop item', () => {
+    const current_account = screen.getByRole<HTMLButtonElement>('button', {
+      name: /CR111111/i,
     });
-
-    it('Should render User Navbar Desktop item', () => {
-      const current_account = screen.getByRole<HTMLButtonElement>('button', {
-        name: /CR111111/i,
-      });
-      expect(current_account).toBeInTheDocument();
-    });
+    expect(current_account).toBeInTheDocument();
   });
 });

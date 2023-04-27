@@ -8,6 +8,8 @@
     transition: background-color 0.2s;
     border-radius: 3px;
     padding: rem(1);
+    height: rem(5.2);
+    line-height: rem(2);
     
     &:hover {
         cursor: pointer;
@@ -23,6 +25,7 @@
         margin-left: rem(1);
         line-height: rem(2);
         .accountId {
+            font-size: rem(1);
             color: var(--ifm-color-emphasis-600);
         }
     }
