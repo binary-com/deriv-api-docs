@@ -17,14 +17,14 @@ const Footer = () => {
           style={{ textDecoration: 'none' }}
           href='https://binary.vanillacommunity.com/'
         >
-          <button className={styles.communityButton}>Join Our Community</button>
+          <button className={styles.communityButton}>Join our community</button>
         </a>
       </section>
       <section className={styles.FooterBody}>
         <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
           We&apos;re here to help
         </Text>
-        <Text type='paragraph-1' align='center' className={styles.FooterBodyContent}>
+        <Text type='paragraph-1' align='center' className={styles.FooterBodyContentEmail}>
           Email us at{' '}
           <a className={styles.Email} href={'mailto:api-support@deriv.com'}>
             api-support@deriv.com

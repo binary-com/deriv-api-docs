@@ -22,7 +22,7 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --text-profit-success: #4bb4b3;
-  --demo-account: #377CFC;
+  --demo-account: #377cfc;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --nav-height: 72px;
   --ifm-menu-color: #414652;
@@ -33,7 +33,6 @@
   --schema-array: #ff8fc8;
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
-
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -151,7 +150,7 @@ div[class*='sidebarViewport'] {
   > div {
     z-index: 1000;
   }
-  div[role="dialog"] {
+  div[role='dialog'] {
     z-index: 1001;
   }
 }
@@ -262,7 +261,7 @@ main[class*='docMainContainer'] .container {
   .navbar__logo {
     width: rem(7.4);
   }
-  
+
   .navbar__toggle {
     width: rem(1.2);
   }
