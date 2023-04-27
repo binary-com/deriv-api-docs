@@ -38,16 +38,16 @@ export const LoginModal = (visible) => {
           <div className='modal-overlay'>
             <Modal.Overlay />
             <Modal.PageContent
-              title={'Authorization Required'}
+              title={'Authorisation required'}
               has_close_button
               className={style.wrapper}
             >
-              <div className={style.modal}>Log in or sign up to continue</div>
+              <div className={style.modal}>Log in or sign up to continue.</div>
               <div className={style.buttonWrapper}>
                 <Button color='tertiary' onClick={handleSignUp}>
                   Sign up
                 </Button>
-                <Button color='primary' onClick={handleClick}>
+                <Button color='primary' onClick={handleClick} className={style.btn}>
                   Login
                 </Button>
               </div>
