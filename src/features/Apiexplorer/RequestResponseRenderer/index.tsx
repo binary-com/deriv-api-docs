@@ -48,7 +48,7 @@ export const LoginModal = (visible) => {
                   Sign up
                 </Button>
                 <Button color='primary' onClick={handleClick} className={style.btn}>
-                  Login
+                  Log in
                 </Button>
               </div>
             </Modal.PageContent>
