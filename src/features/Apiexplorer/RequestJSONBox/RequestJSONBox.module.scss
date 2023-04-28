@@ -74,6 +74,9 @@
   padding-left: rem(2.3);
   font-size: rem(1.4);
   line-height: rem(2);
+  @media (max-width: 992px) {
+    padding-left: rem(1.7);
+  }
 }
 
 .buttonWrapper {

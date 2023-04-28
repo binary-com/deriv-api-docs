@@ -44,7 +44,7 @@ export const LoginModal = (visible) => {
             >
               <div className={style.modal}>Log in or sign up to continue.</div>
               <div className={style.buttonWrapper}>
-                <Button color='tertiary' onClick={handleSignUp}>
+                <Button color='tertiary' onClick={handleSignUp} className={style.btn}>
                   Sign up
                 </Button>
                 <Button color='primary' onClick={handleClick} className={style.btn}>
