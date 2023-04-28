@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 import styles from './Schema.module.scss';
-import RecursiveProperties from './RecursiveContent/RecursiveProperties';
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import SourceButton from './SourceButton/SourceButton';
+import SchemaProperties from './SchemaProperties';
 
-export type JSONSchemaType = {
+export type TJsonSchemaType = {
   jsonSchema: {
     properties?: Record<string, unknown>;
     default?: any;
@@ -13,43 +11,10 @@ export type JSONSchemaType = {
   };
 };
 
-const Properties = ({ jsonSchema }: JSONSchemaType) => {
-  React.useEffect(() => {
-    setIsCodeOpen(false);
-  }, [jsonSchema]);
-  const [is_code_open, setIsCodeOpen] = React.useState(false);
-  let data;
-  try {
-    data = JSON.stringify(jsonSchema.default, null, 2);
-  } catch (_error) {
-    data = '';
-  }
-
-  return (
-    <React.Fragment>
-      <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
-      {is_code_open ? (
-        <BrowserOnly fallback={<div>Loading...</div>}>
-          {() => {
-            const ReactJson = require('react-json-view').default;
-            return <ReactJson src={JSON.parse(data)} theme='tube' />;
-          }}
-        </BrowserOnly>
-      ) : (
-        <RecursiveProperties
-          is_open
-          properties={jsonSchema.properties}
-          value={jsonSchema.properties}
-        />
-      )}
-    </React.Fragment>
-  );
-};
-
-const SchemaBody = ({ jsonSchema }: JSONSchemaType) => {
+const SchemaBody = ({ jsonSchema }: TJsonSchemaType) => {
   return (
     <div className={styles.schemaBody}>
-      <Properties jsonSchema={jsonSchema} />
+      <SchemaProperties jsonSchema={jsonSchema} />
     </div>
   );
 };

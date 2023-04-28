@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
+import React, { useState, useCallback } from 'react';
+import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
@@ -24,7 +24,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   const [response_state, setResponseState] = useState(false);
 
   const parseRequestJSON = () => {
-    let request_data;
+    let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
 
     try {
       request_data = JSON.parse(reqData);

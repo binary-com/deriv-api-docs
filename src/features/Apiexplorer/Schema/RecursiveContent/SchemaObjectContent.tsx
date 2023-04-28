@@ -24,6 +24,7 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
     title,
   } = properties[key_value];
   const value = properties[key_value];
+  console.log(value);
   let data;
   try {
     data = JSON.stringify(value, null, 2);

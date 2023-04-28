@@ -1,7 +1,12 @@
 import React from 'react';
-import { TSocketEndpointNames, TSocketResponseData } from '@site/src/configs/websocket/types';
+import {
+  TSocketEndpointNames,
+  TSocketResponseData,
+  TSocketSubscribableEndpointNames,
+} from '@site/src/configs/websocket/types';
 import { Circles } from 'react-loader-spinner';
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import { getIsBrowser } from '@site/src/utils';
+import ReactJson from 'react-json-view';
 import styles from './PlaygroundSection.module.scss';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
@@ -11,7 +16,7 @@ type TPlaygroundSection<T extends TSocketEndpointNames> = {
   error: unknown;
 };
 
-const PlaygroundSection = <T extends TSocketEndpointNames>({
+const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNames>({
   loader,
   response_state,
   data,
@@ -36,31 +41,14 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {response_state && (
-        <BrowserOnly
-          fallback={
-            <Circles
-              height='100'
-              width='100'
-              color='#d44c0d'
-              ariaLabel='circles-loading'
-              wrapperClass='loading'
-            />
-          }
-        >
-          {() => {
-            const ReactJson = require('react-json-view').default;
-            return (
-              <div data-testid='dt_json_view'>
-                {data !== null ? (
-                  <ReactJson src={data} theme='tube' />
-                ) : (
-                  <ReactJson src={error} theme='tube' />
-                )}
-              </div>
-            );
-          }}
-        </BrowserOnly>
+      {response_state && getIsBrowser() && (
+        <div data-testid='dt_json_view'>
+          {data !== null ? (
+            <ReactJson src={{ data }} theme='tube' />
+          ) : (
+            <ReactJson src={{ error }} theme='tube' />
+          )}
+        </div>
       )}
     </div>
   );

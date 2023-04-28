@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
-import { cleanup, findByTestId, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { act } from 'react-dom/test-utils';
 

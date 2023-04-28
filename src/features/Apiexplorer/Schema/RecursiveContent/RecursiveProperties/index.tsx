@@ -1,6 +1,6 @@
 import React from 'react';
-import SchemaDescription from './SchemaDescription';
-import SchemaObjectContent from './SchemaObjectContent';
+import SchemaDescription from '../SchemaDescription';
+import SchemaObjectContent from '../SchemaObjectContent';
 
 type TRecursiveProperties = {
   is_open: boolean;
