@@ -1,6 +1,6 @@
 ---
 title: Websocket
-hide_title: true
+hide_title: false
 draft: false
 sidebar_label: Websocket
 sidebar_position: 0
@@ -13,6 +13,7 @@ keywords:
   - websockets
 description: What is websocket?
 ---
+
 ## What is WebSocket?
 
 The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as “packets”, without breaking the connection and the need of additional HTTP-requests.
@@ -21,7 +22,8 @@ WebSocket is especially great for services that require continuous data exchange
 
 ## A Simple example
 
-To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss`  in the url:
+To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url:
+
 ```js
 let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
@@ -36,10 +38,10 @@ On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over T
 
 Once the socket is created, we should listen to events on it. There are totally 4 events:
 
-* open – connection established,
-* message – data received,
-* error – websocket error,
-* close – connection closed.
+- open – connection established,
+- message – data received,
+- error – websocket error,
+- close – connection closed.
 
 And if we’d like to send a message then socket.send(data) will do that.
 
@@ -143,5 +145,5 @@ Sec-WebSocket-Accept: rG8wsswmHTJ85lJgAE3M5RTmcCE=
 
 ## References
 
-* ** [Websockets APIs - MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)** 
-* ** [Websocket - Javascript Info](https://javascript.info/websocket)**
+- ** [Websockets APIs - MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)**
+- ** [Websocket - Javascript Info](https://javascript.info/websocket)**
