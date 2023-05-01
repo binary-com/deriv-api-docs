@@ -1,6 +1,6 @@
 ---
 title: API Calls Anatomy
-hide_title: true
+hide_title: false
 draft: false
 sidebar_label: API Calls anatomy
 sidebar_position: 1
@@ -11,6 +11,7 @@ keywords:
   - concept
 description: Deriv API calls Anatomy
 ---
+
 ## Subscribe and Send
 
 All API calls have a send functionality for making a request and receiving a response. Certain API calls also offer a subscribe functionality allowing for updates to be sent to your application when new information becomes available.
@@ -39,14 +40,13 @@ If you want to stop the message Stream created by `subscribe`, you will have to 
 For more information on the `Forget` API call, you can have a look at [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) in the API explorer.
 :::
 
-
 ## Request Data
 
 In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization are some of the things you can use it for.
 
 #### API Call Method Name
 
-Every `request` in the WebSocket API includes a `method name` field that serves as a unique identifier for the request. In most cases, this  `method name` will get a numerical value of `1`. However, there are some cases where the identifier property may have a string value.
+Every `request` in the WebSocket API includes a `method name` field that serves as a unique identifier for the request. In most cases, this `method name` will get a numerical value of `1`. However, there are some cases where the identifier property may have a string value.
 
 :::caution
 API Call Method Name is always required. this field determines the data you'll get from our websocket server.
