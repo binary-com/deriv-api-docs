@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { act, cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { Dropdown, TDropdown } from '../Dropdown';
 import userEvent from '@testing-library/user-event';
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import RecursiveProperties from './RecursiveProperties';
-import SchemaDescription from './SchemaDescription';
-import styles from '../Schema.module.scss';
+import RecursiveProperties from '../RecursiveProperties';
+import SchemaDescription from '../SchemaDescription';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import SourceButton from '../SourceButton/SourceButton';
-import SchemaBodyHeader from './SchemaBodyHeader';
+import SourceButton from '../../SourceButton/SourceButton';
+import SchemaBodyHeader from '../SchemaBodyHeader';
+import styles from '../../Schema.module.scss';
 
 type TSchemaObjectContent = {
   key_value: string;
@@ -24,7 +24,6 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
     title,
   } = properties[key_value];
   const value = properties[key_value];
-  console.log(value);
   let data;
   try {
     data = JSON.stringify(value, null, 2);
