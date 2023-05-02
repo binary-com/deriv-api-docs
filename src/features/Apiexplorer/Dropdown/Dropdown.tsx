@@ -8,14 +8,14 @@ export type TDropdown = {
   selected: string;
   setSelected: (value: string) => void;
   selected_value: string;
-  handleChange: (event: React.MouseEvent<HTMLOptionElement, MouseEvent>, value: string) => void;
+  handleChange: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: string) => void;
 };
 
 type TDropdownList = {
   selected: string;
   setSelected: (value: string) => void;
   selected_value: string;
-  handleChange: (event: React.MouseEvent<HTMLOptionElement, MouseEvent>, value: string) => void;
+  handleChange: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: string) => void;
 
   searchResults: string;
   setIsActive: (value: boolean) => void;
@@ -53,7 +53,7 @@ const DropdownList = ({
             return option.title.toLowerCase().includes(searchResults.toLowerCase()) ? option : null;
           })
           .map((option) => (
-            <option
+            <div
               key={option.name}
               onClick={(e) => {
                 setSelected(option.title);
@@ -66,7 +66,7 @@ const DropdownList = ({
               data-testid={`apiDropdownItems{option.name}`}
             >
               {option.title}
-            </option>
+            </div>
           ))}
       </div>
     </div>
@@ -111,7 +111,7 @@ export const Dropdown = ({ selected, setSelected, handleChange, selected_value }
               searchResults={searchResults}
               setIsActive={setIsActive}
               setSearchResults={setSearchResults}
-            ></DropdownList>
+            />
           </div>
         )}
       </div>
