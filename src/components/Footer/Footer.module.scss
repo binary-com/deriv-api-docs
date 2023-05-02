@@ -11,6 +11,7 @@
   @media screen and (max-width: 992px) {
     flex-direction: column;
     gap: rem(2);
+    padding: rem(4);
   }
 
   .FooterBody {
@@ -23,17 +24,25 @@
       font-size: rem(3.2);
       color: var(--ifm-color-white);
       @media screen and (max-width: 992px) {
-        font-size: rem(2);
+        font-size: rem(2.4);
       }
     }
     .FooterBodyContent {
       color: var(--ifm-color-white);
       font-weight: 400;
+      text-align: center;
       @media screen and (max-width: 992px) {
-        font-size: rem(1.5);
+        font-size: rem(1.6);
       }
     }
 
+    .FooterBodyContentEmail {
+      color: var(--ifm-color-white);
+      font-weight: 400;
+      @media screen and (max-width: 992px) {
+        font-size: rem(1.4);
+      }
+    }
     .Email {
       color: var(--ifm-color-danger);
       padding: 0 rem(0.5);

@@ -3,7 +3,6 @@ import useLoginUrl from '@site/src/hooks/useLoginUrl';
 import useLogout from '@site/src/hooks/useLogout';
 import React, { useEffect, useState } from 'react';
 import UserNavbarDesktopItem from './item.desktop';
-import UserNavbarMobileItem from './item.mobile';
 
 interface IProps {
   mobile?: boolean;
@@ -21,10 +20,10 @@ const UserNavbarItem = ({ mobile }: IProps) => {
     setAuthUrl(url);
   }, [getUrl]);
 
-  return mobile ? (
-    <UserNavbarMobileItem authUrl={authUrl} is_logged_in={is_logged_in} logout={logout} />
-  ) : (
-    <UserNavbarDesktopItem authUrl={authUrl} is_logged_in={is_logged_in} logout={logout} />
+  return (
+    !mobile && (
+      <UserNavbarDesktopItem authUrl={authUrl} is_logged_in={is_logged_in} logout={logout} />
+    )
   );
 };
 
