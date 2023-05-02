@@ -10,6 +10,7 @@ import { useCallback } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { Circles } from 'react-loader-spinner';
 import useSubscription from '@site/src/hooks/useSubscription';
+import useLoginUrl from '@site/src/hooks/useLoginUrl';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
   name: T;
@@ -25,6 +26,15 @@ type TPlaygroundSection<T extends TSocketSubscribableEndpointNames> = {
 };
 
 export const LoginModal = (visible) => {
+  const { getUrl } = useLoginUrl();
+
+  const handleClick = () => {
+    location.assign(getUrl('en'));
+  };
+
+  const handleSignUp = () => {
+    location.assign('https://deriv.com/signup/');
+  };
   if (visible?.visible) {
     return (
       <Modal defaultOpen>
@@ -32,11 +42,19 @@ export const LoginModal = (visible) => {
           <div className='modal-overlay'>
             <Modal.Overlay />
             <Modal.PageContent
-              title={'Authorization Required'}
+              title={'Authorisation required'}
               has_close_button
-              has_title_separator
+              className={style.wrapper}
             >
-              <div className={style.modal}>Please Login to fetch Response</div>
+              <div className={style.modal}>Log in or sign up to continue.</div>
+              <div className={style.buttonWrapper}>
+                <Button color='tertiary' onClick={handleSignUp} className={style.btn}>
+                  Sign up
+                </Button>
+                <Button color='primary' onClick={handleClick} className={style.btn}>
+                  Log in
+                </Button>
+              </div>
             </Modal.PageContent>
           </div>
         </Modal.Portal>
