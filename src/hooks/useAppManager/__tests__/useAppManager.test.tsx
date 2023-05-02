@@ -6,7 +6,6 @@ import AppManagerContextProvider from '@site/src/contexts/app-manager/app-manage
 
 const wrapper = ({ children }) => (
   <AuthProvider>
-    {' '}
     <AppManagerContextProvider>{children}</AppManagerContextProvider>
   </AuthProvider>
 );
