@@ -37,4 +37,33 @@ describe('SchemaObjectContent', () => {
 
     expect(nested_property).not.toBeVisible();
   });
+
+  it('should throw an error if the properties cannot be stringified', async () => {
+    const consoleOutput = [];
+    const mockedError = (output) => consoleOutput.push(output);
+    console.error = mockedError;
+
+    const fake_properties = {
+      test_item: {
+        description: 'test description}}{{',
+        type: 'array',
+        defaultValue: 'default_test',
+        pattern: 'some_test_pattern',
+        examples: ['example1', 'example2'],
+        enum: ['test1', 'test2'],
+        title: 'test title',
+        properties: null,
+      },
+    };
+
+    // creating intentionally a circular dependency,
+    // triggering the try catch error mechanism.
+    fake_properties.test_item.properties = {
+      test_item: fake_properties.test_item,
+    };
+
+    render(<SchemaObjectContent key_value='test_item' properties={fake_properties} />);
+
+    expect(consoleOutput).toEqual(['There was an issue stringifying JSON data: ']);
+  });
 });

@@ -5,6 +5,8 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import SourceButton from '../../SourceButton/SourceButton';
 import SchemaBodyHeader from '../SchemaBodyHeader';
 import styles from '../../Schema.module.scss';
+import ReactJson from 'react-json-view';
+import { getIsBrowser } from '@site/src/utils';
 
 type TSchemaObjectContent = {
   key_value: string;
@@ -27,8 +29,9 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
   let data;
   try {
     data = JSON.stringify(value, null, 2);
-  } catch (_error) {
+  } catch (error) {
     data = '';
+    console.error('There was an issue stringifying JSON data: ', error);
   }
   React.useEffect(() => {
     setIsCodeOpen(false);
@@ -52,14 +55,7 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
       {/* Description */}
       <SchemaDescription description={description} />
       {/* RecursiveProperties */}
-      {is_code_open && (
-        <BrowserOnly fallback={<div>Loading...</div>}>
-          {() => {
-            const ReactJson = require('react-json-view').default;
-            return <ReactJson src={JSON.parse(data)} theme='tube' />;
-          }}
-        </BrowserOnly>
-      )}
+      {is_code_open && getIsBrowser() && <ReactJson src={JSON.parse(data)} theme='tube' />}
       {!is_code_open && (
         <RecursiveProperties
           is_open={is_open_object}
