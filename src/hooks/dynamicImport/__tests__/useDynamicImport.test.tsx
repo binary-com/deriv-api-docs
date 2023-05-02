@@ -30,4 +30,10 @@ describe('useDynamicImportJSON', () => {
     const url = location.hash;
     expect(url).toMatch('active_symbols');
   });
+  it('should have correct text area inputs inside the text box', () => {
+    const { result } = renderHook(() => useDynamicImportJSON());
+    expect(result.current.text_data.request).toMatch(
+      '{\n  "active_symbols": "brief",\n  "product_type": "basic"\n}',
+    );
+  });
 });
