@@ -4,6 +4,7 @@ import { TJsonSchemaType } from '../SchemaBody';
 import { getIsBrowser } from '@site/src/utils';
 import SourceButton from '../SourceButton/SourceButton';
 import RecursiveProperties from '../RecursiveContent/RecursiveProperties';
+import { Circles } from 'react-loader-spinner';
 
 const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   React.useEffect(() => {
@@ -21,8 +22,20 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   return (
     <React.Fragment>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
-      {is_code_open && getIsBrowser() ? (
-        <ReactJson src={JSON.parse(data)} theme='tube' />
+      {is_code_open ? (
+        <React.Fragment>
+          {getIsBrowser() ? (
+            <ReactJson src={JSON.parse(data)} theme='tube' />
+          ) : (
+            <Circles
+              height='100'
+              width='100'
+              color='#d44c0d'
+              ariaLabel='circles-loading'
+              wrapperClass='loading'
+            />
+          )}
+        </React.Fragment>
       ) : (
         <RecursiveProperties
           is_open

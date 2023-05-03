@@ -41,14 +41,30 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {response_state && getIsBrowser() && (
-        <div data-testid='dt_json_view'>
-          {data !== null ? (
-            <ReactJson src={{ data }} theme='tube' />
-          ) : (
-            <ReactJson src={{ error }} theme='tube' />
+      {getIsBrowser() ? (
+        <React.Fragment>
+          {response_state && (
+            <React.Fragment>
+              {() => (
+                <div data-testid='dt_json_view'>
+                  {data !== null ? (
+                    <ReactJson src={{ data }} theme='tube' />
+                  ) : (
+                    <ReactJson src={{ error }} theme='tube' />
+                  )}
+                </div>
+              )}
+            </React.Fragment>
           )}
-        </div>
+        </React.Fragment>
+      ) : (
+        <Circles
+          height='100'
+          width='100'
+          color='#d44c0d'
+          ariaLabel='circles-loading'
+          wrapperClass='loading'
+        />
       )}
     </div>
   );

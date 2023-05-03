@@ -8,19 +8,7 @@ const ApiExplorer = () => {
   return (
     <Layout title={'API Explorer'} description='Deriv API documentation'>
       <main>
-        <BrowserOnly
-          fallback={
-            <Circles
-              height='100'
-              width='100'
-              color='#d44c0d'
-              ariaLabel='circles-loading'
-              wrapperClass='loading'
-            />
-          }
-        >
-          {() => <ApiExplorerFeatures />}
-        </BrowserOnly>
+        <ApiExplorerFeatures />
       </main>
     </Layout>
   );
