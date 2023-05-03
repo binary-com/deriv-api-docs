@@ -1,6 +1,4 @@
-import React from 'react';
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import ReactJson from 'react-json-view';
+import React, { Suspense } from 'react';
 import { TJsonSchemaType } from '../SchemaBody';
 import SourceButton from '../SourceButton/SourceButton';
 import RecursiveProperties from '../RecursiveContent/RecursiveProperties';
@@ -19,24 +17,25 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
     console.error('There was an issue stringifying JSON data: ', error);
   }
 
-  const isBrowser = useIsBrowser();
+  const ReactJson = React.lazy(() => import('react-json-view'));
+  const Loader = () => (
+    <Circles
+      height='100'
+      width='100'
+      color='#d44c0d'
+      ariaLabel='circles-loading'
+      wrapperClass='loading'
+    />
+  );
 
   return (
     <React.Fragment>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
       {is_code_open ? (
         <React.Fragment>
-          {isBrowser ? (
+          <Suspense fallback={<Loader />}>
             <ReactJson src={JSON.parse(data)} theme='tube' />
-          ) : (
-            <Circles
-              height='100'
-              width='100'
-              color='#d44c0d'
-              ariaLabel='circles-loading'
-              wrapperClass='loading'
-            />
-          )}
+          </Suspense>
         </React.Fragment>
       ) : (
         <RecursiveProperties

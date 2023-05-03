@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   TSocketEndpointNames,
   TSocketResponseData,
   TSocketSubscribableEndpointNames,
 } from '@site/src/configs/websocket/types';
 import { Circles } from 'react-loader-spinner';
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import ReactJson from 'react-json-view';
 import styles from './PlaygroundSection.module.scss';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
@@ -22,50 +20,35 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   data,
   error,
 }: TPlaygroundSection<T>) => {
-  const isBrowser = useIsBrowser();
-  if (loader) {
-    return (
-      <div>
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-        />
-      </div>
-    );
-  }
+  const ReactJson = React.lazy(() => import('react-json-view'));
+  const Loader = () => (
+    <Circles
+      height='100'
+      width='100'
+      color='#d44c0d'
+      ariaLabel='circles-loading'
+      wrapperClass='loading'
+    />
+  );
+  if (loader) return <Loader />;
   return (
     <div
       id='playground-console'
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {isBrowser ? (
+      {response_state && (
         <React.Fragment>
-          {response_state && (
-            <React.Fragment>
-              {() => (
-                <div data-testid='dt_json_view'>
-                  {data !== null ? (
-                    <ReactJson src={{ data }} theme='tube' />
-                  ) : (
-                    <ReactJson src={{ error }} theme='tube' />
-                  )}
-                </div>
+          <Suspense fallback={<Loader />}>
+            <div data-testid='dt_json_view'>
+              {data !== null ? (
+                <ReactJson src={{ data }} theme='tube' />
+              ) : (
+                <ReactJson src={{ error }} theme='tube' />
               )}
-            </React.Fragment>
-          )}
+            </div>
+          </Suspense>
         </React.Fragment>
-      ) : (
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-        />
       )}
     </div>
   );
