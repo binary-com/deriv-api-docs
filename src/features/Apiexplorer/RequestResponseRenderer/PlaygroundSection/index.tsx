@@ -5,9 +5,9 @@ import {
   TSocketSubscribableEndpointNames,
 } from '@site/src/configs/websocket/types';
 import { Circles } from 'react-loader-spinner';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import ReactJson from 'react-json-view';
 import styles from './PlaygroundSection.module.scss';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
@@ -22,6 +22,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   data,
   error,
 }: TPlaygroundSection<T>) => {
+  const isBrowser = useIsBrowser();
   if (loader) {
     return (
       <div>
@@ -41,18 +42,30 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {response_state && (
-        <BrowserOnly>
-          {() => (
-            <div data-testid='dt_json_view'>
-              {data !== null ? (
-                <ReactJson src={{ data }} theme='tube' />
-              ) : (
-                <ReactJson src={{ error }} theme='tube' />
+      {isBrowser ? (
+        <React.Fragment>
+          {response_state && (
+            <React.Fragment>
+              {() => (
+                <div data-testid='dt_json_view'>
+                  {data !== null ? (
+                    <ReactJson src={{ data }} theme='tube' />
+                  ) : (
+                    <ReactJson src={{ error }} theme='tube' />
+                  )}
+                </div>
               )}
-            </div>
+            </React.Fragment>
           )}
-        </BrowserOnly>
+        </React.Fragment>
+      ) : (
+        <Circles
+          height='100'
+          width='100'
+          color='#d44c0d'
+          ariaLabel='circles-loading'
+          wrapperClass='loading'
+        />
       )}
     </div>
   );

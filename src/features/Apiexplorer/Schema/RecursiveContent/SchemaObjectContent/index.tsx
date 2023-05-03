@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import RecursiveProperties from '../RecursiveProperties';
 import SchemaDescription from '../SchemaDescription';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import SourceButton from '../../SourceButton/SourceButton';
 import SchemaBodyHeader from '../SchemaBodyHeader';
 import ReactJson from 'react-json-view';
+import { Circles } from 'react-loader-spinner';
 import styles from '../../Schema.module.scss';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 
 type TSchemaObjectContent = {
   key_value: string;
@@ -37,6 +38,8 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
     setIsOpenObject(false);
   }, [properties]);
 
+  const isBrowser = useIsBrowser();
+
   return (
     <div className={styles.schemaBodySignature}>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
@@ -55,13 +58,19 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
       {/* Description */}
       <SchemaDescription description={description} />
       {/* RecursiveProperties */}
-      <BrowserOnly>
-        {() => (
-          <React.Fragment>
-            {is_code_open && <ReactJson src={JSON.parse(data)} theme='tube' />}
-          </React.Fragment>
-        )}
-      </BrowserOnly>
+      {isBrowser ? (
+        <React.Fragment>
+          {is_code_open && <ReactJson src={JSON.parse(data)} theme='tube' />}
+        </React.Fragment>
+      ) : (
+        <Circles
+          height='100'
+          width='100'
+          color='#d44c0d'
+          ariaLabel='circles-loading'
+          wrapperClass='loading'
+        />
+      )}
       {!is_code_open && (
         <RecursiveProperties
           is_open={is_open_object}

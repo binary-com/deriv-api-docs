@@ -1,9 +1,10 @@
 import React from 'react';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import ReactJson from 'react-json-view';
 import { TJsonSchemaType } from '../SchemaBody';
 import SourceButton from '../SourceButton/SourceButton';
 import RecursiveProperties from '../RecursiveContent/RecursiveProperties';
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import { Circles } from 'react-loader-spinner';
 
 const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   React.useEffect(() => {
@@ -18,11 +19,25 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
     console.error('There was an issue stringifying JSON data: ', error);
   }
 
+  const isBrowser = useIsBrowser();
+
   return (
     <React.Fragment>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
       {is_code_open ? (
-        <BrowserOnly>{() => <ReactJson src={JSON.parse(data)} theme='tube' />}</BrowserOnly>
+        <React.Fragment>
+          {isBrowser ? (
+            <ReactJson src={JSON.parse(data)} theme='tube' />
+          ) : (
+            <Circles
+              height='100'
+              width='100'
+              color='#d44c0d'
+              ariaLabel='circles-loading'
+              wrapperClass='loading'
+            />
+          )}
+        </React.Fragment>
       ) : (
         <RecursiveProperties
           is_open
