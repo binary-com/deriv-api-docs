@@ -22,9 +22,9 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --text-profit-success: #4bb4b3;
-  --demo-account: #377CFC;
+  --demo-account: #377cfc;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --nav-height: 60px;
+  --nav-height: 72px;
   --ifm-menu-color: #414652;
   --ifm-menu-link-sublist-icon-2: url(/img/arrow_sidebar.svg);
   --ifm-menu-link-padding-vertical: 9px;
@@ -33,7 +33,6 @@
   --schema-array: #ff8fc8;
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
-
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -86,7 +85,7 @@ h6 {
 }
 
 .error-message {
-  color: var(--colors-coral600) !important;
+  color: var(--colors-coral500) !important;
 }
 
 /* reset */
@@ -95,9 +94,9 @@ button {
 }
 
 a {
-  color: var(--colors-coral600);
+  color: var(--colors-coral500);
   &:hover {
-    color: var(--colors-coral600);
+    color: var(--colors-coral500);
   }
 }
 
@@ -151,7 +150,7 @@ div[class*='sidebarViewport'] {
   > div {
     z-index: 1000;
   }
-  div[role="dialog"] {
+  div[role='dialog'] {
     z-index: 1001;
   }
 }
@@ -167,15 +166,19 @@ div[class*='sidebarViewport'] {
 }
 
 .navbar {
-  padding: 0 rem(1.5);
+  padding: 0 5%;
   height: var(--nav-height);
+  line-height: rem(2);
+  @media (max-width: 996px) {
+    padding: 0 rem(1.5);
+  }
   &__inner .navbar__items:first-child a {
     font-weight: normal;
   }
   &__link {
     &--active,
     &:hover {
-      color: var(--colors-coral600);
+      color: var(--colors-coral500);
       text-decoration: none;
     }
   }
@@ -195,6 +198,9 @@ div[class*='sidebarViewport'] {
 
 .navbar__items--right {
   gap: rem(1);
+  a {
+    font-weight: 700;
+  }
 }
 
 main[class*='docMainContainer'] .container {
@@ -205,7 +211,7 @@ main[class*='docMainContainer'] .container {
   }
 }
 
-.menu__list {
+.theme-doc-sidebar-container .theme-doc-sidebar-menu {
   margin-top: rem(9);
 }
 
@@ -230,7 +236,7 @@ main[class*='docMainContainer'] .container {
 
 .menu__link--active,
 .menu__link--active:hover {
-  color: var(--colors-coral600);
+  color: var(--colors-coral500);
 }
 
 .menu__caret {
@@ -255,7 +261,7 @@ main[class*='docMainContainer'] .container {
   .navbar__logo {
     width: rem(7.4);
   }
-  
+
   .navbar__toggle {
     width: rem(1.2);
   }

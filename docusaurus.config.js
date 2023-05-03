@@ -71,6 +71,10 @@ const config = {
           },
           { to: 'https://tech.deriv.com/', label: 'Blog', position: 'left' },
           {
+            type: 'custom-navbar-separator',
+            position: 'right',
+          },
+          {
             type: 'custom-api-token-navbar-item',
             position: 'right',
           },

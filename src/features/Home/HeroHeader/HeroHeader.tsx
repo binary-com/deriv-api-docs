@@ -21,7 +21,7 @@ export const HeroHeader = () => {
         </Text>
         <a href='/docs/intro'>
           <Button type='button' className={styles.HeroButton}>
-            Get started
+            Read the docs
           </Button>
         </a>
       </div>

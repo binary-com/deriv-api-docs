@@ -13,7 +13,7 @@
 
   .ApiFeaturesImage {
     display: inline-block;
-    width: rem(60);
+    width: rem(70);
   }
 
   .FeatureText {
@@ -22,25 +22,33 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: rem(2);
 
     header {
       display: flex;
       flex-direction: column;
       gap: rem(2);
+      @media screen and (max-width: 992px) {
+        > h2 {
+          text-align: center;
+        }
+      }
     }
 
     @media (min-width: 425px) {
       margin-left: rem(4);
     }
     .FeatureParagraph {
-      font-weight: 500;
+      font-weight: 400;
       line-height: rem(3);
     }
     .FeatureList {
       margin-left: rem(-2);
-      font-weight: 500;
-
+      font-weight: 400;
+      padding-left: rem(2);
+      @media screen and (max-width: 992px) {
+        font-size: rem(1.4);
+      }
+      
       .FeatureOptions {
         align-items: center;
         list-style-type: none;

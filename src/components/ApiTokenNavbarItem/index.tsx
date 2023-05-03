@@ -13,7 +13,8 @@ const ApiTokenNavbarItem = () => {
   const [is_toggle_dropdown, setToggleDropdown] = useState(false);
   const { updateCurrentTab, currentTab, is_dashboard } = useAppManager();
   const toggle_dropdown = is_toggle_dropdown ? styles.active : '';
-  const one_token = tokens.length <= 1 ? styles.oneToken : '';
+  const has_one_token =
+    tokens.length <= 1 && is_dashboard && currentTab === 'MANAGE_TOKENS' ? styles.oneToken : '';
 
   const dropdownRef = useRef(null);
   useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
@@ -45,23 +46,25 @@ const ApiTokenNavbarItem = () => {
     <div ref={dropdownRef} className={styles.tokenDropdownContainer}>
       {currentToken ? (
         <button
-          className={`${styles.tokenDropdownButton} ${toggle_dropdown} ${one_token}`}
+          className={`${styles.tokenDropdownButton} ${toggle_dropdown} ${has_one_token}`}
           type='button'
           onClick={() => {
             setToggleDropdown((prev) => !prev);
           }}
         >
-          {currentToken.display_name}
+          <span>{currentToken.display_name}</span>
         </button>
       ) : (
         <CreateToken />
       )}
 
-      {is_toggle_dropdown && tokens.length > 1 && (
+      {is_toggle_dropdown && (
         <div className={styles.tokenDropdownWrapper}>
-          <div className={styles.tokenDropdown}>
-            <TokenDropdown />
-          </div>
+          {tokens.length > 1 && (
+            <div className={styles.tokenDropdown}>
+              <TokenDropdown />
+            </div>
+          )}
           <CreateToken />
         </div>
       )}
