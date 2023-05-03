@@ -1,5 +1,4 @@
 import apiManager from '@site/src/configs/websocket';
-import { getIsBrowser } from '@site/src/utils';
 import { useCallback } from 'react';
 import useAuthContext from '../useAuthContext';
 
