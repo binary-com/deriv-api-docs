@@ -5,7 +5,7 @@ import {
   TSocketSubscribableEndpointNames,
 } from '@site/src/configs/websocket/types';
 import { Circles } from 'react-loader-spinner';
-import { getIsBrowser } from '@site/src/utils';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import ReactJson from 'react-json-view';
 import styles from './PlaygroundSection.module.scss';
 
@@ -22,6 +22,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   data,
   error,
 }: TPlaygroundSection<T>) => {
+  const isBrowser = useIsBrowser();
   if (loader) {
     return (
       <div>
@@ -41,7 +42,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
     >
-      {getIsBrowser() ? (
+      {isBrowser ? (
         <React.Fragment>
           {response_state && (
             <React.Fragment>
