@@ -15,7 +15,7 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
     data = JSON.stringify(jsonSchema.default, null, 2);
   } catch (error) {
     data = '';
-    console.error(error);
+    console.error('There was an issue stringifying JSON data: ', error);
   }
 
   return (

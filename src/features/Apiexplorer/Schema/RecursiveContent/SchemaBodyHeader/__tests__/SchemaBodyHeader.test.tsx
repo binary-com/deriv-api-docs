@@ -147,24 +147,4 @@ describe('SchemaBodyHeader', () => {
     const type = await screen.findByText(/integer/i);
     expect(type).toBeVisible();
   });
-
-  // it('should render the SchemaBodyHeader with integer array type', async () => {
-  //     render(
-  //         <SchemaBodyHeader
-  //             key_value='test_key_value'
-  //             type={'array'}
-  //             defaultValue="default_test"
-  //             pattern="some_test_pattern"
-  //             examples={['example1', 'example2']}
-  //             enum={['test1', 'test2']}
-  //             title='test title'
-  //             is_open_object
-  //             setIsOpenObject={() => jest.fn()}
-  //         />
-  //     )
-  //     const nested_value = await screen.findByRole('button', { name: /test_key_value/i });
-  //     expect(nested_value).toBeVisible();
-
-  //     await userEvent.click(nested_value);
-  // })
 });

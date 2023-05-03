@@ -38,7 +38,7 @@ describe('SchemaObjectContent', () => {
     expect(nested_property).not.toBeVisible();
   });
 
-  it('should throw an error if the properties cannot be stringified', async () => {
+  it('should throw an error if the properties cannot be stringified', () => {
     const consoleOutput = [];
     const mockedError = (output) => consoleOutput.push(output);
     console.error = mockedError;

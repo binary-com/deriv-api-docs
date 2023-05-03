@@ -55,14 +55,20 @@ describe('Dropdown', () => {
   });
 
   it('should close the dropdown when clicking outside of the element', async () => {
-    render(<Dropdown {...mockProps} />);
+    render(
+      <div>
+        <button>testButton</button>
+        <Dropdown {...mockProps} />
+      </div>,
+    );
     const select = await screen.findByText(/Select API Call/i);
     await userEvent.click(select);
 
     const option_list = await screen.findByText(/active symbols/i);
     expect(option_list).toBeVisible();
 
-    await userEvent.click(document.body);
+    const outside_element = await screen.findByRole('button', { name: /testButton/i });
+    await userEvent.click(outside_element);
     expect(option_list).not.toBeVisible();
   });
 
