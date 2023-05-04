@@ -13,10 +13,15 @@ jest.mock('@docusaurus/router', () => ({
   }),
 }));
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 jest.mock('@site/src/hooks/useAuthContext');
 
 describe('useDynamicImportJSON', () => {
   const { result } = renderHook(() => useDynamicImportJSON());
+
   it('should populate text data with the correct values', () => {
     act(() => {
       expect(result.current.text_data).toEqual({
@@ -26,10 +31,37 @@ describe('useDynamicImportJSON', () => {
       });
     });
   });
+
   it('should have the correct hash value in the URL on selection of an api call', () => {
     const location = require('@docusaurus/router').useLocation();
     const url = location.hash;
     expect(url).toMatch('active_symbols');
+  });
+
+  it('should check for change in hash value and update text data accordingly', () => {
+    act(() => {
+      jest.mock('@docusaurus/router', () => ({
+        useLocation: () => ({
+          pathname: '/api-explorer#website_status',
+          hash: '#website_status',
+        }),
+        useHistory: () => ({
+          push: jest.fn(),
+        }),
+      }));
+      const mockEvent = {
+        currentTarget: {
+          value: 'active_symbols',
+        },
+        preventDefault: jest.fn(),
+      };
+      result.current.handleSelectChange(mockEvent, 'active_symbols');
+    });
+    expect(result.current.text_data).toEqual({
+      request: '{\n  "active_symbols": "brief",\n  "product_type": "basic"\n}',
+      selected_value: 'Active Symbols',
+      name: 'active_symbols',
+    });
   });
 
   it('should have correct text area inputs inside dynamic imports correctly', () => {
