@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { TJsonSchemaType } from '../SchemaBody';
 import SourceButton from '../SourceButton/SourceButton';
 import RecursiveProperties from '../RecursiveContent/RecursiveProperties';
-import { Circles } from 'react-loader-spinner';
+import Loader from '@site/src/components/Loader';
 
 const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   React.useEffect(() => {
@@ -18,22 +18,13 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   }
 
   const ReactJson = React.lazy(() => import('react-json-view'));
-  const Loader = () => (
-    <Circles
-      height='100'
-      width='100'
-      color='#d44c0d'
-      ariaLabel='circles-loading'
-      wrapperClass='loading'
-    />
-  );
 
   return (
     <React.Fragment>
       <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
       {is_code_open ? (
         <React.Fragment>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<div style={{ color: 'white' }}>Loading...</div>}>
             <ReactJson src={JSON.parse(data)} theme='tube' />
           </Suspense>
         </React.Fragment>

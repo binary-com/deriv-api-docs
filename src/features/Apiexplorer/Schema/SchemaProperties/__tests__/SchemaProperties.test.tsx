@@ -1,6 +1,7 @@
 import React from 'react';
 import SchemaProperties from '..';
-import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('SchemaProperties', () => {
   it('should throw an error when invalid JSON properties are passed', async () => {
@@ -23,5 +24,24 @@ describe('SchemaProperties', () => {
     render(<SchemaProperties jsonSchema={fake_properties} />);
 
     expect(consoleOutput).toEqual(['There was an issue stringifying JSON data: ']);
+  });
+
+  it('should open the schema when pressing the source button', async () => {
+    const fake_properties = {
+      info: 'test',
+      default: null,
+      properties: null,
+    };
+
+    render(<SchemaProperties jsonSchema={fake_properties} />);
+
+    const schema_button = await screen.findByText('{}');
+
+    expect(schema_button).toBeVisible();
+
+    await userEvent.click(schema_button);
+
+    const schema = await screen.findByTitle('JSON');
+    expect(schema).toBeVisible();
   });
 });

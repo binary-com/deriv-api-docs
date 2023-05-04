@@ -29,9 +29,18 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     }
   }, [error]);
 
+  let json_data;
+  try {
+    json_data = JSON.parse(reqData);
+    console.log(json_data);
+  } catch (error) {
+    json_data = '';
+    console.error('something went wrong when parsing the json data: ', error);
+  }
+
   const handleClick = useCallback(() => {
     unsubscribe();
-    subscribe(JSON.parse(reqData));
+    subscribe(json_data);
     setResponseState(true);
   }, [reqData, subscribe, unsubscribe]);
 

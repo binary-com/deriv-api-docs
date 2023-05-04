@@ -4,7 +4,7 @@ import {
   TSocketResponseData,
   TSocketSubscribableEndpointNames,
 } from '@site/src/configs/websocket/types';
-import { Circles } from 'react-loader-spinner';
+import Loader from '@site/src/components/Loader';
 import styles from './PlaygroundSection.module.scss';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
@@ -21,16 +21,9 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   error,
 }: TPlaygroundSection<T>) => {
   const ReactJson = React.lazy(() => import('react-json-view'));
-  const Loader = () => (
-    <Circles
-      height='100'
-      width='100'
-      color='#d44c0d'
-      ariaLabel='circles-loading'
-      wrapperClass='loading'
-    />
-  );
+
   if (loader) return <Loader />;
+
   return (
     <div
       id='playground-console'

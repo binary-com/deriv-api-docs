@@ -45,7 +45,7 @@ describe('SchemaObjectContent', () => {
 
     const fake_properties = {
       test_item: {
-        description: 'test description}}{{',
+        description: 'test description',
         type: 'array',
         defaultValue: 'default_test',
         pattern: 'some_test_pattern',
@@ -65,5 +65,35 @@ describe('SchemaObjectContent', () => {
     render(<SchemaObjectContent key_value='test_item' properties={fake_properties} />);
 
     expect(consoleOutput).toEqual(['There was an issue stringifying JSON data: ']);
+  });
+
+  it('should throw an error if the properties cannot be stringified', async () => {
+    const consoleOutput = [];
+    const mockedError = (output) => consoleOutput.push(output);
+    console.error = mockedError;
+
+    const fake_properties = {
+      test_item: {
+        description: 'test description',
+        type: 'array',
+        defaultValue: 'default_test',
+        pattern: 'some_test_pattern',
+        examples: ['example1', 'example2'],
+        enum: ['test1', 'test2'],
+        title: 'test title',
+        properties: null,
+      },
+    };
+
+    render(<SchemaObjectContent key_value='test_item' properties={fake_properties} />);
+
+    const schema_button = await screen.findByText('{}');
+
+    expect(schema_button).toBeVisible();
+
+    await userEvent.click(schema_button);
+
+    const schema = await screen.findByTitle('JSON');
+    expect(schema).toBeVisible();
   });
 });
