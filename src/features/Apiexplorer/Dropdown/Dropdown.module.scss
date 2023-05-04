@@ -66,6 +66,7 @@
 
     .dropdownSelected {
       background: var(--ifm-color-gray-400);
+      pointer-events: none;
     }
 
     .dropdownList {
