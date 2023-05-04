@@ -32,7 +32,6 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   let json_data;
   try {
     json_data = JSON.parse(reqData);
-    console.log(json_data);
   } catch (error) {
     json_data = '';
     console.error('something went wrong when parsing the json data: ', error);
