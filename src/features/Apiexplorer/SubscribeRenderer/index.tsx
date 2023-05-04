@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  TSocketResponseData,
+  TSocketResponse,
   TSocketSubscribableEndpointNames,
 } from '@site/src/configs/websocket/types';
 import { Button, Modal } from '@deriv/ui';
@@ -21,7 +21,7 @@ export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNam
 type TPlaygroundSection<T extends TSocketSubscribableEndpointNames> = {
   loader: boolean;
   responseState: boolean;
-  data: TSocketResponseData<T>;
+  full_response: TSocketResponse<T>;
   error: unknown;
 };
 
@@ -67,7 +67,7 @@ export const LoginModal = (visible) => {
 const PlaygroundSection = <T extends TSocketSubscribableEndpointNames>({
   loader,
   responseState,
-  data,
+  full_response,
   error,
 }: TPlaygroundSection<T>) => {
   if (loader) {
@@ -105,8 +105,8 @@ const PlaygroundSection = <T extends TSocketSubscribableEndpointNames>({
             const ReactJson = require('react-json-view').default;
             return (
               <div>
-                {data !== null ? (
-                  <ReactJson src={data} theme='tube' />
+                {full_response !== null ? (
+                  <ReactJson src={full_response} theme='tube' />
                 ) : (
                   <ReactJson src={error} theme='tube' />
                 )}
@@ -125,7 +125,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   auth,
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
-  const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [responseState, setResponseState] = useState(false);
 
   const handleClick = useCallback(() => {
@@ -155,7 +155,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           responseState={responseState}
-          data={data}
+          full_response={full_response}
           error={error}
         />
       )}

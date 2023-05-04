@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TSocketEndpointNames, TSocketResponseData } from '@site/src/configs/websocket/types';
+import { TSocketEndpointNames, TSocketResponse } from '@site/src/configs/websocket/types';
 import useWS from '@site/src/hooks/useWs';
 import { Button, Modal } from '@deriv/ui';
 import style from '../RequestJSONBox/RequestJSONBox.module.scss';
@@ -17,7 +17,7 @@ export interface IResponseRendererProps<T extends TSocketEndpointNames> {
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
   responseState: boolean;
-  data: TSocketResponseData<T>;
+  full_response: TSocketResponse<T>;
   error: unknown;
 };
 
@@ -63,7 +63,7 @@ export const LoginModal = (visible) => {
 const PlaygroundSection = <T extends TSocketEndpointNames>({
   loader,
   responseState,
-  data,
+  full_response,
   error,
 }: TPlaygroundSection<T>) => {
   if (loader) {
@@ -101,8 +101,8 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
             const ReactJson = require('react-json-view').default;
             return (
               <div>
-                {data !== null ? (
-                  <ReactJson src={data} theme='tube' />
+                {full_response !== null ? (
+                  <ReactJson src={full_response} theme='tube' />
                 ) : (
                   <ReactJson src={error} theme='tube' />
                 )}
@@ -121,7 +121,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   auth,
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
-  const { data, is_loading, send, clear, error } = useWS<T>(name);
+  const { full_response, is_loading, send, clear, error } = useWS<T>(name);
   const [responseState, setResponseState] = useState(false);
 
   const handleClick = useCallback(() => {
@@ -151,7 +151,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           responseState={responseState}
-          data={data}
+          full_response={full_response}
           error={error}
         />
       )}
