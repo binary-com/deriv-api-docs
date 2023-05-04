@@ -1,0 +1,8 @@
+@use 'src/styles/utility' as *;
+
+.btnWrapper {
+    display: flex;
+    justify-content: center;
+    gap: rem(0.5);
+    padding: rem(2);
+}
