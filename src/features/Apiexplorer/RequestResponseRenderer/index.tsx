@@ -19,6 +19,7 @@ type TPlaygroundSection<T extends TSocketEndpointNames> = {
   responseState: boolean;
   full_response: TSocketResponse<T>;
   error: unknown;
+  name: string;
 };
 
 export const LoginModal = (visible) => {
@@ -65,6 +66,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
   responseState,
   full_response,
   error,
+  name,
 }: TPlaygroundSection<T>) => {
   if (loader) {
     return (
@@ -98,11 +100,22 @@ const PlaygroundSection = <T extends TSocketEndpointNames>({
           }
         >
           {() => {
+            const key = full_response['msg_type'] ?? name;
             const ReactJson = require('react-json-view').default;
+            const echo_req_json = {
+              echo_req: full_response['echo_req'],
+              msg_type: full_response['msg_type'],
+              req_id: full_response['req_id'],
+            };
+            const main_object_json = { [key]: full_response[key] };
+
             return (
               <div>
                 {full_response !== null ? (
-                  <ReactJson src={full_response} theme='tube' />
+                  <div className={style.reactJsonContainer}>
+                    <ReactJson src={echo_req_json} theme='tube' />
+                    <ReactJson src={main_object_json} theme='tube' />
+                  </div>
                 ) : (
                   <ReactJson src={error} theme='tube' />
                 )}
@@ -153,6 +166,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           responseState={responseState}
           full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>
