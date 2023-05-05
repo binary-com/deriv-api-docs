@@ -7,6 +7,8 @@ import {
 import Loader from '@site/src/components/Loader';
 import styles from './PlaygroundSection.module.scss';
 
+const ReactJson = React.lazy(() => import('react-json-view'));
+
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
   response_state: boolean;
@@ -20,8 +22,6 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   data,
   error,
 }: TPlaygroundSection<T>) => {
-  const ReactJson = React.lazy(() => import('react-json-view'));
-
   if (loader) return <Loader />;
 
   return (

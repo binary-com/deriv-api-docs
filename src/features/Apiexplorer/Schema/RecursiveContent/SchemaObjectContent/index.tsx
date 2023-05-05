@@ -5,6 +5,8 @@ import SourceButton from '../../SourceButton/SourceButton';
 import SchemaBodyHeader from '../SchemaBodyHeader';
 import styles from '../../Schema.module.scss';
 
+const ReactJson = React.lazy(() => import('react-json-view'));
+
 type TSchemaObjectContent = {
   key_value: string;
   properties: any;
@@ -34,8 +36,6 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
     setIsCodeOpen(false);
     setIsOpenObject(false);
   }, [properties]);
-
-  const ReactJson = React.lazy(() => import('react-json-view'));
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

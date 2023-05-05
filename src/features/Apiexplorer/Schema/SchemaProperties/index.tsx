@@ -2,7 +2,8 @@ import React, { Suspense } from 'react';
 import { TJsonSchemaType } from '../SchemaBody';
 import SourceButton from '../SourceButton/SourceButton';
 import RecursiveProperties from '../RecursiveContent/RecursiveProperties';
-import Loader from '@site/src/components/Loader';
+
+const ReactJson = React.lazy(() => import('react-json-view'));
 
 const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
   React.useEffect(() => {
@@ -16,8 +17,6 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
     data = '';
     console.error('There was an issue stringifying JSON data: ', error);
   }
-
-  const ReactJson = React.lazy(() => import('react-json-view'));
 
   return (
     <React.Fragment>
