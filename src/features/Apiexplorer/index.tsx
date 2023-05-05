@@ -4,7 +4,7 @@ import { Dropdown } from './Dropdown/Dropdown';
 import styles from './styles.module.scss';
 import SchemaWrapper from './Schema/SchemaWrapper';
 import RequestJSONBox from './RequestJSONBox';
-import useDynamicImportJSON from '@site/src/hooks/dynamicImport';
+import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 
 export default function ApiExplorerFeatures() {
   const {
@@ -16,6 +16,7 @@ export default function ApiExplorerFeatures() {
     response_info,
     handleTextAreaInput,
   } = useDynamicImportJSON();
+
   const has_info = Object.keys(request_info).length === 0;
   return (
     <div className={styles.playgroundContent}>
@@ -37,7 +38,7 @@ export default function ApiExplorerFeatures() {
                   request_example={text_data.request}
                   handleChange={handleTextAreaInput}
                   name={text_data.name}
-                  auth_required={request_info.auth_required}
+                  auth={request_info.auth_required}
                 />
               </div>
             </div>
