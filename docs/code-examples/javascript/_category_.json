@@ -1,0 +1,8 @@
+{
+  "label": "Javascript Examples",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "A collection of javascript code examples for the Deriv API"
+  }
+}
