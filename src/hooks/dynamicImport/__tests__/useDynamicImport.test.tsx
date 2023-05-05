@@ -13,14 +13,14 @@ jest.mock('@docusaurus/router', () => ({
   }),
 }));
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 jest.mock('@site/src/hooks/useAuthContext');
 
 describe('useDynamicImportJSON', () => {
   const { result } = renderHook(() => useDynamicImportJSON());
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should populate text data with the correct values', () => {
     act(() => {
@@ -42,8 +42,8 @@ describe('useDynamicImportJSON', () => {
     act(() => {
       jest.mock('@docusaurus/router', () => ({
         useLocation: () => ({
-          pathname: '/api-explorer#website_status',
-          hash: '#website_status',
+          pathname: '/api-explorer#active_symbols',
+          hash: '#active_symbol',
         }),
         useHistory: () => ({
           push: jest.fn(),
