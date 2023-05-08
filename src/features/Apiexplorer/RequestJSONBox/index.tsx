@@ -10,14 +10,14 @@ interface TRequestJSONBox<T extends TSocketEndpointNames> {
   handleChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   request_example: string;
   name: T;
-  auth_required: number;
+  auth: number;
 }
 
 function RequestJSONBox<T extends TSocketEndpointNames>({
   handleChange,
   request_example,
   name,
-  auth_required,
+  auth,
 }: TRequestJSONBox<T>) {
   const is_subscribe = useMemo(() => {
     return request_example?.includes('subscribe');
@@ -40,10 +40,10 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
           <SubscribeRenderer
             name={name as TSocketSubscribableEndpointNames}
             reqData={request_example}
-            auth={auth_required}
+            auth={auth}
           />
         ) : (
-          <RequestResponseRenderer name={name} reqData={request_example} auth={auth_required} />
+          <RequestResponseRenderer name={name} reqData={request_example} auth={auth} />
         )}
       </div>
     </div>
