@@ -2,8 +2,10 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import ApiExplorerFeatures from '..';
 import userEvent from '@testing-library/user-event';
+import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import { render, screen } from '@testing-library/react';
+import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
+import { cleanup, render, screen } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { act } from 'react-dom/test-utils';
 
@@ -21,40 +23,157 @@ jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
 
+mockUseAuthContext.mockImplementation(() => {
+  return {
+    is_logged_in: false,
+  };
+});
+
+jest.mock('@site/src/hooks/useWs');
+
+const mockuseWS = useWS as jest.MockedFunction<() => Partial<ReturnType<typeof useWS>>>;
+
+const mockClear = jest.fn();
+
+mockuseWS.mockImplementation(() => ({
+  clear: mockClear,
+  send: jest.fn(),
+}));
+
+jest.mock('@site/src/hooks/useDynamicImportJSON');
+
+const mockUseDynamicImportJSON = useDynamicImportJSON as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useDynamicImportJSON>>
+>;
+
+mockUseDynamicImportJSON.mockImplementation(() => ({
+  request_info: {
+    auth_required: 1,
+    auth_scopes: [],
+    description: 'this is a test with `echo_req` description',
+    title: 'this is a test title',
+  },
+  response_info: {
+    description: 'this is a test with `echo_req` description',
+    title: 'this is a test title',
+  },
+  setSelected: jest.fn(),
+  handleSelectChange: jest.fn(),
+  text_data: {
+    name: null,
+    selected_value: 'Select API Call - Version 3',
+    request: '',
+  },
+}));
+
 describe('ApiExplorerFeatures', () => {
-  beforeEach(() => {
-    mockUseAuthContext.mockImplementation(() => {
-      return {
-        is_logged_in: true,
-      };
-    });
-    render(<ApiExplorerFeatures />);
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
   });
+
   it('should render the title', () => {
+    render(<ApiExplorerFeatures />);
+
     const title = screen.getByRole('heading', { name: /API Explorer/i });
     expect(title).toBeInTheDocument();
   });
 
-  it('should render the dropdown', () => {
-    const dropdown = screen.getByTestId('dropdown');
-    expect(dropdown).toBeInTheDocument();
+  it('should be able to select from dropdown', async () => {
+    render(<ApiExplorerFeatures />);
+
+    const playground_select = await screen.findByText(/select api call/i);
+    await userEvent.click(playground_select);
+
+    const select_option = await screen.findByText(/active symbols/i);
+    await userEvent.click(select_option);
+
+    expect(select_option).not.toBeVisible();
   });
 
-  it('should render the textarea', () => {
-    const textarea = screen.getByPlaceholderText('Request JSON');
-    expect(textarea).toBeInTheDocument();
+  it('should close the dropdown when clicking outside of it', async () => {
+    render(<ApiExplorerFeatures />);
+
+    const playground_select = await screen.findByText(/select api call/i);
+    await userEvent.click(playground_select);
+
+    const select_option = await screen.findByText(/active symbols/i);
+    expect(select_option).toBeVisible();
+
+    const page_title = await screen.findByText(/api explorer/i);
+    await userEvent.click(page_title);
+
+    expect(select_option).not.toBeVisible();
   });
 
-  it('should render schemawrapper', () => {
-    act(async () => {
-      const playground_select = await screen.findByText(/select api call/i);
-      await userEvent.click(playground_select);
+  it('should render LoginDialog and it can be closed', async () => {
+    render(<ApiExplorerFeatures />);
 
-      const select_option = await screen.findByText(/active symbols/i);
-      await userEvent.click(select_option);
+    const playground_select = await screen.findByText(/select api call/i);
+    await userEvent.click(playground_select);
 
-      const schemawrapper = screen.getByTestId('playgroundDocs');
-      expect(schemawrapper).toBeInTheDocument();
+    const select_option = await screen.findByText(/application: get details/i);
+    expect(select_option).toBeVisible();
+
+    await userEvent.click(select_option);
+
+    const send_request = await screen.findByText(/send request/i);
+    await userEvent.click(send_request);
+
+    const dialog = await screen.findByRole('dialog');
+    expect(dialog).toBeVisible();
+
+    const close_button = await screen.findByTestId('close-button');
+
+    await userEvent.click(close_button);
+    expect(dialog).not.toBeVisible();
+  });
+
+  it('should render the RequestResponseRenderer and can clear it', async () => {
+    mockUseDynamicImportJSON.mockImplementation(() => ({
+      request_info: {
+        auth_required: 0,
+        auth_scopes: [],
+        description: 'this is a test with `echo_req` description',
+        title: 'this is a test title',
+      },
+      response_info: {
+        description: 'this is a test with `echo_req` description',
+        title: 'this is a test title',
+      },
+      setSelected: jest.fn(),
+      handleSelectChange: jest.fn(),
+      text_data: {
+        name: null,
+        selected_value: 'Select API Call - Version 3',
+        request: '',
+      },
+    }));
+
+    render(<ApiExplorerFeatures />);
+
+    const playground_select = await screen.findByText(/select api call/i);
+    await userEvent.click(playground_select);
+
+    const select_option = await screen.findByText(/active symbols/i);
+    expect(select_option).toBeVisible();
+
+    await userEvent.click(select_option);
+
+    await act(async () => {
+      const send_request = await screen.findByRole('button', { name: /send request/i });
+      expect(send_request).toBeVisible();
+      await userEvent.click(send_request);
     });
+
+    const playground_console = await screen.findByTestId('dt_playground_section');
+
+    expect(playground_console).toBeVisible();
+
+    const clear_request = await screen.findByRole('button', { name: /clear/i });
+    await userEvent.click(clear_request);
+
+    // Once during the send request and once during the clear request
+    expect(mockClear).toHaveBeenCalledTimes(2);
   });
 });

@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from '../Schema.module.scss';
+import styles from '../../Schema.module.scss';
 import clsx from 'clsx';
 
 type TSchemaBodyHeader = {
   key_value: string;
-  type: string;
+  type: string | string[];
   defaultValue: string;
   pattern: string;
   title: string;

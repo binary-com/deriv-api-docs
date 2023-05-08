@@ -41,9 +41,11 @@ describe('HeroHeader', () => {
     expect(help_text).toBeInTheDocument();
   });
 
-  it('should render support section properly', () => {
-    const support_text = screen.getByText(/^Email us at/i);
+  it('should render support section properly', async () => {
+    const support_text = await screen.findByText(/^Email us at/i);
     expect(support_text).toHaveTextContent(/Email us at api-support@deriv.com/i);
-    expect(support_text).toHaveTextContent(/if you have any questions./i);
+
+    const question_text = await screen.findByText(/^if you have any questions./i);
+    expect(question_text).toBeVisible();
   });
 });
