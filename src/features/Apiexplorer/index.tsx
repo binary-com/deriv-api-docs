@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import SchemaWrapper from './Schema/SchemaWrapper';
 import RequestJSONBox from './RequestJSONBox';
 import useDynamicImportJSON from '@site/src/hooks/dynamicImport';
+import Footer from '@site/src/components/Footer';
 
 export default function ApiExplorerFeatures() {
   const {
@@ -19,44 +20,49 @@ export default function ApiExplorerFeatures() {
   const has_info = Object.keys(request_info).length === 0;
   return (
     <div className={styles.playgroundContent}>
-      <Text type='heading-2' as='h1' className={styles.heading}>
-        API Explorer
-      </Text>
-      <div className={styles.pageWrapper}>
-        <div className={styles.playground}>
-          <div className={styles.playgroundPageWrapper}>
-            <div className={styles.playgroundApiJson}>
-              <Dropdown
-                selected_value={text_data.selected_value}
-                handleChange={handleSelectChange}
-                selected={selected}
-                setSelected={setSelected}
-              ></Dropdown>
-              <div>
-                <RequestJSONBox
-                  request_example={text_data.request}
-                  handleChange={handleTextAreaInput}
-                  name={text_data.name}
-                  auth_required={request_info.auth_required}
-                />
+      <div>
+        <Text type='heading-2' as='h1' className={styles.heading}>
+          API Explorer
+        </Text>
+        <div className={styles.pageWrapper}>
+          <div className={styles.playground}>
+            <div className={styles.playgroundPageWrapper}>
+              <div className={styles.playgroundApiJson}>
+                <Dropdown
+                  selected_value={text_data.selected_value}
+                  handleChange={handleSelectChange}
+                  selected={selected}
+                  setSelected={setSelected}
+                ></Dropdown>
+                <div>
+                  <RequestJSONBox
+                    request_example={text_data.request}
+                    handleChange={handleTextAreaInput}
+                    name={text_data.name}
+                    auth_required={request_info.auth_required}
+                  />
+                </div>
               </div>
+              {!has_info && (
+                <div
+                  id='playground'
+                  data-testid='playgroundDocs'
+                  className={styles.playgroundApiDocs}
+                >
+                  <div className={styles.schemaContainer}>
+                    <SchemaWrapper info={request_info} />
+                  </div>
+                  <div className={styles.schemaContainer}>
+                    <SchemaWrapper info={response_info} />
+                  </div>
+                </div>
+              )}
             </div>
-            {!has_info && (
-              <div
-                id='playground'
-                data-testid='playgroundDocs'
-                className={styles.playgroundApiDocs}
-              >
-                <div className={styles.schemaContainer}>
-                  <SchemaWrapper info={request_info} />
-                </div>
-                <div className={styles.schemaContainer}>
-                  <SchemaWrapper info={response_info} />
-                </div>
-              </div>
-            )}
           </div>
         </div>
+      </div>
+      <div className={styles.footer}>
+        <Footer />
       </div>
     </div>
   );
