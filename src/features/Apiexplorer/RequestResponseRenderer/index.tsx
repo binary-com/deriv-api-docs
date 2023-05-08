@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
@@ -18,7 +18,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
-  const { is_logged_in } = useAuthContext();
+  const { is_logged_in, is_authorized } = useAuthContext();
   const { data, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
@@ -34,6 +34,11 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
 
     return request_data;
   };
+
+  const buttonIsDisabled = useMemo(() => {
+    if (auth === 0 || !is_logged_in || is_authorized) return false;
+    return true;
+  }, [is_authorized, auth, is_logged_in]);
 
   const handleClick = useCallback(() => {
     if (auth === 1) setToggleModal(true);
@@ -51,7 +56,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   return (
     <div>
       <div className={styles.btnWrapper}>
-        <Button color='primary' onClick={handleClick}>
+        <Button color='primary' disabled={buttonIsDisabled} onClick={handleClick}>
           Send Request
         </Button>
         <Button color='secondary' onClick={handleClear}>
