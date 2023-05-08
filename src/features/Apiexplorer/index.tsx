@@ -40,7 +40,7 @@ export default function ApiExplorerFeatures() {
                     request_example={text_data.request}
                     handleChange={handleTextAreaInput}
                     name={text_data.name}
-                    auth_required={request_info.auth_required}
+                    auth={request_info.auth_required}
                   />
                 </div>
               </div>
