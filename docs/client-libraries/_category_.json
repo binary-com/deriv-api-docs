@@ -4,5 +4,6 @@
   "link": {
     "type": "generated-index",
     "description": "Learn how to use Deriv websocket API features with our Client libraries"
-  }
+  },
+  "className": "hidden"
 }
