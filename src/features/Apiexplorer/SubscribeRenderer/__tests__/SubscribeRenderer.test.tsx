@@ -55,6 +55,10 @@ mockUseSubscription.mockImplementation(() => ({
   subscribe: mockSubscribe,
   unsubscribe: mockUnsubscribe,
   error: 'random error',
+  full_response: {
+    tick: 1,
+    echo_req: { tick: 1 },
+  },
 }));
 
 const request_data = `{

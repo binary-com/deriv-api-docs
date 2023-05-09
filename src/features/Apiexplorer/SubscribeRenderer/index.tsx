@@ -21,7 +21,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
 
@@ -66,8 +66,9 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           response_state={response_state}
-          data={data}
+          full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>
