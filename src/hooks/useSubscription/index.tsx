@@ -18,7 +18,7 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
     (response: TSocketResponse<T>) => {
       const key = response['msg_type'] ?? name;
       setData(response[key] as TSocketResponseData<T>);
-      setFullResponse(full_response);
+      setFullResponse(response);
       setIsLoading(false);
     },
     [name],

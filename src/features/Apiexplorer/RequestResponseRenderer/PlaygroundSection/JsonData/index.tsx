@@ -19,8 +19,16 @@ const JsonData = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNa
   name,
   error,
 }: TJsonData<T>) => {
-  const getResponse = useCallback((key: string) => full_response[key], [full_response]);
-  const key = getResponse('msg_type') ?? name;
+  const getResponse = useCallback(
+    (key: string) => {
+      const response = full_response;
+      const selected_key = response[key] ?? name;
+      if (response !== null) return selected_key;
+    },
+    [full_response],
+  );
+
+  const key = getResponse('msg_type');
   const echo_req_json = {
     echo_req: getResponse('echo_req'),
     msg_type: getResponse('msg_type'),

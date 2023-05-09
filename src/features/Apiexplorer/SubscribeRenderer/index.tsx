@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { TSocketSubscribableEndpointNames } from '@site/src/configs/websocket/types';
+import {
+  TSocketSubscribableEndpointNames,
+  TSocketRequestProps,
+} from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
@@ -31,17 +34,21 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     }
   }, [error]);
 
-  let json_data;
-  try {
-    json_data = JSON.parse(reqData);
-  } catch (error) {
-    json_data = '';
-    console.error('something went wrong when parsing the json data: ', error);
-  }
+  const parseRequestJSON = () => {
+    let json_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
+
+    try {
+      json_data = JSON.parse(reqData);
+    } catch (error) {
+      console.error('Could not parse the JSON data while trying to send the request: ', error);
+    }
+
+    return json_data;
+  };
 
   const handleClick = useCallback(() => {
     unsubscribe();
-    subscribe(json_data);
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [reqData, subscribe, unsubscribe]);
 
