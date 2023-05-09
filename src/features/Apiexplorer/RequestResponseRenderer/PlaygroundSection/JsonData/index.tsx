@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from './JsonData.module.scss';
 import {
   TSocketResponseData,
@@ -19,14 +19,11 @@ const JsonData = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNa
   name,
   error,
 }: TJsonData<T>) => {
-  const getResponse = useCallback(
-    (key: string) => {
-      const response = full_response;
-      const selected_key = response[key] ?? name;
-      if (response !== null) return selected_key;
-    },
-    [full_response],
-  );
+  const getResponse = (key: string) => {
+    const response = full_response;
+    const selected_key = response[key] ?? name;
+    if (response !== null) return selected_key;
+  };
 
   const key = getResponse('msg_type');
   const echo_req_json = {
