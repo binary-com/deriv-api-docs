@@ -1,6 +1,6 @@
 ---
-title: Setting up a Deriv Application
-sidebar_label: Setting up a Deriv Application
+title: Setting up a Deriv application
+sidebar_label: Setting up a Deriv application
 sidebar_position: 7
 tags:
   - intro
@@ -8,74 +8,62 @@ tags:
 keywords:
   - intro
   - application_setup
-description: How to setup Deriv Application
+description: How to setup Deriv application
 ---
 :::danger
 For the reviewer, Links in this section will be provided in the future.
 :::
 
-#### Deriv Account
+#### Deriv account
 
-If you don't have a deriv account already you can visit the Sign Up page and create one, it's completely free. and if you already have an account please login with your account. for testing purposes and to prevent accidental money loss, make sure you're using your demo account not the real one for now.
+If you don't have a Deriv account yet, you can easily create one by visiting our signup page or by using the [new_account_virtual](/apiexplorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
+
+To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using [new_account_real](/apiexplorer#new_account_real) or [new_account_maltainvest](/apiexplorer#new_account_maltainvest) API calls.
 
 :::caution
-To create Deriv Applications you need an API Token with **admin** scope in the account you want to create your application with
+To create Deriv applications, you'll need an API token with the Admin scope for the account you wish to use for your application.
 :::
 
-## How to create Deriv API Token
+## How to create a Deriv API token
 
+To create your API token, simply go to the Dashboard and select the **Manage Tokens** tab. From there, create a new token that matches the access level needed for your application's features.
 
-
-Please visit our Dashboard to create your API token, in the **Manage Tokens** tab create your token with the appropriate access level required by your application features.
-
-**API Token Scopes:**
-
-| API Token Scope     | Description                                                                                                                               |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Read                | This scope will allow third-party apps to view your account activity, settings, limits, balance sheets, trade purchase history, and more. |
-| Trade               | This scope will allow third-party apps to buy and sell contracts for you, renew your expired purchases, and top up your demo accounts.    |
-| Payments            | This scope will allow third-party apps to withdraw to payment agents and make inter-account transfers for you.                            |
-| Trading Information | This scope will allow third-party apps to view your trading history.                                                                      |
-| Admin               | This scope will allow third-party apps to open accounts for you, manage your settings and token usage, and more.                          |
-
-![](/img/token_api.png)
-
-To create a new API Token, follow these steps:
+To create a new API token, follow these steps:
 
 1. Select the scopes you need.
-2. Provide a name for you token
+2. Provide a name for your token
 3. Click **Create**
 
+Alternatively, you can create an API token via the [api_token](/apiexplorer#api_token) API call.
+
 :::caution
-You need a token with `admin` scope to create application.
+You need a token with the `Admin` scope to create an application.
 :::
 
-## How to create Deriv Application
+## How to create a Deriv application
 
+To create your application with the appropriate configuration options, select the **Register Application** tab in the Dashboard. You can make changes to your application's configuration at anytime in the **Manage Applications** tab.
 
-
-In Dashboard select **Register application** tab and create you application with appropriate options, you can change these config in tab **Manage applications** as well.
-
-| App Information Field | Description                                                                               |
+| App information field | Description                                                                               |
 | --------------------- | ----------------------------------------------------------------------------------------- |
 | Account               | The account you want to create the application with                                       |
 | API Token             | The API token you want to create the application with                                     |
-| App Name              | Application Name                                                                          |
-| Markup                | You can earn commission by adding a markup to the price of each trade                     |
-| Authorization URL     | This allows clients to log in to your app using their Deriv accounts without an API token |
-| Verification URL      | This URL will be used as the OAuth redirect URL for the OAuth authorization.              |
+| App Name              | Application name |
+| Markup                | The commission added to the trade price to earn additional income |
+| Authorisation URL     | The URL that enables clients to log in to your app using their |
+| Verification URL      | The OAuth redirect URL for the OAuth authorisation |
 
-**To create an application follow these steps:**
+**To create an application, follow these steps:**
 
 1. Select the account you want to create the application with.
-2. Select the API token added to your account ( it must have \`admin\` scope )
-3. Provide a name for your application
+2. Select the API token added to your account ( it must have the \`Admin\` scope ).
+3. Provide a name for your application.
 4. Fill the **Markup** and **OAuth details** fields.
-5. Select the **Authorization Scopes** needed by your application
-6. Click **Click Register Application**
+5. Select the **Authorisation Scopes** needed by your application.
+6. Click **Register Application**.
 
-Make sure the **Authorization** and **Verification** URLs are correct based on your implementation.
+Make sure the **Authorisation** and **Verification** URLs are correct based on your implementation.
 
-For example, if your domain is **`https://example.com`** and your **Authorization and Authentication is being handled by** `verfiy`, your URLs will be:
+For example, if your domain is **`https://example.com`** and your **authorisation and authentication are handled by** `verfiy`, your URLs will be:
 
 **`https://example.com/verify`**
