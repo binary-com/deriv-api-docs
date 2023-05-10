@@ -22,7 +22,7 @@ Our Documentation is divided in several sections:
 - [Languages](category/languages)
 <!-- - [Client Libraries](category/client-libraries) -->
 - [Guides](category/guides)
-- [FAQ](category/faq)
+<!-- - [FAQ](category/faq) -->
 
 ### Quick Start
 
