@@ -1,26 +1,5 @@
 @use 'src/styles/utility' as *;
 
-.schemaRole {
-  font-size: rem(1.4);
-  line-height: rem(1.4);
-  color: var(--ifm-color-success-light);
-  border: none;
-  margin: rem(0.8) rem(0.8) 0 0;
-  padding: rem(0.6) rem(0.8);
-  border-radius: 4px;
-  background-color: rgba(0, 255, 104, 0.16);
-}
-
-.schemaCode {
-  color: var(--ifm-color-white);
-  font-size: rem(1.4);
-}
-
-.schemaSubText {
-  line-height: rem(1.5);
-  font-size: rem(1.6);
-}
-
 .schemaHeader {
   padding: rem(2.4);
   border-top-left-radius: 6px;
@@ -214,18 +193,6 @@
       &.objectOpen {
         margin-bottom: rem(1);
       }
-    }
-
-    .schemaRole {
-      background-color: rgba(255, 255, 255, 0.16);
-      border: none;
-      font-size: rem(1.4);
-      font-weight: 400;
-      line-height: rem(2.4);
-      color: var(--ifm-color-white);
-      height: fit-content;
-      padding: rem(0.5) rem(0.5);
-      margin: 0 rem(0.5);
     }
   }
 

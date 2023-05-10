@@ -29,7 +29,9 @@ const Footer = () => {
           <a className={styles.Email} href={'mailto:api-support@deriv.com'}>
             api-support@deriv.com
           </a>
-          <p>if you have any questions.</p>
+        </Text>
+        <Text type='paragraph-1' align='center' className={styles.FooterBodyContentEmail}>
+          if you have any questions.
         </Text>
       </section>
     </footer>
