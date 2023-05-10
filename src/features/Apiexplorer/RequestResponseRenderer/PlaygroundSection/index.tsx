@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import {
   TSocketEndpointNames,
-  TSocketResponseData,
   TSocketSubscribableEndpointNames,
+  TSocketResponse,
 } from '@site/src/configs/websocket/types';
 import JsonData from './JsonData';
 import Loader from '@site/src/components/Loader';
@@ -11,7 +11,7 @@ import styles from './PlaygroundSection.module.scss';
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
   response_state: boolean;
-  full_response: TSocketResponseData<T>;
+  full_response: TSocketResponse<T>;
   error: unknown;
   name: string;
 };
