@@ -12,8 +12,6 @@ const AppRegistration = () => {
   const { is_loading, send: registerApp, error, clear, data } = useWS('app_register');
   const { currentLoginAccount } = useAuthContext();
 
-  console.log(currentLoginAccount);
-
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
