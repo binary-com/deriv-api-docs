@@ -6,6 +6,7 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 import PlaygroundSection from './PlaygroundSection';
 import LoginDialog from '../LoginDialog';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
+import { ValidDialog } from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketEndpointNames> {
   name: T;
@@ -22,6 +23,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   const { data, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
+  const [is_valid, setIsValid] = useState(false);
 
   const parseRequestJSON = () => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -40,6 +42,12 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
     clear();
     send(parseRequestJSON());
     setResponseState(true);
+    if (error) {
+      setToggleModal(true);
+      setIsValid(true);
+    }
+
+    console.log(is_valid);
   }, [reqData, send, clear, auth]);
 
   const handleClear = () => {
@@ -58,7 +66,9 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && toggle_modal ? (
+      {is_valid ? (
+        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
+      ) : !is_logged_in && toggle_modal ? (
         <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection
