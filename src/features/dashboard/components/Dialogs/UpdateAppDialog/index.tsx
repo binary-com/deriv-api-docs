@@ -8,6 +8,7 @@ import { ApplicationObject } from '@deriv/api-types';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
 import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import styles from './update-app-dialog.module.scss';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 
 interface IUpdateAppDialog {
   app: ApplicationObject;
@@ -16,6 +17,7 @@ interface IUpdateAppDialog {
 
 const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const { send: updateApp, is_loading, data, error, clear } = useWS('app_update');
+  const { currentLoginAccount } = useAuthContext();
   const { getApps } = useAppManager();
 
   const scopes = scopesArrayToObject(app.scopes);
@@ -44,8 +46,13 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
+      const is_demo_account = currentLoginAccount.name.includes('VRTC');
+
       const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
       const has_verification_uri = verification_uri !== '' && { verification_uri };
+      const can_have_markup = !is_demo_account && {
+        app_markup_percentage: Number(app_markup_percentage),
+      };
 
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
@@ -59,7 +66,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
         name,
         ...has_redirect_uri,
         ...has_verification_uri,
-        app_markup_percentage: Number(app_markup_percentage),
+        ...can_have_markup,
         scopes: selectedScopes,
       });
     },
