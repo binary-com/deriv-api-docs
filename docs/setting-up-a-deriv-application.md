@@ -4,10 +4,12 @@ sidebar_label: Setting up a Deriv application
 sidebar_position: 7
 tags:
   - intro
-  - application_setup
+  - application
+  - setup
 keywords:
   - intro
-  - application_setup
+  - application
+  - setup
 description: How to setup Deriv application
 ---
 :::danger
