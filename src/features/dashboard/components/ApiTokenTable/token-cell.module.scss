@@ -18,8 +18,8 @@
     gap: rem(1);
     button {
         position: relative;
-        width: rem(1.5);
-        height: rem(1.5);
+        min-width: rem(1.5);
+        min-height: rem(1.5);
         background-repeat: no-repeat;
         background-position: center;
         background-color: var(--colors-greyLight200);

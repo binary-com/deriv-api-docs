@@ -4,6 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import SubscribeRenderer from '..';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
+import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
@@ -12,6 +13,33 @@ const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<I
 
 mockUseAuthContext.mockImplementation(() => ({
   is_logged_in: true,
+  is_authorized: true,
+}));
+
+jest.mock('@site/src/hooks/useDynamicImportJSON');
+
+const mockUseDynamicImportJSON = useDynamicImportJSON as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useDynamicImportJSON>>
+>;
+
+mockUseDynamicImportJSON.mockImplementation(() => ({
+  request_info: {
+    auth_required: 1,
+    auth_scopes: [],
+    description: 'this is a test with `echo_req` description',
+    title: 'this is a test title',
+  },
+  response_info: {
+    description: 'this is a test with `echo_req` description',
+    title: 'this is a test title',
+  },
+  setSelected: jest.fn(),
+  handleSelectChange: jest.fn(),
+  text_data: {
+    name: null,
+    selected_value: 'Select API Call - Version 3',
+    request: '',
+  },
 }));
 
 jest.mock('@site/src/hooks/useSubscription');

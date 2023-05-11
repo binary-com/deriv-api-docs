@@ -80,6 +80,11 @@ fieldset .customTextInput:last-child {
         }
       }
     }
+    .scopes {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: rem(2.5);
+    }
     .disableTokenDropdown {
       opacity: 0.2;
       pointer-events: none;
@@ -105,7 +110,7 @@ fieldset .customTextInput:last-child {
   }
 }
 .submit_container {
-  margin: rem(1) 0;
+  margin-top: rem(2.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,7 +139,6 @@ fieldset .customTextInput:last-child {
 .customCheckboxWrapper {
   display: flex;
   gap: rem(1);
-  margin: rem(1) 0;
 
   label {
     cursor: pointer;

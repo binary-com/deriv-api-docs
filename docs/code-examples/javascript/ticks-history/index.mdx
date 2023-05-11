@@ -1,0 +1,28 @@
+---
+title: Ticks History
+draft: false
+sidebar_label: Ticks History
+sidebar_position: 2
+tags:
+  - code
+  - example
+  - ticks
+  - history
+keywords:
+  - code
+  - example
+  - ticks
+  - history
+description: Ticks History code example
+---
+
+import SandboxIframe from '@site/src/components/SandboxIframe';
+import { sandboxes } from '@site/src/components/SandboxIframe/utility/sandboxes';
+
+With ticks history you are able to get a collection of past tick times and prices.
+
+<SandboxIframe sandbox={sandboxes.ticks_history} />
+
+We subscribe to the ticks functionality from the Deriv API websocket to keep track of current and past ticks.
+
+As an example you could create an interactive tick graph.
