@@ -26,7 +26,7 @@ const mockUnsubscribe = jest.fn();
 mockUseSubscription.mockImplementation(() => ({
   subscribe: mockSubscribe,
   unsubscribe: mockUnsubscribe,
-  error: 'random error',
+  error: '',
 }));
 
 const request_data = `{
@@ -68,13 +68,17 @@ describe('SubscribeRenderer', () => {
     expect(mockUnsubscribe).toBeCalledTimes(1);
   });
 
-  it('should throw an error if incorrect json is being parsed', () => {
+  it('should throw an error if incorrect json is being parsed', async () => {
     const consoleOutput = [];
     const mockedError = (output) => consoleOutput.push(output);
     console.error = mockedError;
 
     render(<SubscribeRenderer name='ticks' auth={1} reqData={'asdawefaewf3232'} />);
+    const button = await screen.findByRole('button', { name: /Send Request/i });
+    await userEvent.click(button);
 
-    expect(consoleOutput[0]).toEqual('something went wrong when parsing the json data: ');
+    expect(consoleOutput[0]).toEqual(
+      'Could not parse the JSON data while trying to send the request: ',
+    );
   });
 });

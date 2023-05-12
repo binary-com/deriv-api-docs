@@ -11,7 +11,7 @@ export const ValidDialog = ({ setIsValid, setToggleModal }: TVoginDialog) => {
   const onOpenChange = useCallback(
     (open: boolean) => {
       if (!open) {
-        setIsValid(true);
+        setIsValid(false);
         setToggleModal(false);
       }
     },
@@ -22,8 +22,15 @@ export const ValidDialog = ({ setIsValid, setToggleModal }: TVoginDialog) => {
       <Modal.Portal>
         <div className='modal-overlay'>
           <Modal.Overlay />
-          <Modal.PageContent title={'Invalid JSON'} has_close_button className={styles.wrapper}>
-            <div className={styles.modal}>Incorrect Syntax</div>
+          <Modal.PageContent
+            title={'Invalid JSON'}
+            has_close_button
+            className={styles.validwrapper}
+          >
+            <div className={styles.validmodal}>
+              Your JSON object is invalid. Please make sure you provide the correct syntax for your
+              JSON object.
+            </div>
           </Modal.PageContent>
         </div>
       </Modal.Portal>

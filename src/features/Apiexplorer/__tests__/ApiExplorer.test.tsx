@@ -62,7 +62,7 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
   text_data: {
     name: null,
     selected_value: 'Select API Call - Version 3',
-    request: '',
+    request: ' { "echo_req": 1 } ',
   },
 }));
 
@@ -144,18 +144,18 @@ describe('ApiExplorerFeatures', () => {
       setSelected: jest.fn(),
       handleSelectChange: jest.fn(),
       text_data: {
-        name: null,
-        selected_value: 'Select API Call - Version 3',
-        request: '',
+        request: '{\n  "active_symbols": "brief",\n  "product_type": "basic"\n}',
+        selected_value: 'Active Symbols',
+        name: 'active_symbols',
       },
     }));
 
     render(<ApiExplorerFeatures />);
 
-    const playground_select = await screen.findByText(/select api call/i);
+    const playground_select = await screen.findByText(/active symbols/i);
     await userEvent.click(playground_select);
 
-    const select_option = await screen.findByText(/active symbols/i);
+    const select_option = await screen.findByText(/api token/i);
     expect(select_option).toBeVisible();
 
     await userEvent.click(select_option);

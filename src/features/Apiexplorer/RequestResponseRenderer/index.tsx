@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
@@ -32,6 +32,9 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
       request_data = JSON.parse(reqData);
     } catch (error) {
       console.error('Could not parse the JSON data while trying to send the request: ', error);
+      console.log(error);
+      setIsValid(true);
+      setToggleModal(false);
     }
 
     return request_data;
@@ -42,12 +45,6 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
     clear();
     send(parseRequestJSON());
     setResponseState(true);
-    if (error) {
-      setToggleModal(true);
-      setIsValid(true);
-    }
-
-    console.log(is_valid);
   }, [reqData, send, clear, auth]);
 
   const handleClear = () => {
@@ -66,17 +63,19 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {is_valid ? (
-        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
-      ) : !is_logged_in && toggle_modal ? (
-        <LoginDialog setToggleModal={setToggleModal} />
+      {!is_valid ? (
+        !is_logged_in && toggle_modal ? (
+          <LoginDialog setToggleModal={setToggleModal} />
+        ) : (
+          <PlaygroundSection
+            loader={is_loading}
+            response_state={response_state}
+            data={data}
+            error={error}
+          />
+        )
       ) : (
-        <PlaygroundSection
-          loader={is_loading}
-          response_state={response_state}
-          data={data}
-          error={error}
-        />
+        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
       )}
     </div>
   );

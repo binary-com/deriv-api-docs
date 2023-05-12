@@ -1,11 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { TSocketSubscribableEndpointNames } from '@site/src/configs/websocket/types';
+import {
+  TSocketRequestProps,
+  TSocketSubscribableEndpointNames,
+} from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
 import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
+import ValidDialog from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
   name: T;
@@ -22,24 +26,26 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
+  const [is_valid, setIsValid] = useState(false);
 
-  useEffect(() => {
-    if (error) {
-      setToggleModal(true);
+  const parseRequestJSON = () => {
+    let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
+
+    try {
+      request_data = JSON.parse(reqData);
+    } catch (error) {
+      console.error('Could not parse the JSON data while trying to send the request: ', error);
+      console.log(error);
+      setIsValid(true);
+      setToggleModal(false);
     }
-  }, [error]);
 
-  let json_data;
-  try {
-    json_data = JSON.parse(reqData);
-  } catch (error) {
-    json_data = '';
-    console.error('something went wrong when parsing the json data: ', error);
-  }
+    return request_data;
+  };
 
   const handleClick = useCallback(() => {
     unsubscribe();
-    subscribe(json_data);
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [reqData, subscribe, unsubscribe]);
 
@@ -58,7 +64,9 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && auth == 1 && toggle_modal ? (
+      {is_valid ? (
+        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
+      ) : !is_logged_in && auth == 1 && toggle_modal ? (
         <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection
