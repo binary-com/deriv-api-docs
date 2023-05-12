@@ -8,6 +8,7 @@ import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { cleanup, render, screen } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { act } from 'react-dom/test-utils';
+import RequestResponseRenderer from '../RequestResponseRenderer';
 
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
@@ -175,5 +176,19 @@ describe('ApiExplorerFeatures', () => {
 
     // Once during the send request and once during the clear request
     expect(mockClear).toHaveBeenCalledTimes(2);
+  });
+
+  it('should throw an error if incorrect json is being parsed', async () => {
+    const consoleOutput = [];
+    const mockedError = (output) => consoleOutput.push(output);
+    console.error = mockedError;
+
+    render(<RequestResponseRenderer name='ticks' auth={1} reqData={'asdawefaewf3232'} />);
+    const button = await screen.findByRole('button', { name: /Send Request/i });
+    await userEvent.click(button);
+
+    expect(consoleOutput[0]).toEqual(
+      'Could not parse the JSON data while trying to send the request: ',
+    );
   });
 });

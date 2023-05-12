@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 import { Modal } from '@deriv/ui';
 import styles from '../LoginDialog/LoginDialog.module.scss';
 
-type TVoginDialog = {
+type TValidDialog = {
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ValidDialog = ({ setIsValid, setToggleModal }: TVoginDialog) => {
+export const ValidDialog = ({ setIsValid, setToggleModal }: TValidDialog) => {
   const onOpenChange = useCallback(
     (open: boolean) => {
       if (!open) {
@@ -15,7 +15,7 @@ export const ValidDialog = ({ setIsValid, setToggleModal }: TVoginDialog) => {
         setToggleModal(false);
       }
     },
-    [setIsValid],
+    [setIsValid, setToggleModal],
   );
   return (
     <Modal defaultOpen onOpenChange={onOpenChange}>
