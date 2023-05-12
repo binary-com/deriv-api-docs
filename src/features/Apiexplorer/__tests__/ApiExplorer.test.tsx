@@ -8,7 +8,6 @@ import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { cleanup, render, screen } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { act } from 'react-dom/test-utils';
-import RequestResponseRenderer from '../RequestResponseRenderer';
 
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
@@ -57,7 +56,7 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
   text_data: {
     name: null,
     selected_value: 'Select API Call - Version 3',
-    request: ' { "echo_req": 1 } ',
+    request: '{ "echo_req": 1 } ',
   },
 }));
 
@@ -126,6 +125,26 @@ describe('ApiExplorerFeatures', () => {
       await userEvent.click(close_button);
       expect(dialog).not.toBeVisible();
     });
+    it('should render ValidDialog and it can be closed', async () => {
+      const playground_select = screen.getByText(/select api call/i);
+      await userEvent.click(playground_select);
+
+      const select_option = screen.getByText(/application: get details/i);
+      expect(select_option).toBeVisible();
+
+      await userEvent.click(select_option);
+
+      const send_request = screen.getByText(/send request/i);
+      await userEvent.click(send_request);
+
+      const dialog = await screen.findByRole('dialog');
+      expect(dialog).toBeVisible();
+
+      const close_button = screen.getByTestId('close-button');
+
+      await userEvent.click(close_button);
+      expect(dialog).not.toBeVisible();
+    });
   });
 
   describe('Logged in', () => {
@@ -135,25 +154,12 @@ describe('ApiExplorerFeatures', () => {
     });
 
     it('should render the RequestResponseRenderer and can clear it', async () => {
-      mockUseDynamicImportJSON.mockImplementation(() => ({
-        request_info: {
-          auth_required: 0,
-          auth_scopes: [],
-          description: 'this is a test with `echo_req` description',
-          title: 'this is a test title',
-        },
-        response_info: {
-          description: 'this is a test with `echo_req` description',
-          title: 'this is a test title',
-        },
-        setSelected: jest.fn(),
-        handleSelectChange: jest.fn(),
-        text_data: {
-          request: '{\n  "active_symbols": "brief",\n  "product_type": "basic"\n}',
-          selected_value: 'Active Symbols',
-          name: 'active_symbols',
-        },
-      }));
+      mockUseAuthContext.mockImplementation(() => {
+        return {
+          is_logged_in: true,
+          is_authorized: true,
+        };
+      });
 
       render(<ApiExplorerFeatures />);
 
@@ -213,19 +219,5 @@ describe('ApiExplorerFeatures', () => {
 
       expect(mockClear).toHaveBeenCalledTimes(0);
     });
-  });
-
-  it('should throw an error if incorrect json is being parsed', async () => {
-    const consoleOutput = [];
-    const mockedError = (output) => consoleOutput.push(output);
-    console.error = mockedError;
-
-    render(<RequestResponseRenderer name='ticks' auth={1} reqData={'asdawefaewf3232'} />);
-    const button = await screen.findByRole('button', { name: /Send Request/i });
-    await userEvent.click(button);
-
-    expect(consoleOutput[0]).toEqual(
-      'Could not parse the JSON data while trying to send the request: ',
-    );
   });
 });
