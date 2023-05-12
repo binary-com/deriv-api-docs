@@ -31,10 +31,10 @@ describe('Login', () => {
     expect(login).toBeInTheDocument();
   });
   it('should render title properly', () => {
-    const login_text = screen.getByRole('heading');
-    expect(login_text).toHaveTextContent(
-      /Log in to your Deriv account to get the API token and start using our API./i,
-    );
+    const login_text = screen.getByRole('heading', {
+      name: /Log in to your Deriv account to get the API token and start using our API./i,
+    });
+    expect(login_text).toBeInTheDocument();
   });
   it('should render image properly', () => {
     const login_img = screen.getByRole('image');

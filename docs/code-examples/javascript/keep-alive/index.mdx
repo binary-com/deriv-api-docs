@@ -1,0 +1,24 @@
+---
+title: Keep Alive
+draft: false
+sidebar_label: Keep Alive
+sidebar_position: 7
+tags:
+  - code
+  - example
+  - keep
+  - alive
+keywords:
+  - code
+  - example
+  - keep
+  - alive
+description: Keep Alive code example
+---
+
+import SandboxIframe from '@site/src/components/SandboxIframe';
+import { sandboxes } from '@site/src/components/SandboxIframe/utility/sandboxes';
+
+In this example you'll see how to keep a connection alive when getting contract proposals via the Deriv API. This example keeps the connection alive by sending a ping every 30 seconds.
+
+<SandboxIframe sandbox={sandboxes.keep_alive} />

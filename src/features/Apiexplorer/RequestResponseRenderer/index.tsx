@@ -3,6 +3,7 @@ import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/web
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import PlaygroundSection from './PlaygroundSection';
 import LoginDialog from '../LoginDialog';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
@@ -20,6 +21,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   auth,
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
+  const { disableSendRequest } = useDisableSendRequest();
   const { data, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
@@ -56,7 +58,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   return (
     <div>
       <div className={styles.btnWrapper}>
-        <Button color='primary' onClick={handleClick}>
+        <Button color='primary' disabled={disableSendRequest(auth)} onClick={handleClick}>
           Send Request
         </Button>
         <Button color='secondary' onClick={handleClear}>

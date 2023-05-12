@@ -7,6 +7,7 @@ import { Button } from '@deriv/ui';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
+import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
 import ValidDialog from '../ValidDialog';
@@ -23,6 +24,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   auth,
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
+  const { disableSendRequest } = useDisableSendRequest();
   const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
@@ -57,7 +59,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   return (
     <div>
       <div className={styles.btnWrapper}>
-        <Button color='primary' onClick={handleClick}>
+        <Button color='primary' disabled={disableSendRequest(auth)} onClick={handleClick}>
           Send Request
         </Button>
         <Button color='secondary' onClick={handleClear}>
