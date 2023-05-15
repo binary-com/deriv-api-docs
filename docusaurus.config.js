@@ -65,7 +65,7 @@ const config = {
           },
           { to: 'dashboard', label: 'Dashboard', position: 'left' },
           {
-            to: 'apiexplorer',
+            to: 'api-explorer',
             position: 'left',
             label: 'API Explorer',
           },
