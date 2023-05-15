@@ -103,7 +103,6 @@ commands:
           command: |
             npm i wrangler@2.0.19
             cd build
-            # npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=main
             echo "New website - http://cf-pages-deriv-developers-portal.deriv.com"
 
 jobs:
