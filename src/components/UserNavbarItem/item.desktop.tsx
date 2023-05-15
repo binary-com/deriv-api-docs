@@ -21,10 +21,10 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
     <AccountSwitcher />
   ) : (
     <React.Fragment>
-      <Link to={authUrl} className={logInButtonClasses} target='_self'>
+      <Link to={authUrl} className={logInButtonClasses} target='_blank'>
         Log in
       </Link>
-      <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses} target='_self'>
+      <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses} target='_blank'>
         Sign up
       </Link>
     </React.Fragment>

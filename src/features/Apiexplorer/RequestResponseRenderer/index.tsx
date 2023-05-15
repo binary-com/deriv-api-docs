@@ -3,9 +3,9 @@ import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/web
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import PlaygroundSection from './PlaygroundSection';
 import LoginDialog from '../LoginDialog';
-import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 
 export interface IResponseRendererProps<T extends TSocketEndpointNames> {

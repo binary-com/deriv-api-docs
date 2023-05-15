@@ -13,15 +13,17 @@ keywords:
   - websockets
 description: What is websocket?
 ---
+
 ## What is WebSocket?
 
 The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as “packets”, without breaking the connection and the need of additional HTTP-requests.
 
-WebSocket is especially great for services that require continuous data exchange, e.g. online games, real-time trading systems and so on.
+WebSocket is especially great for services that require continuous data exchange, e.g. real-time trading systems and so on.
 
 ## A Simple example
 
-To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss`  in the url:
+To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url:
+
 ```js
 let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
@@ -36,10 +38,10 @@ On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over T
 
 Once the socket is created, we should listen to events on it. There are totally 4 events:
 
-* open – connection established,
-* message – data received,
-* error – websocket error,
-* close – connection closed.
+- open – connection established,
+- message – data received,
+- error – websocket error,
+- close – connection closed.
 
 And if we’d like to send a message then socket.send(data) will do that.
 
@@ -86,8 +88,6 @@ Use WebSocket When You Are:
 2. A real-life example of such Websocket utility is in the trading websites such as deriv. Here, Websocket assist in data handling that is impelled by the deployed backend server to the client.
 3. ‍Creating a chat application
    Chat application developers call out Websocket for help in operations like a one-time exchange and publishing/broadcasting the messages. As the same Websocket connection is used for sending/receiving messages, communication becomes easy and quick.
-4. ‍Working up on gaming application
-   While gaming application development is going on, it’s imperative that the server is unremittingly receiving the data, without asking for UI refresh. Websocket accomplish this goal without disturbing the UI of the gaming app.
 
 Now that it’s clear where Websocket should be used, don’t forget to know the cases where it should be avoided and keep yourself away from tons of operational hassles.
 
@@ -143,5 +143,5 @@ Sec-WebSocket-Accept: rG8wsswmHTJ85lJgAE3M5RTmcCE=
 
 ## References
 
-* ** [Websockets APIs - MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)** 
-* ** [Websocket - Javascript Info](https://javascript.info/websocket)**
+- ** [Websockets APIs - MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)**
+- ** [Websocket - Javascript Info](https://javascript.info/websocket)**

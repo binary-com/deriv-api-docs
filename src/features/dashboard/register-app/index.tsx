@@ -6,15 +6,22 @@ import { scopesObjectToArray } from '@site/src/utils';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
 import { IRegisterAppForm } from '../types';
+import useAuthContext from '@site/src/hooks/useAuthContext';
 
 const AppRegistration = () => {
   const { is_loading, send: registerApp, error, clear, data } = useWS('app_register');
+  const { currentLoginAccount } = useAuthContext();
 
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
+      const is_demo_account = currentLoginAccount.name.includes('VRTC');
+
       const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
       const has_verification_uri = verification_uri !== '' && { verification_uri };
+      const can_have_markup = !is_demo_account && {
+        app_markup_percentage: Number(app_markup_percentage),
+      };
 
       const selectedScopes = scopesObjectToArray({
         admin: data.admin,
@@ -27,7 +34,7 @@ const AppRegistration = () => {
         name,
         ...has_redirect_uri,
         ...has_verification_uri,
-        app_markup_percentage: Number(app_markup_percentage),
+        ...can_have_markup,
         scopes: selectedScopes,
       });
     },
