@@ -28,16 +28,6 @@ describe('Get an object with currency data', () => {
 });
 
 describe('Get App ID', () => {
-  global.window = Object.create(window);
-  const defineUrl = (url) => {
-    Object.defineProperty(window, 'location', {
-      value: {
-        href: url,
-      },
-      writable: true,
-    });
-  };
-
   it("Should return 35074 when it's called in localhost environment", () => {
     const appId = getAppId(true);
     expect(appId).toBe('35074');
