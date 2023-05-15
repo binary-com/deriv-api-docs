@@ -18,7 +18,7 @@ For the reviewer, Links in this section will be provided in the future.
 
 #### Deriv account
 
-If you don't have a Deriv account yet, you can easily create one by visiting our signup page or by using the [new_account_virtual](/apiexplorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
+If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the [new_account_virtual](/apiexplorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
 
 To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using [new_account_real](/apiexplorer#new_account_real) or [new_account_maltainvest](/apiexplorer#new_account_maltainvest) API calls.
 
@@ -52,7 +52,7 @@ To create your application with the appropriate configuration options, select th
 | API Token             | The API token you want to create the application with                                     |
 | App Name              | Application name |
 | Markup                | The commission added to the trade price to earn additional income |
-| Authorisation URL     | The URL that enables clients to log in to your app using their |
+| Authorisation URL     | The URL that enables clients to log in to your app using their Deriv accounts without an API token |
 | Verification URL      | The OAuth redirect URL for the OAuth authorisation |
 
 **To create an application, follow these steps:**
