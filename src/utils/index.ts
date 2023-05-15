@@ -1,7 +1,13 @@
 import moment from 'moment';
 import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
+import {
+  DEFAULT_WS_SERVER,
+  LOCALHOST_APP_ID,
+  PRODUCTION_APP_ID,
+  STAGING_APP_ID,
+  VERCEL_DEPLOYMENT_APP_ID,
+} from './constants';
 
 const CURRENCY_MAP = new Map([
   ['Demo', { icon: 'demo', name: 'Demo' }],
@@ -47,13 +53,32 @@ export const getIsLocalhost = () => {
   return window.location.hostname.includes('localhost') ? true : false;
 };
 
+export const getIsStaging = () => {
+  return window.location.hostname.includes('staging-api.deriv.com') ? true : false;
+};
+
+export const getIsVercelStaging = () => {
+  return window.location.hostname.includes('deriv-api-docs.binary.sx') ? true : false;
+};
+
+export const getIsProduction = () => {
+  return window.location.hostname.includes('api.deriv.com') ? true : false;
+};
+
 /**
  * @description based on the environment which the project is running we must use different appIds, to get the proper redirect url
  * @param isLocalHost {boolean} pass `true` if the project is running on localhost
  * @returns {string} proper appId for the project
  */
 export const getAppId = (isLocalHost: boolean) => {
-  return isLocalHost ? LOCALHOST_APP_ID : VERCEL_DEPLOYMENT_APP_ID;
+  if (isLocalHost) return LOCALHOST_APP_ID;
+
+  // if not localhost, then one of the following:
+  if (getIsStaging()) return STAGING_APP_ID;
+  if (getIsVercelStaging()) return VERCEL_DEPLOYMENT_APP_ID;
+  if (getIsProduction()) return PRODUCTION_APP_ID;
+
+  return VERCEL_DEPLOYMENT_APP_ID;
 };
 
 /**
