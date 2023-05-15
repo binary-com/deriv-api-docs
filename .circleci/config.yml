@@ -29,11 +29,9 @@ commands:
         type: string
         default: 'staging'
     steps:
-      - attach_workspace:
-          at: _site
       - run:
           name: Tag build
-          command: echo "<< parameters.version_name >> $(date -u +'%Y-%m-%dT%H:%M:%SZ')" > _site/version
+          command: echo "<< parameters.version_name >> $(date -u +'%Y-%m-%dT%H:%M:%SZ')" > build/version
 
   docker_build_push:
     description: 'Build and push Docker image to Docker Hub'
@@ -83,8 +81,8 @@ commands:
     steps:
       - slack/status:
           include_project_field: false
-          failure_message: 'Release failed for api.deriv.com with version *$(cat _site/version)*'
-          success_message: 'Release succeeded for api.deriv.com with version *$(cat _site/version)*'
+          failure_message: 'Release failed for api.deriv.com with version *$(cat build/version)*'
+          success_message: 'Release succeeded for api.deriv.com with version *$(cat build/version)*'
           webhook: ${SLACK_WEBHOOK}
   publish_to_pages_staging:
     description: 'Publish to cloudflare pages'
@@ -93,7 +91,7 @@ commands:
           name: 'Publish to cloudflare pages (staging)'
           command: |
             npm i wrangler@2.0.19
-            cd _site
+            cd build
             npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=staging
             echo "New staging website - http://staging.cf-pages-deriv-developers-portal.deriv.com"
 
@@ -104,14 +102,14 @@ commands:
           name: 'Publish to cloudflare pages (production)'
           command: |
             npm i wrangler@2.0.19
-            cd _site
+            cd build
             # npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=main
             echo "New website - http://cf-pages-deriv-developers-portal.deriv.com"
 
 jobs:
   build:
     docker:
-      - image: circleci/node:16.13.1-stretch
+      - image: circleci/node:18.16.0
     steps:
       - checkout
       - npm_install_from_cache
@@ -119,7 +117,7 @@ jobs:
 
   release_staging:
     docker:
-      - image: circleci/node:16.13.1-stretch
+      - image: circleci/node:18.16.0
     steps:
       - checkout
       - npm_install_from_cache
@@ -134,7 +132,7 @@ jobs:
 
   release_production:
     docker:
-      - image: circleci/node:16.13.1-stretch
+      - image: circleci/node:18.16.0
     steps:
       - checkout
       - npm_install_from_cache
