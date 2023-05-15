@@ -20,7 +20,7 @@ Our Documentation is divided in several sections:
 - [Code Examples](category/code-examples)
 - [Languages](category/languages)
 - [Guides](category/guides)
-- [Setting up a deriv app](/docs/application_setup.md)
+- [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)
 
 ### Quick Start
 

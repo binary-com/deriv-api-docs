@@ -16,7 +16,7 @@ description: Getting started with Deriv API
 
 Our Documentation is divided in several sections:
 
-- [Setting up a deriv app](/docs/application_setup.md)
+- [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)
 - [Terminology](category/terminology)
 - [Core Concepts](category/core-concepts)
 - [Languages](category/languages)
