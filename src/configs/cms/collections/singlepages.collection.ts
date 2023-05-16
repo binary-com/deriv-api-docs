@@ -33,7 +33,7 @@ const SinglePagesCollection: CmsCollection = {
     {
       name: 'app_reg',
       label: 'Application Setup',
-      file: 'docs/application_setup.md',
+      file: 'docs/setting-up-a-deriv-application.md',
       fields: [...default_doc_fields],
     },
   ],

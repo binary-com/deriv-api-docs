@@ -25,7 +25,7 @@ You have to make sure you have all the requirements mentioned bellow to continue
 3. Deriv App ID 
 
 :::note
-Please refer to [Setting up a Deriv Application](docs/application_setup) for detailed instruction how to create Deriv API token and Applications
+Please refer to [Setting up a Deriv Application](docs/setting-up-a-deriv-application) for detailed instruction how to create Deriv API token and Applications
 :::
 
 ### API Token

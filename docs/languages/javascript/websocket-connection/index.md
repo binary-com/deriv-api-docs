@@ -26,7 +26,7 @@ const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${ap
 ```
 
 :::info
-`app_id = 1089` is just for testing purposes, please update it with your own in production. please check [this](/docs/application_setup.md) to create a new app for yourself.
+`app_id = 1089` is just for testing purposes, please update it with your own in production. please check [this](/docs/setting-up-a-deriv-application) to create a new app for yourself.
 
 :::
 
