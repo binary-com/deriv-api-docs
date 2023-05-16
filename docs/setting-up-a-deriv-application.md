@@ -12,15 +12,16 @@ keywords:
   - setup
 description: How to setup Deriv application
 ---
+
 :::danger
 For the reviewer, Links in this section will be provided in the future.
 :::
 
 #### Deriv account
 
-If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the [new_account_virtual](/apiexplorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
+If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the [new_account_virtual](/api-explorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
 
-To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using [new_account_real](/apiexplorer#new_account_real) or [new_account_maltainvest](/apiexplorer#new_account_maltainvest) API calls.
+To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using [new_account_real](/api-explorer#new_account_real) or [new_account_maltainvest](/api-explorer#new_account_maltainvest) API calls.
 
 :::caution
 To create Deriv applications, you'll need an API token with the Admin scope for the account you wish to use for your application.
@@ -36,7 +37,7 @@ To create a new API token, follow these steps:
 2. Provide a name for your token
 3. Click **Create**
 
-Alternatively, you can create an API token via the [api_token](/apiexplorer#api_token) API call.
+Alternatively, you can create an API token via the [api_token](/api-explorer#api_token) API call.
 
 :::caution
 You need a token with the `Admin` scope to create an application.
@@ -46,14 +47,14 @@ You need a token with the `Admin` scope to create an application.
 
 To create your application with the appropriate configuration options, select the **Register Application** tab in the Dashboard. You can make changes to your application's configuration at anytime in the **Manage Applications** tab.
 
-| App information field | Description                                                                               |
-| --------------------- | ----------------------------------------------------------------------------------------- |
-| Account               | The account you want to create the application with                                       |
-| API Token             | The API token you want to create the application with                                     |
-| App Name              | Application name |
-| Markup                | The commission added to the trade price to earn additional income |
+| App information field | Description                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| Account               | The account you want to create the application with                                                |
+| API Token             | The API token you want to create the application with                                              |
+| App Name              | Application name                                                                                   |
+| Markup                | The commission added to the trade price to earn additional income                                  |
 | Authorisation URL     | The URL that enables clients to log in to your app using their Deriv accounts without an API token |
-| Verification URL      | The OAuth redirect URL for the OAuth authorisation |
+| Verification URL      | The OAuth redirect URL for the OAuth authorisation                                                 |
 
 **To create an application, follow these steps:**
 
