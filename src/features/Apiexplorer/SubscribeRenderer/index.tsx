@@ -10,6 +10,7 @@ import useSubscription from '@site/src/hooks/useSubscription';
 import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
+import ValidDialog from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
   name: T;
@@ -27,23 +28,21 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
-
-  useEffect(() => {
-    if (error) {
-      setToggleModal(true);
-    }
-  }, [error]);
+  const [is_valid, setIsValid] = useState(false);
 
   const parseRequestJSON = () => {
-    let json_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
+    let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
 
     try {
-      json_data = JSON.parse(reqData);
+      request_data = JSON.parse(reqData);
     } catch (error) {
       console.error('Could not parse the JSON data while trying to send the request: ', error);
+      console.log(error);
+      setIsValid(true);
+      setToggleModal(false);
     }
 
-    return json_data;
+    return request_data;
   };
 
   const handleClick = useCallback(() => {
@@ -67,7 +66,9 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && auth == 1 && toggle_modal ? (
+      {is_valid ? (
+        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
+      ) : !is_logged_in && auth == 1 && toggle_modal ? (
         <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection

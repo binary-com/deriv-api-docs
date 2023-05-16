@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
@@ -7,6 +7,7 @@ import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import PlaygroundSection from './PlaygroundSection';
 import LoginDialog from '../LoginDialog';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
+import { ValidDialog } from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketEndpointNames> {
   name: T;
@@ -24,6 +25,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   const { full_response, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
+  const [is_valid, setIsValid] = useState(false);
 
   const parseRequestJSON = () => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -32,6 +34,9 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
       request_data = JSON.parse(reqData);
     } catch (error) {
       console.error('Could not parse the JSON data while trying to send the request: ', error);
+      console.log(error);
+      setIsValid(true);
+      setToggleModal(false);
     }
 
     return request_data;
@@ -60,16 +65,20 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_logged_in && toggle_modal ? (
-        <LoginDialog setToggleModal={setToggleModal} />
+      {!is_valid ? (
+        !is_logged_in && toggle_modal ? (
+          <LoginDialog setToggleModal={setToggleModal} />
+        ) : (
+          <PlaygroundSection
+            loader={is_loading}
+            response_state={response_state}
+            full_response={full_response}
+            error={error}
+            name={name}
+          />
+        )
       ) : (
-        <PlaygroundSection
-          loader={is_loading}
-          response_state={response_state}
-          full_response={full_response}
-          error={error}
-          name={name}
-        />
+        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
       )}
     </div>
   );

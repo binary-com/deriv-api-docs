@@ -41,7 +41,7 @@ describe('RequestResponseRenderer', () => {
     handleChange: jest.fn(),
     request_example: '{"app_list": 1}',
     name: 'app_list' as TSocketEndpointNames,
-    auth: 0,
+    auth: 1,
   };
 
   beforeEach(() => {

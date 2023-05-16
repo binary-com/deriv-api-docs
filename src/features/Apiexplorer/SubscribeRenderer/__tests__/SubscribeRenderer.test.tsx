@@ -54,7 +54,7 @@ const mockUnsubscribe = jest.fn();
 mockUseSubscription.mockImplementation(() => ({
   subscribe: mockSubscribe,
   unsubscribe: mockUnsubscribe,
-  error: 'random error',
+  error: '',
   full_response: {
     tick: 1,
     echo_req: { tick: 1 },
@@ -106,10 +106,8 @@ describe('SubscribeRenderer', () => {
     console.error = mockedError;
 
     render(<SubscribeRenderer name='ticks' auth={1} reqData={'asdawefaewf3232'} />);
-
-    const send_request_button = screen.getByRole('button', { name: 'Send Request' });
-
-    await userEvent.click(send_request_button);
+    const button = await screen.findByRole('button', { name: /Send Request/i });
+    await userEvent.click(button);
 
     expect(consoleOutput[0]).toEqual(
       'Could not parse the JSON data while trying to send the request: ',
