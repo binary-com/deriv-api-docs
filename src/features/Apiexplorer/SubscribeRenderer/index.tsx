@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import {
-  TSocketRequestProps,
   TSocketSubscribableEndpointNames,
+  TSocketRequestProps,
 } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
@@ -25,7 +25,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_valid, setIsValid] = useState(false);
@@ -74,8 +74,9 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           response_state={response_state}
-          data={data}
+          full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>

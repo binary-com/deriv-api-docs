@@ -11,9 +11,9 @@ keywords:
 description: How to get the list of countries in Deriv api?
 ---
 
-:::caution
+<!-- :::caution
 You can learn more about countries [here](/docs/terminology/trading/residence-list)
-:::
+::: -->
 
 To get the countries list, you can update the `open` event listener like so:
 

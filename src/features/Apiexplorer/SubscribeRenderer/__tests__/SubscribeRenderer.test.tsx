@@ -55,6 +55,10 @@ mockUseSubscription.mockImplementation(() => ({
   subscribe: mockSubscribe,
   unsubscribe: mockUnsubscribe,
   error: '',
+  full_response: {
+    tick: 1,
+    echo_req: { tick: 1 },
+  },
 }));
 
 const request_data = `{
@@ -105,8 +109,6 @@ describe('SubscribeRenderer', () => {
     const button = await screen.findByRole('button', { name: /Send Request/i });
     await userEvent.click(button);
 
-    expect(consoleOutput[0]).toEqual(
-      'Could not parse the JSON data while trying to send the request: ',
-    );
+    expect(consoleOutput[0]).toEqual('something went wrong when parsing the json data: ');
   });
 });

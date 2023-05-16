@@ -32,6 +32,10 @@ const mockClear = jest.fn();
 mockuseWS.mockImplementation(() => ({
   clear: mockClear,
   send: jest.fn(),
+  full_response: {
+    tick: 1,
+    echo_req: { tick: 1 },
+  },
 }));
 
 jest.mock('@site/src/hooks/useDynamicImportJSON');

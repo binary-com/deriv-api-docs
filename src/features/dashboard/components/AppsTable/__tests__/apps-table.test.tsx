@@ -1,19 +1,23 @@
 import { ApplicationObject } from '@deriv/api-types';
 import useAppManager from '@site/src/hooks/useAppManager';
-import { render, screen, cleanup, within } from '@site/src/test-utils';
+import useAuthContext from '@site/src/hooks/useAuthContext';
+import { render, screen, cleanup, within, waitFor } from '@site/src/test-utils';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppsTable from '..';
 
-jest.mock('@site/src/hooks/useAppManager');
-const mockUseAppManager = useAppManager as jest.MockedFunction<
-  () => Partial<ReturnType<typeof useAppManager>>
+jest.mock('@site/src/hooks/useAuthContext');
+const mockUseAuthContext = useAuthContext as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAuthContext>>
 >;
 
-const mockGetApps = jest.fn();
-
-mockUseAppManager.mockImplementation(() => ({
-  getApps: mockGetApps,
+mockUseAuthContext.mockImplementation(() => ({
+  is_authorized: true,
+  currentLoginAccount: {
+    currency: 'USD',
+    name: 'CR111111',
+    token: 'first_token',
+  },
 }));
 
 const fakeApplications: ApplicationObject[] = [
@@ -85,6 +89,23 @@ describe('Apps Table', () => {
     expect(deleteDialogTitle).toBeInTheDocument();
 
     const closeDeleteDialog = await screen.findByText(/no, keep it/i);
+    await userEvent.click(closeDeleteDialog);
+
+    expect(deleteDialogTitle).not.toBeInTheDocument();
+  });
+
+  it('Should close delete dialog when pressing the delete button', async () => {
+    const actionCells = await screen.findAllByTestId('app-action-cell');
+    const firstActionCell = actionCells[0];
+
+    const withinActionCell = within(firstActionCell);
+    const openDeleteDialogButton = withinActionCell.getByTestId('delete-app-button');
+    await userEvent.click(openDeleteDialogButton);
+
+    const deleteDialogTitle = await screen.findByText('Are you sure you want to delete this app?');
+    expect(deleteDialogTitle).toBeInTheDocument();
+
+    const closeDeleteDialog = screen.getByText(/yes, delete/i);
     await userEvent.click(closeDeleteDialog);
 
     expect(deleteDialogTitle).not.toBeInTheDocument();
