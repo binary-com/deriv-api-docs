@@ -3,20 +3,45 @@ import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import useSubscription from '@site/src/hooks/useSubscription';
+import useWS from '@site/src/hooks/useWs';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import userEvent from '@testing-library/user-event';
 import RequestJSONBox from '..';
 
+const fakeHookObject = {
+  clear: jest.fn(),
+  send: jest.fn(),
+  full_response: {
+    tick: 1,
+    echo_req: { tick: 1 },
+  },
+};
+
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
+
+jest.mock('@site/src/hooks/useSubscription');
+
+const mockUseSubscription = useSubscription as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useSubscription>>
+>;
+
+mockUseSubscription.mockImplementation(() => fakeHookObject);
+
+jest.mock('@site/src/hooks/useWs');
+
+const mockuseWS = useWS as jest.MockedFunction<() => Partial<ReturnType<typeof useWS>>>;
+
+mockuseWS.mockImplementation(() => fakeHookObject);
 
 describe('RequestResponseRenderer', () => {
   const mockProps = {
     handleChange: jest.fn(),
     request_example: '{"app_list": 1}',
     name: 'app_list' as TSocketEndpointNames,
-    auth: 0,
+    auth: 1,
   };
 
   beforeEach(() => {

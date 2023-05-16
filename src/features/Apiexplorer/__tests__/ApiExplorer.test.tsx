@@ -32,6 +32,10 @@ const mockClear = jest.fn();
 mockuseWS.mockImplementation(() => ({
   clear: mockClear,
   send: jest.fn(),
+  full_response: {
+    tick: 1,
+    echo_req: { tick: 1 },
+  },
 }));
 
 jest.mock('@site/src/hooks/useDynamicImportJSON');
@@ -56,7 +60,7 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
   text_data: {
     name: null,
     selected_value: 'Select API Call - Version 3',
-    request: '',
+    request: '{ "echo_req": 1 } ',
   },
 }));
 
@@ -106,6 +110,26 @@ describe('ApiExplorerFeatures', () => {
     });
 
     it('should render LoginDialog and it can be closed', async () => {
+      const playground_select = screen.getByText(/select api call/i);
+      await userEvent.click(playground_select);
+
+      const select_option = screen.getByText(/application: get details/i);
+      expect(select_option).toBeVisible();
+
+      await userEvent.click(select_option);
+
+      const send_request = screen.getByText(/send request/i);
+      await userEvent.click(send_request);
+
+      const dialog = await screen.findByRole('dialog');
+      expect(dialog).toBeVisible();
+
+      const close_button = screen.getByTestId('close-button');
+
+      await userEvent.click(close_button);
+      expect(dialog).not.toBeVisible();
+    });
+    it('should render ValidDialog and it can be closed', async () => {
       const playground_select = screen.getByText(/select api call/i);
       await userEvent.click(playground_select);
 

@@ -11,7 +11,7 @@ const TokenDropdown = ({ admin_only = false }: { admin_only?: boolean }) => {
   const isAdmin = (token_item: TTokenType) => token_item?.scopes.includes('admin');
 
   const isNotCurrentToken = (token_item: TTokenType) => {
-    const is_not_admin_token = token_item?.display_name !== currentToken?.display_name;
+    const is_not_admin_token = token_item?.token !== currentToken?.token;
     return is_not_admin_token;
   };
 
@@ -41,7 +41,7 @@ const TokenDropdown = ({ admin_only = false }: { admin_only?: boolean }) => {
   return (
     <React.Fragment>
       {tokens.map((item: TTokenType) => (
-        <AdminTokens key={item.display_name} item={item} />
+        <AdminTokens key={item.token} item={item} />
       ))}
     </React.Fragment>
   );
