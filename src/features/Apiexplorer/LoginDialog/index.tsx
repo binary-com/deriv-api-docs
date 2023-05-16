@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
-import { Modal } from '@deriv/ui';
+import { Modal, Button } from '@deriv/ui';
 import useLoginUrl from '@site/src/hooks/useLoginUrl';
-import { Button } from '@deriv/ui';
 import styles from './LoginDialog.module.scss';
 
 type TLoginDialog = {

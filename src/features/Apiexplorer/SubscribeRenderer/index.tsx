@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { TSocketSubscribableEndpointNames } from '@site/src/configs/websocket/types';
+import {
+  TSocketSubscribableEndpointNames,
+  TSocketRequestProps,
+} from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
@@ -21,7 +24,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
 
@@ -31,17 +34,21 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     }
   }, [error]);
 
-  let json_data;
-  try {
-    json_data = JSON.parse(reqData);
-  } catch (error) {
-    json_data = '';
-    console.error('something went wrong when parsing the json data: ', error);
-  }
+  const parseRequestJSON = () => {
+    let json_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
+
+    try {
+      json_data = JSON.parse(reqData);
+    } catch (error) {
+      console.error('Could not parse the JSON data while trying to send the request: ', error);
+    }
+
+    return json_data;
+  };
 
   const handleClick = useCallback(() => {
     unsubscribe();
-    subscribe(json_data);
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [reqData, subscribe, unsubscribe]);
 
@@ -66,8 +73,9 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           response_state={response_state}
-          data={data}
+          full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>

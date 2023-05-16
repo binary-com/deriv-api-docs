@@ -21,7 +21,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { data, is_loading, send, clear, error } = useWS<T>(name);
+  const { full_response, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
 
@@ -66,8 +66,9 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
         <PlaygroundSection
           loader={is_loading}
           response_state={response_state}
-          data={data}
+          full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>
