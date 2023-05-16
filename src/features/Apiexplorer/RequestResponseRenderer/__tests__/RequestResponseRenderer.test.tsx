@@ -37,4 +37,19 @@ describe('RequestResponseRenderer', () => {
 
     expect(dialog).toBeVisible();
   });
+  it('should be able to close the dialog when pressing the close button', async () => {
+    render(<RequestResponseRenderer name='ticks' auth={0} reqData={'asdawefaewf3232'} />);
+
+    const button = screen.getByRole('button', { name: /Send Request/i });
+    await userEvent.click(button);
+
+    const dialog = await screen.findByText(/Your JSON object is invalid/i);
+
+    expect(dialog).toBeVisible();
+
+    const close_button = screen.getByTestId('close-button');
+    await userEvent.click(close_button);
+
+    expect(dialog).not.toBeVisible();
+  });
 });
