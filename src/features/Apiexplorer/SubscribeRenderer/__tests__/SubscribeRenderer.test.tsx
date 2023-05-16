@@ -109,6 +109,8 @@ describe('SubscribeRenderer', () => {
     const button = await screen.findByRole('button', { name: /Send Request/i });
     await userEvent.click(button);
 
-    expect(consoleOutput[0]).toEqual('something went wrong when parsing the json data: ');
+    expect(consoleOutput[0]).toEqual(
+      'Could not parse the JSON data while trying to send the request: ',
+    );
   });
 });
