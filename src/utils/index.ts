@@ -49,20 +49,8 @@ export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
  *
  * @returns {boolean} return true if the window hostname contains `localhost`
  */
-export const getIsLocalhost = () => {
-  return window.location.hostname.includes('localhost') ? true : false;
-};
-
-export const getIsStaging = () => {
-  return window.location.hostname.includes('staging-api.deriv.com') ? true : false;
-};
-
-export const getIsVercelStaging = () => {
-  return window.location.hostname.includes('deriv-api-docs.binary.sx') ? true : false;
-};
-
-export const getIsProduction = () => {
-  return window.location.hostname.includes('api.deriv.com') ? true : false;
+export const isHost = (hostname: string) => {
+  return window.location.hostname.includes(hostname) ? true : false;
 };
 
 /**
@@ -74,9 +62,9 @@ export const getAppId = (isLocalHost: boolean) => {
   if (isLocalHost) return LOCALHOST_APP_ID;
 
   // if not localhost, then one of the following:
-  if (getIsStaging()) return STAGING_APP_ID;
-  if (getIsVercelStaging()) return VERCEL_DEPLOYMENT_APP_ID;
-  if (getIsProduction()) return PRODUCTION_APP_ID;
+  if (isHost('staging-api.deriv.com')) return STAGING_APP_ID;
+  if (isHost('deriv-api-docs.binary.sx')) return VERCEL_DEPLOYMENT_APP_ID;
+  if (isHost('api.deriv.com')) return PRODUCTION_APP_ID;
 
   return VERCEL_DEPLOYMENT_APP_ID;
 };
@@ -144,7 +132,7 @@ export const getServerConfig = () => {
         appId: config_app_id,
       };
     } else {
-      const isLocalHost = getIsLocalhost();
+      const isLocalHost = isHost('localhost');
       return {
         serverUrl: DEFAULT_WS_SERVER,
         appId: getAppId(isLocalHost),

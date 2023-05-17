@@ -4,7 +4,7 @@ const {
   getAccountsFromSearchParams,
   getAppId,
   getIsBrowser,
-  getIsLocalhost,
+  isHost,
   getServerConfig,
   getCurrencyObject,
 } = utils;
@@ -76,19 +76,19 @@ describe('Format Token Scope', () => {
 describe('Get Is Localhost', () => {
   it('Should return true when hostname is localhost.binary.sx', () => {
     window.location.hostname = 'localhost.binary.sx';
-    const isLocalhost = getIsLocalhost();
+    const isLocalhost = isHost('localhost');
     expect(isLocalhost).toBeTruthy();
   });
 
   it('Should return true when hostname contains localhost', () => {
     window.location.hostname = 'localhost:3000';
-    const isLocalhost = getIsLocalhost();
+    const isLocalhost = isHost('localhost');
     expect(isLocalhost).toBeTruthy();
   });
 
   it('Should return false when hostname is vercel deployment', () => {
     window.location.hostname = 'deriv-api-docs.binary.sx';
-    const isLocalHost = getIsLocalhost();
+    const isLocalHost = isHost('localhost');
     expect(isLocalHost).toBeFalsy();
   });
 });
