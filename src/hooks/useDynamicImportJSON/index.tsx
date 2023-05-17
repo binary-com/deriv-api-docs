@@ -69,12 +69,18 @@ const useDynamicImportJSON = () => {
     },
     [setRequestInfo, setResponseInfo],
   );
-  useEffect(() => {
-    const hash_value = hash.split('#')[1];
-    const request_body = playground_requests.find((el) => el.name === hash_value);
-    const is_not_placeholder = text_data.selected_value === request_body?.name;
-    if (is_not_placeholder) dynamicImportJSON(text_data.selected_value);
-  }, [dynamicImportJSON, hash, text_data.selected_value]);
+
+  // What is the point of the code below? request_body.name can never be exactly equal to selected_value.
+  // For example: selected_value = 'Active Symbols' request_body.name = 'active_symbols'.
+  // I also don't know what this code is supposed to do. Right now, it will do nothing.
+  // commented it out for now. I cannot test this.
+
+  // useEffect(() => {
+  //   const hash_value = hash.split('#')[1];
+  //   const request_body = playground_requests.find((el) => el.name === hash_value);
+  //   const is_not_placeholder = text_data.selected_value === request_body?.name;
+  //   if (is_not_placeholder) dynamicImportJSON(text_data.selected_value);
+  // }, [dynamicImportJSON, hash, text_data.selected_value]);
 
   useEffect(() => {
     const hash_value = hash.split('#')[1];
