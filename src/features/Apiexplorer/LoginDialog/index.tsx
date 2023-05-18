@@ -35,13 +35,16 @@ export const LoginDialog = ({ setToggleModal }: TLoginDialog) => {
             className={styles.wrapper}
           >
             <div className={styles.modal}>
-              This API call must be authorised because it requires access to your account
-              information.
+              <p>
+                This API call must be authorised because it requires access to your account
+                information.
+              </p>
+              <p>
+                Log in to your Deriv account to proceed. If you don’t have a Deriv account, sign up
+                first.
+              </p>
             </div>
-            <div className={styles.modal}>
-              Log in to your Deriv account to proceed. If you don’t have a Deriv account, sign up
-              first.
-            </div>
+
             <div className={styles.buttonWrapper}>
               <Button color='tertiary' onClick={handleSignUp} className={styles.btn}>
                 Sign up
