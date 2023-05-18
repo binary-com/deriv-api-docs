@@ -35,6 +35,7 @@ export const LoginDialog = ({ setToggleModal }: TLoginDialog) => {
             className={styles.wrapper}
           >
             <div className={styles.modal}>
+              {/* check */}
               <p>
                 This API call must be authorised because it requires access to your account
                 information.
