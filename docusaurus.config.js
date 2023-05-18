@@ -24,7 +24,15 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'pr'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+      pr: {
+        label: 'Portuguese',
+      },
+    },
   },
 
   plugins: ['@docusaurus/theme-live-codeblock', 'docusaurus-plugin-sass'],
@@ -80,6 +88,10 @@ const config = {
           },
           {
             type: 'custom-user-navbar-item',
+            position: 'right',
+          },
+          {
+            type: 'localeDropdown',
             position: 'right',
           },
         ],
