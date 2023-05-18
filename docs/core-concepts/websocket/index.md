@@ -22,7 +22,7 @@ WebSocket is especially great for services that require continuous data exchange
 
 ## A Simple example
 
-To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url:
+To open a websocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url. Here is how you can do that in `JavaScript`:
 
 ```js
 let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
@@ -45,7 +45,7 @@ Once the socket is created, we should listen to events on it. There are totally 
 
 And if we’d like to send a message then socket.send(data) will do that.
 
-Here’s an example in `Javascript`:
+Here’s an example in `JavaScript`:
 
 ```js
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.

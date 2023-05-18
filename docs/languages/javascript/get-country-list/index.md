@@ -15,7 +15,7 @@ description: How to get the list of countries in Deriv api?
 You can learn more about countries [here](/docs/terminology/trading/residence-list)
 ::: -->
 
-To get the countries list, you can update the `open` event listener like so:
+To get the countries list, you can update your `open` event listener like the following:
 
 ```js title="index.js"
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
@@ -118,12 +118,11 @@ the response should be an object:
 }
 ```
 
-With this call, you'll get useful information for the supported countries, such as:
+With this call, you will get useful information about support countries, such as:
 
 - `2-letter` code for each country
 - `Identity` service providers for each country
 - Country Tax Identifier Format (`tin_format`)
-- etc
 
 This can be useful to account creation forms, in which you need to ask your users to provide validated information about their identity base, depending on their country of residence.
 
@@ -131,17 +130,17 @@ This can be useful to account creation forms, in which you need to ask your user
 For address and tax ID validations, please use the provided 'tin_format' for the country.
 :::
 
-The country of your users is important for our next steps. With it, you can determine which assets and features the client can use.
+The country of your users is important for your next steps. With it, you can determine which assets and features the client can use.
 
 :::tip
 It's better if you get the list of countries before populating your form.
 :::
 
 :::danger
-We need detailed content about `IDV` and `ONFIDO` identity services, their differences and possibilities
+You will need detailed content about `IDV` and `ONFIDO` identity services, their differences and possibilities.
 :::
 
-your final code should be:
+Your final code will be:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.

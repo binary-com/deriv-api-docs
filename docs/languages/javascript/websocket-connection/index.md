@@ -1,5 +1,5 @@
 ---
-title: Websocket Connection
+title: Websocket connection
 sidebar_label: Websocket connection
 sidebar_position: 1
 tags:
@@ -7,7 +7,7 @@ tags:
 keywords:
   - js
   - websocket-connection
-description: how to setup websocket connection with deriv api?
+description: how to setup websocket connection with Deriv api?
 ---
 
 :::caution
@@ -16,9 +16,11 @@ If you're not familiar with websockets, please check out [our documentation](/do
 
 :::
 
-### Setup websocket connection
+### Setup
 
-next we'll create a websocket connection to `Dervi Websocket Server` like so:
+To create a websocket connection, we want to use the Deriv websocket URL with an `app_id`. You can create your own app_id within your [dashboard](/dashboard) or keep the default `1089` app_id for testing. Keep in mind that eventually, you should make your own app_id. Especially if you would like to monetize your application.
+
+To setup the connection, add the following code in your JavaScript file:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
@@ -26,13 +28,12 @@ const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${ap
 ```
 
 :::info
-`app_id = 1089` is just for testing purposes, please update it with your own in production. please check [this](/docs/setting-up-a-deriv-application) to create a new app for yourself.
-
+`app_id = 1089` is just for testing purposes, please update it with your own app_id when releasing your application on a production environment. please check [this guide](/docs/setting-up-a-deriv-application) to create a new app for yourself.
 :::
 
-at this point we're connected to the `websocket server` but we're not getting or recieving any data, to send/receive data we have to `subscribe` to [websocket events](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket#events).
+At this point we are connected to the `websocket server`. But, we do not receive any data. To send or receive data, we have to `subscribe` to <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket#events" target="_blank">websocket events</a>.
 
-generally we have 4 events on `websockets connections`:
+Generally we have 4 events on `websockets connections`:
 
 - **close**:
   Fired when a connection with a WebSocket is closed. Also available via the onclose property
@@ -71,10 +72,11 @@ Now open the `index.html` file in our browser and checkout your Developer Consol
 
 ### Send and receive data
 
-Our websocket server provide `ping / pong` functionality, let's use it in our demo project to send and receive data. change the event listeners for `open` and `message` like so:
+Our websocket server provides a [Ping](/api-explorer#ping) call. In this case we can use it to test our websocket connection. Let's use it in our demo project to send and receive data. 
 
+In your code, you can adjust the `open` and `message` eventlisteners with the following code in order to retrieve data from the `Ping` call:
 :::caution
-The `send` function on websocket connection only receives `string`, `ArrayBuffer`, `Blob` and `TypedArray`, `DataView`, you can read more abou them [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send), which mean if we want to send an `object` we have stringify with `JSON.stringify` it first.
+The `send` function only receives `string`, `ArrayBuffer`, `Blob` and `TypedArray`, `DataView`, data types. You can read more about them [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
 :::
 
 ```js title="index.js"
@@ -109,14 +111,14 @@ Congratulations :tada:
 You just created your first demo project with websockets.
 
 :::tip
-The `ping` request is mostly used to test the connection or to keep it alive.
+The `Ping` request is mostly used to test the connection or to keep it alive.
 :::
 
 ### Keep Websocket Connection Alive
 
-By Defualt `Websocket connection` will be closed when no traffic is sent between them for more or less **180 seconds**. one way to keep the connection alive is to send `ping` request with interval of **120 seconds**, this way will keep the connection alive and active.
+By default, the `Websocket connection` will be closed when no traffic is sent after **180 seconds**. One way to keep the connection alive is by sending a [Ping](/api-explorer#ping) request with interval of **120 seconds**. This way you will keep the connection alive and active.
 
-Simple example setup would be like so:
+Here is an example of how you can set it up:
 
 ```js title="index.js"
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
@@ -140,9 +142,9 @@ websocket.addEventListener('close', (event) => {
 });
 ```
 
-Now when the connection is `established` we start sending `ping` requests with `12000ms` intervals.
+Now when the connection is `established` we start sending `Ping` requests with `12000ms` intervals.
 
-your final code should be:
+Your final code will then look like this:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
