@@ -1,6 +1,6 @@
 ---
-title: Get list of countries
-sidebar_label: Get list of countries
+title: Get a list of countries
+sidebar_label: Get a list of countries
 sidebar_position: 2
 tags:
   - country_list
@@ -8,14 +8,14 @@ tags:
 keywords:
   - country_list
   - javascript
-description: How to get the list of countries in Deriv api?
+description: How to get a list of countries in Deriv api?
 ---
 
 <!-- :::caution
 You can learn more about countries [here](/docs/terminology/trading/residence-list)
 ::: -->
 
-To get the countries list, you can update your `open` event listener like the following:
+To get a list of countries, update the open event listener using the following approach:
 
 ```js title="index.js"
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
@@ -36,7 +36,7 @@ websocket.addEventListener('open', (event) => {
 });
 ```
 
-Now update the `message` event listener to render the data:
+Now, update the `message` event listener to render the data:
 
 ```js title="index.js"
 // subscribe to `message` event
@@ -56,7 +56,7 @@ websocket.addEventListener('message', (event) => {
 });
 ```
 
-the response should be an object:
+The response should be an object:
 
 ```json
 {
@@ -120,20 +120,21 @@ the response should be an object:
 
 With this call, you will get useful information about supported countries, such as:
 
-- `2-letter` code for each country
+- A `2-letter` code for each country
 - `Identity` service providers for each country
 - Country Tax Identifier Format (`tin_format`)
+- etc.
 
-This can be useful to account creation forms, in which you need to ask your users to provide validated information about their identity base, depending on their country of residence.
+This can be useful for account creation forms, in which you need to ask users to provide validated information about their identity base, depending on their country of residence.
 
 :::caution
 For address and tax ID validations, please use the provided 'tin_format' for the country.
 :::
 
-The country of your users is important for your next steps. With it, you can determine which assets and features the client can use.
+User's country is important for your next steps. It determines which assets and features they can use.
 
 :::tip
-It's better if you get the list of countries before populating your form.
+It's better to get the list of countries before populating your form.
 :::
 
 :::danger

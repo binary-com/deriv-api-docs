@@ -1,17 +1,21 @@
 ---
-title: API Calls Anatomy
+title: API calls' anatomy
 hide_title: true
 draft: false
-sidebar_label: API Calls anatomy
+sidebar_label: API calls' anatomy
 sidebar_position: 1
 tags:
   - concept
+  - calls
+  - anatomy
 keywords:
   - trading
   - concept
-description: Deriv API calls Anatomy
+  - calls
+  - anatomy
+description: Deriv API calls' anatomy
 ---
-## Subscribe and Send
+## Subscribe and send
 
 All API calls have a send functionality for making a request and receiving a response. Certain API calls also offer a subscribe functionality allowing for updates to be sent to your application when new information becomes available.
 
@@ -40,19 +44,19 @@ For more information on the `Forget` API call, you can have a look at [Forget](h
 :::
 
 
-## Request Data
+## Request data
 
-In order to make it easier for you to handle the `request` and `response` flow of your websocket connection, every deriv websocket API calls has a general structure. you can use it for caching, validation, request and response synchronization are some of the things you can use it for.
+In order to make it easier for you to handle the `request` and `response` flow of your WebSocket connection, every deriv WebSocket API calls has a general structure. you can use it for caching, validation, request and response synchronization are some of the things you can use it for.
 
-#### API Call Method Name
+#### API call method name
 
 Every `request` in the WebSocket API includes a `method name` field that serves as a unique identifier for the request. In most cases, this  `method name` will get a numerical value of `1`. However, there are some cases where the identifier property may have a string value.
 
 :::caution
-API Call Method Name is always required. this field determines the data you'll get from our websocket server.
+API Call Method Name is always required. this field determines the data you'll get from our WebSocket server.
 :::
 
-### Required Fields
+### Required fields
 
 Every request data has several required fields which you must provide them and they may contain optional fields as well, let's explore this with an example on `Residence List`:
 
@@ -70,23 +74,23 @@ Request data for this call is like so:
 
 The `residence_list` field is the `method name` for the call and is required. There may be other required fields which are related to this type of the request you want to send. if you want to know more about `Residence List` and other API calls please check them out in the [API Explorer](https://api.deriv.com/api-explorer#residence_list).
 
-### Optional Fields
+### Optional fields
 
 Every Call has several `Optional` fields as well, `passthrough` and `req_id` are always part of the request data but you can choose to opt-out and not use them.
 
-#### `passthrough` Field
+#### `passthrough` field
 
 Whatever you pass to this field will be returned back to you inside a `response` object, this can be helpful when you need to simulate a stateful flow for your `requests` and `responses`.
 
-#### `req_id` Field
+#### `req_id` field
 
-You may need to `tag` your requests and pass them through our `websocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
+You may need to `tag` your requests and pass them through our `WebSocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
 
 :::caution
 There may be other optional fields for a request which are only related to that API call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
 :::
 
-## Response Data
+## Response data
 
 When you get the response for the call, there will be a `Field` with the same name as the `method name`. and it contains the actual data.
 
@@ -161,13 +165,13 @@ The response for the `Residence List` call:
 
 Here the `residence_list` is the `method name` and it contains the actual data you requested. rest of the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
 
-#### The `echo_req` Field
+#### The `echo_req` field
 
 This `Field` contains the exact `Request Data` you sent to the server.
 
-#### The `msg_type` Field
+#### The `msg_type` field
 
-This `Field` helps you determine which `message` data you're getting on the message event of the websocket connection. For example, your `onmessage` event handler for your websocket connection in `Javascript` would be:
+This `Field` helps you determine which `message` data you're getting on the message event of the WebSocket connection. For example, your `onmessage` event handler for your WebSocket connection in `JavaScript` would be:
 
 ```js
 socket.onmessage = (event) => {
@@ -186,7 +190,7 @@ socket.onmessage = (event) => {
 }
 ```
 
-#### The `req_id` Field
+#### The `req_id` field
 
 This is the `Optional` passed to the `Request Data`, you can use it for `validation`, `synchronization`, `caching`, etc.
 

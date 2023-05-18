@@ -32,13 +32,13 @@ Our Documentation is divided in several sections:
 
 #### Core Concepts
 
-Have a look at the [Core Concept](/docs/category/core-concepts) pages and take your time to read through it. These concepts will help you get familiar with our websocket server api and how to use it more efficiently. They are not related to any of our frameworks or libraries.
+Have a look at the [Core Concept](/docs/category/core-concepts) pages and take your time to read through it. These concepts will help you get familiar with our WebSocket server api and how to use it more efficiently. They are not related to any of our frameworks or libraries.
 
 When you read through the [Core Concept](/docs/category/core-concepts) page, you can start choosing your implementation approach based on the language, framework or library you want to use in your application.
 
 #### Code Examples
 
-If you want to know how you can implement our API within your code, then we suggest to have a look at our [Code Examples](/docs/category/code-examples). These code examples come in `CodeSandboxes`. This allows you to easily fork the code examples and experiment with them for personal use. For now we only have javascript code examples, but, we plan to add more examples that are created with different languages, frameworks and libraries in the near future.
+If you want to know how you can implement our API within your code, then we suggest to have a look at our [Code Examples](/docs/category/code-examples). These code examples come in `CodeSandboxes`. This allows you to easily fork the code examples and experiment with them for personal use. For now we only have JavaScript code examples, but, we plan to add more examples that are created with different languages, frameworks and libraries in the near future.
 
 #### Languages
 

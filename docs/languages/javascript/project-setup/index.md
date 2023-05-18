@@ -1,42 +1,42 @@
 ---
-title: Project Setup
-sidebar_label: Project Setup
+title: Project setup
+sidebar_label: Project setup
 sidebar_position: 0
 tags:
   - javascript
 keywords:
   - js
   - project-setup
-description: js deriv api project setup
+description: Deriv API JavaScript project setup
 ---
 
-### Create Project
+### Create a project
 
-We will create a simple `HTML` page that contains our javascript file, which handles our websocket connection. To start off, create a directory for your next project:
+We are going to create a simple `HTML` page that contains our JavaScript file, which will handle our WebSocket connection. First, create a directory for your next project:
 
 ```bash
 mkdir deriv-websocket-demo
 ```
 
-navigate to the `deriv-websocket-demo` folder:
+Navigate to the `deriv-websocket-demo` folder:
 
 ```bash
 cd deriv-websocket-demo
 ```
 
-then, create the needed files with the following command:
+Next, create the required files as you see below:
 
 ```bash
 touch index.html index.css index.js
 ```
 
-Now you can open the folder with your prefered code editor or IDE.
+Now, you can open the folder with your prefered code editor or IDE.
 
 :::tip
-We suggest using [Visual Studio Code](https://code.visualstudio.com/) with [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) enabled, it will help you a lot going forward in implementations.
+We suggest using [Visual Studio Code](https://code.visualstudio.com/) with [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) enabled. This will help you a lot with implementations.
 :::
 
-In the newly created files, you can put the following code:
+Your final code should be:
 
 ```js title="index.js"
 console.log("we will create our websocket connection here");
@@ -58,6 +58,6 @@ console.log("we will create our websocket connection here");
 </html>
 ```
 
-After adding the content, we can run the application by simply executing the `index.html` file or by using the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">Live Server Extension</a>. When running your app, see in the console if the `console.log` is appearing. Then you know that the javascript file is working so that the websocket connection can be implemented properly.
+After adding the content, we can run the application by simply executing the `index.html` file or by using the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">Live Server Extension</a>. When running your app, see in the console if the `console.log` is appearing. Then you know that the JavaScript file is working so that the websocket connection can be implemented properly.
 
 For setting up the Deriv websocket, you can proceed to the [Websocket connection](/docs/languages/javascript/websocket-connection) page.
