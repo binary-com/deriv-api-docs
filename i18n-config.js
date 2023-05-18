@@ -10,5 +10,5 @@ export const pt = {
   path: 'pt',
   display_name: 'Português',
   short_name: 'PT',
-  affiliate_lang: 9,
+  affiliate_lang: 9, //empty commit
 };
