@@ -118,7 +118,7 @@ the response should be an object:
 }
 ```
 
-With this call, you will get useful information about support countries, such as:
+With this call, you will get useful information about supported countries, such as:
 
 - `2-letter` code for each country
 - `Identity` service providers for each country
