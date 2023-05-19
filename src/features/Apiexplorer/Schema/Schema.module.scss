@@ -10,6 +10,7 @@
   .schemaTitle {
     font-size: var(rem(2.4));
     color: var(--ifm-color-white);
+    font-weight: bold;
   }
 
   .schemaDescription {
@@ -84,11 +85,11 @@
   color: var(--ifm-color-secondary-darkest);
   font-family: lucida console, Monaco, monospace;
   padding: rem(0.2);
-  position: relative;
+  position: absolute;
+  right: 3px;
   text-align: right;
   cursor: pointer;
   font-weight: 500;
-  font-size: rem(2);
   transition: opacity 0.2s ease-in-out;
 }
 
@@ -286,8 +287,8 @@
 
 .schemaHeader + .schemaBody > .sourceButtonMain {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: rem(2.4);
+  right: rem(2.4);
   &:hover {
     opacity: 1;
   }
@@ -295,4 +296,8 @@
 
 .schemaHeader:hover + .schemaBody > .sourceButtonMain {
   opacity: 1;
+}
+
+.reactJsonView {
+  margin-bottom: 24px;
 }
