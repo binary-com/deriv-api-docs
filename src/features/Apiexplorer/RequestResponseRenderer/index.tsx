@@ -25,7 +25,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   const { full_response, is_loading, send, clear, error } = useWS<T>(name);
   const [toggle_modal, setToggleModal] = useState(false);
   const [response_state, setResponseState] = useState(false);
-  const [is_valid, setIsValid] = useState(false);
+  const [is_not_valid, setIsNotValid] = useState(false);
 
   const parseRequestJSON = () => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -35,7 +35,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
     } catch (error) {
       console.error('Could not parse the JSON data while trying to send the request: ', error);
       console.log(error);
-      setIsValid(true);
+      setIsNotValid(true);
       setToggleModal(false);
     }
 
@@ -65,7 +65,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           Clear
         </Button>
       </div>
-      {!is_valid ? (
+      {!is_not_valid ? (
         !is_logged_in && toggle_modal ? (
           <LoginDialog setToggleModal={setToggleModal} />
         ) : (
@@ -78,7 +78,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
           />
         )
       ) : (
-        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
+        <ValidDialog setIsNotValid={setIsNotValid} setToggleModal={setToggleModal} />
       )}
     </div>
   );
