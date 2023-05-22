@@ -82,6 +82,14 @@ const config = {
             type: 'custom-user-navbar-item',
             position: 'right',
           },
+          // {
+          //   type: 'custom-language-switcher-navbar-item',
+          //   position: 'right',
+          // },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
         ],
       },
       prism: {
