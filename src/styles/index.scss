@@ -266,3 +266,17 @@ main[class*='docMainContainer'] .container {
     width: rem(1.2);
   }
 }
+
+.dropdown--right .dropdown__menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  top: 51px;
+}
+
+.dropdown__menu {
+  padding: 24px 24px;
+  background-color: var(--colors-greyLight100);
+  border-radius: 8px;
+  box-shadow: 0 0 20px #0000000d, 0 16px 20px #0000000d;
+}

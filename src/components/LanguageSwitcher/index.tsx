@@ -11,7 +11,9 @@ const LanguageSwitcher = () => {
 
   return (
     <div>
-      <button>EN</button>
+      <button onClick={() => setToggleDropdown((prev) => !prev)} className={def}>
+        EN
+      </button>
     </div>
   );
 };
