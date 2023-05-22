@@ -86,7 +86,7 @@
   font-family: lucida console, Monaco, monospace;
   padding: rem(0.2);
   position: absolute;
-  right: 3px;
+  right: rem(0.3);
   text-align: right;
   cursor: pointer;
   font-weight: 500;
@@ -299,5 +299,5 @@
 }
 
 .reactJsonView {
-  margin-bottom: 24px;
+  margin-bottom: rem(2.4);
 }
