@@ -6,7 +6,6 @@ import { useLocation } from '@docusaurus/router';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import type { LinkLikeNavbarItemProps } from '@theme/NavbarItem';
 import type { Props } from '@theme/NavbarItem/LocaleDropdownNavbarItem';
-// import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
 
 import styles from './styles.module.css';
 
@@ -59,20 +58,12 @@ export default function LocaleDropdownNavbarItem({
       })
     : localeConfigs[currentLocale].label;
 
-  // const [is_toggle_dropdown, setToggleDropdown] = useState(false);
-  // const dropdown_toggle = is_toggle_dropdown ? styles.active : styles.inactive;
-
-  // const dropdownRef = useRef(null);
-  // useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
-
   return (
     <DropdownNavbarItem
       {...props}
       mobile={mobile}
       label={<>{dropdownLabel === 'English' ? 'EN' : 'PT'}</>}
       items={items}
-      // className={`${styles.displayMenu} ${dropdown_toggle}`}
-      // onClick={() => setToggleDropdown((prev) => !prev)}
     />
   );
 }
