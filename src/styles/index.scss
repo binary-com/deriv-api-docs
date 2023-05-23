@@ -277,18 +277,18 @@ main[class*='docMainContainer'] .container {
   box-shadow: 0 0 20px #0000000d, 0 16px 20px #0000000d;
   visibility: visible;
 }
+.dropdown {
+  height: 100%;
+  padding-top: 25px;
+}
 
+.navbar__items--right {
+  align-items: baseline;
+}
 .dropdown > .navbar__link:after {
   display: none;
 }
 
-.dropdown:hover,
-.dropdown:focus {
-  .dropdown__menu {
-    display: block;
-    margin-top: 50px;
-  }
-}
 .dropdown__link:hover,
 .dropdown__link--active {
   background-color: var(--colors-greyLight100);
