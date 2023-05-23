@@ -56,7 +56,13 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
         {/* Description */}
         <SchemaDescription description={description} />
         {/* RecursiveProperties */}
-        {is_code_open && <ReactJson src={JSON.parse(data)} theme='tube' />}
+
+        {is_code_open && (
+          <div className={styles.reactJsonView}>
+            <ReactJson src={JSON.parse(data)} theme='tube' />
+          </div>
+        )}
+
         {!is_code_open && (
           <RecursiveProperties
             is_open={is_open_object}
