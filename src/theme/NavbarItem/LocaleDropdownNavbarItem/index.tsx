@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useAlternatePageUtils } from '@docusaurus/theme-common/internal';
 import { translate } from '@docusaurus/Translate';
@@ -6,6 +6,7 @@ import { useLocation } from '@docusaurus/router';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import type { LinkLikeNavbarItemProps } from '@theme/NavbarItem';
 import type { Props } from '@theme/NavbarItem/LocaleDropdownNavbarItem';
+// import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
 
 import styles from './styles.module.css';
 
@@ -58,17 +59,20 @@ export default function LocaleDropdownNavbarItem({
       })
     : localeConfigs[currentLocale].label;
 
+  // const [is_toggle_dropdown, setToggleDropdown] = useState(false);
+  // const dropdown_toggle = is_toggle_dropdown ? styles.active : styles.inactive;
+
+  // const dropdownRef = useRef(null);
+  // useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
+
   return (
     <DropdownNavbarItem
       {...props}
       mobile={mobile}
-      label={
-        <>
-          {/* <IconLanguage className={styles.iconLanguage} /> */}
-          {dropdownLabel === 'English' ? 'EN' : 'PT'}
-        </>
-      }
+      label={<>{dropdownLabel === 'English' ? 'EN' : 'PT'}</>}
       items={items}
+      // className={`${styles.displayMenu} ${dropdown_toggle}`}
+      // onClick={() => setToggleDropdown((prev) => !prev)}
     />
   );
 }

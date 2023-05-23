@@ -267,16 +267,30 @@ main[class*='docMainContainer'] .container {
   }
 }
 
-.dropdown--right .dropdown__menu {
+.dropdown__menu {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  top: 51px;
-}
-
-.dropdown__menu {
   padding: 24px 24px;
   background-color: var(--colors-greyLight100);
   border-radius: 8px;
   box-shadow: 0 0 20px #0000000d, 0 16px 20px #0000000d;
+  visibility: visible;
+}
+
+.dropdown > .navbar__link:after {
+  display: none;
+}
+
+.dropdown:hover,
+.dropdown:focus {
+  .dropdown__menu {
+    display: block;
+    margin-top: 50px;
+  }
+}
+.dropdown__link:hover,
+.dropdown__link--active {
+  background-color: var(--colors-greyLight100);
+  color: var(--ifm-dropdown-link-color);
 }
