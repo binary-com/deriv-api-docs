@@ -54,17 +54,15 @@ const useDynamicImportJSON = () => {
         .then((data) => {
           setRequestInfo(data);
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
+          setRequestInfo({});
         });
       import(`../../../config/v3/${selected_value}/receive.json`)
         .then((data) => {
           setResponseInfo(data);
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
+          setResponseInfo({});
         });
     },
     [setRequestInfo, setResponseInfo],
