@@ -50,12 +50,20 @@ const useDynamicImportJSON = () => {
   );
   const dynamicImportJSON = useCallback(
     (selected_value) => {
-      import(`../../../config/v3/${selected_value}/send.json`).then((data) => {
-        setRequestInfo(data);
-      });
-      import(`../../../config/v3/${selected_value}/receive.json`).then((data) => {
-        setResponseInfo(data);
-      });
+      import(`../../../config/v3/${selected_value}/send.json`)
+        .then((data) => {
+          setRequestInfo(data);
+        })
+        .catch(() => {
+          setRequestInfo({});
+        });
+      import(`../../../config/v3/${selected_value}/receive.json`)
+        .then((data) => {
+          setResponseInfo(data);
+        })
+        .catch(() => {
+          setRequestInfo({});
+        });
     },
     [setRequestInfo, setResponseInfo],
   );
