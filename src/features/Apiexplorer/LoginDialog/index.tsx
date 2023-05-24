@@ -34,7 +34,17 @@ export const LoginDialog = ({ setToggleModal }: TLoginDialog) => {
             has_close_button
             className={styles.wrapper}
           >
-            <div className={styles.modal}>Log in or sign up to continue.</div>
+            <div className={styles.modal}>
+              <p>
+                This API call must be authorised because it requires access to your account
+                information.
+              </p>
+              <p>
+                Log in to your Deriv account to proceed. If you don’t have a Deriv account, sign up
+                first.
+              </p>
+            </div>
+
             <div className={styles.buttonWrapper}>
               <Button color='tertiary' onClick={handleSignUp} className={styles.btn}>
                 Sign up
