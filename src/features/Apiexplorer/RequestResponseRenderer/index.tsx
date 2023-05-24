@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
@@ -33,8 +33,6 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
     try {
       request_data = JSON.parse(reqData);
     } catch (error) {
-      console.error('Could not parse the JSON data while trying to send the request: ', error);
-      console.log(error);
       setIsNotValid(true);
       setToggleModal(false);
     }
