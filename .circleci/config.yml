@@ -93,7 +93,7 @@ commands:
             npm i wrangler@2.0.19
             cd build
             npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=staging
-            echo "New staging website - http://staging.cf-pages-deriv-developers-portal.deriv.com"
+            echo "New staging website - https://staging-api.deriv.com/"
 
   publish_to_pages_production:
     description: "Publish to cloudflare pages"
@@ -103,8 +103,8 @@ commands:
           command: |
             npm i wrangler@2.0.19
             cd build
-            npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=maintest
-            echo "New website - http://cf-pages-deriv-developers-portal.deriv.com"
+            npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=main
+            echo "New website - http://api.deriv.com"
 
 jobs:
   build:
