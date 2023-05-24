@@ -4,16 +4,16 @@ import { Button, Text } from '@deriv/ui';
 import { getAppId } from '@site/src/utils';
 import styles from './Endpoint.module.scss';
 
-const default_endpoint = {
-  app_id: getAppId(false),
-  server_url: 'oauth.deriv.com',
-};
-
 interface IEndpointFormValues {
   app_id: string;
   server_url: string;
 }
 const EndPoint = () => {
+  const default_endpoint = {
+    app_id: getAppId(false),
+    server_url: 'oauth.deriv.com',
+  };
+
   const {
     register,
     handleSubmit,
