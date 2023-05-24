@@ -104,7 +104,7 @@ commands:
             npm i wrangler@2.0.19
             cd build
             npx wrangler pages publish . --project-name=deriv-developers-portal-pages --branch=main
-            echo "New website - http://api.deriv.com"
+            echo "New website - https://api.deriv.com"
 
 jobs:
   build:
