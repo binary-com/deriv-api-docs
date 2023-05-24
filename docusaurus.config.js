@@ -27,7 +27,21 @@ const config = {
     locales: ['en'],
   },
 
-  plugins: ['@docusaurus/theme-live-codeblock', 'docusaurus-plugin-sass'],
+  plugins: [
+    '@docusaurus/theme-live-codeblock',
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/docs/intro',
+            from: '/docs',
+          },
+        ],
+      },
+    ],
+  ],
 
   presets: [
     [
