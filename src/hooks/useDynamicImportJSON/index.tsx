@@ -62,7 +62,7 @@ const useDynamicImportJSON = () => {
           setResponseInfo(data);
         })
         .catch(() => {
-          setRequestInfo({});
+          setResponseInfo({});
         });
     },
     [setRequestInfo, setResponseInfo],
