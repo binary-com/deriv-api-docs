@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useAlternatePageUtils } from '@docusaurus/theme-common/internal';
 import { translate } from '@docusaurus/Translate';
@@ -7,10 +7,8 @@ import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import type { LinkLikeNavbarItemProps } from '@theme/NavbarItem';
 import type { Props } from '@theme/NavbarItem/LocaleDropdownNavbarItem';
 
-import styles from './styles.module.css';
-
 export default function LocaleDropdownNavbarItem({
-  mobile,
+  // mobile,
   dropdownItemsBefore,
   dropdownItemsAfter,
   ...props
@@ -40,9 +38,9 @@ export default function LocaleDropdownNavbarItem({
           ? // Similar idea as DefaultNavbarItem: select the right Infima active
             // class name. This cannot be substituted with isActive, because the
             // target URLs contain `pathname://` and therefore are not NavLinks!
-            mobile
-            ? 'menu__link--active'
-            : 'dropdown__link--active'
+            // mobile
+            // ? 'menu__link--active' :
+            'dropdown__link--active'
           : '',
     };
   });
@@ -50,18 +48,18 @@ export default function LocaleDropdownNavbarItem({
   const items = [...dropdownItemsBefore, ...localeItems, ...dropdownItemsAfter];
 
   // Mobile is handled a bit differently
-  const dropdownLabel = mobile
-    ? translate({
-        message: 'Languages',
-        id: 'theme.navbar.mobileLanguageDropdown.label',
-        description: 'The label for the mobile language switcher dropdown',
-      })
-    : localeConfigs[currentLocale].label;
+  const dropdownLabel =
+    // mobile  ? translate({
+    //       message: 'Languages',
+    //       id: 'theme.navbar.mobileLanguageDropdown.label',
+    //       description: 'The label for the mobile language switcher dropdown',
+    //     }) :
+    localeConfigs[currentLocale].label;
 
   return (
     <DropdownNavbarItem
       {...props}
-      mobile={mobile}
+      // mobile={mobile}
       label={<>{dropdownLabel === 'English' ? 'EN' : 'PT'}</>}
       items={items}
     />

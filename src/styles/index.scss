@@ -275,22 +275,25 @@ main[class*='docMainContainer'] .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: rem(1.6);
-  padding: rem(2.4) rem(2.4);
+  padding: rem(1.6) rem(1.6);
   background-color: var(--colors-greyLight100);
   border-radius: rem(0.8);
-  box-shadow: 0 0 rem(2) #0000000d, 0 rem(1.6) rem(1.6) #0000000d;
+  box-shadow: 0 0 rem(2) rgba(0, 0, 0, 0.05), 0 rem(1.6) rem(1.6) rgba(0, 0, 0, 0.05);
   visibility: visible;
 }
 
 .navbar__items--right .dropdown__link {
   font-weight: normal;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: rem(1.6);
+  line-height: rem(2.4);
 }
 
 .dropdown {
   height: 100%;
   padding-top: rem(2.5);
+  @media screen {
+    display: grid;
+  }
 }
 
 .dropdown:hover {
@@ -306,4 +309,8 @@ main[class*='docMainContainer'] .container {
 
 .dropdown__link--active:hover {
   color: var(--colors-coral500);
+}
+
+.menu__list-item:last-child {
+  display: none;
 }
