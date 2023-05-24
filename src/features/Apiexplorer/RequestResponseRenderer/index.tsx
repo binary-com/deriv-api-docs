@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { TSocketEndpointNames, TSocketRequestProps } from '@site/src/configs/websocket/types';
 import { Button } from '@deriv/ui';
 import useWS from '@site/src/hooks/useWs';
@@ -20,6 +20,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
+  const AUTH_ENABLED = 1;
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
   const { full_response, is_loading, send, clear, error } = useWS<T>(name);
@@ -43,7 +44,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
   };
 
   const handleClick = useCallback(() => {
-    if (auth === 1) setToggleModal(true);
+    if (auth === AUTH_ENABLED) setToggleModal(true);
     clear();
     send(parseRequestJSON());
     setResponseState(true);

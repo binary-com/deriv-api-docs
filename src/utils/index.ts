@@ -7,6 +7,7 @@ import {
   PRODUCTION_APP_ID,
   STAGING_APP_ID,
   VERCEL_DEPLOYMENT_APP_ID,
+  OAUTH_URL,
 } from './constants';
 
 const CURRENCY_MAP = new Map([
@@ -130,18 +131,21 @@ export const getServerConfig = () => {
       return {
         serverUrl: config_server_url,
         appId: config_app_id,
+        oauth: OAUTH_URL,
       };
     } else {
       const isLocalHost = isHost('localhost');
       return {
         serverUrl: DEFAULT_WS_SERVER,
         appId: getAppId(isLocalHost),
+        oauth: OAUTH_URL,
       };
     }
   } else {
     return {
       serverUrl: DEFAULT_WS_SERVER,
       appId: getAppId(false),
+      oauth: OAUTH_URL,
     };
   }
 };
