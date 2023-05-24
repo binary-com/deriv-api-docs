@@ -106,10 +106,6 @@ const config = {
         disableSwitch: true,
         respectPrefersColorScheme: false,
       },
-      announcementBar: {
-        id: 'announcementBar-2', // Increment on change
-        content: `⭐️ This project is still in progress, we'll add more contents and features everyday, so stay tuned!`,
-      },
     }),
 };
 
