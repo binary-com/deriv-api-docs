@@ -1,7 +1,13 @@
 import moment from 'moment';
 import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
+import {
+  DEFAULT_WS_SERVER,
+  LOCALHOST_APP_ID,
+  PRODUCTION_APP_ID,
+  STAGING_APP_ID,
+  VERCEL_DEPLOYMENT_APP_ID,
+} from './constants';
 
 const CURRENCY_MAP = new Map([
   ['Demo', { icon: 'demo', name: 'Demo' }],
@@ -43,8 +49,8 @@ export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
  *
  * @returns {boolean} return true if the window hostname contains `localhost`
  */
-export const getIsLocalhost = () => {
-  return window.location.hostname.includes('localhost') ? true : false;
+export const isHost = (hostname: string) => {
+  return window.location.hostname.includes(hostname) ? true : false;
 };
 
 /**
@@ -53,7 +59,14 @@ export const getIsLocalhost = () => {
  * @returns {string} proper appId for the project
  */
 export const getAppId = (isLocalHost: boolean) => {
-  return isLocalHost ? LOCALHOST_APP_ID : VERCEL_DEPLOYMENT_APP_ID;
+  if (isLocalHost) return LOCALHOST_APP_ID;
+
+  // if not localhost, then one of the following:
+  if (isHost('staging-api.deriv.com')) return STAGING_APP_ID;
+  if (isHost('deriv-api-docs.binary.sx')) return VERCEL_DEPLOYMENT_APP_ID;
+  if (isHost('api.deriv.com')) return PRODUCTION_APP_ID;
+
+  return VERCEL_DEPLOYMENT_APP_ID;
 };
 
 /**
@@ -119,7 +132,7 @@ export const getServerConfig = () => {
         appId: config_app_id,
       };
     } else {
-      const isLocalHost = getIsLocalhost();
+      const isLocalHost = isHost('localhost');
       return {
         serverUrl: DEFAULT_WS_SERVER,
         appId: getAppId(isLocalHost),
