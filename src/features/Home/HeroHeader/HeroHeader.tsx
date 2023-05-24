@@ -19,7 +19,7 @@ export const HeroHeader = () => {
           Use our powerful, flexible, and free API to build a custom trading <br />
           platform - for yourself or for your business.
         </Text>
-        <a href='/docs/intro'>
+        <a href='/docs/quickstart'>
           <Button type='button' className={styles.HeroButton}>
             Read the docs
           </Button>

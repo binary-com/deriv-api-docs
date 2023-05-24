@@ -1,5 +1,6 @@
 ---
 title: Introduction
+id: quickstart
 hide_title: false
 draft: false
 sidebar_label: Introduction
