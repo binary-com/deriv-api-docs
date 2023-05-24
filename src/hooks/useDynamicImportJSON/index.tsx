@@ -56,7 +56,7 @@ const useDynamicImportJSON = () => {
         })
         .catch((error) => {
           // eslint-disable-next-line
-          console.log(error);
+          console.error(error);
         });
       import(`../../../config/v3/${selected_value}/receive.json`)
         .then((data) => {
@@ -64,7 +64,7 @@ const useDynamicImportJSON = () => {
         })
         .catch((error) => {
           // eslint-disable-next-line
-          console.log(error);
+          console.error(error);
         });
     },
     [setRequestInfo, setResponseInfo],
