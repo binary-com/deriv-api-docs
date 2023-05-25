@@ -28,7 +28,7 @@ form {
       }
       &.first_step {
         margin-bottom: rem(2.4);
-        &::before { 
+        &::before {
           content: '1';
         }
       }
@@ -118,4 +118,10 @@ form {
   @media screen and (max-width: 765px) {
     grid-template-columns: 1fr;
   }
+}
+
+.helperText {
+  font-size: rem(1.4);
+  padding-left: rem(1);
+  color: var(--colors-greyLight600);
 }
