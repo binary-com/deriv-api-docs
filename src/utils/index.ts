@@ -129,9 +129,9 @@ export const getServerConfig = () => {
     const config_app_id = localStorage.getItem('config.app_id');
     if (config_app_id && config_server_url) {
       return {
-        serverUrl: config_server_url,
+        serverUrl: DEFAULT_WS_SERVER,
         appId: config_app_id,
-        oauth: OAUTH_URL,
+        oauth: config_server_url,
       };
     } else {
       const isLocalHost = isHost('localhost');
