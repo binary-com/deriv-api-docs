@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 
 const useLoginUrl = () => {
   const getUrl = useCallback((language = 'en') => {
-    const { appId, oauth } = getServerConfig();
-    return generateLoginUrl(language, oauth, appId);
+    const { appId, serverUrl } = getServerConfig();
+    return generateLoginUrl(language, serverUrl, appId);
   }, []);
 
   return { getUrl };
