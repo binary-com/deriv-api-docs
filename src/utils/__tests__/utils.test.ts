@@ -1,5 +1,5 @@
 import * as utils from '@site/src/utils';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
+import { LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID, OAUTH_URL } from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
@@ -157,7 +157,7 @@ describe('Get Server Config', () => {
       jest.spyOn(utils, 'getIsBrowser').mockReturnValueOnce(false);
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toEqual(VERCEL_DEPLOYMENT_APP_ID);
-      expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
+      expect(serverConfig.serverUrl).toEqual(OAUTH_URL);
     });
   });
   describe('Given we are in Browser', () => {
@@ -166,7 +166,7 @@ describe('Get Server Config', () => {
     it('Should return default ws server url and vercel deployment appId in LOCALHOST ', () => {
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toEqual(LOCALHOST_APP_ID);
-      expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
+      expect(serverConfig.serverUrl).toEqual(OAUTH_URL);
     });
     it('Should return serverUrl and appId from localstorage in production', () => {
       jest.spyOn(localStorage, 'getItem').mockReturnValueOnce('test.binary.sx');
