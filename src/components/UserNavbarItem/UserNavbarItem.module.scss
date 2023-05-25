@@ -1,5 +1,11 @@
 @use 'src/styles/utility' as *;
 
+.searchButton {
+  width: rem(2.4);
+  height: rem(2.4);
+  background-color: black;
+}
+
 .LogInButton {
   color: var(--colors-coral500);
   font-weight: bold;
