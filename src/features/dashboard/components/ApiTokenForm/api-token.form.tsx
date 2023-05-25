@@ -134,8 +134,11 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           </div>
         </div>
         <div className={styles.customTextInput}>
-          <input type='text' name='name' {...register('name')} />
+          <input type='text' name='name' {...register('name')} placeholder='Token name' />
           <Button type='submit'>Create</Button>
+        </div>
+        <div className={styles.helperText}>
+          <p>Length of token name must be between 2 and 32 characters.</p>
         </div>
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
