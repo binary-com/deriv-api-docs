@@ -12,15 +12,22 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
 
   // This is the only React way to access and focus the search input from the 3rd party library we use
   const focusSearchInput = () => {
-    // For some reason, the DOM places the search input in a child after triggering the search the first time
-    (nav_ref && nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.focus?.()) ||
-      (nav_ref &&
-        nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.firstChild?.focus?.());
+    // For some reason, this library wraps the search in a new element after triggering the search the first time
+    const focusInput = () =>
+      nav_ref && nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.focus?.();
+    const focusNestedInput = () =>
+      nav_ref &&
+      nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.firstChild?.focus?.();
+
+    focusInput() || focusNestedInput();
   };
 
   const closeSearchHotkey = (event) => {
     const press_escape = event.key === 'Escape';
+    const press_cmd_and_k = event.metaKey && event.key === 'k';
+
     if (press_escape) setToggleSearch(false);
+    if (press_cmd_and_k) setToggleSearch(false);
   };
 
   const openSearchHotkey = (event) => {
