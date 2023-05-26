@@ -58,6 +58,9 @@ export class ApiManager {
   public authorize(token: string) {
     return this.derivApi.authorize({ authorize: token });
   }
+  public logout() {
+    this.derivApi.send({ logout: 1 });
+  }
 
   private registerKeepAlive() {
     if (this.pingInterval) {

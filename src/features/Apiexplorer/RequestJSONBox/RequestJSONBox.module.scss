@@ -67,6 +67,22 @@
   }
 }
 
-.modal {
-  padding: rem(1);
+div[role='dialog'] {
+  padding-top: rem(0.8);
+}
+
+@media (max-width: 992px) {
+  div[role='dialog'] {
+    height: unset;
+    width: rem(44);
+    padding-top: rem(0.2);
+  }
+}
+
+@media (max-width: 425px) {
+  div[role='dialog'] {
+    height: unset;
+    width: rem(32);
+    padding-top: rem(0.2);
+  }
 }

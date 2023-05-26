@@ -115,4 +115,7 @@ form {
   grid-template-columns: 0.5fr 0.5fr;
   grid-gap: rem(1.6);
   margin-bottom: rem(2);
+  @media screen and (max-width: 765px) {
+    grid-template-columns: 1fr;
+  }
 }

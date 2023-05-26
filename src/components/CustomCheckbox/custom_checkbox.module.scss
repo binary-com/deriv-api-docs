@@ -5,14 +5,18 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    height: rem(1.6);
     min-width: rem(1.6);
     padding-top: rem(0.8);
     z-index: 0;
     margin-bottom: auto;
     label {
         cursor: pointer;
-        margin-left: rem(2.5);
+        margin-left: rem(1.5);
+    }
+    .checkboxContainer {
+        position: relative;
+        width: rem(1.5);
+        height: rem(1.5);
     }
     .customCheckbox {
         position: absolute;
@@ -23,7 +27,6 @@
         height: rem(1.6);
         border-radius: 2px;
         transition: background-color 0.25s, border-color 0.25s;
-        top: rem(0.5);
         z-index: 1;
     }
     input {

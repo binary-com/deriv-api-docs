@@ -35,8 +35,7 @@ const base_schema = {
     .matches(
       markupPercentageRegex,
       'Your markup value must be equal to or above 0.00 and no more than 5.00.',
-    )
-    .required('Enter a markup value'),
+    ),
   app_id: yup.number(),
 };
 

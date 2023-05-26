@@ -1,26 +1,5 @@
 @use 'src/styles/utility' as *;
 
-.schemaRole {
-  font-size: rem(1.4);
-  line-height: rem(1.4);
-  color: var(--ifm-color-success-light);
-  border: none;
-  margin: rem(0.8) rem(0.8) 0 0;
-  padding: rem(0.6) rem(0.8);
-  border-radius: 4px;
-  background-color: rgba(0, 255, 104, 0.16);
-}
-
-.schemaCode {
-  color: var(--ifm-color-white);
-  font-size: rem(1.4);
-}
-
-.schemaSubText {
-  line-height: rem(1.5);
-  font-size: rem(1.6);
-}
-
 .schemaHeader {
   padding: rem(2.4);
   border-top-left-radius: 6px;
@@ -31,6 +10,7 @@
   .schemaTitle {
     font-size: var(rem(2.4));
     color: var(--ifm-color-white);
+    font-weight: bold;
   }
 
   .schemaDescription {
@@ -105,11 +85,11 @@
   color: var(--ifm-color-secondary-darkest);
   font-family: lucida console, Monaco, monospace;
   padding: rem(0.2);
-  position: relative;
+  position: absolute;
+  right: rem(0.3);
   text-align: right;
   cursor: pointer;
   font-weight: 500;
-  font-size: rem(2);
   transition: opacity 0.2s ease-in-out;
 }
 
@@ -215,18 +195,6 @@
         margin-bottom: rem(1);
       }
     }
-
-    .schemaRole {
-      background-color: rgba(255, 255, 255, 0.16);
-      border: none;
-      font-size: rem(1.4);
-      font-weight: 400;
-      line-height: rem(2.4);
-      color: var(--ifm-color-white);
-      height: fit-content;
-      padding: rem(0.5) rem(0.5);
-      margin: 0 rem(0.5);
-    }
   }
 
   .enumFlex {
@@ -319,8 +287,8 @@
 
 .schemaHeader + .schemaBody > .sourceButtonMain {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: rem(2.4);
+  right: rem(2.4);
   &:hover {
     opacity: 1;
   }
@@ -328,4 +296,8 @@
 
 .schemaHeader:hover + .schemaBody > .sourceButtonMain {
   opacity: 1;
+}
+
+.reactJsonView {
+  margin-bottom: rem(2.4);
 }

@@ -41,20 +41,22 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
   const { tokens, isLoadingTokens } = useApiToken();
 
   return (
-    <div className={styles.api_table} {...props}>
-      <Circles
-        height='100'
-        width='100'
-        color='#d44c0d'
-        ariaLabel='circles-loading'
-        wrapperClass='loading'
-        visible={isLoadingTokens}
-      />
-      <Table
-        columns={tableColumns}
-        data={tokens}
-        initialState={{ hiddenColumns: ['valid_for_ip'] }}
-      />
+    <div className={styles.api_table_container}>
+      <div className={styles.api_table} {...props}>
+        <Circles
+          height='100'
+          width='100'
+          color='#d44c0d'
+          ariaLabel='circles-loading'
+          wrapperClass='loading'
+          visible={isLoadingTokens}
+        />
+        <Table
+          columns={tableColumns}
+          data={tokens}
+          initialState={{ hiddenColumns: ['valid_for_ip'] }}
+        />
+      </div>
     </div>
   );
 };

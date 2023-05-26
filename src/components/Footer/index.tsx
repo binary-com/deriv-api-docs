@@ -16,6 +16,8 @@ const Footer = () => {
           data-testid='community-link'
           style={{ textDecoration: 'none' }}
           href='https://binary.vanillacommunity.com/'
+          target='_blank'
+          rel='noreferrer'
         >
           <button className={styles.communityButton}>Join our community</button>
         </a>

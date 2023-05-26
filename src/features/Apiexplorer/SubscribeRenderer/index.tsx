@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
-  TSocketResponseData,
   TSocketSubscribableEndpointNames,
+  TSocketRequestProps,
 } from '@site/src/configs/websocket/types';
-import { Button, Modal } from '@deriv/ui';
-import style from '../RequestJSONBox/RequestJSONBox.module.scss';
+import { Button } from '@deriv/ui';
+import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import { useCallback } from 'react';
-import BrowserOnly from '@docusaurus/BrowserOnly';
-import { Circles } from 'react-loader-spinner';
 import useSubscription from '@site/src/hooks/useSubscription';
+import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
+import LoginDialog from '../LoginDialog';
+import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
+import ValidDialog from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
   name: T;
@@ -17,102 +18,41 @@ export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNam
   auth: number;
 }
 
-type TPlaygroundSection<T extends TSocketSubscribableEndpointNames> = {
-  loader: boolean;
-  responseState: boolean;
-  data: TSocketResponseData<T>;
-  error: unknown;
-};
-
-export const LoginModal = (visible) => {
-  if (visible?.visible) {
-    return (
-      <Modal defaultOpen>
-        <Modal.Portal>
-          <div className='modal-overlay'>
-            <Modal.Overlay />
-            <Modal.PageContent
-              title={'Authorization Required'}
-              has_close_button
-              has_title_separator
-            >
-              <div className={style.modal}>Please Login to fetch Response</div>
-            </Modal.PageContent>
-          </div>
-        </Modal.Portal>
-      </Modal>
-    );
-  }
-  return null;
-};
-
-const PlaygroundSection = <T extends TSocketSubscribableEndpointNames>({
-  loader,
-  responseState,
-  data,
-  error,
-}: TPlaygroundSection<T>) => {
-  if (loader) {
-    return (
-      <div>
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-        />
-      </div>
-    );
-  }
-  return (
-    <div
-      id='playground-console'
-      className={style.playgroundConsole}
-      data-testid='playground-section'
-    >
-      {responseState && (
-        <BrowserOnly
-          fallback={
-            <Circles
-              height='100'
-              width='100'
-              color='#d44c0d'
-              ariaLabel='circles-loading'
-              wrapperClass='loading'
-            />
-          }
-        >
-          {() => {
-            const ReactJson = require('react-json-view').default;
-            return (
-              <div>
-                {data !== null ? (
-                  <ReactJson src={data} theme='tube' />
-                ) : (
-                  <ReactJson src={error} theme='tube' />
-                )}
-              </div>
-            );
-          }}
-        </BrowserOnly>
-      )}
-    </div>
-  );
-};
-
 function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   name,
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
-  const { data, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
-  const [responseState, setResponseState] = useState(false);
+  const { disableSendRequest } = useDisableSendRequest();
+  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const [response_state, setResponseState] = useState(false);
+  const [toggle_modal, setToggleModal] = useState(false);
+  const [is_not_valid, setIsNotValid] = useState(false);
+
+  useEffect(() => {
+    if (error && error.code === 'AuthorizationRequired') {
+      setToggleModal(true);
+    }
+  }, [error]);
+
+  const parseRequestJSON = () => {
+    let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
+
+    try {
+      request_data = JSON.parse(reqData);
+    } catch (error) {
+      console.error('Could not parse the JSON data while trying to send the request: ', error);
+      setIsNotValid(true);
+      setToggleModal(false);
+    }
+
+    return request_data;
+  };
 
   const handleClick = useCallback(() => {
     unsubscribe();
-    subscribe(JSON.parse(reqData));
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [reqData, subscribe, unsubscribe]);
 
@@ -123,22 +63,25 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 
   return (
     <div>
-      <div className={style.btnWrapper}>
-        <Button color='primary' onClick={handleClick}>
+      <div className={styles.btnWrapper}>
+        <Button color='primary' disabled={disableSendRequest(auth)} onClick={handleClick}>
           Send Request
         </Button>
         <Button color='secondary' onClick={handleClear}>
           Clear
         </Button>
       </div>
-      {!is_logged_in && auth == 1 ? (
-        <LoginModal visible={error} />
+      {is_not_valid ? (
+        <ValidDialog setIsNotValid={setIsNotValid} setToggleModal={setToggleModal} />
+      ) : !is_logged_in && auth == 1 && toggle_modal ? (
+        <LoginDialog setToggleModal={setToggleModal} />
       ) : (
         <PlaygroundSection
           loader={is_loading}
-          responseState={responseState}
-          data={data}
+          response_state={response_state}
+          full_response={full_response}
           error={error}
+          name={name}
         />
       )}
     </div>
