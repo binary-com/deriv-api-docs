@@ -3,7 +3,10 @@
 .searchButton {
   width: rem(2.4);
   height: rem(2.4);
-  background-color: black;
+  background-image: url('/img/search-bold.svg');
+  background-repeat: no-repeat;
+  background-size: rem(1.6) rem(1.6);
+  background-position: center;
 }
 
 .LogInButton {
