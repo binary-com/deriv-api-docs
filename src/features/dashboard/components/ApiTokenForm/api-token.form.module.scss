@@ -99,7 +99,7 @@ form {
     &:focus {
       outline-color: unset;
       outline: 1px solid var(--colors-blue500);
-      border-radius: 3px;
+      border-radius: rem(0.3);
       & ~ label {
         color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
