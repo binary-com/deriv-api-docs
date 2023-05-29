@@ -70,8 +70,16 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
       <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses} target='_blank'>
         Sign up
       </Link>
-      <button onClick={() => setToggleSearch((prev) => !prev)} className={styles.searchButton} />
-      <div className='search-overlay' onClick={() => setToggleSearch(false)} />
+      <button
+        onClick={() => setToggleSearch((prev) => !prev)}
+        className={styles.searchButton}
+        data-testid='dt_search_button'
+      />
+      <div
+        className='search-overlay'
+        onClick={() => setToggleSearch(false)}
+        data-testid='dt_search_overlay'
+      />
     </nav>
   );
 };

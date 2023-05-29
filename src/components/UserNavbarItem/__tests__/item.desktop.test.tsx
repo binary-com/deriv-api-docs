@@ -69,4 +69,63 @@ describe('User Navbar Desktop Item', () => {
       expect(logout_button).toHaveTextContent('Log out');
     });
   });
+  describe('Search popup', () => {
+    beforeEach(() => {
+      render(<UserNavbarDesktopItem is_logged_in={false} authUrl={'https://www.example.com'} />);
+    });
+
+    afterEach(() => {
+      cleanup();
+    });
+
+    it('should be able to open search on hotkey command', async () => {
+      await userEvent.keyboard('{Meta>}[KeyK]{/Meta}');
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+    });
+
+    it('should be able to close search on same hotkey command', async () => {
+      await userEvent.keyboard('{Meta>}[KeyK]{/Meta}');
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+
+      await userEvent.keyboard('{Meta>}[KeyK]{/Meta}');
+
+      expect(navigation.classList.contains('search-closed'));
+    });
+
+    it('should be able to close search when pressing the Escape button', async () => {
+      await userEvent.keyboard('{Meta>}[KeyK]{/Meta}');
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+
+      await userEvent.keyboard('{Escape}');
+
+      expect(navigation.classList.contains('search-closed'));
+    });
+
+    it('should be able to open search when clicking the search button', async () => {
+      const search_button = screen.getByTestId('dt_search_button');
+      await userEvent.click(search_button);
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+    });
+
+    it('should be able to close search when clicking on the overlay', async () => {
+      const search_button = screen.getByTestId('dt_search_button');
+      await userEvent.click(search_button);
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+
+      const search_overlay = screen.getByTestId('dt_search_overlay');
+      await userEvent.click(search_overlay);
+
+      expect(navigation.classList.contains('search-closed'));
+    });
+  });
 });
