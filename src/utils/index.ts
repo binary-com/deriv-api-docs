@@ -2,12 +2,12 @@ import moment from 'moment';
 import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
 import {
-  DEFAULT_WS_SERVER,
   LOCALHOST_APP_ID,
   PRODUCTION_APP_ID,
   STAGING_APP_ID,
   VERCEL_DEPLOYMENT_APP_ID,
   OAUTH_URL,
+  DEFAULT_WS_SERVER,
 } from './constants';
 
 const CURRENCY_MAP = new Map([
@@ -129,9 +129,9 @@ export const getServerConfig = () => {
     const config_app_id = localStorage.getItem('config.app_id');
     if (config_app_id && config_server_url) {
       return {
-        serverUrl: config_server_url,
+        serverUrl: DEFAULT_WS_SERVER,
         appId: config_app_id,
-        oauth: OAUTH_URL,
+        oauth: config_server_url,
       };
     } else {
       const isLocalHost = isHost('localhost');

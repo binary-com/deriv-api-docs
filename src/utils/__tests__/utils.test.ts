@@ -1,5 +1,10 @@
 import * as utils from '@site/src/utils';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
+import {
+  LOCALHOST_APP_ID,
+  VERCEL_DEPLOYMENT_APP_ID,
+  OAUTH_URL,
+  DEFAULT_WS_SERVER,
+} from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
@@ -174,7 +179,7 @@ describe('Get Server Config', () => {
 
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toBe('1234');
-      expect(serverConfig.serverUrl).toBe('test.binary.sx');
+      expect(serverConfig.serverUrl).toBe('ws.binaryws.com');
       expect(localStorage.getItem).toHaveBeenCalledTimes(2);
     });
   });
