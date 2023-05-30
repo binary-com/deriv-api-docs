@@ -127,9 +127,10 @@ export const getServerConfig = () => {
   if (isBrowser) {
     const config_server_url = localStorage.getItem('config.server_url');
     const config_app_id = localStorage.getItem('config.app_id');
+    console.log(config_server_url);
     if (config_app_id && config_server_url) {
       return {
-        serverUrl: DEFAULT_WS_SERVER,
+        serverUrl: config_server_url,
         appId: config_app_id,
         oauth: config_server_url,
       };
