@@ -25,7 +25,7 @@ Please make sure you have all the requirements mentioned below to continue.
 3. Deriv app ID 
 
 :::note
-Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-application) for detailed instructions how to create a Deriv API token and application.
+Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-application.md) for detailed instructions how to create a Deriv API token and application.
 :::
 
 ### API token
@@ -54,15 +54,13 @@ For more information on OAuth2, visit [this guide](https://aaronparecki.com/oau
 
 Here is the visual representation of how the OAuth authorisation connection works:
 
-![OAuth flow](/img/how_oauth_works.png "OAuth flow")
+![OAuth flow](/img/how_oauth_works.png 'OAuth flow')
 
 ## The authentication process
 
 In order to authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application** tab in the **OAuth details** fields. Then, add a login button on your website or app and direct users to **`https://oauth.binary.com/oauth2/authorize?app_id=your_app_id`** where your_app_id is the ID of your app.
 
-
-
-![Deriv OAuth Login](/img/oauth_login.png "Deriv OAuth Login")
+![Deriv OAuth Login](/img/oauth_login.png 'Deriv OAuth Login')
 
 Once a user signs up/logs in, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
 
@@ -74,17 +72,17 @@ The query parameters in the redirect URL are the user's accounts and their relat
 
 ```js
 const user_accounts = [
-    {
-        account: "cr799393",
-        token: "a1-f7pnteezo4jzhpxclctizt27hyeot",
-        currency: "usd"
-    },
-    {
-        account: "vrtc1859315",
-        token: "a1clwe3vfuuus5kraceykdsoqm4snfq",
-        currency: "usd"
-    },
-]
+  {
+    account: 'cr799393',
+    token: 'a1-f7pnteezo4jzhpxclctizt27hyeot',
+    currency: 'usd',
+  },
+  {
+    account: 'vrtc1859315',
+    token: 'a1clwe3vfuuus5kraceykdsoqm4snfq',
+    currency: 'usd',
+  },
+];
 ```
 To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the user's **selected** account **session token**:
 ```js

@@ -1,10 +1,15 @@
 import * as utils from '@site/src/utils';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
+import {
+  LOCALHOST_APP_ID,
+  VERCEL_DEPLOYMENT_APP_ID,
+  OAUTH_URL,
+  DEFAULT_WS_SERVER,
+} from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
   getIsBrowser,
-  getIsLocalhost,
+  isHost,
   getServerConfig,
   getCurrencyObject,
 } = utils;
@@ -33,8 +38,19 @@ describe('Get App ID', () => {
     expect(appId).toBe('35074');
   });
   it("Should return 35073 when it's called in vercel environment", () => {
+    window.location.hostname = 'deriv-api-docs.binary.sx';
     const appId = getAppId(false);
     expect(appId).toBe('35073');
+  });
+  it("Should return 36545 when it's called in staging environment", () => {
+    window.location.hostname = 'staging-api.deriv.com';
+    const appId = getAppId(false);
+    expect(appId).toBe('36545');
+  });
+  it("Should return 36544 when it's called in production environment", () => {
+    window.location.hostname = 'api.deriv.com';
+    const appId = getAppId(false);
+    expect(appId).toBe('36544');
   });
 });
 
@@ -65,19 +81,19 @@ describe('Format Token Scope', () => {
 describe('Get Is Localhost', () => {
   it('Should return true when hostname is localhost.binary.sx', () => {
     window.location.hostname = 'localhost.binary.sx';
-    const isLocalhost = getIsLocalhost();
+    const isLocalhost = isHost('localhost');
     expect(isLocalhost).toBeTruthy();
   });
 
   it('Should return true when hostname contains localhost', () => {
     window.location.hostname = 'localhost:3000';
-    const isLocalhost = getIsLocalhost();
+    const isLocalhost = isHost('localhost');
     expect(isLocalhost).toBeTruthy();
   });
 
   it('Should return false when hostname is vercel deployment', () => {
     window.location.hostname = 'deriv-api-docs.binary.sx';
-    const isLocalHost = getIsLocalhost();
+    const isLocalHost = isHost('localhost');
     expect(isLocalHost).toBeFalsy();
   });
 });
@@ -163,7 +179,7 @@ describe('Get Server Config', () => {
 
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toBe('1234');
-      expect(serverConfig.serverUrl).toBe('test.binary.sx');
+      expect(serverConfig.serverUrl).toBe('ws.binaryws.com');
       expect(localStorage.getItem).toHaveBeenCalledTimes(2);
     });
   });

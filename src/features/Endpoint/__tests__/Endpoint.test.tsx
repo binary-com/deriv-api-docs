@@ -23,9 +23,9 @@ describe('Endpoint', () => {
   it('should have default values in input fields', () => {
     const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
-    expect(server).toHaveValue('green.binaryws.com');
+    expect(server).toHaveValue('oauth.deriv.com');
 
-    expect(app_id).toHaveValue('35014');
+    expect(app_id).toHaveValue('35073');
   });
 
   it('validate user inputs, and provides error messages for app id field', async () => {

@@ -17,7 +17,6 @@ export default function ApiExplorerFeatures() {
     response_info,
     handleTextAreaInput,
   } = useDynamicImportJSON();
-
   const has_info = Object.keys(request_info).length === 0;
   return (
     <div className={styles.playgroundContent}>

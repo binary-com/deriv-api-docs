@@ -18,13 +18,13 @@
     "typecheck": "tsc",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,md,json}' --config ./.prettierrc",
-    "prepare": "husky install"
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@deriv/deriv-api": "^1.0.11",
     "@deriv/ui": "^0.1.0",
     "@docusaurus/core": "^2.4.0",
+    "@docusaurus/plugin-client-redirects": "^2.4.0",
     "@docusaurus/preset-classic": "^2.4.0",
     "@docusaurus/theme-live-codeblock": "^2.4.0",
     "@hookform/resolvers": "^2.9.10",

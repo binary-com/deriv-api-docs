@@ -5,7 +5,7 @@ import * as utils from '@site/src/utils';
 
 jest
   .spyOn(utils, 'getServerConfig')
-  .mockReturnValue({ appId: '1234', serverUrl: 'test.binary.sx' });
+  .mockReturnValue({ appId: '1234', serverUrl: 'test.binary.sx', oauth: 'test.oauth.sx' });
 
 describe('Use Login URL', () => {
   afterEach(() => {
@@ -23,7 +23,7 @@ describe('Use Login URL', () => {
 
     expect(loginUrl).toContain('l=en');
     expect(utils.getServerConfig).toHaveBeenCalled();
-    expect(loginUrl).toMatch(/https:\/\/test.binary.sx/);
+    expect(loginUrl).toMatch('https://test.oauth.sx/oauth2/authorize?app_id=1234&l=en');
     expect(loginUrl).toMatch(/app_id=1234/);
   });
 
@@ -37,7 +37,7 @@ describe('Use Login URL', () => {
 
     expect(loginUrl).toContain('l=es');
     expect(utils.getServerConfig).toHaveBeenCalled();
-    expect(loginUrl).toMatch(/https:\/\/test.binary.sx/);
+    expect(loginUrl).toMatch('https://test.oauth.sx/oauth2/authorize?app_id=1234&l=es');
     expect(loginUrl).toMatch(/app_id=1234/);
   });
 });
