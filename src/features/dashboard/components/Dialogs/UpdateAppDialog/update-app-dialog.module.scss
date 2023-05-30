@@ -1,9 +1,10 @@
 @use 'src/styles/utility' as *;
 
 .update_dialog {
-  height: 80vh;
+  height: 80vh !important;
   overflow: auto;
   width: 80vw;
+
   .update_app_content {
     margin: rem(2);
   }

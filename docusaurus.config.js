@@ -27,7 +27,21 @@ const config = {
     locales: ['en'],
   },
 
-  plugins: ['@docusaurus/theme-live-codeblock', 'docusaurus-plugin-sass'],
+  plugins: [
+    '@docusaurus/theme-live-codeblock',
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/docs/intro',
+            from: '/docs',
+          },
+        ],
+      },
+    ],
+  ],
 
   presets: [
     [
@@ -105,10 +119,6 @@ const config = {
         defaultMode: 'light',
         disableSwitch: true,
         respectPrefersColorScheme: false,
-      },
-      announcementBar: {
-        id: 'announcementBar-2', // Increment on change
-        content: `⭐️ This project is still in progress, we'll add more contents and features everyday, so stay tuned!`,
       },
     }),
 };

@@ -6,10 +6,15 @@ import {
 } from '@site/src/configs/websocket/types';
 import { useCallback, useState } from 'react';
 
+type TError = {
+  code?: string;
+  message?: string;
+};
+
 const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) => {
   const [is_loading, setIsLoading] = useState(false);
   const [is_subscribed, setSubscribed] = useState(false);
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState<TError>();
   const [data, setData] = useState<TSocketResponseData<T>>();
   const [full_response, setFullResponse] = useState<TSocketResponse<T>>();
   const [subscriber, setSubscriber] = useState<{ unsubscribe?: VoidFunction }>();

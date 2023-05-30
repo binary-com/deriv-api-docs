@@ -5,9 +5,8 @@ import userEvent from '@testing-library/user-event';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, act } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
@@ -44,6 +43,8 @@ const mockUseDynamicImportJSON = useDynamicImportJSON as jest.MockedFunction<
   () => Partial<ReturnType<typeof useDynamicImportJSON>>
 >;
 
+const mockHandleSelectChange = jest.fn();
+
 mockUseDynamicImportJSON.mockImplementation(() => ({
   request_info: {
     auth_required: 1,
@@ -56,6 +57,7 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
     title: 'this is a test title',
   },
   setSelected: jest.fn(),
+  handleTextAreaInput: mockHandleSelectChange,
   handleSelectChange: jest.fn(),
   text_data: {
     name: null,
@@ -148,6 +150,13 @@ describe('ApiExplorerFeatures', () => {
 
       await userEvent.click(close_button);
       expect(dialog).not.toBeVisible();
+    });
+
+    it('should change the text when writing in the textbox', async () => {
+      const json_box = screen.getByPlaceholderText('Request JSON');
+      expect(json_box).toBeVisible();
+      await userEvent.type(json_box, 'test123');
+      expect(mockHandleSelectChange).toHaveBeenCalled();
     });
   });
 

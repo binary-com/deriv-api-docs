@@ -28,7 +28,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
-  const [is_valid, setIsValid] = useState(false);
+  const [is_not_valid, setIsNotValid] = useState(false);
+
+  useEffect(() => {
+    if (error && error.code === 'AuthorizationRequired') {
+      setToggleModal(true);
+    }
+  }, [error]);
 
   const parseRequestJSON = () => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -37,8 +43,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
       request_data = JSON.parse(reqData);
     } catch (error) {
       console.error('Could not parse the JSON data while trying to send the request: ', error);
-      console.log(error);
-      setIsValid(true);
+      setIsNotValid(true);
       setToggleModal(false);
     }
 
@@ -66,8 +71,8 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           Clear
         </Button>
       </div>
-      {is_valid ? (
-        <ValidDialog setIsValid={setIsValid} setToggleModal={setToggleModal} />
+      {is_not_valid ? (
+        <ValidDialog setIsNotValid={setIsNotValid} setToggleModal={setToggleModal} />
       ) : !is_logged_in && auth == 1 && toggle_modal ? (
         <LoginDialog setToggleModal={setToggleModal} />
       ) : (
