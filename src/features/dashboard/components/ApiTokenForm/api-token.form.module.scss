@@ -107,6 +107,9 @@ form {
         transform: translateY(rem(-2)) scale(0.75);
       }
     }
+    &::placeholder {
+      color: var(--colors-greyLight600);
+    }
   }
 }
 
