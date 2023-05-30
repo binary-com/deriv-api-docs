@@ -52,7 +52,7 @@ console.log("we will create our websocket connection here");
     <title>Deriv HTML JS Demo</title>
   </head>
   <body>
-    <h2>Deriv Websocket API demo</h2>
+    <h2>Deriv WebSocket API demo</h2>
     <script src="index.js" async defer />
   </body>
 </html>
@@ -60,4 +60,4 @@ console.log("we will create our websocket connection here");
 
 After adding the content, we can run the application by simply executing the `index.html` file or by using the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">Live Server Extension</a>. When running your app, see in the console if the `console.log` is appearing. Then you know that the JavaScript file is working so that the websocket connection can be implemented properly.
 
-For setting up the Deriv websocket, you can proceed to the [Websocket connection](/docs/languages/javascript/websocket-connection) page.
+For setting up the Deriv websocket, you can proceed to the [WebSocket connection](/docs/languages/javascript/websocket-connection) page.

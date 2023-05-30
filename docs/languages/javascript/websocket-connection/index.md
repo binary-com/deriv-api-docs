@@ -72,10 +72,10 @@ Now, open the `index.html` file in our browser and check your developer console.
 
 ### Send and receive data
 
-Our WebSocket server provides a [Ping](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
+Our WebSocket server provides a [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
 
 :::caution
-The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob` and `TypedArray`, `DataView` data types. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
+The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView` data types. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
 :::
 
 ```js title="index.js"
@@ -110,12 +110,12 @@ Congratulations :tada:
 You just created your first demo project with WebSockets.
 
 :::tip
-The `Ping` request is mostly used to test the connection or to keep it alive.
+The `ping` request is mostly used to test the connection or to keep it alive.
 :::
 
 ### Keep WebSocket connection alive
 
-By default, the `Websocket connections` will be closed when no traffic is sent between them for around **180 seconds**. One way to keep the connection alive is by sending a [Ping](/api-explorer#ping) request with intervals of **120 seconds**. This way you will keep the connection alive and active.
+By default, `WebSocket connections` will be closed when no traffic is sent between them for around **180 seconds**. One way to keep the connection alive is by sending a [ping](/api-explorer#ping) request with intervals of **120 seconds**. This way you will keep the connection alive and active.
 
 A simple setup example would be the following:
 
@@ -141,7 +141,7 @@ websocket.addEventListener('close', (event) => {
 });
 ```
 
-Now, when the connection is `established`, we start sending `Ping` requests with `12000ms` intervals.
+Now, when the connection is `established`, we start sending `ping` requests with `12000ms` intervals.
 
 Your final code should be:
 

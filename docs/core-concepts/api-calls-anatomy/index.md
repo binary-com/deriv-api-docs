@@ -87,12 +87,12 @@ Whatever you pass to this field will be returned back to you inside a `response`
 You may need to `tag` your requests and pass them through our `WebSocket` calls. you can do it by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
 
 :::caution
-There may be other optional fields for a request which are only related to that API call, please check our [API Explorer](https://api.deriv.com/api-explorer) to get familiar with them.
+To learn about additional optional fields specific to each API call, please refer to our [API Explorer](https://api.deriv.com/api-explorer).
 :::
 
 ## Response data
 
-When you get the response for the call, there will be a `Field` with the same name as the `method name`. and it contains the actual data.
+When you get the response for the call, there will be a `Field` with the same name as the `method name`, which contains the actual data.
 
 The response for the `Residence List` call:
 
@@ -163,7 +163,7 @@ The response for the `Residence List` call:
 };
 ```
 
-Here the `residence_list` is the `method name` and it contains the actual data you requested. rest of the array is removed here for brevity sake, you can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
+Here the `residence_list` is the `method name`, and it contains the actual data you requested. To keep it short, we haven't included the rest of the array. You can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
 
 #### The `echo_req` field
 

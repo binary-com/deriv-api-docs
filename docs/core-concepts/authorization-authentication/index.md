@@ -12,7 +12,7 @@ keywords:
   - deriv-authorisation
 description: Deriv API authorisation and authentication
 ---
-Without authorisation and authentication you'll only get access to roughly half of our API calls and features. For example in order to buy contracts or utilise the `Copy Trading` features, your users must be authenticated and authorised by our **OAuth** provider and **WebSocket Server**.
+Without authorisation and authentication you'll only get access to roughly half of our API calls and features. For example, in order to buy contracts or utilise the `Copy Trading` features, your users must be authenticated and authorised by our **OAuth** provider and **WebSocket Server**.
 
 ## Before we start
 
@@ -64,7 +64,7 @@ In order to authenticate your user, specify the URL that will be used as the OAu
 
 ![Deriv OAuth Login](/img/oauth_login.png "Deriv OAuth Login")
 
-Once a user signs up or logs in, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
+Once a user signs up/logs in, they will be redirected to the URL that you entered as the Redirect URL. This URL will have arguments added to it with the user's session tokens, and will look similar to this:
 
 `https://[YOUR_WEBSITE_URL]/redirect/?acct1=cr799393& token1=a1-f7pnteezo4jzhpxclctizt27hyeot&cur1=usd& acct2=vrtc1859315& token2=a1clwe3vfuuus5kraceykdsoqm4snfq& cur2=usd`
 
@@ -93,7 +93,7 @@ To authorise the user based on the user's **selected** account, call the [author
 }
 ```
 
-The response for the `authorize` call would be an object like so:
+The response for the `authorize` call would be an object as below:
 ```js
 {
     "account_list": [
