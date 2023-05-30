@@ -179,7 +179,7 @@ describe('Get Server Config', () => {
 
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toBe('1234');
-      expect(serverConfig.serverUrl).toBe('ws.binaryws.com');
+      expect(serverConfig.serverUrl).toBe('test.binary.sx');
       expect(localStorage.getItem).toHaveBeenCalledTimes(2);
     });
   });
