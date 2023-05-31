@@ -11,7 +11,7 @@ interface IEndpointFormValues {
 }
 const EndPoint = () => {
   const default_endpoint = {
-    app_id: getAppId(false),
+    app_id: getAppId(),
     server_url: OAUTH_URL,
   };
 

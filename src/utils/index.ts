@@ -59,10 +59,9 @@ export const isHost = (hostname: string) => {
  * @param isLocalHost {boolean} pass `true` if the project is running on localhost
  * @returns {string} proper appId for the project
  */
-export const getAppId = (isLocalHost: boolean) => {
-  if (isLocalHost) return LOCALHOST_APP_ID;
-
+export const getAppId = () => {
   // if not localhost, then one of the following:
+  if (isHost('localhost')) return LOCALHOST_APP_ID;
   if (isHost('staging-api.deriv.com')) return STAGING_APP_ID;
   if (isHost('deriv-api-docs.binary.sx')) return VERCEL_DEPLOYMENT_APP_ID;
   if (isHost('api.deriv.com')) return PRODUCTION_APP_ID;
@@ -135,7 +134,7 @@ export const getServerConfig = () => {
     const isLocalHost = isHost('localhost');
     return {
       serverUrl: DEFAULT_WS_SERVER,
-      appId: getAppId(isLocalHost),
+      appId: getAppId(),
       oauth: OAUTH_URL,
     };
   }

@@ -34,22 +34,23 @@ describe('Get an object with currency data', () => {
 
 describe('Get App ID', () => {
   it("Should return 35074 when it's called in localhost environment", () => {
-    const appId = getAppId(true);
+    window.location.hostname = 'localhost';
+    const appId = getAppId();
     expect(appId).toBe('35074');
   });
   it("Should return 35073 when it's called in vercel environment", () => {
     window.location.hostname = 'deriv-api-docs.binary.sx';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('35073');
   });
   it("Should return 36545 when it's called in staging environment", () => {
     window.location.hostname = 'staging-api.deriv.com';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('36545');
   });
   it("Should return 36544 when it's called in production environment", () => {
     window.location.hostname = 'api.deriv.com';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('36544');
   });
 });
