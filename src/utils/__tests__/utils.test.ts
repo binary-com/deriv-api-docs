@@ -1,5 +1,5 @@
 import * as utils from '@site/src/utils';
-import { LOCALHOST_APP_ID, DEFAULT_WS_SERVER } from '../constants';
+import { LOCALHOST_APP_ID, DEFAULT_WS_SERVER, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
@@ -158,10 +158,18 @@ describe('Get Server Config', () => {
     jest.clearAllMocks();
   });
 
+  describe('Given we are in SSR ( no browser object ) ', () => {
+    it('Should return default ws server url and appId while SSR', () => {
+      jest.spyOn(utils, 'getIsBrowser').mockReturnValueOnce(false);
+      const serverConfig = getServerConfig();
+      expect(serverConfig.appId).toEqual(LOCALHOST_APP_ID);
+      expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
+    });
+  });
+
   describe('Given we are in Browser', () => {
     jest.spyOn(utils, 'getIsBrowser').mockReturnValue(true);
-
-    it('Should return default ws server url and vercel deployment appId in LOCALHOST ', () => {
+    it('Should return default ws server url and localhost appId', () => {
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toEqual(LOCALHOST_APP_ID);
       expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
