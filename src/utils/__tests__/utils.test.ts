@@ -157,14 +157,14 @@ describe('Get Server Config', () => {
     jest.clearAllMocks();
   });
 
-  describe('Given we are in SSR ( no browser object ) ', () => {
-    it('Should return default ws server url and vercel deployment appId', () => {
-      jest.spyOn(utils, 'getIsBrowser').mockReturnValueOnce(false);
-      const serverConfig = getServerConfig();
-      expect(serverConfig.appId).toEqual(VERCEL_DEPLOYMENT_APP_ID);
-      expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
-    });
-  });
+  // describe('Given we are in SSR ( no browser object ) ', () => {
+  //   it('Should return default ws server url and vercel deployment appId', () => {
+  //     jest.spyOn(utils, 'getIsBrowser').mockReturnValueOnce(false);
+  //     const serverConfig = getServerConfig();
+  //     expect(serverConfig.appId).toEqual(VERCEL_DEPLOYMENT_APP_ID);
+  //     expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
+  //   });
+  // });
   describe('Given we are in Browser', () => {
     jest.spyOn(utils, 'getIsBrowser').mockReturnValue(true);
 

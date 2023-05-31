@@ -27,9 +27,12 @@ const EndPoint = () => {
     },
   });
 
+  const refreshWhenSubmitted = () => window.location.reload();
+
   const onSubmit = (data: IEndpointFormValues) => {
     localStorage.setItem('config.app_id', data.app_id);
     localStorage.setItem('config.server_url', data.server_url);
+    refreshWhenSubmitted();
   };
 
   const onResetClicked = () => {
@@ -37,8 +40,6 @@ const EndPoint = () => {
     localStorage.removeItem('config.server_url');
     window.location.reload();
   };
-
-  const refreshWhenSubmitted = () => window.location.reload();
 
   const server_url = localStorage.getItem('config.server_url') ?? default_endpoint.server_url;
   const app_id = localStorage.getItem('config.app_id') ?? default_endpoint.app_id;
@@ -107,12 +108,7 @@ const EndPoint = () => {
               <div className={styles.urlLink}>{current_url}</div>
             </div>
             <div className={styles.buttons}>
-              <Button
-                type='submit'
-                color='primary'
-                onClick={refreshWhenSubmitted}
-                disabled={Object.keys(errors).length > 0}
-              >
+              <Button type='submit' color='primary' disabled={Object.keys(errors).length > 0}>
                 Submit
               </Button>
               <span style={{ marginLeft: '1.6rem' }} />
