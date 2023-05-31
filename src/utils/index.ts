@@ -60,7 +60,6 @@ export const isHost = (hostname: string) => {
  * @returns {string} proper appId for the project
  */
 export const getAppId = () => {
-  // if not localhost, then one of the following:
   if (isHost('localhost')) return LOCALHOST_APP_ID;
   if (isHost('staging-api.deriv.com')) return STAGING_APP_ID;
   if (isHost('deriv-api-docs.binary.sx')) return VERCEL_DEPLOYMENT_APP_ID;
@@ -131,7 +130,6 @@ export const getServerConfig = () => {
       oauth: config_server_url,
     };
   } else {
-    const isLocalHost = isHost('localhost');
     return {
       serverUrl: DEFAULT_WS_SERVER,
       appId: getAppId(),

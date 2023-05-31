@@ -1,10 +1,5 @@
 import * as utils from '@site/src/utils';
-import {
-  LOCALHOST_APP_ID,
-  VERCEL_DEPLOYMENT_APP_ID,
-  OAUTH_URL,
-  DEFAULT_WS_SERVER,
-} from '../constants';
+import { LOCALHOST_APP_ID, DEFAULT_WS_SERVER } from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
