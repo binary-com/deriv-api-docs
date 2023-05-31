@@ -56,7 +56,6 @@ export const isHost = (hostname: string) => {
 
 /**
  * @description based on the environment which the project is running we must use different appIds, to get the proper redirect url
- * @param isLocalHost {boolean} pass `true` if the project is running on localhost
  * @returns {string} proper appId for the project
  */
 export const getAppId = () => {
@@ -125,6 +124,7 @@ export const getServerConfig = () => {
   if (isBrowser) {
     const config_server_url = localStorage.getItem('config.server_url');
     const config_app_id = localStorage.getItem('config.app_id');
+
     return {
       serverUrl: config_server_url ?? DEFAULT_WS_SERVER,
       appId: config_app_id ?? getAppId(),
@@ -139,8 +139,8 @@ export const getServerConfig = () => {
   }
 };
 
-export const generateLoginUrl = (language: string, serverUrl: string, appId: string) => {
-  return `https://${serverUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
+export const generateLoginUrl = (language: string, oauthUrl: string, appId: string) => {
+  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
 };
 
 interface IScopesLike {
