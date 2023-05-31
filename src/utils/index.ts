@@ -129,7 +129,7 @@ export const getServerConfig = () => {
     const config_app_id = localStorage.getItem('config.app_id');
     if (config_app_id && config_server_url) {
       return {
-        serverUrl: DEFAULT_WS_SERVER,
+        serverUrl: config_server_url,
         appId: config_app_id,
         oauth: config_server_url,
       };
