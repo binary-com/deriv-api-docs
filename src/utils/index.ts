@@ -123,8 +123,6 @@ export const formatTokenScope = (tokenScope: string) => {
 };
 
 export const getServerConfig = () => {
-  // const isBrowser = getIsBrowser();
-  // if (isBrowser) {
   const config_server_url = localStorage.getItem('config.server_url');
   const config_app_id = localStorage.getItem('config.app_id');
   if (config_app_id && config_server_url) {
@@ -141,13 +139,6 @@ export const getServerConfig = () => {
       oauth: OAUTH_URL,
     };
   }
-  // } else {
-  //   return {
-  //     serverUrl: DEFAULT_WS_SERVER,
-  //     appId: getAppId(false),
-  //     oauth: OAUTH_URL,
-  //   };
-  // }
 };
 
 export const generateLoginUrl = (language: string, serverUrl: string, appId: string) => {

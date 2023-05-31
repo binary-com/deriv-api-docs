@@ -38,7 +38,7 @@ const EndPoint = () => {
   const onResetClicked = () => {
     localStorage.removeItem('config.app_id');
     localStorage.removeItem('config.server_url');
-    window.location.reload();
+    refreshWhenSubmitted();
   };
 
   const server_url = localStorage.getItem('config.server_url') ?? default_endpoint.server_url;
