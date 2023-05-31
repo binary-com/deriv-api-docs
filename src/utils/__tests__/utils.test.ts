@@ -1,10 +1,5 @@
 import * as utils from '@site/src/utils';
-import {
-  LOCALHOST_APP_ID,
-  VERCEL_DEPLOYMENT_APP_ID,
-  OAUTH_URL,
-  DEFAULT_WS_SERVER,
-} from '../constants';
+import { LOCALHOST_APP_ID, DEFAULT_WS_SERVER, VERCEL_DEPLOYMENT_APP_ID } from '../constants';
 const {
   getAccountsFromSearchParams,
   getAppId,
@@ -33,23 +28,29 @@ describe('Get an object with currency data', () => {
 });
 
 describe('Get App ID', () => {
+  it('By default it should return vercel staging ap id if hostname is not listed', () => {
+    window.location.hostname = 'asdfasdf';
+    const appId = getAppId();
+    expect(appId).toBe('35073');
+  });
   it("Should return 35074 when it's called in localhost environment", () => {
-    const appId = getAppId(true);
+    window.location.hostname = 'localhost';
+    const appId = getAppId();
     expect(appId).toBe('35074');
   });
   it("Should return 35073 when it's called in vercel environment", () => {
     window.location.hostname = 'deriv-api-docs.binary.sx';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('35073');
   });
   it("Should return 36545 when it's called in staging environment", () => {
     window.location.hostname = 'staging-api.deriv.com';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('36545');
   });
   it("Should return 36544 when it's called in production environment", () => {
     window.location.hostname = 'api.deriv.com';
-    const appId = getAppId(false);
+    const appId = getAppId();
     expect(appId).toBe('36544');
   });
 });
@@ -158,17 +159,17 @@ describe('Get Server Config', () => {
   });
 
   describe('Given we are in SSR ( no browser object ) ', () => {
-    it('Should return default ws server url and vercel deployment appId', () => {
+    it('Should return default ws server url and appId while SSR', () => {
       jest.spyOn(utils, 'getIsBrowser').mockReturnValueOnce(false);
       const serverConfig = getServerConfig();
-      expect(serverConfig.appId).toEqual(VERCEL_DEPLOYMENT_APP_ID);
+      expect(serverConfig.appId).toEqual(LOCALHOST_APP_ID);
       expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);
     });
   });
+
   describe('Given we are in Browser', () => {
     jest.spyOn(utils, 'getIsBrowser').mockReturnValue(true);
-
-    it('Should return default ws server url and vercel deployment appId in LOCALHOST ', () => {
+    it('Should return default ws server url and localhost appId', () => {
       const serverConfig = getServerConfig();
       expect(serverConfig.appId).toEqual(LOCALHOST_APP_ID);
       expect(serverConfig.serverUrl).toEqual(DEFAULT_WS_SERVER);

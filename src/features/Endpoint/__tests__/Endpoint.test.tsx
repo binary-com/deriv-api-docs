@@ -25,7 +25,7 @@ describe('Endpoint', () => {
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     expect(server).toHaveValue('oauth.deriv.com');
 
-    expect(app_id).toHaveValue('35073');
+    expect(app_id).toHaveValue('35074');
   });
 
   it('validate user inputs, and provides error messages for app id field', async () => {
