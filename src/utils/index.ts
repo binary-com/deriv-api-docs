@@ -121,13 +121,14 @@ export const formatTokenScope = (tokenScope: string) => {
 };
 
 export const getServerConfig = () => {
-  const config_server_url = localStorage.getItem('config.server_url');
-  const config_app_id = localStorage.getItem('config.app_id');
-  if (config_app_id && config_server_url) {
+  const isBrowser = getIsBrowser();
+  if (isBrowser) {
+    const config_server_url = localStorage.getItem('config.server_url');
+    const config_app_id = localStorage.getItem('config.app_id');
     return {
-      serverUrl: config_server_url,
-      appId: config_app_id,
-      oauth: config_server_url,
+      serverUrl: config_server_url ?? DEFAULT_WS_SERVER,
+      appId: config_app_id ?? getAppId(),
+      oauth: config_server_url ?? OAUTH_URL,
     };
   } else {
     return {
