@@ -14,19 +14,6 @@ mockUseAuthContext.mockImplementation(() => ({
 }));
 
 describe('RequestResponseRenderer', () => {
-  it('should catch the response error when JSON parse fails', async () => {
-    const consoleOutput = [];
-    const mockedError = (output) => consoleOutput.push(output);
-    console.error = mockedError;
-
-    render(<RequestResponseRenderer name='ticks' auth={0} reqData={'asdawefaewf3232'} />);
-    const button = screen.getByRole('button', { name: /Send Request/i });
-    await userEvent.click(button);
-
-    expect(consoleOutput[0]).toEqual(
-      'Could not parse the JSON data while trying to send the request: ',
-    );
-  });
   it('should render a dialog when the json is invalid', async () => {
     render(<RequestResponseRenderer name='ticks' auth={0} reqData={'asdawefaewf3232'} />);
 

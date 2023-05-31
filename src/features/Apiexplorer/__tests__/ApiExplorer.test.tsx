@@ -4,6 +4,7 @@ import ApiExplorerFeatures from '..';
 import userEvent from '@testing-library/user-event';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import useSubscription from '@site/src/hooks/useSubscription';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { cleanup, render, screen, act } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
@@ -21,6 +22,12 @@ jest.mock('@docusaurus/router', () => ({
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
+
+jest.mock('@site/src/hooks/useSubscription');
+
+const mockUseSubscription = useSubscription as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useSubscription>>
+>;
 
 jest.mock('@site/src/hooks/useWs');
 
@@ -73,6 +80,14 @@ describe('ApiExplorerFeatures', () => {
         return {
           is_logged_in: false,
           is_authorized: false,
+        };
+      });
+      mockUseSubscription.mockImplementation(() => {
+        return {
+          error: {
+            code: 'AuthorizationRequired',
+            message: 'Please log in.',
+          },
         };
       });
       render(<ApiExplorerFeatures />);
@@ -131,11 +146,33 @@ describe('ApiExplorerFeatures', () => {
       await userEvent.click(close_button);
       expect(dialog).not.toBeVisible();
     });
+
     it('should render ValidDialog and it can be closed', async () => {
       const playground_select = screen.getByText(/select api call/i);
       await userEvent.click(playground_select);
 
       const select_option = screen.getByText(/application: get details/i);
+      expect(select_option).toBeVisible();
+
+      await userEvent.click(select_option);
+
+      const send_request = screen.getByText(/send request/i);
+      await userEvent.click(send_request);
+
+      const dialog = await screen.findByRole('dialog');
+      expect(dialog).toBeVisible();
+
+      const close_button = screen.getByTestId('close-button');
+
+      await userEvent.click(close_button);
+      expect(dialog).not.toBeVisible();
+    });
+
+    it('should render LoginDialog when selecting and requesting balance and it can be closed', async () => {
+      const playground_select = screen.getByText(/select api call/i);
+      await userEvent.click(playground_select);
+
+      const select_option = screen.getByText(/balance/i);
       expect(select_option).toBeVisible();
 
       await userEvent.click(select_option);
