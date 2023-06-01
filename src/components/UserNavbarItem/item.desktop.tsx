@@ -3,11 +3,12 @@ import clsx from 'clsx';
 import React, { useState, useEffect, useRef } from 'react';
 import AccountSwitcher from '../AccountSwitcher';
 import { IUserNavbarItemProps } from './item.types';
+import { useLocation } from '@docusaurus/router';
 import styles from './UserNavbarItem.module.scss';
 
 const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) => {
   const [toggle_search, setToggleSearch] = useState<boolean>(false);
-
+  const location = useLocation();
   const nav_ref = useRef(null);
 
   // This is the only React way to access and focus the search input from the 3rd party library we use
@@ -34,6 +35,10 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
     const press_cmd_and_k = event.metaKey && event.key === 'k';
     if (press_cmd_and_k) setToggleSearch(true);
   };
+
+  useEffect(() => {
+    if (toggle_search) setToggleSearch(false);
+  }, [toggle_search, location]);
 
   useEffect(() => {
     if (toggle_search) {
