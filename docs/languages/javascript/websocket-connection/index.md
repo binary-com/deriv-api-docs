@@ -75,7 +75,7 @@ Now, open the `index.html` file in our browser and check your developer console.
 Our WebSocket server provides a [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
 
 :::caution
-The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView` data types. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
+The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView`. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
 :::
 
 ```js title="index.js"
@@ -115,7 +115,7 @@ The `ping` request is mostly used to test the connection or to keep it alive.
 
 ### Keep WebSocket connection alive
 
-By default, `WebSocket connections` will be closed when no traffic is sent between them for around **180 seconds**. One way to keep the connection alive is by sending a [ping](/api-explorer#ping) request with intervals of **120 seconds**. This way you will keep the connection alive and active.
+By default, `WebSocket connections` will be closed when no traffic is sent between them for around **180 seconds**. One way to keep the connection alive is to send [ping](/api-explorer#ping) requests with intervals of **120 seconds**. This will keep the connection alive and active.
 
 A simple setup example would be the following:
 

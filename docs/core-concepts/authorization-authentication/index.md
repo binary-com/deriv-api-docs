@@ -145,4 +145,4 @@ The response for the `authorize` call would be an object as below:
     "user_id": 12345678
   }
 ```
-Now, the user is authorised, and you use Deriv API calls on behalf of the account.
+Now, the user is authorised, and you can use Deriv API calls on behalf of the account.
