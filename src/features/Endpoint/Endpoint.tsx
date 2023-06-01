@@ -1,18 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text } from '@deriv/ui';
+import { getAppId } from '@site/src/utils';
+import { OAUTH_URL } from '@site/src/utils/constants';
 import styles from './Endpoint.module.scss';
-
-const default_endpoint = {
-  app_id: '35014',
-  server_url: 'green.binaryws.com',
-};
 
 interface IEndpointFormValues {
   app_id: string;
   server_url: string;
 }
 const EndPoint = () => {
+  const default_endpoint = {
+    app_id: getAppId(),
+    server_url: OAUTH_URL,
+  };
+
   const {
     register,
     handleSubmit,
@@ -25,15 +27,18 @@ const EndPoint = () => {
     },
   });
 
+  const refreshWhenSubmitted = () => window.location.reload();
+
   const onSubmit = (data: IEndpointFormValues) => {
     localStorage.setItem('config.app_id', data.app_id);
     localStorage.setItem('config.server_url', data.server_url);
+    refreshWhenSubmitted();
   };
 
   const onResetClicked = () => {
     localStorage.removeItem('config.app_id');
     localStorage.removeItem('config.server_url');
-    window.location.reload();
+    refreshWhenSubmitted();
   };
 
   const server_url = localStorage.getItem('config.server_url') ?? default_endpoint.server_url;

@@ -1,7 +1,14 @@
 import moment from 'moment';
 import { IUserLoginAccount } from '../contexts/auth/auth.context';
 import { TScopes } from '../types';
-import { DEFAULT_WS_SERVER, LOCALHOST_APP_ID, VERCEL_DEPLOYMENT_APP_ID } from './constants';
+import {
+  LOCALHOST_APP_ID,
+  PRODUCTION_APP_ID,
+  STAGING_APP_ID,
+  VERCEL_DEPLOYMENT_APP_ID,
+  OAUTH_URL,
+  DEFAULT_WS_SERVER,
+} from './constants';
 
 const CURRENCY_MAP = new Map([
   ['Demo', { icon: 'demo', name: 'Demo' }],
@@ -43,17 +50,21 @@ export const isNotDemoCurrency = (account: TIsNotDemoCurrency) => {
  *
  * @returns {boolean} return true if the window hostname contains `localhost`
  */
-export const getIsLocalhost = () => {
-  return window.location.hostname.includes('localhost') ? true : false;
+export const isHost = (hostname: string) => {
+  return window.location.hostname.includes(hostname) ? true : false;
 };
 
 /**
  * @description based on the environment which the project is running we must use different appIds, to get the proper redirect url
- * @param isLocalHost {boolean} pass `true` if the project is running on localhost
  * @returns {string} proper appId for the project
  */
-export const getAppId = (isLocalHost: boolean) => {
-  return isLocalHost ? LOCALHOST_APP_ID : VERCEL_DEPLOYMENT_APP_ID;
+export const getAppId = () => {
+  if (isHost('localhost')) return LOCALHOST_APP_ID;
+  if (isHost('staging-api.deriv.com')) return STAGING_APP_ID;
+  if (isHost('deriv-api-docs.binary.sx')) return VERCEL_DEPLOYMENT_APP_ID;
+  if (isHost('api.deriv.com')) return PRODUCTION_APP_ID;
+
+  return VERCEL_DEPLOYMENT_APP_ID;
 };
 
 /**
@@ -113,28 +124,23 @@ export const getServerConfig = () => {
   if (isBrowser) {
     const config_server_url = localStorage.getItem('config.server_url');
     const config_app_id = localStorage.getItem('config.app_id');
-    if (config_app_id && config_server_url) {
-      return {
-        serverUrl: config_server_url,
-        appId: config_app_id,
-      };
-    } else {
-      const isLocalHost = getIsLocalhost();
-      return {
-        serverUrl: DEFAULT_WS_SERVER,
-        appId: getAppId(isLocalHost),
-      };
-    }
+
+    return {
+      serverUrl: config_server_url ?? DEFAULT_WS_SERVER,
+      appId: config_app_id ?? getAppId(),
+      oauth: config_server_url ?? OAUTH_URL,
+    };
   } else {
     return {
       serverUrl: DEFAULT_WS_SERVER,
-      appId: getAppId(false),
+      appId: getAppId(),
+      oauth: OAUTH_URL,
     };
   }
 };
 
-export const generateLoginUrl = (language: string, serverUrl: string, appId: string) => {
-  return `https://${serverUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
+export const generateLoginUrl = (language: string, oauthUrl: string, appId: string) => {
+  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
 };
 
 interface IScopesLike {

@@ -54,27 +54,19 @@ const useDynamicImportJSON = () => {
         .then((data) => {
           setRequestInfo(data);
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log(error);
+        .catch(() => {
+          setRequestInfo({});
         });
       import(`../../../config/v3/${selected_value}/receive.json`)
         .then((data) => {
           setResponseInfo(data);
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.log(error);
+        .catch(() => {
+          setResponseInfo({});
         });
     },
     [setRequestInfo, setResponseInfo],
   );
-  useEffect(() => {
-    const hash_value = hash.split('#')[1];
-    const request_body = playground_requests.find((el) => el.name === hash_value);
-    const is_not_placeholder = text_data.selected_value === request_body?.name;
-    if (is_not_placeholder) dynamicImportJSON(text_data.selected_value);
-  }, [dynamicImportJSON, hash, text_data.selected_value]);
 
   useEffect(() => {
     const hash_value = hash.split('#')[1];

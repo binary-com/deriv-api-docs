@@ -54,7 +54,7 @@ const mockUnsubscribe = jest.fn();
 mockUseSubscription.mockImplementation(() => ({
   subscribe: mockSubscribe,
   unsubscribe: mockUnsubscribe,
-  error: '',
+  error: { code: '' },
   full_response: {
     tick: 1,
     echo_req: { tick: 1 },

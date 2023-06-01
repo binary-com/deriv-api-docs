@@ -20,7 +20,7 @@ const JsonData = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNa
 }: TJsonData<T>) => {
   return (
     <React.Fragment>
-      {full_response !== null ? (
+      {full_response !== null && full_response?.echo_req ? (
         <div className={styles.reactJsonContainer}>
           <ReactJson src={full_response.echo_req} theme='tube' />
           <ReactJson src={full_response} theme='tube' />
