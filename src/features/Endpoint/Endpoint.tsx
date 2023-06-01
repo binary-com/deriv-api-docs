@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text } from '@deriv/ui';
 import styles from './Endpoint.module.scss';
+import Translate from '@docusaurus/Translate';
 
 const default_endpoint = {
   app_id: '35014',
@@ -45,7 +46,7 @@ const EndPoint = () => {
       <form onSubmit={handleSubmit(onSubmit)} aria-label='form'>
         <div className={styles.pageContent}>
           <Text type='heading-2' as={'h2'} align='center' bold role='heading'>
-            Change API endpoint
+            <Translate>Change API endpoint</Translate>
           </Text>
           <div className={styles.content}>
             <div className={styles.customTextInput} id='custom-text-input'>
@@ -66,7 +67,9 @@ const EndPoint = () => {
                   className={styles.textInput}
                   required
                 />
-                <label className={styles.inlineLabel}>Server URL</label>
+                <label className={styles.inlineLabel}>
+                  <Translate>Server URL</Translate>
+                </label>
                 {errors.server_url && (
                   <div data-testid='server_error' className={styles.errorMessage}>
                     {errors.server_url.message}
@@ -90,7 +93,9 @@ const EndPoint = () => {
                   placeholder='e.g. 9999'
                   required
                 />
-                <label className={styles.inlineLabel}>App ID</label>
+                <label className={styles.inlineLabel}>
+                  <Translate>App ID </Translate>
+                </label>
                 {errors.app_id && (
                   <div data-testid='app_id_error' className={styles.errorMessage}>
                     {errors.app_id.message}
@@ -99,12 +104,14 @@ const EndPoint = () => {
               </div>
             </div>
             <div className={styles.currentUrl}>
-              <span className={styles.urlLabel}>Connected to :</span>
+              <span className={styles.urlLabel}>
+                <Translate>Connected to :</Translate>
+              </span>
               <div className={styles.urlLink}>{current_url}</div>
             </div>
             <div className={styles.buttons}>
               <Button type='submit' color='primary' disabled={Object.keys(errors).length > 0}>
-                Submit
+                <Translate>Submit</Translate>
               </Button>
               <span style={{ marginLeft: '1.6rem' }} />
               <Button
@@ -113,7 +120,7 @@ const EndPoint = () => {
                 onClick={onResetClicked}
                 className={styles.resetButton}
               >
-                Reset to original settings
+                <Translate>Reset to original settings</Translate>
               </Button>
             </div>
           </div>

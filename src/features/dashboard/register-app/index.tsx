@@ -7,6 +7,7 @@ import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogE
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
 import { IRegisterAppForm } from '../types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import Translate from '@docusaurus/Translate';
 
 const AppRegistration = () => {
   const { is_loading, send: registerApp, error, clear, data } = useWS('app_register');
@@ -45,7 +46,7 @@ const AppRegistration = () => {
     return (
       <>
         <Button role='submit' disabled={is_loading}>
-          Register Application
+          <Translate>Register Application</Translate>
         </Button>
       </>
     );

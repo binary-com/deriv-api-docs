@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './GetStarted.module.scss';
 import { Text } from '@deriv/ui';
 import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 
 export const GetStarted = () => {
   return (
@@ -15,7 +16,7 @@ export const GetStarted = () => {
           role='heading'
           as='h2'
         >
-          Get started with our API in 3 simple steps:
+          <Translate>Get started with our API in 3 simple steps:</Translate>
         </Text>
         <nav className={styles.cardContainer}>
           <Link
@@ -27,9 +28,11 @@ export const GetStarted = () => {
             <img src='/img/guide.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
-                1. Learn about our API
+                <Translate>1. Learn about our API</Translate>
               </Text>
-              <p>Understand basic concepts and terminologies.</p>
+              <p>
+                <Translate>Understand basic concepts and terminologies.</Translate>
+              </p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />
@@ -45,9 +48,11 @@ export const GetStarted = () => {
             <img src='/img/sign-up.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
-                2. Sign up
+                <Translate>2. Sign up</Translate>
               </Text>
-              <p>Create a free Deriv account to access our API.</p>
+              <p>
+                <Translate>Create a free Deriv account to access our API.</Translate>
+              </p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />
@@ -62,9 +67,11 @@ export const GetStarted = () => {
             <img src='/img/register-your-app.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
-                3. Register your app
+                <Translate>3. Register your app</Translate>
               </Text>
-              <p>Fill out the registration form to start using Deriv API.</p>
+              <p>
+                <Translate>Fill out the registration form to start using Deriv API</Translate>
+              </p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />
@@ -72,14 +79,14 @@ export const GetStarted = () => {
           </Link>
         </nav>
         <span className={styles.termConditions}>
-          By using our API, you confirm that you have read and agreed to our
+          <Translate>By using our API, you confirm that you have read and agreed to our</Translate>
           <Link
             to='https://deriv.com/tnc/business-partners-api-user.pdf'
             target='_blank'
             rel='noopener noreferrer'
           >
             {' '}
-            terms and conditions.
+            <Translate>terms and conditions.</Translate>
           </Link>
         </span>
       </section>

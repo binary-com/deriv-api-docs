@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import Translate from '@docusaurus/Translate';
 
 const schema = yup
   .object({
@@ -107,7 +108,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         <div className={styles.step_title}>
           <div className={`${styles.first_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'first-step-title'}>
-              Select scopes based on the access you need.
+              <Translate>Select scopes based on the access you need.</Translate>
             </Text>
           </div>
         </div>
@@ -129,7 +130,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         <div className={styles.step_title}>
           <div className={`${styles.second_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
-              Name your token and click on Create to generate your token.
+              <Translate>Name your token and click on Create to generate your token.</Translate>
             </Text>
           </div>
         </div>
@@ -140,7 +141,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>
-              Copy and paste the token into the app.
+              <Translate>Copy and paste the token into the app.</Translate>
             </Text>
           </div>
         </div>

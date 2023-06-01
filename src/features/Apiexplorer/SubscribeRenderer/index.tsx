@@ -11,6 +11,7 @@ import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
 import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
 import ValidDialog from '../ValidDialog';
+import Translate from '@docusaurus/Translate';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
   name: T;
@@ -60,10 +61,10 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     <div>
       <div className={styles.btnWrapper}>
         <Button color='primary' disabled={disableSendRequest(auth)} onClick={handleClick}>
-          Send Request
+          <Translate>Send Request</Translate>
         </Button>
         <Button color='secondary' onClick={handleClear}>
-          Clear
+          <Translate>Clear</Translate>
         </Button>
       </div>
       {is_valid ? (
