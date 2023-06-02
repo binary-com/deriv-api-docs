@@ -136,7 +136,7 @@ describe('Update App Dialog', () => {
     });
 
     const appRedirectUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
-      name: 'Authorization URL (optional)',
+      name: 'Authorization URL (required)',
     });
 
     const appVerificationUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
@@ -216,7 +216,7 @@ describe('Update App Dialog', () => {
       name: 'App name (required)',
     });
     const appRedirectUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
-      name: 'Authorization URL (optional)',
+      name: 'Authorization URL (required)',
     });
 
     const appVerificationUrlInput = screen.getByRole<HTMLInputElement>('textbox', {

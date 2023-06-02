@@ -174,7 +174,7 @@ describe('App Form', () => {
     });
 
     const appRedirectUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
-      name: 'Authorization URL (optional)',
+      name: 'Authorization URL (required)',
     });
 
     const appVerificationUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
