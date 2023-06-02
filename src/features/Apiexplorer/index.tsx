@@ -1,5 +1,5 @@
 import { Text } from '@deriv/ui';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dropdown } from './Dropdown/Dropdown';
 import styles from './styles.module.scss';
 import SchemaWrapper from './Schema/SchemaWrapper';
