@@ -30,13 +30,13 @@ Next, create the required files as you see below:
 touch index.html index.css index.js
 ```
 
-Now, you can open the folder with your prefered code editor or IDE.
-
 :::tip
 We suggest using [Visual Studio Code](https://code.visualstudio.com/) with [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) enabled. This will help you a lot with implementations.
 :::
 
-Your final code should be:
+Now open the `index.html` file or use the [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+Now, change the content of the files using the following approach:
 
 ```js title="index.js"
 console.log("we will create our websocket connection here");

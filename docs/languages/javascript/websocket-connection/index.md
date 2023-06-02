@@ -17,10 +17,9 @@ If you're not familiar with WebSockets, please check out [our documentation](/do
 :::
 
 ### Set up a WebSocket connection
+<!-- To create a websocket connection, we want to use the Deriv websocket URL with an `app_id`. You can create your own app_id within your [dashboard](/dashboard) or keep the default `1089` app_id for testing. Keep in mind that eventually, you should make your own app_id. Especially if you would like to monetize your application. -->
 
-To create a websocket connection, we want to use the Deriv websocket URL with an `app_id`. You can create your own app_id within your [dashboard](/dashboard) or keep the default `1089` app_id for testing. Keep in mind that eventually, you should make your own app_id. Especially if you would like to monetize your application.
-
-To setup the connection, add the following code in your JavaScript file:
+Next, we'll create a WebSocket connection to Deriv WebSocket Server as seen below:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
@@ -72,7 +71,7 @@ Now, open the `index.html` file in our browser and check your developer console.
 
 ### Send and receive data
 
-Our WebSocket server provides a [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
+Our WebSocket server provides [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
 
 :::caution
 The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView`. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.

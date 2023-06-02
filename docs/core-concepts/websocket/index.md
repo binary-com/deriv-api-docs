@@ -77,7 +77,7 @@ socket.onerror = function (error) {
 };
 ```
 
-## Why do we need websocket and when should we avoid it?
+## Why do we need WebSockets and when should we avoid them?
 
 WebSocket are an essential client-server communication tool and one needs to be fully aware of its utility and avoid scenarios to benefit from its utmost potential. It’s explained extensively in the next section.
 
@@ -95,25 +95,25 @@ WebSocket shouldn’t be taken onboard when old data fetching is the need of the
 
 ## WebSocket vs HTTP
 
-As both HTTP and WebSocket are employed for application communication, people often get confused and find it difficult to pick one out of these two. Have a look at the below-mentioned text and gain better clarity on HTTP and WebSocket.
+As both HTTP and WebSocket protocols are employed for application communication, people often get confused and find it difficult to pick one.
 
-As told previously, WebSocket is a framed and bidirectional protocol. On the contrary, to this, HTTP is a unidirectional protocol functioning above the TCP protocol.
+As told previously, WebSocket is a framed and bidirectional protocol. On the other hand, HTTP is a unidirectional protocol functioning above the TCP protocol.
 
-As WebSocket protocol is capable to support continual data transmission, it’s majorly used in real-time application development. HTTP is stateless and is used for the development of [RESTful](https://de.wikipedia.org/wiki/Representational_State_Transfer) and [SOAP](https://de.wikipedia.org/wiki/SOAP) applications. Soap can still use HTTP for implementation, but REST is widely spread and used.
+As the WebSocket protocol is capable of supporting continual data transmission, it’s majorly used in real-time application development. HTTP is stateless and is used for the development of [RESTful](https://de.wikipedia.org/wiki/Representational_State_Transfer) and [SOAP](https://de.wikipedia.org/wiki/SOAP) applications. SOAP can still use HTTP for implementation, but REST is widely spread and used.
 
-In WebSocket, communication occurs at both ends, which makes it a faster protocol. In HTTP, the connection is built at one end, making it a bit sluggish than WebSocket.
+In WebSocket, communication occurs at both ends, which makes it a faster protocol. In HTTP, the connection is built at one end, making it a bit more sluggish than WebSocket.
 
 WebSocket uses a unified TCP connection and needs one party to terminate the connection. Until it happens, the connection remains active. HTTP needs to build a distinct connection for separate requests. Once the request is completed, the connection breaks automatically.
 
 ## How are WebSocket connections established?
 
-The process starts with a WebSocket handshake that involves using a new scheme ws or wss. To understand quickly, you may consider them equivalent to HTTP and secure HTTP (HTTPS) respectively.
+The process starts with a WebSocket handshake that involves using a new scheme (ws or wss). To help you understand, consider them equivalent to HTTP and secure HTTP (HTTPS) respectively.
 
-Using this scheme, servers and clients are expected to follow the standard WebSocket connection protocol. The WebSocket connection establishment begins with HTTP request upgrading that features a couple of headers such as Connection: Upgrade, Upgrade: WebSocket, Sec-WebSocket- Key, and so on.
+Using this scheme, servers and clients are expected to follow the standard WebSocket connection protocol. The WebSocket connection establishment begins with a HTTP request upgrading that features a couple of headers such as Connection: Upgrade, Upgrade: WebSocket, Sec-WebSocket- Key, and so on.
 
 Here is how this connection is established:
 
-1. **The Request :** Connection Upgrade header denotes the WebSocket handshake while the Sec-WebSocket-Key features Base64-encoded random value. This value is arbitrarily generated during every WebSocket handshake. Besides the above, the key header is also a part of this request.
+1. **The Request :** The Connection Upgrade header denotes the WebSocket handshake while the Sec-WebSocket-Key features Base64-encoded random value. This value is arbitrarily generated during every WebSocket handshake. Besides the above, the key header is also a part of this request.
 
 The above-listed headers, when combined, form an HTTP GET request. It will have similar data in it:
 
@@ -128,7 +128,7 @@ Sec-WebSocket-Version: 13
 Sec-WebSocket-Key: b6gjhT32u488lpuRwKaOWs==
 ```
 
-To clarify, Sec-WebSocket-Version, one can explain the WebSocket protocol version ready to use for the client.
+To clarify Sec-WebSocket-Version, one can explain the WebSocket protocol version ready to use for the client.
 
 2. **The Response:** The response header, Sec-WebSocket-Accept, features the rest of value submitted in the Sec-WebSocket-Key request header. This is connected with a particular protocol specification and is used widely to keep misleading information at bay. In other words, it enhances the API security and stops ill-configured servers from creating blunders in the application development.
 
