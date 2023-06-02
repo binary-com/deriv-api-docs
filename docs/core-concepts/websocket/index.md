@@ -14,13 +14,13 @@ keywords:
 description: What is a WebSocket?
 ---
 
-## What is a WebSocket?
+## What are WebSockets?
 
-The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between browser and server via a persistent connection. The data can be passed in both directions as “packets”, without breaking the connection and the need of additional HTTP-requests.
+The `WebSocket` protocol, described in the specification [RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455), provides a way to exchange data between the browser and the server via a persistent connection. The data can be passed in both directions as “packets” without breaking the connection or needing additional HTTP requests.
 
 WebSocket is especially great for services that require continuous data exchange, e.g. real-time trading systems and so on.
 
-## A Simple example
+## A simple example
 
 To open a WebSocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url. Here is how you can do that in `JavaScript`:
 
@@ -29,21 +29,21 @@ let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
 
 :::caution
-Always prefer `wss://`. The `wss://` protocol is not only encrypted, but also more reliable.
+Using `wss://` is always the better choice. The `wss://` protocol is not only encrypted, but also more reliable.
 
-That’s because ws:// data is not encrypted, visible for any intermediary. Old proxy servers do not know about WebSocket, they may see “strange” headers and abort the connection.
+On the other hand, the `ws://` data is not encrypted and can be visible to intermediaries. Old proxy servers may encounter "strange" headers and terminate the connection.
 
-On the other hand, `wss://` is WebSocket over TLS, (same as HTTPS is HTTP over TLS), the transport security layer encrypts the data at the sender and decrypts it at the receiver. So data packets are passed encrypted through proxies. They can’t see what’s inside and let them through.
+`wss://` stands for WebSocket over TLS, similar to how HTTPS is HTTP over TLS. With the transport security layer, data is encrypted by the sender and decrypted by the receiver. This means that encrypted data packets can successfully pass through proxies without being inspected.
 :::
 
-Once the socket is created, we should listen to events on it. There are totally 4 events:
+Once the socket is created, we should listen to events on it. There are 4 events altogether:
 
-- open – connection established,
-- message – data received,
-- error – WebSocket error,
-- close – connection closed.
+- Open – Connection established
+- Message – Data received
+- Error – WebSocket error
+- Close – Connection closed
 
-And if we’d like to send a message then socket.send(data) will do that.
+Sending a message can be done via socket.send(data).
 
 Here’s an example in `JavaScript`:
 
@@ -79,17 +79,18 @@ socket.onerror = function (error) {
 
 ## Why do we need WebSockets and when should we avoid them?
 
-WebSocket are an essential client-server communication tool and one needs to be fully aware of its utility and avoid scenarios to benefit from its utmost potential. It’s explained extensively in the next section.
+WebSocket are an essential client-server communication tool. To benefit the most from their potential, it's important to understand how they can be helpful and when it's best to avoid using them. It’s explained extensively in the next section.
 
 Use WebSocket When You Are:
 
-1. ‍Developing real-time web application
-   The most customary use of WebSocket is in real-time application development wherein it assists in a continual display of data at the client end. As the backend server sends back this data continuously, WebSocket allows uninterrupted pushing or transmitting this data in the already open connection. The use of WebSockets makes such data transmission quick and leverages the application's performance.
-2. A real-life example of such WebSocket utility is in the trading websites such as deriv. Here, WebSocket assist in data handling that is impelled by the deployed backend server to the client.
-3. ‍Creating a chat application
-   Chat application developers call out WebSocket for help in operations like a one-time exchange and publishing/broadcasting the messages. As the same WebSocket connection is used for sending/receiving messages, communication becomes easy and quick.
+1. ‍When you're developing a real-time web application. 
+  The most customary use of WebSocket is in real-time application development wherein it assists in a continual display of data at the client end. As the back-end server sends back this data continuously, a WebSocket allows uninterrupted pushing or transmitting of this data in the already open connection. The use of WebSockets makes such data transmission quick and leverages the application's performance.
+2. For trading websites, such as Deriv. 
+  Here, WebSocket assist in data handling that is impelled by the deployed back-end server to the client.
+3. ‍When creating a chat application.
+  Chat application developers call out WebSockets for help in operations like a one-time exchange and publishing/broadcasting messages. As the same WebSocket connection is used for sending/receiving messages, communication becomes easy and quick.
 
-Now that it’s clear where WebSocket should be used, don’t forget to know the cases where it should be avoided and keep yourself away from tons of operational hassles.
+Now that we've established where WebSockets should be used, let's see where it is best to avoid them. This will help you steer clear of unnecessary operational hassles.
 
 WebSocket shouldn’t be taken onboard when old data fetching is the need of the hour or need data only for one-time processing. In these cases, using HTTP protocols is a wise choice.
 
