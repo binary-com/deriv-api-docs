@@ -25,8 +25,10 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
   const [isdisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    if (name === undefined) {
+    if (name === null) {
       setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
     }
   }, [name]);
 
