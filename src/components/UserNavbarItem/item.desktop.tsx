@@ -11,10 +11,6 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
   const location = useLocation();
   const nav_ref = useRef(null);
 
-  useEffect(() => {
-    setToggleSearch(false);
-  }, [location]);
-
   // This is the only React way to access and focus the search input from the 3rd party library we use
   const focusSearchInput = () => {
     // For some reason, this library wraps the search in a new element after triggering the search the first time
@@ -39,6 +35,10 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
     const press_cmd_and_k = event.metaKey && event.key === 'k';
     if (press_cmd_and_k) setToggleSearch(true);
   };
+
+  useEffect(() => {
+    setToggleSearch(false);
+  }, [location]);
 
   useEffect(() => {
     if (toggle_search) {
