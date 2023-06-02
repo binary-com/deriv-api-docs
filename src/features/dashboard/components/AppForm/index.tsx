@@ -190,7 +190,7 @@ const AppForm = ({
                   type='text'
                   placeholder=' '
                 />
-                <label htmlFor='app_redirect_uri'>Authorization URL (optional)</label>
+                <label htmlFor='app_redirect_uri'>Authorization URL (required)</label>
               </div>
               <p className={styles.helperText}>
                 *Please note that this URL will be used as the OAuth redirect URL for the OAuth
