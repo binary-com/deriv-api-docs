@@ -71,7 +71,12 @@ describe('User Navbar Desktop Item', () => {
   });
   describe('Search popup', () => {
     beforeEach(() => {
-      render(<UserNavbarDesktopItem is_logged_in={false} authUrl={'https://www.example.com'} />);
+      render(
+        <React.Fragment>
+          <UserNavbarDesktopItem is_logged_in={false} authUrl={'https://www.example.com'} />
+          <input type='text' placeholder='search' className='navbar__search-input' />
+        </React.Fragment>,
+      );
     });
 
     afterEach(() => {
@@ -83,6 +88,16 @@ describe('User Navbar Desktop Item', () => {
 
       const navigation = screen.getByRole('navigation');
       expect(navigation.classList.contains('search-open'));
+    });
+
+    it('should focus the input after using the hotkey command', async () => {
+      await userEvent.keyboard('{Meta>}[KeyK]{/Meta}');
+
+      const navigation = screen.getByRole('navigation');
+      expect(navigation.classList.contains('search-open'));
+
+      const input = screen.getByPlaceholderText('search');
+      expect(input).toHaveFocus();
     });
 
     it('should be able to close search on same hotkey command', async () => {

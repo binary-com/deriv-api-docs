@@ -11,18 +11,6 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
   const location = useLocation();
   const nav_ref = useRef(null);
 
-  // This is the only React way to access and focus the search input from the 3rd party library we use
-  const focusSearchInput = () => {
-    // For some reason, this library wraps the search in a new element after triggering the search the first time
-    const focusInput = () =>
-      nav_ref && nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.focus?.();
-    const focusNestedInput = () =>
-      nav_ref &&
-      nav_ref?.current?.nextElementSibling?.firstChild?.firstChild?.firstChild?.focus?.();
-
-    focusInput() ?? focusNestedInput();
-  };
-
   const closeSearchHotkey = (event) => {
     const press_escape = event.key === 'Escape';
     const press_cmd_and_k = event.metaKey && event.key === 'k';
@@ -34,6 +22,15 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
   const openSearchHotkey = (event) => {
     const press_cmd_and_k = event.metaKey && event.key === 'k';
     if (press_cmd_and_k) setToggleSearch(true);
+  };
+
+  const focusSearchInput = () => {
+    // Using vanilla JS to get the element since it's a 3rd party library. I cannot access through React.
+    const search_input = document.querySelector('.navbar__search-input');
+    if (search_input) {
+      const focusInput = () => (search_input as HTMLElement).focus();
+      focusInput();
+    }
   };
 
   useEffect(() => {
