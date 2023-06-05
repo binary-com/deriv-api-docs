@@ -28,13 +28,24 @@ describe('HeroHeader', () => {
   it('should render community link properly', () => {
     const community_link = screen.getByTestId('community-link');
     expect(community_link).toBeInTheDocument();
-    expect(community_link).toHaveAttribute('href', 'https://binary.vanillacommunity.com/');
+    expect(community_link).toHaveAttribute('href', 'https://deriv.vanillacommunity.com/');
   });
   it('should render the button inside community link properly', () => {
     const community_link = screen.getByTestId('community-link');
     const { getByRole } = within(community_link);
     const button = getByRole('button');
     expect(button).toHaveTextContent('Join our community');
+  });
+  it('should render telegram link properly', () => {
+    const telegram_link = screen.getByTestId('telegram-link');
+    expect(telegram_link).toBeInTheDocument();
+    expect(telegram_link).toHaveAttribute('href', 'https://t.me/+g6FV5tFY1u9lZGE1');
+  });
+  it('should render the button inside telegram link properly', () => {
+    const telegram_link = screen.getByTestId('telegram-link');
+    const { getByRole } = within(telegram_link);
+    const button = getByRole('button');
+    expect(button).toHaveTextContent('Telegram');
   });
   it('should render footer body texts properly', () => {
     const help_text = screen.getByText(/^we're here to help$/i);
