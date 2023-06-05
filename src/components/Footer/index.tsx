@@ -13,29 +13,23 @@ const Footer = () => {
           Discuss ideas and share solutions with developers worldwide.
         </p>
         <div className={styles.Communities}>
-          <a
+          <button
+            className={styles.communityButton}
+            onClick={() => window.open('https://deriv.vanillacommunity.com/')}
             data-testid='community-link'
-            style={{ textDecoration: 'none' }}
-            href='https://deriv.vanillacommunity.com/'
-            target='_blank'
-            rel='noreferrer'
           >
-            <button className={styles.communityButton}>Join our community</button>
-          </a>
-          <a
+            Join our community
+          </button>
+          <button
+            className={styles.communityButton}
+            onClick={() => window.open('https://t.me/+g6FV5tFY1u9lZGE1')}
             data-testid='telegram-link'
-            style={{ textDecoration: 'none' }}
-            href='https://t.me/+g6FV5tFY1u9lZGE1'
-            target='_blank'
-            rel='noreferrer'
           >
-            <button className={styles.communityButton}>
-              <div className={styles.Telegram}>
-                <img src='/img/telegram.svg' className={styles.TelegramIcon} />
-                <p>Telegram</p>
-              </div>
-            </button>
-          </a>
+            <div className={styles.Telegram}>
+              <img src='/img/telegram.svg' className={styles.TelegramIcon} />
+              <p>Telegram</p>
+            </div>
+          </button>
         </div>
       </section>
       <section className={styles.FooterBody}>
