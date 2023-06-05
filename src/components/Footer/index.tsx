@@ -15,7 +15,7 @@ const Footer = () => {
         <a
           data-testid='community-link'
           style={{ textDecoration: 'none' }}
-          href='https://binary.vanillacommunity.com/'
+          href='https://deriv.vanillacommunity.com/'
           target='_blank'
           rel='noreferrer'
         >
