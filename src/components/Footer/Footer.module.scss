@@ -10,7 +10,7 @@
 
   @media screen and (max-width: 992px) {
     flex-direction: column;
-    gap: rem(2);
+    gap: rem(4);
     padding: rem(4);
   }
 
@@ -47,14 +47,29 @@
       color: var(--ifm-color-danger);
       padding: 0 rem(0.5);
     }
+    .Communities {
+      display: flex;
+      align-items: center;
+      gap: rem(1.7);
+    }
     .communityButton {
       font-family: 'Ubuntu', sans-serif;
       color: var(--ifm-color-white);
       border: 2px solid var(--ifm-color-secondary-darkest);
-      padding: rem(0.5);
-      border-radius: rem(1);
+      padding: rem(0.8) rem(1.6);
+      border-radius: rem(1.7);
       font-size: rem(1.4);
       font-weight: bold;
+    }
+    .Telegram {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: rem(0.8);
+    }
+    .TelegramIcon {
+      width: rem(2);
+      height: rem(1.657);
     }
   }
 }

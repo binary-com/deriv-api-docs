@@ -12,15 +12,31 @@ const Footer = () => {
         <p className={styles.FooterBodyContent}>
           Discuss ideas and share solutions with developers worldwide.
         </p>
-        <a
-          data-testid='community-link'
-          style={{ textDecoration: 'none' }}
-          href='https://deriv.vanillacommunity.com/'
-          target='_blank'
-          rel='noreferrer'
-        >
-          <button className={styles.communityButton}>Join our community</button>
-        </a>
+        <div className={styles.Communities}>
+          <a
+            data-testid='community-link'
+            style={{ textDecoration: 'none' }}
+            href='https://deriv.vanillacommunity.com/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <button className={styles.communityButton}>Join our community</button>
+          </a>
+          <a
+            data-testid='telegram-link'
+            style={{ textDecoration: 'none' }}
+            href='https://t.me/+g6FV5tFY1u9lZGE1'
+            target='_blank'
+            rel='noreferrer'
+          >
+            <button className={styles.communityButton}>
+              <div className={styles.Telegram}>
+                <img src='/img/telegram.svg' className={styles.TelegramIcon} />
+                <p>Telegram</p>
+              </div>
+            </button>
+          </a>
+        </div>
       </section>
       <section className={styles.FooterBody}>
         <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
