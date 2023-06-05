@@ -9,7 +9,6 @@ import styles from './UserNavbarItem.module.scss';
 const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) => {
   const [toggle_search, setToggleSearch] = useState<boolean>(false);
   const location = useLocation();
-  const nav_ref = useRef(null);
 
   const closeSearchHotkey = (event) => {
     const press_escape = event.key === 'Escape';
@@ -46,7 +45,7 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
       window.addEventListener('keydown', openSearchHotkey);
       return () => window.removeEventListener('keydown', openSearchHotkey);
     }
-  }, [toggle_search, nav_ref]);
+  }, [toggle_search]);
 
   const logInButtonClasses = clsx(
     'navbar__item navbar__link',
@@ -62,10 +61,7 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
   return is_logged_in ? (
     <AccountSwitcher />
   ) : (
-    <nav
-      ref={nav_ref}
-      className={`right-navigation ${toggle_search ? 'search-open' : 'search-closed'}`}
-    >
+    <nav className={`right-navigation ${toggle_search ? 'search-open' : 'search-closed'}`}>
       <Link to={authUrl} className={logInButtonClasses}>
         Log in
       </Link>
