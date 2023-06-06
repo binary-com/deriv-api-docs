@@ -16,14 +16,12 @@ const Footer = () => {
           <button
             className={styles.communityButton}
             onClick={() => window.open('https://deriv.vanillacommunity.com/')}
-            data-testid='community-link'
           >
             Join our community
           </button>
           <button
             className={styles.communityButton}
             onClick={() => window.open('https://t.me/+g6FV5tFY1u9lZGE1')}
-            data-testid='telegram-link'
           >
             <div className={styles.Telegram}>
               <img src='/img/telegram.svg' className={styles.TelegramIcon} />
