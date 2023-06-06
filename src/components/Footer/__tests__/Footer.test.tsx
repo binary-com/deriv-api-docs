@@ -26,23 +26,15 @@ describe('HeroHeader', () => {
     );
     expect(footer_description).toBeInTheDocument();
   });
-  it('should render community link when community button is clicked', async () => {
-    window.open = jest.fn();
-
-    const communityButton = screen.getByRole('button', { name: 'Join our community' });
-    expect(communityButton).toBeInTheDocument();
-    await userEvent.click(communityButton);
-
-    expect(window.open).toHaveBeenCalledWith('https://deriv.vanillacommunity.com/');
+  it('should render community link properly', () => {
+    const community_link = screen.getByRole('link', { name: 'Join our community' });
+    expect(community_link).toBeInTheDocument();
+    expect(community_link).toHaveAttribute('href', 'https://deriv.vanillacommunity.com/');
   });
-  it('should render telegram link when telegram button is clicked', async () => {
-    window.open = jest.fn();
-
-    const telegramButton = screen.getByRole('button', { name: 'Telegram' });
-    expect(telegramButton).toBeInTheDocument();
-    await userEvent.click(telegramButton);
-
-    expect(window.open).toHaveBeenCalledWith('https://t.me/+g6FV5tFY1u9lZGE1');
+  it('should render telegram link properly', () => {
+    const telegram_link = screen.getByRole('link', { name: 'Telegram' });
+    expect(telegram_link).toBeInTheDocument();
+    expect(telegram_link).toHaveAttribute('href', 'https://t.me/+g6FV5tFY1u9lZGE1');
   });
   it('should render footer body texts properly', () => {
     const help_text = screen.getByText(/^we're here to help$/i);
