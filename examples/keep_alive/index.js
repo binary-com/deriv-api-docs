@@ -5,7 +5,7 @@ const connection = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${a
 
 const api = new DerivAPIBasic({ connection });
 
-const keepAlive = () => {
+const proposal = () => {
   api.subscribe({
     proposal: 1,
     subscribe: 1,
@@ -20,15 +20,15 @@ const keepAlive = () => {
   });
 };
 
-// Send a ping ever 30 seconds to keep the connection alive, needs to use the same
-// websocket connection as the one you want to maintain.
+// Send a ping every 30 seconds to keep the connection alive
+// Needs to use the same websocket connection as the one you want to maintain.
 const ping = () => {
   setInterval(() => {
     api.ping();
   }, 30000);
 };
 
-const keepAliveRes = async (res) => {
+const wsResponse = async (res) => {
   const data = JSON.parse(res.data);
   if (data.error !== undefined) {
     console.log('Error: %s ', data.error.message);
@@ -45,14 +45,14 @@ const keepAliveRes = async (res) => {
 };
 
 const checkSignal = () => {
-  keepAlive();
+  proposal();
   ping();
-  connection.addEventListener('message', keepAliveRes);
+  connection.addEventListener('message', wsResponse);
 };
 
 const endCall = () => {
-  connection.removeEventListener('message', keepAliveRes, false);
-  keepAlive().unsubscribe();
+  connection.removeEventListener('message', wsResponse, false);
+  proposal().unsubscribe();
 };
 
 const keep_alive_button = document.querySelector('#keep_alive');
