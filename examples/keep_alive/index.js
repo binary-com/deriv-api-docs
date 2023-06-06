@@ -18,10 +18,14 @@ const keepAlive = () => {
     symbol: 'R_100',
     barrier: '+0.1',
   });
-  /*
-   * Send a ping ever 30 seconds to keep the connection alive, needs to use the same
-   * websocket connection as the one you want to maintain.
-   */
+};
+
+// Send a ping ever 30 seconds to keep the connection alive, needs to use the same
+// websocket connection as the one you want to maintain.
+const ping = () => {
+  setInterval(() => {
+    api.ping();
+  }, 30000);
 };
 
 const keepAliveRes = async (res) => {
@@ -40,8 +44,9 @@ const keepAliveRes = async (res) => {
   }
 };
 
-const checkSignal = async () => {
-  await keepAlive();
+const checkSignal = () => {
+  keepAlive();
+  ping();
   connection.addEventListener('message', keepAliveRes);
 };
 
