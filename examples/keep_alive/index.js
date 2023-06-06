@@ -32,7 +32,7 @@ const wsResponse = async (res) => {
   const data = JSON.parse(res.data);
   if (data.error !== undefined) {
     console.log('Error: %s ', data.error.message);
-    connection.removeEventListener('message', keepAliveRes, false);
+    connection.removeEventListener('message', wsResponse, false);
     await api.disconnect();
   } else if (data.msg_type === 'proposal') {
     console.log('Details: %s', data.proposal.longcode);
