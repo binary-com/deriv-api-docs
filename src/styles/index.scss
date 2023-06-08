@@ -191,13 +191,25 @@ div[class*='sidebarViewport'] {
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.4);
         inset: 0;
+
+        @media (max-width: 768px) {
+          width: rem(2.5);
+          height: rem(2.5);
+          background-color: unset;
+          background-image: url('/img/close_dialog.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: rem(1.5);
+          inset: rem(1) rem(1) auto auto;
+          z-index: 1;
+        }
       }
       &+ div[class*='searchBox'] {
           position: fixed;
           min-width: rem(32);
           max-width: rem(79.2);
           max-height: rem(48);
-          top: rem(9);
+          top: 5%;
           width: 100%;
           height: 100%;
           border-radius: rem(1.6);
@@ -205,6 +217,15 @@ div[class*='sidebarViewport'] {
           transform: translateX(-50%);
           padding: 0;
           background-color: var(--ifm-color-white);
+          
+          @media (max-width: 768px) {
+            min-width: unset;
+            max-width: unset;
+            max-height: unset;
+            border-radius: unset;
+            top: 0;
+          }
+
           span[class*='searchBar'] {
             width: 100%;
             span[class*='dropdownMenu'] {
@@ -240,11 +261,16 @@ div[class*='sidebarViewport'] {
           }
         .navbar__search {
           margin: 0;
-          margin-top: rem(1.6);
+          margin-top: rem(2);
           display: flex;
           justify-content: center;
           text-align: center;
           width: 100%;
+
+          @media (max-width: 768px) {
+            margin-top: rem(4);
+          }
+
           button[class*='searchClearButton'] {
             right: rem(3);
           }
