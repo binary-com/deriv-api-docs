@@ -14,20 +14,24 @@ const SearchButton = ({ setToggleSearch, toggle_search }: TSearchButton) => {
     const press_escape = event.key === 'Escape';
     const press_cmd_and_k = event.metaKey && event.key === 'k';
 
-    if (press_escape) setToggleSearch(false);
-    if (press_cmd_and_k) setToggleSearch(false);
+    if (press_escape || press_cmd_and_k) {
+      setToggleSearch(false);
+    }
   };
 
   const openSearchHotkey = (event) => {
     const press_cmd_and_k = event.metaKey && event.key === 'k';
-    if (press_cmd_and_k) setToggleSearch(true);
+
+    if (press_cmd_and_k) {
+      setToggleSearch(true);
+    }
   };
 
   const focusSearchInput = () => {
     // Using vanilla JS to get the element since it's a 3rd party library. I cannot access through React.
-    const search_input = document.querySelector('.navbar__search-input');
+    const search_input = document.querySelector('.navbar__search-input') as HTMLFormElement;
     if (search_input) {
-      const focusInput = () => (search_input as HTMLElement).focus();
+      const focusInput = () => search_input.focus();
       focusInput();
     }
   };
