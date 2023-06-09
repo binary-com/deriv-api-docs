@@ -1,4 +1,5 @@
 import { Text } from '@deriv/ui';
+import Translate from '@docusaurus/Translate';
 import * as Tabs from '@radix-ui/react-tabs';
 import { TDashboardTab } from '@site/src/contexts/app-manager/app-manager.context';
 import useAppManager from '@site/src/hooks/useAppManager';
@@ -11,27 +12,27 @@ import styles from './tabs.module.scss';
 type TTab = {
   id: number;
   value: TDashboardTab;
-  label: string;
+  label: React.ReactNode;
   content: () => JSX.Element;
 };
 
 const tabs: TTab[] = [
   {
     id: 0,
-    value: 'MANAGE_TOKENS',
-    label: 'Manage tokens',
+    value: <Translate>MANAGE_TOKENS</Translate>,
+    label: <Translate>Manage tokens</Translate>,
     content: ApiToken,
   },
   {
     id: 1,
-    value: 'REGISTER_APP',
-    label: 'Register application',
+    value: <Translate> REGISTER_APP</Translate>,
+    label: <Translate>Register application</Translate>,
     content: AppRegistration,
   },
   {
     id: 2,
-    value: 'MANAGE_APPS',
-    label: 'Manage applications',
+    value: <Translate>MANAGE_APPS</Translate>,
+    label: <Translate>Manage applications</Translate>,
     content: AppManagement,
   },
 ];
@@ -43,10 +44,10 @@ const DashboardTabs = () => {
     <div className={styles.app_dashboard} id={'app-manager-dashboard'}>
       <div>
         <Text as='h2' type='heading-3' align='center'>
-          Your apps
+          <Translate> Your apps</Translate>
         </Text>
         <Text as='p' type='subtitle-1' align='center'>
-          Register your app, get an app ID, and start using the Deriv API
+          <Translate> Register your app, get an app ID, and start using the Deriv API</Translate>
         </Text>
       </div>
       <Tabs.Root className={styles.tabs_root} value={currentTab} onValueChange={updateCurrentTab}>

@@ -1,7 +1,7 @@
 import { ApplicationObject } from '@deriv/api-types';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-export type TDashboardTab = 'MANAGE_TOKENS' | 'REGISTER_APP' | 'MANAGE_APPS';
+export type TDashboardTab = 'MANAGE_TOKENS' | 'REGISTER_APP' | 'MANAGE_APPS' | React.ReactNode;
 
 export type TAppManagerContext = {
   apps: ApplicationObject[];
