@@ -4,3 +4,4 @@ jest.config.js
 commitlint.config.js
 babel.config.js
 examples
+src/theme
