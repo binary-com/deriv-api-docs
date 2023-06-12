@@ -1,6 +1,17 @@
 import React from 'react';
 import { Header } from '..';
+import useOfficialContentsContext from '@site/src/hooks/useOfficialContentsContext';
 import { render, screen } from '@testing-library/react';
+
+jest.mock('@site/src/hooks/useOfficialContentsContext');
+
+const mockUseOfficialContentsContext = useOfficialContentsContext as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useOfficialContentsContext>>
+>;
+
+mockUseOfficialContentsContext.mockImplementation(() => ({
+  is_official_domain: true,
+}));
 
 describe('Header', () => {
   it('should be able to render the header with links', () => {
