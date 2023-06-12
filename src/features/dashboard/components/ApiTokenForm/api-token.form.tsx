@@ -26,38 +26,56 @@ export type TApiTokenFormItemsNames = keyof TApiTokenForm;
 
 type TScope = {
   name: TApiTokenFormItemsNames;
-  description: string;
+  description: React.ReactNode;
   label: string;
 };
 
 const scopes: TScope[] = [
   {
     name: 'read',
-    description:
-      'This scope will allow third-party apps to view your account activity, settings, limits, balance sheets, trade purchase history, and more.',
+    description: (
+      <Translate>
+        This scope will allow third-party apps to view your account activity, settings, limits,
+        balance sheets, trade purchase history, and more.
+      </Translate>
+    ),
     label: 'Read',
   },
   {
     name: 'trade',
-    description:
-      'This scope will allow third-party apps to buy and sell contracts for you, renew your expired purchases, and top up your demo accounts.',
+    description: (
+      <Translate>
+        This scope will allow third-party apps to buy and sell contracts for you, renew your expired
+        purchases, and top up your demo accounts.
+      </Translate>
+    ),
     label: 'Trade',
   },
   {
     name: 'payments',
-    description:
-      'This scope will allow third-party apps to withdraw to payment agents and make inter-account transfers for you.',
+    description: (
+      <Translate>
+        This scope will allow third-party apps to withdraw to payment agents and make inter-account
+        transfers for you.
+      </Translate>
+    ),
     label: 'Payments',
   },
   {
     name: 'trading_information',
-    description: 'This scope will allow third-party apps to view your trading history.',
+    description: (
+      <Translate>This scope will allow third-party apps to view your trading history.</Translate>
+    ),
     label: 'Trading Information',
   },
   {
     name: 'admin',
-    description:
-      'This scope will allow third-party apps to open accounts for you, manage your settings and token usage, and more.',
+    description: (
+      <Translate>
+        This scope will allow third-party apps to open accounts for you, manage your settings and
+        token usage, and more.
+      </Translate>
+    ),
     label: 'Admin',
   },
 ];

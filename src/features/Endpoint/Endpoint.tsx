@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text } from '@deriv/ui';
 import styles from './Endpoint.module.scss';
-import Translate from '@docusaurus/Translate';
+import Translate, { translate } from '@docusaurus/Translate';
 
 const default_endpoint = {
   app_id: '35014',
@@ -55,11 +55,11 @@ const EndPoint = () => {
                   {...register('server_url', {
                     required: {
                       value: true,
-                      message: 'Server is Required',
+                      message: translate({ message: 'Server is Required' }),
                     },
                     pattern: {
                       value: /^([\w-]+\.)+[\w-]+(`[\w- ;,./?%&=])*?$/, // TODO: it's better to check if the server url contains qa or not ( for qa box server urls )
-                      message: 'Please enter a valid server URL',
+                      message: translate({ message: 'Please enter a valid server URL' }),
                     },
                   })}
                   name='server_url'
@@ -81,11 +81,11 @@ const EndPoint = () => {
                   {...register('app_id', {
                     required: {
                       value: true,
-                      message: 'App ID is required',
+                      message: translate({ message: 'App ID is required' }),
                     },
                     pattern: {
                       value: /^(0|[1-9]\d*)(\.\d+)?$/,
-                      message: 'Please enter a valid app ID',
+                      message: translate({ message: 'Please enter a valid app ID' }),
                     },
                   })}
                   name='app_id'
