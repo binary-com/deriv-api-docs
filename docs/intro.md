@@ -4,6 +4,7 @@ hide_title: false
 draft: false
 sidebar_label: Introduction
 sidebar_position: 0
+sidebar_class_name: hide-sidebar-item
 tags:
   - introduction
 keywords:

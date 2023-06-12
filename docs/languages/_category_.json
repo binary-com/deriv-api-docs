@@ -1,4 +1,5 @@
 {
+  "className": "hide-sidebar-item",
   "label": "Languages",
   "position": 4,
   "link": {

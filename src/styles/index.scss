@@ -122,7 +122,7 @@ body {
 }
 
 .hidden {
-  background-color: blue;
+  display: none !important;
 }
 
 .unofficial-host .hide-sidebar-item {

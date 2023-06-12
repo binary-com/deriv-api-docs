@@ -1,10 +1,10 @@
 ---
-sidebar_class_name: hide-sidebar-item
 title: Monetizing the Deriv API
 hide_title: true
 draft: false
 sidebar_label: Monetizing the Deriv API
 sidebar_position: 1
+sidebar_class_name: hide-sidebar-item
 tags:
   - concept
   - earn

@@ -1,4 +1,5 @@
 {
+  "className": "hide-sidebar-item",
   "label": "Core Concepts",
   "position": 2,
   "link": {

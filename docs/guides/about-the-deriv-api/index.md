@@ -4,7 +4,6 @@ hide_title: true
 draft: false
 sidebar_label: About the Deriv API
 sidebar_position: 0
-sidebar_class_name: hidden
 tags:
   - concept
   - api
