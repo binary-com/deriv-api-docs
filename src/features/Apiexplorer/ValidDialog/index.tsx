@@ -4,19 +4,19 @@ import styles from '../LoginDialog/LoginDialog.module.scss';
 import Translate from '@docusaurus/Translate';
 
 type TValidDialog = {
-  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsNotValid: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ValidDialog = ({ setIsValid, setToggleModal }: TValidDialog) => {
+export const ValidDialog = ({ setIsNotValid, setToggleModal }: TValidDialog) => {
   const onOpenChange = useCallback(
     (open: boolean) => {
       if (!open) {
-        setIsValid(false);
+        setIsNotValid(false);
         setToggleModal(false);
       }
     },
-    [setIsValid, setToggleModal],
+    [setIsNotValid, setToggleModal],
   );
   return (
     <Modal defaultOpen onOpenChange={onOpenChange}>

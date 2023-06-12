@@ -2,6 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { cleanup, render, screen, RenderResult, within } from '@site/src/test-utils';
 import Footer from '../';
+import userEvent from '@testing-library/user-event';
 
 describe('HeroHeader', () => {
   let render_result: RenderResult;
@@ -26,15 +27,14 @@ describe('HeroHeader', () => {
     expect(footer_description).toBeInTheDocument();
   });
   it('should render community link properly', () => {
-    const community_link = screen.getByTestId('community-link');
+    const community_link = screen.getByRole('link', { name: 'Join our community' });
     expect(community_link).toBeInTheDocument();
-    expect(community_link).toHaveAttribute('href', 'https://binary.vanillacommunity.com/');
+    expect(community_link).toHaveAttribute('href', 'https://deriv.vanillacommunity.com/');
   });
-  it('should render the button inside community link properly', () => {
-    const community_link = screen.getByTestId('community-link');
-    const { getByRole } = within(community_link);
-    const button = getByRole('button');
-    expect(button).toHaveTextContent('Join our community');
+  it('should render telegram link properly', () => {
+    const telegram_link = screen.getByRole('link', { name: 'Telegram' });
+    expect(telegram_link).toBeInTheDocument();
+    expect(telegram_link).toHaveAttribute('href', 'https://t.me/+g6FV5tFY1u9lZGE1');
   });
   it('should render footer body texts properly', () => {
     const help_text = screen.getByText(/^we're here to help$/i);
