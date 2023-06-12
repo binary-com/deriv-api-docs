@@ -14,13 +14,15 @@ keywords:
 description: Getting started with Deriv API
 ---
 
+import RenderOfficialContents from '@site/src/components/RenderOfficialContents';
+
 Our Documentation is divided in several sections:
 
 - [Core Concepts](category/core-concepts)
 - [Code Examples](category/code-examples)
 - [Languages](category/languages)
 - [Guides](category/guides)
-- [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)
+<RenderOfficialContents>- [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)</RenderOfficialContents>
 
 ### Quick Start
 

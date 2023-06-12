@@ -1,4 +1,5 @@
 ---
+sidebar_class_name: hide-sidebar-item
 title: Monetizing the Deriv API
 hide_title: true
 draft: false

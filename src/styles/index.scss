@@ -121,6 +121,14 @@ body {
   overflow-x: hidden;
 }
 
+.hidden {
+  background-color: blue;
+}
+
+.unofficial-host .hide-sidebar-item {
+  display: none !important;
+}
+
 .swiper {
   padding: 0 rem(4) !important;
   width: rem(32) !important;

@@ -30,11 +30,17 @@ export const domains = [
   'api.deriv.be',
   'api.deriv.com',
   'staging.deriv.be',
-  'localhost:3000',
+  'staging.deriv.me',
+  // 'localhost:3000',
   'deriv-com-git-fork',
   'deriv-developers-portal-git-fork',
   'staging-api.deriv.com',
 ];
+
+export const isOfficialHost = () => {
+  const host = window.location.host;
+  return domains.includes(host);
+};
 
 export const getCurrencyObject = (currency: string) => {
   const currencyObject = CURRENCY_MAP.get(currency);
