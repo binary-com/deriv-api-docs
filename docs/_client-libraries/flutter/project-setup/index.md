@@ -1,5 +1,5 @@
 ---
-title: Project Setup
+title: Project setup
 sidebar_label: Setup
 sidebar_position: 0
 ---
