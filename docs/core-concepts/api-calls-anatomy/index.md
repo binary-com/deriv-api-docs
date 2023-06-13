@@ -50,7 +50,7 @@ To make it easier for you to handle the request and response flow of your WebSoc
 
 #### API call method name
 
-Every `request` in the WebSocket API includes a `method name` field that serves as a unique identifier for the request. In most cases, this  `method name` will get a numerical value of `1`. However, there are some cases where the identifier property may have a string value.
+Every `request` in the WebSocket API includes a `method name` field that serves as a unique identifier for the request. In most cases, this `method name` will get a numerical value of `1`. However, there are some cases where the identifier property may have a string value.
 
 :::caution
 API Call Method Name is always required. this field determines the data you'll get from our WebSocket server.
