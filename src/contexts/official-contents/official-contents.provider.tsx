@@ -1,5 +1,5 @@
 import React, { useMemo, ReactNode, useState, useEffect } from 'react';
-import { isOfficialHost } from '@site/src/utils';
+import { domains } from '@site/src/utils';
 import { IOfficialContents, OfficialContentsContext } from './official-contents.context';
 
 type TAuthProviderProps = {
@@ -8,6 +8,11 @@ type TAuthProviderProps = {
 
 const OfficialContentsProvider = ({ children }: TAuthProviderProps) => {
   const [is_official_domain, setIsOfficialDomain] = useState<boolean>(false);
+
+  const isOfficialHost = () => {
+    const host = window.location.host;
+    return domains.includes(host);
+  };
 
   useEffect(() => {
     isOfficialHost() ? setIsOfficialDomain(true) : setIsOfficialDomain(false);

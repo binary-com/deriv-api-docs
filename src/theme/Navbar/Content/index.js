@@ -7,7 +7,7 @@ import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
-import { isOfficialHost } from '@site/src/utils';
+import useOfficialContentsContext from '@site/src/hooks/useOfficialContentsContext';
 import styles from './styles.module.css';
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
@@ -15,6 +15,7 @@ function useNavbarItems() {
 }
 function NavbarItems({ items }) {
   let unofficial_domain_item;
+  const { is_official_domain } = useOfficialContentsContext();
 
   for (const value of Object.values(items)) {
     if (value.label === 'Documentation') {
@@ -25,7 +26,7 @@ function NavbarItems({ items }) {
 
   return (
     <>
-      {isOfficialHost() ? (
+      {is_official_domain ? (
         <React.Fragment>
           {items.map((item, i) => (
             <ErrorCauseBoundary

@@ -37,11 +37,6 @@ export const domains = [
   'staging-api.deriv.com',
 ];
 
-export const isOfficialHost = () => {
-  const host = window.location.host;
-  return domains.includes(host);
-};
-
 export const getCurrencyObject = (currency: string) => {
   const currencyObject = CURRENCY_MAP.get(currency);
   if (!currencyObject) {

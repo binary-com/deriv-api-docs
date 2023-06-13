@@ -11,7 +11,7 @@ import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import type { Props } from '@theme/Layout';
 import { Header } from '@site/src/components/Header';
-import { isOfficialHost } from '@site/src/utils';
+import useOfficialContentsContext from '@site/src/hooks/useOfficialContentsContext';
 import styles from './styles.module.css';
 
 export default function Layout(props: Props): JSX.Element {
@@ -23,12 +23,13 @@ export default function Layout(props: Props): JSX.Element {
     title,
     description,
   } = props;
+  const { is_official_domain } = useOfficialContentsContext();
 
   useKeyboardNavigation();
 
   return (
     <LayoutProvider>
-      <div className={isOfficialHost() ? '' : 'unofficial-host'}>
+      <div className={is_official_domain ? '' : 'unofficial-host'}>
         <PageMetadata title={title} description={description} />
 
         <SkipToContent />
