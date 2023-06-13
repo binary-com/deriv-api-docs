@@ -79,9 +79,9 @@ socket.onerror = function (error) {
 
 ## Why do we need WebSockets and when should we avoid them?
 
-WebSocket are an essential client-server communication tool. To benefit the most from their potential, it's important to understand how they can be helpful and when it's best to avoid using them. It’s explained extensively in the next section.
+WebSockets are an essential client-server communication tool. To benefit the most from their potential, it's important to understand how they can be helpful and when it's best to avoid using them. It’s explained extensively in the next section.
 
-Use WebSocket When You Are:
+Use WebSockets in the following cases:
 
 1. ‍When you're developing a real-time web application. 
   The most customary use of WebSocket is in real-time application development wherein it assists in a continual display of data at the client end. As the back-end server sends back this data continuously, a WebSocket allows uninterrupted pushing or transmitting of this data in the already open connection. The use of WebSockets makes such data transmission quick and leverages the application's performance.
@@ -92,7 +92,7 @@ Use WebSocket When You Are:
 
 Now that we've established where WebSockets should be used, let's see where it is best to avoid them. This will help you steer clear of unnecessary operational hassles.
 
-WebSocket shouldn’t be taken onboard when old data fetching is the need of the hour or need data only for one-time processing. In these cases, using HTTP protocols is a wise choice.
+WebSockets shouldn't be taken onboard when all that is needed is fetching old data or data that's to be processed only once. In these cases, using HTTP protocols is a wise choice.
 
 ## WebSocket vs HTTP
 
