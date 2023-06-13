@@ -8,19 +8,18 @@ type TDropdownList = {
   setSelected: (value: string) => void;
   selected_value: string;
   handleChange: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: string) => void;
-
   searchResults: string;
   setIsActive: (value: boolean) => void;
   setSearchResults: (result: string) => void;
 };
 
 const DropdownList = ({
-  selected,
   setSelected,
   handleChange,
   setIsActive,
   searchResults,
   setSearchResults,
+  selected_value,
 }: TDropdownList) => {
   return (
     <div>
@@ -53,7 +52,7 @@ const DropdownList = ({
                 handleChange(e, option.name);
               }}
               className={clsx(styles.dropdownItem, {
-                [styles.dropdownSelected]: selected === option.title,
+                [styles.dropdownSelected]: selected_value === option.title,
               })}
               data-testid={`apiDropdownItems{option.name}`}
             >

@@ -40,7 +40,7 @@ describe('Use Api Token', () => {
     expect(result.current.tokens.length).toBe(0);
   });
 
-  it('Should NOT get Api Tokens from server is user is NOT authenticated', async () => {
+  it('Should NOT get Api Tokens from server when user is NOT authenticated', async () => {
     mockUseAuthContext.mockImplementationOnce(() => ({
       is_authorized: false,
     }));
@@ -53,8 +53,9 @@ describe('Use Api Token', () => {
   it('Should get Api Tokens from server if user is authenticated', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useApiToken(), { wrapper });
 
-    await expect(wsServer).toReceiveMessage({ api_token: 1, req_id: 1 });
+    await expect(wsServer).toReceiveMessage({ api_token: 1, req_id: 1 }); // client sends request
     wsServer.send({
+      // the server sends the response
       api_token: {
         tokens: [
           {

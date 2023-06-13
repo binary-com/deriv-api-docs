@@ -7,21 +7,30 @@ import CurrencyIcon from '../CurrencyIcon';
 import SelectedAccount from '../CustomSelectDropdown/account-dropdown/SelectedAccount';
 import AccountDropdown from '../CustomSelectDropdown/account-dropdown/AccountDropdown';
 import styles from './account_switcher.module.scss';
+import SearchButton from '../SearchButton';
 
 const AccountSwitcher = () => {
   const { logout } = useLogout();
 
   const { currentLoginAccount } = useAuthContext();
   const [is_toggle_dropdown, setToggleDropdown] = useState(false);
+  const [toggle_search, setToggleSearch] = useState<boolean>(false);
   const dropdown_toggle = is_toggle_dropdown ? styles.active : styles.inactive;
+  const search_toggle = toggle_search ? 'search-open' : 'search-closed';
   const is_demo = currentLoginAccount.name.includes('VRTC') ? styles.demo : '';
 
   const dropdownRef = useRef(null);
   useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
 
   return (
-    <div ref={dropdownRef} className={`${styles.accountSwitcher} ${dropdown_toggle}`}>
-      <button onClick={() => setToggleDropdown((prev) => !prev)} className={is_demo}>
+    <div
+      ref={dropdownRef}
+      className={`right-navigation ${styles.accountSwitcher} ${dropdown_toggle} ${search_toggle}`}
+    >
+      <button
+        onClick={() => setToggleDropdown((prev) => !prev)}
+        className={`${is_demo} ${styles.accountSwitcherButton}`}
+      >
         <div className={styles.currencyIconContainer}>
           <CurrencyIcon currency={isNotDemoCurrency(currentLoginAccount)} />
         </div>
@@ -55,6 +64,7 @@ const AccountSwitcher = () => {
           </div>
         </div>
       )}
+      <SearchButton setToggleSearch={setToggleSearch} toggle_search={toggle_search} />
     </div>
   );
 };
