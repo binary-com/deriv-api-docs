@@ -23,4 +23,4 @@ The company has a number of licensed subsidiaries in various jurisdictions, whic
 
 This call will return the appropriate Landing Company for clients of a given country.
 
-The landing company may differ for Gaming contracts (Synthetic Indices) and Financial contracts (Forex, Stock Indices, Commodities).
+The landing company may differ for Synthetic Indices and Financial contracts (Forex, Stock Indices, Commodities).
