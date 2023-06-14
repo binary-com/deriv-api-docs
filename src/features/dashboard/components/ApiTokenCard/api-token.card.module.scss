@@ -19,10 +19,14 @@
     font-size: var(--fontSizes-2xs);
   }
 
+  .description {
+    padding-left: rem(1);
+  }
+
   .warning_container {
     display: flex;
     gap: rem(1);
-    background-color : #FFAD3A29;
+    background-color: #ffad3a29;
     padding: rem(0.8);
     font-size: var(--fontSizes-2xs);
     img {

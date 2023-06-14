@@ -119,7 +119,7 @@ describe('DeleteTokenDialog', () => {
     const delete_modal = await screen.findByText(/Are you sure you want to delete this token?/i);
     expect(delete_modal).toBeInTheDocument();
 
-    const cancel_button = await screen.findByRole('button', { name: 'No, keep it' });
+    const cancel_button = await screen.findByRole('button', { name: 'Cancel' });
     await userEvent.click(cancel_button);
 
     expect(delete_modal).not.toBeInTheDocument();
@@ -134,7 +134,7 @@ describe('DeleteTokenDialog', () => {
     const delete_modal = await screen.findByText(/Are you sure you want to delete this token?/i);
     expect(delete_modal).toBeInTheDocument();
 
-    const cancel_button = await screen.findByRole('button', { name: 'Yes, delete' });
+    const cancel_button = await screen.findByRole('button', { name: 'Cancel' });
     await userEvent.click(cancel_button);
 
     expect(mockDeleteToken).toHaveBeenCalledTimes(1);

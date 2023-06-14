@@ -21,19 +21,19 @@ const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => 
     () => [
       {
         id: 0,
+        text: 'Cancel',
+        color: 'secondary',
+        onClick: () => {
+          setToggleModal(false);
+        },
+      },
+      {
+        id: 1,
         text: 'Yes, delete',
         color: 'primary',
         onClick: () => {
           setToggleModal(false);
           onDelete();
-        },
-      },
-      {
-        id: 1,
-        text: 'No, keep it',
-        color: 'secondary',
-        onClick: () => {
-          setToggleModal(false);
         },
       },
     ],
