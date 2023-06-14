@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import TokenCreationDialogSuccess from '../Dialogs/TokenCreationDialogSuccess';
 
 const schema = yup
   .object({
@@ -62,12 +63,14 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
-  const { createToken, isCreatingToken } = useCreateToken();
+  const { createToken, isCreatingToken, errorCreatingToken } = useCreateToken();
 
   const { handleSubmit, register, setValue, getValues } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
     mode: 'all',
   });
+
+  const [is_toggle, setToggleModal] = useState(false);
 
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
@@ -80,8 +83,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trading_information: data.trading_information,
       });
       createToken(name, selectedTokenScope);
+      errorCreatingToken ? setToggleModal(false) : setToggleModal(true);
     },
-    [createToken],
+    [createToken, errorCreatingToken],
   );
 
   const onCardClick = useCallback(
@@ -136,6 +140,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         <div className={styles.customTextInput}>
           <input type='text' name='name' {...register('name')} placeholder='Token name' />
           <Button type='submit'>Create</Button>
+          {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
         </div>
         <div className={styles.helperText}>
           <p>Length of token name must be between 2 and 32 characters.</p>
