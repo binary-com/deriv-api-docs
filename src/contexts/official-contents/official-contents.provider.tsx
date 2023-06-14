@@ -15,7 +15,29 @@ const OfficialContentsProvider = ({ children }: TAuthProviderProps) => {
   };
 
   useEffect(() => {
-    isOfficialHost() ? setIsOfficialDomain(true) : setIsOfficialDomain(false);
+    const hash = window.location.hash;
+    const branding_state = sessionStorage.getItem('toggleBranding');
+
+    if (!branding_state) {
+      sessionStorage.setItem('toggleBranding', '0');
+    }
+
+    if (hash === '#toggleBranding') {
+      sessionStorage.setItem('toggleBranding', '1');
+    }
+
+    if (hash === '#toggleBranding' && branding_state === '1') {
+      sessionStorage.setItem('toggleBranding', '0');
+    }
+  }, [window.location.hash]);
+
+  useEffect(() => {
+    const branding_is_disabled = sessionStorage.getItem('toggleBranding') === '1';
+    if (branding_is_disabled || !isOfficialHost()) {
+      setIsOfficialDomain(false);
+    } else {
+      setIsOfficialDomain(true);
+    }
   }, [setIsOfficialDomain]);
 
   const context_object: IOfficialContents = useMemo(() => {
