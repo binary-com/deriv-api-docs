@@ -6,6 +6,7 @@ import React from 'react';
 import AppManagement from '../../manage-apps';
 import ApiToken from '../../manage-tokens';
 import AppRegistration from '../../register-app';
+import ApiTokenTable from '../ApiTokenTable';
 import styles from './tabs.module.scss';
 
 type TTab = {
