@@ -42,7 +42,7 @@
         width: rem(1.2);
         height: rem(1.2);
         transform: rotate(0deg);
-        transition: transform .2s;
+        transition: transform 0.2s;
       }
       &:hover {
         text-decoration: none;
@@ -75,7 +75,7 @@
       width: rem(1.5);
       height: rem(1.5);
       transform: rotate(0deg);
-      transition: transform .2s ease-in-out;
+      transition: transform 0.2s ease-in-out;
     }
     &.active::after {
       transform: rotate(-180deg);
@@ -115,6 +115,8 @@
       display: flex;
       flex-direction: column;
       gap: rem(0.8);
+      overflow-y: scroll;
+      max-height: rem(40);
     }
     @media (max-width: 1200px) {
       position: fixed;
