@@ -151,13 +151,6 @@ describe('ApiExplorerFeatures', () => {
       await userEvent.click(close_button);
       expect(dialog).not.toBeVisible();
     });
-
-    it('should change the text when writing in the textbox', async () => {
-      const json_box = screen.getByPlaceholderText('Request JSON');
-      expect(json_box).toBeVisible();
-      await userEvent.type(json_box, 'test123');
-      expect(mockHandleSelectChange).toHaveBeenCalled();
-    });
   });
 
   describe('Logged in', () => {

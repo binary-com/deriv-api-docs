@@ -1,6 +1,6 @@
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import clsx from 'clsx';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import RequestResponseRenderer from '../RequestResponseRenderer';
 import style from './RequestJSONBox.module.scss';
 import SubscribeRenderer from '../SubscribeRenderer';
@@ -23,6 +23,15 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
   const is_subscribe = useMemo(() => {
     return request_example?.includes('subscribe');
   }, [request_example]);
+  const [isdisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (name === null) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [name]);
 
   return (
     <div className={style.playgroundBox}>
@@ -36,6 +45,7 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
           placeholder={'Request JSON'}
           onChange={handleChange}
           value={request_example}
+          disabled={isdisabled}
         ></textarea>
         {is_subscribe ? (
           <SubscribeRenderer
