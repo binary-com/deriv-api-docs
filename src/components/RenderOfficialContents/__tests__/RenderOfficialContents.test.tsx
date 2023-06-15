@@ -57,38 +57,4 @@ describe('RenderOfficialContents', () => {
 
     expect(container).toBeEmptyDOMElement();
   });
-
-  it('should render alternative when using feature flag', () => {
-    // window = Object.create(window);
-    // const url = "http://dummy.com";
-    // Object.defineProperty(window, 'location', {
-    //   value: {
-    //     href: url,
-    //     hash: '#toggleBranding'
-    //   },
-    //   writable: true // possibility to override
-    // });
-
-    mockUseOfficialContentsContext.mockImplementation(() => ({
-      is_official_domain: false,
-    }));
-
-    const hash = '#toggleBranding';
-    Object.defineProperty(window.location, 'hash', {
-      writable: true,
-      value: hash,
-    });
-
-    render(
-      <RenderOfficialContents>
-        <div>test</div>
-        <div>alternative</div>
-      </RenderOfficialContents>,
-    );
-
-    expect(window.location.hash).toEqual('#toggleBranding');
-
-    const content = screen.getByText('alternative');
-    expect(content).toBeVisible();
-  });
 });
