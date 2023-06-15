@@ -73,6 +73,19 @@ describe('RequestResponseRenderer', () => {
     expect(placeholder).toHaveLength(1);
   });
 
+  it('should disable text box if no api call is selected in the dropdown', () => {
+    const newProps = {
+      handleChange: jest.fn(),
+      request_example: '',
+      name: null as TSocketEndpointNames,
+      auth: 0,
+    };
+    cleanup();
+    render(<RequestJSONBox {...newProps} />);
+    const textarea = screen.getByLabelText('Request JSON');
+    expect(textarea).toBeDisabled();
+  });
+
   it('should render response renderer component', async () => {
     const primaryButton = screen.getByRole('button', { name: /Send Request/i });
     const secondaryButton = screen.getByRole('button', { name: /clear/i });

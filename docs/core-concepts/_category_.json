@@ -1,8 +1,8 @@
 {
-  "label": "Core Concepts",
+  "label": "Core concepts",
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "Learn core concepts of Deriv API websocket server and it's features"
+    "description": "Learn core concepts of the Deriv API WebSocket server and its features"
   }
 }

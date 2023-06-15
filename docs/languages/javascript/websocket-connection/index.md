@@ -1,24 +1,25 @@
 ---
-title: Websocket Connection
-sidebar_label: Websocket connection
+title: WebSocket connection
+sidebar_label: WebSocket connection
 sidebar_position: 1
 tags:
   - javascript
 keywords:
   - js
   - websocket-connection
-description: how to setup websocket connection with deriv api?
+description: how to setup a WebSocket connection with Deriv api?
 ---
 
 :::caution
 
-If you're not familiar with websockets, please check out [our documentation](/docs/core-concepts/websocket).
+If you're not familiar with WebSockets, please check out [our documentation](/docs/core-concepts/websocket).
 
 :::
 
-### Setup websocket connection
+### Set up a WebSocket connection
+<!-- To create a websocket connection, we want to use the Deriv websocket URL with an `app_id`. You can create your own app_id within your [dashboard](/dashboard) or keep the default `1089` app_id for testing. Keep in mind that eventually, you should make your own app_id. Especially if you would like to monetize your application. -->
 
-next we'll create a websocket connection to `Dervi Websocket Server` like so:
+Next, we'll create a WebSocket connection to Deriv WebSocket Server as seen below:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
@@ -26,16 +27,15 @@ const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${ap
 ```
 
 :::info
-`app_id = 1089` is just for testing purposes, please update it with your own in production. please check [this](/docs/setting-up-a-deriv-application) to create a new app for yourself.
-
+`app_id = 1089` is just for testing purposes. Please update it with your own app_id when releasing your application on a production environment. Please check [this guide](/docs/setting-up-a-deriv-application) to create a new app for yourself.
 :::
 
-at this point we're connected to the `websocket server` but we're not getting or recieving any data, to send/receive data we have to `subscribe` to [websocket events](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket#events).
+At this point, we are connected to the `WebSocket server`. But, we do not receive any data. To send or receive data, we have to `subscribe` to <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket#events" target="_blank">websocket events</a>.
 
-generally we have 4 events on `websockets connections`:
+Generally, we have 4 events on `WebSocket connections`:
 
 - **close**:
-  Fired when a connection with a WebSocket is closed. Also available via the onclose property
+  Fired when a connection with a WebSocket is closed. Also available via the onclose property.
 - **open**:
   Fired when a connection with a WebSocket is opened. Also available via the onopen property.
 - **message**:
@@ -43,7 +43,7 @@ generally we have 4 events on `websockets connections`:
 - **error**:
   Fired when a connection with a WebSocket has been closed because of an error, such as when some data couldn't be sent. Also available via the onerror property.
 
-let's add an event listener for these events on our websocket connection
+Let's add an event listener for these events on our WebSocket connection.
 
 ```js title="index.js"
 // subscribe to `open` event
@@ -67,14 +67,14 @@ websocket.addEventListener('error', (event) => {
 });
 ```
 
-Now open the `index.html` file in our browser and checkout your Developer Console, you should see only the log for `websocket connection established`.
+Now, open the `index.html` file in our browser and check your developer console. You should see only the log for `WebSocket connection established`.
 
 ### Send and receive data
 
-Our websocket server provide `ping / pong` functionality, let's use it in our demo project to send and receive data. change the event listeners for `open` and `message` like so:
+Our WebSocket server provides [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
 
 :::caution
-The `send` function on websocket connection only receives `string`, `ArrayBuffer`, `Blob` and `TypedArray`, `DataView`, you can read more abou them [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send), which mean if we want to send an `object` we have stringify with `JSON.stringify` it first.
+The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView`. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
 :::
 
 ```js title="index.js"
@@ -106,17 +106,17 @@ The `receivedMessage` would be an object like so:
 
 Congratulations :tada:
 
-You just created your first demo project with websockets.
+You just created your first demo project with WebSockets.
 
 :::tip
 The `ping` request is mostly used to test the connection or to keep it alive.
 :::
 
-### Keep Websocket Connection Alive
+### Keep WebSocket connection alive
 
-By Defualt `Websocket connection` will be closed when no traffic is sent between them for more or less **180 seconds**. one way to keep the connection alive is to send `ping` request with interval of **120 seconds**, this way will keep the connection alive and active.
+By default, `WebSocket connections` will be closed when no traffic is sent between them for around **180 seconds**. One way to keep the connection alive is to send [ping](/api-explorer#ping) requests with intervals of **120 seconds**. This will keep the connection alive and active.
 
-Simple example setup would be like so:
+A simple setup example would be the following:
 
 ```js title="index.js"
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
@@ -140,9 +140,9 @@ websocket.addEventListener('close', (event) => {
 });
 ```
 
-Now when the connection is `established` we start sending `ping` requests with `12000ms` intervals.
+Now, when the connection is `established`, we start sending `ping` requests with `12000ms` intervals.
 
-your final code should be:
+Your final code should be:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
