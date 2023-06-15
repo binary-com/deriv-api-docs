@@ -35,11 +35,12 @@ describe('Token Creation Dialog', () => {
     const mockOnClose = jest.fn();
 
     render(<TokenCreationDialogSuccess setToggleModal={mockOnClose} />);
+    const modal = screen.getByText('Your API token is ready to be used.');
 
     const crossButton = screen.getByTestId('close-button');
-
     await userEvent.click(crossButton);
 
+    expect(modal).not.toBeInTheDocument();
     expect(mockOnClose).toHaveBeenCalled();
   });
 });

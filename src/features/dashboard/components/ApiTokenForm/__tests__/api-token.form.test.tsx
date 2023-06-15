@@ -112,4 +112,16 @@ describe('Home Page', () => {
 
     expect(mockCreateToken).not.toHaveBeenCalled();
   });
+
+  it('Should open success dialog when token is created  ', async () => {
+    const nameInput = screen.getByRole('textbox');
+
+    await userEvent.type(nameInput, 'test create token');
+
+    const submitButton = screen.getByRole('button', { name: /Create/i });
+    await userEvent.click(submitButton);
+
+    const modal = await screen.getByText('Your API token is ready to be used.');
+    expect(modal).toBeVisible();
+  });
 });

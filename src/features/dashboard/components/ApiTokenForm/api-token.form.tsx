@@ -63,7 +63,7 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
-  const { createToken, isCreatingToken, errorCreatingToken } = useCreateToken();
+  const { createToken, isCreatingToken } = useCreateToken();
 
   const { handleSubmit, register, setValue, getValues } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
@@ -83,9 +83,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trading_information: data.trading_information,
       });
       createToken(name, selectedTokenScope);
-      errorCreatingToken ? setToggleModal(false) : setToggleModal(true);
+      setToggleModal(!is_toggle);
     },
-    [createToken, errorCreatingToken],
+    [createToken, is_toggle],
   );
 
   const onCardClick = useCallback(
