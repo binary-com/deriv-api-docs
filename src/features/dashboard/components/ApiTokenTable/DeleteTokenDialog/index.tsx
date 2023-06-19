@@ -46,7 +46,7 @@ const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => 
         <div className='modal-overlay'>
           <Modal.Overlay />
           <Modal.DialogContent
-            title='Deleting token'
+            title='Delete token'
             content='Are you sure you want to delete this token?'
             action_buttons={actionButtons}
             has_close_button
