@@ -32,6 +32,7 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
   const onError = useCallback((response: TSocketResponse<T>) => {
     setError(response.error);
     setIsLoading(false);
+    setFullResponse(null);
   }, []);
 
   const subscribe = useCallback(
