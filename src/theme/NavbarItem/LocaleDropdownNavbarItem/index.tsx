@@ -5,9 +5,9 @@ import { useLocation } from '@docusaurus/router';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import type { LinkLikeNavbarItemProps } from '@theme/NavbarItem';
 import type { Props } from '@theme/NavbarItem/LocaleDropdownNavbarItem';
+import classnames from 'classnames';
 
 export default function LocaleDropdownNavbarItem({
-  // mobile,
   dropdownItemsBefore,
   dropdownItemsAfter,
   ...props
@@ -31,9 +31,7 @@ export default function LocaleDropdownNavbarItem({
       to,
       target: '_self',
       autoAddBaseUrl: false,
-      className:
-        // eslint-disable-next-line no-nested-ternary
-        locale === currentLocale ? 'dropdown__link--active' : '',
+      className: classnames({ 'dropdown__link--active': locale === currentLocale }),
     };
   });
 
@@ -44,8 +42,7 @@ export default function LocaleDropdownNavbarItem({
   return (
     <DropdownNavbarItem
       {...props}
-      // mobile={mobile}
-      label={<>{dropdownLabel === 'English' ? 'EN' : 'PT'}</>}
+      label={<>{dropdownLabel === 'English' ? 'EN' : 'ES'}</>}
       items={items}
     />
   );
