@@ -124,4 +124,17 @@ describe('Home Page', () => {
     const modal = await screen.getByText('Your API token is ready to be used.');
     expect(modal).toBeVisible();
   });
+
+  it('Should have create button disabled when input is empty or has whitespace char', async () => {
+    const submitButton = screen.getByRole('button', { name: /Create/i });
+    expect(submitButton).toBeDisabled();
+
+    const nameInput = screen.getByRole('textbox');
+    await userEvent.type(nameInput, 'token text');
+
+    expect(submitButton).not.toBeDisabled();
+
+    await userEvent.clear(nameInput);
+    expect(submitButton).toBeDisabled();
+  });
 });
