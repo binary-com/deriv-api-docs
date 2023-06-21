@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text } from '@deriv/ui';
 import styles from './Footer.module.scss';
 
