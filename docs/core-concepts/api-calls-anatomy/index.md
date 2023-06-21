@@ -15,13 +15,14 @@ keywords:
   - anatomy
 description: Deriv API calls' anatomy
 ---
+
 ## Subscribe and send
 
 All API calls have a send functionality for making a request and receiving a response. Certain API calls also offer a subscribe functionality allowing for updates to be sent to your application when new information becomes available.
 
 ### Subscribe
 
-Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream of data of this particular API call.
+Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream from data of this particular API call.
 
 Some of these API calls automatically subscribe (e.g. [ticks](https://api.deriv.com/api-explorer#ticks)) and some have an optional `subscribe` field. If you pass `1` to the `subscribe` field, the subscription will start and the server will continue to send the requested data until you unsubscribe by calling the `Forget` or `Forget all` API calls.
 
@@ -42,7 +43,6 @@ If you want to stop the message stream created by `subscribe`, you will have to 
 :::caution
 For more information on the `Forget` API call, have a look at [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) in the API explorer.
 :::
-
 
 ## Request data
 
