@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from '@deriv/ui';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
+  useEffect(() => {
+    const s = document.createElement('script');
+    s.src =
+      'https://survey.survicate.com/workspaces/83b651f6b3eca1ab4551d95760fe5deb/web_surveys.js';
+    s.async = true;
+    s.innerHTML = 'Hello World';
+    const e = document.getElementById('__docusaurus');
+    console.log('e: ', e);
+    e.parentNode.insertBefore(s, e);
+  }, []);
+
   return (
     <footer className={styles.FooterContainer} data-testid='footer-text'>
       <section className={styles.FooterBody}>
