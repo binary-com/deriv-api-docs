@@ -8,7 +8,6 @@ const Footer = () => {
     s.src =
       'https://survey.survicate.com/workspaces/83b651f6b3eca1ab4551d95760fe5deb/web_surveys.js';
     s.async = true;
-    s.innerHTML = 'Hello World';
     const e = document.getElementById('__docusaurus');
     console.log('e: ', e);
     e.parentNode.insertBefore(s, e);
