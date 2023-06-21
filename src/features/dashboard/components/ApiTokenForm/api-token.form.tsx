@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useCallback, useState } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -71,6 +71,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   });
 
   const [is_toggle, setToggleModal] = useState(false);
+  const [is_empty, setFieldEmpty] = useState(true);
 
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
@@ -95,6 +96,11 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     },
     [getValues, setValue],
   );
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const message = e.target.value;
+    message.trim().length === 0 ? setFieldEmpty(true) : setFieldEmpty(false);
+  };
 
   return (
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
@@ -138,8 +144,16 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           </div>
         </div>
         <div className={styles.customTextInput}>
-          <input type='text' name='name' {...register('name')} placeholder='Token name' />
-          <Button type='submit'>Create</Button>
+          <input
+            type='text'
+            name='name'
+            {...register('name')}
+            placeholder='Token name'
+            onChange={handleChange}
+          />
+          <Button type='submit' disabled={is_empty}>
+            Create
+          </Button>
           {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
         </div>
         <div className={styles.helperText}>
