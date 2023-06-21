@@ -84,7 +84,7 @@ Whatever you pass to this field will be returned back to you inside a `response`
 
 #### The `req_id` field
 
-You may need to `tag` your requests and pass them through our `WebSocket` calls. You can do so by passing a `number` to this field. it can be helpful when you need to map `requests` to `responses`.
+You may need to `tag` your requests and pass them through our `WebSocket` calls. You can do so by passing a `number` to this field. It can be helpful when you need to map `requests` to `responses`.
 
 :::caution
 To learn about additional optional fields specific to each API call, please refer to our [API Explorer](https://api.deriv.com/api-explorer).
