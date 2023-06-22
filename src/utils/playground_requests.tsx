@@ -551,6 +551,9 @@ export const playground_requests = [
   {
     name: 'p2p_advertiser_adverts',
     title: 'P2P Advertiser Adverts',
+    body: {
+      p2p_advertiser_adverts: 1,
+    },
   },
   {
     name: 'p2p_advertiser_create',
