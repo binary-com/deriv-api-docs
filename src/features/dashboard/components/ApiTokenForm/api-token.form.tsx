@@ -99,7 +99,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const message = e.target.value;
-    message.trim().length === 0 ? setFieldEmpty(true) : setFieldEmpty(false);
+    /^\s/.test(message) || message.trim().length === 0 ? setFieldEmpty(true) : setFieldEmpty(false);
   };
 
   return (

@@ -125,16 +125,19 @@ describe('Home Page', () => {
     expect(modal).toBeVisible();
   });
 
-  it('Should have create button disabled when input is empty or has whitespace char', async () => {
+  it('Should have create button disabled when input is empty or starts with whitespace', async () => {
     const submitButton = screen.getByRole('button', { name: /Create/i });
     expect(submitButton).toBeDisabled();
 
     const nameInput = screen.getByRole('textbox');
-    await userEvent.type(nameInput, 'token text');
 
-    expect(submitButton).not.toBeDisabled();
+    await userEvent.type(nameInput, ' {space}token text');
+    expect(submitButton).toBeDisabled();
 
     await userEvent.clear(nameInput);
     expect(submitButton).toBeDisabled();
+
+    await userEvent.type(nameInput, 'token text');
+    expect(submitButton).not.toBeDisabled();
   });
 });
