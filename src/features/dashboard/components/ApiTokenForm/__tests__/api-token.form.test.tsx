@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen, within } from '@site/src/test-utils';
+import { cleanup, fireEvent, render, screen, within } from '@site/src/test-utils';
 import userEvent from '@testing-library/user-event';
 import ApiTokenForm from '../api-token.form';
 import useCreateToken from '../../../hooks/useCreateToken';
@@ -49,6 +49,7 @@ const scopes = [
     label: 'Admin',
   },
 ];
+const preventDefault = jest.fn();
 
 describe('Home Page', () => {
   beforeEach(() => {
@@ -125,19 +126,29 @@ describe('Home Page', () => {
     expect(modal).toBeVisible();
   });
 
-  it('Should have create button disabled when input is empty or starts with whitespace', async () => {
+  it('Should have create button disabled when input is empty or ends with whitespace', async () => {
     const submitButton = screen.getByRole('button', { name: /Create/i });
     expect(submitButton).toBeDisabled();
 
     const nameInput = screen.getByRole('textbox');
 
-    await userEvent.type(nameInput, ' {space}token text');
-    expect(submitButton).toBeDisabled();
+    await userEvent.type(nameInput, 'token text');
+    expect(submitButton).not.toBeDisabled();
 
     await userEvent.clear(nameInput);
     expect(submitButton).toBeDisabled();
 
-    await userEvent.type(nameInput, 'token text');
-    expect(submitButton).not.toBeDisabled();
+    await userEvent.clear(nameInput);
+    await userEvent.type(nameInput, 'token text ');
+    expect(submitButton).toBeDisabled();
+  });
+
+  it('Should disable user from entering whitespace in the beginning', async () => {
+    const nameInput = screen.getByRole('textbox');
+
+    fireEvent.keyDown(nameInput, { code: 'Space', preventDefault });
+    await userEvent.type(nameInput, '{space}');
+
+    expect(nameInput).toHaveValue('');
   });
 });

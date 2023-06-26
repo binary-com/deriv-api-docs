@@ -71,7 +71,8 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   });
 
   const [is_toggle, setToggleModal] = useState(false);
-  const [is_empty, setFieldEmpty] = useState(true);
+  const [is_disabled, setDisabled] = useState(true);
+  const [is_empty, setEmpty] = useState(true);
 
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
@@ -99,7 +100,14 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const message = e.target.value;
-    /^\s/.test(message) || message.trim().length === 0 ? setFieldEmpty(true) : setFieldEmpty(false);
+    message.trim().length === 0 ? setEmpty(true) : setEmpty(false);
+    /\s$/.test(message) || message.trim().length === 0 ? setDisabled(true) : setDisabled(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Space' && is_empty) {
+      e.preventDefault();
+    }
   };
 
   return (
@@ -150,8 +158,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
             {...register('name')}
             placeholder='Token name'
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
-          <Button type='submit' disabled={is_empty}>
+          <Button type='submit' disabled={is_disabled}>
             Create
           </Button>
           {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
