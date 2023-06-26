@@ -25,15 +25,21 @@ const CURRENCY_MAP = new Map([
 ]);
 
 export const domains = [
+  'deriv.be',
+  'deriv.me',
   'deriv.com',
   'api.deriv.me',
   'api.deriv.be',
   'api.deriv.com',
   'staging.deriv.be',
   'staging.deriv.me',
+  'staging.deriv.com',
   'localhost:3000',
+  'localhost',
   'deriv-com-git-fork',
   'deriv-developers-portal-git-fork',
+  'staging-api.deriv.be',
+  'staging-api.deriv.me',
   'staging-api.deriv.com',
 ];
 
