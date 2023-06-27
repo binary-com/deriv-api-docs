@@ -12,6 +12,7 @@ keywords:
   - deriv-authorisation
 description: Deriv API authorisation and authentication
 ---
+
 Without authorisation and authentication you'll only get access to roughly half of our API calls and features. For example, in order to buy contracts or utilise the `Copy Trading` features, your users must be authenticated and authorised by our **OAuth** provider and **WebSocket Server**.
 
 ## Before we start
@@ -20,12 +21,12 @@ Please make sure you have all the requirements mentioned below to continue.
 
 ### Requirements
 
-1. Deriv account 
+1. Deriv account
 2. Deriv API token with the appropriate access level
-3. Deriv app ID 
+3. Deriv app ID
 
 :::note
-Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-application.md) for detailed instructions how to create a Deriv API token and application.
+Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-application.md) for detailed instructions on how to create a Deriv API token and application.
 :::
 
 ### API token
@@ -84,7 +85,9 @@ const user_accounts = [
   },
 ];
 ```
-To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize)  API call with the user's **selected** account **session token**:
+
+To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize) API call with the user's **selected** account **session token**:
+
 ```js
 {
   "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
@@ -92,6 +95,7 @@ To authorise the user based on the user's **selected** account, call the [author
 ```
 
 The response for the `authorize` call would be an object as below:
+
 ```js
 {
     "account_list": [
@@ -145,4 +149,5 @@ The response for the `authorize` call would be an object as below:
     "user_id": 12345678
   }
 ```
+
 Now, the user is authorised, and you can use Deriv API calls on behalf of the account.

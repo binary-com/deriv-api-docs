@@ -83,12 +83,12 @@ WebSockets are an essential client-server communication tool. To benefit the mos
 
 Use WebSockets in the following cases:
 
-1. ‍When you're developing a real-time web application. 
-  The most customary use of WebSocket is in real-time application development wherein it assists in a continual display of data at the client end. As the back-end server sends back this data continuously, a WebSocket allows uninterrupted pushing or transmitting of this data in the already open connection. The use of WebSockets makes such data transmission quick and leverages the application's performance.
-2. For trading websites, such as Deriv. 
-  Here, WebSocket assist in data handling that is impelled by the deployed back-end server to the client.
+1. ‍When you're developing a real-time web application.
+   The most customary use of WebSocket is in real-time application development wherein it assists in a continual display of data at the client end. As the back-end server sends back this data continuously, a WebSocket allows uninterrupted pushing or transmitting of this data in the already open connection. The use of WebSockets makes such data transmission quick and leverages the application's performance.
+2. For trading websites, such as Deriv.
+   Here, WebSocket assists in data handling that is impelled by the deployed back-end server to the client.
 3. ‍When creating a chat application.
-  Chat application developers call out WebSockets for help in operations like a one-time exchange and publishing/broadcasting messages. As the same WebSocket connection is used for sending/receiving messages, communication becomes easy and quick.
+   Chat application developers call out WebSockets for help in operations like a one-time exchange and publishing/broadcasting messages. As the same WebSocket connection is used for sending/receiving messages, communication becomes easy and quick.
 
 Now that we've established where WebSockets should be used, let's see where it is best to avoid them. This will help you steer clear of unnecessary operational hassles.
 
