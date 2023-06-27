@@ -21,7 +21,7 @@ const useBrandingState = () => {
     } else {
       setIsOfficialDomain(true);
     }
-  }, [localStorage]);
+  }, []);
 
   return { is_official_domain };
 };
