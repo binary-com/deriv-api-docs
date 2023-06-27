@@ -34,7 +34,7 @@
   h3 {
     color: var(--ifm-color-emphasis-500);
     font-weight: 400;
-    transition: color .2s;
+    transition: color 0.2s;
   }
 }
 
@@ -51,5 +51,4 @@
   justify-content: space-around;
   align-items: center;
   padding: rem(2);
-  overflow: auto;
 }
