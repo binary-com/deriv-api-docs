@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Header.module.scss';
 import Link from '@docusaurus/Link';
 import RenderOfficialContents from '../RenderOfficialContents';
 
 export const Header = () => {
+  useEffect(() => {
+    const s = document.createElement('script');
+    s.src =
+      'https://survey.survicate.com/workspaces/83b651f6b3eca1ab4551d95760fe5deb/web_surveys.js';
+    s.async = true;
+    const e = document.getElementById('__docusaurus');
+    e.parentNode.insertBefore(s, e);
+  }, []);
   return (
     <RenderOfficialContents>
       <div className={styles.Navtop}>
