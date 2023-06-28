@@ -47,3 +47,10 @@ If you want to know for example how you can `monetize your application` or how t
 #### Setting up a Deriv application
 
 If you want to know more about the essentials that are needed to setup your own application, then have a look at the [Setting up a Deriv application](/docs/setting-up-a-deriv-application) section.
+
+:::danger
+Kindly be informed that due to recent API usage guidelines, all third-party apps communications must use Deriv's API red servers at the following address
+`red.binaryws.com`
+This restriction will be applied after 7 days and any traffic to the other servers from third-party apps will be rejected.
+Please take the necessary action before the efficient date.
+:::
