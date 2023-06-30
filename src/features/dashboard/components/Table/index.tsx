@@ -8,7 +8,7 @@ interface ITableProps<T extends object> extends HTMLAttributes<HTMLTableElement>
   data: T[];
   columns: Column<T>[];
   initialState?: TableState<T>;
-  table_row_ref: LegacyRef<HTMLTableRowElement>;
+  table_row_ref?: LegacyRef<HTMLTableRowElement>;
   getCustomCellProps?: (cell: Cell<T, unknown>) => object;
 }
 
