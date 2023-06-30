@@ -5,6 +5,9 @@
     display: table;
     min-width: 765px;
     width: 100%;
+    tr {
+      height: rem(12.5);
+    }
   }
 
   thead {
