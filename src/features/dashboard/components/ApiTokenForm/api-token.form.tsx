@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { scopesObjectToArray } from '@site/src/utils';
 import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
+import useApiToken from '@site/src/hooks/useApiToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
 
@@ -16,7 +17,18 @@ const schema = yup
     payments: yup.boolean(),
     trading_information: yup.boolean(),
     admin: yup.boolean(),
-    name: yup.string().required(),
+    name: yup
+      .string()
+      .required()
+      .max(32, 'Only up to 32 characters are allowed.')
+      .matches(/^[a-z0-9_\-\s]*$/, {
+        message: 'Only alphanumeric characters with spaces and underscores are allowed.',
+        excludeEmptyString: true,
+      })
+      .matches(/^(?!\s)[a-z0-9_\-\s]*(?<!\s)$/, {
+        message: 'No whitespace is allowed at the beginning or the end of the name.',
+        excludeEmptyString: true,
+      }),
   })
   .required();
 
@@ -62,12 +74,39 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
+  const [input_value, setInputValue] = useState('');
+  const [token_names, setTokenNames] = useState([]);
+  const [is_invalid_token, setIsInvalidToken] = useState(false);
   const { createToken, isCreatingToken } = useCreateToken();
+  const { tokens } = useApiToken();
 
-  const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
     mode: 'all',
   });
+
+  useEffect(() => {
+    if (tokens.length > 0) {
+      tokens.forEach((token_object) => {
+        setTokenNames((prevState) => [...prevState, token_object.display_name]);
+      });
+    }
+  }, [tokens]);
+
+  useEffect(() => {
+    if (token_names.includes(input_value)) {
+      setIsInvalidToken(true);
+    } else {
+      setIsInvalidToken(false);
+    }
+  }, [input_value, token_names]);
 
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
@@ -134,10 +173,25 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
             </Text>
           </div>
         </div>
-        <div className={styles.customTextInput}>
+        <div
+          onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
+          className={styles.customTextInput}
+        >
           <input type='text' name='name' {...register('name')} placeholder='Token name' />
-          <Button type='submit'>Create</Button>
+          <Button disabled={is_invalid_token} type='submit'>
+            Create
+          </Button>
         </div>
+        {errors && errors?.name && (
+          <Text as='span' type='paragraph-1' className='error-message'>
+            {errors.name?.message}
+          </Text>
+        )}
+        {is_invalid_token && (
+          <div className='error-message'>
+            <p>That name is taken. Choose another.</p>
+          </div>
+        )}
         <div className={styles.helperText}>
           <p>Length of token name must be between 2 and 32 characters.</p>
         </div>
