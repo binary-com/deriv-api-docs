@@ -46,13 +46,13 @@ describe('Delete App Dialog', () => {
 
   it('Should render proper buttons', () => {
     const okButton = screen.getByRole('button', { name: /yes, delete/i });
-    const cancelButton = screen.getByRole('button', { name: /no, keep it/i });
+    const cancelButton = screen.getByRole('button', { name: /Cancel/i });
     expect(okButton).toBeInTheDocument();
     expect(cancelButton).toBeInTheDocument();
   });
 
   it('Should call onClose on cancel button click', async () => {
-    const cancelButton = screen.getByRole('button', { name: /no, keep it/i });
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
 
     await userEvent.click(cancelButton);
 
