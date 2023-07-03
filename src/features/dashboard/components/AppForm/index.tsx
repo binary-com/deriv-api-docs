@@ -164,7 +164,7 @@ const AppForm = ({
                 </div>
                 <Text as='p' type='paragraph-1' className={styles.helperText}>
                   If you don&lsquo;t want to earn a markup, enter 0 here. Otherwise, enter a number
-                  up to 5. Maximum: 5.00%.
+                  up to 3. Maximum: 3.00%.
                 </Text>
                 {errors && errors?.app_markup_percentage && (
                   <Text as='span' type='paragraph-1' className='error-message'>
