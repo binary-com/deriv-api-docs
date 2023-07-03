@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   TSocketSubscribableEndpointNames,
   TSocketRequestProps,
@@ -30,10 +30,16 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_not_valid, setIsNotValid] = useState(false);
 
+  const subscribe_ref: any = useRef();
+
   useEffect(() => {
     if (error && error.code === 'AuthorizationRequired') {
       setToggleModal(true);
     }
+
+    return () => {
+      if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
+    };
   }, [error]);
 
   const parseRequestJSON = () => {
@@ -51,13 +57,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   };
 
   const handleClick = useCallback(() => {
-    unsubscribe();
-    subscribe(parseRequestJSON());
+    if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
+    subscribe_ref.current = subscribe(parseRequestJSON());
     setResponseState(true);
-  }, [reqData, subscribe, unsubscribe]);
+  }, [subscribe, unsubscribe]);
 
   const handleClear = () => {
-    unsubscribe();
+    subscribe_ref.current?.unsubscribe?.();
     setResponseState(false);
   };
 
@@ -88,4 +94,4 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   );
 }
 
-export default SubscribeRenderer;
+export default React.memo(SubscribeRenderer);

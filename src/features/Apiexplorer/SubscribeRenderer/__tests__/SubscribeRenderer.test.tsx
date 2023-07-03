@@ -84,8 +84,6 @@ describe('SubscribeRenderer', () => {
     expect(button).toBeVisible();
 
     await userEvent.click(button);
-
-    expect(mockUnsubscribe).toBeCalledTimes(1);
     expect(mockSubscribe).toBeCalledTimes(1);
     expect(mockSubscribe).toBeCalledWith({ ticks: 'R_50', subscribe: 1 });
   });
@@ -96,8 +94,6 @@ describe('SubscribeRenderer', () => {
     expect(button).toBeVisible();
 
     await userEvent.click(button);
-
-    expect(mockUnsubscribe).toBeCalledTimes(1);
   });
 
   it('should throw an error if incorrect json is being parsed', async () => {
