@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { isNotDemoCurrency } from '@site/src/utils';
@@ -14,6 +14,7 @@ import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-d
 import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
 import clsx from 'clsx';
+import RestrictionsAppname from '../RestrictionsAppname';
 
 type TAppFormProps = {
   initialValues?: Partial<IRegisterAppForm>;
@@ -41,6 +42,7 @@ const AppForm = ({
 
   const { currentToken, tokens } = useApiToken();
   const { currentLoginAccount } = useAuthContext();
+  const [display_restrictions, setDisplayRestrictions] = useState(false);
 
   const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
 
@@ -121,15 +123,25 @@ const AppForm = ({
                   </div>
                 </React.Fragment>
               )}
-              <div className={styles.customTextInput} id='custom-text-input'>
-                <input {...register('name')} type='text' id='app_name' placeholder=' ' />
-                <label htmlFor='app_name'>App name (required)</label>
+              <div>
+                <div className={styles.customTextInput} id='custom-text-input'>
+                  <input
+                    {...register('name')}
+                    type='text'
+                    id='app_name'
+                    placeholder=' '
+                    onFocus={() => setDisplayRestrictions(true)}
+                  />
+                  <label htmlFor='app_name'>App name (required)</label>
+                </div>
+                {errors && errors?.name ? (
+                  <Text as='span' type='paragraph-1' className='error-message'>
+                    {errors.name?.message}
+                  </Text>
+                ) : (
+                  display_restrictions && <RestrictionsAppname />
+                )}
               </div>
-              {errors && errors?.name && (
-                <Text as='span' type='paragraph-1' className='error-message'>
-                  {errors.name?.message}
-                </Text>
-              )}
             </div>
             <div className={styles.formHeaderContainer}>
               <h4>Markup</h4>
