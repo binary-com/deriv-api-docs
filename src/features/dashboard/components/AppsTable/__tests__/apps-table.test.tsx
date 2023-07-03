@@ -88,7 +88,7 @@ describe('Apps Table', () => {
     const deleteDialogTitle = await screen.findByText('Are you sure you want to delete this app?');
     expect(deleteDialogTitle).toBeInTheDocument();
 
-    const closeDeleteDialog = await screen.findByText(/no, keep it/i);
+    const closeDeleteDialog = await screen.findByText(/cancel/i);
     await userEvent.click(closeDeleteDialog);
 
     expect(deleteDialogTitle).not.toBeInTheDocument();

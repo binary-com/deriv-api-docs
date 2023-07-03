@@ -9,8 +9,7 @@ tags:
 keywords:
   - deriv
   - api
-  - getting
-  - started
+  - getting started
 description: Getting started with Deriv API
 ---
 

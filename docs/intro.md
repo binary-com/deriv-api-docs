@@ -6,17 +6,13 @@ sidebar_label: Introduction
 sidebar_position: 0
 tags:
   - introduction
-  - getting
-  - started
-  - quick
-  - start
+  - getting started
+  - quick startup
 keywords:
   - deriv
   - api
-  - getting
-  - started
-  - quick
-  - start
+  - getting started
+  - quick startup
 description: Getting started with Deriv API
 ---
 
@@ -49,4 +45,5 @@ When using our code examples, we also suggest to have a look at our [Languages](
 If you want to know for example how you can `monetize your application` or how to create a `secure way for users to log in` to your application, then we provide a handful of [Guides](/docs/category/guides) that can assist you with that.
 
 #### Setting up a Deriv application
+
 If you want to know more about the essentials that are needed to setup your own application, then have a look at the [Setting up a Deriv application](/docs/setting-up-a-deriv-application) section.

@@ -2,6 +2,12 @@ import React from 'react';
 import { Header } from '..';
 import { render, screen } from '@testing-library/react';
 
+beforeAll(() => {
+  const script_tag = document.createElement('div');
+  script_tag.setAttribute('id', '__docusaurus');
+  document.body.appendChild(script_tag);
+});
+
 describe('Header', () => {
   it('should be able to render the header with links', () => {
     render(<Header />);
