@@ -53,6 +53,26 @@ describe('Api Token Table', () => {
     const loadingElement = await screen.findByTestId('circles-loading');
     expect(loadingElement).not.toBeVisible();
   });
+
+  it('Should be able to render the tokens in the table', () => {
+    mockUseApiToken.mockImplementationOnce(() => ({
+      tokens: [
+        {
+          display_name: 'testtoken1',
+          last_used: '',
+          scopes: ['admin', 'payments', 'read', 'trade', 'trading_information'],
+          token: 'asddfdsa1231',
+          valid_for_ip: '',
+        },
+      ],
+      isLoadingTokens: false,
+    }));
+
+    render(<ApiTokenTable />);
+
+    const token = screen.getByText('testtoken1');
+    expect(token).toBeVisible();
+  });
 });
 
 describe('DeleteTokenDialog', () => {

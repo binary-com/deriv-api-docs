@@ -46,7 +46,7 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
   useEffect(() => {
     const row_element_exists = table_row_ref !== null;
     if (tokens.length > 0 && row_element_exists) {
-      const row_height = table_row_ref.current?.clientHeight;
+      const row_height = table_row_ref.current && table_row_ref.current.clientHeight;
       setTableHeight(row_height * tokens.length);
     }
   }, [tokens, table_row_ref]);
