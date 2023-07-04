@@ -1,0 +1,9 @@
+@use 'src/styles/utility' as *;
+
+.tokenrestrictions {
+  font-size: rem(1.4);
+  font-weight: 400;
+  line-height: 18px;
+  padding-left: rem(2.8);
+  color: var(--colors-greyLight600);
+}

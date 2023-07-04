@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import TokenNameRestrictions from '../TokenNameRestrictions/TokenNameRestrictions';
 
 const schema = yup
   .object({
@@ -63,6 +64,7 @@ const scopes: TScope[] = [
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
+  const [restrictions, setRestrictions] = useState(false);
 
   const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
@@ -139,7 +141,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           <Button type='submit'>Create</Button>
         </div>
         <div className={styles.helperText}>
-          <p>Length of token name must be between 2 and 32 characters.</p>
+          <TokenNameRestrictions />
         </div>
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
