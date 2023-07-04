@@ -8,7 +8,7 @@ interface ITableProps<T extends object> extends HTMLAttributes<HTMLTableElement>
   data: T[];
   columns: Column<T>[];
   initialState?: TableState<T>;
-  table_row_ref?: LegacyRef<HTMLTableRowElement>;
+  row_height?: number;
   getCustomCellProps?: (cell: Cell<T, unknown>) => object;
 }
 
@@ -17,7 +17,7 @@ const Table = <T extends object>({
   columns,
   initialState,
   getCustomCellProps = defaultPropGetter,
-  table_row_ref,
+  row_height,
   ...rest
 }: ITableProps<T>) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<T>({
@@ -43,7 +43,11 @@ const Table = <T extends object>({
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <tr ref={table_row_ref} key={row.getRowProps().key} {...row.getRowProps()}>
+            <tr
+              style={{ height: `${row_height}px` }}
+              key={row.getRowProps().key}
+              {...row.getRowProps()}
+            >
               {row.cells.map((cell) => {
                 return (
                   <td key={cell.getCellProps().key} {...cell.getCellProps()}>

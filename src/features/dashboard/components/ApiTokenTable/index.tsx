@@ -38,22 +38,19 @@ const tableColumns: TTokenColumn[] = [
 ];
 
 const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
-  const TABLE_HEADER_HEIGHT = 125;
+  const ROW_HEIGHT = 125;
   const { tokens, isLoadingTokens } = useApiToken();
   const [table_height, setTableHeight] = useState(0);
-  const table_row_ref = useRef(null);
 
   useEffect(() => {
-    const row_element_exists = table_row_ref !== null;
-    if (tokens.length > 0 && row_element_exists) {
-      const row_height = table_row_ref.current && table_row_ref.current.clientHeight;
-      setTableHeight(row_height * tokens.length);
+    if (tokens.length > 0) {
+      setTableHeight(ROW_HEIGHT * tokens.length);
     }
-  }, [tokens, table_row_ref]);
+  }, [tokens]);
 
   return (
     <div
-      style={{ height: `calc(${table_height}px + ${TABLE_HEADER_HEIGHT}px + 50px)` }}
+      style={{ height: `calc(${table_height}px + ${ROW_HEIGHT}px + 50px)` }}
       className={styles.api_table_container}
     >
       <div className={styles.api_table} {...props}>
@@ -69,7 +66,7 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
           columns={tableColumns}
           data={tokens}
           initialState={{ hiddenColumns: ['valid_for_ip'] }}
-          table_row_ref={table_row_ref}
+          row_height={ROW_HEIGHT}
         />
       </div>
     </div>
