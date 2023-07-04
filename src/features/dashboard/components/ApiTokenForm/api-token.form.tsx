@@ -19,16 +19,22 @@ const schema = yup
     admin: yup.boolean(),
     name: yup
       .string()
-      .required()
       .max(32, 'Only up to 32 characters are allowed.')
-      .matches(/^[a-z0-9_\-\s]*$/, {
+      .matches(/^[a-zA-Z0-9_\-\s]*$/, {
         message: 'Only alphanumeric characters with spaces and underscores are allowed.',
         excludeEmptyString: true,
       })
-      .matches(/^(?!\s)[a-z0-9_\-\s]*(?<!\s)$/, {
+      .matches(/^(?!\s)[a-zA-Z0-9_\-\s]*(?<!\s)$/, {
         message: 'No whitespace is allowed at the beginning or the end of the name.',
         excludeEmptyString: true,
-      }),
+      })
+      .matches(
+        /^(?!.*deriv|.*d3r1v|.*der1v|.*d3riv|.*b1nary|.*binary|.*b1n4ry|.*bin4ry|.*blnary|.*b\|nary).*$/i,
+        {
+          message: 'The name cannot contain “Binary”, “Deriv”, or similar words.',
+          excludeEmptyString: true,
+        },
+      ),
   })
   .required();
 
@@ -92,16 +98,20 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     mode: 'all',
   });
 
+  const disable_button = is_invalid_token || Object.keys(errors).length > 0 || input_value === '';
+
   useEffect(() => {
     if (tokens.length > 0) {
       tokens.forEach((token_object) => {
-        setTokenNames((prevState) => [...prevState, token_object.display_name]);
+        const token_lowercase = token_object.display_name.toLowerCase();
+        setTokenNames((prevState) => [...prevState, token_lowercase]);
       });
     }
   }, [tokens]);
 
   useEffect(() => {
-    if (token_names.includes(input_value)) {
+    const token_name_exists = token_names.includes(input_value.toLowerCase());
+    if (token_name_exists) {
       setIsInvalidToken(true);
     } else {
       setIsInvalidToken(false);
@@ -175,10 +185,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         </div>
         <div
           onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
-          className={styles.customTextInput}
+          className={`${styles.customTextInput} ${errors.name ? 'error-border' : ''}`}
         >
           <input type='text' name='name' {...register('name')} placeholder='Token name' />
-          <Button disabled={is_invalid_token} type='submit'>
+          <Button disabled={disable_button} type='submit'>
             Create
           </Button>
         </div>
