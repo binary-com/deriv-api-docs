@@ -6,7 +6,13 @@ const useBrandingState = () => {
 
   const isOfficialHost = () => {
     const host = window.location.host;
-    return domains.includes(host);
+    let is_official_host = true;
+    domains.forEach((domain) => {
+      if (host.includes(domain)) {
+        is_official_host = host.includes(domain);
+      }
+    });
+    return is_official_host;
   };
 
   useEffect(() => {
