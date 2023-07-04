@@ -50,7 +50,7 @@ If you want to know more about the essentials that are needed to setup your own 
 
 :::danger
 Kindly be informed that due to recent API usage guidelines, all third-party apps communications must use Deriv's API red servers at the following address
-`red.binaryws.com`
+`red.binaryws.com`.
 This restriction will be applied after 7 days and any traffic to the other servers from third-party apps will be rejected.
-Please take the necessary action before the efficient date.
+Please take the necessary action before the effective date.
 :::
