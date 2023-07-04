@@ -6,15 +6,13 @@ const useBrandingState = () => {
 
   const isOfficialHost = () => {
     const host = window.location.host;
-    let is_official_host = true;
-
+    let is_official_host = false;
     for (const domain of domains) {
       if (host.includes(domain)) {
         is_official_host = host.includes(domain);
         break;
       }
     }
-
     return is_official_host;
   };
 
