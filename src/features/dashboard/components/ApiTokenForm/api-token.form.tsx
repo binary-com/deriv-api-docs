@@ -102,7 +102,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const message = e.target.value;
     message.trim().length === 0 ? setEmpty(true) : setEmpty(false);
-    /\s$/.test(message) || message.trim().length === 0 ? setDisabled(true) : setDisabled(false);
+    /^\s.*/.test(message) || /\s$/.test(message) || message.trim().length === 0
+      ? setDisabled(true)
+      : setDisabled(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
