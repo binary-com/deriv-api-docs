@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { Circles } from 'react-loader-spinner';
 import styles from './api-table.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
