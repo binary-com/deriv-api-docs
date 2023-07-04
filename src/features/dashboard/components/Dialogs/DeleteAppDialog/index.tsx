@@ -33,7 +33,7 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
       },
       {
         id: 1,
-        text: 'No, keep it',
+        text: 'Cancel',
         color: 'secondary',
         onClick: () => {
           onClose();
