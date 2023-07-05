@@ -30,7 +30,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_not_valid, setIsNotValid] = useState(false);
 
-  const subscribe_ref: any = useRef();
+  const subscribe_ref: React.MutableRefObject<{ unsubscribe: () => void }> = useRef();
 
   useEffect(() => {
     if (error && error.code === 'AuthorizationRequired') {
@@ -42,7 +42,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     };
   }, [error]);
 
-  const parseRequestJSON = () => {
+  const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
 
     try {
@@ -54,13 +54,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     }
 
     return request_data;
-  };
+  }, [reqData]);
 
   const handleClick = useCallback(() => {
     if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
     subscribe_ref.current = subscribe(parseRequestJSON());
     setResponseState(true);
-  }, [subscribe, unsubscribe]);
+  }, [parseRequestJSON, subscribe]);
 
   const handleClear = () => {
     subscribe_ref.current?.unsubscribe?.();
