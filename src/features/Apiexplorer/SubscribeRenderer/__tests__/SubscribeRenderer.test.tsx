@@ -91,29 +91,45 @@ describe('SubscribeRenderer', () => {
       'Could not parse the JSON data while trying to send the request: ',
     );
   });
-});
 
-it('should call subscribe and unsubscribe when pressing the send request button', async () => {
-  jest.spyOn(React, 'useRef').mockReturnValue({
-    current: {
-      unsubscribe: mockUnsubscribe,
-    },
+  it('should call subscribe and unsubscribe when pressing the send request button', async () => {
+    jest.spyOn(React, 'useRef').mockReturnValue({
+      current: {
+        unsubscribe: mockUnsubscribe,
+      },
+    });
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    const button = await screen.findByRole('button', { name: /Send Request/i });
+    expect(button).toBeVisible();
+
+    await userEvent.click(button);
+    expect(mockUnsubscribe).toBeCalledTimes(1);
+    expect(mockSubscribe).toBeCalledTimes(1);
+    expect(mockSubscribe).toBeCalledWith({ ticks: 'R_50', subscribe: 1 });
   });
-  render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
-  const button = await screen.findByRole('button', { name: /Send Request/i });
-  expect(button).toBeVisible();
 
-  await userEvent.click(button);
-  expect(mockUnsubscribe).toBeCalledTimes(1);
-  expect(mockSubscribe).toBeCalledTimes(1);
-  expect(mockSubscribe).toBeCalledWith({ ticks: 'R_50', subscribe: 1 });
-});
+  it('should call unsubscribe when pressing the clear button', async () => {
+    jest.spyOn(React, 'useRef').mockReturnValue({
+      current: {
+        unsubscribe: mockUnsubscribe,
+      },
+    });
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    const button = await screen.findByRole('button', { name: 'Clear' });
+    expect(button).toBeVisible();
 
-it('should call unsubscribe when pressing the clear button', async () => {
-  render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
-  const button = await screen.findByRole('button', { name: 'Clear' });
-  expect(button).toBeVisible();
+    await userEvent.click(button);
+    expect(mockUnsubscribe).toBeCalledTimes(1);
+  });
 
-  await userEvent.click(button);
-  expect(mockUnsubscribe).toBeCalledTimes(1);
+  it('should call unsubscribe when unmounting the component', async () => {
+    jest.spyOn(React, 'useRef').mockReturnValue({
+      current: {
+        unsubscribe: mockUnsubscribe,
+      },
+    });
+    const { unmount } = render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    unmount();
+    expect(mockUnsubscribe).toBeCalledTimes(1);
+  });
 });
