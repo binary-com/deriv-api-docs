@@ -9,6 +9,10 @@ import SearchButton from '../SearchButton';
 const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) => {
   const [toggle_search, setToggleSearch] = useState<boolean>(false);
 
+  const handleClick = () => {
+    location.assign(authUrl);
+  };
+
   const logInButtonClasses = clsx(
     'navbar__item navbar__link',
     styles.UserNavbarItem,
@@ -24,10 +28,10 @@ const UserNavbarDesktopItem = ({ authUrl, is_logged_in }: IUserNavbarItemProps) 
     <AccountSwitcher />
   ) : (
     <nav className={`right-navigation ${toggle_search ? 'search-open' : 'search-closed'}`}>
-      <Link to={authUrl} className={logInButtonClasses}>
+      <button onClick={handleClick} className={logInButtonClasses}>
         Log in
-      </Link>
-      <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses} target='_blank'>
+      </button>
+      <Link to={'https://deriv.com/signup/'} className={signUpButtonClasses}>
         Sign up
       </Link>
       <SearchButton setToggleSearch={setToggleSearch} toggle_search={toggle_search} />
