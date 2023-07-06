@@ -117,6 +117,42 @@ describe('App Form', () => {
     expect(appMarkupPercentageError).toBeInTheDocument();
   });
 
+  it('Should show error for invalid Auth url', async () => {
+    const submitButton = screen.getByText('Update Application');
+
+    const authURLInput = screen.getByRole('textbox', {
+      name: 'Authorization URL (optional)',
+    });
+
+    await userEvent.type(authURLInput, 'http:invalidAUTHurl.com');
+
+    await userEvent.click(submitButton);
+
+    const authURLInputError = await screen.queryByText(
+      'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+    );
+
+    expect(authURLInputError).toBeInTheDocument();
+  });
+
+  it('Should show error for invalid Verification url', async () => {
+    const submitButton = screen.getByText('Update Application');
+
+    const authURLInput = screen.getByRole('textbox', {
+      name: 'Verification URL (optional)',
+    });
+
+    await userEvent.type(authURLInput, 'http:invalidVERIurl.com');
+
+    await userEvent.click(submitButton);
+
+    const authURLInputError = await screen.queryByText(
+      'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+    );
+
+    expect(authURLInputError).toBeInTheDocument();
+  });
+
   it('Should show error message for wrong value', async () => {
     const fakeTokens: TTokensArrayType = [
       {
