@@ -63,7 +63,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   }, [parseRequestJSON, subscribe]);
 
   const handleClear = () => {
-    subscribe_ref.current?.unsubscribe?.();
+    subscribe_ref.current.unsubscribe();
     setResponseState(false);
   };
 
