@@ -1,11 +1,12 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import SubscribeRenderer from '..';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import LoginDialog from '../../LoginDialog';
 
 jest.mock('@site/src/hooks/useAuthContext');
 
@@ -131,5 +132,29 @@ describe('SubscribeRenderer', () => {
     const { unmount } = render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
     unmount();
     expect(mockUnsubscribe).toBeCalledTimes(1);
+  });
+  it('should call login dialog when the error code is not authourized', async () => {
+    const setToggleModal = jest.fn();
+    jest.spyOn(React, 'useState').mockReturnValue([false, setToggleModal]);
+    mockUseAuthContext.mockImplementation(() => ({
+      is_logged_in: false,
+      is_authorized: false,
+    }));
+    mockUseSubscription.mockImplementation(() => ({
+      subscribe: mockSubscribe,
+      unsubscribe: mockUnsubscribe,
+      error: { code: 'AuthorizationRequired' },
+      full_response: {
+        tick: 1,
+        echo_req: { tick: 1 },
+      },
+    }));
+
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    const button = await screen.findByRole('button', { name: /Send Request/i });
+    await userEvent.click(button);
+    await waitFor(() => {
+      expect(setToggleModal).toHaveBeenCalled();
+    });
   });
 });

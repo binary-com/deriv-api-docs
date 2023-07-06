@@ -25,7 +25,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { full_response, is_loading, subscribe, unsubscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, error } = useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_not_valid, setIsNotValid] = useState(false);
