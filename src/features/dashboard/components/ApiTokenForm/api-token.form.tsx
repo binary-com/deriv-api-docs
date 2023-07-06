@@ -135,6 +135,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           </div>
         </div>
         <div className={styles.customTextInput}>
+          <label htmlFor='playground-request' className={styles.inlineLabel}>
+            Token name (You`&apos;`ve created <b>{}</b> out of 30 tokens )
+          </label>
           <input type='text' name='name' {...register('name')} placeholder='Token name' />
           <Button type='submit'>Create</Button>
         </div>

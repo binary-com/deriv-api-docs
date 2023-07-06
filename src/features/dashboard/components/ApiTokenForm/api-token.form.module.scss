@@ -79,6 +79,14 @@ form {
     transition: all 0.25s ease;
     white-space: nowrap;
   }
+  .inlineLabel {
+    position: absolute;
+    top: rem(-0.3);
+    left: rem(1);
+    font-size: rem(0.8);
+    padding: rem(0.2) rem(0.4);
+    background-color: var(--ifm-color-white);
+  }
   input[type='text'],
   input[type='number'] {
     background: 0 0;
