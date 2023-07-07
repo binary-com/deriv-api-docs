@@ -20,12 +20,9 @@ const schema = yup
     name: yup
       .string()
       .max(32, 'Only up to 32 characters are allowed.')
-      .matches(/^[a-zA-Z0-9_\-\s]*$/, {
-        message: 'Only alphanumeric characters with spaces and underscores are allowed.',
-        excludeEmptyString: true,
-      })
-      .matches(/^(?!\s)[a-zA-Z0-9_\-\s]*(?<!\s)$/, {
-        message: 'No whitespace is allowed at the beginning or the end of the name.',
+      .matches(/^[a-zA-Z0-9]+(?:[- _][a-zA-Z0-9]+)*$/, {
+        message:
+          'Only alphanumeric characters with spaces, dashes and underscores are allowed. (Example: my_application)',
         excludeEmptyString: true,
       })
       .matches(
@@ -82,6 +79,7 @@ const scopes: TScope[] = [
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const [input_value, setInputValue] = useState('');
   const [token_names, setTokenNames] = useState([]);
+  const [has_tokens, setHasTokens] = useState(false);
   const [is_invalid_token, setIsInvalidToken] = useState(false);
   const { createToken, isCreatingToken } = useCreateToken();
   const { tokens } = useApiToken();
@@ -100,14 +98,26 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
 
   const disable_button = is_invalid_token || Object.keys(errors).length > 0 || input_value === '';
 
+  const newTokenArray = () => {
+    const token_array = [];
+    for (const token_object of tokens) {
+      const token_name = token_object.display_name.toLowerCase();
+      token_array.push(token_name);
+      setTokenNames(token_array);
+    }
+  };
+
   useEffect(() => {
-    if (tokens.length > 0) {
-      tokens.forEach((token_object) => {
-        const token_lowercase = token_object.display_name.toLowerCase();
-        setTokenNames((prevState) => [...prevState, token_lowercase]);
-      });
+    if (tokens.length !== 0) {
+      setHasTokens(true);
     }
   }, [tokens]);
+
+  useEffect(() => {
+    if (has_tokens) {
+      newTokenArray();
+    }
+  }, [has_tokens]);
 
   useEffect(() => {
     const token_name_exists = token_names.includes(input_value.toLowerCase());
@@ -192,9 +202,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
             Create
           </Button>
         </div>
-        {errors && errors?.name && (
+        {errors && errors.name && (
           <Text as='span' type='paragraph-1' className='error-message'>
-            {errors.name?.message}
+            {errors.name.message}
           </Text>
         )}
         {is_invalid_token && (
