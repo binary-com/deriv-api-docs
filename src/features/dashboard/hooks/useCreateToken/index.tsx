@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { TTokenType } from '@site/src/types';
+import { TError } from '../../components/Dialogs/RegisterAppDialogError';
 
 const useCreateToken = () => {
   const { send, data, is_loading, error } = useWS('api_token');
@@ -27,7 +28,7 @@ const useCreateToken = () => {
   return {
     createToken,
     isCreatingToken: is_loading,
-    errorCreatingToken: error,
+    errorCreatingToken: error as TError,
   };
 };
 

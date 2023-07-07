@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const schema = yup
   .object({
@@ -62,7 +63,9 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
-  const { createToken, isCreatingToken } = useCreateToken();
+  const { createToken, isCreatingToken, errorCreatingToken } = useCreateToken();
+  const { tokens } = useApiToken();
+  const numberOfTokens = tokens.length - 1;
 
   const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
@@ -81,8 +84,11 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       });
       createToken(name, selectedTokenScope);
       reset();
+      if (errorCreatingToken) {
+        console.log(errorCreatingToken.error.message);
+      }
     },
-    [createToken, reset],
+    [createToken, errorCreatingToken, reset],
   );
 
   const onCardClick = useCallback(
@@ -136,7 +142,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         </div>
         <div className={styles.customTextInput}>
           <label htmlFor='playground-request' className={styles.inlineLabel}>
-            Token name (You`&apos;`ve created <b>{}</b> out of 30 tokens )
+            Token name (You&apos;ve created <b>{numberOfTokens}</b> out of 30 tokens )
           </label>
           <input type='text' name='name' {...register('name')} placeholder='Token name' />
           <Button type='submit'>Create</Button>
