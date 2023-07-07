@@ -229,4 +229,30 @@ describe('App Form', () => {
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
   });
+
+  it('Should display restrictions when app name is in focus and disappear if error occurs', async () => {
+    const submitButton = screen.getByText('Update Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(
+      tokenNameInput,
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti neque ratione',
+    );
+
+    const restrictionsList = screen.queryByRole('list');
+    expect(restrictionsList).toBeInTheDocument();
+
+    await userEvent.clear(tokenNameInput);
+
+    await userEvent.type(
+      tokenNameInput,
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti neque ratione repudiandae in dolores reiciendis sequi nvrohgoih iuhwr uiwhrug uwhiog iouwhg ouwhg',
+    );
+
+    await userEvent.click(submitButton);
+    expect(restrictionsList).not.toBeInTheDocument();
+  });
 });
