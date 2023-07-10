@@ -49,7 +49,7 @@ const AppForm = ({
   const accountHasAdminToken = () => {
     const admin_check_array = [];
     tokens.forEach((token) => {
-      const has_admin_scope = token?.scopes?.includes('admin');
+      const has_admin_scope = token.scopes && token.scopes.includes('admin');
       has_admin_scope ? admin_check_array.push(true) : admin_check_array.push(false);
     });
     return admin_check_array.includes(true);
@@ -75,9 +75,7 @@ const AppForm = ({
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
         <div
-          className={`${styles.formContent} ${
-            !admin_token && !is_update_mode ? styles.noAdmin : ''
-          }`}
+          className={`${styles.formContent} ${!admin_token && !is_update_mode && styles.noAdmin}`}
         >
           <div>
             <div className={styles.apiTokenWrapper}>
@@ -96,7 +94,7 @@ const AppForm = ({
                   <div data-testid='select-account'>
                     <CustomSelectDropdown
                       label='Your account'
-                      value={currentLoginAccount?.name}
+                      value={currentLoginAccount && currentLoginAccount.name}
                       register={register('currency_account')}
                       is_error={!accountHasAdminToken()}
                     >
@@ -134,9 +132,9 @@ const AppForm = ({
                   />
                   <label htmlFor='app_name'>App name (required)</label>
                 </div>
-                {errors && errors?.name ? (
+                {errors && errors.name ? (
                   <Text as='span' type='paragraph-1' className='error-message'>
-                    {errors.name?.message}
+                    {errors.name.message}
                   </Text>
                 ) : (
                   display_restrictions && <RestrictionsAppname />
@@ -178,9 +176,9 @@ const AppForm = ({
                   If you don&lsquo;t want to earn a markup, enter 0 here. Otherwise, enter a number
                   up to 5. Maximum: 5.00%.
                 </Text>
-                {errors && errors?.app_markup_percentage && (
+                {errors && errors.app_markup_percentage && (
                   <Text as='span' type='paragraph-1' className='error-message'>
-                    {errors.app_markup_percentage?.message}
+                    {errors.app_markup_percentage.message}
                   </Text>
                 )}
               </div>
@@ -208,8 +206,8 @@ const AppForm = ({
                 *Please note that this URL will be used as the OAuth redirect URL for the OAuth
                 authorization.
               </p>
-              {errors && errors?.redirect_uri && (
-                <span className='error-message'>{errors.redirect_uri?.message}</span>
+              {errors && errors.redirect_uri && (
+                <span className='error-message'>{errors.redirect_uri.message}</span>
               )}
             </div>
 
@@ -223,8 +221,8 @@ const AppForm = ({
                 />
                 <label htmlFor='app_verification_uri'>Verification URL (optional)</label>
               </div>
-              {errors && errors?.verification_uri && (
-                <span className='error-message'>{errors.verification_uri?.message}</span>
+              {errors && errors.verification_uri && (
+                <span className='error-message'>{errors.verification_uri.message}</span>
               )}
             </div>
 

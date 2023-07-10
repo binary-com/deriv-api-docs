@@ -45,7 +45,7 @@ describe('App Form', () => {
       {
         display_name: 'first',
         last_used: '',
-        scopes: ['read', 'trade'],
+        scopes: ['read', 'trade', 'admin'],
         token: 'first_token',
         valid_for_ip: '',
       },
