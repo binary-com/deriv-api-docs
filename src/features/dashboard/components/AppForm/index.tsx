@@ -35,7 +35,7 @@ const AppForm = ({
     handleSubmit,
     formState: { errors },
   } = useForm<IRegisterAppForm>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(is_update_mode ? appEditSchema : appRegisterSchema),
     defaultValues: initialValues,
   });
