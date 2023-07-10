@@ -237,10 +237,7 @@ describe('App Form', () => {
       name: 'App name (required)',
     });
 
-    await userEvent.type(
-      tokenNameInput,
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti neque ratione',
-    );
+    await userEvent.type(tokenNameInput, 'Lorem ipsum dolor sit amet');
 
     const restrictionsList = screen.queryByRole('list');
     expect(restrictionsList).toBeInTheDocument();
