@@ -47,6 +47,7 @@ const CreateTokenField = ({
 
   const token_name_exists = getTokenNames().includes(input_value.toLowerCase());
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
+  const error_border_active = token_name_exists || errors.name;
 
   return (
     <React.Fragment>
@@ -59,9 +60,15 @@ const CreateTokenField = ({
       </div>
       <div
         onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
-        className={`${styles.customTextInput} ${errors.name ? 'error-border' : ''}`}
+        className={`${styles.customTextInput} ${error_border_active ? 'error-border' : ''}`}
       >
-        <input type='text' name='name' {...register} placeholder='Token name' />
+        <input
+          className={`${error_border_active ? 'error-border' : ''}`}
+          type='text'
+          name='name'
+          {...register}
+          placeholder='Token name'
+        />
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>

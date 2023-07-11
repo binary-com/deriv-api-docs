@@ -19,6 +19,7 @@ const schema = yup
     admin: yup.boolean(),
     name: yup
       .string()
+      .min(2, 'Your token name must be atleast 2 characters long.')
       .max(32, 'Only up to 32 characters are allowed.')
       .matches(/^[a-zA-Z0-9]+(?:[- _][a-zA-Z0-9]+)*$/, {
         message:
