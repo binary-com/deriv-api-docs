@@ -35,7 +35,6 @@ const CreateTokenField = ({
       setFormIsCleared(false);
     }
   }, [form_is_cleared]);
-  console.log(errors);
 
   const getTokenNames = useCallback(() => {
     const token_names = [];
