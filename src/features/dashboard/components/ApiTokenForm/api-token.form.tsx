@@ -1,14 +1,14 @@
-import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
-import { Button, Text } from '@deriv/ui';
+import React, { HTMLAttributes, useCallback, useState } from 'react';
+import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { scopesObjectToArray } from '@site/src/utils';
 import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
-import useApiToken from '@site/src/hooks/useApiToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import CreateTokenField from './CreateTokenField';
 
 const schema = yup
   .object({
@@ -77,12 +77,8 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
-  const [input_value, setInputValue] = useState('');
-  const [token_names, setTokenNames] = useState([]);
-  const [has_tokens, setHasTokens] = useState(false);
-  const [is_invalid_token, setIsInvalidToken] = useState(false);
   const { createToken, isCreatingToken } = useCreateToken();
-  const { tokens } = useApiToken();
+  const [form_is_cleared, setFormIsCleared] = useState(false);
 
   const {
     handleSubmit,
@@ -96,38 +92,6 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     mode: 'all',
   });
 
-  const disable_button = is_invalid_token || Object.keys(errors).length > 0 || input_value === '';
-
-  const newTokenArray = () => {
-    const token_array = [];
-    for (const token_object of tokens) {
-      const token_name = token_object.display_name.toLowerCase();
-      token_array.push(token_name);
-      setTokenNames(token_array);
-    }
-  };
-
-  useEffect(() => {
-    if (tokens.length !== 0) {
-      setHasTokens(true);
-    }
-  }, [tokens]);
-
-  useEffect(() => {
-    if (has_tokens) {
-      newTokenArray();
-    }
-  }, [has_tokens]);
-
-  useEffect(() => {
-    const token_name_exists = token_names.includes(input_value.toLowerCase());
-    if (token_name_exists) {
-      setIsInvalidToken(true);
-    } else {
-      setIsInvalidToken(false);
-    }
-  }, [input_value, token_names]);
-
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
       const { name } = data;
@@ -139,6 +103,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trading_information: data.trading_information,
       });
       createToken(name, selectedTokenScope);
+      setFormIsCleared(true);
       reset();
     },
     [createToken, reset],
@@ -186,35 +151,12 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
             />
           ))}
         </div>
-        <div className={styles.step_title}>
-          <div className={`${styles.second_step} ${styles.step}`}>
-            <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
-              Name your token and click on Create to generate your token.
-            </Text>
-          </div>
-        </div>
-        <div
-          onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
-          className={`${styles.customTextInput} ${errors.name ? 'error-border' : ''}`}
-        >
-          <input type='text' name='name' {...register('name')} placeholder='Token name' />
-          <Button disabled={disable_button} type='submit'>
-            Create
-          </Button>
-        </div>
-        {errors && errors.name && (
-          <Text as='span' type='paragraph-1' className='error-message'>
-            {errors.name.message}
-          </Text>
-        )}
-        {is_invalid_token && (
-          <div className='error-message'>
-            <p>That name is taken. Choose another.</p>
-          </div>
-        )}
-        <div className={styles.helperText}>
-          <p>Length of token name must be between 2 and 32 characters.</p>
-        </div>
+        <CreateTokenField
+          register={register('name')}
+          errors={errors}
+          form_is_cleared={form_is_cleared}
+          setFormIsCleared={setFormIsCleared}
+        />
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>

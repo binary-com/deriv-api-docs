@@ -134,9 +134,6 @@ describe('Home Page', () => {
 
     await userEvent.type(nameInput, 'testtoken1');
 
-    const submitButton = screen.getByRole('button', { name: /Create/i });
-    await userEvent.click(submitButton);
-
     const error = screen.getByText(/That name is taken. Choose another./i);
     expect(error).toBeVisible;
   });
