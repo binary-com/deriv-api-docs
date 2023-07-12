@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import { Text, Button } from '@deriv/ui';
 import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
@@ -36,7 +36,7 @@ const CreateTokenField = ({
     }
   }, [form_is_cleared]);
 
-  const getTokenNames = useCallback(() => {
+  const getTokenNames = useMemo(() => {
     const token_names = [];
     for (const token_object of tokens) {
       const token_name = token_object.display_name.toLowerCase();
@@ -45,7 +45,7 @@ const CreateTokenField = ({
     return token_names;
   }, [tokens]);
 
-  const token_name_exists = getTokenNames().includes(input_value.toLowerCase());
+  const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
   const error_border_active = token_name_exists || errors.name;
 
