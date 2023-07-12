@@ -11,7 +11,7 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
 
   useEffect(() => {
     setIsHidingToken(true);
-  }, [cell.value]);
+  }, [token]);
 
   const HiddenToken = () => {
     const TOKEN_LENGTH = 14;
