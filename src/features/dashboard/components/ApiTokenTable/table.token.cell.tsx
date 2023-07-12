@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TTokenType } from '@site/src/types';
 import { CellProps } from 'react-table';
 import styles from './token-cell.module.scss';
@@ -8,6 +8,10 @@ const ApiTokenCell = ({ cell }: React.PropsWithChildren<CellProps<TTokenType, st
   const [is_hiding_token, setIsHidingToken] = useState(true);
   const has_admin_scope = cell.row?.original?.scopes?.includes('admin');
   const token = cell.value;
+
+  useEffect(() => {
+    setIsHidingToken(true);
+  }, [cell.value]);
 
   const HiddenToken = () => {
     const TOKEN_LENGTH = 14;
