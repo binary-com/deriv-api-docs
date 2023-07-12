@@ -16,6 +16,13 @@ keywords:
 description: Getting started with Deriv API
 ---
 
+:::danger
+Kindly be informed that due to recent API usage guidelines, all third-party apps communications must use Deriv's API red servers at the following address
+`red.binaryws.com`.
+This restriction will be applied after 7 days and any traffic to the other servers from third-party apps will be rejected.
+Please take the necessary action before the effective date.
+:::
+
 Our Documentation is divided in several sections:
 
 - [Core concepts](category/core-concepts)

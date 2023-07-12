@@ -17,13 +17,14 @@ If you're not familiar with WebSockets, please check out [our documentation](/do
 :::
 
 ### Set up a WebSocket connection
+
 <!-- To create a websocket connection, we want to use the Deriv websocket URL with an `app_id`. You can create your own app_id within your [dashboard](/dashboard) or keep the default `1089` app_id for testing. Keep in mind that eventually, you should make your own app_id. Especially if you would like to monetize your application. -->
 
 Next, we'll create a WebSocket connection to Deriv WebSocket Server as seen below:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
-const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const websocket = new WebSocket(`wss://red.binaryws.com/websockets/v3?app_id=${app_id}`);
 ```
 
 :::info
@@ -146,7 +147,7 @@ Your final code should be:
 
 ```js title="index.js"
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
-const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const websocket = new WebSocket(`wss://red.binaryws.com/websockets/v3?app_id=${app_id}`);
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
 let interval;
 
