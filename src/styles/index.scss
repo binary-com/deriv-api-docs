@@ -126,8 +126,13 @@ body {
   display: none !important;
 }
 
-.unofficial-host .hide-sidebar-item {
-  display: none !important;
+.unofficial-host { 
+  .hide-sidebar-item {
+    display: none !important;
+  }
+  .navbar__items--right {
+    display: none !important;
+  }
 }
 
 .swiper {
