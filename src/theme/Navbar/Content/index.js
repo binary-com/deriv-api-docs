@@ -18,7 +18,6 @@ function NavbarItems({ items }) {
   const { is_official_domain } = useOfficialContentsContext();
 
   for (const value of Object.values(items)) {
-    console.log(value);
     if (value.label === 'Documentation' || value.position === 'right') {
       unofficial_domain_items.push(value);
     }

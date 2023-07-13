@@ -1,7 +1,7 @@
 import DerivAPIBasic from 'https://cdn.skypack.dev/@deriv/deriv-api/dist/DerivAPIBasic';
 
 const app_id = 32436; // Replace with your app_id or leave the current test app_id.
-const connection = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const connection = new WebSocket(`wss://red.binaryws.com/websockets/v3?app_id=${app_id}`);
 const api = new DerivAPIBasic({ connection });
 
 // Use a demo account token to test with demo currency.
