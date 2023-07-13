@@ -158,7 +158,7 @@ describe('App Form', () => {
     await userEvent.click(submitButton);
 
     const appMarkupPercentageError = await screen.findByText(
-      'Your markup value must be equal to or above 0.00 and no more than 3.00.',
+      'Your markup value must be equal to or above 0.00 and no more than 5.00.',
     );
 
     expect(appMarkupPercentageError).toBeInTheDocument();
