@@ -7,6 +7,7 @@ import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogE
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
 import { IRegisterAppForm } from '../types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import styles from '../components/AppForm/app-form.module.scss';
 
 const AppRegistration = () => {
   const { is_loading, send: registerApp, error, clear, data } = useWS('app_register');
@@ -44,7 +45,7 @@ const AppRegistration = () => {
   const renderButtons = () => {
     return (
       <>
-        <Button role='submit' disabled={is_loading}>
+        <Button role='submit' disabled={is_loading} className={styles.buttonRadius}>
           Register Application
         </Button>
       </>
