@@ -14,13 +14,13 @@ function useNavbarItems() {
   return useThemeConfig().navbar.items;
 }
 function NavbarItems({ items }) {
-  let unofficial_domain_item;
+  const unofficial_domain_items = [];
   const { is_official_domain } = useOfficialContentsContext();
 
   for (const value of Object.values(items)) {
-    if (value.label === 'Documentation') {
-      unofficial_domain_item = value;
-      break;
+    console.log(value);
+    if (value.label === 'Documentation' || value.position === 'right') {
+      unofficial_domain_items.push(value);
     }
   }
 
@@ -46,19 +46,21 @@ function NavbarItems({ items }) {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <ErrorCauseBoundary
-            key={unofficial_domain_item?.label}
-            onError={(error) =>
-              new Error(
-                `A theme navbar item failed to render.
-      Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
-      ${JSON.stringify(unofficial_domain_item, null, 2)}`,
-                { cause: error },
-              )
-            }
-          >
-            <NavbarItem {...unofficial_domain_item} />
-          </ErrorCauseBoundary>
+          {unofficial_domain_items.map((unofficial_item, i) => (
+            <ErrorCauseBoundary
+              key={i}
+              onError={(error) =>
+                new Error(
+                  `A theme navbar item failed to render.
+        Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
+        ${JSON.stringify(unofficial_item, null, 2)}`,
+                  { cause: error },
+                )
+              }
+            >
+              <NavbarItem {...unofficial_item} />
+            </ErrorCauseBoundary>
+          ))}
         </React.Fragment>
       )}
     </>

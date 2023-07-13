@@ -34,7 +34,7 @@ export const domains = [
   'staging.deriv.be',
   'staging.deriv.me',
   'staging.deriv.com',
-  'localhost',
+  // 'localhost',
   'deriv-com-git-fork',
   'deriv-developers-portal-git-fork',
   'deriv-api-docs-git-fork',

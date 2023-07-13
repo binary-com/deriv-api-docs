@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 export interface IOfficialContents {
   is_official_domain: boolean;

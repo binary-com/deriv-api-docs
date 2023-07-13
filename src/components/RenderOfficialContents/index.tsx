@@ -8,7 +8,11 @@ type TRenderOfficialContents = {
 const RenderOfficialContents = ({ children }: TRenderOfficialContents) => {
   const Alternative = () => (children[1] ? <React.Fragment>{children[1]}</React.Fragment> : <></>);
   const { is_official_domain } = useOfficialContentsContext();
-  return is_official_domain ? <React.Fragment>{children}</React.Fragment> : <Alternative />;
+  return is_official_domain ? (
+    <React.Fragment>{children[0] ?? children}</React.Fragment>
+  ) : (
+    <Alternative />
+  );
 };
 
 export default RenderOfficialContents;
