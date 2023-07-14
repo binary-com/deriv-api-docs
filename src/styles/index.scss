@@ -90,6 +90,16 @@ h6 {
   color: var(--colors-coral500) !important;
 }
 
+.error-border {
+  border-color: var(--colors-coral500) !important;
+  &:focus-within {
+    border-color: var(--colors-coral500) !important;
+  }
+  &:focus {
+    outline: var(--colors-coral500) !important;
+  }
+}
+
 /* reset */
 button {
   all: unset;

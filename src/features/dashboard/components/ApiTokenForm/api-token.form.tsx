@@ -144,7 +144,25 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           </label>
         </div>
         <div className={styles.helperText}>
-          <p>Length of token name must be between 2 and 32 characters.</p>
+          <ul>
+            <li>
+              <span>Only alphanumeric characters with spaces and underscores are allowed.</span>
+            </li>
+            <li>
+              <span>The name must be between 2 to 32 characters.</span>
+            </li>
+            <li>
+              <span>Duplicate token names aren&apos;t allowed.</span>
+            </li>
+            <li>
+              <span>
+                The name cannot contain &ldquo;Binary&rdquo;, &ldquo;Deriv&rdquo;, or similar words.
+              </span>
+            </li>
+            <li>
+              <span>You can create up to 30 tokens for this account.</span>
+            </li>
+          </ul>
         </div>
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
