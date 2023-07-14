@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const schema = yup
   .object({
@@ -63,6 +64,7 @@ const scopes: TScope[] = [
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
+  const { tokens } = useApiToken();
 
   const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
@@ -135,8 +137,11 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           </div>
         </div>
         <div className={styles.customTextInput}>
-          <input type='text' name='name' {...register('name')} placeholder='Token name' />
+          <input type='text' name='name' {...register('name')} placeholder=' ' />
           <Button type='submit'>Create</Button>
+          <label className={styles.tokenInputLabel}>
+            Token name (you&apos;ve created <b>{tokens.length}</b> out of 30 tokens)
+          </label>
         </div>
         <div className={styles.helperText}>
           <p>Length of token name must be between 2 and 32 characters.</p>

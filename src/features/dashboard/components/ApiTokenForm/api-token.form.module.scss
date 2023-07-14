@@ -95,6 +95,9 @@ form {
       background-color: var(--ifm-color-emphasis-0);
       padding: 0 rem(0.4);
       transform: translateY(rem(-2)) scale(0.75);
+      &.tokenInputLabel {
+        color: var(--smoke);
+      }
     }
     &:focus {
       outline-color: unset;
@@ -105,6 +108,9 @@ form {
         background-color: var(--ifm-color-emphasis-0);
         padding: 0 rem(0.4);
         transform: translateY(rem(-2)) scale(0.75);
+        &.tokenInputLabel {
+          color: var(--smoke);
+        }
       }
     }
     &::placeholder {
