@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const markupPercentageRegex = /^((([0-2]\.([0-9]([0-9])?)?))||([3]\.([0]([0])?)?)||([0-3]))$/;
+const markupPercentageRegex = /^((([0-4]\.([0-9]([0-9])?)?))||([5]\.([0]([0])?)?)||([0-5]))$/;
 const urlRegex = /^[a-z][a-z0-9.+-]*:\/\/[0-9a-zA-Z.-]+[%/\w .-]*$/;
 
 const base_schema = {
@@ -34,7 +34,7 @@ const base_schema = {
     .max(4, 'Your markup value cannot be more than 4 characters.')
     .matches(
       markupPercentageRegex,
-      'Your markup value must be equal to or above 0.00 and no more than 3.00.',
+      'Your markup value must be equal to or above 0.00 and no more than 5.00.',
     ),
   app_id: yup.number(),
 };
