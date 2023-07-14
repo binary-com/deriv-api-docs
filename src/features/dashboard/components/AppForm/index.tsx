@@ -133,7 +133,7 @@ const AppForm = ({
             </div>
             <div className={styles.formHeaderContainer}>
               <h4>Markup</h4>
-              <div>
+              <div className={styles.markup}>
                 <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
                   You can earn commission by adding a markup to the price of each trade. Enter your
                   markup percentage here.
