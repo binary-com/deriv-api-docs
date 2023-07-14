@@ -23,7 +23,7 @@ const schema = yup
       .max(32, 'Only up to 32 characters are allowed.')
       .matches(/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_ ]*$/, {
         message:
-          'Only alphanumeric characters with spaces, dashes and underscores are allowed. (Example: my_application)',
+          'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
         excludeEmptyString: true,
       })
       .matches(
