@@ -86,7 +86,7 @@ fieldset .customTextInput:last-child {
       flex-direction: column;
       margin-bottom: rem(2.5);
       .scopesWrapper {
-        padding-left: rem(1);
+        padding-left: rem(1.6);
       }
     }
     .disableTokenDropdown {
@@ -159,8 +159,4 @@ fieldset .customTextInput:last-child {
 
 .termsOfConditionRegister {
   margin-left: rem(2);
-}
-
-.buttonRadius {
-  border-radius: rem(1.6);
 }

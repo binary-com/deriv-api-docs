@@ -45,7 +45,13 @@ const AppRegistration = () => {
   const renderButtons = () => {
     return (
       <>
-        <Button role='submit' disabled={is_loading} className={styles.buttonRadius}>
+        <Button
+          role='submit'
+          disabled={is_loading}
+          style={{
+            borderRadius: '1rem',
+          }}
+        >
           Register Application
         </Button>
       </>
