@@ -34,6 +34,7 @@
   --schema-array: #ff8fc8;
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
+  --smoke: #414652;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -96,6 +97,9 @@ h6 {
   }
   &:focus {
     outline: var(--colors-coral500) !important;
+  }
+  label {
+    color: var(--colors-coral500) !important;
   }
 }
 

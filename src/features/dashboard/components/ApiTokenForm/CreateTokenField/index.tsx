@@ -45,7 +45,10 @@ const CreateTokenField = ({
     return token_names;
   }, [tokens]);
 
-  const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
+  const tokens_limit_reached = tokens.length === 30 && Object.keys(errors).length === 0;
+  const token_name_exists =
+    getTokenNames.includes(input_value.toLowerCase()) && Object.keys(errors).length === 0;
+  const has_no_errors = Object.values(errors).length === 0;
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
   const error_border_active = token_name_exists || errors.name;
 
@@ -67,11 +70,14 @@ const CreateTokenField = ({
           type='text'
           name='name'
           {...register}
-          placeholder='Token name'
+          placeholder=' '
         />
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
+        <label className={styles.tokenInputLabel}>
+          Token name (you&apos;ve created <b>{tokens.length}</b> out of 30 tokens)
+        </label>
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>
@@ -81,6 +87,34 @@ const CreateTokenField = ({
       {token_name_exists && (
         <div className='error-message'>
           <p>That name is taken. Choose another.</p>
+        </div>
+      )}
+      {tokens_limit_reached && input_value !== '' && (
+        <div className='error-message'>
+          <p>You&apos;ve reached 30 tokens creation limit.</p>
+        </div>
+      )}
+      {has_no_errors && (
+        <div className={styles.helperText}>
+          <ul>
+            <li>
+              <span>Only alphanumeric characters with spaces and underscores are allowed.</span>
+            </li>
+            <li>
+              <span>The name must be between 2 to 32 characters.</span>
+            </li>
+            <li>
+              <span>Duplicate token names aren&apos;t allowed.</span>
+            </li>
+            <li>
+              <span>
+                The name cannot contain &ldquo;Binary&rdquo;, &ldquo;Deriv&rdquo;, or similar words.
+              </span>
+            </li>
+            <li>
+              <span>You can create up to 30 tokens for this account.</span>
+            </li>
+          </ul>
         </div>
       )}
     </React.Fragment>
