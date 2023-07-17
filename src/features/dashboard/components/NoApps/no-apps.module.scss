@@ -10,7 +10,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: var(center);
+  justify-content: center;
   align-items: center;
   width: calc(rem(32) - rem(3.2));
   position: relative;
@@ -28,13 +28,13 @@
   height: rem(10);
 }
 
-.noAppsText {
+.noAppsText p {
   text-align: center;
+  margin-bottom: rem(2);
 }
 
 [data-state*="responsive.desktop"] {
   .noAppsWrapper {
-    width: calc(100% - rem(12.5));
     position: relative;
   }
   .noApps {
