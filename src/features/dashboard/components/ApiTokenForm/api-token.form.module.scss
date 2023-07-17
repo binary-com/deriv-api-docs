@@ -56,19 +56,16 @@ form {
   position: relative;
   box-sizing: border-box;
   margin: rem(1) 0;
-  &:focus-within {
-    border-color: var(--colors-blue400);
-  }
   &:hover {
     border: 1px solid var(--colors-greyLight600);
   }
+  &:focus-within {
+    border-color: var(--colors-blue500);
+  }
   button {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    height: rem(3);
   }
   label {
     position: absolute;
@@ -98,7 +95,7 @@ form {
     }
     &:focus {
       outline-color: unset;
-      outline: 1px solid var(--colors-blue500);
+      outline: unset;
       border-radius: rem(0.3);
       & ~ label {
         color: var(--colors-blue400);
