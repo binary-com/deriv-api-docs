@@ -1,5 +1,5 @@
-import React, { ReactNode, useMemo, useState } from 'react';
-import { Text } from '@deriv/ui';
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { isNotDemoCurrency } from '@site/src/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,37 +14,62 @@ import AccountDropdown from '@site/src/components/CustomSelectDropdown/account-d
 import CustomCheckbox from '@site/src/components/CustomCheckbox';
 import styles from './app-form.module.scss';
 import clsx from 'clsx';
+import useAppManager from '@site/src/hooks/useAppManager';
+import useWS from '@site/src/hooks/useWs';
 import RestrictionsAppname from '../RestrictionsAppname';
 
 type TAppFormProps = {
   initialValues?: Partial<IRegisterAppForm>;
   isUpdating?: boolean;
-  renderButtons: () => ReactNode;
   submit: (data: IRegisterAppForm) => void;
   is_update_mode?: boolean;
+  form_is_cleared: boolean;
+  setFormIsCleared: Dispatch<SetStateAction<boolean>>;
 };
 
 const AppForm = ({
   initialValues,
   submit,
-  renderButtons,
   is_update_mode = false,
+  form_is_cleared,
+  setFormIsCleared,
 }: TAppFormProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IRegisterAppForm>({
     mode: 'all',
+    criteriaMode: 'firstError',
     resolver: yupResolver(is_update_mode ? appEditSchema : appRegisterSchema),
     defaultValues: initialValues,
   });
 
   const { currentToken, tokens } = useApiToken();
   const { currentLoginAccount } = useAuthContext();
+  const { getApps, apps } = useAppManager();
+  const [input_value, setInputValue] = useState('');
+  const { is_loading } = useWS('app_register');
+
+  useEffect(() => {
+    if (form_is_cleared) {
+      setInputValue('');
+      setFormIsCleared(false);
+      reset();
+    }
+    getApps();
+  }, [form_is_cleared, getApps]);
+
   const [display_restrictions, setDisplayRestrictions] = useState(false);
 
   const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
+
+  const appNamesArray = apps?.map((app) => app.name);
+  const app_name_exists = appNamesArray?.includes(input_value);
+  const disable_register_btn =
+    app_name_exists || input_value === '' || Object.keys(errors).length > 0 || is_loading;
+  const error_border_active = app_name_exists || errors.name;
 
   const accountHasAdminToken = () => {
     const admin_check_array = [];
@@ -71,6 +96,15 @@ const AppForm = ({
     </React.Fragment>
   );
 
+  const renderButtons = () => {
+    return (
+      <>
+        <Button role='submit' disabled={disable_register_btn}>
+          Register Application
+        </Button>
+      </>
+    );
+  };
   return (
     <React.Fragment>
       <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
@@ -122,12 +156,21 @@ const AppForm = ({
                 </React.Fragment>
               )}
               <div>
-                <div className={styles.customTextInput} id='custom-text-input'>
+                <div
+                  className={`${styles.customTextInput} ${
+                    error_border_active ? 'error-border' : ''
+                  }`}
+                  id='custom-text-input'
+                  onChange={(e) => {
+                    setInputValue((e.target as HTMLInputElement).value);
+                  }}
+                >
                   <input
                     {...register('name')}
                     type='text'
                     id='app_name'
                     placeholder=' '
+                    className={`${error_border_active ? 'error-border' : ''}`}
                     onFocus={() => setDisplayRestrictions(true)}
                   />
                   <label htmlFor='app_name'>App name (required)</label>
@@ -135,6 +178,10 @@ const AppForm = ({
                 {errors && errors.name ? (
                   <Text as='span' type='paragraph-1' className='error-message'>
                     {errors.name.message}
+                  </Text>
+                ) : app_name_exists ? (
+                  <Text as='span' type='paragraph-1' className='error-message'>
+                    That name is taken. Choose another.
                   </Text>
                 ) : (
                   display_restrictions && <RestrictionsAppname />
