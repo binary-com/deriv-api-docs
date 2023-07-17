@@ -9,6 +9,7 @@ import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
 import CreateTokenField from './CreateTokenField';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const schema = yup
   .object({
@@ -80,6 +81,7 @@ const scopes: TScope[] = [
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
   const [form_is_cleared, setFormIsCleared] = useState(false);
+  const { tokens } = useApiToken();
 
   const {
     handleSubmit,

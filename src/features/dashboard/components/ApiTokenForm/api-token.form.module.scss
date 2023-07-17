@@ -51,7 +51,7 @@ form {
 .customTextInput {
   align-items: center;
   border: 1px solid var(--colors-greyLight400);
-  border-radius: 4px;
+  border-radius: rem(1.6);
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -66,6 +66,8 @@ form {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     height: rem(3);
+    border-top-right-radius: rem(1.6);
+    border-bottom-right-radius: rem(1.6);
   }
   label {
     position: absolute;
@@ -92,16 +94,22 @@ form {
       background-color: var(--ifm-color-emphasis-0);
       padding: 0 rem(0.4);
       transform: translateY(rem(-2)) scale(0.75);
+      &.tokenInputLabel {
+        color: var(--smoke);
+      }
     }
     &:focus {
       outline-color: unset;
       outline: unset;
-      border-radius: rem(0.3);
+      border-radius: rem(1.6);
       & ~ label {
         color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
         padding: 0 rem(0.4);
         transform: translateY(rem(-2)) scale(0.75);
+        &.tokenInputLabel {
+          color: var(--smoke);
+        }
       }
     }
     &::placeholder {
@@ -121,7 +129,14 @@ form {
 }
 
 .helperText {
+  line-height: 2.2;
   font-size: rem(1.4);
   padding-left: rem(1);
   color: var(--colors-greyLight600);
+  li {
+    font-size: rem(1);
+    span {
+      font-size: rem(1.4);
+    }
+  }
 }
