@@ -1,15 +1,17 @@
-import { Button } from '@deriv/ui';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { render, screen, cleanup } from '@site/src/test-utils';
 import { TTokensArrayType } from '@site/src/types';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppForm from '..';
+import { ApplicationObject } from '@deriv/api-types';
+import useAppManager from '@site/src/hooks/useAppManager';
 
 jest.mock('@site/src/hooks/useApiToken');
 jest.mock('@site/src/utils', () => ({
   ...jest.requireActual('@site/src/utils'),
 }));
+jest.mock('@site/src/hooks/useAppManager');
 
 const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
@@ -20,24 +22,81 @@ mockUseApiToken.mockImplementation(() => ({
   updateCurrentToken: jest.fn(),
 }));
 
-const renderButtons = () => {
-  return (
-    <div>
-      <Button role='submit'>Update Application</Button>
-    </div>
-  );
-};
+const mockUseAppManager = useAppManager as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAppManager>>
+>;
+mockUseAppManager.mockImplementation(() => ({
+  apps: [],
+  getApps: jest.fn(),
+}));
 
 describe('App Form', () => {
   const mockOnSubmit = jest.fn();
 
   beforeEach(() => {
-    render(<AppForm renderButtons={renderButtons} submit={mockOnSubmit} />);
+    render(<AppForm button_text='Update Application' submit={mockOnSubmit} />);
   });
 
   afterEach(() => {
     cleanup();
     jest.clearAllMocks();
+  });
+
+  it('Should show error message for using an appname that already exists', async () => {
+    const fakeApps: ApplicationObject[] = [
+      {
+        active: 1,
+        app_id: 12345,
+        app_markup_percentage: 0,
+        appstore: '',
+        github: '',
+        googleplay: '',
+        homepage: '',
+        name: 'duplicate_app',
+        redirect_uri: 'https://example.com',
+        scopes: ['read', 'trade', 'trading_information'],
+        verification_uri: 'https://example.com',
+        last_used: '',
+      },
+      {
+        active: 1,
+        app_id: 12345,
+        app_markup_percentage: 0,
+        appstore: '',
+        github: '',
+        googleplay: '',
+        homepage: '',
+        name: 'testApp',
+        redirect_uri: 'https://example.com',
+        scopes: ['read', 'trade'],
+        verification_uri: 'https://example.com',
+        last_used: '',
+      },
+    ];
+    const mockGetApps = jest.fn();
+
+    mockUseAppManager.mockImplementation(() => ({
+      apps: fakeApps,
+      getApps: mockGetApps,
+    }));
+
+    const submitButton = screen.getByText('Update Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(tokenNameInput, 'duplicate_app');
+
+    await userEvent.click(submitButton);
+
+    await userEvent.clear(tokenNameInput);
+
+    await userEvent.type(tokenNameInput, 'duplicate_app');
+
+    const appNameErrorText = await screen.findByText('That name is taken. Choose another.');
+
+    expect(appNameErrorText).toBeInTheDocument();
   });
 
   it('Should show error message for having no admin token', async () => {
@@ -72,7 +131,10 @@ describe('App Form', () => {
 
   it('Should show error message for empty app name', async () => {
     const submitButton = screen.getByText('Update Application');
-
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+    await userEvent.clear(tokenNameInput);
     await userEvent.click(submitButton);
 
     const appNameErrorText = await screen.findByText('Enter your app name.');
@@ -95,6 +157,24 @@ describe('App Form', () => {
     await userEvent.click(submitButton);
 
     const appNameErrorText = await screen.findByText('Your app name cannot exceed 48 characters.');
+
+    expect(appNameErrorText).toBeInTheDocument();
+  });
+
+  it('Should show error for using non alphanumeric characters except underscore or space', async () => {
+    const submitButton = screen.getByText('Update Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(tokenNameInput, 'invalid-token...');
+
+    await userEvent.click(submitButton);
+
+    const appNameErrorText = await screen.findByText(
+      'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
+    );
 
     expect(appNameErrorText).toBeInTheDocument();
   });

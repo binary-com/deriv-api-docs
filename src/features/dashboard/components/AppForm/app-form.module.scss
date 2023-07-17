@@ -144,3 +144,8 @@ fieldset .customTextInput:last-child {
     cursor: pointer;
   }
 }
+
+.buttons {
+  display: flex;
+  gap: rem(1);
+}

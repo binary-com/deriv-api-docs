@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import React, { Dispatch, ReactNode, SetStateAction, useEffect, useMemo, useState } from 'react';
 import { Button, Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { isNotDemoCurrency } from '@site/src/utils';
@@ -23,8 +23,10 @@ type TAppFormProps = {
   isUpdating?: boolean;
   submit: (data: IRegisterAppForm) => void;
   is_update_mode?: boolean;
-  form_is_cleared: boolean;
-  setFormIsCleared: Dispatch<SetStateAction<boolean>>;
+  form_is_cleared?: boolean;
+  setFormIsCleared?: Dispatch<SetStateAction<boolean>>;
+  button_text: string;
+  cancelButton?: () => ReactNode;
 };
 
 const AppForm = ({
@@ -33,6 +35,8 @@ const AppForm = ({
   is_update_mode = false,
   form_is_cleared,
   setFormIsCleared,
+  button_text,
+  cancelButton,
 }: TAppFormProps) => {
   const {
     register,
@@ -69,7 +73,8 @@ const AppForm = ({
   const app_name_exists = appNamesArray?.includes(input_value);
   const disable_register_btn =
     app_name_exists || input_value === '' || Object.keys(errors).length > 0 || is_loading;
-  const error_border_active = app_name_exists || errors.name;
+  const disable_btn = is_update_mode ? is_loading : disable_register_btn;
+  const error_border_active = (!is_update_mode && app_name_exists) || errors.name;
 
   const accountHasAdminToken = () => {
     const admin_check_array = [];
@@ -98,11 +103,12 @@ const AppForm = ({
 
   const renderButtons = () => {
     return (
-      <>
-        <Button role='submit' disabled={disable_register_btn}>
-          Register Application
+      <div className={styles.buttons}>
+        <Button role='submit' disabled={disable_btn}>
+          {button_text}
         </Button>
-      </>
+        {is_update_mode && cancelButton()}
+      </div>
     );
   };
   return (
@@ -179,7 +185,7 @@ const AppForm = ({
                   <Text as='span' type='paragraph-1' className='error-message'>
                     {errors.name.message}
                   </Text>
-                ) : app_name_exists ? (
+                ) : !is_update_mode && app_name_exists ? (
                   <Text as='span' type='paragraph-1' className='error-message'>
                     That name is taken. Choose another.
                   </Text>
