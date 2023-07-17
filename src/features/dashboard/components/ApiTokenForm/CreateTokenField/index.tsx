@@ -46,8 +46,6 @@ const CreateTokenField = ({
   }, [tokens]);
 
   const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
-  const no_min_max_error =
-    (errors && errors.name?.type === 'min') || (errors && errors.name?.type === 'max');
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
   const error_border_active = token_name_exists || errors.name;
 
@@ -83,11 +81,6 @@ const CreateTokenField = ({
       {token_name_exists && (
         <div className='error-message'>
           <p>That name is taken. Choose another.</p>
-        </div>
-      )}
-      {!no_min_max_error && (
-        <div className={styles.helperText}>
-          <p>Length of token name must be between 2 and 32 characters.</p>
         </div>
       )}
     </React.Fragment>
