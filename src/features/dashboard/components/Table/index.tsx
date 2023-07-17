@@ -43,6 +43,7 @@ const Table = <T extends object>({
           return (
             <tr key={row.getRowProps().key} {...row.getRowProps()}>
               {row.cells.map((cell) => {
+                console.log(cell);
                 return (
                   <td key={cell.getCellProps().key} {...cell.getCellProps()}>
                     {cell.render('Cell', getCustomCellProps(cell))}
