@@ -48,9 +48,30 @@ const CreateTokenField = ({
   const tokens_limit_reached = tokens.length === 30 && Object.keys(errors).length === 0;
   const token_name_exists =
     getTokenNames.includes(input_value.toLowerCase()) && Object.keys(errors).length === 0;
-  const has_no_errors = Object.values(errors).length === 0;
-  const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
-  const error_border_active = token_name_exists || errors.name;
+  const has_custom_errors = token_name_exists || (tokens_limit_reached && input_value !== '');
+  const has_no_errors = Object.values(errors).length === 0 && !has_custom_errors;
+  const disable_button =
+    token_name_exists || Object.keys(errors).length > 0 || input_value === '' || has_custom_errors;
+  const error_border_active = token_name_exists || errors.name || has_custom_errors;
+
+  const CustomErrors = () => {
+    if (token_name_exists) {
+      return (
+        <div className='error-message'>
+          <p>That name is taken. Choose another.</p>
+        </div>
+      );
+    }
+    if (tokens_limit_reached && input_value !== '') {
+      return (
+        <div className='error-message'>
+          <p>You&apos;ve reached 30 tokens creation limit.</p>
+        </div>
+      );
+    }
+
+    return <></>;
+  };
 
   return (
     <React.Fragment>
@@ -84,16 +105,7 @@ const CreateTokenField = ({
           {errors.name.message}
         </Text>
       )}
-      {token_name_exists && (
-        <div className='error-message'>
-          <p>That name is taken. Choose another.</p>
-        </div>
-      )}
-      {tokens_limit_reached && input_value !== '' && (
-        <div className='error-message'>
-          <p>You&apos;ve reached 30 tokens creation limit.</p>
-        </div>
-      )}
+      <CustomErrors />
       {has_no_errors && (
         <div className={styles.helperText}>
           <ul>
