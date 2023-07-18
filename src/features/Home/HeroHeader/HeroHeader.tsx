@@ -6,7 +6,7 @@ export const HeroHeader = () => {
   return (
     <header className={styles.HeroImageStyle} data-testid='hero-header'>
       <div className={styles.HeroContainerStyle}>
-        <Text type='heading-1' as={'h1'} bold className={styles.heading} aria-level={2}>
+        <Text type='hero' as={'h1'} bold className={styles.heading} aria-level={2}>
           Deriv API
         </Text>
         <Text
