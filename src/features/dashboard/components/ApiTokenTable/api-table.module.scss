@@ -2,12 +2,9 @@
 
 .api_table_container {
   position: relative;
-  overflow: auto;
-  .api_table {
-    height: rem(30);
-    min-height: 10rem;
-    table {
-      position: absolute;
-    }
+  overflow-y: hidden;
+  overflow-x: auto;
+  .api_table table {
+    position: absolute;
   }
 }

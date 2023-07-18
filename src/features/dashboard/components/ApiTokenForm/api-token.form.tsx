@@ -83,7 +83,7 @@ const scopes: TScope[] = [
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
 
-  const { handleSubmit, register, setValue, getValues } = useForm<TApiTokenForm>({
+  const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
     mode: 'all',
   });
@@ -99,8 +99,9 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trading_information: data.trading_information,
       });
       createToken(name, selectedTokenScope);
+      reset();
     },
-    [createToken],
+    [createToken, reset],
   );
 
   const onCardClick = useCallback(

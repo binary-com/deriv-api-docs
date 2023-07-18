@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { Circles } from 'react-loader-spinner';
 import styles from './api-table.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
@@ -38,10 +38,21 @@ const tableColumns: TTokenColumn[] = [
 ];
 
 const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
+  const ROW_HEIGHT = 125;
   const { tokens, isLoadingTokens } = useApiToken();
+  const [table_height, setTableHeight] = useState(0);
+
+  useEffect(() => {
+    if (tokens.length > 0) {
+      setTableHeight(ROW_HEIGHT * tokens.length);
+    }
+  }, [tokens]);
 
   return (
-    <div className={styles.api_table_container}>
+    <div
+      style={{ height: `calc(${table_height}px + ${ROW_HEIGHT}px + 50px)` }}
+      className={styles.api_table_container}
+    >
       <div className={styles.api_table} {...props}>
         <Circles
           height='100'
@@ -55,6 +66,7 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
           columns={tableColumns}
           data={tokens}
           initialState={{ hiddenColumns: ['valid_for_ip'] }}
+          row_height={ROW_HEIGHT}
         />
       </div>
     </div>
