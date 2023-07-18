@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { Modal } from '@deriv/ui';
 import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
+import { translate } from '@docusaurus/Translate';
 
 type TDeleteTokendialog = {
   setToggleModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,6 +47,8 @@ const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => 
         <div className='modal-overlay'>
           <Modal.Overlay />
           <Modal.DialogContent
+            title='Deleting token'
+            content={translate({ message: 'Are you sure you want to delete this token?' })}
             title='Delete token'
             content='Are you sure you want to delete this token?'
             action_buttons={actionButtons}

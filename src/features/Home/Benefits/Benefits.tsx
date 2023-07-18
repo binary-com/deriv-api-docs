@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from '@deriv/ui';
 import styles from './Benefits.module.scss';
+import Translate from '@docusaurus/Translate';
 
 type TBenefitsIcon = {
   icon: string;
@@ -40,7 +41,7 @@ export const Benefits = () => {
     <article data-testid='benefits' className={styles.BenefitsContainer}>
       <header>
         <Text type='heading-2' as={'h2'} align='center' bold className={styles.Heading}>
-          Benefits of using Deriv API
+          <Translate> Benefits of using Deriv API</Translate>
         </Text>
         <section className={styles.BenefitsIcons}>
           <BenefitsIcon icon='automation' text='Automation' alt='automation' />
@@ -52,11 +53,15 @@ export const Benefits = () => {
         <article className={styles.InformationContainer}>
           <ImageContainer image='personalisation' alt='personalisation' />
           <section className={styles.InformationContent}>
-            <h1>Personalize your trading</h1>
+            <h1>
+              <Translate>Personalize your trading</Translate>
+            </h1>
             <Text type='subtitle-2' as='p'>
-              Personalize your trading apps to match your needs. Create charts and views the way you
-              like them. Develop your trading app using any common programming language and extend
-              your trading opportunities.
+              <Translate>
+                Personalize your trading apps to match your needs. Create charts and views the way
+                you like them. Develop your trading app using any common programming language and
+                extend your trading opportunities.
+              </Translate>
             </Text>
           </section>
         </article>
@@ -65,9 +70,11 @@ export const Benefits = () => {
           <section className={styles.InformationContent}>
             <h1>Build a business and earn more</h1>
             <Text type='subtitle-2' as='p'>
-              Create your own trading apps by taking advantage of the power of Deriv&apos;s trading
-              services. Share your apps with fellow traders or customers, and get a chance to earn
-              more or build your own business.
+              <Translate>
+                Create your own trading apps by taking advantage of the power of Deriv&apos;s
+                trading services. Share your apps with fellow traders or customers, and get a chance
+                to earn more or build your own business.
+              </Translate>
             </Text>
           </section>
         </article>

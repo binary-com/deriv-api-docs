@@ -1,3 +1,4 @@
+import Translate from '@docusaurus/Translate';
 import React from 'react';
 import { CellProps } from 'react-table';
 import { TAppColumn } from '.';
@@ -16,14 +17,18 @@ const AppActionsCell = ({ openDeleteDialog, openEditDialog }: IAppActionsCellPro
         className={`${styles.updateApp} ${styles.tooltip}`}
         data-testid={'update-app-button'}
       >
-        <span className={styles.tooltipText}>Edit application details</span>
+        <span className={styles.tooltipText}>
+          <Translate>Edit application details</Translate>
+        </span>
       </div>
       <div
         onClick={openDeleteDialog}
         className={`${styles.deleteApp} ${styles.tooltip}`}
         data-testid={'delete-app-button'}
       >
-        <span className={styles.tooltipText}>Delete application</span>
+        <span className={styles.tooltipText}>
+          <Translate>Delete application</Translate>
+        </span>
       </div>
     </div>
   );

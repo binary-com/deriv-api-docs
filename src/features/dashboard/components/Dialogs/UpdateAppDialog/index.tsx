@@ -9,6 +9,7 @@ import { RegisterAppDialogError } from '../RegisterAppDialogError';
 import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import styles from './update-app-dialog.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import Translate from '@docusaurus/Translate';
 
 interface IUpdateAppDialog {
   app: ApplicationObject;
@@ -77,9 +78,11 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
     return (
       <div className={styles.buttons}>
         <Button role='submit' disabled={is_loading}>
-          Update Application
+          <Translate> Update Application</Translate>
         </Button>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>
+          <Translate>Cancel</Translate>
+        </Button>
       </div>
     );
   };

@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { TModalActionButton } from '@deriv/ui/dist/types/src/components/core/modal/types';
 import { Modal } from '@deriv/ui';
 import { useDeleteApp } from '../../../hooks/useDeleteApp';
+import { translate } from '@docusaurus/Translate';
 
 type TDeleteAppDialogProps = {
   appId: number;
@@ -50,7 +51,7 @@ const DeleteAppDialog = ({ appId, onClose }: TDeleteAppDialogProps) => {
           <Modal.Overlay />
           <Modal.DialogContent
             title='Delete app'
-            content='Are you sure you want to delete this app?'
+            content={translate({ message: 'Are you sure you want to delete this app?' })}
             action_buttons={actionButtons}
             has_close_button
           />
