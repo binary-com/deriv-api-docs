@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { isNotDemoCurrency } from '@site/src/utils';
@@ -33,6 +33,7 @@ const AppForm = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IRegisterAppForm>({
     mode: 'onBlur',
     resolver: yupResolver(is_update_mode ? appEditSchema : appRegisterSchema),
@@ -53,6 +54,11 @@ const AppForm = ({
     return admin_check_array.includes(true);
   };
 
+  const submitAndReset = (e) => {
+    submit(e);
+    reset();
+  };
+
   const disableMarkup = useMemo(() => {
     let isDisabled;
     isNotDemoCurrency(currentLoginAccount) === 'Demo' ? (isDisabled = true) : (isDisabled = false);
@@ -71,7 +77,7 @@ const AppForm = ({
 
   return (
     <React.Fragment>
-      <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submit)}>
+      <form role={'form'} className={styles.apps_form} onSubmit={handleSubmit(submitAndReset)}>
         <div
           className={`${styles.formContent} ${
             !admin_token && !is_update_mode ? styles.noAdmin : ''
