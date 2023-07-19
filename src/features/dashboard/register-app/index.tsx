@@ -49,8 +49,9 @@ const AppRegistration = () => {
           role='submit'
           disabled={is_loading}
           style={{
-            borderRadius: '1rem',
+            borderRadius: '0.935rem',
           }}
+          size='large'
         >
           Register Application
         </Button>
