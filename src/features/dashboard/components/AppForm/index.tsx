@@ -84,7 +84,7 @@ const AppForm = ({
                   App information
                 </Text>
                 {!is_update_mode && (
-                  <Text as='p' type='paragraph-1' className={styles.subHeading}>
+                  <Text as='p' type='paragraph-1' className={styles.wrapperHeading}>
                     Select your api token ( it should have admin scope )
                   </Text>
                 )}

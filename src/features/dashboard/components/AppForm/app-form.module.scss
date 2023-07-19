@@ -102,7 +102,7 @@ fieldset .customTextInput:last-child {
     .apiTokenWrapper {
       display: flex;
       flex-direction: column;
-      gap: rem(2);
+      gap: rem(1);
       margin-bottom: rem(2);
     }
     .formHeaderContainer {
@@ -116,6 +116,9 @@ fieldset .customTextInput:last-child {
       }
       .formsubHeading {
         padding: rem(1.6);
+      }
+      .wrapperHeading {
+        padding-left: rem(1.6);
       }
       .markup {
         margin-bottom: rem(1);
