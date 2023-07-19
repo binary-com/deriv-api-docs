@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -80,7 +80,7 @@ const scopes: TScope[] = [
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
-  const [restrictions, setRestrictions] = useState(false);
+  const [hiderestrictions, setHideRestrictions] = useState(false);
   const [form_is_cleared, setFormIsCleared] = useState(false);
 
   const {
@@ -94,7 +94,6 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     resolver: yupResolver(schema),
     mode: 'all',
   });
-
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
       const { name } = data;
@@ -119,6 +118,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     },
     [getValues, setValue],
   );
+
+  useEffect(() => {
+    errors.name?.message ? setHideRestrictions(true) : setHideRestrictions(false);
+  }, [errors.name?.message]);
 
   return (
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
@@ -160,7 +163,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           form_is_cleared={form_is_cleared}
           setFormIsCleared={setFormIsCleared}
         />
-        <TokenNameRestrictions />
+        {!hiderestrictions && <TokenNameRestrictions />}
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>
