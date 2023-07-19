@@ -163,8 +163,7 @@ const AppForm = ({
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>
                 <Text as='p' type='paragraph-1' className={styles.helperText}>
-                  If you don&lsquo;t want to earn a markup, enter 0 here. Otherwise, enter a number
-                  up to 5. Maximum: 5.00%.
+                  Enter 0 if you don&lsquo;t want to earn a markup. Max markup: 5%
                 </Text>
                 {errors && errors?.app_markup_percentage && (
                   <Text as='span' type='paragraph-1' className='error-message'>
