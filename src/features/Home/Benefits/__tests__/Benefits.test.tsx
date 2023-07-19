@@ -23,7 +23,7 @@ describe('Benefits', () => {
     expect(execution).toBeInTheDocument();
   });
   it('should render personalize your trading information', () => {
-    const title = screen.getByText(/Personalize your trading$/i);
+    const title = screen.getByText(/Personalise your trading$/i);
     const information = screen.getByText(/create charts and views/i);
 
     expect(title).toBeInTheDocument();
