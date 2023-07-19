@@ -166,7 +166,7 @@ const AppForm = ({
                 </div>
                 <Text
                   as='p'
-                  type='paragraph-1'
+                  type='paragraph-2'
                   className={`${styles.helperText} ${styles.formsubHeading}`}
                 >
                   Enter 0 if you don&lsquo;t want to earn a markup. Max markup: 3%
@@ -197,10 +197,14 @@ const AppForm = ({
                 />
                 <label htmlFor='app_redirect_uri'>Authorization URL (optional)</label>
               </div>
-              <p className={`${styles.helperText} ${styles.formsubHeading}`}>
+              <Text
+                as='p'
+                type='paragraph-2'
+                className={`${styles.helperText} ${styles.formsubHeading}`}
+              >
                 *Please note that this URL will be used as the OAuth redirect URL for the OAuth
                 authorization.
-              </p>
+              </Text>
               {errors && errors?.redirect_uri && (
                 <span className='error-message'>{errors.redirect_uri?.message}</span>
               )}
