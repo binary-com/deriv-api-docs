@@ -14,7 +14,7 @@ describe('Restrictions for App name', () => {
     render(<RestrictionsAppname />);
 
     const listItem1 = screen.getByText(
-      'Only alphanumeric characters with spaces, underscores, and hyphens are allowed.',
+      'Only alphanumeric characters with spaces and underscores are allowed.',
     );
     const listItem2 = screen.getByText('The name can contain up to 48 characters.');
     const listItem3 = screen.getByText('Duplicate token names aren’t allowed.');
