@@ -121,7 +121,10 @@ const AppForm = ({
                   </div>
                 </React.Fragment>
               )}
-              <div className={styles.customTextInput} id='custom-text-input'>
+              <div
+                className={`${styles.helperMargin} ${styles.customTextInput}`}
+                id='custom-text-input'
+              >
                 <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                 <label htmlFor='app_name'>App name (required)</label>
               </div>
@@ -211,7 +214,10 @@ const AppForm = ({
             </div>
 
             <div>
-              <div className={styles.customTextInput} id='custom-text-input'>
+              <div
+                className={`${styles.verificationMargin} ${styles.customTextInput}`}
+                id='custom-text-input'
+              >
                 <input
                   {...register('verification_uri')}
                   id='app_verification_uri'

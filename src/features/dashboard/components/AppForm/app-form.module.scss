@@ -11,7 +11,6 @@ fieldset .customTextInput:last-child {
   display: flex;
   position: relative;
   box-sizing: border-box;
-  margin: rem(1) 0;
   &:focus-within {
     border-color: var(--colors-blue400);
     border-radius: rem(1.6);
@@ -59,6 +58,12 @@ fieldset .customTextInput:last-child {
   }
 }
 
+.helperMargin {
+  margin: rem(1) 0;
+}
+.verificationMargin {
+  margin: rem(2) 0;
+}
 .apps_form {
   display: flex;
   flex-direction: column;
@@ -96,6 +101,7 @@ fieldset .customTextInput:last-child {
     .helperText {
       width: 100%;
       padding-left: rem(1);
+      padding-bottom: rem(1);
       color: var(--colors-greyLight600);
       margin-bottom: 0;
     }
@@ -165,5 +171,6 @@ fieldset .customTextInput:last-child {
 }
 
 .termsOfConditionRegister {
-  margin-left: rem(2);
+  margin-left: rem(4);
+  margin-top: rem(6);
 }
