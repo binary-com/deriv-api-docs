@@ -147,4 +147,19 @@ describe('Home Page', () => {
 
     expect(mockCreateToken).not.toHaveBeenCalled();
   });
+  it('should render token count label', () => {
+    const tokenCountLabel = screen.getByTestId('token-count-label');
+    expect(tokenCountLabel).toBeInTheDocument();
+  });
+
+  it('should update token account on token creation', async () => {
+    const nameInput = screen.getByRole('textbox');
+    const tokenCountLabel = screen.getByTestId('token-count-label');
+    await userEvent.type(nameInput, 'test create token');
+
+    const submitButton = screen.getByRole('button', { name: /Create/i });
+    await userEvent.click(submitButton);
+
+    expect(tokenCountLabel).toHaveTextContent("Token name (You've created 1 out of 30 tokens )");
+  });
 });

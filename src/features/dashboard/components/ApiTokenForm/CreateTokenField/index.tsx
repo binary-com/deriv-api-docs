@@ -47,8 +47,11 @@ const CreateTokenField = ({
   }, [tokens]);
 
   const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
-  const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
-  const error_border_active = token_name_exists || errors.name;
+  const max_tokens_reached = numberOfTokens === 30;
+  const disable_button =
+    token_name_exists || max_tokens_reached || Object.keys(errors).length > 0 || input_value === '';
+  const error_border = token_name_exists || max_tokens_reached;
+  const error_border_active = errors.name || error_border;
 
   return (
     <React.Fragment>
@@ -63,7 +66,11 @@ const CreateTokenField = ({
         onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
         className={`${styles.customTextInput} ${error_border_active ? 'error-border' : ''}`}
       >
-        <label htmlFor='playground-request' className={styles.inlineLabel}>
+        <label
+          htmlFor='playground-request'
+          className={styles.inlineLabel}
+          data-testid='token-count-label'
+        >
           Token name (You&apos;ve created <b>{numberOfTokens}</b> out of 30 tokens )
         </label>
         <input
@@ -77,10 +84,17 @@ const CreateTokenField = ({
           Create
         </Button>
       </div>
-      {errors && errors.name && (
-        <Text as='span' type='paragraph-1' className='error-message'>
-          {errors.name.message}
-        </Text>
+      {max_tokens_reached ? (
+        <div className='error-message'>
+          <p>You have reached the maximum number of tokens.</p>
+        </div>
+      ) : (
+        errors &&
+        errors.name && (
+          <Text as='span' type='paragraph-1' className='error-message'>
+            {errors.name.message}
+          </Text>
+        )
       )}
       {token_name_exists && (
         <div className='error-message'>

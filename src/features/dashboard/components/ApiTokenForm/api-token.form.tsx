@@ -78,7 +78,7 @@ const scopes: TScope[] = [
 ];
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
-  const { createToken, isCreatingToken, errorCreatingToken } = useCreateToken();
+  const { createToken, isCreatingToken } = useCreateToken();
   const [form_is_cleared, setFormIsCleared] = useState(false);
 
   const {
@@ -106,11 +106,8 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       await createToken(name, selectedTokenScope);
       setFormIsCleared(true);
       reset();
-      if (errorCreatingToken) {
-        console.log(errorCreatingToken);
-      }
     },
-    [createToken, errorCreatingToken, reset],
+    [createToken, reset],
   );
 
   const onCardClick = useCallback(
