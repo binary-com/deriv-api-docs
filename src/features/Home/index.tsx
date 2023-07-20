@@ -18,7 +18,8 @@ export default function HomepageFeatures() {
       <WaysToEarn />
       <GetStarted />
       <ApiFeatures />
-      <Carousel />
+      {/* Carousel requires new quote's before it should be enabled again */}
+      {/* <Carousel /> */}
       <Footer />
     </main>
   );
