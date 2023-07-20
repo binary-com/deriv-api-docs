@@ -3,6 +3,32 @@ import { cleanup, fireEvent, render, screen, within } from '@site/src/test-utils
 import userEvent from '@testing-library/user-event';
 import ApiTokenForm from '../api-token.form';
 import useCreateToken from '../../../hooks/useCreateToken';
+import useApiToken from '@site/src/hooks/useApiToken';
+
+jest.mock('@site/src/hooks/useApiToken');
+
+const mockUseApiToken = useApiToken as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useApiToken>>
+>;
+
+mockUseApiToken.mockImplementation(() => ({
+  tokens: [
+    {
+      display_name: 'testtoken1',
+      last_used: '',
+      scopes: ['read', 'trade', 'payments', 'admin'],
+      token: 'asdf1234',
+      valid_for_ip: '',
+    },
+    {
+      display_name: 'testtoken2',
+      last_used: '',
+      scopes: ['read', 'trade', 'payments', 'admin'],
+      token: 'asdf1235',
+      valid_for_ip: '',
+    },
+  ],
+}));
 
 jest.mock('@site/src/features/dashboard/hooks/useCreateToken');
 
@@ -104,6 +130,15 @@ describe('Home Page', () => {
     expect(mockCreateToken).toHaveBeenCalledWith('test create token', []);
   });
 
+  it('Should not be able to create a token if name already exists', async () => {
+    const nameInput = screen.getByRole('textbox');
+
+    await userEvent.type(nameInput, 'testtoken1');
+
+    const error = screen.getByText(/That name is taken. Choose another./i);
+    expect(error).toBeVisible;
+  });
+
   it('Should not create token when name input is empty', async () => {
     const nameInput = screen.getByRole('textbox');
 
@@ -126,29 +161,16 @@ describe('Home Page', () => {
     expect(modal).toBeVisible();
   });
 
-  it('Should have create button disabled when input is empty or ends with whitespace', async () => {
+  it('Should have create button disabled in case of empty input or error message', async () => {
     const submitButton = screen.getByRole('button', { name: /Create/i });
     expect(submitButton).toBeDisabled();
 
     const nameInput = screen.getByRole('textbox');
 
-    await userEvent.type(nameInput, 'token text');
-    expect(submitButton).not.toBeDisabled();
-
-    await userEvent.clear(nameInput);
+    await userEvent.type(nameInput, 'token-text');
     expect(submitButton).toBeDisabled();
 
     await userEvent.clear(nameInput);
-    await userEvent.type(nameInput, 'token text ');
     expect(submitButton).toBeDisabled();
-  });
-
-  it('Should disable user from entering whitespace in the beginning', async () => {
-    const nameInput = screen.getByRole('textbox');
-
-    fireEvent.keyDown(nameInput, { code: 'Space', preventDefault });
-    await userEvent.type(nameInput, '{space}');
-
-    expect(nameInput).toHaveValue('');
   });
 });

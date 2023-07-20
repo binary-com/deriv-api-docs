@@ -32,7 +32,6 @@ const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => 
         text: 'Yes, delete',
         color: 'primary',
         onClick: () => {
-          setToggleModal(false);
           onDelete();
         },
       },
