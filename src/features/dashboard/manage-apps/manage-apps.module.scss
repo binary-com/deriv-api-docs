@@ -5,6 +5,8 @@
   display: inline-block;
   overflow: auto;
   max-height: calc(100vh - rem(35));
+  border-top-left-radius: rem(1.6);
+  border-top-right-radius: rem(1.6);
 }
 
 @mixin actionIcon {

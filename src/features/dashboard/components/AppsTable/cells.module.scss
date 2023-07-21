@@ -7,8 +7,6 @@
   cursor: pointer;
   padding: rem(2) rem(2);
   border-radius: 100%;
-  background-color: var(--colors-greyLight200);
-  border: 2px solid var(--colors-greyLight400);
 }
 
 .deleteApp {
@@ -25,6 +23,7 @@
   display: flex;
   gap: rem(2);
   margin: rem(3);
+  justify-content: center;
 }
 
 .tooltip {

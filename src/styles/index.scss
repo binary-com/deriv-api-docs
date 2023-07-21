@@ -177,7 +177,7 @@ div[class*='sidebarViewport'] {
 }
 
 .navbar {
-  padding: 0 5%;
+  padding: 0 5vw;
   height: var(--nav-height);
   line-height: rem(2);
   @media (max-width: 996px) {
