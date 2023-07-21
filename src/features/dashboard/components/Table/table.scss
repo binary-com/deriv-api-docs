@@ -13,12 +13,20 @@
     height: rem(5);
   }
 
+  th {
+    min-width: rem(20);
+  }
+
   th,
   td {
     display: table-cell;
     border-left: none;
     border-right: none;
     border-bottom-color: var(--ifm-color-emphasis-200);
+    text-align: left;
+    &:last-child {
+      text-align: center;
+    }
   }
 
   td:nth-child(3) {
