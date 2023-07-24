@@ -1,5 +1,5 @@
 project_id: '585007'
-api_token: '8409fee9283302be9e3a10545bdbce8567c1be42d4dea9ef759ce3f16847fe6801c5112d38d2ba69'
+api_token: 'API_TRANSLATIONS'
 files:
   # JSON translation files
   - source: /i18n/en/**/*
