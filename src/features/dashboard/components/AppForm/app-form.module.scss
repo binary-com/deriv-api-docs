@@ -11,7 +11,7 @@ fieldset .customTextInput:last-child {
   display: flex;
   position: relative;
   box-sizing: border-box;
-  margin: rem(1) 0;
+  margin: rem(1) 0 0;
   &:focus-within {
     border-color: var(--colors-blue400);
   }
@@ -49,7 +49,7 @@ fieldset .customTextInput:last-child {
       outline: 1px solid var(--colors-blue500);
       border-radius: 3px;
       & ~ label {
-        color: var(--colors-blue400);
+        // color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
         padding: 0 rem(0.4);
         transform: translateY(rem(-2)) scale(0.75);
@@ -149,3 +149,7 @@ fieldset .customTextInput:last-child {
   display: flex;
   gap: rem(1);
 }
+
+// .labelError input:focus ~ label {
+//   color: var(--colors-coral500) !important;
+// }
