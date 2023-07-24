@@ -50,15 +50,21 @@ const CopyTokenDialog = ({ setToggleModal, copyToken }: TCopyTokenDialog) => {
           <Modal.PageContent has_close_button action_buttons={actionButtons}>
             <div className={styles.content}>
               <Translate>
-              Be careful who you share this token with. Anyone with this token can perform the
-              following actions on your account behalf
+                Be careful who you share this token with. Anyone with this token can perform the
+                following actions on your account behalf
               </Translate>
               <ul>
-                <li><Translate>Add accounts</Translate></li>
+                <li>
+                  <Translate>Add accounts</Translate>
+                </li>
 
-                <li><Translate>Create or delete API tokens for trading and withdrawals</Translate></li>
+                <li>
+                  <Translate>Create or delete API tokens for trading and withdrawals</Translate>
+                </li>
 
-                <li><Translate>Modify account settings</Translate></li>
+                <li>
+                  <Translate>Modify account settings</Translate>
+                </li>
               </ul>
             </div>
           </Modal.PageContent>

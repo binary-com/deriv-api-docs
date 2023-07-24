@@ -49,8 +49,6 @@ const DeleteTokenDialog = ({ onDelete, setToggleModal }: TDeleteTokendialog) => 
           <Modal.DialogContent
             title='Deleting token'
             content={translate({ message: 'Are you sure you want to delete this token?' })}
-            title='Delete token'
-            content='Are you sure you want to delete this token?'
             action_buttons={actionButtons}
             has_close_button
           />
