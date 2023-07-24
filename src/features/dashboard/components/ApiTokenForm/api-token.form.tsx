@@ -106,10 +106,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       });
       createToken(name, selectedTokenScope);
       setFormIsCleared(true);
-      setToggleModal(!is_toggle);
+      setToggleModal((prev) => !prev);
       reset();
     },
-    [createToken, is_toggle, reset],
+    [createToken, reset],
   );
 
   const onCardClick = useCallback(
