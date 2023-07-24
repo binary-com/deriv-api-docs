@@ -9,6 +9,7 @@
     "start:dev": "docusaurus start",
     "build": "docusaurus build",
     "test": "jest",
+    "crowdin": "crowdin",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -21,6 +22,7 @@
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
+    "@crowdin/cli": "^3.13.0",
     "@deriv/deriv-api": "^1.0.11",
     "@deriv/ui": "^0.1.0",
     "@docusaurus/core": "^2.4.0",

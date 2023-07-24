@@ -18,5 +18,9 @@
   "item.label.Blog": {
     "message": "Blog",
     "description": "Navbar item with label Blog"
+  },
+  "item.label.Bug bounty": {
+    "message": "Bug bounty",
+    "description": "Navbar item with label Bug bounty"
   }
 }

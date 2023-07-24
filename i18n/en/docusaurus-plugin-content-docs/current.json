@@ -1,0 +1,50 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Core concepts": {
+    "message": "Core concepts",
+    "description": "The label for category Core concepts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Core concepts.link.generated-index.description": {
+    "message": "Learn core concepts of the Deriv API WebSocket server and its features",
+    "description": "The generated-index page description for category Core concepts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Code Examples": {
+    "message": "Code Examples",
+    "description": "The label for category Code Examples in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Code Examples.link.generated-index.description": {
+    "message": "Learn more about the API with our code examples",
+    "description": "The generated-index page description for category Code Examples in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.JavaScript Examples": {
+    "message": "JavaScript Examples",
+    "description": "The label for category JavaScript Examples in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.JavaScript Examples.link.generated-index.description": {
+    "message": "JavaScript code examples",
+    "description": "The generated-index page description for category JavaScript Examples in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Languages": {
+    "message": "Languages",
+    "description": "The label for category Languages in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Languages.link.generated-index.description": {
+    "message": "Learn how to use Deriv WebSocket API features with your language of your choice",
+    "description": "The generated-index page description for category Languages in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.JavaScript": {
+    "message": "JavaScript",
+    "description": "The label for category JavaScript in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.JavaScript.link.generated-index.description": {
+    "message": "Learn how to use Deriv WebSocket APIs with JavaScript.",
+    "description": "The generated-index page description for category JavaScript in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Guides": {
+    "message": "Guides",
+    "description": "The label for category Guides in sidebar tutorialSidebar"
+  }
+}
