@@ -49,7 +49,7 @@ fieldset .customTextInput:last-child {
       outline: 1px solid var(--colors-blue500);
       border-radius: 3px;
       & ~ label {
-        // color: var(--colors-blue400);
+        color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
         padding: 0 rem(0.4);
         transform: translateY(rem(-2)) scale(0.75);
@@ -150,6 +150,21 @@ fieldset .customTextInput:last-child {
   gap: rem(1);
 }
 
-// .labelError input:focus ~ label {
-//   color: var(--colors-coral500) !important;
-// }
+.errorAppname {
+  border-color: var(--colors-coral500) !important;
+  &:focus-within {
+    border-color: var(--colors-coral500) !important;
+  }
+  input[type='text'],
+  input[type='number'] {
+    &:not(:placeholder-shown) ~ label {
+      color: var(--colors-coral500) !important;
+    }
+    &:focus {
+      outline: var(--colors-coral500) !important;
+      & ~ label {
+        color: var(--colors-coral500) !important;
+      }
+    }
+  }
+}

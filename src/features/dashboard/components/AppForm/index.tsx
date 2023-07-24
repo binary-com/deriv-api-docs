@@ -164,7 +164,7 @@ const AppForm = ({
               <div>
                 <div
                   className={`${styles.customTextInput} ${
-                    error_border_active ? 'error-border' : ''
+                    error_border_active ? styles.errorAppname : ''
                   }`}
                   id='custom-text-input'
                   onChange={(e) => {
@@ -176,15 +176,9 @@ const AppForm = ({
                     type='text'
                     id='app_name'
                     placeholder=' '
-                    className={'error-border'}
                     onFocus={() => setDisplayRestrictions(true)}
                   />
-                  <label
-                    htmlFor='app_name'
-                    className={`${error_border_active && styles.labelError}`}
-                  >
-                    App name (required)
-                  </label>
+                  <label htmlFor='app_name'>App name (required)</label>
                 </div>
                 {errors && errors.name ? (
                   <Text as='span' type='paragraph-1' className='error-message'>
