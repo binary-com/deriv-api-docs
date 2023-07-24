@@ -25,7 +25,6 @@ type TAppFormProps = {
   is_update_mode?: boolean;
   form_is_cleared?: boolean;
   setFormIsCleared?: Dispatch<SetStateAction<boolean>>;
-  button_text: string;
   cancelButton?: () => ReactNode;
 };
 
@@ -35,7 +34,6 @@ const AppForm = ({
   is_update_mode = false,
   form_is_cleared,
   setFormIsCleared,
-  button_text,
   cancelButton,
 }: TAppFormProps) => {
   const {
@@ -105,7 +103,7 @@ const AppForm = ({
     return (
       <div className={styles.buttons}>
         <Button role='submit' disabled={disable_btn}>
-          {button_text}
+          {is_update_mode ? 'Update Application' : 'Register Application'}
         </Button>
         {is_update_mode && cancelButton()}
       </div>

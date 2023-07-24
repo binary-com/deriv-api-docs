@@ -34,7 +34,7 @@ describe('App Form', () => {
   const mockOnSubmit = jest.fn();
 
   beforeEach(() => {
-    render(<AppForm button_text='Update Application' submit={mockOnSubmit} />);
+    render(<AppForm submit={mockOnSubmit} />);
   });
 
   afterEach(() => {
@@ -80,7 +80,7 @@ describe('App Form', () => {
       getApps: mockGetApps,
     }));
 
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
@@ -130,7 +130,7 @@ describe('App Form', () => {
   });
 
   it('Should show error message for empty app name', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
     });
@@ -143,7 +143,7 @@ describe('App Form', () => {
   });
 
   it('Should show error for long app name', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
@@ -162,7 +162,7 @@ describe('App Form', () => {
   });
 
   it('Should show error for using non alphanumeric characters except underscore or space', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
@@ -180,7 +180,7 @@ describe('App Form', () => {
   });
 
   it('Should show error message for long app markup percentage', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const appMarkupPercentageInput = screen.getByRole<HTMLInputElement>('spinbutton', {
       name: 'Markup percentage (optional)',
@@ -198,7 +198,7 @@ describe('App Form', () => {
   });
 
   it('Should show error for invalid Auth url', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const authURLInput = screen.getByRole('textbox', {
       name: 'Authorization URL (optional)',
@@ -216,7 +216,7 @@ describe('App Form', () => {
   });
 
   it('Should show error for invalid Verification url', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const authURLInput = screen.getByRole('textbox', {
       name: 'Verification URL (optional)',
@@ -263,7 +263,7 @@ describe('App Form', () => {
       updateCurrentToken: jest.fn(),
     }));
 
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const appMarkupPercentageInput = screen.getByRole<HTMLInputElement>('spinbutton', {
       name: 'Markup percentage (optional)',
@@ -281,7 +281,7 @@ describe('App Form', () => {
   });
 
   it('Should call onSubmit on submitting the form', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const selectTokenOption = screen.getByTestId('select-token');
 
@@ -311,7 +311,7 @@ describe('App Form', () => {
   });
 
   it('Should display restrictions when app name is in focus and disappear if error occurs', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',

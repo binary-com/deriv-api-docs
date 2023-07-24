@@ -48,7 +48,6 @@ const AppRegistration = () => {
         submit={onSubmit}
         form_is_cleared={form_is_cleared}
         setFormIsCleared={setFormIsCleared}
-        button_text='Register Application'
       />
       {error && <RegisterAppDialogError error={error} onClose={clear} />}
       {data && <RegisterAppDialogSuccess onClose={clear} />}

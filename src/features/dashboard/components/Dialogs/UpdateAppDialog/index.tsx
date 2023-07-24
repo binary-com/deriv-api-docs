@@ -91,7 +91,6 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
             <div className={styles.update_app_content}>
               <AppForm
                 is_update_mode
-                button_text='Update Application'
                 cancelButton={cancelButton}
                 submit={onSubmit}
                 initialValues={initialValues}
