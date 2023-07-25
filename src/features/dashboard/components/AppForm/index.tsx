@@ -63,7 +63,7 @@ const AppForm = ({
     getApps();
   }, [form_is_cleared, getApps]);
 
-  const [display_restrictions, setDisplayRestrictions] = useState(false);
+  const [display_restrictions, setDisplayRestrictions] = useState(true);
 
   const admin_token = currentToken?.scopes?.includes('admin') && currentToken.token;
 
@@ -73,6 +73,12 @@ const AppForm = ({
     app_name_exists || input_value === '' || Object.keys(errors).length > 0 || is_loading;
   const disable_btn = is_update_mode ? is_loading : disable_register_btn;
   const error_border_active = (!is_update_mode && app_name_exists) || errors.name;
+
+  useEffect(() => {
+    errors.name?.message || app_name_exists
+      ? setDisplayRestrictions(false)
+      : setDisplayRestrictions(true);
+  }, [errors.name?.message, app_name_exists]);
 
   const accountHasAdminToken = () => {
     const admin_check_array = [];
@@ -174,7 +180,7 @@ const AppForm = ({
                     type='text'
                     id='app_name'
                     placeholder=' '
-                    onFocus={() => setDisplayRestrictions(true)}
+                    // onFocus={() => setDisplayRestrictions(true)}
                   />
                   <label htmlFor='app_name'>App name (required)</label>
                 </div>
