@@ -3,6 +3,7 @@ import { Text, Button } from '@deriv/ui';
 import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form';
+import CustomErrors from './CustomErrors';
 
 type TCreateTokenField = {
   register: UseFormRegisterReturn;
@@ -49,29 +50,9 @@ const CreateTokenField = ({
   const token_name_exists =
     getTokenNames.includes(input_value.toLowerCase()) && Object.keys(errors).length === 0;
   const has_custom_errors = token_name_exists || (tokens_limit_reached && input_value !== '');
-  const has_no_errors = Object.values(errors).length === 0 && !has_custom_errors;
   const disable_button =
     token_name_exists || Object.keys(errors).length > 0 || input_value === '' || has_custom_errors;
   const error_border_active = token_name_exists || errors.name || has_custom_errors;
-
-  const CustomErrors = () => {
-    if (token_name_exists) {
-      return (
-        <div className='error-message'>
-          <p>That name is taken. Choose another.</p>
-        </div>
-      );
-    }
-    if (tokens_limit_reached && input_value !== '') {
-      return (
-        <div className='error-message'>
-          <p>You&apos;ve reached 30 tokens creation limit.</p>
-        </div>
-      );
-    }
-
-    return <></>;
-  };
 
   return (
     <React.Fragment>
@@ -105,30 +86,11 @@ const CreateTokenField = ({
           {errors.name.message}
         </Text>
       )}
-      <CustomErrors />
-      {has_no_errors && (
-        <div className={styles.helperText}>
-          <ul>
-            <li>
-              <span>Only alphanumeric characters with spaces and underscores are allowed.</span>
-            </li>
-            <li>
-              <span>The name must be between 2 to 32 characters.</span>
-            </li>
-            <li>
-              <span>Duplicate token names aren&apos;t allowed.</span>
-            </li>
-            <li>
-              <span>
-                The name cannot contain &ldquo;Binary&rdquo;, &ldquo;Deriv&rdquo;, or similar words.
-              </span>
-            </li>
-            <li>
-              <span>You can create up to 30 tokens for this account.</span>
-            </li>
-          </ul>
-        </div>
-      )}
+      <CustomErrors
+        token_name_exists={token_name_exists}
+        tokens_limit_reached={tokens_limit_reached}
+        input_value={input_value}
+      />
     </React.Fragment>
   );
 };
