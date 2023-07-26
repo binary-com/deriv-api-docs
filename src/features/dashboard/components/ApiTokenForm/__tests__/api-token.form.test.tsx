@@ -135,7 +135,7 @@ describe('Home Page', () => {
 
     await userEvent.type(nameInput, 'testtoken1');
 
-    const error = screen.getByText(/ No duplicate token names are allowed for the same account./i);
+    const error = screen.getByText(/No duplicate token names are allowed for the same account./i);
     expect(error).toBeVisible;
   });
 
