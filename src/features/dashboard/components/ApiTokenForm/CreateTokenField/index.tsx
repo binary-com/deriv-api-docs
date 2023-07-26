@@ -18,6 +18,7 @@ type TCreateTokenField = {
   >;
   form_is_cleared: boolean;
   setFormIsCleared: Dispatch<SetStateAction<boolean>>;
+  setHideRestriction: Dispatch<SetStateAction<boolean>>;
 };
 
 const CreateTokenField = ({
@@ -25,6 +26,7 @@ const CreateTokenField = ({
   register,
   form_is_cleared,
   setFormIsCleared,
+  setHideRestriction,
 }: TCreateTokenField) => {
   const { tokens } = useApiToken();
   const [input_value, setInputValue] = useState('');
@@ -49,6 +51,11 @@ const CreateTokenField = ({
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
   const error_border_active = token_name_exists || errors.name;
 
+  useEffect(() => {
+    if (error_border_active) {
+      setHideRestriction(true);
+    }
+  }, [error_border_active, setHideRestriction]);
   return (
     <React.Fragment>
       <div className={styles.step_title}>

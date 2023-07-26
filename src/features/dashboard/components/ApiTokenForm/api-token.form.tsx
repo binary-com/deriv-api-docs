@@ -162,6 +162,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           errors={errors}
           form_is_cleared={form_is_cleared}
           setFormIsCleared={setFormIsCleared}
+          setHideRestriction={setHideRestrictions}
         />
         {!hiderestrictions && <TokenNameRestrictions />}
         <div className={styles.step_title}>
