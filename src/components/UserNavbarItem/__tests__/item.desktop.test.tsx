@@ -42,8 +42,12 @@ describe('User Navbar Desktop Item', () => {
     });
 
     it('Should render login link navbar item', async () => {
-      const login_nav_button = screen.getByRole<HTMLAnchorElement>('link', { name: /log in/i });
-      expect(login_nav_button).toHaveAttribute('href', 'https://www.example.com');
+      const login_nav_button = screen.getByRole('button', { name: /log in/i });
+      expect(login_nav_button).toBeVisible();
+
+      await userEvent.click(login_nav_button);
+
+      expect(location.href).toBe('https://www.example.com/');
     });
   });
   describe('Given user is logged in', () => {

@@ -108,7 +108,14 @@ const AppForm = ({
   const renderButtons = () => {
     return (
       <div className={styles.buttons}>
-        <Button role='submit' disabled={disable_btn}>
+        <Button
+          role='submit'
+          disabled={disable_btn}
+          style={{
+            borderRadius: '0.935rem',
+          }}
+          size='large'
+        >
           {is_update_mode ? 'Update Application' : 'Register Application'}
         </Button>
         {is_update_mode && cancelButton()}
@@ -128,7 +135,7 @@ const AppForm = ({
                   App information
                 </Text>
                 {!is_update_mode && (
-                  <Text as='p' type='paragraph-1'>
+                  <Text as='p' type='paragraph-1' className={styles.wrapperHeading}>
                     Select your api token ( it should have admin scope )
                   </Text>
                 )}
@@ -167,7 +174,7 @@ const AppForm = ({
               )}
               <div>
                 <div
-                  className={`${styles.customTextInput} ${
+                  className={`${styles.helperMargin} ${styles.customTextInput} ${
                     error_border_active ? styles.errorAppname : ''
                   }`}
                   id='custom-text-input'
@@ -175,13 +182,7 @@ const AppForm = ({
                     setInputValue((e.target as HTMLInputElement).value);
                   }}
                 >
-                  <input
-                    {...register('name')}
-                    type='text'
-                    id='app_name'
-                    placeholder=' '
-                    // onFocus={() => setDisplayRestrictions(true)}
-                  />
+                  <input {...register('name')} type='text' id='app_name' placeholder=' ' />
                   <label htmlFor='app_name'>App name (required)</label>
                 </div>
                 {errors && errors.name ? (
@@ -199,11 +200,13 @@ const AppForm = ({
             </div>
             <div className={styles.formHeaderContainer}>
               <h4>Markup</h4>
-              <div>
-                <Text as='span' type='paragraph-1'>
+              <div className={styles.markup}>
+                <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
                   You can earn commission by adding a markup to the price of each trade. Enter your
                   markup percentage here.
-                  <br />
+                </Text>
+                <br />
+                <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
                   <b>NOTE: Markup is only available for real accounts</b>
                 </Text>
               </div>
@@ -228,9 +231,12 @@ const AppForm = ({
                   />
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>
-                <Text as='p' type='paragraph-1' className={styles.helperText}>
-                  If you don&lsquo;t want to earn a markup, enter 0 here. Otherwise, enter a number
-                  up to 5. Maximum: 5.00%.
+                <Text
+                  as='p'
+                  type='paragraph-2'
+                  className={`${styles.helperText} ${styles.formsubHeading}`}
+                >
+                  Enter 0 if you don&lsquo;t want to earn a markup. Max markup: 3%
                 </Text>
                 {errors && errors.app_markup_percentage && (
                   <Text as='span' type='paragraph-1' className='error-message'>
@@ -242,7 +248,7 @@ const AppForm = ({
             <div className={styles.formHeaderContainer}>
               <h4>OAuth details</h4>
               <div>
-                <Text as='span' type='paragraph-1'>
+                <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
                   This allows clients to log in to your app using their Deriv accounts without an
                   API token.
                 </Text>
@@ -258,17 +264,24 @@ const AppForm = ({
                 />
                 <label htmlFor='app_redirect_uri'>Authorization URL (optional)</label>
               </div>
-              <p className={styles.helperText}>
+              <Text
+                as='p'
+                type='paragraph-2'
+                className={`${styles.helperText} ${styles.formsubHeading}`}
+              >
                 *Please note that this URL will be used as the OAuth redirect URL for the OAuth
                 authorization.
-              </p>
-              {errors && errors.redirect_uri && (
-                <span className='error-message'>{errors.redirect_uri.message}</span>
+              </Text>
+              {errors && errors?.redirect_uri && (
+                <span className='error-message'>{errors.redirect_uri?.message}</span>
               )}
             </div>
 
             <div>
-              <div className={styles.customTextInput} id='custom-text-input'>
+              <div
+                className={`${styles.verificationMargin} ${styles.customTextInput}`}
+                id='custom-text-input'
+              >
                 <input
                   {...register('verification_uri')}
                   id='app_verification_uri'
@@ -286,53 +299,59 @@ const AppForm = ({
               <div>
                 <div className={styles.formHeaderContainer}>
                   <h4>Scope of authorization</h4>
-                  <div>
+                  <div className={styles.subHeading}>
                     <span>Select the scope for your app:</span>
                   </div>
                 </div>
               </div>
-              <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox name='read' id='read-scope' register={register('read')}>
-                  <label htmlFor='read-scope'>
-                    <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
-                  </label>
-                </CustomCheckbox>
-              </div>
-              <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox name='trade' id='trade-scope' register={register('trade')}>
-                  <label htmlFor='trade-scope'>
-                    <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your
-                    clients&apos; behalf.
-                  </label>
-                </CustomCheckbox>
-              </div>
-              <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox
-                  name='trading_information'
-                  id='trading_information-scope'
-                  register={register('trading_information')}
-                >
-                  <label htmlFor='trading_information-scope'>
-                    <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
-                    trading information, including their account balance.
-                  </label>
-                </CustomCheckbox>
-              </div>
-              <div className={styles.customCheckboxWrapper}>
-                <CustomCheckbox name='payments' id='payments-scope' register={register('payments')}>
-                  <label htmlFor='payments-scope'>
-                    <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on
-                    your clients&rsquo; behalf.
-                  </label>
-                </CustomCheckbox>
-              </div>
-              <div className={`${styles.customCheckboxWrapper} mb-0`}>
-                <CustomCheckbox name='admin' id='admin-scope' register={register('admin')}>
-                  <label htmlFor='admin-scope'>
-                    <b>Admin</b>: Full account access, including the access to manage security
-                    tokens.
-                  </label>
-                </CustomCheckbox>
+              <div className={styles.scopesWrapper}>
+                <div className={styles.customCheckboxWrapper}>
+                  <CustomCheckbox name='read' id='read-scope' register={register('read')}>
+                    <label htmlFor='read-scope'>
+                      <b>Read</b>: You&apos;ll have full access to your clients&apos; information.
+                    </label>
+                  </CustomCheckbox>
+                </div>
+                <div className={styles.customCheckboxWrapper}>
+                  <CustomCheckbox name='trade' id='trade-scope' register={register('trade')}>
+                    <label htmlFor='trade-scope'>
+                      <b>Trade</b>: You&apos;ll be able to buy and sell contracts on your
+                      clients&apos; behalf.
+                    </label>
+                  </CustomCheckbox>
+                </div>
+                <div className={styles.customCheckboxWrapper}>
+                  <CustomCheckbox
+                    name='trading_information'
+                    id='trading_information-scope'
+                    register={register('trading_information')}
+                  >
+                    <label htmlFor='trading_information-scope'>
+                      <b>Trading information</b>: You&lsquo;ll be able to view your clients&rsquo;
+                      trading information, including their account balance.
+                    </label>
+                  </CustomCheckbox>
+                </div>
+                <div className={styles.customCheckboxWrapper}>
+                  <CustomCheckbox
+                    name='payments'
+                    id='payments-scope'
+                    register={register('payments')}
+                  >
+                    <label htmlFor='payments-scope'>
+                      <b>Payments</b>: You&lsquo;ll be able to perform deposits and withdrawals on
+                      your clients&rsquo; behalf.
+                    </label>
+                  </CustomCheckbox>
+                </div>
+                <div className={`${styles.customCheckboxWrapper} mb-0`}>
+                  <CustomCheckbox name='admin' id='admin-scope' register={register('admin')}>
+                    <label htmlFor='admin-scope'>
+                      <b>Admin</b>: Full account access, including the access to manage security
+                      tokens.
+                    </label>
+                  </CustomCheckbox>
+                </div>
               </div>
             </div>
             <div className={styles.termsOfConditionRegister}>
