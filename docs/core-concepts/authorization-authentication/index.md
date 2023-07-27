@@ -71,7 +71,7 @@ Once a user signs up/logs in, they will be redirected to the URL that you entere
 
 The query parameters in the redirect URL are the user's accounts and their related session tokens. You can map the query parameters to an array using the following approach:
 
-```js
+```js showLineNumbers
 const user_accounts = [
   {
     account: 'cr799393',
@@ -88,7 +88,7 @@ const user_accounts = [
 
 To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize) API call with the user's **selected** account **session token**:
 
-```js
+```js showLineNumbers
 {
   "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
 }
@@ -96,7 +96,7 @@ To authorise the user based on the user's **selected** account, call the [author
 
 The response for the `authorize` call would be an object as below:
 
-```js
+```js showLineNumbers
 {
     "account_list": [
       {

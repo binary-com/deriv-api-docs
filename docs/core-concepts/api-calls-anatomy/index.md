@@ -64,7 +64,7 @@ A `Residence List` call returns a list of countries and 2-letter country codes, 
 
 The request data for this call is as below:
 
-```ts
+```ts showLineNumbers
 {
   residence_list: 1; // Api Call Method Name
   passthrough?: object; // Optional
@@ -96,7 +96,7 @@ When you get the response for the call, there will be a `Field` with the same na
 
 The response for the `Residence List` call:
 
-```js
+```js showLineNumbers
 {
   echo_req: {
     req_id: 1,
@@ -173,7 +173,7 @@ This `Field` contains the exact `Request Data` you sent to the server.
 
 This `Field` helps you determine which `message` data you're getting on the message event of the WebSocket connection. For example, your `onmessage` event handler for your WebSocket connection in `JavaScript` would be:
 
-```js
+```js showLineNumbers
 socket.onmessage = (event) => {
   const receivedMessage = JSON.parse(event.data);
 

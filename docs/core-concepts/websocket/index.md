@@ -47,7 +47,7 @@ Sending a message can be done via socket.send(data).
 
 Here’s an example in `JavaScript`:
 
-```js
+```js showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
 const socket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 
