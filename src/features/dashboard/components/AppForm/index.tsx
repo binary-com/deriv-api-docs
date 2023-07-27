@@ -131,9 +131,7 @@ const AppForm = ({
           <div>
             <div className={styles.apiTokenWrapper}>
               <div className={styles.formHeaderContainer}>
-                <Text as='p' type='paragraph-1' bold>
-                  App information
-                </Text>
+                <h4>App information</h4>
                 {!is_update_mode && (
                   <Text as='p' type='paragraph-1' className={styles.wrapperHeading}>
                     Select your api token ( it should have admin scope )
