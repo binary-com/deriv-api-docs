@@ -9,11 +9,10 @@ tags:
   - calls
   - anatomy
 keywords:
-  - trading
-  - concept
-  - calls
-  - anatomy
-description: Deriv API calls' anatomy
+  - trading app
+  - api calls
+  - api example
+description: Set up API calls for your trading app using the API call feature. With API examples, learn to subscribe, send requests, and get response data.
 ---
 
 ## Subscribe and send

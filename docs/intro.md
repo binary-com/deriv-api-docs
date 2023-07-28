@@ -6,14 +6,11 @@ sidebar_label: Introduction
 sidebar_position: 0
 tags:
   - introduction
-  - getting started
-  - quick startup
 keywords:
-  - deriv
-  - api
-  - getting started
-  - quick startup
-description: Getting started with Deriv API
+  - trading app
+  - api code
+  - api example
+description: Get an overview of the available Deriv API code examples and languages, and how to use it to create your trading app.
 ---
 
 Our Documentation is divided in several sections:

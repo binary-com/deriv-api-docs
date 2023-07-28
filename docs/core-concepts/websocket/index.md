@@ -8,10 +8,10 @@ tags:
   - concept
   - websocket
 keywords:
-  - trading
-  - concept
-  - websockets
-description: What is a WebSocket?
+  - trading app
+  - websocket protocol
+  - websocket connections
+description: Learn about WebSocket protocol and WebSocket connections, and how to integrate them so you can enable data exchanges on your trading app.
 ---
 
 ## What are WebSockets?
