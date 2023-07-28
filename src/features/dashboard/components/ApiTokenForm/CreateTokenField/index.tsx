@@ -87,7 +87,7 @@ const CreateTokenField = ({
       )}
       {token_name_exists && (
         <div className='error-message'>
-          <p>No duplicate token names are allowed for the same account.</p>
+          <p>That name is taken. Choose another.</p>
         </div>
       )}
     </React.Fragment>
