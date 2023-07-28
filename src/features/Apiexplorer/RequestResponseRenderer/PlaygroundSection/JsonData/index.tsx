@@ -11,7 +11,6 @@ const ReactJson = React.lazy(() => import('react-json-view'));
 type TJsonData<T extends TSocketEndpointNames> = {
   full_response: TSocketResponse<T>;
   error: unknown;
-  name: string;
 };
 
 const JsonData = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNames>({

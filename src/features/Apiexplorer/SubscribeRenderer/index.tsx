@@ -87,7 +87,6 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           response_state={response_state}
           full_response={full_response}
           error={error}
-          name={name}
         />
       )}
     </div>
