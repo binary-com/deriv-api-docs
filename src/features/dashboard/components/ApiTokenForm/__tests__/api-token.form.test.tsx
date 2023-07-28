@@ -172,7 +172,7 @@ describe('Home Page', () => {
 
       await userEvent.type(nameInput, 'asdf');
 
-      const error = screen.getByText(/reached 30 tokens creation limit/i);
+      const error = screen.getByText(/created the maximum number of tokens/i);
       expect(error).toBeVisible();
     });
   });
