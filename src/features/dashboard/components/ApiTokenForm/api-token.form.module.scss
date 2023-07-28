@@ -55,7 +55,7 @@ form {
   display: flex;
   position: relative;
   box-sizing: border-box;
-  margin: rem(1) 0;
+  margin: rem(0.5) 0;
   &:hover {
     border: 1px solid var(--colors-greyLight600);
   }

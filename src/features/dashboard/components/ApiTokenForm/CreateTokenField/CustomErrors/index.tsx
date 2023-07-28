@@ -17,7 +17,7 @@ const CustomErrors = ({ token_name_exists, tokens_limit_reached, input_value }: 
   if (tokens_limit_reached && input_value !== '') {
     return (
       <div className='error-message'>
-        <p>You&apos;ve reached 30 tokens creation limit.</p>
+        <p>You&apos;ve created the maximum number of tokens.</p>
       </div>
     );
   }
