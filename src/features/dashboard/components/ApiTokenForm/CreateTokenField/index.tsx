@@ -3,6 +3,7 @@ import { Text, Button } from '@deriv/ui';
 import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form';
+import CustomErrors from './CustomErrors';
 import TokenCreationDialogSuccess from '../../Dialogs/TokenCreationDialogSuccess';
 
 type TCreateTokenField = {
@@ -52,9 +53,13 @@ const CreateTokenField = ({
     return token_names;
   }, [tokens]);
 
-  const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
-  const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
-  const error_border_active = token_name_exists || errors.name;
+  const tokens_limit_reached = tokens.length === 30 && Object.keys(errors).length === 0;
+  const token_name_exists =
+    getTokenNames.includes(input_value.toLowerCase()) && Object.keys(errors).length === 0;
+  const has_custom_errors = token_name_exists || (tokens_limit_reached && input_value !== '');
+  const disable_button =
+    token_name_exists || Object.keys(errors).length > 0 || input_value === '' || has_custom_errors;
+  const error_border_active = token_name_exists || errors.name || has_custom_errors;
 
   useEffect(() => {
     if (error_border_active) {
@@ -79,7 +84,7 @@ const CreateTokenField = ({
           type='text'
           name='name'
           {...register}
-          placeholder='Token name'
+          placeholder=' '
         />
         <Button disabled={disable_button} type='submit'>
           Create
@@ -91,11 +96,11 @@ const CreateTokenField = ({
           {errors.name.message}
         </Text>
       )}
-      {token_name_exists && (
-        <div className='error-message'>
-          <p>That name is taken. Choose another.</p>
-        </div>
-      )}
+      <CustomErrors
+        token_name_exists={token_name_exists}
+        tokens_limit_reached={tokens_limit_reached}
+        input_value={input_value}
+      />
     </React.Fragment>
   );
 };

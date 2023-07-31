@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
 import TokenNameRestrictions from '../TokenNameRestrictions/TokenNameRestrictions';
 import CreateTokenField from './CreateTokenField';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const schema = yup
   .object({
