@@ -7,7 +7,19 @@ const base_schema = {
   name: yup
     .string()
     .required('Enter your app name.')
-    .max(48, 'Your app name cannot exceed 48 characters.'),
+    .max(48, 'Your app name cannot exceed 48 characters.')
+    .matches(/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_ ]*$/, {
+      message:
+        'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
+      excludeEmptyString: true,
+    })
+    .matches(
+      /^(?!.*deriv|.*d3r1v|.*der1v|.*d3riv|.*b1nary|.*binary|.*b1n4ry|.*bin4ry|.*blnary|.*b\|nary).*$/i,
+      {
+        message: 'The name cannot contain “Binary”, “Deriv”, or similar words.',
+        excludeEmptyString: true,
+      },
+    ),
   read: yup.boolean(),
   trade: yup.boolean(),
   payments: yup.boolean(),

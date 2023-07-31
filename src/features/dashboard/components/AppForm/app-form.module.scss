@@ -59,7 +59,7 @@ fieldset .customTextInput:last-child {
 }
 
 .helperMargin {
-  margin: rem(1) 0;
+  margin: rem(1) 0 0;
 }
 .verificationMargin {
   margin: rem(2) 0;
@@ -122,6 +122,7 @@ fieldset .customTextInput:last-child {
       }
       .formsubHeading {
         padding: rem(1.6);
+        display: inline-block;
       }
       .wrapperHeading {
         padding-left: rem(1.6);
@@ -173,4 +174,28 @@ fieldset .customTextInput:last-child {
 .termsOfConditionRegister {
   margin-left: rem(4);
   margin-top: rem(6);
+}
+
+.buttons {
+  display: flex;
+  gap: rem(1);
+}
+
+.errorAppname {
+  border-color: var(--colors-coral500) !important;
+  &:focus-within {
+    border-color: var(--colors-coral500) !important;
+  }
+  input[type='text'],
+  input[type='number'] {
+    &:not(:placeholder-shown) ~ label {
+      color: var(--colors-coral500) !important;
+    }
+    &:focus {
+      outline: var(--colors-coral500) !important;
+      & ~ label {
+        color: var(--colors-coral500) !important;
+      }
+    }
+  }
 }
