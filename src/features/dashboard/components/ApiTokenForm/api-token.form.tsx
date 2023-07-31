@@ -80,6 +80,7 @@ const scopes: TScope[] = [
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
   const [form_is_cleared, setFormIsCleared] = useState(false);
+  const [is_toggle, setToggleModal] = useState(false);
 
   const {
     handleSubmit,
@@ -105,6 +106,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       });
       createToken(name, selectedTokenScope);
       setFormIsCleared(true);
+      setToggleModal((prev) => !prev);
       reset();
     },
     [createToken, reset],
@@ -157,6 +159,8 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           errors={errors}
           form_is_cleared={form_is_cleared}
           setFormIsCleared={setFormIsCleared}
+          is_toggle={is_toggle}
+          setToggleModal={setToggleModal}
         />
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
