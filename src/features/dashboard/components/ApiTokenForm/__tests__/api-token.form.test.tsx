@@ -139,6 +139,14 @@ describe('Home Page', () => {
       expect(error).toBeVisible;
     });
 
+    it('should hide restrictions if error is present', async () => {
+      const nameInput = screen.getByRole('textbox');
+      const restrictions = screen.getByRole('list');
+      expect(restrictions).toBeVisible();
+      await userEvent.type(nameInput, 'testtoken1');
+      expect(restrictions).not.toBeVisible();
+    });
+
     it('Should not create token when name input is empty', async () => {
       const nameInput = screen.getByRole('textbox');
 
@@ -147,6 +155,30 @@ describe('Home Page', () => {
       await userEvent.click(nameInput);
 
       expect(mockCreateToken).not.toHaveBeenCalled();
+    });
+    it('Should open success dialog when token is created  ', async () => {
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'test create token');
+
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      await userEvent.click(submitButton);
+
+      const modal = screen.getByText('Your API token is ready to be used.');
+      expect(modal).toBeVisible();
+    });
+
+    it('Should have create button disabled in case of empty input or error message', async () => {
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      expect(submitButton).toBeDisabled();
+
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'token-text');
+      expect(submitButton).toBeDisabled();
+
+      await userEvent.clear(nameInput);
+      expect(submitButton).toBeDisabled();
     });
   });
   describe('Token limit', () => {

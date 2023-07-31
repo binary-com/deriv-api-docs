@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
@@ -8,6 +8,7 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import TokenNameRestrictions from '../TokenNameRestrictions/TokenNameRestrictions';
 import CreateTokenField from './CreateTokenField';
 import useApiToken from '@site/src/hooks/useApiToken';
 
@@ -80,8 +81,9 @@ const scopes: TScope[] = [
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
+  const [hiderestrictions, setHideRestrictions] = useState(false);
   const [form_is_cleared, setFormIsCleared] = useState(false);
-  const { tokens } = useApiToken();
+  const [is_toggle, setToggleModal] = useState(false);
 
   const {
     handleSubmit,
@@ -94,7 +96,6 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     resolver: yupResolver(schema),
     mode: 'all',
   });
-
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
       const { name } = data;
@@ -107,6 +108,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       });
       createToken(name, selectedTokenScope);
       setFormIsCleared(true);
+      setToggleModal((prev) => !prev);
       reset();
     },
     [createToken, reset],
@@ -119,6 +121,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     },
     [getValues, setValue],
   );
+
+  useEffect(() => {
+    errors.name?.message ? setHideRestrictions(true) : setHideRestrictions(false);
+  }, [errors.name?.message]);
 
   return (
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
@@ -159,7 +165,11 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           errors={errors}
           form_is_cleared={form_is_cleared}
           setFormIsCleared={setFormIsCleared}
+          setHideRestriction={setHideRestrictions}
+          is_toggle={is_toggle}
+          setToggleModal={setToggleModal}
         />
+        {!hiderestrictions && <TokenNameRestrictions />}
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>

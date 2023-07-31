@@ -4,6 +4,7 @@ import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form';
 import CustomErrors from './CustomErrors';
+import TokenCreationDialogSuccess from '../../Dialogs/TokenCreationDialogSuccess';
 
 type TCreateTokenField = {
   register: UseFormRegisterReturn;
@@ -19,6 +20,9 @@ type TCreateTokenField = {
   >;
   form_is_cleared: boolean;
   setFormIsCleared: Dispatch<SetStateAction<boolean>>;
+  setHideRestriction: Dispatch<SetStateAction<boolean>>;
+  is_toggle: boolean;
+  setToggleModal: Dispatch<SetStateAction<boolean>>;
 };
 
 const CreateTokenField = ({
@@ -26,6 +30,9 @@ const CreateTokenField = ({
   register,
   form_is_cleared,
   setFormIsCleared,
+  setHideRestriction,
+  is_toggle,
+  setToggleModal,
 }: TCreateTokenField) => {
   const { tokens } = useApiToken();
   const [input_value, setInputValue] = useState('');
@@ -54,6 +61,11 @@ const CreateTokenField = ({
     token_name_exists || Object.keys(errors).length > 0 || input_value === '' || has_custom_errors;
   const error_border_active = token_name_exists || errors.name || has_custom_errors;
 
+  useEffect(() => {
+    if (error_border_active) {
+      setHideRestriction(true);
+    }
+  }, [error_border_active, setHideRestriction]);
   return (
     <React.Fragment>
       <div className={styles.step_title}>
@@ -77,9 +89,7 @@ const CreateTokenField = ({
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
-        <label className={styles.tokenInputLabel}>
-          Token name (you&apos;ve created <b>{tokens.length}</b> out of 30 tokens)
-        </label>
+        {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>
