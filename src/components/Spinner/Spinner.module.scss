@@ -1,0 +1,37 @@
+@use 'src/styles/utility' as *;
+.spinnerContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(2);
+  .spinner {
+    position: relative;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
+    border-radius: 100%;
+    overflow: hidden;
+    animation: rotating 0.5s linear infinite;
+    &:before {
+      content: "";
+      left: 50%;
+      top: 50%;
+      width: 70%;
+      height: 70%;
+      position: absolute;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      box-shadow: rem(10) rem(-20) rem(5) rem(15) var(--colors-coral500);
+    }
+  }
+
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

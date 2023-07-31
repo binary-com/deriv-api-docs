@@ -5,7 +5,7 @@ import {
   TSocketResponse,
 } from '@site/src/configs/websocket/types';
 import JsonData from './JsonData';
-import Loader from '@site/src/components/Loader';
+import Spinner from '@site/src/components/Spinner';
 import styles from './PlaygroundSection.module.scss';
 import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
 
@@ -67,7 +67,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     }
   }, [playground_history, is_scrolling]);
 
-  if (loader && playground_history.length === 0) return <Loader />;
+  if (loader && playground_history.length === 0) return <Spinner />;
 
   return (
     <div
@@ -78,7 +78,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     >
       {response_state && (
         <React.Fragment>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Spinner />}>
             <div data-testid='dt_json_view' className={styles.dtJsonView}>
               {playground_history.map((response: TSocketResponse<T>) => {
                 // API does not give an unique ID across subscription API calls as of now.
