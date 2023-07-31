@@ -1,5 +1,5 @@
 ---
-title: WebSocket connection
+title: setuo a WebSocket connection
 sidebar_label: WebSocket connection
 sidebar_position: 1
 tags:
@@ -7,7 +7,7 @@ tags:
 keywords:
   - js
   - websocket-connection
-description: how to setup a WebSocket connection with Deriv api?
+description: A guide on how to set up a WebSocket connection to a WebSocket API on your trading app.
 ---
 
 :::caution

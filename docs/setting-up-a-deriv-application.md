@@ -1,5 +1,5 @@
 ---
-title: Setting up a Deriv application
+title: Create a Deriv application
 sidebar_label: Setting up a Deriv application
 sidebar_position: 7
 tags:
@@ -10,7 +10,7 @@ keywords:
   - intro
   - application
   - setup
-description: How to setup Deriv application
+description: A step-by-step guide on creating your Deriv API token and building your trading application with the help of our trading API. Learn more.
 ---
 
 :::danger

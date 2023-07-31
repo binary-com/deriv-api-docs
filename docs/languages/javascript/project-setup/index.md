@@ -1,5 +1,5 @@
 ---
-title: Project setup
+title: Project setup | JavaScript
 sidebar_label: Project setup
 sidebar_position: 0
 tags:
@@ -7,7 +7,7 @@ tags:
 keywords:
   - js
   - project-setup
-description: Deriv API JavaScript project setup
+description: Create a directory for your next API trading app project using a WebSocket.
 ---
 
 ### Create a project
@@ -39,7 +39,7 @@ Now, open the `index.html` file or use the [Live Server Extension](https://marke
 Now, change the content of the files using the following approach:
 
 ```js title="index.js"
-console.log("we will create our websocket connection here");
+console.log('we will create our websocket connection here');
 ```
 
 ```html title="index.html"

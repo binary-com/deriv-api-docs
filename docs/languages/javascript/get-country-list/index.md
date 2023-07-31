@@ -1,5 +1,5 @@
 ---
-title: Get a list of countries
+title: Get country list
 sidebar_label: Get a list of countries
 sidebar_position: 2
 tags:
@@ -8,7 +8,7 @@ tags:
 keywords:
   - country_list
   - javascript
-description: How to get a list of countries in Deriv api?
+description: Get information about your users by adding a list of countries to your trading app. Learn how to do that with this JavaScript API example.
 ---
 
 <!-- :::caution

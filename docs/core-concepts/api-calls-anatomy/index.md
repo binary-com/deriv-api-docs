@@ -1,5 +1,5 @@
 ---
-title: API calls' anatomy
+title: Functions of API Calls
 hide_title: false
 draft: false
 sidebar_label: API calls' anatomy

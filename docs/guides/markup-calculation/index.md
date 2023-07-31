@@ -1,5 +1,5 @@
 ---
-title: Markup calculation
+title: Charge the contract markups
 hide_title: true
 draft: false
 sidebar_label: Markup calculation
@@ -16,7 +16,7 @@ keywords:
   - earning
   - commission
   - markup
-description: How is markup calculated?
+description: Learn how to charge markups on trading contracts purchased through your trading app.
 ---
 
 ## Markup

@@ -1,5 +1,5 @@
 ---
-title: About the Deriv API
+title: About Deriv API
 hide_title: true
 draft: false
 sidebar_label: About the Deriv API
@@ -24,7 +24,7 @@ keywords:
   - authorise
   - register
   - integration
-description: How to use the Deriv API
+description: Learn about Deriv API, its features, and API documentation with code examples, and how to use it to build your trading app.
 ---
 
 ## What is the Deriv API?
