@@ -19,6 +19,7 @@ type TCreateTokenField = {
   >;
   form_is_cleared: boolean;
   setFormIsCleared: Dispatch<SetStateAction<boolean>>;
+  setHideRestriction: Dispatch<SetStateAction<boolean>>;
   is_toggle: boolean;
   setToggleModal: Dispatch<SetStateAction<boolean>>;
 };
@@ -28,6 +29,7 @@ const CreateTokenField = ({
   register,
   form_is_cleared,
   setFormIsCleared,
+  setHideRestriction,
   is_toggle,
   setToggleModal,
 }: TCreateTokenField) => {
@@ -54,6 +56,11 @@ const CreateTokenField = ({
   const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
   const error_border_active = token_name_exists || errors.name;
 
+  useEffect(() => {
+    if (error_border_active) {
+      setHideRestriction(true);
+    }
+  }, [error_border_active, setHideRestriction]);
   return (
     <React.Fragment>
       <div className={styles.step_title}>

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import ApiTokenForm from '../api-token.form';
 import useCreateToken from '../../../hooks/useCreateToken';
 import useApiToken from '@site/src/hooks/useApiToken';
+import TokenNameRestrictions from '../../TokenNameRestrictions/TokenNameRestrictions';
 
 jest.mock('@site/src/hooks/useApiToken');
 
@@ -137,6 +138,14 @@ describe('Home Page', () => {
 
     const error = screen.getByText(/That name is taken. Choose another./i);
     expect(error).toBeVisible;
+  });
+
+  it('should hide restrictions if error is present', async () => {
+    const nameInput = screen.getByRole('textbox');
+    const restrictions = screen.getByRole('list');
+    expect(restrictions).toBeVisible();
+    await userEvent.type(nameInput, 'testtoken1');
+    expect(restrictions).not.toBeVisible();
   });
 
   it('Should not create token when name input is empty', async () => {
