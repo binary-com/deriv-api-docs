@@ -1,6 +1,5 @@
 {
-  "title": "Programming Languages",
-  "label": "Languages",
+  "label": "Programming Languages",
   "position": 4,
   "link": {
     "type": "generated-index",
