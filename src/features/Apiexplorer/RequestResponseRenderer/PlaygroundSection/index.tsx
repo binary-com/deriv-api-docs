@@ -48,9 +48,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
 
   const scrollToBottom = () => {
     const ref_is_loaded = json_data_ref?.current !== null;
-    json_data_ref.current.removeEventListener('wheel', toggleScrolling);
     json_data_ref.current.addEventListener('wheel', toggleScrolling);
-
     if (ref_is_loaded) {
       const console_height = json_data_ref.current.scrollHeight;
       json_data_ref.current.scrollTo({ behavior: 'smooth', top: console_height });
