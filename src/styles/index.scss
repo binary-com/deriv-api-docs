@@ -343,6 +343,10 @@ div[class*='sidebarViewport'] {
   }
 }
 
+.navbar__item {
+  padding: rem(0.4) rem(1.6) rem(0.4) rem(1.6);
+}
+
 main[class*='docMainContainer'] .container {
   padding-top: rem(4) !important; // Have to use important since docusaurus does the same.
   margin: 0 rem(4);
