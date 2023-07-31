@@ -3,6 +3,7 @@ import { Text, Button } from '@deriv/ui';
 import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form';
+import TokenCreationDialogSuccess from '../../Dialogs/TokenCreationDialogSuccess';
 
 type TCreateTokenField = {
   register: UseFormRegisterReturn;
@@ -19,6 +20,8 @@ type TCreateTokenField = {
   form_is_cleared: boolean;
   setFormIsCleared: Dispatch<SetStateAction<boolean>>;
   setHideRestriction: Dispatch<SetStateAction<boolean>>;
+  is_toggle: boolean;
+  setToggleModal: Dispatch<SetStateAction<boolean>>;
 };
 
 const CreateTokenField = ({
@@ -27,6 +30,8 @@ const CreateTokenField = ({
   form_is_cleared,
   setFormIsCleared,
   setHideRestriction,
+  is_toggle,
+  setToggleModal,
 }: TCreateTokenField) => {
   const { tokens } = useApiToken();
   const [input_value, setInputValue] = useState('');
@@ -79,6 +84,7 @@ const CreateTokenField = ({
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
+        {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>

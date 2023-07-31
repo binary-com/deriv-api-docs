@@ -82,6 +82,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
   const [hiderestrictions, setHideRestrictions] = useState(false);
   const [form_is_cleared, setFormIsCleared] = useState(false);
+  const [is_toggle, setToggleModal] = useState(false);
 
   const {
     handleSubmit,
@@ -106,6 +107,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
       });
       createToken(name, selectedTokenScope);
       setFormIsCleared(true);
+      setToggleModal((prev) => !prev);
       reset();
     },
     [createToken, reset],
@@ -163,6 +165,8 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
           form_is_cleared={form_is_cleared}
           setFormIsCleared={setFormIsCleared}
           setHideRestriction={setHideRestrictions}
+          is_toggle={is_toggle}
+          setToggleModal={setToggleModal}
         />
         {!hiderestrictions && <TokenNameRestrictions />}
         <div className={styles.step_title}>
