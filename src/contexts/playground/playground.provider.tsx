@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import apiManager from '@site/src/configs/websocket';
 import { getIsBrowser } from '@site/src/utils';
 import { PlaygroundContext } from './playground.context';
@@ -16,7 +16,13 @@ if (getIsBrowser()) {
 const PlaygroundProvider = <T extends TSocketEndpointNames>({
   children,
 }: TPlaygroundProviderProps) => {
-  const [playground_history, setPlaygroundHistory] = useState<TSocketResponseData<T> | []>([]);
+  const [playground_history, setPlaygroundHistory] = useState<TSocketResponseData<T>[]>([]);
+
+  useEffect(() => {
+    if (playground_history.length > 5) {
+      setPlaygroundHistory((prev) => prev.slice(1));
+    }
+  }, [playground_history]);
 
   const context_object = useMemo(() => {
     return {

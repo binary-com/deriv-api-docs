@@ -4,31 +4,21 @@ import { render, screen } from '@testing-library/react';
 
 describe('PlaygroundSection', () => {
   it('should render the loader', async () => {
-    render(
-      <PlaygroundSection loader response_state={false} full_response={null} error={null} name='' />,
-    );
+    render(<PlaygroundSection loader response_state={false} full_response={null} error={null} />);
     const loader = await screen.findByTestId('circles-loading');
     expect(loader).toBeVisible();
   });
 
   it('should render the PlaygroundConsole', async () => {
     render(
-      <PlaygroundSection
-        loader={false}
-        response_state={false}
-        full_response={null}
-        error={null}
-        name=''
-      />,
+      <PlaygroundSection loader={false} response_state={false} full_response={null} error={null} />,
     );
     const playground_section = await screen.findByTestId('dt_playground_section');
     expect(playground_section).toBeVisible();
   });
 
   it('should render the ReactJson', async () => {
-    render(
-      <PlaygroundSection loader={false} response_state full_response={null} error={null} name='' />,
-    );
+    render(<PlaygroundSection loader={false} response_state full_response={null} error={null} />);
 
     const playground_section = await screen.findByTestId('dt_playground_section');
     expect(playground_section).toBeVisible();

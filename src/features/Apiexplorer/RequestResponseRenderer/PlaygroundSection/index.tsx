@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import {
   TSocketEndpointNames,
   TSocketSubscribableEndpointNames,
@@ -24,16 +24,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
 }: TPlaygroundSection<T>) => {
   const json_data_ref = useRef<HTMLDivElement>(null);
   const { setPlaygroundHistory, playground_history } = usePlaygroundContext();
-
-  useEffect(() => {
-    updateHistory();
-  }, [full_response]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [playground_history]);
-
-  if (loader && playground_history.length === 0) return <Loader />;
+  const [is_scrolling, setIsScrolling] = useState(true);
 
   const updateHistory = () => {
     if (full_response) {
@@ -41,13 +32,42 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     }
   };
 
+  const toggleScrolling = (e) => {
+    const SCROLL_MARGIN = 150;
+    const scroll_height = json_data_ref.current.scrollHeight;
+    const scroll_top = json_data_ref.current.scrollTop;
+    const scroll_position = scroll_height - scroll_top;
+    const window_height = json_data_ref.current.clientHeight;
+
+    if (window_height + SCROLL_MARGIN < scroll_position) {
+      setIsScrolling(false);
+    } else {
+      setIsScrolling(true);
+    }
+  };
+
   const scrollToBottom = () => {
     const ref_is_loaded = json_data_ref?.current !== null;
+    json_data_ref.current.removeEventListener('wheel', toggleScrolling);
+    json_data_ref.current.addEventListener('wheel', toggleScrolling);
+
     if (ref_is_loaded) {
       const console_height = json_data_ref.current.scrollHeight;
       json_data_ref.current.scrollTo({ behavior: 'smooth', top: console_height });
     }
   };
+
+  useEffect(() => {
+    updateHistory();
+  }, [full_response]);
+
+  useEffect(() => {
+    if (is_scrolling) {
+      scrollToBottom();
+    }
+  }, [playground_history, is_scrolling]);
+
+  if (loader && playground_history.length === 0) return <Loader />;
 
   return (
     <div
@@ -59,12 +79,17 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
       {response_state && (
         <React.Fragment>
           <Suspense fallback={<Loader />}>
-            <div data-testid='dt_json_view'>
-              {playground_history.map((response: TSocketResponse<T>) => (
-                <React.Fragment key={response.req_id}>
-                  <JsonData full_response={response} error={error} />
-                </React.Fragment>
-              ))}
+            <div data-testid='dt_json_view' className={styles.dtJsonView}>
+              {playground_history.map((response: TSocketResponse<T>) => {
+                // API does not give an unique ID across subscription API calls as of now.
+                // I used stringify here to make it work properly and to not have duplicate keys.
+                const key = response.subscription ? JSON.stringify(response) : response.req_id;
+                return (
+                  <React.Fragment key={key}>
+                    <JsonData full_response={response} error={error} />
+                  </React.Fragment>
+                );
+              })}
             </div>
           </Suspense>
         </React.Fragment>
