@@ -52,9 +52,9 @@ export const Benefits = () => {
         <article className={styles.InformationContainer}>
           <ImageContainer image='personalisation' alt='personalisation' />
           <section className={styles.InformationContent}>
-            <h1>Personalize your trading</h1>
+            <h1>Personalise your trading</h1>
             <Text type='subtitle-2' as='p'>
-              Personalize your trading apps to match your needs. Create charts and views the way you
+              Personalise your trading apps to match your needs. Create charts and views the way you
               like them. Develop your trading app using any common programming language and extend
               your trading opportunities.
             </Text>

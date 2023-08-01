@@ -12,17 +12,19 @@
     width: 100%;
     flex-wrap: nowrap;
     margin-bottom: rem(6.4);
-    gap: rem(3);
+    gap: rem(20);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 0 rem(1);
 
     @media screen and (max-width: 992px) {
       margin-top: rem(3);
+      gap: rem(8.8);
     }
 
     @media screen and (max-width: 425px) {
       flex-direction: column;
+      gap: rem(3);
     }
   }
 
@@ -37,10 +39,6 @@
 
     h3 {
       margin: rem(1.6) 0;
-    }
-
-    img {
-      margin-bottom: rem(4);
     }
 
     @media screen and (max-width: 992px) {
