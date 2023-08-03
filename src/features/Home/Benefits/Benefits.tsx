@@ -50,7 +50,10 @@ export const Benefits = () => {
       </header>
       <section className={styles.BenefitsInformation}>
         <article className={styles.InformationContainer}>
-          <ImageContainer image='personalisation' alt='personalisation' />
+          <ImageContainer
+            image='personalisation'
+            alt='A trading app created using Deriv API shown on a laptop.'
+          />
           <section className={styles.InformationContent}>
             <Text as='h3' className={styles.headingSize}>
               Personalize your trading
@@ -63,7 +66,10 @@ export const Benefits = () => {
           </section>
         </article>
         <article className={styles.InformationContainer}>
-          <ImageContainer image='build-business' alt='building a business' />
+          <ImageContainer
+            image='build-business'
+            alt='A business man testing the Deriv API for his trading app.'
+          />
           <section className={styles.InformationContent}>
             <Text as='h3' className={styles.headingSize}>
               Build a business and earn more
