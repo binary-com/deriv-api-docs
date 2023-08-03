@@ -1,11 +1,10 @@
 ---
-title: Introduction
+title: Quick Start
 hide_title: false
 draft: false
-sidebar_label: Introduction
+sidebar_label: Quick Start
 sidebar_position: 0
 tags:
-  - introduction
   - getting started
   - quick startup
 keywords:
@@ -23,8 +22,6 @@ Our Documentation is divided in several sections:
 - [Languages](category/languages)
 - [Guides](category/guides)
 - [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)
-
-### Quick Start
 
 #### Core Concepts
 
