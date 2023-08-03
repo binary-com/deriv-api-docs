@@ -26,7 +26,7 @@ export const GetStarted = () => {
           >
             <img src='/img/guide.svg' className={styles.cardIcon} />
             <section>
-              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h3'>
                 1. Learn about our API
               </Text>
               <p>Understand basic concepts and terminologies.</p>
@@ -44,7 +44,7 @@ export const GetStarted = () => {
           >
             <img src='/img/sign-up.svg' className={styles.cardIcon} />
             <section>
-              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h3'>
                 2. Sign up
               </Text>
               <p>Create a free Deriv account to access our API.</p>
@@ -61,7 +61,7 @@ export const GetStarted = () => {
           >
             <img src='/img/register-your-app.svg' className={styles.cardIcon} />
             <section>
-              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
+              <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h3'>
                 3. Register your app
               </Text>
               <p>Fill out the registration form to start using Deriv API.</p>
