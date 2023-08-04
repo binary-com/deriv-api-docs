@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { RefObject, Suspense, useEffect, useRef, useState } from 'react';
 import {
   TSocketEndpointNames,
   TSocketSubscribableEndpointNames,
@@ -8,12 +8,14 @@ import JsonData from './JsonData';
 import Spinner from '@site/src/components/Spinner';
 import styles from './PlaygroundSection.module.scss';
 import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
+import { PlaygroundContext } from '@site/src/contexts/playground/playground.context';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
   response_state: boolean;
   full_response: TSocketResponse<T>;
   error: unknown;
+  test_ref?: any;
 };
 
 const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNames>({
@@ -22,7 +24,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   full_response,
   error,
 }: TPlaygroundSection<T>) => {
-  const json_data_ref = useRef<HTMLDivElement>(null);
+  const ref: RefObject<HTMLDivElement> = useRef(null);
   const { setPlaygroundHistory, playground_history } = usePlaygroundContext();
   const [is_scrolling, setIsScrolling] = useState(true);
 
@@ -32,12 +34,12 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     }
   };
 
-  const toggleScrolling = (e) => {
+  const toggleScrolling = () => {
     const SCROLL_MARGIN = 150;
-    const scroll_height = json_data_ref.current.scrollHeight;
-    const scroll_top = json_data_ref.current.scrollTop;
+    const scroll_height = ref.current.scrollHeight;
+    const scroll_top = ref.current.scrollTop;
     const scroll_position = scroll_height - scroll_top;
-    const window_height = json_data_ref.current.clientHeight;
+    const window_height = ref.current.clientHeight;
 
     if (window_height + SCROLL_MARGIN < scroll_position) {
       setIsScrolling(false);
@@ -47,11 +49,13 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   };
 
   const scrollToBottom = () => {
-    const ref_is_loaded = json_data_ref?.current !== null;
-    json_data_ref.current.addEventListener('wheel', toggleScrolling);
+    const ref_is_loaded = ref && ref.current;
+    if (full_response && full_response.subscription) {
+      ref.current.addEventListener('wheel', toggleScrolling);
+    }
     if (ref_is_loaded) {
-      const console_height = json_data_ref.current.scrollHeight;
-      json_data_ref.current.scrollTo({ behavior: 'smooth', top: console_height });
+      const console_height = ref.current && ref.current.scrollHeight;
+      ref.current && (ref.current.scrollTop = console_height);
     }
   };
 
@@ -72,7 +76,8 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
       id='playground-console'
       className={styles.playgroundConsole}
       data-testid='dt_playground_section'
-      ref={json_data_ref}
+      ref={ref}
+      onScroll={toggleScrolling}
     >
       {response_state && (
         <React.Fragment>

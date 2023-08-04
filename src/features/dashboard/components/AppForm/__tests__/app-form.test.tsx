@@ -310,9 +310,7 @@ describe('App Form', () => {
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
   });
 
-  it('Should display restrictions when app name is in focus and disappear if error occurs', async () => {
-    const submitButton = screen.getByText('Register Application');
-
+  it('Should display restrictions when app name is in focus', async () => {
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
     });
@@ -321,15 +319,19 @@ describe('App Form', () => {
 
     const restrictionsList = screen.queryByRole('list');
     expect(restrictionsList).toBeInTheDocument();
+  });
 
-    await userEvent.clear(tokenNameInput);
+  it('Should hide restrictions when error occurs', async () => {
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
 
     await userEvent.type(
       tokenNameInput,
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti neque ratione repudiandae in dolores reiciendis sequi nvrohgoih iuhwr uiwhrug uwhiog iouwhg ouwhg',
     );
 
-    await userEvent.click(submitButton);
+    const restrictionsList = screen.queryByRole('list');
     expect(restrictionsList).not.toBeInTheDocument();
   });
 });

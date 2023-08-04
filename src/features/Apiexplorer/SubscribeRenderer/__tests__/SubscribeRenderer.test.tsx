@@ -6,7 +6,6 @@ import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
-import LoginDialog from '../../LoginDialog';
 
 jest.mock('@site/src/hooks/useAuthContext');
 

@@ -1,11 +1,37 @@
 import React from 'react';
 import PlaygroundSection from '..';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
+import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
+import { IPlaygroundContext } from '@site/src/contexts/playground/playground.context';
+import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
+
+jest.mock('react', () => {
+  return {
+    ...jest.requireActual<typeof React>('react'),
+    useRef: jest.fn(),
+  };
+});
+
+jest.mock('@site/src/hooks/usePlaygroundContext');
+
+const mockUsePlaygroundContext = usePlaygroundContext as jest.MockedFunction<
+  () => Partial<IPlaygroundContext<TSocketEndpointNames>>
+>;
+
+mockUsePlaygroundContext.mockImplementation(() => ({
+  setPlaygroundHistory: jest.fn(),
+  playground_history: [],
+}));
 
 describe('PlaygroundSection', () => {
+  afterAll(() => {
+    cleanup();
+    jest.clearAllMocks();
+  });
+
   it('should render the loader', async () => {
     render(<PlaygroundSection loader response_state={false} full_response={null} error={null} />);
-    const loader = await screen.findByTestId('circles-loading');
+    const loader = await screen.findByTestId('dt_spinner');
     expect(loader).toBeVisible();
   });
 

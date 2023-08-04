@@ -54,16 +54,13 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
       className={styles.api_table_container}
     >
       <div className={styles.api_table} {...props}>
-        {isLoadingTokens ? (
-          <Spinner />
-        ) : (
-          <Table
-            columns={tableColumns}
-            data={tokens}
-            initialState={{ hiddenColumns: ['valid_for_ip'] }}
-            row_height={ROW_HEIGHT}
-          />
-        )}
+        <Table
+          columns={tableColumns}
+          data={tokens}
+          initialState={{ hiddenColumns: ['valid_for_ip'] }}
+          row_height={ROW_HEIGHT}
+        />
+        {isLoadingTokens && <Spinner />}
       </div>
     </div>
   );

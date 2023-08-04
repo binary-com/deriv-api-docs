@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import styles from './Dropdown.module.scss';
 import clsx from 'clsx';
 import DropdownList from './DropdownList';
-import { useOnClickOutside } from 'usehooks-ts';
+import useOnClickOutside from '@site/src/hooks/useOnClickOutside';
 
 export type TDropdown = {
   selected: string;
@@ -18,19 +18,13 @@ export const Dropdown = ({ selected, setSelected, handleChange, selected_value }
 
   const ref = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      setIsActive(false);
-    }
-  };
-
   const handleToggleDropdown = () => {
     setIsActive(!isActive);
     setToggle(!toggle);
     setSearchResults('');
   };
-
-  useOnClickOutside(ref, handleClickOutside);
+  useOnClickOutside(ref, setIsActive, false);
+  // useOnClickOutside(ref, () => setIsActive(false));
 
   return (
     <div>

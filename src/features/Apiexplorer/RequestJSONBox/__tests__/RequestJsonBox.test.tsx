@@ -7,6 +7,7 @@ import useSubscription from '@site/src/hooks/useSubscription';
 import useWS from '@site/src/hooks/useWs';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import userEvent from '@testing-library/user-event';
+import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
 import RequestJSONBox from '..';
 
 const fakeHookObject = {
@@ -21,6 +22,17 @@ const fakeHookObject = {
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
+
+jest.mock('@site/src/hooks/usePlaygroundContext');
+
+const mockUsePlaygroundContext = usePlaygroundContext as jest.MockedFunction<
+  () => Partial<ReturnType<typeof usePlaygroundContext>>
+>;
+
+mockUsePlaygroundContext.mockImplementation(() => ({
+  playground_history: [],
+  setPlaygroundHistory: jest.fn(),
+}));
 
 jest.mock('@site/src/hooks/useSubscription');
 

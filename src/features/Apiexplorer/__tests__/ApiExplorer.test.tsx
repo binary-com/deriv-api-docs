@@ -5,8 +5,11 @@ import userEvent from '@testing-library/user-event';
 import useWS from '@site/src/hooks/useWs';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useDynamicImportJSON from '@site/src/hooks/useDynamicImportJSON';
+import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
 import { cleanup, render, screen, act } from '@testing-library/react';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import { IPlaygroundContext } from '@site/src/contexts/playground/playground.context';
+import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
@@ -21,6 +24,17 @@ jest.mock('@docusaurus/router', () => ({
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
+
+jest.mock('@site/src/hooks/usePlaygroundContext');
+
+const mockUsePlaygroundContext = usePlaygroundContext as jest.MockedFunction<
+  () => Partial<IPlaygroundContext<TSocketEndpointNames>>
+>;
+
+mockUsePlaygroundContext.mockImplementation(() => ({
+  setPlaygroundHistory: jest.fn(),
+  playground_history: [],
+}));
 
 jest.mock('@site/src/hooks/useWs');
 
@@ -69,6 +83,7 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
 describe('ApiExplorerFeatures', () => {
   describe('Logged out', () => {
     beforeEach(() => {
+      jest.spyOn(React, 'useRef').mockReturnValueOnce({ current: { scrollTo: jest.fn() } });
       mockUseAuthContext.mockImplementation(() => {
         return {
           is_logged_in: false,
