@@ -20,7 +20,7 @@ const AccountSwitcher = () => {
   const is_demo = currentLoginAccount.name.includes('VRTC') ? styles.demo : '';
 
   const dropdownRef = useRef(null);
-  useOnClickOutside(dropdownRef, setToggleDropdown, false);
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   return (
     <div

@@ -2,13 +2,12 @@ import { RefObject, useEffect } from 'react';
 
 const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
-  setState: React.Dispatch<React.SetStateAction<boolean>>,
-  new_state: boolean,
+  onClickOutside,
 ): void => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setState(new_state);
+        onClickOutside();
       }
     }
     // Bind the event listener

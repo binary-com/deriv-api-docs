@@ -18,7 +18,7 @@ const ApiTokenNavbarItem = () => {
 
   const dropdownRef = useRef(null);
 
-  useOnClickOutside(dropdownRef, setToggleDropdown, false);
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   if (!is_logged_in || !is_authorized || isLoadingTokens) {
     return null;

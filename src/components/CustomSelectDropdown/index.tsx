@@ -27,7 +27,7 @@ const CustomSelectDropdown = ({
 
   const dropdownRef = useRef(null);
 
-  useOnClickOutside(dropdownRef, setToggleDropdown, false);
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   return (
     <div className={styles.customSelectField}>

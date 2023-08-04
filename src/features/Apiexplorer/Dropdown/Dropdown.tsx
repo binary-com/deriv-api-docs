@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './Dropdown.module.scss';
 import clsx from 'clsx';
 import DropdownList from './DropdownList';
@@ -18,13 +18,13 @@ export const Dropdown = ({ selected, setSelected, handleChange, selected_value }
 
   const ref = useRef(null);
 
+  useOnClickOutside(ref, () => setIsActive(false));
+
   const handleToggleDropdown = () => {
     setIsActive(!isActive);
     setToggle(!toggle);
     setSearchResults('');
   };
-  useOnClickOutside(ref, setIsActive, false);
-  // useOnClickOutside(ref, () => setIsActive(false));
 
   return (
     <div>
