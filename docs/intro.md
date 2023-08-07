@@ -2,7 +2,7 @@
 title: Quick Start
 hide_title: false
 draft: false
-sidebar_label: Quick Start
+sidebar_label: Quick start
 sidebar_position: 0
 tags:
   - getting started
