@@ -1,5 +1,5 @@
 ---
-title: Quick Start
+title: Quick start
 hide_title: false
 draft: false
 sidebar_label: Quick start
