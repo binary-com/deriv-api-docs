@@ -6,12 +6,12 @@ sidebar_label: Quick Start
 sidebar_position: 0
 tags:
   - getting started
-  - quick startup
+  - quick start
 keywords:
   - deriv
   - api
   - getting started
-  - quick startup
+  - quick start
 description: Getting started with Deriv API
 ---
 
