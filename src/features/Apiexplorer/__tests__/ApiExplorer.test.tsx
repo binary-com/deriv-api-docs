@@ -83,7 +83,6 @@ mockUseDynamicImportJSON.mockImplementation(() => ({
 describe('ApiExplorerFeatures', () => {
   describe('Logged out', () => {
     beforeEach(() => {
-      jest.spyOn(React, 'useRef').mockReturnValueOnce({ current: { scrollTo: jest.fn() } });
       mockUseAuthContext.mockImplementation(() => {
         return {
           is_logged_in: false,

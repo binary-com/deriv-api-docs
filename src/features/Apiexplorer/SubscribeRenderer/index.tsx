@@ -8,8 +8,8 @@ import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
 import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
-import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
+import LoginDialog from '../LoginDialog';
 import ValidDialog from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
@@ -25,22 +25,23 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
 }: IResponseRendererProps<T>) {
   const { is_logged_in } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { full_response, is_loading, subscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, is_subscribed, error } =
+    useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_not_valid, setIsNotValid] = useState(false);
-
-  const subscribe_ref: React.MutableRefObject<{ unsubscribe: () => void }> = useRef();
 
   useEffect(() => {
     if (error && error.code === 'AuthorizationRequired') {
       setToggleModal(true);
     }
-
-    return () => {
-      if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
-    };
   }, [error]);
+
+  useEffect(() => {
+    return () => {
+      if (is_subscribed) unsubscribe();
+    };
+  }, [is_subscribed]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -57,13 +58,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   }, [reqData]);
 
   const handleClick = useCallback(() => {
-    if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
-    subscribe_ref.current = subscribe(parseRequestJSON());
+    if (is_subscribed) unsubscribe();
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [parseRequestJSON, subscribe]);
 
   const handleClear = () => {
-    subscribe_ref.current.unsubscribe();
+    unsubscribe();
     setResponseState(false);
   };
 

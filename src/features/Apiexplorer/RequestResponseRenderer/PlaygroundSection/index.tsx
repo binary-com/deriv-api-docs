@@ -8,7 +8,6 @@ import JsonData from './JsonData';
 import Spinner from '@site/src/components/Spinner';
 import styles from './PlaygroundSection.module.scss';
 import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
-import { PlaygroundContext } from '@site/src/contexts/playground/playground.context';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;

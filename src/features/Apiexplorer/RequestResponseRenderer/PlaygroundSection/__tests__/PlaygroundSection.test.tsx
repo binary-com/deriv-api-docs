@@ -24,7 +24,7 @@ mockUsePlaygroundContext.mockImplementation(() => ({
 }));
 
 describe('PlaygroundSection', () => {
-  afterAll(() => {
+  afterEach(() => {
     cleanup();
     jest.clearAllMocks();
   });
