@@ -7,13 +7,13 @@ fieldset .customTextInput:last-child {
 .customTextInput {
   align-items: center;
   border: 1px solid var(--colors-greyLight400);
-  border-radius: 4px;
+  border-radius: rem(1.6);
   display: flex;
   position: relative;
   box-sizing: border-box;
-  margin: rem(1) 0;
   &:focus-within {
     border-color: var(--colors-blue400);
+    border-radius: rem(1.6);
   }
   &:hover {
     border: 1px solid var(--colors-greyLight600);
@@ -47,7 +47,7 @@ fieldset .customTextInput:last-child {
     &:focus {
       outline-color: unset;
       outline: 1px solid var(--colors-blue500);
-      border-radius: 3px;
+      border-radius: rem(1.6);
       & ~ label {
         color: var(--colors-blue400);
         background-color: var(--ifm-color-emphasis-0);
@@ -58,6 +58,12 @@ fieldset .customTextInput:last-child {
   }
 }
 
+.helperMargin {
+  margin: rem(1) 0 0;
+}
+.verificationMargin {
+  margin: rem(2) 0;
+}
 .apps_form {
   display: flex;
   flex-direction: column;
@@ -84,6 +90,9 @@ fieldset .customTextInput:last-child {
       display: flex;
       flex-direction: column;
       margin-bottom: rem(2.5);
+      .scopesWrapper {
+        padding-left: rem(1.6);
+      }
     }
     .disableTokenDropdown {
       opacity: 0.2;
@@ -92,25 +101,42 @@ fieldset .customTextInput:last-child {
     .helperText {
       width: 100%;
       padding-left: rem(1);
+      padding-bottom: rem(1);
       color: var(--colors-greyLight600);
       margin-bottom: 0;
     }
     .apiTokenWrapper {
       display: flex;
       flex-direction: column;
-      gap: rem(2);
+      gap: rem(1);
       margin-bottom: rem(2);
-      .formHeaderContainer {
-        display: flex;
-        padding: rem(1) 0;
-        margin-top: rem(1.5);
-        flex-direction: column;
+    }
+    .formHeaderContainer {
+      display: flex;
+      padding: rem(1) 0;
+      gap: rem(1);
+      margin-top: rem(1.5);
+      flex-direction: column;
+      .subHeading {
+        padding-left: rem(1);
+      }
+      .formsubHeading {
+        padding: rem(1.6);
+        display: inline-block;
+      }
+      .wrapperHeading {
+        padding-left: rem(1.6);
+      }
+      .markup {
+        margin-bottom: rem(1);
       }
     }
   }
 }
+
 .submit_container {
   margin-top: rem(2.5);
+  margin-bottom: rem(5.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,5 +168,34 @@ fieldset .customTextInput:last-child {
 
   label {
     cursor: pointer;
+  }
+}
+
+.termsOfConditionRegister {
+  margin-left: rem(4);
+  margin-top: rem(6);
+}
+
+.buttons {
+  display: flex;
+  gap: rem(1);
+}
+
+.errorAppname {
+  border-color: var(--colors-coral500) !important;
+  &:focus-within {
+    border-color: var(--colors-coral500) !important;
+  }
+  input[type='text'],
+  input[type='number'] {
+    &:not(:placeholder-shown) ~ label {
+      color: var(--colors-coral500) !important;
+    }
+    &:focus {
+      outline: var(--colors-coral500) !important;
+      & ~ label {
+        color: var(--colors-coral500) !important;
+      }
+    }
   }
 }

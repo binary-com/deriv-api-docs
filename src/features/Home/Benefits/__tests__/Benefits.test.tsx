@@ -22,8 +22,8 @@ describe('Benefits', () => {
     expect(integration).toBeInTheDocument();
     expect(execution).toBeInTheDocument();
   });
-  it('should render personalize your trading information', () => {
-    const title = screen.getByText(/Personalize your trading$/i);
+  it('should render personalise your trading information', () => {
+    const title = screen.getByText(/Personalise your trading$/i);
     const information = screen.getByText(/create charts and views/i);
 
     expect(title).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('Benefits', () => {
     expect(title).toBeInTheDocument();
     expect(information).toBeInTheDocument();
   });
-  it('should render personalize image', () => {
+  it('should render personalise image', () => {
     const image = screen.getByTestId('personalisation');
     expect(image).toBeInTheDocument();
   });

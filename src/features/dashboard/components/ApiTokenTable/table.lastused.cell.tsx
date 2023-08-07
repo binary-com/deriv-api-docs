@@ -16,6 +16,7 @@ const ApiLastUsedCell = ({
   const onDelete = () => {
     const values = row.original;
     deleteToken(values.token);
+    setToggleModal(false);
   };
 
   return (
