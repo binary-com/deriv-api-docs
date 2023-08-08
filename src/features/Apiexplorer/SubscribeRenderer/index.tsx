@@ -49,7 +49,6 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     try {
       request_data = JSON.parse(reqData);
     } catch (error) {
-      console.error('Could not parse the JSON data while trying to send the request: ', error);
       setIsNotValid(true);
       setToggleModal(false);
     }

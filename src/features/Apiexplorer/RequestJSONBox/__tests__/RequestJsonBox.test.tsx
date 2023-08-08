@@ -10,6 +10,8 @@ import userEvent from '@testing-library/user-event';
 import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
 import RequestJSONBox from '..';
 
+jest.mock('@site/src/hooks/useScrollTo');
+
 const fakeHookObject = {
   clear: jest.fn(),
   send: jest.fn(),

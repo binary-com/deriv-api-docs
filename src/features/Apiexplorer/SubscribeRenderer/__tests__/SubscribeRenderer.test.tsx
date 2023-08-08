@@ -10,6 +10,8 @@ import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { IPlaygroundContext } from '@site/src/contexts/playground/playground.context';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 
+jest.mock('@site/src/hooks/useScrollTo');
+
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;
@@ -76,9 +78,9 @@ mockUseSubscription.mockImplementation(() => ({
 }));
 
 const request_data = `{
-    "ticks": "R_50",
-    "subscribe": 1
-  }`;
+  "ticks": "R_50",
+  "subscribe": 1
+}`;
 
 describe('SubscribeRenderer', () => {
   afterEach(() => {
@@ -86,24 +88,18 @@ describe('SubscribeRenderer', () => {
     jest.clearAllMocks();
   });
 
-  it('should render properly', async () => {
+  it('should render properly', () => {
     render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
-    const button = await screen.findByRole('button', { name: /Send Request/i });
+    const button = screen.getByRole('button', { name: /Send Request/i });
     expect(button).toBeVisible();
   });
 
   it('should throw an error if incorrect json is being parsed', async () => {
-    const consoleOutput = [];
-    const mockedError = (output) => consoleOutput.push(output);
-    console.error = mockedError;
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={''} />);
+    const button = screen.getByRole('button', { name: /Send Request/i });
+    expect(button).toBeVisible();
 
-    render(<SubscribeRenderer name='ticks' auth={1} reqData={'asdawefaewf3232'} />);
-    const button = await screen.findByRole('button', { name: /Send Request/i });
     await userEvent.click(button);
-
-    expect(consoleOutput[0]).toEqual(
-      'Could not parse the JSON data while trying to send the request: ',
-    );
   });
 
   it('should call subscribe and unsubscribe when pressing the send request button', async () => {

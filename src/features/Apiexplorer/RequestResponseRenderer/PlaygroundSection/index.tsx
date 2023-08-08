@@ -8,6 +8,7 @@ import JsonData from './JsonData';
 import Spinner from '@site/src/components/Spinner';
 import styles from './PlaygroundSection.module.scss';
 import usePlaygroundContext from '@site/src/hooks/usePlaygroundContext';
+import useScrollTo from '@site/src/hooks/useScrollTo';
 
 type TPlaygroundSection<T extends TSocketEndpointNames> = {
   loader: boolean;
@@ -23,9 +24,9 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
   full_response,
   error,
 }: TPlaygroundSection<T>) => {
-  const ref: RefObject<HTMLDivElement> = useRef(null);
   const { setPlaygroundHistory, playground_history } = usePlaygroundContext();
   const [is_scrolling, setIsScrolling] = useState(true);
+  const ref: RefObject<HTMLDivElement> = useRef(null);
 
   const updateHistory = () => {
     if (full_response) {
@@ -47,26 +48,11 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     }
   };
 
-  const scrollToBottom = () => {
-    const ref_is_loaded = ref && ref.current;
-    if (full_response && full_response.subscription) {
-      ref.current.addEventListener('wheel', toggleScrolling);
-    }
-    if (ref_is_loaded) {
-      const console_height = ref.current && ref.current.scrollHeight;
-      ref.current && (ref.current.scrollTop = console_height);
-    }
-  };
+  useScrollTo(ref, playground_history, is_scrolling);
 
   useEffect(() => {
     updateHistory();
   }, [full_response]);
-
-  useEffect(() => {
-    if (is_scrolling) {
-      scrollToBottom();
-    }
-  }, [playground_history, is_scrolling]);
 
   if (loader && playground_history.length === 0) return <Spinner />;
 

@@ -11,6 +11,8 @@ import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { IPlaygroundContext } from '@site/src/contexts/playground/playground.context';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 
+jest.mock('@site/src/hooks/useScrollTo');
+
 jest.mock('@docusaurus/router', () => ({
   useLocation: () => ({
     pathname: '/api-explorer',

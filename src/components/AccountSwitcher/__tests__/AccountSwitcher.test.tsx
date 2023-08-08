@@ -2,10 +2,11 @@ import React from 'react';
 import { cleanup, render, screen } from '@site/src/test-utils';
 import userEvent from '@testing-library/user-event';
 import AccountSwitcher from '..';
+import AuthProvider from '@site/src/contexts/auth/auth.provider';
 import useLogout from '@site/src/hooks/useLogout';
 import useAuthContext from '@site/src/hooks/useAuthContext';
+import useOnClickOutside from '@site/src/hooks/useOnClickOutside';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
-import AuthProvider from '@site/src/contexts/auth/auth.provider';
 import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
