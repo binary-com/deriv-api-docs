@@ -57,6 +57,9 @@ const config = {
         theme: {
           customCss: [require.resolve('./src/styles/index.scss')],
         },
+        googleTagManager: {
+          containerId: 'GTM-NF7884S',
+        },
       }),
     ],
   ],

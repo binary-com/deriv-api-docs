@@ -25,7 +25,7 @@ WebSocket is especially great for services that require continuous data exchange
 To open a WebSocket connection, we need to create `new WebSocket` using the special protocol `ws`or `wss` in the url. Here is how you can do that in `JavaScript`:
 
 ```js
-let socket = new WebSocket('wss://red.binaryws.com/websockets/v3?app_id=1089');
+let socket = new WebSocket('wss://ws.binaryws.com/websockets/v3?app_id=1089');
 ```
 
 :::caution
@@ -47,9 +47,9 @@ Sending a message can be done via socket.send(data).
 
 Here’s an example in `JavaScript`:
 
-```js
+```js showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
-const socket = new WebSocket(`wss://red.binaryws.com/websockets/v3?app_id=${app_id}`);
+const socket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 
 socket.onopen = function (e) {
   console.log('[open] Connection established');

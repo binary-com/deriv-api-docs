@@ -1,5 +1,5 @@
-import React, { HTMLAttributes, useCallback, useState } from 'react';
-import { Button, Text } from '@deriv/ui';
+import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
+import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
 import { Circles } from 'react-loader-spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,9 @@ import ApiTokenCard from '../ApiTokenCard';
 import useCreateToken from '@site/src/features/dashboard/hooks/useCreateToken';
 import * as yup from 'yup';
 import styles from './api-token.form.module.scss';
+import TokenNameRestrictions from '../TokenNameRestrictions/TokenNameRestrictions';
+import CreateTokenField from './CreateTokenField';
+import useApiToken from '@site/src/hooks/useApiToken';
 
 const schema = yup
   .object({
@@ -16,7 +19,22 @@ const schema = yup
     payments: yup.boolean(),
     trading_information: yup.boolean(),
     admin: yup.boolean(),
-    name: yup.string().required(),
+    name: yup
+      .string()
+      .min(2, 'Your token name must be atleast 2 characters long.')
+      .max(32, 'Only up to 32 characters are allowed.')
+      .matches(/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_ ]*$/, {
+        message:
+          'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
+        excludeEmptyString: true,
+      })
+      .matches(
+        /^(?!.*deriv|.*d3r1v|.*der1v|.*d3riv|.*b1nary|.*binary|.*b1n4ry|.*bin4ry|.*blnary|.*b\|nary).*$/i,
+        {
+          message: 'The name cannot contain “Binary”, “Deriv”, or similar words.',
+          excludeEmptyString: true,
+        },
+      ),
   })
   .required();
 
@@ -63,12 +81,21 @@ const scopes: TScope[] = [
 
 const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
   const { createToken, isCreatingToken } = useCreateToken();
+  const [hiderestrictions, setHideRestrictions] = useState(false);
+  const [form_is_cleared, setFormIsCleared] = useState(false);
+  const [is_toggle, setToggleModal] = useState(false);
 
-  const { handleSubmit, register, setValue, getValues, reset } = useForm<TApiTokenForm>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm<TApiTokenForm>({
     resolver: yupResolver(schema),
     mode: 'all',
   });
-
   const onSubmit = useCallback(
     (data: TApiTokenForm) => {
       const { name } = data;
@@ -80,6 +107,8 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
         trading_information: data.trading_information,
       });
       createToken(name, selectedTokenScope);
+      setFormIsCleared(true);
+      setToggleModal((prev) => !prev);
       reset();
     },
     [createToken, reset],
@@ -92,6 +121,10 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     },
     [getValues, setValue],
   );
+
+  useEffect(() => {
+    errors.name?.message ? setHideRestrictions(true) : setHideRestrictions(false);
+  }, [errors.name?.message]);
 
   return (
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
@@ -127,20 +160,16 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
             />
           ))}
         </div>
-        <div className={styles.step_title}>
-          <div className={`${styles.second_step} ${styles.step}`}>
-            <Text as={'p'} type={'paragraph-1'} data-testid={'second-step-title'}>
-              Name your token and click on Create to generate your token.
-            </Text>
-          </div>
-        </div>
-        <div className={styles.customTextInput}>
-          <input type='text' name='name' {...register('name')} placeholder='Token name' />
-          <Button type='submit'>Create</Button>
-        </div>
-        <div className={styles.helperText}>
-          <p>Length of token name must be between 2 and 32 characters.</p>
-        </div>
+        <CreateTokenField
+          register={register('name')}
+          errors={errors}
+          form_is_cleared={form_is_cleared}
+          setFormIsCleared={setFormIsCleared}
+          setHideRestriction={setHideRestrictions}
+          is_toggle={is_toggle}
+          setToggleModal={setToggleModal}
+        />
+        {!hiderestrictions && <TokenNameRestrictions />}
         <div className={styles.step_title}>
           <div className={`${styles.third_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'third-step-title'}>

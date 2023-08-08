@@ -1,0 +1,10 @@
+@use 'src/styles/utility' as *;
+
+.restrictions {
+  font-size: rem(1.2);
+  font-weight: 400;
+  line-height: rem(1.8);
+  padding-left: rem(2.8);
+  margin-top: rem(0.5);
+  color: var(--colors-greyLight600);
+}

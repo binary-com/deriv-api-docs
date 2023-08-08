@@ -4,7 +4,7 @@ import { Benefits } from './Benefits/Benefits';
 import { ClientLibraries } from './ClientLibraries/ClientLibraries';
 import { HeroHeader } from './HeroHeader/HeroHeader';
 import { WaysToEarn } from './WaysToEarn/WaysToEarn';
-import { Carousel } from './Carousel/Carousel';
+// import { Carousel } from './Carousel/Carousel';
 import Footer from '@site/src/components/Footer';
 import styles from './styles.module.scss';
 import { GetStarted } from './GetStarted/GetStarted';
@@ -23,7 +23,8 @@ export default function HomepageFeatures() {
           <WaysToEarn />
           <GetStarted />
           <ApiFeatures />
-          <Carousel />
+          {/* Carousel requires new quote's before it should be enabled again */}
+          {/* <Carousel /> */}
           <Footer />
         </React.Fragment>
       </RenderOfficialContents>

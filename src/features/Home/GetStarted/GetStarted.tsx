@@ -18,18 +18,13 @@ export const GetStarted = () => {
           Get started with our API in 3 simple steps:
         </Text>
         <nav className={styles.cardContainer}>
-          <Link
-            to='/docs/category/guides'
-            className={styles.mainPageCard}
-            data-testid='guide'
-            target='_blank'
-          >
+          <Link to='/docs/category/guides' className={styles.mainPageCard} data-testid='guide'>
             <img src='/img/guide.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 1. Learn about our API
               </Text>
-              <p>Understand basic concepts and terminologies.</p>
+              <p>Understand basic concepts and terminologies</p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />
@@ -47,24 +42,19 @@ export const GetStarted = () => {
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 2. Sign up
               </Text>
-              <p>Create a free Deriv account to access our API.</p>
+              <p>Create a free Deriv account to access our API</p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />
             </figure>
           </Link>
-          <Link
-            to='/dashboard'
-            className={styles.mainPageCard}
-            data-testid='register'
-            target='_blank'
-          >
+          <Link to='/dashboard' className={styles.mainPageCard} data-testid='register'>
             <img src='/img/register-your-app.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
                 3. Register your app
               </Text>
-              <p>Fill out the registration form to start using Deriv API.</p>
+              <p>Fill out the registration form to start using Deriv API</p>
             </section>
             <figure className={styles.arrowIcon}>
               <img src='img/home-arrow.svg' />

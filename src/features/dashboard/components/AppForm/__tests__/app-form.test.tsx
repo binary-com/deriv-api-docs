@@ -1,15 +1,17 @@
-import { Button } from '@deriv/ui';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { render, screen, cleanup } from '@site/src/test-utils';
 import { TTokensArrayType } from '@site/src/types';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppForm from '..';
+import { ApplicationObject } from '@deriv/api-types';
+import useAppManager from '@site/src/hooks/useAppManager';
 
 jest.mock('@site/src/hooks/useApiToken');
 jest.mock('@site/src/utils', () => ({
   ...jest.requireActual('@site/src/utils'),
 }));
+jest.mock('@site/src/hooks/useAppManager');
 
 const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
@@ -20,19 +22,19 @@ mockUseApiToken.mockImplementation(() => ({
   updateCurrentToken: jest.fn(),
 }));
 
-const renderButtons = () => {
-  return (
-    <div>
-      <Button role='submit'>Update Application</Button>
-    </div>
-  );
-};
+const mockUseAppManager = useAppManager as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAppManager>>
+>;
+mockUseAppManager.mockImplementation(() => ({
+  apps: [],
+  getApps: jest.fn(),
+}));
 
 describe('App Form', () => {
   const mockOnSubmit = jest.fn();
 
   beforeEach(() => {
-    render(<AppForm renderButtons={renderButtons} submit={mockOnSubmit} />);
+    render(<AppForm submit={mockOnSubmit} />);
   });
 
   afterEach(() => {
@@ -40,12 +42,69 @@ describe('App Form', () => {
     jest.clearAllMocks();
   });
 
+  it('Should show error message for using an appname that already exists', async () => {
+    const fakeApps: ApplicationObject[] = [
+      {
+        active: 1,
+        app_id: 12345,
+        app_markup_percentage: 0,
+        appstore: '',
+        github: '',
+        googleplay: '',
+        homepage: '',
+        name: 'duplicate_app',
+        redirect_uri: 'https://example.com',
+        scopes: ['read', 'trade', 'trading_information'],
+        verification_uri: 'https://example.com',
+        last_used: '',
+      },
+      {
+        active: 1,
+        app_id: 12345,
+        app_markup_percentage: 0,
+        appstore: '',
+        github: '',
+        googleplay: '',
+        homepage: '',
+        name: 'testApp',
+        redirect_uri: 'https://example.com',
+        scopes: ['read', 'trade'],
+        verification_uri: 'https://example.com',
+        last_used: '',
+      },
+    ];
+    const mockGetApps = jest.fn();
+
+    mockUseAppManager.mockImplementation(() => ({
+      apps: fakeApps,
+      getApps: mockGetApps,
+    }));
+
+    const submitButton = screen.getByText('Register Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(tokenNameInput, 'duplicate_app');
+
+    await userEvent.click(submitButton);
+
+    await userEvent.clear(tokenNameInput);
+
+    await userEvent.type(tokenNameInput, 'duplicate_app');
+
+    const appNameErrorText = await screen.findByText('That name is taken. Choose another.');
+
+    expect(appNameErrorText).toBeInTheDocument();
+  });
+
   it('Should show error message for having no admin token', async () => {
     const fakeTokens: TTokensArrayType = [
       {
         display_name: 'first',
         last_used: '',
-        scopes: ['read', 'trade'],
+        scopes: ['read', 'trade', 'admin'],
         token: 'first_token',
         valid_for_ip: '',
       },
@@ -71,8 +130,11 @@ describe('App Form', () => {
   });
 
   it('Should show error message for empty app name', async () => {
-    const submitButton = screen.getByText('Update Application');
-
+    const submitButton = screen.getByText('Register Application');
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+    await userEvent.clear(tokenNameInput);
     await userEvent.click(submitButton);
 
     const appNameErrorText = await screen.findByText('Enter your app name.');
@@ -81,7 +143,7 @@ describe('App Form', () => {
   });
 
   it('Should show error for long app name', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
       name: 'App name (required)',
@@ -99,8 +161,26 @@ describe('App Form', () => {
     expect(appNameErrorText).toBeInTheDocument();
   });
 
+  it('Should show error for using non alphanumeric characters except underscore or space', async () => {
+    const submitButton = screen.getByText('Register Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(tokenNameInput, 'invalid-token...');
+
+    await userEvent.click(submitButton);
+
+    const appNameErrorText = await screen.findByText(
+      'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
+    );
+
+    expect(appNameErrorText).toBeInTheDocument();
+  });
+
   it('Should show error message for long app markup percentage', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const appMarkupPercentageInput = screen.getByRole<HTMLInputElement>('spinbutton', {
       name: 'Markup percentage (optional)',
@@ -115,6 +195,42 @@ describe('App Form', () => {
     );
 
     expect(appMarkupPercentageError).toBeInTheDocument();
+  });
+
+  it('Should show error for invalid Auth url', async () => {
+    const submitButton = screen.getByText('Register Application');
+
+    const authURLInput = screen.getByRole('textbox', {
+      name: 'Authorization URL (optional)',
+    });
+
+    await userEvent.type(authURLInput, 'http:invalidAUTHurl.com');
+
+    await userEvent.click(submitButton);
+
+    const authURLInputError = await screen.queryByText(
+      'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+    );
+
+    expect(authURLInputError).toBeInTheDocument();
+  });
+
+  it('Should show error for invalid Verification url', async () => {
+    const submitButton = screen.getByText('Register Application');
+
+    const authURLInput = screen.getByRole('textbox', {
+      name: 'Verification URL (optional)',
+    });
+
+    await userEvent.type(authURLInput, 'http:invalidVERIurl.com');
+
+    await userEvent.click(submitButton);
+
+    const authURLInputError = await screen.queryByText(
+      'Enter a valid URL. (Example: https://www.[YourDomainName].com)',
+    );
+
+    expect(authURLInputError).toBeInTheDocument();
   });
 
   it('Should show error message for wrong value', async () => {
@@ -147,7 +263,7 @@ describe('App Form', () => {
       updateCurrentToken: jest.fn(),
     }));
 
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const appMarkupPercentageInput = screen.getByRole<HTMLInputElement>('spinbutton', {
       name: 'Markup percentage (optional)',
@@ -165,7 +281,7 @@ describe('App Form', () => {
   });
 
   it('Should call onSubmit on submitting the form', async () => {
-    const submitButton = screen.getByText('Update Application');
+    const submitButton = screen.getByText('Register Application');
 
     const selectTokenOption = screen.getByTestId('select-token');
 
@@ -192,5 +308,28 @@ describe('App Form', () => {
     await userEvent.click(submitButton);
 
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should display restrictions when app name is in focus and disappear if error occurs', async () => {
+    const submitButton = screen.getByText('Register Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    await userEvent.type(tokenNameInput, 'Lorem ipsum dolor sit amet');
+
+    const restrictionsList = screen.queryByRole('list');
+    expect(restrictionsList).toBeInTheDocument();
+
+    await userEvent.clear(tokenNameInput);
+
+    await userEvent.type(
+      tokenNameInput,
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi corrupti neque ratione repudiandae in dolores reiciendis sequi nvrohgoih iuhwr uiwhrug uwhiog iouwhg ouwhg',
+    );
+
+    await userEvent.click(submitButton);
+    expect(restrictionsList).not.toBeInTheDocument();
   });
 });
