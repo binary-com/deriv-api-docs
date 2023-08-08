@@ -72,7 +72,7 @@ Now, open the `index.html` file in our browser and check your developer console.
 
 ### Send and receive data
 
-Our WebSocket server provides [ping/pong](/api-explorer#ping) functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
+Our WebSocket server provides <a href="/api-explorer#ping" target="_blank" rel="noopener noreferrer">ping/pong</a> functionality. Let's use it in our demo project to send and receive data. Change the event listeners for `open` and `message` as below:
 
 :::caution
 The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView`. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
