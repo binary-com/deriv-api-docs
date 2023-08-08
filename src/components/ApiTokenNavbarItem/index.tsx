@@ -59,7 +59,12 @@ const ApiTokenNavbarItem = () => {
       )}
 
       {is_toggle_dropdown && (
-        <div className={styles.tokenDropdownWrapper}>
+        <div
+          className={styles.tokenDropdownWrapper}
+          onClick={() => {
+            setToggleDropdown((prev) => !prev);
+          }}
+        >
           {tokens.length > 1 && (
             <div className={styles.tokenDropdown}>
               <TokenDropdown />
