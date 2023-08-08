@@ -2,6 +2,7 @@
 title: Setting up a Deriv application
 sidebar_label: Setting up a Deriv application
 sidebar_position: 7
+sidebar_class_name: hide-sidebar-item
 tags:
   - intro
   - application
