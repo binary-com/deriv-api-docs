@@ -24,9 +24,9 @@ All API calls have a send functionality for making a request and receiving a res
 
 Several API calls provide the `subscribe` functionality. When you subscribe to an API call, you will receive a continuous stream from data of this particular API call.
 
-Some of these API calls automatically subscribe (e.g. [ticks](https://api.deriv.com/api-explorer#ticks)) and some have an optional `subscribe` field. If you pass `1` to the `subscribe` field, the subscription will start and the server will continue to send the requested data until you unsubscribe by calling the `Forget` or `Forget all` API calls.
+Some of these API calls automatically subscribe (e.g. [ticks](/api-explorer#ticks)) and some have an optional `subscribe` field. If you pass `1` to the `subscribe` field, the subscription will start and the server will continue to send the requested data until you unsubscribe by calling the `Forget` or `Forget all` API calls.
 
-For example, you can call [Tick History](https://api.deriv.com/api-explorer#ticks_history) to receive tick history data. But when you add the `subscribe` option to this call, you will receive the tick history data you requested in the first response, and you will continue to receive a new response every time there is a new tick published by the server for the given symbol.
+For example, you can call [Tick History](/api-explorer#ticks_history) to receive tick history data. But when you add the `subscribe` option to this call, you will receive the tick history data you requested in the first response, and you will continue to receive a new response every time there is a new tick published by the server for the given symbol.
 
 In the message stream from `subscribe`, there is a field called `subscription`. This is the `Stream ID`. With this ID, you can identify the message stream in your logic and stop the stream with `Forget` and `Forget All` API calls.
 
@@ -41,7 +41,7 @@ If you call the API with the `send` functionality, then the server will only sen
 If you want to stop the message stream created by `subscribe`, you will have to call the `Forget` API call with the correct `Stream ID`. Otherwise, you can use the `Forget All` API call to stop streams by their `Method name`.
 
 :::caution
-For more information on the `Forget` API call, have a look at [Forget](https://api.deriv.com/api-explorer#forget) and [Forget All](https://api.deriv.com/api-explorer#forget_all) in the API explorer.
+For more information on the `Forget` API call, have a look at [Forget](/api-explorer#forget) and [Forget All](/api-explorer#forget_all) in the API explorer.
 :::
 
 ## Request data
@@ -72,7 +72,7 @@ The request data for this call is as below:
 }
 ```
 
-The `residence_list` field is the `method name` for the call and is required. There may be other required fields related to this type of the request you want to send. To know more about `Residence List` and other API calls, please check them out in [API Explorer](https://api.deriv.com/api-explorer#residence_list).
+The `residence_list` field is the `method name` for the call and is required. There may be other required fields related to this type of the request you want to send. To know more about `Residence List` and other API calls, please check them out in [API Explorer](/api-explorer#residence_list).
 
 ### Optional fields
 
@@ -87,7 +87,7 @@ Whatever you pass to this field will be returned back to you inside a `response`
 You may need to `tag` your requests and pass them through our `WebSocket` calls. You can do so by passing a `number` to this field. It can be helpful when you need to map `requests` to `responses`.
 
 :::caution
-To learn about additional optional fields specific to each API call, please refer to our [API Explorer](https://api.deriv.com/api-explorer).
+To learn about additional optional fields specific to each API call, please refer to our [API Explorer](/api-explorer).
 :::
 
 ## Response data
@@ -163,7 +163,7 @@ The response for the `Residence List` call:
 };
 ```
 
-Here the `residence_list` is the `method name`, and it contains the actual data you requested. To keep it short, we haven't included the rest of the array. You can check the actual response [here](https://api.deriv.com/api-explorer#residence_list).
+Here the `residence_list` is the `method name`, and it contains the actual data you requested. To keep it short, we haven't included the rest of the array. You can check the actual response [here](/api-explorer#residence_list).
 
 #### The `echo_req` field
 

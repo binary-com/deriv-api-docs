@@ -33,7 +33,7 @@ Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-applica
 
 An API token is a unique identifier of a client that requests access from a server. It's the simplest way of authorisation.
 
-The access level for each API token has to match the required access level of each API call, which can be found in the [API Explorer](https://api.deriv.com/api-explorer) as well.
+The access level for each API token has to match the required access level of each API call, which can be found in the [API Explorer](/api-explorer) as well.
 
 For example, on the screenshot below, you can see that to be able to use the Account Status, a token with read access level must be used.
 
@@ -86,7 +86,7 @@ const user_accounts = [
 ];
 ```
 
-To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize) API call with the user's **selected** account **session token**:
+To authorise the user based on the user's **selected** account, call the [authorize](/api-explorer#authorize) API call with the user's **selected** account **session token**:
 
 ```js showLineNumbers
 {
