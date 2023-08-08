@@ -22,7 +22,7 @@ If you're not familiar with WebSockets, please check out [our documentation](/do
 
 Next, we'll create a WebSocket connection to Deriv WebSocket Server as seen below:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
 const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 ```
@@ -46,7 +46,7 @@ Generally, we have 4 events on `WebSocket connections`:
 
 Let's add an event listener for these events on our WebSocket connection.
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 // subscribe to `open` event
 websocket.addEventListener('open', (event) => {
   console.log('websocket connection established: ', event);
@@ -78,7 +78,7 @@ Our WebSocket server provides [ping/pong](/api-explorer#ping) functionality. Let
 The `send` function on the WebSocket connection, only receives `string`, `ArrayBuffer`, `Blob`, `TypedArray` and `DataView`. You can read more about them on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send). This means, if we want to send an `object`, we have to stringify it with `JSON.stringify` first.
 :::
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 // subscribe to `open` event
 websocket.addEventListener('open', (event) => {
   console.log('websocket connection established: ', event);
@@ -95,7 +95,7 @@ websocket.addEventListener('message', (event) => {
 
 The `receivedMessage` would be an object like so:
 
-```js
+```js showLineNumbers
 {
   echo_req: {
       ping: 1
@@ -119,7 +119,7 @@ By default, `WebSocket connections` will be closed when no traffic is sent betwe
 
 A simple setup example would be the following:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
 let interval;
 websocket.addEventListener('open', (event) => {
@@ -145,7 +145,7 @@ Now, when the connection is `established`, we start sending `ping` requests with
 
 Your final code should be:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
 const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
