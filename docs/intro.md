@@ -1,18 +1,17 @@
 ---
-title: Introduction
+title: Quick start
 hide_title: false
 draft: false
-sidebar_label: Introduction
+sidebar_label: Quick start
 sidebar_position: 0
 tags:
-  - introduction
   - getting started
-  - quick startup
+  - quick start
 keywords:
   - deriv
   - api
   - getting started
-  - quick startup
+  - quick start
 description: Getting started with Deriv API
 ---
 
@@ -23,8 +22,6 @@ Our Documentation is divided in several sections:
 - [Languages](category/languages)
 - [Guides](category/guides)
 - [Setting up a deriv app](/docs/setting-up-a-deriv-application.md)
-
-### Quick Start
 
 #### Core Concepts
 
