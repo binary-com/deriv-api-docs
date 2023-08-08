@@ -13,10 +13,6 @@ keywords:
 description: How to setup Deriv application
 ---
 
-:::danger
-For the reviewer, Links in this section will be provided in the future.
-:::
-
 #### Deriv account
 
 If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the [new_account_virtual](/api-explorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
