@@ -45,30 +45,73 @@ const mockUseDynamicImportJSON = useDynamicImportJSON as jest.MockedFunction<
 
 const mockHandleSelectChange = jest.fn();
 
-mockUseDynamicImportJSON.mockImplementation(() => ({
-  request_info: {
-    auth_required: 1,
-    auth_scopes: [],
-    description: 'this is a test with `echo_req` description',
-    title: 'this is a test title',
-  },
-  response_info: {
-    description: 'this is a test with `echo_req` description',
-    title: 'this is a test title',
-  },
-  setSelected: jest.fn(),
-  handleTextAreaInput: mockHandleSelectChange,
-  handleSelectChange: jest.fn(),
-  text_data: {
-    name: null,
-    selected_value: 'Select API Call - Version 3',
-    request: '{ "echo_req": 1 } ',
-  },
-}));
-
 describe('ApiExplorerFeatures', () => {
+  describe('Empty request body', () => {
+    beforeEach(() => {
+      mockUseDynamicImportJSON.mockImplementation(() => ({
+        request_info: {
+          auth_required: 1,
+          auth_scopes: [],
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        response_info: {
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        setSelected: jest.fn(),
+        handleTextAreaInput: mockHandleSelectChange,
+        handleSelectChange: jest.fn(),
+        text_data: {
+          name: null,
+          selected_value: 'Select API Call - Version 3',
+          request: '',
+        },
+      }));
+      mockUseAuthContext.mockImplementation(() => {
+        return {
+          is_logged_in: false,
+          is_authorized: false,
+        };
+      });
+      render(<ApiExplorerFeatures />);
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+      cleanup();
+    });
+
+    it('Should disable the buttons when there is no data in the request body', () => {
+      const request_button = screen.getByRole('button', { name: /send request/i });
+      const clear_button = screen.getByRole('button', { name: /clear/i });
+
+      expect(request_button).toBeDisabled();
+      expect(clear_button).toBeDisabled();
+    });
+  });
   describe('Logged out', () => {
     beforeEach(() => {
+      mockUseDynamicImportJSON.mockImplementation(() => ({
+        request_info: {
+          auth_required: 1,
+          auth_scopes: [],
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        response_info: {
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        setSelected: jest.fn(),
+        handleTextAreaInput: mockHandleSelectChange,
+        handleSelectChange: jest.fn(),
+        text_data: {
+          name: null,
+          selected_value: 'Select API Call - Version 3',
+          request: '{ "echo_req": 1 } ',
+        },
+      }));
       mockUseAuthContext.mockImplementation(() => {
         return {
           is_logged_in: false,
@@ -154,6 +197,29 @@ describe('ApiExplorerFeatures', () => {
   });
 
   describe('Logged in', () => {
+    beforeEach(() => {
+      mockUseDynamicImportJSON.mockImplementation(() => ({
+        request_info: {
+          auth_required: 1,
+          auth_scopes: [],
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        response_info: {
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        setSelected: jest.fn(),
+        handleTextAreaInput: mockHandleSelectChange,
+        handleSelectChange: jest.fn(),
+        text_data: {
+          name: null,
+          selected_value: 'Select API Call - Version 3',
+          request: '{ "echo_req": 1 } ',
+        },
+      }));
+    });
+
     afterEach(() => {
       jest.clearAllMocks();
       cleanup();
@@ -196,6 +262,29 @@ describe('ApiExplorerFeatures', () => {
   });
 
   describe('Disabled send request button', () => {
+    beforeEach(() => {
+      mockUseDynamicImportJSON.mockImplementation(() => ({
+        request_info: {
+          auth_required: 1,
+          auth_scopes: [],
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        response_info: {
+          description: 'this is a test with `echo_req` description',
+          title: 'this is a test title',
+        },
+        setSelected: jest.fn(),
+        handleTextAreaInput: mockHandleSelectChange,
+        handleSelectChange: jest.fn(),
+        text_data: {
+          name: null,
+          selected_value: 'Select API Call - Version 3',
+          request: '{ "echo_req": 1 } ',
+        },
+      }));
+    });
+
     afterEach(() => {
       jest.clearAllMocks();
       cleanup();
