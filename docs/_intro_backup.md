@@ -1,8 +1,8 @@
 ---
-title: Introduction
+title: Quick start
 hide_title: false
 draft: false
-sidebar_label: Introduction
+sidebar_label: Quick start
 sidebar_position: 0
 tags:
   - introduction
