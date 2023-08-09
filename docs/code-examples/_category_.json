@@ -3,6 +3,7 @@
   "position": 3,
   "link": {
     "type": "generated-index",
+    "title": "Code examples",
     "description": "Set up API calls for your trading app using the API call feature. With API examples, learn to subscribe, send requests, and get response data."
   }
 }
