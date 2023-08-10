@@ -35,7 +35,14 @@ const mockUsePlaygroundContext = usePlaygroundContext as jest.MockedFunction<
 
 mockUsePlaygroundContext.mockImplementation(() => ({
   setPlaygroundHistory: jest.fn(),
-  playground_history: [],
+  playground_history: [
+    {
+      echo_req: { ping: 1, req_id: 1 },
+      msg_type: 'ping',
+      ping: 'pong',
+      req_id: 1,
+    },
+  ],
 }));
 
 jest.mock('@site/src/hooks/useWs');

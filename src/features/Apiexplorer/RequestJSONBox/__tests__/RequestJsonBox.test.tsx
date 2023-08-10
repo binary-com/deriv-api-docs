@@ -64,7 +64,6 @@ describe('RequestResponseRenderer', () => {
         is_logged_in: true,
       };
     });
-    render(<RequestJSONBox {...mockProps} />);
   });
 
   afterEach(() => {
@@ -94,13 +93,33 @@ describe('RequestResponseRenderer', () => {
       name: null as TSocketEndpointNames,
       auth: 0,
     };
-    cleanup();
     render(<RequestJSONBox {...newProps} />);
     const textarea = screen.getByLabelText('Request JSON');
     expect(textarea).toBeDisabled();
   });
 
+  it('should disable text box if no api call is selected in the dropdown', async () => {
+    const newProps = {
+      handleChange: jest.fn(),
+      request_example: 'asdfaewfaewfaewfd',
+      name: null as TSocketEndpointNames,
+      auth: 0,
+    };
+    render(<RequestJSONBox {...newProps} />);
+    const send = screen.getByRole('button', { name: /send request/i });
+    await userEvent.click(send);
+
+    const popup = screen.getByText(/your json object is invalid/i);
+    expect(popup).toBeVisible();
+
+    const close_icon = screen.getByAltText(/close-icon/i);
+    await userEvent.click(close_icon);
+
+    expect(popup).not.toBeVisible();
+  });
+
   it('should render response renderer component', async () => {
+    render(<RequestJSONBox {...mockProps} />);
     const primaryButton = screen.getByRole('button', { name: /Send Request/i });
     const secondaryButton = screen.getByRole('button', { name: /clear/i });
     await userEvent.click(primaryButton);
@@ -110,6 +129,7 @@ describe('RequestResponseRenderer', () => {
     expect(secondaryButton).toBeInTheDocument();
   });
   it('should show  request api json of the call selected from dropdown inside the text area', async () => {
+    render(<RequestJSONBox {...mockProps} />);
     const textarea = screen.getByPlaceholderText('Request JSON');
     expect(textarea).toBeInTheDocument();
     expect(textarea).toHaveValue('{"app_list": 1}');

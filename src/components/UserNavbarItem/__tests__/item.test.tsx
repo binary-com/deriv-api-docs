@@ -76,7 +76,7 @@ describe('Given device type is desktop', () => {
     expect(current_account).toBeInTheDocument();
   });
 
-  it('Should close the dropdown when clicking outside of it', async () => {
+  it('Should close the account dropdown when clicking outside of it', async () => {
     const current_account_button = screen.getByRole('button', { name: /CR111111/i });
     await userEvent.click(current_account_button);
 
