@@ -82,6 +82,11 @@ const request_data = `{
   "subscribe": 1
 }`;
 
+const false_data = `{
+  "tickssss": "R_50",
+  "subscribeeeee": 1asdfdsa
+}`;
+
 describe('SubscribeRenderer', () => {
   afterEach(() => {
     cleanup();
@@ -95,11 +100,15 @@ describe('SubscribeRenderer', () => {
   });
 
   it('should throw an error if incorrect json is being parsed', async () => {
-    render(<SubscribeRenderer name='ticks' auth={1} reqData={''} />);
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={false_data} />);
     const button = screen.getByRole('button', { name: /Send Request/i });
     expect(button).toBeVisible();
 
     await userEvent.click(button);
+
+    const popup = screen.getByText(/your json object is invalid/i);
+
+    expect(popup).toBeVisible();
   });
 
   it('should call subscribe and unsubscribe when pressing the send request button', async () => {
