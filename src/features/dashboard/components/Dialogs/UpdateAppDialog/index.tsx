@@ -74,7 +74,16 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   );
 
   const cancelButton = () => {
-    return <Button onClick={onClose}>Cancel</Button>;
+    return (
+      <Button
+        onClick={onClose}
+        style={{
+          borderRadius: '0.935rem',
+        }}
+      >
+        Cancel
+      </Button>
+    );
   };
 
   return (

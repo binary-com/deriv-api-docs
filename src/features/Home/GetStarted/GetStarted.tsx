@@ -18,12 +18,7 @@ export const GetStarted = () => {
           Get started with our API in 3 simple steps:
         </Text>
         <nav className={styles.cardContainer}>
-          <Link
-            to='/docs/category/guides'
-            className={styles.mainPageCard}
-            data-testid='guide'
-            target='_blank'
-          >
+          <Link to='/docs/category/guides' className={styles.mainPageCard} data-testid='guide'>
             <img src='/img/guide.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>
@@ -53,12 +48,7 @@ export const GetStarted = () => {
               <img src='img/home-arrow.svg' />
             </figure>
           </Link>
-          <Link
-            to='/dashboard'
-            className={styles.mainPageCard}
-            data-testid='register'
-            target='_blank'
-          >
+          <Link to='/dashboard' className={styles.mainPageCard} data-testid='register'>
             <img src='/img/register-your-app.svg' className={styles.cardIcon} />
             <section>
               <Text type='subtitle-1' bold className={`${styles.dark} ${styles.header}`} as='h2'>

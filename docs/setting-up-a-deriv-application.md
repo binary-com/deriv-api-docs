@@ -2,6 +2,7 @@
 title: Setting up a Deriv application
 sidebar_label: Setting up a Deriv application
 sidebar_position: 7
+sidebar_class_name: hide-sidebar-item
 tags:
   - intro
   - application
@@ -13,15 +14,11 @@ keywords:
 description: How to setup Deriv application
 ---
 
-:::danger
-For the reviewer, Links in this section will be provided in the future.
-:::
-
 #### Deriv account
 
-If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the [new_account_virtual](/api-explorer#new_account_virtual) API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
+If you don't have a Deriv account yet, you can easily create one by visiting our signup page or using the <a href="/api-explorer#new_account_virtual" target="_blank" rel="noopener noreferrer">new_account_virtual</a> API call. It's completely free. And if you have an account already, please log in using your account details. To avoid any accidental loss of funds during testing, we recommend using your demo account instead of a real account.
 
-To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using [new_account_real](/api-explorer#new_account_real) or [new_account_maltainvest](/api-explorer#new_account_maltainvest) API calls.
+To earn markup, get a Deriv real account to receive your monthly earnings. You can also create a real account using <a href="/api-explorer#new_account_real" target="_blank" rel="noopener noreferrer">new_account_real</a> or <a href="/api-explorer#new_account_maltainvest" target="_blank" rel="noopener noreferrer">new_account_maltainvest</a> API calls.
 
 :::caution
 To create Deriv applications, you'll need an API token with the Admin scope for the account you wish to use for your application.
@@ -37,7 +34,7 @@ To create a new API token, follow these steps:
 2. Provide a name for your token
 3. Click **Create**
 
-Alternatively, you can create an API token via the [api_token](/api-explorer#api_token) API call.
+Alternatively, you can create an API token via the <a href="/api-explorer#api_token" target="_blank" rel="noopener noreferrer">api_token</a> API call.
 
 :::caution
 You need a token with the `Admin` scope to create an application.
