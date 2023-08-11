@@ -8,7 +8,7 @@ import { act } from 'react-dom/test-utils';
 
 const wrapper = ({ children }) => <PlaygroundProvider>{children}</PlaygroundProvider>;
 
-describe('usePLaygroundContext', () => {
+describe('usePlaygroundContext', () => {
   let view: RenderHookResult<{ children: ReactNode }, IPlaygroundContext<TSocketEndpointNames>>;
 
   beforeEach(async () => {
