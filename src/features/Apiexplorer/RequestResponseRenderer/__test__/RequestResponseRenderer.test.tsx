@@ -37,7 +37,7 @@ mockUsePlaygroundContext.mockImplementation(() => ({
   playground_history: [],
 }));
 
-jest.mock('@site/src/hooks/useWS');
+jest.mock('@site/src/hooks/useWs');
 
 const mockUseWS = useWS as jest.MockedFunction<() => Partial<ReturnType<typeof useWS>>>;
 
