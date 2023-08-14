@@ -33,7 +33,7 @@ Please refer to [Setting up a Deriv application](docs/setting-up-a-deriv-applica
 
 An API token is a unique identifier of a client that requests access from a server. It's the simplest way of authorisation.
 
-The access level for each API token has to match the required access level of each API call, which can be found in the [API Explorer](https://api.deriv.com/api-explorer) as well.
+The access level for each API token has to match the required access level of each API call, which can be found in the [API Explorer](/api-explorer) as well.
 
 For example, on the screenshot below, you can see that to be able to use the Account Status, a token with read access level must be used.
 
@@ -71,7 +71,7 @@ Once a user signs up/logs in, they will be redirected to the URL that you entere
 
 The query parameters in the redirect URL are the user's accounts and their related session tokens. You can map the query parameters to an array using the following approach:
 
-```js
+```js showLineNumbers
 const user_accounts = [
   {
     account: 'cr799393',
@@ -86,9 +86,9 @@ const user_accounts = [
 ];
 ```
 
-To authorise the user based on the user's **selected** account, call the [authorize](https://api.deriv.com/api-explorer#authorize) API call with the user's **selected** account **session token**:
+To authorise the user based on the user's **selected** account, call the [authorize](/api-explorer#authorize) API call with the user's **selected** account **session token**:
 
-```js
+```js showLineNumbers
 {
   "authorize": "a1-f7pnteezo4jzhpxclctizt27hyeot"
 }
@@ -96,7 +96,7 @@ To authorise the user based on the user's **selected** account, call the [author
 
 The response for the `authorize` call would be an object as below:
 
-```js
+```js showLineNumbers
 {
     "account_list": [
       {

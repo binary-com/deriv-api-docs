@@ -16,7 +16,7 @@ interface IUpdateAppDialog {
 }
 
 const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
-  const { send: updateApp, is_loading, data, error, clear } = useWS('app_update');
+  const { send: updateApp, data, error, clear } = useWS('app_update');
   const { currentLoginAccount } = useAuthContext();
   const { getApps } = useAppManager();
 
@@ -73,14 +73,16 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
     [updateApp],
   );
 
-  const renderButtons = () => {
+  const cancelButton = () => {
     return (
-      <div className={styles.buttons}>
-        <Button role='submit' disabled={is_loading}>
-          Update Application
-        </Button>
-        <Button onClick={onClose}>Cancel</Button>
-      </div>
+      <Button
+        onClick={onClose}
+        style={{
+          borderRadius: '0.935rem',
+        }}
+      >
+        Cancel
+      </Button>
     );
   };
 
@@ -98,7 +100,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
             <div className={styles.update_app_content}>
               <AppForm
                 is_update_mode
-                renderButtons={renderButtons}
+                cancelButton={cancelButton}
                 submit={onSubmit}
                 initialValues={initialValues}
                 isUpdating

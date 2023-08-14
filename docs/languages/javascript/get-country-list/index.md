@@ -17,7 +17,7 @@ You can learn more about countries [here](/docs/terminology/trading/residence-li
 
 To get a list of countries, update the open event listener using the following approach:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
 let interval;
 // subscribe to `open` event
@@ -38,7 +38,7 @@ websocket.addEventListener('open', (event) => {
 
 Now, update the `message` event listener to render the data:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 // subscribe to `message` event
 websocket.addEventListener('message', (event) => {
   const receivedMessage = JSON.parse(event.data);
@@ -58,7 +58,7 @@ websocket.addEventListener('message', (event) => {
 
 The response should be an object:
 
-```json
+```json showLineNumbers
 {
   "echo_req": {
     "req_id": 1,
@@ -143,7 +143,7 @@ You will need detailed content about `IDV` and `ONFIDO` identity services, their
 
 Your final code will be:
 
-```js title="index.js"
+```js title="index.js" showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
 const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds

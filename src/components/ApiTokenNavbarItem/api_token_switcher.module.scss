@@ -118,12 +118,17 @@
       overflow-y: scroll;
       max-height: rem(40);
     }
-    @media (max-width: 1200px) {
+    @media (min-width: 768px) and (max-width: 1200px) {
       position: fixed;
       width: 100%;
       top: calc(var(--nav-height) + rem(7));
       left: 0;
       right: 0;
+    }
+    @media (max-width: 768px) {
+      position: fixed;
+      width: 100%;
+      top: calc(var(--nav-height) + rem(3.8));
     }
   }
 }

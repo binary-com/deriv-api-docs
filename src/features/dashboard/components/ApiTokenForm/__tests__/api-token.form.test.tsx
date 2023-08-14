@@ -11,25 +11,6 @@ const mockUseApiToken = useApiToken as jest.MockedFunction<
   () => Partial<ReturnType<typeof useApiToken>>
 >;
 
-mockUseApiToken.mockImplementation(() => ({
-  tokens: [
-    {
-      display_name: 'testtoken1',
-      last_used: '',
-      scopes: ['read', 'trade', 'payments', 'admin'],
-      token: 'asdf1234',
-      valid_for_ip: '',
-    },
-    {
-      display_name: 'testtoken2',
-      last_used: '',
-      scopes: ['read', 'trade', 'payments', 'admin'],
-      token: 'asdf1235',
-      valid_for_ip: '',
-    },
-  ],
-}));
-
 jest.mock('@site/src/features/dashboard/hooks/useCreateToken');
 
 const mockUseCreateToken = useCreateToken as jest.MockedFunction<typeof useCreateToken>;
@@ -77,74 +58,154 @@ const scopes = [
 ];
 
 describe('Home Page', () => {
-  beforeEach(() => {
-    render(<ApiTokenForm />);
-  });
+  describe('General tests', () => {
+    beforeEach(() => {
+      mockUseApiToken.mockImplementation(() => ({
+        tokens: [
+          {
+            display_name: 'testtoken1',
+            last_used: '',
+            scopes: ['read', 'trade', 'payments', 'admin'],
+            token: 'asdf1234',
+            valid_for_ip: '',
+          },
+          {
+            display_name: 'testtoken2',
+            last_used: '',
+            scopes: ['read', 'trade', 'payments', 'admin'],
+            token: 'asdf1235',
+            valid_for_ip: '',
+          },
+        ],
+      }));
 
-  afterEach(() => {
-    cleanup();
-    jest.clearAllMocks();
-  });
+      render(<ApiTokenForm />);
+    });
 
-  it('Should render first step title', () => {
-    const firstStep = screen.getByTestId('first-step-title');
-    expect(firstStep).toHaveTextContent(/Select scopes based on the access you need./i);
-  });
+    afterEach(() => {
+      cleanup();
+      jest.clearAllMocks();
+    });
 
-  it('Should render all of scopes checkbox cards', () => {
-    scopes.forEach((item) => {
-      const apiTokenCard = screen.getByTestId(`api-token-card-${item.name}`);
-      expect(apiTokenCard).toBeInTheDocument();
+    it('Should render first step title', () => {
+      const firstStep = screen.getByTestId('first-step-title');
+      expect(firstStep).toHaveTextContent(/Select scopes based on the access you need./i);
+    });
+
+    it('Should render all of scopes checkbox cards', () => {
+      scopes.forEach((item) => {
+        const apiTokenCard = screen.getByTestId(`api-token-card-${item.name}`);
+        expect(apiTokenCard).toBeInTheDocument();
+      });
+    });
+
+    it('Should render second step title', () => {
+      const secondStep = screen.getByTestId('second-step-title');
+      expect(secondStep).toHaveTextContent(
+        /Name your token and click on Create to generate your token./i,
+      );
+    });
+
+    it('Should check the checkbox when clicked on api token card', async () => {
+      const adminTokenCard = screen.getByTestId('api-token-card-admin');
+      const withinAdminTokenCard = within(adminTokenCard);
+      const adminCheckbox = withinAdminTokenCard.getByRole<HTMLInputElement>('checkbox');
+
+      expect(adminCheckbox.checked).toBeFalsy();
+
+      await userEvent.click(adminTokenCard);
+
+      expect(adminCheckbox.checked).toBeTruthy();
+    });
+
+    it('Should create token on form submit', async () => {
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'test create token');
+
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      await userEvent.click(submitButton);
+
+      expect(mockCreateToken).toHaveBeenCalledTimes(1);
+      expect(mockCreateToken).toHaveBeenCalledWith('test create token', []);
+    });
+
+    it('Should not be able to create a token if name already exists', async () => {
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'testtoken1');
+
+      const error = screen.getByText(/That name is taken. Choose another./i);
+      expect(error).toBeVisible;
+    });
+
+    it('should hide restrictions if error is present', async () => {
+      const nameInput = screen.getByRole('textbox');
+      const restrictions = screen.getByRole('list');
+      expect(restrictions).toBeVisible();
+      await userEvent.type(nameInput, 'testtoken1');
+      expect(restrictions).not.toBeVisible();
+    });
+
+    it('Should not create token when name input is empty', async () => {
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.clear(nameInput);
+
+      await userEvent.click(nameInput);
+
+      expect(mockCreateToken).not.toHaveBeenCalled();
+    });
+    it('Should open success dialog when token is created  ', async () => {
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'test create token');
+
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      await userEvent.click(submitButton);
+
+      const modal = screen.getByText('Your API token is ready to be used.');
+      expect(modal).toBeVisible();
+    });
+
+    it('Should have create button disabled in case of empty input or error message', async () => {
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      expect(submitButton).toBeDisabled();
+
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'token-text');
+      expect(submitButton).toBeDisabled();
+
+      await userEvent.clear(nameInput);
+      expect(submitButton).toBeDisabled();
     });
   });
+  describe('Token limit', () => {
+    const createMaxTokens = () => {
+      const token_array = [];
+      for (let i = 0; i < 30; i++) {
+        token_array.push({
+          display_name: `testtoken${i}`,
+          last_used: '',
+          scopes: ['read', 'trade', 'payments', 'admin'],
+          token: 'asdf1234',
+          valid_for_ip: '',
+        });
+      }
+      return token_array;
+    };
 
-  it('Should render second step title', () => {
-    const secondStep = screen.getByTestId('second-step-title');
-    expect(secondStep).toHaveTextContent(
-      /Name your token and click on Create to generate your token./i,
-    );
-  });
+    it('Should show an error when the user tries to create more than 30 tokens', async () => {
+      mockUseApiToken.mockImplementation(() => ({ tokens: createMaxTokens() }));
+      render(<ApiTokenForm />);
 
-  it('Should check the checkbox when clicked on api token card', async () => {
-    const adminTokenCard = screen.getByTestId('api-token-card-admin');
-    const withinAdminTokenCard = within(adminTokenCard);
-    const adminCheckbox = withinAdminTokenCard.getByRole<HTMLInputElement>('checkbox');
+      const nameInput = screen.getByRole('textbox');
 
-    expect(adminCheckbox.checked).toBeFalsy();
+      await userEvent.type(nameInput, 'asdf');
 
-    await userEvent.click(adminTokenCard);
-
-    expect(adminCheckbox.checked).toBeTruthy();
-  });
-
-  it('Should create token on form submit', async () => {
-    const nameInput = screen.getByRole('textbox');
-
-    await userEvent.type(nameInput, 'test create token');
-
-    const submitButton = screen.getByRole('button', { name: /Create/i });
-    await userEvent.click(submitButton);
-
-    expect(mockCreateToken).toHaveBeenCalledTimes(1);
-    expect(mockCreateToken).toHaveBeenCalledWith('test create token', []);
-  });
-
-  it('Should not be able to create a token if name already exists', async () => {
-    const nameInput = screen.getByRole('textbox');
-
-    await userEvent.type(nameInput, 'testtoken1');
-
-    const error = screen.getByText(/That name is taken. Choose another./i);
-    expect(error).toBeVisible;
-  });
-
-  it('Should not create token when name input is empty', async () => {
-    const nameInput = screen.getByRole('textbox');
-
-    await userEvent.clear(nameInput);
-
-    await userEvent.click(nameInput);
-
-    expect(mockCreateToken).not.toHaveBeenCalled();
+      const error = screen.getByText(/created the maximum number of tokens/i);
+      expect(error).toBeVisible();
+    });
   });
 });

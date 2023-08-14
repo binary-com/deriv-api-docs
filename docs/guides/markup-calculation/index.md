@@ -21,7 +21,7 @@ description: Learn how to charge markups on trading contracts purchased through 
 
 ## Markup
 
-Increase your earnings by charging markups on each contract purchased through the trading app you've created with the Deriv API. The markup is defined by you and can be up to 5%.
+Increase your earnings by charging markups on each contract purchased through the trading app you've created with the Deriv API. The markup is defined by you and can be up to 3%.
 
 Below is an example of how the markup is calculated.
 

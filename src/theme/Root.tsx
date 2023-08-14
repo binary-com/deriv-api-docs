@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import AuthProvider from '../contexts/auth/auth.provider';
 import ApiTokenProvider from '../contexts/api-token/api-token.provider';
 import AppManagerContextProvider from '../contexts/app-manager/app-manager.provider';
+import OfficialContentsProvider from '../contexts/official-contents/official-contents.provider';
 
 type TRootProps = {
   children: ReactNode;
@@ -12,13 +13,15 @@ type TRootProps = {
 export default function Root({ children }: TRootProps) {
   return (
     <>
-      <AuthProvider>
-        <ApiTokenProvider>
-          <AppManagerContextProvider>
-            <ThemeProvider>{children}</ThemeProvider>
-          </AppManagerContextProvider>
-        </ApiTokenProvider>
-      </AuthProvider>
+      <OfficialContentsProvider>
+        <AuthProvider>
+          <ApiTokenProvider>
+            <AppManagerContextProvider>
+              <ThemeProvider>{children}</ThemeProvider>
+            </AppManagerContextProvider>
+          </ApiTokenProvider>
+        </AuthProvider>
+      </OfficialContentsProvider>
     </>
   );
 }
