@@ -1,5 +1,5 @@
 ---
-title: setuo a WebSocket connection
+title: Setup a WebSocket connection
 sidebar_label: WebSocket connection
 sidebar_position: 1
 tags:

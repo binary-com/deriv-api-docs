@@ -1,5 +1,5 @@
 ---
-title: Charge the contract markups
+title: Charge contract markups
 hide_title: true
 draft: false
 sidebar_label: Markup calculation

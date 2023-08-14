@@ -1,5 +1,5 @@
 ---
-title: Open authoriaation
+title: Open authorisation
 hide_title: true
 draft: false
 sidebar_label: OAuth2
