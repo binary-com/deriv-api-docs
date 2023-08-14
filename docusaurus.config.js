@@ -1,6 +1,5 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
 const lightCodeTheme = require('prism-react-renderer/themes/nightOwlLight');
 const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 
@@ -57,6 +56,9 @@ const config = {
         blog: false,
         theme: {
           customCss: [require.resolve('./src/styles/index.scss')],
+        },
+        googleTagManager: {
+          containerId: 'GTM-NF7884S',
         },
       }),
     ],

@@ -149,6 +149,19 @@ body {
   overflow-x: hidden;
 }
 
+.hidden {
+  display: none !important;
+}
+
+.unofficial-host { 
+  .hide-sidebar-item {
+    display: none !important;
+  }
+  .navbar__items--right {
+    display: none !important;
+  }
+}
+
 .swiper {
   padding: 0 rem(4) !important;
   width: rem(32) !important;
@@ -191,6 +204,10 @@ div[class*='sidebarViewport'] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.main-wrapper {
+  height: calc(100vh - rem(7.2));
 }
 
 .navbar {

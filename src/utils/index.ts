@@ -24,6 +24,25 @@ const CURRENCY_MAP = new Map([
   ['AUD', { icon: 'aud', name: 'Australian Dollar' }],
 ]);
 
+export const domains = [
+  'deriv.be',
+  'deriv.me',
+  'deriv.com',
+  'api.deriv.me',
+  'api.deriv.be',
+  'api.deriv.com',
+  'staging.deriv.be',
+  'staging.deriv.me',
+  'staging.deriv.com',
+  'localhost',
+  'deriv-com-git-fork',
+  'deriv-developers-portal-git-fork',
+  'deriv-api-docs-git-fork',
+  'staging-api.deriv.be',
+  'staging-api.deriv.me',
+  'staging-api.deriv.com',
+];
+
 export const getCurrencyObject = (currency: string) => {
   const currencyObject = CURRENCY_MAP.get(currency);
   if (!currencyObject) {

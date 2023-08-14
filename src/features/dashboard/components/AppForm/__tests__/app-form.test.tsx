@@ -274,7 +274,7 @@ describe('App Form', () => {
     await userEvent.click(submitButton);
 
     const appMarkupPercentageError = await screen.findByText(
-      'Your markup value must be equal to or above 0.00 and no more than 5.00.',
+      'Your markup value must be equal to or above 0.00 and no more than 3.00.',
     );
 
     expect(appMarkupPercentageError).toBeInTheDocument();
@@ -323,6 +323,16 @@ describe('App Form', () => {
     expect(restrictionsList).toBeInTheDocument();
 
     await userEvent.clear(tokenNameInput);
+  });
+
+  it('should hide restrictions if error occurs', async () => {
+    const submitButton = screen.getByText('Register Application');
+
+    const tokenNameInput = screen.getByRole<HTMLInputElement>('textbox', {
+      name: 'App name (required)',
+    });
+
+    const restrictionsList = screen.queryByRole('list');
 
     await userEvent.type(
       tokenNameInput,
