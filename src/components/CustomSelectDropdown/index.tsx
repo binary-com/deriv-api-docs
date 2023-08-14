@@ -34,7 +34,7 @@ const CustomSelectDropdown = ({
       <div
         tabIndex={0}
         ref={dropdownRef}
-        onClick={() => setToggleDropdown((prev) => !prev)}
+        onClick={(e) => setToggleDropdown((prev) => !prev)}
         onKeyDown={(e) => e.key === 'ArrowDown' && setToggleDropdown((prev) => !prev)}
         className={`${styles.selectWrapper} ${toggle_dropdown} ${is_error ? styles.error : ''}`}
         data-testid={`dt_custom_dropdown_${value}`}
@@ -43,7 +43,7 @@ const CustomSelectDropdown = ({
         <SelectInput />
         <input {...register} type='hidden' value={value ? value : ''} />
         <div className={`${styles.dropdownWrapper} ${toggle_dropdown}`}>
-          <div className={styles.dropdown} onClick={() => setToggleDropdown((prev) => !prev)}>
+          <div className={styles.dropdown} onClick={(e) => setToggleDropdown((prev) => !prev)}>
             <SelectDropdown />
           </div>
         </div>
