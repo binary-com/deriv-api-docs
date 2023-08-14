@@ -4,7 +4,7 @@ import useLoginUrl from '@site/src/hooks/useLoginUrl';
 import useLogout from '@site/src/hooks/useLogout';
 import React from 'react';
 import UserNavbarItem from '..';
-import { cleanup, render, screen } from '@site/src/test-utils';
+import { cleanup, render, screen, waitFor } from '@site/src/test-utils';
 import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
@@ -78,12 +78,12 @@ describe('Given device type is desktop', () => {
 
   it('Should close the account dropdown when clicking outside of it', async () => {
     const current_account_button = screen.getByRole('button', { name: /CR111111/i });
-    await userEvent.click(current_account_button);
+    userEvent.click(current_account_button);
 
-    const alternative_account = screen.getByText(/CR2222222/i);
+    const alternative_account = await screen.findByText(/CR2222222/i);
     expect(alternative_account).toBeVisible();
 
-    await userEvent.click(document.body);
-    expect(alternative_account).not.toBeVisible();
+    userEvent.click(document.body);
+    await waitFor(() => expect(alternative_account).not.toBeVisible());
   });
 });

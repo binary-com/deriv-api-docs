@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
@@ -107,23 +107,23 @@ describe('RequestResponseRenderer', () => {
     };
     render(<RequestJSONBox {...newProps} />);
     const send = screen.getByRole('button', { name: /send request/i });
-    await userEvent.click(send);
+    userEvent.click(send);
 
-    const popup = screen.getByText(/your json object is invalid/i);
+    const popup = await screen.findByText(/your json object is invalid/i);
     expect(popup).toBeVisible();
 
     const close_icon = screen.getByAltText(/close-icon/i);
-    await userEvent.click(close_icon);
+    userEvent.click(close_icon);
 
-    expect(popup).not.toBeVisible();
+    await waitFor(() => expect(popup).not.toBeVisible());
   });
 
   it('should render response renderer component', async () => {
     render(<RequestJSONBox {...mockProps} />);
     const primaryButton = screen.getByRole('button', { name: /Send Request/i });
     const secondaryButton = screen.getByRole('button', { name: /clear/i });
-    await userEvent.click(primaryButton);
-    const playgroundSection = screen.getByTestId('dt_playground_section');
+    userEvent.click(primaryButton);
+    const playgroundSection = await screen.findByTestId('dt_playground_section');
     expect(playgroundSection).toBeInTheDocument();
     expect(primaryButton).toBeInTheDocument();
     expect(secondaryButton).toBeInTheDocument();
