@@ -38,11 +38,11 @@ Now, open the `index.html` file or use the [Live Server Extension](https://marke
 
 Now, change the content of the files using the following approach:
 
-```js title="index.js"
-console.log("we will create our websocket connection here");
+```js title="index.js" showLineNumbers
+console.log('we will create our websocket connection here');
 ```
 
-```html title="index.html"
+```html title="index.html" showLineNumbers
 <!DOCTYPE html>
 <html lang="en">
   <head>

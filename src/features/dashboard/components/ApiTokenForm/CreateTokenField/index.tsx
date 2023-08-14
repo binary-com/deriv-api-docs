@@ -3,6 +3,8 @@ import { Text, Button } from '@deriv/ui';
 import styles from '../api-token.form.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { FieldErrorsImpl, UseFormRegisterReturn } from 'react-hook-form';
+import CustomErrors from './CustomErrors';
+import TokenCreationDialogSuccess from '../../Dialogs/TokenCreationDialogSuccess';
 
 type TCreateTokenField = {
   register: UseFormRegisterReturn;
@@ -18,6 +20,9 @@ type TCreateTokenField = {
   >;
   form_is_cleared: boolean;
   setFormIsCleared: Dispatch<SetStateAction<boolean>>;
+  setHideRestriction: Dispatch<SetStateAction<boolean>>;
+  is_toggle: boolean;
+  setToggleModal: Dispatch<SetStateAction<boolean>>;
 };
 
 const CreateTokenField = ({
@@ -25,6 +30,9 @@ const CreateTokenField = ({
   register,
   form_is_cleared,
   setFormIsCleared,
+  setHideRestriction,
+  is_toggle,
+  setToggleModal,
 }: TCreateTokenField) => {
   const { tokens } = useApiToken();
   const [input_value, setInputValue] = useState('');
@@ -45,10 +53,19 @@ const CreateTokenField = ({
     return token_names;
   }, [tokens]);
 
-  const token_name_exists = getTokenNames.includes(input_value.toLowerCase());
-  const disable_button = token_name_exists || Object.keys(errors).length > 0 || input_value === '';
-  const error_border_active = token_name_exists || errors.name;
+  const tokens_limit_reached = tokens.length === 30 && Object.keys(errors).length === 0;
+  const token_name_exists =
+    getTokenNames.includes(input_value.toLowerCase()) && Object.keys(errors).length === 0;
+  const has_custom_errors = token_name_exists || (tokens_limit_reached && input_value !== '');
+  const disable_button =
+    token_name_exists || Object.keys(errors).length > 0 || input_value === '' || has_custom_errors;
+  const error_border_active = token_name_exists || errors.name || has_custom_errors;
 
+  useEffect(() => {
+    if (error_border_active) {
+      setHideRestriction(true);
+    }
+  }, [error_border_active, setHideRestriction]);
   return (
     <React.Fragment>
       <div className={styles.step_title}>
@@ -67,22 +84,23 @@ const CreateTokenField = ({
           type='text'
           name='name'
           {...register}
-          placeholder='Token name'
+          placeholder=' '
         />
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
+        {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>
           {errors.name.message}
         </Text>
       )}
-      {token_name_exists && (
-        <div className='error-message'>
-          <p>That name is taken. Choose another.</p>
-        </div>
-      )}
+      <CustomErrors
+        token_name_exists={token_name_exists}
+        tokens_limit_reached={tokens_limit_reached}
+        input_value={input_value}
+      />
     </React.Fragment>
   );
 };

@@ -6,6 +6,7 @@ import TokenDropdown from '../CustomSelectDropdown/token-dropdown/TokenDropdown'
 import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
 import useAppManager from '@site/src/hooks/useAppManager';
 import styles from './api_token_switcher.module.scss';
+import RenderOfficialContents from '../RenderOfficialContents';
 
 const ApiTokenNavbarItem = () => {
   const { is_logged_in, is_authorized } = useAuthContext();
@@ -55,17 +56,26 @@ const ApiTokenNavbarItem = () => {
           <span>{currentToken.display_name}</span>
         </button>
       ) : (
-        <CreateToken />
+        <RenderOfficialContents>
+          <CreateToken />
+        </RenderOfficialContents>
       )}
 
       {is_toggle_dropdown && (
-        <div className={styles.tokenDropdownWrapper}>
+        <div
+          className={styles.tokenDropdownWrapper}
+          onClick={() => {
+            setToggleDropdown((prev) => !prev);
+          }}
+        >
           {tokens.length > 1 && (
             <div className={styles.tokenDropdown}>
               <TokenDropdown />
             </div>
           )}
-          <CreateToken />
+          <RenderOfficialContents>
+            <CreateToken />
+          </RenderOfficialContents>
         </div>
       )}
     </div>

@@ -1,13 +1,25 @@
 import * as yup from 'yup';
 
-const markupPercentageRegex = /^((([0-4]\.([0-9]([0-9])?)?))||([5]\.([0]([0])?)?)||([0-5]))$/;
+const markupPercentageRegex = /^((([0-2]\.([0-9]([0-9])?)?))||([3]\.([0]([0])?)?)||([0-3]))$/;
 const urlRegex = /^[a-z][a-z0-9.+-]*:\/\/[0-9a-zA-Z.-]+[%/\w .-]*$/;
 
 const base_schema = {
   name: yup
     .string()
     .required('Enter your app name.')
-    .max(48, 'Your app name cannot exceed 48 characters.'),
+    .max(48, 'Your app name cannot exceed 48 characters.')
+    .matches(/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9_ ]*$/, {
+      message:
+        'Only alphanumeric characters with spaces and underscores are allowed. (Example: my_application)',
+      excludeEmptyString: true,
+    })
+    .matches(
+      /^(?!.*deriv|.*d3r1v|.*der1v|.*d3riv|.*b1nary|.*binary|.*b1n4ry|.*bin4ry|.*blnary|.*b\|nary).*$/i,
+      {
+        message: 'The name cannot contain “Binary”, “Deriv”, or similar words.',
+        excludeEmptyString: true,
+      },
+    ),
   read: yup.boolean(),
   trade: yup.boolean(),
   payments: yup.boolean(),
@@ -34,7 +46,7 @@ const base_schema = {
     .max(4, 'Your markup value cannot be more than 4 characters.')
     .matches(
       markupPercentageRegex,
-      'Your markup value must be equal to or above 0.00 and no more than 5.00.',
+      'Your markup value must be equal to or above 0.00 and no more than 3.00.',
     ),
   app_id: yup.number(),
 };

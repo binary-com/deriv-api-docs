@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import useWS from '@site/src/hooks/useWs';
 import AppForm from '../components/AppForm';
-import { Button } from '@deriv/ui';
 import { scopesObjectToArray } from '@site/src/utils';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
@@ -9,8 +8,9 @@ import { IRegisterAppForm } from '../types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 
 const AppRegistration = () => {
-  const { is_loading, send: registerApp, error, clear, data } = useWS('app_register');
+  const { send: registerApp, error, clear, data } = useWS('app_register');
   const { currentLoginAccount } = useAuthContext();
+  const [form_is_cleared, setFormIsCleared] = useState(false);
 
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
@@ -37,23 +37,18 @@ const AppRegistration = () => {
         ...can_have_markup,
         scopes: selectedScopes,
       });
+      setFormIsCleared(true);
     },
     [registerApp],
   );
 
-  const renderButtons = () => {
-    return (
-      <>
-        <Button role='submit' disabled={is_loading}>
-          Register Application
-        </Button>
-      </>
-    );
-  };
-
   return (
     <>
-      <AppForm renderButtons={renderButtons} submit={onSubmit} />
+      <AppForm
+        submit={onSubmit}
+        form_is_cleared={form_is_cleared}
+        setFormIsCleared={setFormIsCleared}
+      />
       {error && <RegisterAppDialogError error={error} onClose={clear} />}
       {data && <RegisterAppDialogSuccess onClose={clear} />}
     </>
