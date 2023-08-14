@@ -90,8 +90,10 @@ fieldset .customTextInput:last-child {
       display: flex;
       flex-direction: column;
       margin-bottom: rem(2.5);
-      .scopesWrapper {
-        padding-left: rem(1.6);
+      @media screen and (min-width: 992px) {
+        .scopesWrapper {
+          margin-left: rem(1.6);
+        }
       }
     }
     .disableTokenDropdown {
@@ -112,23 +114,37 @@ fieldset .customTextInput:last-child {
       margin-bottom: rem(2);
     }
     .formHeaderContainer {
+      font-size: rem(1.4);
       display: flex;
       padding: rem(1) 0;
       gap: rem(1);
       margin-top: rem(1.5);
       flex-direction: column;
+      
       .subHeading {
-        padding-left: rem(1);
+        margin-left: rem(1);
       }
       .formsubHeading {
-        padding: rem(1.6);
+        margin-left: rem(1.6);
         display: inline-block;
+        p span {
+          @media screen and (min-width: 992px) {
+            margin-left: rem(4.5);
+            display: block;
+          }
+        }
       }
       .wrapperHeading {
-        padding-left: rem(1.6);
+        margin-left: rem(1.6);
       }
-      .markup {
-        margin-bottom: rem(1);
+    }
+    .markup {
+      margin-bottom: rem(1);
+      span {
+        font-size: rem(1.2);
+        @media screen and (min-width: 992px) {
+          font-size: rem(1.4);
+        }
       }
     }
   }
@@ -165,6 +181,10 @@ fieldset .customTextInput:last-child {
 .customCheckboxWrapper {
   display: flex;
   gap: rem(1);
+  font-size: rem(1.2);
+  @media screen and (min-width: 992px) {
+    font-size: rem(1.4);
+  }
 
   label {
     cursor: pointer;
@@ -172,13 +192,13 @@ fieldset .customTextInput:last-child {
 }
 
 .termsOfConditionRegister {
-  margin-left: rem(4);
-  margin-top: rem(6);
+  font-size: rem(1);
+  text-align: center;
 }
 
 .buttons {
   display: flex;
-  gap: rem(1);
+  gap: rem(2.4);
 }
 
 .errorAppname {

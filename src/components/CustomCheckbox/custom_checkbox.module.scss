@@ -2,13 +2,15 @@
 
 .customCheckboxContainer {
     display: flex;
-    align-items: center;
     justify-content: center;
     position: relative;
     min-width: rem(1.6);
     padding-top: rem(0.8);
     z-index: 0;
     margin-bottom: auto;
+    @media screen and (min-width: 992px) {
+        align-items: center;
+    }
     label {
         cursor: pointer;
         margin-left: rem(1.5);

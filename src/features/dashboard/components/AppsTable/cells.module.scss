@@ -3,9 +3,9 @@
 @mixin actionIcon {
   background-repeat: no-repeat;
   background-position: center;
-  background-size: rem(2);
+  background-size: rem(1.8);
   cursor: pointer;
-  padding: rem(2) rem(2);
+  padding: rem(1.8) rem(1.8);
   border-radius: 100%;
 }
 
@@ -21,7 +21,6 @@
 
 .appActions {
   display: flex;
-  gap: rem(2);
   margin: rem(3);
   justify-content: center;
 }

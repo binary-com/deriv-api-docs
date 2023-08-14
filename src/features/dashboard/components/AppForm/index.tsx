@@ -205,7 +205,15 @@ const AppForm = ({
                 </Text>
                 <br />
                 <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
-                  <b>NOTE: Markup is only available for real accounts</b>
+                  <p>
+                    <b>
+                      Note: Markup is only available for real accounts.{' '}
+                      <span>
+                        Create a real account using new_account_real or new_account_maltainvest API
+                        calls
+                      </span>
+                    </b>
+                  </p>
                 </Text>
               </div>
             </div>
@@ -260,14 +268,14 @@ const AppForm = ({
                   type='text'
                   placeholder=' '
                 />
-                <label htmlFor='app_redirect_uri'>Authorization URL (optional)</label>
+                <label htmlFor='app_redirect_uri'>Authorisation URL (optional)</label>
               </div>
               <Text
                 as='p'
                 type='paragraph-2'
                 className={`${styles.helperText} ${styles.formsubHeading}`}
               >
-                *Please note that this URL will be used as the OAuth redirect URL for the OAuth
+                Please note that this URL will be used as the OAuth redirect URL for the OAuth
                 authorization.
               </Text>
               {errors && errors?.redirect_uri && (
@@ -287,6 +295,11 @@ const AppForm = ({
                   placeholder=' '
                 />
                 <label htmlFor='app_verification_uri'>Verification URL (optional)</label>
+                <Text
+                  as='p'
+                  type='paragraph-2'
+                  className={`${styles.helperText} ${styles.formsubHeading}`}
+                ></Text>
               </div>
               {errors && errors.verification_uri && (
                 <span className='error-message'>{errors.verification_uri.message}</span>
