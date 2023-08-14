@@ -56,7 +56,7 @@ export const Benefits = () => {
           />
           <section className={styles.InformationContent}>
             <Text as='h3' className={styles.headingSize}>
-              Personalize your trading
+              Personalise your trading
             </Text>
             <Text type='subtitle-2' as='p'>
               Personalise your trading apps to match your needs. Create charts and views the way you
