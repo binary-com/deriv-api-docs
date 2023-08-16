@@ -2,7 +2,7 @@
 title: API authentication
 hide_title: false
 draft: false
-sidebar_label: Authorisation and authentication
+sidebar_label: API authentication
 sidebar_position: 2
 tags:
   - authentication

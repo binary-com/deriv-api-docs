@@ -2,7 +2,7 @@
 title: Functions of API Calls
 hide_title: false
 draft: false
-sidebar_label: API calls' anatomy
+sidebar_label: Functions of API Calls
 sidebar_position: 1
 tags:
   - concept
