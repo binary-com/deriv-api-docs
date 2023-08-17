@@ -21,8 +21,6 @@ const JsonView = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNa
     <Suspense fallback={<Spinner />}>
       <div data-testid='dt_json_view' className={styles.dtJsonView}>
         {playground_history.map((response: TSocketResponse<T>) => {
-          // API does not give an unique ID across subscription API calls as of now.
-          // I used stringify here to make it work properly and to not have duplicate keys.
           const key = response.subscription ? JSON.stringify(response) : response.req_id;
           return (
             <React.Fragment key={key}>

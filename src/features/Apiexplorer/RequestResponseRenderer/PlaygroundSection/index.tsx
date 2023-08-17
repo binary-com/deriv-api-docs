@@ -51,7 +51,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
 
   useEffect(() => {
     updateHistory();
-  }, []);
+  }, [full_response]);
 
   if (loader && playground_history.length === 0) return <Spinner />;
 
