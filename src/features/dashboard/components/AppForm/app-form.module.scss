@@ -127,12 +127,6 @@ fieldset .customTextInput:last-child {
       .formsubHeading {
         margin-left: rem(1.6);
         display: inline-block;
-        p span {
-          @media screen and (min-width: 992px) {
-            margin-left: rem(4.5);
-            display: block;
-          }
-        }
       }
       .wrapperHeading {
         margin-left: rem(1.6);

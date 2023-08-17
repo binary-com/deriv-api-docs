@@ -206,13 +206,7 @@ const AppForm = ({
                 <br />
                 <Text as='span' type='paragraph-1' className={styles.formsubHeading}>
                   <p>
-                    <b>
-                      Note: Markup is only available for real accounts.{' '}
-                      <span>
-                        Create a real account using new_account_real or new_account_maltainvest API
-                        calls
-                      </span>
-                    </b>
+                    <b>Note: Markup is only available for real accounts.</b>
                   </p>
                 </Text>
               </div>
