@@ -194,6 +194,9 @@ fieldset .customTextInput:last-child {
 .termsOfConditionRegister {
   font-size: rem(1);
   text-align: center;
+  @media screen and (min-width: 992px) {
+    font-size: rem(1.4);
+  }
 }
 
 .buttons {
