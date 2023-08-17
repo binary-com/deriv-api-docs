@@ -35,10 +35,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     if (error && error.code === 'AuthorizationRequired') {
       setToggleModal(true);
     }
+  }, [error]);
+
+  useEffect(() => {
     return () => {
       if (is_subscribed) unsubscribe();
     };
-  }, [error, is_subscribed]);
+  }, [is_subscribed]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
