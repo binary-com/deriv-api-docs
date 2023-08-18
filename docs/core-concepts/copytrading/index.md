@@ -21,7 +21,7 @@ Copy Trading is becoming popular in the financial markets; it allows a client (t
 
 ## Becoming a Trader
 
-To become a Trader (i.e. to allow others to follow your trades), set the “allow_copiers” setting via the [set settings call](/api-explorer#set_settings).
+To become a Trader (i.e. to allow others to follow your trades), set the “allow_copiers” setting via the [set settings](/api-explorer#set_settings) call.
 
 The Trader then creates a read-only API token and provides it to the Copier.
 
@@ -29,4 +29,4 @@ Enabling the allow_copiers setting will also make the [copytrading statistics](
 
 ## Becoming a Copier
 
-To become a copier, use the [copy start call](/api-explorer#copy_start). To stop copying, use the [copy stop call](/api-explorer#copy_stop).
+To become a copier, use the [copy start](/api-explorer#copy_start) call. To stop copying, use the [copy stop](/api-explorer#copy_stop) call.
