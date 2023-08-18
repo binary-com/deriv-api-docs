@@ -24,7 +24,7 @@ Next, we'll create a WebSocket connection to Deriv WebSocket Server as seen belo
 
 ```js title="index.js" showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
-const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const websocket = new WebSocket(`wss://ws.derivws.com/websockets/v3?app_id=${app_id}`);
 ```
 
 :::info
@@ -147,7 +147,7 @@ Your final code should be:
 
 ```js title="index.js" showLineNumbers
 const app_id = 1089; // Replace with your app_id or leave as 1089 for testing.
-const websocket = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${app_id}`);
+const websocket = new WebSocket(`wss://ws.derivws.com/websockets/v3?app_id=${app_id}`);
 const ping_interval = 12000; // it's in milliseconds, which equals to 120 seconds
 let interval;
 
