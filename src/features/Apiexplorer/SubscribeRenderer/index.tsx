@@ -44,7 +44,8 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   }, [is_subscribed]);
 
   useEffect(() => {
-    if (!is_authorized) unsubscribe();
+    const has_active_subscription = full_response !== undefined && !is_authorized;
+    if (has_active_subscription) unsubscribe();
   }, [is_authorized]);
 
   const parseRequestJSON = useCallback(() => {
