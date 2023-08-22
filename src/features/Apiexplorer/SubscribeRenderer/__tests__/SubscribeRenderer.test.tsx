@@ -19,6 +19,11 @@ const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<I
 mockUseAuthContext.mockImplementation(() => ({
   is_logged_in: true,
   is_authorized: true,
+  currentLoginAccount: {
+    name: 'someAccount',
+    token: 'asdf1234',
+    currency: 'USD',
+  },
 }));
 
 jest.mock('@site/src/hooks/usePlaygroundContext');
@@ -112,6 +117,9 @@ describe('SubscribeRenderer', () => {
   });
 
   it('should call subscribe and unsubscribe when pressing the send request button', async () => {
+    cleanup();
+    jest.clearAllMocks();
+
     mockUseSubscription.mockImplementation(() => ({
       subscribe: mockSubscribe,
       unsubscribe: mockUnsubscribe,
@@ -148,6 +156,9 @@ describe('SubscribeRenderer', () => {
     expect(mockUnsubscribe).toBeCalledTimes(1);
   });
   it('should call login dialog when the error code is not authourized', async () => {
+    cleanup();
+    jest.clearAllMocks();
+
     const setToggleModal = jest.fn();
     jest.spyOn(React, 'useState').mockReturnValue([false, setToggleModal]);
     mockUseAuthContext.mockImplementation(() => ({

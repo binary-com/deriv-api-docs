@@ -23,7 +23,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
-  const { is_logged_in } = useAuthContext();
+  const { is_logged_in, is_authorized } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
   const { full_response, is_loading, subscribe, unsubscribe, is_subscribed, error } =
     useSubscription<T>(name);
@@ -42,6 +42,10 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
       if (is_subscribed) unsubscribe();
     };
   }, [is_subscribed]);
+
+  useEffect(() => {
+    if (!is_authorized) unsubscribe();
+  }, [is_authorized]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
