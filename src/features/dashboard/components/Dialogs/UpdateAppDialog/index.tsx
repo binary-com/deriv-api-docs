@@ -70,7 +70,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
         scopes: selectedScopes,
       });
     },
-    [updateApp],
+    [updateApp, currentLoginAccount.name],
   );
 
   const cancelButton = () => {
