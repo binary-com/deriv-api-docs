@@ -46,7 +46,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   useEffect(() => {
     const has_active_subscription = full_response !== undefined && !is_authorized;
     if (has_active_subscription) unsubscribe();
-  }, [is_authorized]);
+  }, [full_response, is_authorized]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
