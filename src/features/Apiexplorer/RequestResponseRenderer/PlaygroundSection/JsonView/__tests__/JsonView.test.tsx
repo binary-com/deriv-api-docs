@@ -25,7 +25,7 @@ mockUsePlaygroundContext.mockImplementation(() => ({
 
 describe('JsonView', () => {
   it('should be able to render the JsonView', () => {
-    render(<JsonView error={'test'} />);
+    render(<JsonView />);
     // req_id determines the index number of dt_json_container-(idx);
     const response_block = screen.getByTestId('dt_json_container-3');
     expect(response_block).toBeInTheDocument();

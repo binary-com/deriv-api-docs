@@ -9,13 +9,7 @@ import {
 import styles from './JsonView.module.scss';
 import Spinner from '@site/src/components/Spinner';
 
-type TJsonView = {
-  error: unknown;
-};
-
-const JsonView = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNames>({
-  error,
-}: TJsonView) => {
+const JsonView = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNames>() => {
   const { playground_history } = usePlaygroundContext();
   return (
     <Suspense fallback={<Spinner />}>
@@ -24,7 +18,7 @@ const JsonView = <T extends TSocketEndpointNames | TSocketSubscribableEndpointNa
           const key = response.subscription ? JSON.stringify(response) : response.req_id;
           return (
             <React.Fragment key={key}>
-              <JsonData history_reponse={response} error={error} />
+              <JsonData history_reponse={response} />
             </React.Fragment>
           );
         })}

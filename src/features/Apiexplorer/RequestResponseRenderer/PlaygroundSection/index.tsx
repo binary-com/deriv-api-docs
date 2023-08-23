@@ -31,6 +31,9 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     if (full_response) {
       setPlaygroundHistory((prev: TSocketResponse<T>[]) => [...prev, full_response]);
     }
+    if (error) {
+      setPlaygroundHistory((prev: TSocketResponse<T>[]) => [...prev, error]);
+    }
   };
 
   const toggleScrolling = (e) => {
@@ -51,7 +54,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
 
   useEffect(() => {
     updateHistory();
-  }, [full_response]);
+  }, [full_response, error]);
 
   if (loader && playground_history.length === 0) return <Spinner />;
 
@@ -65,7 +68,7 @@ const PlaygroundSection = <T extends TSocketEndpointNames | TSocketSubscribableE
     >
       {response_state && (
         <React.Fragment>
-          <JsonView error={error} />
+          <JsonView />
         </React.Fragment>
       )}
     </div>

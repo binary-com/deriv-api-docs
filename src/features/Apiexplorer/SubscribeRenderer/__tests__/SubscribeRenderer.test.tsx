@@ -141,7 +141,62 @@ describe('SubscribeRenderer', () => {
     expect(mockSubscribe).toBeCalledWith({ ticks: 'R_50', subscribe: 1 });
   });
 
+  it('should unsubscribe any subscriptions when switching accounts', () => {
+    cleanup();
+    jest.clearAllMocks();
+
+    mockUseSubscription.mockImplementation(() => ({
+      subscribe: mockSubscribe,
+      unsubscribe: mockUnsubscribe,
+      error: { code: '' },
+      full_response: {
+        tick: 1,
+        echo_req: { tick: 1 },
+      },
+      is_subscribed: false,
+    }));
+
+    mockUseAuthContext.mockImplementation(() => ({
+      is_logged_in: true,
+      is_authorized: true,
+      is_switching_account: true,
+      currentLoginAccount: {
+        name: 'someAccount',
+        token: 'asdf1234',
+        currency: 'USD',
+      },
+    }));
+
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    expect(mockUnsubscribe).toHaveBeenCalledTimes(1);
+  });
+
   it('should call unsubscribe when pressing the clear button', async () => {
+    cleanup();
+    jest.clearAllMocks();
+
+    mockUseSubscription.mockImplementation(() => ({
+      subscribe: mockSubscribe,
+      unsubscribe: mockUnsubscribe,
+      error: { code: '' },
+      full_response: {
+        tick: 1,
+        echo_req: { tick: 1 },
+      },
+      is_subscribed: true,
+    }));
+
+    mockUseAuthContext.mockImplementation(() => ({
+      is_logged_in: true,
+      is_authorized: true,
+      is_switching_account: false,
+      currentLoginAccount: {
+        name: 'someAccount',
+        token: 'asdf1234',
+        currency: 'USD',
+      },
+    }));
+
     render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
     const button = await screen.findByRole('button', { name: 'Clear' });
     expect(button).toBeVisible();
