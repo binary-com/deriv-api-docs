@@ -201,7 +201,7 @@ describe('App Form', () => {
     const submitButton = screen.getByText('Register Application');
 
     const authURLInput = screen.getByRole('textbox', {
-      name: 'Authorization URL (optional)',
+      name: 'Authorisation URL (optional)',
     });
 
     await userEvent.type(authURLInput, 'http:invalidAUTHurl.com');
@@ -290,7 +290,7 @@ describe('App Form', () => {
     });
 
     const appRedirectUrlInput = screen.getByRole<HTMLInputElement>('textbox', {
-      name: 'Authorization URL (optional)',
+      name: 'Authorisation URL (optional)',
     });
 
     const appVerificationUrlInput = screen.getByRole<HTMLInputElement>('textbox', {

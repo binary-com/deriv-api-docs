@@ -35,6 +35,8 @@
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
   --smoke: #414652;
+  --admin-text: #22BD41;
+  --admin-border: #33C9517A;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -84,6 +86,12 @@ h4,
 h5,
 h6 {
   font-weight: bold;
+}
+
+h4 {
+  @media screen and (max-width: 993px) {
+    font-size: rem(1.4);
+  }
 }
 
 .error-message {
@@ -193,6 +201,7 @@ div[class*='sidebarViewport'] {
   }
   div[role='dialog'] {
     z-index: 1001;
+    border-radius: rem(1.6);
   }
 }
 
@@ -211,7 +220,7 @@ div[class*='sidebarViewport'] {
 }
 
 .navbar {
-  padding: 0 5%;
+  padding: 0 5vw;
   height: var(--nav-height);
   line-height: rem(2);
   @media (max-width: 996px) {

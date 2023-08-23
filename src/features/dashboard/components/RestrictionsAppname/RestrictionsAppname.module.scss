@@ -1,6 +1,9 @@
 @use 'src/styles/utility' as *;
 
 .restrictions {
+  display:flex;
+  flex-direction: column;
+  gap: rem(0.8);
   font-size: rem(1.2);
   font-weight: 400;
   line-height: rem(1.8);
