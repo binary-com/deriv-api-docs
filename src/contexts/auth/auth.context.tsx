@@ -10,6 +10,7 @@ export type IUserAccounts = AuthorizeResponse['authorize']['account_list'];
 export type IUser = Omit<AuthorizeResponse['authorize'], 'account_list'>;
 
 export interface IAuthContext {
+  is_switching_account: boolean;
   is_logged_in: boolean;
   is_authorized: boolean;
   loginAccounts: IUserLoginAccount[];

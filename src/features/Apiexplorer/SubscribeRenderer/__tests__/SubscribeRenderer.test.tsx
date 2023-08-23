@@ -141,7 +141,62 @@ describe('SubscribeRenderer', () => {
     expect(mockSubscribe).toBeCalledWith({ ticks: 'R_50', subscribe: 1 });
   });
 
+  it('should unsubscribe any subscriptions when switching accounts', () => {
+    cleanup();
+    jest.clearAllMocks();
+
+    mockUseSubscription.mockImplementation(() => ({
+      subscribe: mockSubscribe,
+      unsubscribe: mockUnsubscribe,
+      error: { code: '' },
+      full_response: {
+        tick: 1,
+        echo_req: { tick: 1 },
+      },
+      is_subscribed: false,
+    }));
+
+    mockUseAuthContext.mockImplementation(() => ({
+      is_logged_in: true,
+      is_authorized: true,
+      is_switching_account: true,
+      currentLoginAccount: {
+        name: 'someAccount',
+        token: 'asdf1234',
+        currency: 'USD',
+      },
+    }));
+
+    render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
+    expect(mockUnsubscribe).toHaveBeenCalledTimes(1);
+  });
+
   it('should call unsubscribe when pressing the clear button', async () => {
+    cleanup();
+    jest.clearAllMocks();
+
+    mockUseSubscription.mockImplementation(() => ({
+      subscribe: mockSubscribe,
+      unsubscribe: mockUnsubscribe,
+      error: { code: '' },
+      full_response: {
+        tick: 1,
+        echo_req: { tick: 1 },
+      },
+      is_subscribed: true,
+    }));
+
+    mockUseAuthContext.mockImplementation(() => ({
+      is_logged_in: true,
+      is_authorized: true,
+      is_switching_account: false,
+      currentLoginAccount: {
+        name: 'someAccount',
+        token: 'asdf1234',
+        currency: 'USD',
+      },
+    }));
+
     render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
     const button = await screen.findByRole('button', { name: 'Clear' });
     expect(button).toBeVisible();
@@ -149,7 +204,6 @@ describe('SubscribeRenderer', () => {
     await userEvent.click(button);
     expect(mockUnsubscribe).toBeCalledTimes(1);
   });
-
   it('should call unsubscribe when unmounting the component', async () => {
     const { unmount } = render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
     unmount();
@@ -159,27 +213,26 @@ describe('SubscribeRenderer', () => {
     cleanup();
     jest.clearAllMocks();
 
-    const setToggleModal = jest.fn();
-    jest.spyOn(React, 'useState').mockReturnValue([false, setToggleModal]);
     mockUseAuthContext.mockImplementation(() => ({
       is_logged_in: false,
-      is_authorized: false,
+      is_authorized: true,
     }));
     mockUseSubscription.mockImplementation(() => ({
       subscribe: mockSubscribe,
       unsubscribe: mockUnsubscribe,
       error: { code: 'AuthorizationRequired' },
       full_response: {
-        tick: 1,
-        echo_req: { tick: 1 },
+        app_list: 1,
+        echo_req: { app_list: 1 },
       },
     }));
 
     render(<SubscribeRenderer name='ticks' auth={1} reqData={request_data} />);
-    const button = await screen.findByRole('button', { name: /Send Request/i });
-    await userEvent.click(button);
+    const login_dialog = await screen.findByText(
+      /This API call must be authorised because it requires access to your account information./i,
+    );
     await waitFor(() => {
-      expect(setToggleModal).toHaveBeenCalled();
+      expect(login_dialog).toBeVisible();
     });
   });
 });

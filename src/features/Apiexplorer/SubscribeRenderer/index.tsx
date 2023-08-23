@@ -23,7 +23,7 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
-  const { is_logged_in, is_authorized } = useAuthContext();
+  const { is_logged_in, is_switching_account } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
   const { full_response, is_loading, subscribe, unsubscribe, is_subscribed, error } =
     useSubscription<T>(name);
@@ -44,9 +44,8 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   }, [is_subscribed]);
 
   useEffect(() => {
-    const has_active_subscription = full_response !== undefined && !is_authorized;
-    if (has_active_subscription) unsubscribe();
-  }, [full_response, is_authorized]);
+    if (is_switching_account) unsubscribe();
+  }, [is_switching_account]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -86,18 +85,18 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           Clear
         </Button>
       </div>
-      {is_not_valid ? (
+      {is_not_valid && (
         <ValidDialog setIsNotValid={setIsNotValid} setToggleModal={setToggleModal} />
-      ) : !is_logged_in && auth == 1 && toggle_modal ? (
-        <LoginDialog setToggleModal={setToggleModal} />
-      ) : (
-        <PlaygroundSection
-          loader={is_loading}
-          response_state={response_state}
-          full_response={full_response}
-          error={error}
-        />
       )}
+      {!is_logged_in && auth == 1 && toggle_modal && (
+        <LoginDialog setToggleModal={setToggleModal} />
+      )}
+      <PlaygroundSection
+        loader={is_loading}
+        response_state={response_state}
+        full_response={full_response}
+        error={error}
+      />
     </div>
   );
 }

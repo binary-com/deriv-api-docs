@@ -22,6 +22,7 @@ if (getIsBrowser()) {
 const AuthProvider = ({ children }: TAuthProviderProps) => {
   const [is_logged_in, setIsLoggedIn] = useState(false);
   const [is_authorized, setIsAuthorized] = useState(false);
+  const [is_switching_account, setisSwitchingAccount] = useState(false);
 
   const [loginAccounts, setLoginAccounts] = useSessionStorage<IUserLoginAccount[]>(
     LOGIN_ACCOUNTS_SESSION_STORAGE_KEY,
@@ -46,6 +47,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     if (currentLoginAccount.token) {
       const { authorize } = await apiManager.authorize(currentLoginAccount.token);
       setIsAuthorized(true);
+      setisSwitchingAccount(false);
       const { account_list, ...user } = authorize;
       setUserAccounts(account_list);
       setUser(user);
@@ -76,6 +78,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
   const updateCurrentLoginAccount = useCallback(
     (account: IUserLoginAccount) => {
       setIsAuthorized(false);
+      setisSwitchingAccount(true);
       setCurrentLoginAccount(account);
     },
     [setCurrentLoginAccount],
@@ -91,6 +94,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
 
   const context_object: IAuthContext = useMemo(() => {
     return {
+      is_switching_account,
       is_logged_in,
       is_authorized,
       loginAccounts,
@@ -102,6 +106,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     };
   }, [
     currentLoginAccount,
+    is_switching_account,
     is_authorized,
     is_logged_in,
     loginAccounts,
