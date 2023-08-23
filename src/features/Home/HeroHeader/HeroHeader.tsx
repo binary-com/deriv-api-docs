@@ -12,9 +12,10 @@ export const HeroHeader = () => {
         <Text
           type='subtitle-1'
           align='center'
-          as={'h3'}
+          as={'p'}
           aria-level={7}
           className={styles.SubHeading}
+          data-testid='hero-header-subtitle'
         >
           Use our powerful, flexible, and free API to build a custom trading <br />
           platform - for yourself or for your business.

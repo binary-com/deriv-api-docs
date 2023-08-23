@@ -1,5 +1,5 @@
 ---
-title: Monetizing the Deriv API
+title: Monetise your trading app
 hide_title: true
 draft: false
 sidebar_label: Monetizing the Deriv API
@@ -21,7 +21,7 @@ keywords:
   - monetization
   - api
   - websocket
-description: Monetize the Deriv API for your application
+description: Find out how to monetise the Deriv API by becoming a Deriv affiliate, advertising on your trading app, or offering premium features.
 ---
 
 ## Monetizing the Deriv API

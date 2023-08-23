@@ -50,9 +50,14 @@ export const Benefits = () => {
       </header>
       <section className={styles.BenefitsInformation}>
         <article className={styles.InformationContainer}>
-          <ImageContainer image='personalisation' alt='personalisation' />
+          <ImageContainer
+            image='personalisation'
+            alt='A trading app created using Deriv API shown on a laptop.'
+          />
           <section className={styles.InformationContent}>
-            <h1>Personalise your trading</h1>
+            <Text as='h3' className={styles.headingSize}>
+              Personalise your trading
+            </Text>
             <Text type='subtitle-2' as='p'>
               Personalise your trading apps to match your needs. Create charts and views the way you
               like them. Develop your trading app using any common programming language and extend
@@ -61,9 +66,14 @@ export const Benefits = () => {
           </section>
         </article>
         <article className={styles.InformationContainer}>
-          <ImageContainer image='build-business' alt='building a business' />
+          <ImageContainer
+            image='build-business'
+            alt='A business man testing the Deriv API for his trading app.'
+          />
           <section className={styles.InformationContent}>
-            <h1>Build a business and earn more</h1>
+            <Text as='h3' className={styles.headingSize}>
+              Build a business and earn more
+            </Text>
             <Text type='subtitle-2' as='p'>
               Create your own trading apps by taking advantage of the power of Deriv&apos;s trading
               services. Share your apps with fellow traders or customers, and get a chance to earn

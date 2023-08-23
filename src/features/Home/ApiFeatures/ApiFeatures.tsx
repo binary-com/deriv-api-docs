@@ -50,6 +50,7 @@ export const ApiFeatures = () => {
         src='/img/api-featutes.png'
         className={styles.ApiFeaturesImage}
         data-testid='api-features-img'
+        alt='Using Deriv API to build a trading app with features like real-time pricing charts available on Dtrader.'
       />
     </article>
   );

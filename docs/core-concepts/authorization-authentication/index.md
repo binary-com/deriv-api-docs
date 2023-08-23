@@ -1,16 +1,16 @@
 ---
-title: Authorisation and authentication
+title: API authentication
 hide_title: false
 draft: false
-sidebar_label: Authorisation and authentication
+sidebar_label: API authentication
 sidebar_position: 2
 tags:
   - authentication
   - authorisation
 keywords:
   - deriv-authentication
-  - deriv-authorisation
-description: Deriv API authorisation and authentication
+  - deriv-authorisatio
+description: Access the complete set of Deriv API features on your trading app by authenticating users with an API token. Learn to do this with an API example.
 ---
 
 Without authorisation and authentication you'll only get access to roughly half of our API calls and features. For example, in order to buy contracts or utilise the `Copy Trading` features, your users must be authenticated and authorised by our **OAuth** provider and **WebSocket Server**.

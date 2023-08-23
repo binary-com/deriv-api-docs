@@ -7,10 +7,10 @@ sidebar_position: 0
 tags:
   - introduction
 keywords:
-  - deriv
-  - api
-  - getting started
-description: Getting started with Deriv API
+  - trading app
+  - api code
+  - api example
+description: Get an overview of the available Deriv API code examples and languages, and how to use it to create your trading app.
 ---
 
 Our Documentation is divided in several sections:

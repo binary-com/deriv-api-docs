@@ -1,19 +1,18 @@
 ---
-title: API calls' anatomy
+title: Functions of API Calls
 hide_title: false
 draft: false
-sidebar_label: API calls' anatomy
+sidebar_label: Functions of API Calls
 sidebar_position: 1
 tags:
   - concept
   - calls
   - anatomy
 keywords:
-  - trading
-  - concept
-  - calls
-  - anatomy
-description: Deriv API calls' anatomy
+  - trading app
+  - api calls
+  - api example
+description: Set up API calls for your trading app using the API call feature. With API examples, learn to subscribe, send requests, and get response data.
 ---
 
 ## Subscribe and send

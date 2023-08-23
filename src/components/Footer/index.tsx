@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className={styles.FooterContainer} data-testid='footer-text'>
       <section className={styles.FooterBody}>
-        <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
+        <Text type='subtitle-1' as='h3' align='center' className={styles.FooterContent}>
           Get connected
         </Text>
         <p className={styles.FooterBodyContent}>
@@ -35,7 +35,7 @@ const Footer = () => {
         </div>
       </section>
       <section className={styles.FooterBody}>
-        <Text type='subtitle-1' as='h2' align='center' className={styles.FooterContent}>
+        <Text type='subtitle-1' as='h3' align='center' className={styles.FooterContent}>
           We&apos;re here to help
         </Text>
         <Text type='paragraph-1' align='center' className={styles.FooterBodyContentEmail}>
