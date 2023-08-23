@@ -5,11 +5,9 @@ import { scopesObjectToArray } from '@site/src/utils';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
 import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialogSuccess';
 import { IRegisterAppForm } from '../types';
-import useAuthContext from '@site/src/hooks/useAuthContext';
 
 const AppRegistration = () => {
   const { send: registerApp, error, clear, data } = useWS('app_register');
-  const { loginAccounts } = useAuthContext();
   const [form_is_cleared, setFormIsCleared] = useState(false);
 
   const onSubmit = useCallback(
