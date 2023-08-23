@@ -46,11 +46,10 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const onSubmit = useCallback(
     (data: IRegisterAppForm) => {
       const { name, redirect_uri, verification_uri, app_markup_percentage } = data;
-      const is_demo_account = currentLoginAccount.name.includes('VRTC');
 
       const has_redirect_uri = redirect_uri !== '' && { redirect_uri };
       const has_verification_uri = verification_uri !== '' && { verification_uri };
-      const can_have_markup = !is_demo_account && {
+      const markup = {
         app_markup_percentage: Number(app_markup_percentage),
       };
 
@@ -66,7 +65,7 @@ const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
         name,
         ...has_redirect_uri,
         ...has_verification_uri,
-        ...can_have_markup,
+        ...markup,
         scopes: selectedScopes,
       });
     },
