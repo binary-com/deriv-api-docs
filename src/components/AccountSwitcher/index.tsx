@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { isNotDemoCurrency } from '@site/src/utils';
 import useLogout from '@site/src/hooks/useLogout';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
+import useOnClickOutside from '@site/src/hooks/useOnClickOutside';
 import CurrencyIcon from '../CurrencyIcon';
 import SelectedAccount from '../CustomSelectDropdown/account-dropdown/SelectedAccount';
 import AccountDropdown from '../CustomSelectDropdown/account-dropdown/AccountDropdown';
@@ -20,7 +20,7 @@ const AccountSwitcher = () => {
   const is_demo = currentLoginAccount.name.includes('VRTC') ? styles.demo : '';
 
   const dropdownRef = useRef(null);
-  useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   return (
     <div

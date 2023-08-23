@@ -33,7 +33,7 @@ export default function ApiExplorerFeatures() {
                   handleChange={handleSelectChange}
                   selected={selected}
                   setSelected={setSelected}
-                ></Dropdown>
+                />
                 <div>
                   <RequestJSONBox
                     request_example={text_data.request}

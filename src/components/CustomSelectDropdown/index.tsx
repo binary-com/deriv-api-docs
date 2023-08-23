@@ -1,5 +1,5 @@
 import React, { useState, useRef, ReactElement } from 'react';
-import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
+import useOnClickOutside from '@site/src/hooks/useOnClickOutside';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import styles from './custom_select_dropdown.module.scss';
 
@@ -26,15 +26,16 @@ const CustomSelectDropdown = ({
   const ErrorMessage = () => children[2];
 
   const dropdownRef = useRef(null);
-  useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
+
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   return (
     <div className={styles.customSelectField}>
       <div
         tabIndex={0}
         ref={dropdownRef}
-        onClick={() => setToggleDropdown(!is_toggle_dropdown)}
-        onKeyDown={(e) => e.key === 'ArrowDown' && setToggleDropdown(!is_toggle_dropdown)}
+        onClick={(e) => setToggleDropdown((prev) => !prev)}
+        onKeyDown={(e) => e.key === 'ArrowDown' && setToggleDropdown((prev) => !prev)}
         className={`${styles.selectWrapper} ${toggle_dropdown} ${is_error ? styles.error : ''}`}
         data-testid={`dt_custom_dropdown_${value}`}
       >
@@ -42,7 +43,7 @@ const CustomSelectDropdown = ({
         <SelectInput />
         <input {...register} type='hidden' value={value ? value : ''} />
         <div className={`${styles.dropdownWrapper} ${toggle_dropdown}`}>
-          <div className={styles.dropdown} onClick={() => setToggleDropdown(!is_toggle_dropdown)}>
+          <div className={styles.dropdown} onClick={(e) => setToggleDropdown((prev) => !prev)}>
             <SelectDropdown />
           </div>
         </div>

@@ -3,7 +3,7 @@ import useWS from '@site/src/hooks/useWs';
 import { useCallback } from 'react';
 
 const useRegisterApp = () => {
-  const { send, data, is_loading, error } = useWS('app_register');
+  const { send, data, is_loading } = useWS('app_register');
 
   const registerApp = useCallback(
     (data: TSocketRequestCleaned<'app_register'>) => {

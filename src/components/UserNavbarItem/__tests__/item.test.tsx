@@ -1,10 +1,11 @@
-import { IAuthContext } from '@site/src/contexts/auth/auth.context';
+import userEvent from '@testing-library/user-event';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useLoginUrl from '@site/src/hooks/useLoginUrl';
 import useLogout from '@site/src/hooks/useLogout';
-import { cleanup, render, screen } from '@site/src/test-utils';
 import React from 'react';
 import UserNavbarItem from '..';
+import { cleanup, render, screen, waitFor } from '@site/src/test-utils';
+import { IAuthContext } from '@site/src/contexts/auth/auth.context';
 import { IUserLoginAccount } from '@site/src/contexts/auth/auth.context';
 
 jest.mock('@site/src/hooks/useAuthContext');
@@ -73,5 +74,16 @@ describe('Given device type is desktop', () => {
       name: /CR111111/i,
     });
     expect(current_account).toBeInTheDocument();
+  });
+
+  it('Should close the account dropdown when clicking outside of it', async () => {
+    const current_account_button = screen.getByRole('button', { name: /CR111111/i });
+    userEvent.click(current_account_button);
+
+    const alternative_account = await screen.findByText(/CR2222222/i);
+    expect(alternative_account).toBeVisible();
+
+    userEvent.click(document.body);
+    await waitFor(() => expect(alternative_account).not.toBeVisible());
   });
 });

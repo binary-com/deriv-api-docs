@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import { Text } from '@deriv/ui';
 import { useForm } from 'react-hook-form';
-import { Circles } from 'react-loader-spinner';
+import Spinner from '@site/src/components/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { scopesObjectToArray } from '@site/src/utils';
 import ApiTokenCard from '../ApiTokenCard';
@@ -130,14 +130,7 @@ const ApiTokenForm = (props: HTMLAttributes<HTMLFormElement>) => {
     <form role={'form'} onSubmit={handleSubmit(onSubmit)} {...props}>
       <div className={styles.steps_line} />
       <div>
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-          visible={isCreatingToken}
-        />
+        {isCreatingToken && <Spinner />}
         <div className={styles.step_title}>
           <div className={`${styles.first_step} ${styles.step}`}>
             <Text as={'p'} type={'paragraph-1'} data-testid={'first-step-title'}>

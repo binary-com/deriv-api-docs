@@ -92,6 +92,22 @@ describe('Home Page', () => {
       expect(firstStep).toHaveTextContent(/Select scopes based on the access you need./i);
     });
 
+    it('should show spinner when in token creation process', () => {
+      cleanup();
+      mockUseCreateToken.mockImplementation(() => {
+        return {
+          createToken: mockCreateToken,
+          errorCreatingToken: undefined,
+          isCreatingToken: true,
+        };
+      });
+
+      render(<ApiTokenForm />);
+
+      const spinner = screen.getByTestId('dt_spinner');
+      expect(spinner).toBeVisible();
+    });
+
     it('Should render all of scopes checkbox cards', () => {
       scopes.forEach((item) => {
         const apiTokenCard = screen.getByTestId(`api-token-card-${item.name}`);

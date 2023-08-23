@@ -3,7 +3,7 @@ import Link from '@docusaurus/Link';
 import useApiToken from '@site/src/hooks/useApiToken';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import TokenDropdown from '../CustomSelectDropdown/token-dropdown/TokenDropdown';
-import useClickOutsideDropdown from '@site/src/hooks/useClickOutsideDropdown';
+import useOnClickOutside from '@site/src/hooks/useOnClickOutside';
 import useAppManager from '@site/src/hooks/useAppManager';
 import styles from './api_token_switcher.module.scss';
 import RenderOfficialContents from '../RenderOfficialContents';
@@ -18,7 +18,8 @@ const ApiTokenNavbarItem = () => {
     tokens.length <= 1 && is_dashboard && currentTab === 'MANAGE_TOKENS' ? styles.oneToken : '';
 
   const dropdownRef = useRef(null);
-  useClickOutsideDropdown(dropdownRef, setToggleDropdown, false);
+
+  useOnClickOutside(dropdownRef, () => setToggleDropdown(false));
 
   if (!is_logged_in || !is_authorized || isLoadingTokens) {
     return null;

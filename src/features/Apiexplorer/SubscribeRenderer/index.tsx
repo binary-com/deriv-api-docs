@@ -8,8 +8,8 @@ import styles from '../RequestJSONBox/RequestJSONBox.module.scss';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 import useSubscription from '@site/src/hooks/useSubscription';
 import useDisableSendRequest from '@site/src/hooks/useDisableSendRequest';
-import LoginDialog from '../LoginDialog';
 import PlaygroundSection from '../RequestResponseRenderer/PlaygroundSection';
+import LoginDialog from '../LoginDialog';
 import ValidDialog from '../ValidDialog';
 
 export interface IResponseRendererProps<T extends TSocketSubscribableEndpointNames> {
@@ -23,24 +23,30 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   reqData,
   auth,
 }: IResponseRendererProps<T>) {
-  const { is_logged_in } = useAuthContext();
+  const { is_logged_in, is_authorized } = useAuthContext();
   const { disableSendRequest } = useDisableSendRequest();
-  const { full_response, is_loading, subscribe, error } = useSubscription<T>(name);
+  const { full_response, is_loading, subscribe, unsubscribe, is_subscribed, error } =
+    useSubscription<T>(name);
   const [response_state, setResponseState] = useState(false);
   const [toggle_modal, setToggleModal] = useState(false);
   const [is_not_valid, setIsNotValid] = useState(false);
-
-  const subscribe_ref: React.MutableRefObject<{ unsubscribe: () => void }> = useRef();
 
   useEffect(() => {
     if (error && error.code === 'AuthorizationRequired') {
       setToggleModal(true);
     }
-
-    return () => {
-      if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
-    };
   }, [error]);
+
+  useEffect(() => {
+    return () => {
+      if (is_subscribed) unsubscribe();
+    };
+  }, [is_subscribed]);
+
+  useEffect(() => {
+    const has_active_subscription = full_response !== undefined && !is_authorized;
+    if (has_active_subscription) unsubscribe();
+  }, [full_response, is_authorized]);
 
   const parseRequestJSON = useCallback(() => {
     let request_data: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>;
@@ -48,7 +54,6 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
     try {
       request_data = JSON.parse(reqData);
     } catch (error) {
-      console.error('Could not parse the JSON data while trying to send the request: ', error);
       setIsNotValid(true);
       setToggleModal(false);
     }
@@ -57,13 +62,13 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   }, [reqData]);
 
   const handleClick = useCallback(() => {
-    if (subscribe_ref.current) subscribe_ref.current.unsubscribe();
-    subscribe_ref.current = subscribe(parseRequestJSON());
+    if (is_subscribed) unsubscribe();
+    subscribe(parseRequestJSON());
     setResponseState(true);
   }, [parseRequestJSON, subscribe]);
 
   const handleClear = () => {
-    subscribe_ref.current.unsubscribe();
+    unsubscribe();
     setResponseState(false);
   };
 
@@ -91,7 +96,6 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
           response_state={response_state}
           full_response={full_response}
           error={error}
-          name={name}
         />
       )}
     </div>

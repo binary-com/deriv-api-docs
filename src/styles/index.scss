@@ -34,6 +34,8 @@
   --schema-array: #ff8fc8;
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
+  --spinner-height: 100px;
+  --spinner-width: 100px;
   --smoke: #414652;
   --admin-text: #22BD41;
   --admin-border: #33C9517A;
@@ -155,6 +157,7 @@ h2 {
 html,
 body {
   overflow-x: hidden;
+  overflow-anchor: none;
 }
 
 .hidden {

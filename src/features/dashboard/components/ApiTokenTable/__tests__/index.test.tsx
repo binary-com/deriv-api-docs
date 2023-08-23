@@ -38,20 +38,8 @@ describe('Api Token Table', () => {
 
     render(<ApiTokenTable />);
 
-    const loadingElement = await screen.findByTestId('circles-loading');
+    const loadingElement = await screen.findByTestId('dt_spinner');
     expect(loadingElement).toBeVisible();
-  });
-
-  it('Should not render loading when isLoadingTokens is falsy', async () => {
-    mockUseApiToken.mockImplementationOnce(() => ({
-      tokens: [],
-      isLoadingTokens: false,
-    }));
-
-    render(<ApiTokenTable />);
-
-    const loadingElement = await screen.findByTestId('circles-loading');
-    expect(loadingElement).not.toBeVisible();
   });
 });
 

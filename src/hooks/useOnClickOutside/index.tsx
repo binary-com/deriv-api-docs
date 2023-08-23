@@ -1,14 +1,13 @@
 import { RefObject, useEffect } from 'react';
 
-const useClickOutsideDropdown = (
-  ref: RefObject<HTMLElement>,
-  setState: React.Dispatch<React.SetStateAction<boolean>>,
-  new_state: boolean,
-) => {
+const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
+  ref: RefObject<T>,
+  onClickOutside,
+): void => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setState(new_state);
+        onClickOutside();
       }
     }
     // Bind the event listener
@@ -20,4 +19,4 @@ const useClickOutsideDropdown = (
   }, [ref]);
 };
 
-export default useClickOutsideDropdown;
+export default useOnClickOutside;

@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import { Circles } from 'react-loader-spinner';
+import Spinner from '@site/src/components/Spinner';
 import styles from './api-table.module.scss';
 import useApiToken from '@site/src/hooks/useApiToken';
 import { Column } from 'react-table';
@@ -54,20 +54,13 @@ const ApiTokenTable = (props: HTMLAttributes<HTMLDivElement>) => {
       className={styles.api_table_container}
     >
       <div className={styles.api_table} {...props}>
-        <Circles
-          height='100'
-          width='100'
-          color='#d44c0d'
-          ariaLabel='circles-loading'
-          wrapperClass='loading'
-          visible={isLoadingTokens}
-        />
         <Table
           columns={tableColumns}
           data={tokens}
           initialState={{ hiddenColumns: ['valid_for_ip'] }}
           row_height={ROW_HEIGHT}
         />
+        {isLoadingTokens && <Spinner />}
       </div>
     </div>
   );

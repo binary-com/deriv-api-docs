@@ -48,6 +48,51 @@ describe('Api Token Navbar Item', () => {
     expect(renderResult.container).toBeEmptyDOMElement();
   });
 
+  it('Should close the token dropdown when clicking outside of it', async () => {
+    mockUseAuthContext.mockImplementation(() => ({
+      is_authorized: true,
+      is_logged_in: true,
+    }));
+
+    mockUseApiToken.mockImplementation(() => ({
+      tokens: [
+        {
+          display_name: 'first_token',
+          last_used: '',
+          scopes: ['read', 'trade'],
+          token: 'token_1',
+          valid_for_ip: '',
+        },
+        {
+          display_name: 'michio_app_pages',
+          last_used: '2022-10-04 10:33:51',
+          scopes: ['read', 'trade', 'payments', 'trading_information', 'admin'],
+          token: 'token_2',
+          valid_for_ip: '',
+        },
+      ],
+      currentToken: {
+        display_name: 'first_token',
+        last_used: '',
+        scopes: ['read', 'trade'],
+        token: 'token_1',
+        valid_for_ip: '',
+      },
+      isLoadingTokens: false,
+    }));
+
+    render(<ApiTokenNavbarItem />);
+
+    const current_account_button = screen.getByText(/first_token/i);
+    await userEvent.click(current_account_button);
+
+    const alternative_account = screen.getByText(/michio_app_pages/i);
+    expect(alternative_account).toBeVisible();
+
+    await userEvent.click(document.body);
+    expect(alternative_account).not.toBeVisible();
+  });
+
   it('Should render current api token', async () => {
     mockUseAuthContext.mockImplementation(() => ({
       is_authorized: true,
