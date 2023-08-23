@@ -8,7 +8,6 @@ import { ApplicationObject } from '@deriv/api-types';
 import { RegisterAppDialogError } from '../RegisterAppDialogError';
 import { scopesArrayToObject, scopesObjectToArray } from '@site/src/utils';
 import styles from './update-app-dialog.module.scss';
-import useAuthContext from '@site/src/hooks/useAuthContext';
 
 interface IUpdateAppDialog {
   app: ApplicationObject;
@@ -17,7 +16,6 @@ interface IUpdateAppDialog {
 
 const UpdateAppDialog = ({ app, onClose }: IUpdateAppDialog) => {
   const { send: updateApp, data, error, clear } = useWS('app_update');
-  const { currentLoginAccount } = useAuthContext();
   const { getApps } = useAppManager();
 
   const scopes = scopesArrayToObject(app.scopes);
