@@ -7,6 +7,8 @@ import { RegisterAppDialogSuccess } from '../components/Dialogs/RegisterAppDialo
 import { IRegisterAppForm } from '../types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 
+//test
+
 const AppRegistration = () => {
   const { send: registerApp, error, clear, data } = useWS('app_register');
   const { currentLoginAccount } = useAuthContext();
