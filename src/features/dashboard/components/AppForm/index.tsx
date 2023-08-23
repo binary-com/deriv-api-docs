@@ -89,12 +89,6 @@ const AppForm = ({
     return admin_check_array.includes(true);
   };
 
-  const disableMarkup = useMemo(() => {
-    let isDisabled;
-    isNotDemoCurrency(currentLoginAccount) === 'Demo' ? (isDisabled = true) : (isDisabled = false);
-    return isDisabled;
-  }, [currentLoginAccount]);
-
   const AccountErrorMessage = () => (
     <React.Fragment>
       {!accountHasAdminToken() && (
@@ -211,12 +205,7 @@ const AppForm = ({
             </div>
             <div>
               <div>
-                <div
-                  className={clsx(styles.customTextInput, {
-                    [styles.disableTokenDropdown]: disableMarkup,
-                  })}
-                  id='custom-text-input'
-                >
+                <div className={clsx(styles.customTextInput)} id='custom-text-input'>
                   <input
                     {...register('app_markup_percentage')}
                     type='number'
@@ -225,7 +214,6 @@ const AppForm = ({
                     className='last'
                     defaultValue={0}
                     placeholder=' '
-                    disabled={disableMarkup}
                   />
                   <label htmlFor='app_markup_percentage'>Markup percentage (optional)</label>
                 </div>
