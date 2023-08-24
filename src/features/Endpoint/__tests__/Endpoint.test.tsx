@@ -21,7 +21,7 @@ describe('Endpoint', () => {
   });
 
   it('should have default values in input fields', () => {
-    const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     expect(server).toHaveValue('oauth.deriv.com');
 
@@ -40,7 +40,7 @@ describe('Endpoint', () => {
   });
 
   it('validate user inputs, and provides error messages for server field', async () => {
-    const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
 
     await userEvent.clear(server);
     await userEvent.type(server, 'qa10@deriv.com');
@@ -51,7 +51,7 @@ describe('Endpoint', () => {
   });
 
   it('should validate submit button functionality', async () => {
-    const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     const form = screen.getByRole('form');
 
@@ -89,7 +89,7 @@ describe('Endpoint', () => {
   });
 
   it('Should have submit button enabled with no errors on the from', async () => {
-    const server = screen.getByPlaceholderText('e.g. frontend.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     const submit_button = screen.getByRole('button', { name: /submit/i });
 
