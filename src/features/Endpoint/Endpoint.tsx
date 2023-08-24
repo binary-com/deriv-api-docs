@@ -67,7 +67,7 @@ const EndPoint = () => {
                     },
                   })}
                   name='server_url'
-                  placeholder='e.g. ws.derivws.com'
+                  placeholder='e.g. ws.binaryws.com'
                   className={styles.textInput}
                   required
                 />
