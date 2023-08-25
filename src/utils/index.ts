@@ -126,7 +126,6 @@ export const getAccountsFromSearchParams = (searchParams: string) => {
       });
     }
   }
-  console.log('accounts', accounts);
   return accounts;
 };
 
