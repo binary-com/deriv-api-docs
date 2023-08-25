@@ -123,7 +123,6 @@ export const getAccountsFromSearchParams = (searchParams: string) => {
         name: params.get(`acct${queryIndex}`),
         token: params.get(`token${queryIndex}`),
         currency: params.get(`cur${queryIndex}`),
-        route: params.get(`route`),
       });
     }
   }

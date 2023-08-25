@@ -8,7 +8,6 @@ import useAuthContext from '../hooks/useAuthContext';
 
 export default function Auth(): JSX.Element {
   const { search } = useLocation(); // to get the search params
-  console.log('search', search);
   const { is_logged_in } = useAuthContext();
   const { checkUrlParams } = useAuthParams();
 
