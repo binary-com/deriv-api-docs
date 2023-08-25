@@ -11,15 +11,13 @@ export default function Auth(): JSX.Element {
   const { is_logged_in } = useAuthContext();
   const { checkUrlParams } = useAuthParams();
 
-  const params = new URLSearchParams(search);
-
-  const redirect_route = params.get('route').replace(/%2F/g, '/') || '/';
-
   useEffect(() => {
     checkUrlParams(search);
   }, [checkUrlParams, search]);
 
   if (is_logged_in) {
+    const params = new URLSearchParams(search);
+    const redirect_route = params.get('route').replace(/%2F/g, '/') || '/';
     return <Redirect to={redirect_route} />;
   }
 
