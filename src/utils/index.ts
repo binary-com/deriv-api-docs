@@ -123,9 +123,11 @@ export const getAccountsFromSearchParams = (searchParams: string) => {
         name: params.get(`acct${queryIndex}`),
         token: params.get(`token${queryIndex}`),
         currency: params.get(`cur${queryIndex}`),
+        route: params.get(`route`),
       });
     }
   }
+  console.log('accounts', accounts);
   return accounts;
 };
 
@@ -158,8 +160,13 @@ export const getServerConfig = () => {
   }
 };
 
-export const generateLoginUrl = (language: string, oauthUrl: string, appId: string) => {
-  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
+export const generateLoginUrl = (
+  language: string,
+  oauthUrl: string,
+  appId: string,
+  route: string,
+) => {
+  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}&route=${route}`;
 };
 
 interface IScopesLike {

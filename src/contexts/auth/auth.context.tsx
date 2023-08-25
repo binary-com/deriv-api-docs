@@ -4,6 +4,7 @@ export interface IUserLoginAccount {
   name: string;
   token: string;
   currency: string;
+  route: string;
 }
 
 export type IUserAccounts = AuthorizeResponse['authorize']['account_list'];
