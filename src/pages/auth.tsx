@@ -13,7 +13,7 @@ export default function Auth(): JSX.Element {
 
   const params = new URLSearchParams(search);
 
-  const redirect_route = params.get('route').replace(/%2F/g, '/');
+  const redirect_route = params.get('route').replace(/%2F/g, '/') || '/';
 
   useEffect(() => {
     checkUrlParams(search);
