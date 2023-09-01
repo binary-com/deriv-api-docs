@@ -71,7 +71,7 @@ Before running or contributing to this project, you need to install the followin
     ```
 
 6.  **Run the Build**
-    Run proxy server in seperate terminal
+    Run the proxy server in separate terminal
 
     ```sh
     npm run start:auth
