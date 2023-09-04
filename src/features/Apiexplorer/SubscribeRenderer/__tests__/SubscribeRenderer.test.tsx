@@ -11,7 +11,9 @@ import { IPlaygroundContext } from '@site/src/contexts/playground/playground.con
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 
 jest.mock('@site/src/hooks/useScrollTo');
-
+jest.mock('@docusaurus/router', () => ({
+  useLocation: jest.fn(),
+}));
 jest.mock('@site/src/hooks/useAuthContext');
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<() => Partial<IAuthContext>>;

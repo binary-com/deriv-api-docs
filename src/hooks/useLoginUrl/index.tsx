@@ -12,6 +12,7 @@ const useLoginUrl = () => {
 
       return generateLoginUrl(language, oauth, appId, route);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [location],
   );
 

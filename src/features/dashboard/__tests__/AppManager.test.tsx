@@ -7,6 +7,9 @@ import { AppManager } from '..';
 import { useTable } from 'react-table';
 
 jest.mock('@site/src/hooks/useAuthContext');
+jest.mock('@docusaurus/router', () => ({
+  useLocation: jest.fn(),
+}));
 
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<
   () => Partial<ReturnType<typeof useAuthContext>>

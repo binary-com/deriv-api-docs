@@ -3,6 +3,10 @@ import LoginDialog from '..';
 import userEvent from '@testing-library/user-event';
 import { screen, render } from '@testing-library/react';
 
+jest.mock('@docusaurus/router', () => ({
+  useLocation: jest.fn(),
+}));
+
 describe('LoginDialog', () => {
   test('if sign up button is clickable', async () => {
     location.assign = jest.fn();
