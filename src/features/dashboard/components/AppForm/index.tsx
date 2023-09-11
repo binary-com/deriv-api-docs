@@ -277,11 +277,6 @@ const AppForm = ({
                   placeholder=' '
                 />
                 <label htmlFor='app_verification_uri'>Verification URL (optional)</label>
-                <Text
-                  as='p'
-                  type='paragraph-2'
-                  className={`${styles.helperText} ${styles.formsubHeading}`}
-                ></Text>
               </div>
               {errors && errors.verification_uri && (
                 <span className='error-message'>{errors.verification_uri.message}</span>
