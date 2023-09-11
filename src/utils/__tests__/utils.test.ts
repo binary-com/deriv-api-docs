@@ -188,7 +188,8 @@ describe('Get Server Config', () => {
 
 describe('Generate Login Url', () => {
   it('Should generate correct url', () => {
-    const result = utils.generateLoginUrl('es', 'test.server.ws', '5544');
+    const route = window.location.pathname;
+    const result = utils.generateLoginUrl('es', 'test.server.ws', '5544', route);
     expect(result).toMatch(/l=es/);
     expect(result).toMatch(/https:\/\/test.server.ws/);
     expect(result).toMatch(/app_id=5544/);

@@ -158,8 +158,13 @@ export const getServerConfig = () => {
   }
 };
 
-export const generateLoginUrl = (language: string, oauthUrl: string, appId: string) => {
-  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}`;
+export const generateLoginUrl = (
+  language: string,
+  oauthUrl: string,
+  appId: string,
+  route: string,
+) => {
+  return `https://${oauthUrl}/oauth2/authorize?app_id=${appId}&l=${language}&route=${route}`;
 };
 
 interface IScopesLike {

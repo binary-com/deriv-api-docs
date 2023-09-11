@@ -16,7 +16,9 @@ export default function Auth(): JSX.Element {
   }, [checkUrlParams, search]);
 
   if (is_logged_in) {
-    return <Redirect to={'/'} />;
+    const params = new URLSearchParams(search);
+    const redirect_route = params.get('route').replace(/%2F/g, '/') || '/';
+    return <Redirect to={redirect_route} />;
   }
 
   return (

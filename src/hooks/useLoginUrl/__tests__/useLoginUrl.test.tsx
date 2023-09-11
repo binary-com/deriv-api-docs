@@ -7,6 +7,10 @@ jest
   .spyOn(utils, 'getServerConfig')
   .mockReturnValue({ appId: '1234', serverUrl: 'test.binary.sx', oauth: 'test.oauth.sx' });
 
+jest.mock('@docusaurus/router', () => ({
+  useLocation: jest.fn(),
+}));
+
 describe('Use Login URL', () => {
   afterEach(() => {
     jest.clearAllMocks();
