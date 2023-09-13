@@ -1,48 +1,61 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "MT5: Password Change (request)",
-  "description": "To change passwords of the MT5 account.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["admin"],
-  "additionalProperties": false,
-  "required": ["mt5_password_change", "login", "new_password", "old_password"],
-  "properties": {
-    "mt5_password_change": {
-      "description": "Must be `1`",
-      "type": "integer",
-      "enum": [1]
-    },
-    "login": {
-      "description": "MT5 user login",
-      "type": "string",
-      "pattern": "^MT[DR]?[0-9]+$"
-    },
-    "new_password": {
-      "description": "New password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).",
-      "type": "string",
-      "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
-      "sensitive": 1
-    },
-    "old_password": {
-      "description": "Old password for validation (non-empty string, accepts any printable ASCII character)",
-      "type": "string",
-      "pattern": "^[ -~]+$",
-      "sensitive": 1
-    },
-    "password_type": {
-      "description": "[Optional] Type of the password to change.",
-      "type": "string",
-      "default": "main",
-      "enum": ["main", "investor"]
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MT5: Password Change (request)",
+    "description": "To change passwords of the MT5 account.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "admin"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "mt5_password_change",
+        "login",
+        "new_password",
+        "old_password"
+    ],
+    "properties": {
+        "mt5_password_change": {
+            "description": "Must be `1`",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "login": {
+            "description": "MT5 user login",
+            "type": "string",
+            "pattern": "^MT[DR]?[0-9]+$"
+        },
+        "new_password": {
+            "description": "New password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).",
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
+            "sensitive": 1
+        },
+        "old_password": {
+            "description": "Old password for validation (non-empty string, accepts any printable ASCII character)",
+            "type": "string",
+            "pattern": "^[ -~]+$",
+            "sensitive": 1
+        },
+        "password_type": {
+            "description": "[Optional] Type of the password to change.",
+            "type": "string",
+            "default": "main",
+            "enum": [
+                "main",
+                "investor"
+            ]
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

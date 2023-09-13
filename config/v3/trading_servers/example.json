@@ -1,4 +1,4 @@
 {
-  "trading_servers": 1,
-  "platform": "mt5"
+    "trading_servers": 1,
+    "platform": "mt5"
 }

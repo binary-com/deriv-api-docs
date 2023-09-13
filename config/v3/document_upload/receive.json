@@ -1,56 +1,64 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Document Upload (response)",
-  "description": "Receive details of uploaded authentication documents",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "document_upload": {
-      "title": "document_upload",
-      "description": "Details of the uploaded documents.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["call_type", "upload_id"],
-      "properties": {
-        "call_type": {
-          "description": "Current call type, add this to your binary payload metadata",
-          "type": "number"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Document Upload (response)",
+    "description": "Receive details of uploaded authentication documents",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "document_upload": {
+            "title": "document_upload",
+            "description": "Details of the uploaded documents.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "call_type",
+                "upload_id"
+            ],
+            "properties": {
+                "call_type": {
+                    "description": "Current call type, add this to your binary payload metadata",
+                    "type": "number"
+                },
+                "checksum": {
+                    "description": "Hex encoded SHA-1 checksum of the file",
+                    "type": "string"
+                },
+                "document_issuing_country": {
+                    "description": "2-letter country code",
+                    "type": "string",
+                    "pattern": "^[a-z]{2}$"
+                },
+                "size": {
+                    "description": "File size",
+                    "type": "number"
+                },
+                "status": {
+                    "description": "Upload status (`success` or `failure`)",
+                    "type": "string"
+                },
+                "upload_id": {
+                    "description": "Current upload ID, add this to your binary payload metadata",
+                    "type": "number"
+                }
+            }
         },
-        "checksum": {
-          "description": "Hex encoded SHA-1 checksum of the file",
-          "type": "string"
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
         },
-        "document_issuing_country": {
-          "description": "2-letter country code",
-          "type": "string",
-          "pattern": "^[a-z]{2}$"
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "document_upload"
+            ]
         },
-        "size": {
-          "description": "File size",
-          "type": "number"
-        },
-        "status": {
-          "description": "Upload status (`success` or `failure`)",
-          "type": "string"
-        },
-        "upload_id": {
-          "description": "Current upload ID, add this to your binary payload metadata",
-          "type": "number"
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["document_upload"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

@@ -1,58 +1,81 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "OAuth Applications (response)",
-  "description": "A message with used applications",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "oauth_apps": {
-      "title": "oauth_apps",
-      "description": "List of OAuth applications that used for the authorized account.",
-      "type": "array",
-      "items": {
-        "title": "Application object",
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["app_id", "app_markup_percentage", "last_used", "name", "scopes"],
-        "properties": {
-          "app_id": {
-            "description": "Application ID.",
-            "type": "integer"
-          },
-          "app_markup_percentage": {
-            "description": "Markup added to contract prices (as a percentage of contract payout)",
-            "type": "number"
-          },
-          "last_used": {
-            "description": "The last date which the application has been used.",
-            "type": ["null", "string"]
-          },
-          "name": {
-            "description": "Application name",
-            "type": "string"
-          },
-          "scopes": {
-            "description": "The list of permission scopes grant for each app.",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "OAuth Applications (response)",
+    "description": "A message with used applications",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "oauth_apps": {
+            "title": "oauth_apps",
+            "description": "List of 3rd party OAuth applications that used for the authorized account.",
             "type": "array",
             "items": {
-              "type": "string"
+                "title": "Application object",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "app_id",
+                    "app_markup_percentage",
+                    "last_used",
+                    "name",
+                    "official",
+                    "scopes"
+                ],
+                "properties": {
+                    "app_id": {
+                        "description": "Application ID.",
+                        "type": "integer"
+                    },
+                    "app_markup_percentage": {
+                        "description": "Markup added to contract prices (as a percentage of contract payout)",
+                        "type": "number"
+                    },
+                    "last_used": {
+                        "description": "The last date which the application has been used.",
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "name": {
+                        "description": "Application name",
+                        "type": "string"
+                    },
+                    "official": {
+                        "description": "Boolean value: 1 or 0, indicating 1 if app is an official app and 0 incase of unofficial app",
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    "scopes": {
+                        "description": "The list of permission scopes grant for each app.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
-          }
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "oauth_apps"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["oauth_apps"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }
