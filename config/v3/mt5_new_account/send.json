@@ -1,124 +1,171 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "MT5: New Account (request)",
-  "description": "This call creates new MT5 user, either demo or real money user.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["admin"],
-  "additionalProperties": false,
-  "required": ["mt5_new_account", "account_type", "email", "leverage", "mainPassword", "name"],
-  "properties": {
-    "mt5_new_account": {
-      "description": "Must be `1`",
-      "type": "integer",
-      "enum": [1],
-      "sensitive": 1
-    },
-    "account_type": {
-      "description": "Account type. If set to 'financial', setting 'mt5_account_type' is also required.",
-      "type": "string",
-      "enum": ["demo", "gaming", "financial"]
-    },
-    "address": {
-      "description": "[Optional] The address of the user. The maximum length of this address field is 128 characters.",
-      "type": "string",
-      "pattern": "^[\\p{L}\\p{Nd}'.,:;()\\x{b0}@#/-][\\p{L}\\p{Nd}\\s'.,:;()\\x{b0}@#/-]{0,128}$"
-    },
-    "city": {
-      "description": "[Optional] User's city of residence.",
-      "type": "string",
-      "pattern": "^\\p{L}[\\p{L}\\s'.-]{0,99}$"
-    },
-    "company": {
-      "description": "[Optional] Name of the client's company. The maximum length of the company name is 64 characters.",
-      "type": "string",
-      "pattern": "^[\\p{L}\\p{Nd}\\s'.,@/-]{0,64}$"
-    },
-    "country": {
-      "description": "[Optional] 2-letter country code (value received from `residence_list` call).",
-      "type": "string",
-      "pattern": "^[a-z]{2}$"
-    },
-    "currency": {
-      "description": "[Optional] MT5 account currency, the default value will be the qualified account currency.",
-      "type": "string",
-      "pattern": "^(|[a-zA-Z0-9]{2,20})$"
-    },
-    "dry_run": {
-      "description": "[Optional] If set to 1, only validation is performed.",
-      "type": "integer",
-      "default": 0,
-      "enum": [0, 1]
-    },
-    "email": {
-      "description": "Email address",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}$"
-    },
-    "investPassword": {
-      "description": "[Optional] The investor password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).",
-      "type": "string",
-      "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
-      "sensitive": 1
-    },
-    "leverage": {
-      "description": "Client leverage (from 1 to 1000).",
-      "type": "number"
-    },
-    "mainPassword": {
-      "description": "The master password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address). This field is required.",
-      "type": "string",
-      "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
-      "sensitive": 1
-    },
-    "mt5_account_category": {
-      "description": "[Optional] To choose whether account is conventional or not. Unavailable for financial_stp MT5_account_type",
-      "type": "string",
-      "enum": ["conventional"]
-    },
-    "mt5_account_type": {
-      "description": "[Optional] Financial: Variable spreads, High leverage. Financial STP: Variable spreads, Medium Leverage, more products. If 'account_type' set to 'financial', setting 'mt5_account_type' is also required.",
-      "type": "string",
-      "enum": ["financial", "financial_stp"]
-    },
-    "name": {
-      "description": "Client's name. The maximum length here is 101 characters.",
-      "type": "string",
-      "pattern": "^.{1,101}$"
-    },
-    "phone": {
-      "description": "[Optional] User's phone number.",
-      "type": ["null", "string"],
-      "sensitive": 1
-    },
-    "phonePassword": {
-      "description": "[Optional] The user's phone password.",
-      "type": "string",
-      "maxLength": 50,
-      "sensitive": 1
-    },
-    "server": {
-      "description": "[Optional] Trade server.",
-      "type": ["null", "string"],
-      "enum": ["p01_ts01", "p01_ts02", "p01_ts03", "p01_ts04", "p02_ts02"]
-    },
-    "state": {
-      "description": "[Optional] User's state (region) of residence.",
-      "type": "string",
-      "pattern": "^.{0,50}$"
-    },
-    "zipCode": {
-      "description": "[Optional] User's zip code.",
-      "type": "string",
-      "maxLength": 50
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MT5: New Account (request)",
+    "description": "This call creates new MT5 user, either demo or real money user.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "admin"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "mt5_new_account",
+        "account_type",
+        "email",
+        "leverage",
+        "mainPassword",
+        "name"
+    ],
+    "properties": {
+        "mt5_new_account": {
+            "description": "Must be `1`",
+            "type": "integer",
+            "enum": [
+                1
+            ],
+            "sensitive": 1
+        },
+        "account_type": {
+            "description": "Account type. If set to 'financial', setting 'mt5_account_type' is also required.",
+            "type": "string",
+            "enum": [
+                "demo",
+                "gaming",
+                "financial",
+                "all"
+            ]
+        },
+        "address": {
+            "description": "[Optional] The address of the user. The maximum length of this address field is 128 characters.",
+            "type": "string",
+            "pattern": "^[\\p{L}\\p{Nd}'.,:;()\\x{b0}@#/-][\\p{L}\\p{Nd}\\s'.,:;()\\x{b0}@#/-]{0,128}$"
+        },
+        "city": {
+            "description": "[Optional] User's city of residence.",
+            "type": "string",
+            "pattern": "^\\p{L}[\\p{L}\\s'.-]{0,99}$"
+        },
+        "company": {
+            "description": "[Optional] Name of the client's company. The maximum length of the company name is 64 characters.",
+            "type": "string",
+            "pattern": "^[\\p{L}\\p{Nd}\\s'.,@/-]{0,64}$"
+        },
+        "country": {
+            "description": "[Optional] 2-letter country code (value received from `residence_list` call).",
+            "type": "string",
+            "pattern": "^[a-z]{2}$"
+        },
+        "currency": {
+            "description": "[Optional] MT5 account currency, the default value will be the qualified account currency.",
+            "type": "string",
+            "pattern": "^(|[a-zA-Z0-9]{2,20})$"
+        },
+        "dry_run": {
+            "description": "[Optional] If set to 1, only validation is performed.",
+            "type": "integer",
+            "default": 0,
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "email": {
+            "description": "Email address",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}$"
+        },
+        "investPassword": {
+            "description": "[Optional] The investor password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).",
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
+            "sensitive": 1
+        },
+        "leverage": {
+            "description": "Client leverage (from 1 to 1000).",
+            "type": "number"
+        },
+        "mainPassword": {
+            "description": "The master password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address). This field is required.",
+            "type": "string",
+            "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
+            "sensitive": 1
+        },
+        "mt5_account_category": {
+            "description": "[Optional] To choose whether account is conventional or swap_free. Unavailable for financial_stp MT5_account_type",
+            "type": "string",
+            "enum": [
+                "conventional",
+                "swap_free"
+            ]
+        },
+        "mt5_account_type": {
+            "description": "[Optional] Financial: Variable spreads, High leverage. Financial STP: Variable spreads, Medium Leverage, more products. If 'account_type' set to 'financial', setting 'mt5_account_type' is also required.",
+            "type": "string",
+            "enum": [
+                "financial",
+                "financial_stp"
+            ]
+        },
+        "name": {
+            "description": "Client's name. The maximum length here is 101 characters.",
+            "type": "string",
+            "maxLength": 101,
+            "minLength": 1
+        },
+        "phone": {
+            "description": "[Optional] User's phone number.",
+            "type": [
+                "null",
+                "string"
+            ],
+            "sensitive": 1
+        },
+        "phonePassword": {
+            "description": "[Optional] The user's phone password.",
+            "type": "string",
+            "maxLength": 50,
+            "sensitive": 1
+        },
+        "server": {
+            "description": "[Optional] Trade server.",
+            "type": [
+                "null",
+                "string"
+            ],
+            "enum": [
+                "p01_ts01",
+                "p01_ts02",
+                "p01_ts03",
+                "p01_ts04",
+                "p02_ts02"
+            ]
+        },
+        "state": {
+            "description": "[Optional] User's state (region) of residence.",
+            "type": "string",
+            "pattern": "^.{0,50}$"
+        },
+        "sub_account_category": {
+            "description": "[Optional] Indicate the sub account category that we have in the cfd group naming convention.",
+            "type": "string",
+            "enum": [
+                "swap_free",
+                "swap_free_high_risk"
+            ]
+        },
+        "zipCode": {
+            "description": "[Optional] User's zip code.",
+            "type": "string",
+            "maxLength": 50
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

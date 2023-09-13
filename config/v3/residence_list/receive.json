@@ -1,161 +1,178 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Countries List (response)",
-  "description": "A message with Residence List",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "residence_list": {
-      "title": "residence_list",
-      "description": "List of countries for account opening",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "disabled": {
-            "description": "Disabled.",
-            "type": "string"
-          },
-          "identity": {
-            "description": "Information about identity options available",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "services": {
-                "description": "Identity services configuration",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Countries List (response)",
+    "description": "A message with Residence List",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "residence_list": {
+            "title": "residence_list",
+            "description": "List of countries for account opening",
+            "type": "array",
+            "items": {
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                  "idv": {
-                    "description": "IDV configuration",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "documents_supported": {
-                        "description": "Documents supported by the IDV service in this country",
+                    "disabled": {
+                        "description": "Disabled.",
+                        "type": "string"
+                    },
+                    "identity": {
+                        "description": "Information about identity options available",
                         "type": "object",
-                        "patternProperties": {
-                          "^\\w+$": {
-                            "description": "Document type",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                              "additional": {
-                                "description": "[Optional] Additional input required from the user",
+                        "additionalProperties": false,
+                        "properties": {
+                            "services": {
+                                "description": "Identity services configuration",
                                 "type": "object",
                                 "additionalProperties": false,
                                 "properties": {
-                                  "display_name": {
-                                    "description": "The localized display name",
-                                    "type": "string"
-                                  },
-                                  "format": {
-                                    "description": "[Optional] Regex pattern to validate documents",
-                                    "type": "string"
-                                  }
+                                    "idv": {
+                                        "description": "IDV configuration",
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "documents_supported": {
+                                                "description": "Documents supported by the IDV service in this country",
+                                                "type": "object",
+                                                "patternProperties": {
+                                                    "^\\w+$": {
+                                                        "description": "Document type",
+                                                        "type": "object",
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "additional": {
+                                                                "description": "[Optional] Additional input required from the user",
+                                                                "type": "object",
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "display_name": {
+                                                                        "description": "The localized display name",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "format": {
+                                                                        "description": "[Optional] Regex pattern to validate documents",
+                                                                        "type": "string"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "display_name": {
+                                                                "description": "The localized display name",
+                                                                "type": "string"
+                                                            },
+                                                            "format": {
+                                                                "description": "[Optional] Regex pattern to validate documents",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "has_visual_sample": {
+                                                "description": "Flag which indicates whether this country has IDV visual samples",
+                                                "type": "integer",
+                                                "enum": [
+                                                    0,
+                                                    1
+                                                ]
+                                            },
+                                            "is_country_supported": {
+                                                "description": "Flag which indicates whether IDV is available in this country",
+                                                "type": "integer",
+                                                "enum": [
+                                                    0,
+                                                    1
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "onfido": {
+                                        "description": "Onfido configuration",
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "documents_supported": {
+                                                "description": "Documents supported by the IDV service in this country",
+                                                "type": "object",
+                                                "patternProperties": {
+                                                    "^\\w+$": {
+                                                        "description": "Document type",
+                                                        "type": "object",
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "display_name": {
+                                                                "description": "The localized display name",
+                                                                "type": "string"
+                                                            },
+                                                            "format": {
+                                                                "description": "[Optional] Regex pattern to validate documents",
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "is_country_supported": {
+                                                "description": "Flag which indicates whether Onfido is available in this country",
+                                                "type": "integer",
+                                                "enum": [
+                                                    0,
+                                                    1
+                                                ]
+                                            }
+                                        }
+                                    }
                                 }
-                              },
-                              "display_name": {
-                                "description": "The localized display name",
-                                "type": "string"
-                              },
-                              "format": {
-                                "description": "[Optional] Regex pattern to validate documents",
-                                "type": "string"
-                              }
                             }
-                          }
                         }
-                      },
-                      "has_visual_sample": {
-                        "description": "Flag which indicates whether this country has IDV visual samples",
-                        "type": "integer",
-                        "enum": [0, 1]
-                      },
-                      "is_country_supported": {
-                        "description": "Flag which indicates whether IDV is available in this country",
-                        "type": "integer",
-                        "enum": [0, 1]
-                      }
-                    }
-                  },
-                  "onfido": {
-                    "description": "Onfido configuration",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "documents_supported": {
-                        "description": "Documents supported by the IDV service in this country",
-                        "type": "object",
-                        "patternProperties": {
-                          "^\\w+$": {
-                            "description": "Document type",
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                              "display_name": {
-                                "description": "The localized display name",
-                                "type": "string"
-                              },
-                              "format": {
-                                "description": "[Optional] Regex pattern to validate documents",
-                                "type": "string"
-                              }
-                            }
-                          }
+                    },
+                    "phone_idd": {
+                        "description": "IDD code of country",
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "selected": {
+                        "description": "Selected.",
+                        "type": "string"
+                    },
+                    "text": {
+                        "description": "Country full name",
+                        "type": "string"
+                    },
+                    "tin_format": {
+                        "description": "Country tax identifier format",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
                         }
-                      },
-                      "is_country_supported": {
-                        "description": "Flag which indicates whether Onfido is available in this country",
-                        "type": "integer",
-                        "enum": [0, 1]
-                      }
+                    },
+                    "value": {
+                        "description": "2-letter country code",
+                        "type": "string",
+                        "pattern": "^\\w\\w$"
                     }
-                  }
                 }
-              }
             }
-          },
-          "phone_idd": {
-            "description": "IDD code of country",
-            "type": ["null", "string"]
-          },
-          "selected": {
-            "description": "Selected.",
-            "type": "string"
-          },
-          "text": {
-            "description": "Country full name",
-            "type": "string"
-          },
-          "tin_format": {
-            "description": "Country tax identifier format",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "value": {
-            "description": "2-letter country code",
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
             "type": "string",
-            "pattern": "^\\w\\w$"
-          }
+            "enum": [
+                "residence_list"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["residence_list"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

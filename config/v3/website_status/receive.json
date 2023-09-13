@@ -1,483 +1,583 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Server Status (response)",
-  "description": "Server status alongside general settings like call limits, currencies information, supported languages, etc.",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "website_status": {
-      "title": "website_status",
-      "description": "Server status and other information regarding general settings",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["api_call_limits", "currencies_config"],
-      "properties": {
-        "api_call_limits": {
-          "description": "Maximum number of API calls during specified period of time.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "max_proposal_subscription",
-            "max_requestes_general",
-            "max_requests_outcome",
-            "max_requests_pricing"
-          ],
-          "properties": {
-            "max_proposal_subscription": {
-              "description": "Maximum subscription to proposal calls.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["applies_to", "max"],
-              "properties": {
-                "applies_to": {
-                  "description": "Describes which calls this limit applies to.",
-                  "type": "string"
-                },
-                "max": {
-                  "description": "Maximum number of allowed calls.",
-                  "type": "number"
-                }
-              }
-            },
-            "max_requestes_general": {
-              "description": "Maximum number of general requests allowed during specified period of time.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["applies_to", "hourly", "minutely"],
-              "properties": {
-                "applies_to": {
-                  "description": "Describes which calls this limit applies to.",
-                  "type": "string"
-                },
-                "hourly": {
-                  "description": "The maximum of allowed calls per hour.",
-                  "type": "number"
-                },
-                "minutely": {
-                  "description": "The maximum of allowed calls per minute.",
-                  "type": "number"
-                }
-              }
-            },
-            "max_requests_outcome": {
-              "description": "Maximum number of outcome requests allowed during specified period of time.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["applies_to", "hourly", "minutely"],
-              "properties": {
-                "applies_to": {
-                  "description": "Describes which calls this limit applies to.",
-                  "type": "string"
-                },
-                "hourly": {
-                  "description": "The maximum of allowed calls per hour.",
-                  "type": "number"
-                },
-                "minutely": {
-                  "description": "The maximum of allowed calls per minute.",
-                  "type": "number"
-                }
-              }
-            },
-            "max_requests_pricing": {
-              "description": "Maximum number of pricing requests allowed during specified period of time.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["applies_to", "hourly", "minutely"],
-              "properties": {
-                "applies_to": {
-                  "description": "Describes which calls this limit applies to.",
-                  "type": "string"
-                },
-                "hourly": {
-                  "description": "The maximum of allowed calls per hour.",
-                  "type": "number"
-                },
-                "minutely": {
-                  "description": "The maximum of allowed calls per minute.",
-                  "type": "number"
-                }
-              }
-            }
-          }
-        },
-        "broker_codes": {
-          "description": "List of all available broker codes.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "clients_country": {
-          "description": "Country code of connected IP",
-          "type": "string"
-        },
-        "currencies_config": {
-          "description": "Available currencies and their information",
-          "type": "object",
-          "minProperties": 1,
-          "patternProperties": {
-            "^[a-zA-Z0-9]{2,20}$": {
-              "description": "Currency code",
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "fractional_digits",
-                "is_deposit_suspended",
-                "is_suspended",
-                "is_withdrawal_suspended",
-                "stake_default",
-                "transfer_between_accounts",
-                "type"
-              ],
-              "properties": {
-                "fractional_digits": {
-                  "description": "Number of fractional digits.",
-                  "type": "number"
-                },
-                "is_deposit_suspended": {
-                  "description": "Current status for payment deposit for the currency",
-                  "type": "number",
-                  "enum": [0, 1]
-                },
-                "is_suspended": {
-                  "description": "Current status for the currency",
-                  "type": "number",
-                  "enum": [0, 1]
-                },
-                "is_withdrawal_suspended": {
-                  "description": "Current status for payment withdrawal for the currency",
-                  "type": "number",
-                  "enum": [0, 1]
-                },
-                "name": {
-                  "description": "Name of the currency.",
-                  "type": "string"
-                },
-                "stake_default": {
-                  "description": "Default stake value for the currency.",
-                  "type": "number",
-                  "minimum": 0
-                },
-                "transfer_between_accounts": {
-                  "description": "Fees and range of allowed amount for transfer between accounts with different types of currencies.",
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": ["fees", "limits"],
-                  "properties": {
-                    "fees": {
-                      "description": "The fee that applies for transfer between accounts with different types of currencies.",
-                      "type": "object",
-                      "patternProperties": {
-                        "^[a-zA-Z0-9]{2,20}$": {
-                          "description": "Currency code.",
-                          "type": "number",
-                          "maximum": 7,
-                          "minimum": 0
-                        }
-                      }
-                    },
-                    "limits": {
-                      "description": "Range of allowed amount for transfer between accounts.",
-                      "oneOf": [
-                        {
-                          "type": "object",
-                          "required": ["min"],
-                          "properties": {
-                            "max": {
-                              "description": "Maximum allowed amount for transfer between accounts with different types of currencies.",
-                              "type": "number",
-                              "minimum": 0
-                            },
-                            "min": {
-                              "description": "Minimum allowed amount for transfer between accounts with different types of currencies.",
-                              "type": "number",
-                              "minimum": 0
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Server Status (response)",
+    "description": "Server status alongside general settings like call limits, currencies information, supported languages, etc.",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "website_status": {
+            "title": "website_status",
+            "description": "Server status and other information regarding general settings",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "api_call_limits",
+                "currencies_config"
+            ],
+            "properties": {
+                "api_call_limits": {
+                    "description": "Maximum number of API calls during specified period of time.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "max_proposal_subscription",
+                        "max_requestes_general",
+                        "max_requests_outcome",
+                        "max_requests_pricing"
+                    ],
+                    "properties": {
+                        "max_proposal_subscription": {
+                            "description": "Maximum subscription to proposal calls.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "applies_to",
+                                "max"
+                            ],
+                            "properties": {
+                                "applies_to": {
+                                    "description": "Describes which calls this limit applies to.",
+                                    "type": "string"
+                                },
+                                "max": {
+                                    "description": "Maximum number of allowed calls.",
+                                    "type": "number"
+                                }
                             }
-                          }
                         },
-                        {
-                          "type": "null"
+                        "max_requestes_general": {
+                            "description": "Maximum number of general requests allowed during specified period of time.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "applies_to",
+                                "hourly",
+                                "minutely"
+                            ],
+                            "properties": {
+                                "applies_to": {
+                                    "description": "Describes which calls this limit applies to.",
+                                    "type": "string"
+                                },
+                                "hourly": {
+                                    "description": "The maximum of allowed calls per hour.",
+                                    "type": "number"
+                                },
+                                "minutely": {
+                                    "description": "The maximum of allowed calls per minute.",
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "max_requests_outcome": {
+                            "description": "Maximum number of outcome requests allowed during specified period of time.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "applies_to",
+                                "hourly",
+                                "minutely"
+                            ],
+                            "properties": {
+                                "applies_to": {
+                                    "description": "Describes which calls this limit applies to.",
+                                    "type": "string"
+                                },
+                                "hourly": {
+                                    "description": "The maximum of allowed calls per hour.",
+                                    "type": "number"
+                                },
+                                "minutely": {
+                                    "description": "The maximum of allowed calls per minute.",
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "max_requests_pricing": {
+                            "description": "Maximum number of pricing requests allowed during specified period of time.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "applies_to",
+                                "hourly",
+                                "minutely"
+                            ],
+                            "properties": {
+                                "applies_to": {
+                                    "description": "Describes which calls this limit applies to.",
+                                    "type": "string"
+                                },
+                                "hourly": {
+                                    "description": "The maximum of allowed calls per hour.",
+                                    "type": "number"
+                                },
+                                "minutely": {
+                                    "description": "The maximum of allowed calls per minute.",
+                                    "type": "number"
+                                }
+                            }
                         }
-                      ]
-                    },
-                    "limits_derivez": {
-                      "description": "Range of allowed amount for transfer between derivez accounts.",
-                      "type": "object"
-                    },
-                    "limits_dxtrade": {
-                      "description": "Range of allowed amount for transfer between dxtrade accounts.",
-                      "type": "object"
-                    },
-                    "limits_mt5": {
-                      "description": "Range of allowed amount for transfer between mt5 accounts.",
-                      "type": "object"
                     }
-                  }
                 },
-                "type": {
-                  "description": "Type of the currency.",
-                  "type": "string",
-                  "enum": ["fiat", "crypto"]
-                }
-              }
-            }
-          }
-        },
-        "dxtrade_status": {
-          "description": "Suspension status of Dxtrade/DerivX API calls",
-          "type": "object",
-          "additionalProperties": false,
-          "minProperties": 3,
-          "properties": {
-            "all": {
-              "description": "Suspension of Dxtrade/DerivX API calls on all servers.",
-              "type": "integer"
-            },
-            "demo": {
-              "description": "Suspension of Dxtrade/DerivX API calls on demo servers.",
-              "type": "integer"
-            },
-            "real": {
-              "description": "Suspension of Dxtrade/DerivX API calls on real trading servers.",
-              "type": "integer"
-            }
-          }
-        },
-        "message": {
-          "description": "Text for site status banner, contains problem description. shown only if set by the system.",
-          "type": "string"
-        },
-        "mt5_status": {
-          "description": "Suspension status of MT5 API calls",
-          "type": "object",
-          "additionalProperties": false,
-          "minProperties": 2,
-          "properties": {
-            "demo": {
-              "description": "Suspension of MT5 API calls on demo servers.",
-              "type": "array"
-            },
-            "real": {
-              "description": "Suspension of MT5 API calls on real trading servers.",
-              "type": "array"
-            }
-          }
-        },
-        "p2p_config": {
-          "description": "Peer-to-peer payment system settings.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "adverts_active_limit",
-            "cancellation_block_duration",
-            "cancellation_count_period",
-            "cancellation_grace_period",
-            "cancellation_limit",
-            "cross_border_ads_enabled",
-            "disabled",
-            "feature_level",
-            "fixed_rate_adverts",
-            "float_rate_adverts",
-            "float_rate_offset_limit",
-            "local_currencies",
-            "maximum_advert_amount",
-            "maximum_order_amount",
-            "order_daily_limit",
-            "order_payment_period",
-            "payment_methods_enabled",
-            "review_period",
-            "supported_currencies"
-          ],
-          "properties": {
-            "adverts_active_limit": {
-              "description": "Maximum number of active ads allowed by an advertiser per currency pair and advert type (buy or sell).",
-              "type": "integer"
-            },
-            "adverts_archive_period": {
-              "description": "Adverts will be deactivated if no activity occurs within this period, in days.",
-              "type": "integer"
-            },
-            "cancellation_block_duration": {
-              "description": "A buyer will be blocked for this duration after exceeding the cancellation limit, in hours.",
-              "type": "integer"
-            },
-            "cancellation_count_period": {
-              "description": "The period within which to count buyer cancellations, in hours.",
-              "type": "integer"
-            },
-            "cancellation_grace_period": {
-              "description": "A buyer may cancel an order within this period without negative consequences, in minutes after order creation.",
-              "type": "integer"
-            },
-            "cancellation_limit": {
-              "description": "A buyer will be temporarily barred after marking this number of cancellations within cancellation_period.",
-              "type": "integer"
-            },
-            "cross_border_ads_enabled": {
-              "description": "When 0, only exchanges in local currency are allowed for P2P advertiser.",
-              "type": "integer",
-              "enum": [0, 1]
-            },
-            "disabled": {
-              "description": "When 1, the P2P service is unavailable.",
-              "type": "integer",
-              "enum": [0, 1]
-            },
-            "feature_level": {
-              "description": "Indicates the availbility of certain backend features.",
-              "type": "integer"
-            },
-            "fixed_rate_adverts": {
-              "description": "Availability of fixed rate adverts.",
-              "type": "string",
-              "enum": ["disabled", "enabled", "list_only"]
-            },
-            "fixed_rate_adverts_end_date": {
-              "description": "Date on which fixed rate adverts will be deactivated.",
-              "type": "string"
-            },
-            "float_rate_adverts": {
-              "description": "Availability of floating rate adverts.",
-              "type": "string",
-              "enum": ["disabled", "enabled", "list_only"]
-            },
-            "float_rate_offset_limit": {
-              "description": "Maximum rate offset for floating rate adverts.",
-              "type": "number"
-            },
-            "local_currencies": {
-              "description": "Available local currencies for p2p_advert_list request.",
-              "type": "array",
-              "items": {
-                "description": "Local currency details.",
-                "type": "object",
-                "additionalProperties": false,
-                "required": ["display_name", "has_adverts", "symbol"],
-                "properties": {
-                  "display_name": {
-                    "description": "Local currency name",
+                "broker_codes": {
+                    "description": "List of all available broker codes.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true
+                },
+                "clients_country": {
+                    "description": "Country code of connected IP",
                     "type": "string"
-                  },
-                  "has_adverts": {
-                    "description": "Indicates that there are adverts available for this currency.",
-                    "type": "integer",
-                    "enum": [0, 1]
-                  },
-                  "is_default": {
-                    "description": "Indicates that this is local currency for the current country.",
-                    "type": "integer",
-                    "enum": [1]
-                  },
-                  "symbol": {
-                    "description": "Local currency symbol",
+                },
+                "currencies_config": {
+                    "description": "Available currencies and their information",
+                    "type": "object",
+                    "minProperties": 1,
+                    "patternProperties": {
+                        "^[a-zA-Z0-9]{2,20}$": {
+                            "description": "Currency code",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "fractional_digits",
+                                "is_deposit_suspended",
+                                "is_suspended",
+                                "is_withdrawal_suspended",
+                                "stake_default",
+                                "transfer_between_accounts",
+                                "type"
+                            ],
+                            "properties": {
+                                "fractional_digits": {
+                                    "description": "Number of fractional digits.",
+                                    "type": "number"
+                                },
+                                "is_deposit_suspended": {
+                                    "description": "Current status for payment deposit for the currency",
+                                    "type": "number",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "is_suspended": {
+                                    "description": "Current status for the currency",
+                                    "type": "number",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "is_withdrawal_suspended": {
+                                    "description": "Current status for payment withdrawal for the currency",
+                                    "type": "number",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "name": {
+                                    "description": "Name of the currency.",
+                                    "type": "string"
+                                },
+                                "stake_default": {
+                                    "description": "Default stake value for the currency.",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "transfer_between_accounts": {
+                                    "description": "Fees and range of allowed amount for transfer between accounts with different types of currencies.",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "fees",
+                                        "limits"
+                                    ],
+                                    "properties": {
+                                        "fees": {
+                                            "description": "The fee that applies for transfer between accounts with different types of currencies.",
+                                            "type": "object",
+                                            "patternProperties": {
+                                                "^[a-zA-Z0-9]{2,20}$": {
+                                                    "description": "Currency code.",
+                                                    "type": "number",
+                                                    "maximum": 7,
+                                                    "minimum": 0
+                                                }
+                                            }
+                                        },
+                                        "limits": {
+                                            "description": "Range of allowed amount for transfer between accounts.",
+                                            "oneOf": [
+                                                {
+                                                    "type": "object",
+                                                    "required": [
+                                                        "min"
+                                                    ],
+                                                    "properties": {
+                                                        "max": {
+                                                            "description": "Maximum allowed amount for transfer between accounts with different types of currencies.",
+                                                            "type": "number",
+                                                            "minimum": 0
+                                                        },
+                                                        "min": {
+                                                            "description": "Minimum allowed amount for transfer between accounts with different types of currencies.",
+                                                            "type": "number",
+                                                            "minimum": 0
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "null"
+                                                }
+                                            ]
+                                        },
+                                        "limits_ctrader": {
+                                            "description": "Range of allowed amount for transfer between ctrader accounts.",
+                                            "type": "object"
+                                        },
+                                        "limits_derivez": {
+                                            "description": "Range of allowed amount for transfer between derivez accounts.",
+                                            "type": "object"
+                                        },
+                                        "limits_dxtrade": {
+                                            "description": "Range of allowed amount for transfer between dxtrade accounts.",
+                                            "type": "object"
+                                        },
+                                        "limits_mt5": {
+                                            "description": "Range of allowed amount for transfer between mt5 accounts.",
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": {
+                                    "description": "Type of the currency.",
+                                    "type": "string",
+                                    "enum": [
+                                        "fiat",
+                                        "crypto"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "dxtrade_status": {
+                    "description": "Suspension status of Dxtrade/DerivX API calls",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "minProperties": 3,
+                    "properties": {
+                        "all": {
+                            "description": "Suspension of Dxtrade/DerivX API calls on all servers.",
+                            "type": "integer"
+                        },
+                        "demo": {
+                            "description": "Suspension of Dxtrade/DerivX API calls on demo servers.",
+                            "type": "integer"
+                        },
+                        "real": {
+                            "description": "Suspension of Dxtrade/DerivX API calls on real trading servers.",
+                            "type": "integer"
+                        }
+                    }
+                },
+                "message": {
+                    "description": "Text for site status banner, contains problem description. shown only if set by the system.",
                     "type": "string"
-                  }
+                },
+                "mt5_status": {
+                    "description": "Suspension status of MT5 API calls",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "minProperties": 2,
+                    "properties": {
+                        "demo": {
+                            "description": "Suspension of MT5 API calls on demo servers.",
+                            "type": "array"
+                        },
+                        "real": {
+                            "description": "Suspension of MT5 API calls on real trading servers.",
+                            "type": "array"
+                        }
+                    }
+                },
+                "p2p_config": {
+                    "description": "Peer-to-peer payment system settings.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "adverts_active_limit",
+                        "block_trade",
+                        "cancellation_block_duration",
+                        "cancellation_count_period",
+                        "cancellation_grace_period",
+                        "cancellation_limit",
+                        "cross_border_ads_enabled",
+                        "disabled",
+                        "feature_level",
+                        "fixed_rate_adverts",
+                        "float_rate_adverts",
+                        "float_rate_offset_limit",
+                        "local_currencies",
+                        "maximum_advert_amount",
+                        "maximum_order_amount",
+                        "order_daily_limit",
+                        "order_payment_period",
+                        "payment_methods_enabled",
+                        "review_period",
+                        "supported_currencies"
+                    ],
+                    "properties": {
+                        "adverts_active_limit": {
+                            "description": "Maximum number of active ads allowed by an advertiser per currency pair and advert type (buy or sell).",
+                            "type": "integer"
+                        },
+                        "adverts_archive_period": {
+                            "description": "Adverts will be deactivated if no activity occurs within this period, in days.",
+                            "type": "integer"
+                        },
+                        "block_trade": {
+                            "description": "Block trading settings",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "disabled": {
+                                    "description": "When 1, Block trading is unavailable.",
+                                    "type": "integer",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "maximum_advert_amount": {
+                                    "description": "Maximum amount of a block trade advert, in USD.",
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "cancellation_block_duration": {
+                            "description": "A buyer will be blocked for this duration after exceeding the cancellation limit, in hours.",
+                            "type": "integer"
+                        },
+                        "cancellation_count_period": {
+                            "description": "The period within which to count buyer cancellations, in hours.",
+                            "type": "integer"
+                        },
+                        "cancellation_grace_period": {
+                            "description": "A buyer may cancel an order within this period without negative consequences, in minutes after order creation.",
+                            "type": "integer"
+                        },
+                        "cancellation_limit": {
+                            "description": "A buyer will be temporarily barred after marking this number of cancellations within cancellation_period.",
+                            "type": "integer"
+                        },
+                        "cross_border_ads_enabled": {
+                            "description": "When 0, only exchanges in local currency are allowed for P2P advertiser.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "disabled": {
+                            "description": "When 1, the P2P service is unavailable.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "feature_level": {
+                            "description": "Indicates the availbility of certain backend features.",
+                            "type": "integer"
+                        },
+                        "fixed_rate_adverts": {
+                            "description": "Availability of fixed rate adverts.",
+                            "type": "string",
+                            "enum": [
+                                "disabled",
+                                "enabled",
+                                "list_only"
+                            ]
+                        },
+                        "fixed_rate_adverts_end_date": {
+                            "description": "Date on which fixed rate adverts will be deactivated.",
+                            "type": "string"
+                        },
+                        "float_rate_adverts": {
+                            "description": "Availability of floating rate adverts.",
+                            "type": "string",
+                            "enum": [
+                                "disabled",
+                                "enabled",
+                                "list_only"
+                            ]
+                        },
+                        "float_rate_offset_limit": {
+                            "description": "Maximum rate offset for floating rate adverts.",
+                            "type": "number"
+                        },
+                        "local_currencies": {
+                            "description": "Available local currencies for p2p_advert_list request.",
+                            "type": "array",
+                            "items": {
+                                "description": "Local currency details.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                    "display_name",
+                                    "has_adverts",
+                                    "symbol"
+                                ],
+                                "properties": {
+                                    "display_name": {
+                                        "description": "Local currency name",
+                                        "type": "string"
+                                    },
+                                    "has_adverts": {
+                                        "description": "Indicates that there are adverts available for this currency.",
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "is_default": {
+                                        "description": "Indicates that this is local currency for the current country.",
+                                        "type": "integer",
+                                        "enum": [
+                                            1
+                                        ]
+                                    },
+                                    "symbol": {
+                                        "description": "Local currency symbol",
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "maximum_advert_amount": {
+                            "description": "Maximum amount of an advert, in USD.",
+                            "type": "number"
+                        },
+                        "maximum_order_amount": {
+                            "description": "Maximum amount of an order, in USD.",
+                            "type": "number"
+                        },
+                        "order_daily_limit": {
+                            "description": "Maximum number of orders a user may create per day.",
+                            "type": "integer"
+                        },
+                        "order_payment_period": {
+                            "description": "Time allowed for order payment, in minutes after order creation.",
+                            "type": "integer"
+                        },
+                        "override_exchange_rate": {
+                            "description": "Local P2P exchange rate which should be used instead of those obtained from the `exchange_rates` call.",
+                            "type": "string"
+                        },
+                        "payment_methods_enabled": {
+                            "description": "Indicates if the payment methods feature is enabled.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "review_period": {
+                            "description": "Time after successful order completion during which reviews can be created, in hours.",
+                            "type": "number"
+                        },
+                        "supported_currencies": {
+                            "description": "List of currencies for which P2P is available",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "uniqueItems": true
+                        }
+                    }
+                },
+                "payment_agents": {
+                    "description": "Payments Agents system settings.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "initial_deposit_per_country"
+                    ],
+                    "properties": {
+                        "initial_deposit_per_country": {
+                            "description": "Initial deposit requirement per country.",
+                            "type": "object",
+                            "patternProperties": {
+                                "^([a-z]{2}|default)$": {
+                                    "description": "Country code or default setting",
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "site_status": {
+                    "description": "The current status of the website.",
+                    "type": "string",
+                    "enum": [
+                        "up",
+                        "down",
+                        "updating"
+                    ]
+                },
+                "supported_languages": {
+                    "description": "Provides codes for languages supported.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "terms_conditions_version": {
+                    "description": "Latest terms and conditions version.",
+                    "type": "string"
                 }
-              }
-            },
-            "maximum_advert_amount": {
-              "description": "Maximum amount of an advert, in USD.",
-              "type": "number"
-            },
-            "maximum_order_amount": {
-              "description": "Maximum amount of an order, in USD.",
-              "type": "number"
-            },
-            "order_daily_limit": {
-              "description": "Maximum number of orders a user may create per day.",
-              "type": "integer"
-            },
-            "order_payment_period": {
-              "description": "Time allowed for order payment, in minutes after order creation.",
-              "type": "integer"
-            },
-            "override_exchange_rate": {
-              "description": "Local P2P exchange rate which should be used instead of those obtained from the `exchange_rates` call.",
-              "type": "string"
-            },
-            "payment_methods_enabled": {
-              "description": "Indicates if the payment methods feature is enabled.",
-              "type": "integer",
-              "enum": [0, 1]
-            },
-            "review_period": {
-              "description": "Time after successful order completion during which reviews can be created, in hours.",
-              "type": "number"
-            },
-            "supported_currencies": {
-              "description": "List of currencies for which P2P is available",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "uniqueItems": true
             }
-          }
         },
-        "payment_agents": {
-          "description": "Payments Agents system settings.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["initial_deposit_per_country"],
-          "properties": {
-            "initial_deposit_per_country": {
-              "description": "Initial deposit requirement per country.",
-              "type": "object",
-              "patternProperties": {
-                "^([a-z]{2}|default)$": {
-                  "description": "Country code or default setting",
-                  "type": "number"
+        "subscription": {
+            "title": "Subscription information",
+            "description": "For subscription requests only.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
+                    "type": "string",
+                    "examples": [
+                        "c84a793b-8a87-7999-ce10-9b22f7ceead3"
+                    ]
                 }
-              }
             }
-          }
         },
-        "site_status": {
-          "description": "The current status of the website.",
-          "type": "string",
-          "enum": ["up", "down", "updating"]
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
         },
-        "supported_languages": {
-          "description": "Provides codes for languages supported.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "website_status"
+            ]
         },
-        "terms_conditions_version": {
-          "description": "Latest terms and conditions version.",
-          "type": "string"
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "subscription": {
-      "title": "Subscription information",
-      "description": "For subscription requests only.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id"],
-      "properties": {
-        "id": {
-          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
-          "type": "string",
-          "examples": ["c84a793b-8a87-7999-ce10-9b22f7ceead3"]
-        }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["website_status"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

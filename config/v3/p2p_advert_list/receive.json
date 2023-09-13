@@ -1,331 +1,412 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Advert List (response)",
-  "description": "Available adverts matching the requested criteria.",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "p2p_advert_list": {
-      "title": "p2p_advert_list",
-      "description": "P2P adverts list.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["list"],
-      "properties": {
-        "list": {
-          "description": "List of adverts.",
-          "type": "array",
-          "items": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Advert List (response)",
+    "description": "Available adverts matching the requested criteria.",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "p2p_advert_list": {
+            "title": "p2p_advert_list",
+            "description": "P2P adverts list.",
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "account_currency",
-              "advertiser_details",
-              "counterparty_type",
-              "country",
-              "created_time",
-              "description",
-              "effective_rate",
-              "effective_rate_display",
-              "id",
-              "is_active",
-              "is_visible",
-              "local_currency",
-              "max_order_amount_limit",
-              "max_order_amount_limit_display",
-              "min_order_amount_limit",
-              "min_order_amount_limit_display",
-              "payment_method",
-              "price",
-              "price_display",
-              "rate",
-              "rate_display",
-              "rate_type",
-              "type"
+                "list"
             ],
             "properties": {
-              "account_currency": {
-                "description": "Currency for this advert. This is the system currency to be transferred between advertiser and client.",
-                "type": "string",
-                "pattern": "^[a-zA-Z0-9]{2,20}$",
-                "examples": ["USD"]
-              },
-              "active_orders": {
-                "description": "The number of active orders against this advert.",
-                "type": "integer"
-              },
-              "advertiser_details": {
-                "title": "Advertiser Details",
-                "description": "Details of the advertiser for this advert.",
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "completed_orders_count",
-                  "id",
-                  "is_online",
-                  "last_online_time",
-                  "name",
-                  "rating_average",
-                  "rating_count",
-                  "recommended_average",
-                  "recommended_count",
-                  "total_completion_rate"
-                ],
-                "properties": {
-                  "completed_orders_count": {
-                    "description": "The total number of orders completed in the past 30 days.",
-                    "type": "integer"
-                  },
-                  "first_name": {
-                    "description": "The advertiser's first name.",
-                    "type": "string",
-                    "sensitive": 1
-                  },
-                  "id": {
-                    "description": "The advertiser's unique identifier.",
-                    "type": "string"
-                  },
-                  "is_blocked": {
-                    "description": "Indicates that the advertiser is blocked by the current user.",
-                    "type": "integer",
-                    "enum": [0]
-                  },
-                  "is_favourite": {
-                    "description": "Indicates that the advertiser is a favourite.",
-                    "type": "integer",
-                    "enum": [0, 1]
-                  },
-                  "is_online": {
-                    "description": "Indicates if the advertiser is currently online.",
-                    "type": "integer",
-                    "enum": [0, 1]
-                  },
-                  "is_recommended": {
-                    "description": "Indicates that the advertiser was recommended in the most recent review by the current user.",
-                    "type": ["integer", "null"],
-                    "enum": [null, 0, 1]
-                  },
-                  "last_name": {
-                    "description": "The advertiser's last name.",
-                    "type": "string",
-                    "sensitive": 1
-                  },
-                  "last_online_time": {
-                    "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
-                    "type": ["integer", "null"]
-                  },
-                  "name": {
-                    "description": "The advertiser's displayed name.",
-                    "type": "string",
-                    "sensitive": 1
-                  },
-                  "rating_average": {
-                    "description": "Average rating of the advertiser, range is 1-5.",
-                    "type": ["null", "number"],
-                    "maximum": 5,
-                    "minimum": 1
-                  },
-                  "rating_count": {
-                    "description": "Number of ratings given to the advertiser.",
-                    "type": "integer"
-                  },
-                  "recommended_average": {
-                    "description": "Percentage of users who have recommended the advertiser.",
-                    "type": ["null", "number"]
-                  },
-                  "recommended_count": {
-                    "description": "Number of times the advertiser has been recommended.",
-                    "type": ["null", "number"]
-                  },
-                  "total_completion_rate": {
-                    "description": "The percentage of successfully completed orders made by or placed against the advertiser within the past 30 days.",
-                    "type": ["null", "number"]
-                  }
+                "list": {
+                    "description": "List of adverts.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "account_currency",
+                            "advertiser_details",
+                            "block_trade",
+                            "counterparty_type",
+                            "country",
+                            "created_time",
+                            "description",
+                            "effective_rate",
+                            "effective_rate_display",
+                            "id",
+                            "is_active",
+                            "is_visible",
+                            "local_currency",
+                            "max_order_amount_limit",
+                            "max_order_amount_limit_display",
+                            "min_order_amount_limit",
+                            "min_order_amount_limit_display",
+                            "payment_method",
+                            "price",
+                            "price_display",
+                            "rate",
+                            "rate_display",
+                            "rate_type",
+                            "type"
+                        ],
+                        "properties": {
+                            "account_currency": {
+                                "description": "Currency for this advert. This is the system currency to be transferred between advertiser and client.",
+                                "type": "string",
+                                "pattern": "^[a-zA-Z0-9]{2,20}$",
+                                "examples": [
+                                    "USD"
+                                ]
+                            },
+                            "active_orders": {
+                                "description": "The number of active orders against this advert.",
+                                "type": "integer"
+                            },
+                            "advertiser_details": {
+                                "title": "Advertiser Details",
+                                "description": "Details of the advertiser for this advert.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                    "completed_orders_count",
+                                    "id",
+                                    "is_online",
+                                    "last_online_time",
+                                    "name",
+                                    "rating_average",
+                                    "rating_count",
+                                    "recommended_average",
+                                    "recommended_count",
+                                    "total_completion_rate"
+                                ],
+                                "properties": {
+                                    "completed_orders_count": {
+                                        "description": "The total number of orders completed in the past 30 days.",
+                                        "type": "integer"
+                                    },
+                                    "first_name": {
+                                        "description": "The advertiser's first name.",
+                                        "type": "string",
+                                        "sensitive": 1
+                                    },
+                                    "id": {
+                                        "description": "The advertiser's unique identifier.",
+                                        "type": "string"
+                                    },
+                                    "is_blocked": {
+                                        "description": "Indicates that the advertiser is blocked by the current user.",
+                                        "type": "integer",
+                                        "enum": [
+                                            0
+                                        ]
+                                    },
+                                    "is_favourite": {
+                                        "description": "Indicates that the advertiser is a favourite.",
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "is_online": {
+                                        "description": "Indicates if the advertiser is currently online.",
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "is_recommended": {
+                                        "description": "Indicates that the advertiser was recommended in the most recent review by the current user.",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "enum": [
+                                            null,
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "last_name": {
+                                        "description": "The advertiser's last name.",
+                                        "type": "string",
+                                        "sensitive": 1
+                                    },
+                                    "last_online_time": {
+                                        "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ]
+                                    },
+                                    "name": {
+                                        "description": "The advertiser's displayed name.",
+                                        "type": "string",
+                                        "sensitive": 1
+                                    },
+                                    "rating_average": {
+                                        "description": "Average rating of the advertiser, range is 1-5.",
+                                        "type": [
+                                            "null",
+                                            "number"
+                                        ],
+                                        "maximum": 5,
+                                        "minimum": 1
+                                    },
+                                    "rating_count": {
+                                        "description": "Number of ratings given to the advertiser.",
+                                        "type": "integer"
+                                    },
+                                    "recommended_average": {
+                                        "description": "Percentage of users who have recommended the advertiser.",
+                                        "type": [
+                                            "null",
+                                            "number"
+                                        ]
+                                    },
+                                    "recommended_count": {
+                                        "description": "Number of times the advertiser has been recommended.",
+                                        "type": [
+                                            "null",
+                                            "number"
+                                        ]
+                                    },
+                                    "total_completion_rate": {
+                                        "description": "The percentage of successfully completed orders made by or placed against the advertiser within the past 30 days.",
+                                        "type": [
+                                            "null",
+                                            "number"
+                                        ]
+                                    }
+                                }
+                            },
+                            "amount": {
+                                "description": "The total amount specified in advert, in `account_currency`. It is only visible to the advert owner.",
+                                "type": "number"
+                            },
+                            "amount_display": {
+                                "description": "The total amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
+                                "type": "string"
+                            },
+                            "block_trade": {
+                                "description": "Indicates if this is block trade advert or not.",
+                                "type": "integer",
+                                "enum": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "contact_info": {
+                                "description": "Advertiser contact information. Only applicable for 'sell adverts'.",
+                                "type": "string",
+                                "sensitive": 1
+                            },
+                            "counterparty_type": {
+                                "description": "Type of transaction from the opposite party's perspective.",
+                                "type": "string",
+                                "enum": [
+                                    "buy",
+                                    "sell"
+                                ]
+                            },
+                            "country": {
+                                "description": "The target country code of the advert.",
+                                "type": "string",
+                                "pattern": "^[a-z]{0,2}$"
+                            },
+                            "created_time": {
+                                "description": "The advert creation time in epoch.",
+                                "type": "integer"
+                            },
+                            "days_until_archive": {
+                                "description": "Days until automatic inactivation of this ad, if no activity occurs.",
+                                "type": "integer"
+                            },
+                            "description": {
+                                "description": "General information about the advert.",
+                                "type": "string",
+                                "sensitive": 1
+                            },
+                            "effective_rate": {
+                                "description": "Conversion rate from account currency to local currency, using current market rate if applicable.",
+                                "type": [
+                                    "null",
+                                    "number"
+                                ]
+                            },
+                            "effective_rate_display": {
+                                "description": "Conversion rate from account currency to local currency, using current market rate if applicable, formatted to appropriate decimal places.",
+                                "type": [
+                                    "null",
+                                    "string"
+                                ]
+                            },
+                            "id": {
+                                "description": "The unique identifier for this advert.",
+                                "type": "string"
+                            },
+                            "is_active": {
+                                "description": "The activation status of the advert.",
+                                "type": "integer",
+                                "enum": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "is_visible": {
+                                "description": "Indicates that this advert will appear on the main advert list.",
+                                "type": "integer",
+                                "default": 0,
+                                "enum": [
+                                    0,
+                                    1
+                                ]
+                            },
+                            "local_currency": {
+                                "description": "Local currency for this advert. This is the form of payment to be arranged directly between advertiser and client.",
+                                "type": "string",
+                                "pattern": "^[a-zA-Z0-9]{2,20}$",
+                                "examples": [
+                                    "USD"
+                                ]
+                            },
+                            "max_order_amount": {
+                                "description": "Maximum order amount specified in advert, in `account_currency`. It is only visible for advertisers.",
+                                "type": "number"
+                            },
+                            "max_order_amount_display": {
+                                "description": "Maximum order amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
+                                "type": "string"
+                            },
+                            "max_order_amount_limit": {
+                                "description": "Maximum order amount at this time, in `account_currency`.",
+                                "type": "number"
+                            },
+                            "max_order_amount_limit_display": {
+                                "description": "Maximum order amount at this time, in `account_currency`, formatted to appropriate decimal places.",
+                                "type": "string"
+                            },
+                            "min_order_amount": {
+                                "description": "Minimum order amount specified in advert, in `account_currency`. It is only visible for advertisers.",
+                                "type": "number"
+                            },
+                            "min_order_amount_display": {
+                                "description": "Minimum order amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
+                                "type": "string"
+                            },
+                            "min_order_amount_limit": {
+                                "description": "Minimum order amount at this time, in `account_currency`.",
+                                "type": "number"
+                            },
+                            "min_order_amount_limit_display": {
+                                "description": "Minimum order amount at this time, in `account_currency`, formatted to appropriate decimal places.",
+                                "type": "string"
+                            },
+                            "payment_info": {
+                                "description": "Payment instructions. Only applicable for 'sell adverts'.",
+                                "type": "string",
+                                "sensitive": 1
+                            },
+                            "payment_method": {
+                                "description": "Payment method name (deprecated).",
+                                "type": [
+                                    "null",
+                                    "string"
+                                ],
+                                "sensitive": 1
+                            },
+                            "payment_method_names": {
+                                "description": "Names of supported payment methods.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "price": {
+                                "description": "Cost of the advert in local currency.",
+                                "type": [
+                                    "null",
+                                    "number"
+                                ]
+                            },
+                            "price_display": {
+                                "description": "Cost of the advert in local currency, formatted to appropriate decimal places.",
+                                "type": [
+                                    "null",
+                                    "string"
+                                ]
+                            },
+                            "rate": {
+                                "description": "Conversion rate from advertiser's account currency to `local_currency`. An absolute rate value (fixed), or percentage offset from current market rate (floating).",
+                                "type": "number"
+                            },
+                            "rate_display": {
+                                "description": "Conversion rate formatted to appropriate decimal places.",
+                                "type": "string"
+                            },
+                            "rate_type": {
+                                "description": "Type of rate, fixed or floating.",
+                                "type": "string",
+                                "enum": [
+                                    "fixed",
+                                    "float"
+                                ]
+                            },
+                            "remaining_amount": {
+                                "description": "Amount currently available for orders, in `account_currency`. It is only visible to the advert owner.",
+                                "type": "number"
+                            },
+                            "remaining_amount_display": {
+                                "description": "Amount currently available for orders, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "description": "Whether this is a buy or a sell.",
+                                "type": "string",
+                                "enum": [
+                                    "buy",
+                                    "sell"
+                                ]
+                            },
+                            "visibility_status": {
+                                "description": "Reasons why an advert is not visible, only visible to the advert owner. Possible values: \n- `advert_inactive`: the advert is set inactive. \n- `advert_max_limit`: the minimum order amount exceeds the system maximum order. \n- `advert_min_limit`: the maximum order amount is too small to be shown on the advert list. \n- `advert_remaining`: the remaining amount of the advert is below the minimum order. \n- `advertiser_ads_paused`: the advertiser has paused all adverts. \n- `advertiser_approval`: the advertiser's proof of identity is not verified. \n- `advertiser_balance`: the advertiser's P2P balance is less than the minimum order. \n- `advertiser_block_trade_ineligible`: the advertiser is not currently eligible for block trading. \n- `advertiser_daily_limit`: the advertiser's remaining daily limit is less than the minimum order. \n- `advertiser_temp_ban`: the advertiser is temporarily banned from P2P.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "advert_inactive",
+                                        "advert_max_limit",
+                                        "advert_min_limit",
+                                        "advert_remaining",
+                                        "advertiser_ads_paused",
+                                        "advertiser_approval",
+                                        "advertiser_balance",
+                                        "advertiser_block_trade_ineligible",
+                                        "advertiser_daily_limit",
+                                        "advertiser_temp_ban"
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
-              },
-              "amount": {
-                "description": "The total amount specified in advert, in `account_currency`. It is only visible to the advert owner.",
-                "type": "number"
-              },
-              "amount_display": {
-                "description": "The total amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
-                "type": "string"
-              },
-              "contact_info": {
-                "description": "Advertiser contact information. Only applicable for 'sell adverts'.",
-                "type": "string",
-                "sensitive": 1
-              },
-              "counterparty_type": {
-                "description": "Type of transaction from the opposite party's perspective.",
-                "type": "string",
-                "enum": ["buy", "sell"]
-              },
-              "country": {
-                "description": "The target country code of the advert.",
-                "type": "string",
-                "pattern": "^[a-z]{0,2}$"
-              },
-              "created_time": {
-                "description": "The advert creation time in epoch.",
-                "type": "integer"
-              },
-              "days_until_archive": {
-                "description": "Days until automatic inactivation of this ad, if no activity occurs.",
-                "type": "integer"
-              },
-              "description": {
-                "description": "General information about the advert.",
-                "type": "string",
-                "sensitive": 1
-              },
-              "effective_rate": {
-                "description": "Conversion rate from account currency to local currency, using current market rate if applicable.",
-                "type": ["null", "number"]
-              },
-              "effective_rate_display": {
-                "description": "Conversion rate from account currency to local currency, using current market rate if applicable, formatted to appropriate decimal places.",
-                "type": ["null", "string"]
-              },
-              "id": {
-                "description": "The unique identifier for this advert.",
-                "type": "string"
-              },
-              "is_active": {
-                "description": "The activation status of the advert.",
-                "type": "integer",
-                "enum": [0, 1]
-              },
-              "is_visible": {
-                "description": "Indicates that this advert will appear on the main advert list.",
-                "type": "integer",
-                "default": 0,
-                "enum": [0, 1]
-              },
-              "local_currency": {
-                "description": "Local currency for this advert. This is the form of payment to be arranged directly between advertiser and client.",
-                "type": "string",
-                "pattern": "^[a-zA-Z0-9]{2,20}$",
-                "examples": ["USD"]
-              },
-              "max_order_amount": {
-                "description": "Maximum order amount specified in advert, in `account_currency`. It is only visible for advertisers.",
-                "type": "number"
-              },
-              "max_order_amount_display": {
-                "description": "Maximum order amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
-                "type": "string"
-              },
-              "max_order_amount_limit": {
-                "description": "Maximum order amount at this time, in `account_currency`.",
-                "type": "number"
-              },
-              "max_order_amount_limit_display": {
-                "description": "Maximum order amount at this time, in `account_currency`, formatted to appropriate decimal places.",
-                "type": "string"
-              },
-              "min_order_amount": {
-                "description": "Minimum order amount specified in advert, in `account_currency`. It is only visible for advertisers.",
-                "type": "number"
-              },
-              "min_order_amount_display": {
-                "description": "Minimum order amount specified in advert, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
-                "type": "string"
-              },
-              "min_order_amount_limit": {
-                "description": "Minimum order amount at this time, in `account_currency`.",
-                "type": "number"
-              },
-              "min_order_amount_limit_display": {
-                "description": "Minimum order amount at this time, in `account_currency`, formatted to appropriate decimal places.",
-                "type": "string"
-              },
-              "payment_info": {
-                "description": "Payment instructions. Only applicable for 'sell adverts'.",
-                "type": "string",
-                "sensitive": 1
-              },
-              "payment_method": {
-                "description": "Payment method name (deprecated).",
-                "type": ["null", "string"],
-                "sensitive": 1
-              },
-              "payment_method_names": {
-                "description": "Names of supported payment methods.",
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "price": {
-                "description": "Cost of the advert in local currency.",
-                "type": ["null", "number"]
-              },
-              "price_display": {
-                "description": "Cost of the advert in local currency, formatted to appropriate decimal places.",
-                "type": ["null", "string"]
-              },
-              "rate": {
-                "description": "Conversion rate from advertiser's account currency to `local_currency`. An absolute rate value (fixed), or percentage offset from current market rate (floating).",
-                "type": "number"
-              },
-              "rate_display": {
-                "description": "Conversion rate formatted to appropriate decimal places.",
-                "type": "string"
-              },
-              "rate_type": {
-                "description": "Type of rate, fixed or floating.",
-                "type": "string",
-                "enum": ["fixed", "float"]
-              },
-              "remaining_amount": {
-                "description": "Amount currently available for orders, in `account_currency`. It is only visible to the advert owner.",
-                "type": "number"
-              },
-              "remaining_amount_display": {
-                "description": "Amount currently available for orders, in `account_currency`, formatted to appropriate decimal places. It is only visible to the advert owner.",
-                "type": "string"
-              },
-              "type": {
-                "description": "Whether this is a buy or a sell.",
-                "type": "string",
-                "enum": ["buy", "sell"]
-              },
-              "visibility_status": {
-                "description": "Reasons why an advert is not visible, only visible to the advert owner. Possible values: \n- `advert_inactive`: the advert is set inactive. \n- `advert_max_limit`: the minimum order amount exceeds the system maximum order. \n- `advert_min_limit`: the maximum order amount is too small to be shown on the advert list. \n- `advert_remaining`: the remaining amount of the advert is below the minimum order. \n- `advertiser_ads_paused`: the advertiser has paused all adverts. \n- `advertiser_approval`: the advertiser's proof of identity is not verified. \n- `advertiser_balance`: the advertiser's P2P balance is less than the minimum order. \n- `advertiser_daily_limit`: the advertiser's remaining daily limit is less than the minimum order. \n- `advertiser_temp_ban`: the advertiser is temporarily banned from P2P.",
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "advert_inactive",
-                    "advert_max_limit",
-                    "advert_min_limit",
-                    "advert_remaining",
-                    "advertiser_ads_paused",
-                    "advertiser_approval",
-                    "advertiser_balance",
-                    "advertiser_daily_limit",
-                    "advertiser_temp_ban"
-                  ]
-                }
-              }
             }
-          }
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "p2p_advert_list"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["p2p_advert_list"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

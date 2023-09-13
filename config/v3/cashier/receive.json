@@ -1,94 +1,116 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Cashier Information (response)",
-  "description": "Cashier information for the specified type.",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "cashier": {
-      "title": "cashier",
-      "description": "Possible error codes are:\n- `ASK_TNC_APPROVAL`: API call `tnc_approval`\n- `ASK_AUTHENTICATE`\n- `ASK_UK_FUNDS_PROTECTION`: API call `tnc_approval`\n- `ASK_CURRENCY`: API call `set_account_currency`\n- `ASK_EMAIL_VERIFY`: API call `verify_email`\n- `ASK_FIX_DETAILS`: API call `set_settings`",
-      "oneOf": [
-        {
-          "description": "Response for type `url`, It will return url to cashier service.",
-          "type": "string"
-        },
-        {
-          "description": "Response for type `api'.",
-          "type": "object",
-          "required": ["action"],
-          "properties": {
-            "action": {
-              "description": "Type of operation, which is requested.",
-              "type": "string",
-              "enum": ["deposit", "withdraw"]
-            },
-            "deposit": {
-              "description": "[Optional] Result for `deposit` action.",
-              "type": "object",
-              "required": ["address"],
-              "properties": {
-                "address": {
-                  "description": "Address for crypto deposit.",
-                  "type": "string"
-                }
-              }
-            },
-            "withdraw": {
-              "description": "[Optional] Result for `withdraw` action.",
-              "oneOf": [
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Cashier Information (response)",
+    "description": "Cashier information for the specified type.",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "cashier": {
+            "title": "cashier",
+            "description": "Possible error codes are:\n- `ASK_TNC_APPROVAL`: API call `tnc_approval`\n- `ASK_AUTHENTICATE`\n- `ASK_UK_FUNDS_PROTECTION`: API call `tnc_approval`\n- `ASK_CURRENCY`: API call `set_account_currency`\n- `ASK_EMAIL_VERIFY`: API call `verify_email`\n- `ASK_FIX_DETAILS`: API call `set_settings`",
+            "oneOf": [
                 {
-                  "title": "Withdraw operation",
-                  "description": "Result for withdraw operation.",
-                  "type": "object",
-                  "required": ["id", "status_code", "status_message"],
-                  "properties": {
-                    "id": {
-                      "description": "The unique identifier for the transaction.",
-                      "type": "string"
-                    },
-                    "status_code": {
-                      "description": "The status code of the withdrawal.",
-                      "type": "string",
-                      "enum": ["LOCKED"]
-                    },
-                    "status_message": {
-                      "description": "The status message of the withdrawal.",
-                      "type": "string"
-                    }
-                  }
+                    "description": "Response for type `url`, It will return url to cashier service.",
+                    "type": "string"
                 },
                 {
-                  "title": "Dry-run validation",
-                  "description": "Result for `dry_run` validation.",
-                  "type": "object",
-                  "required": ["dry_run"],
-                  "properties": {
-                    "dry_run": {
-                      "description": "The `dry_run` was successful.",
-                      "type": "integer",
-                      "enum": [1]
+                    "description": "Response for type `api'.",
+                    "type": "object",
+                    "required": [
+                        "action"
+                    ],
+                    "properties": {
+                        "action": {
+                            "description": "Type of operation, which is requested.",
+                            "type": "string",
+                            "enum": [
+                                "deposit",
+                                "withdraw"
+                            ]
+                        },
+                        "deposit": {
+                            "description": "[Optional] Result for `deposit` action.",
+                            "type": "object",
+                            "required": [
+                                "address"
+                            ],
+                            "properties": {
+                                "address": {
+                                    "description": "Address for crypto deposit.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "withdraw": {
+                            "description": "[Optional] Result for `withdraw` action.",
+                            "oneOf": [
+                                {
+                                    "title": "Withdraw operation",
+                                    "description": "Result for withdraw operation.",
+                                    "type": "object",
+                                    "required": [
+                                        "id",
+                                        "status_code",
+                                        "status_message"
+                                    ],
+                                    "properties": {
+                                        "id": {
+                                            "description": "The unique identifier for the transaction.",
+                                            "type": "string"
+                                        },
+                                        "status_code": {
+                                            "description": "The status code of the withdrawal.",
+                                            "type": "string",
+                                            "enum": [
+                                                "LOCKED"
+                                            ]
+                                        },
+                                        "status_message": {
+                                            "description": "The status message of the withdrawal.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Dry-run validation",
+                                    "description": "Result for `dry_run` validation.",
+                                    "type": "object",
+                                    "required": [
+                                        "dry_run"
+                                    ],
+                                    "properties": {
+                                        "dry_run": {
+                                            "description": "The `dry_run` was successful.",
+                                            "type": "integer",
+                                            "enum": [
+                                                1
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
                     }
-                  }
                 }
-              ]
-            }
-          }
+            ]
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "cashier"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      ]
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["cashier"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }
