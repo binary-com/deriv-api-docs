@@ -2,13 +2,13 @@ name: publish_to_pages_production
 description: Publish to cloudflare pages (production)
 inputs:
   CLOUDFLARE_ACCOUNT_ID:
-    description: 'Cloudflare account id'
+    description: Cloudflare account id
     required: true
   CLOUDFLARE_API_TOKEN:
-    description: 'Cloudflare token'
+    description: Cloudflare token
     required: true
   version:
-    description: 'Version of the app to release'
+    description: Version of the app to release
     required: true
 runs:
   using: composite
@@ -20,7 +20,10 @@ runs:
       version: ${{ inputs.version }}
       run: |-
         npm i wrangler@3.10.1
+
         cd build
+
         npx wrangler pages deploy . --project-name=deriv-developers-portal-pages --branch=main
+
         echo "New website - https://api.deriv.com"
       shell: bash

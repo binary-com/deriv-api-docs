@@ -12,11 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: './.github/actions/setup_node'
+        uses: ./.github/actions/setup_node
       - name: Install Dependencies
-        uses: './.github/actions/npm_install_from_cache'
+        uses: ./.github/actions/npm_install_from_cache
       - name: Build
-        uses: './.github/actions/build'
+        uses: ./.github/actions/build
         with:
           CA_CRT: ${{ secrets.CA_CRT }}
           CA: ${{ secrets.CA }}
@@ -31,11 +31,11 @@ jobs:
           NODE_ENV: staging
           SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
       - name: Versioning
-        uses: './.github/actions/versioning'
+        uses: ./.github/actions/versioning
         with:
           version_name: staging
       - name: Publish to Cloudflare Pages Staging
-        uses: './.github/actions/publish_to_pages_staging'
+        uses: ./.github/actions/publish_to_pages_staging
         with:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

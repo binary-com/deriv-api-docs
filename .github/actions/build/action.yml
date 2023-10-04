@@ -1,35 +1,35 @@
 name: build
-description: 'Build Docusaurus project'
+description: Build Docusaurus project
 inputs:
   CA_CRT:
-    description: 'CA certificate'
+    description: CA certificate
     required: false
-  CA: 
-    description: 'CA'
+  CA:
+    description: CA
     required: false
   CONTEXT_ARTIFACT_S3_BUCKET:
-    description: 'Context artifact S3 bucket'
+    description: Context artifact S3 bucket
     required: false
   DATADOG_APPLICATION_ID:
-    description: 'Datadog application ID'
+    description: Datadog application ID
     required: false
   DATADOG_CLIENT_TOKEN:
-    description: 'Datadog client token'
+    description: Datadog client token
     required: false
   DOCKERHUB_ORGANISATION:
-    description: 'Dockerhub organisation'
+    description: Dockerhub organisation
     required: false
   DOCKERHUB_PASSWORD:
-    description: 'Dockerhub password'
+    description: Dockerhub password
     required: false
   DOCKERHUB_USERNAME:
-    description: 'Dockerhub username'
+    description: Dockerhub username
     required: false
-  DOCKHUB_ORGANISATION: 
-   description: 'Dockerhub organisation'
-   required: false 
+  DOCKHUB_ORGANISATION:
+    description: Dockerhub organisation
+    required: false
   KUBE_SERVER:
-    description: 'Kubernetes server'
+    description: Kubernetes server
     required: false
   SERVICEACCOUNT_TOKEN:
     description: Service account token
@@ -37,23 +37,23 @@ inputs:
   NODE_ENV:
     description: Node environment
     required: false
-    default: 'staging'
+    default: staging
 runs:
   using: composite
   steps:
-  - name: Building Docusaurus project
-    env:
-      NODE_ENV: ${{ inputs.NODE_ENV }}
-      CA: ${{ inputs.CA }}
-      CA_CRT: ${{ inputs.CA_CRT }}
-      CONTEXT_ARTIFACT_S3_BUCKET: ${{ inputs.CONTEXT_ARTIFACT_S3_BUCKET }}
-      DATADOG_APPLICATION_ID: ${{ inputs.DATADOG_APPLICATION_ID }} 
-      DATADOG_CLIENT_TOKEN: ${{ inputs.DATADOG_CLIENT_TOKEN }}
-      DOCKERHUB_ORGANISATION: ${{ inputs.DOCKERHUB_ORGANISATION }}
-      DOCKERHUB_PASSWORD: ${{inputs.DOCKERHUB_PASSWORD}}
-      DOCKERHUB_USERNAME: ${{ inputs.DOCKERHUB_USERNAME }}
-      DOCKHUB_ORGANISATION: ${{ inputs.DOCKHUB_ORGANISATION }} 
-      KUBE_SERVER:  ${{ inputs.KUBE_SERVER }}
-      SERVICEACCOUNT_TOKEN:  ${{ inputs.SERVICEACCOUNT_TOKEN }}
-    run: npm run build
-    shell: bash
+    - name: Building Docusaurus project
+      env:
+        NODE_ENV: ${{ inputs.NODE_ENV }}
+        CA: ${{ inputs.CA }}
+        CA_CRT: ${{ inputs.CA_CRT }}
+        CONTEXT_ARTIFACT_S3_BUCKET: ${{ inputs.CONTEXT_ARTIFACT_S3_BUCKET }}
+        DATADOG_APPLICATION_ID: ${{ inputs.DATADOG_APPLICATION_ID }}
+        DATADOG_CLIENT_TOKEN: ${{ inputs.DATADOG_CLIENT_TOKEN }}
+        DOCKERHUB_ORGANISATION: ${{ inputs.DOCKERHUB_ORGANISATION }}
+        DOCKERHUB_PASSWORD: ${{inputs.DOCKERHUB_PASSWORD}}
+        DOCKERHUB_USERNAME: ${{ inputs.DOCKERHUB_USERNAME }}
+        DOCKHUB_ORGANISATION: ${{ inputs.DOCKHUB_ORGANISATION }}
+        KUBE_SERVER: ${{ inputs.KUBE_SERVER }}
+        SERVICEACCOUNT_TOKEN: ${{ inputs.SERVICEACCOUNT_TOKEN }}
+      run: npm run build
+      shell: bash

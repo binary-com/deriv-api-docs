@@ -2,18 +2,18 @@ name: notify_slack
 description: Send Slack notifications
 inputs:
   SLACK_WEBHOOK_URL:
-    description: 'Slack webhook URL'
+    description: Slack webhook URL
     required: true
   status:
-    description: 'Job status'
+    description: Job status
     required: true
   release_type:
-    description: 'Release type'
+    description: Release type
     required: true
   version:
-    description: 'Version'
+    description: Version
     required: true
-    default: 'N/A'
+    default: N/A
 runs:
   using: composite
   steps:
@@ -26,7 +26,6 @@ runs:
         }' \
           $SLACK_WEBHOOK_URL
       shell: bash
-
     - name: Send Slack Notification on Failure
       if: inputs.status == 'failure'
       run: |-
