@@ -2,7 +2,7 @@ name: Deriv Api Docs Staging Workflow
 on:
   push:
     branches:
-    - master
+      - master
 jobs:
   build_and_publish:
     name: Builds and Publishes to Cloudflare Pages Staging
@@ -12,30 +12,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: "./.github/actions/setup_node"
+        uses: './.github/actions/setup_node'
       - name: Install Dependencies
-        uses: "./.github/actions/npm_install_from_cache"
+        uses: './.github/actions/npm_install_from_cache'
       - name: Build
-        uses: "./.github/actions/build"
+        uses: './.github/actions/build'
         with:
           CA_CRT: ${{ secrets.CA_CRT }}
           CA: ${{ secrets.CA }}
           CONTEXT_ARTIFACT_S3_BUCKET: ${{ secrets.CONTEXT_ARTIFACT_S3_BUCKET }}
-          DATADOG_APPLICATION_ID: ${{ vars.DATADOG_APPLICATION_ID }} 
+          DATADOG_APPLICATION_ID: ${{ vars.DATADOG_APPLICATION_ID }}
           DATADOG_CLIENT_TOKEN: ${{ vars.DATADOG_CLIENT_TOKEN }}
           DOCKERHUB_ORGANISATION: ${{ vars.DOCKERHUB_ORGANISATION }}
           DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKHUB_ORGANISATION: ${{ vars.DOCKHUB_ORGANISATION }} 
-          KUBE_SERVER:  ${{ secrets.KUBE_SERVER }}
+          DOCKHUB_ORGANISATION: ${{ vars.DOCKHUB_ORGANISATION }}
+          KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
           NODE_ENV: staging
-          SERVICEACCOUNT_TOKEN:  ${{ secrets.SERVICEACCOUNT_TOKEN }}
+          SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
       - name: Versioning
-        uses: "./.github/actions/versioning"
+        uses: './.github/actions/versioning'
         with:
           version_name: staging
       - name: Publish to Cloudflare Pages Staging
-        uses: "./.github/actions/publish_to_pages_staging"
+        uses: './.github/actions/publish_to_pages_staging'
         with:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

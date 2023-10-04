@@ -3,13 +3,13 @@ description: Install npm packages from cache
 runs:
   using: composite
   steps:
-  - name: Cache node modules
-    id: cache-nodemodules
-    uses: actions/cache/restore@v3
-    with:
-      key: v1-deps-{{ checksum "package-lock.json" }} 
-      path: node_modules
-  - name: Install npm dependencies
-    if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-    run: npm install
-    shell: bash
+    - name: Cache node modules
+      id: cache-nodemodules
+      uses: actions/cache/restore@v3
+      with:
+        key: v1-deps-{{ checksum "package-lock.json" }}
+        path: node_modules
+    - name: Install npm dependencies
+      if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      run: npm install
+      shell: bash
