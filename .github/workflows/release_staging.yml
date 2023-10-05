@@ -18,18 +18,11 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
         with:
-          CA_CRT: ${{ secrets.CA_CRT }}
           CA: ${{ secrets.CA }}
           CONTEXT_ARTIFACT_S3_BUCKET: ${{ secrets.CONTEXT_ARTIFACT_S3_BUCKET }}
           DATADOG_APPLICATION_ID: ${{ vars.DATADOG_APPLICATION_ID }}
           DATADOG_CLIENT_TOKEN: ${{ vars.DATADOG_CLIENT_TOKEN }}
-          DOCKERHUB_ORGANISATION: ${{ vars.DOCKERHUB_ORGANISATION }}
-          DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKHUB_ORGANISATION: ${{ vars.DOCKHUB_ORGANISATION }}
-          KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
           NODE_ENV: staging
-          SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
       - name: Versioning
         uses: ./.github/actions/versioning
         with:
