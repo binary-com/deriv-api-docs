@@ -28,7 +28,7 @@ jobs:
           version_name: staging
       - name: Read version file
         id: readVersion
-        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+        run: echo "version=$(cat build/version)" >> $GITHUB_OUTPUT
       - name: Publish to Cloudflare Pages Staging
         uses: ./.github/actions/publish_to_pages_staging
         with:

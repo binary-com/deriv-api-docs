@@ -28,7 +28,7 @@ jobs:
           version_name: production
       - name: Read version file
         id: readVersion
-        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+        run: echo "version=$(cat build/version)" >> $GITHUB_OUTPUT
       - name: Publish to Cloudflare Pages Production
         uses: ./.github/actions/publish_to_pages_production
         with:
@@ -49,7 +49,7 @@ jobs:
         uses: technote-space/workflow-conclusion-action@v3
       - name: Read version file
         id: readVersion
-        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+        run: echo "version=$(cat build/version)" >> $GITHUB_OUTPUT
       - name: Send Slack Notification
         uses: ./.github/actions/notify_slack
         with:
