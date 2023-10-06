@@ -3,7 +3,7 @@
 This repository contains the information and code related to the Deriv API documentation.
 
 ![Prerequisite](https://img.shields.io/badge/node-%3E%3D16.16.0-blue.svg)
-[![codecov](https://codecov.io/gh/binary-com/deriv-api-docs/branch/master/graph/badge.svg?token=HXCKP3ZTWP)](https://codecov.io/gh/binary-com/deriv-api-docs)
+[![Coverage Status](https://coveralls.io/repos/github/binary-com/deriv-api-docs/actions/workflows/coveralls.yml/badge.svg)](https://coveralls.io/github/binary-com/deriv-api-docs/actions/workflows/coveralls.yml/badge.svg)
 
 <!--
 ![CircleCI](https://img.shields.io/circleci/build/github/binary-com/deriv-api-docs)
