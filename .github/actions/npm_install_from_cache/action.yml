@@ -7,8 +7,8 @@ runs:
       id: cache-nodemodules
       uses: actions/cache/restore@v3
       with:
-        key: ${{ build-master-cache-${{ hashFiles('package-lock.json') }}
         path: node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install npm dependencies
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
       run: npm install

@@ -8,4 +8,4 @@ runs:
       with:
         path: |-
           node_modules
-        key: ${{ build-master-cache-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
