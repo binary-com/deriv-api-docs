@@ -7,7 +7,7 @@ jobs:
   build_and_publish:
     name: Builds and Publishes to Cloudflare Pages Production
     environment: Production
-    runs-on: Runner_16cores_Deriv-app # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
   send_slack_notification:
     name: Send Slack Notification
     environment: Production
-    runs-on: Runner_16cores_Deriv-app # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
     if: always()
     needs:
       - build_and_publish

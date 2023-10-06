@@ -6,7 +6,7 @@ on:
 jobs:
   build_and_publish:
     name: Builds and Publishes to Cloudflare Pages Staging
-    runs-on: Runner_16cores_Deriv-app # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
     environment: Staging
     steps:
       - name: Checkout
