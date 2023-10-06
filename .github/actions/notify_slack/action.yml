@@ -4,13 +4,13 @@ inputs:
   SLACK_WEBHOOK_URL:
     description: Slack webhook URL
     required: true
-  status:
+  STATUS:
     description: Job status
     required: true
-  release_type:
+  RELEASE_TYPE:
     description: Release type
     required: true
-  version:
+  VERSION:
     description: Version
     required: true
     default: N/A
@@ -18,20 +18,20 @@ runs:
   using: composite
   steps:
     - name: Send Slack Notification on Success
-      if: ${{ inputs.status == 'success' }}
+      if: ${{ inputs.STATUS == 'success' }}
       run: |-
         curl -X POST -H 'Content-type: application/json' \
         --data '{
-        "text": "'"${{ inputs.release_type }}"' Release succeeded for api.deriv.com with version *'"${{ inputs.version }}"'*"
+        "text": "'"${{ inputs.RELEASE_TYPE }}"' Release succeeded for api.deriv.com with version *'"${{ inputs.VERSION }}"'*"
         }' \
           ${{ inputs.SLACK_WEBHOOK_URL }}
       shell: bash
     - name: Send Slack Notification on Failure
-      if: ${{ inputs.status == 'failure' }}
+      if: ${{ inputs.STATUS == 'failure' }}
       run: |-
         curl -X POST -H 'Content-type: application/json' \
         --data '{
-          "text": "'"${{ inputs.release_type }}"' Release failed for api.deriv.com with version *'"${{ inputs.version }}"'*"
+          "text": "'"${{ inputs.RELEASE_TYPE }}"' Release failed for api.deriv.com with version *'"${{ inputs.VERSION }}"'*"
         }' \
         ${{ inputs.SLACK_WEBHOOK_URL }}
       shell: bash

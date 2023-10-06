@@ -39,14 +39,14 @@ jobs:
       - name: Versioning
         uses: ./.github/actions/versioning
         with:
-          version_name: production
-      - name: Read version file
+          RELEASE_TYPE: production
+      - name: Read from version file
         id: readVersion
         run: echo "version=$(cat build/version)" >> $GITHUB_OUTPUT
       - name: Send Slack Notification
         uses: ./.github/actions/notify_slack
         with:
-          release_type: Production
+          RELEASE_TYPE: Production
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          status: ${{ env.WORKFLOW_CONCLUSION }}
-          version: ${{ steps.readVersion.outputs.version }}
+          STATUS: ${{ env.WORKFLOW_CONCLUSION }}
+          VERSION: ${{ steps.readVersion.outputs.version }}
