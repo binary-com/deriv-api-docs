@@ -22,13 +22,6 @@ jobs:
           DATADOG_APPLICATION_ID: ${{ vars.DATADOG_APPLICATION_ID }}
           DATADOG_CLIENT_TOKEN: ${{ vars.DATADOG_CLIENT_TOKEN }}
           NODE_ENV: staging
-      - name: Versioning
-        uses: ./.github/actions/versioning
-        with:
-          version_name: staging
-      - name: Read version file
-        id: readVersion
-        run: echo "version=$(cat build/version)" >> $GITHUB_OUTPUT
       - name: Publish to Cloudflare Pages Staging
         uses: ./.github/actions/publish_to_pages_staging
         with:
