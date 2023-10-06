@@ -1,4 +1,4 @@
-name: Codecov Workflow
+name: Coveralls Workflow
 on:
   pull_request:
     branches:
