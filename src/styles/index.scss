@@ -273,7 +273,8 @@ main[class*='docMainContainer'] .container {
 
 .dropdown__menu {
   display: grid;
-  gap: rem(0.8);
+  grid-template-columns: repeat(3, 1fr);
+  gap: rem(1.6);
   padding: rem(1.6) rem(1.6);
   background-color: var(--colors-greyLight100);
   border-radius: rem(0.8);
