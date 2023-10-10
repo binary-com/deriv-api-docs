@@ -129,157 +129,133 @@ describe("useDynamicImportJSON", () => {
   it("should have correct text area inputs inside dynamic imports correctly", () => {
     act(() => {
       result.current.dynamicImportJSON(result.current.text_data.selected_value);
+      console.log(result.current.request_info);
     });
     expect(result.current.request_info).toEqual({
       $schema: "http://json-schema.org/draft-04/schema#",
-      title: "Active Symbols (response)",
-      description: "A message containing the list of active symbols.",
-      type: "object",
-      required: ["echo_req", "msg_type"],
-      properties: {
-        active_symbols: {
-          title: "active_symbols",
-          description: "List of active symbols.",
-          type: "array",
-          items: {
-            description: "The information about each symbol.",
-            type: "object",
-            additionalProperties: false,
-            required: [
-              "display_name",
-              "display_order",
-              "exchange_is_open",
-              "is_trading_suspended",
-              "market",
-              "market_display_name",
-              "pip",
-              "subgroup",
-              "subgroup_display_name",
-              "submarket",
-              "submarket_display_name",
-              "symbol",
-              "symbol_type",
+      additionalProperties: false,
+      auth_required: 0,
+      default: {
+        $schema: "http://json-schema.org/draft-04/schema#",
+        additionalProperties: false,
+        auth_required: 0,
+        description:
+          "Retrieve a list of all currently active symbols (underlying markets upon which contracts are available for trading).",
+        properties: {
+          active_symbols: {
+            description:
+              "If you use `brief`, only a subset of fields will be returned.",
+            enum: ["brief", "full"],
+            type: "string",
+          },
+          landing_company: {
+            description: "Deprecated - replaced by landing_company_short.",
+            enum: [
+              "iom",
+              "malta",
+              "maltainvest",
+              "svg",
+              "virtual",
+              "vanuatu",
+              "champion",
+              "champion-virtual",
             ],
-            properties: {
-              allow_forward_starting: {
-                description:
-                  "`1` if the symbol is tradable in a forward starting contract, `0` if not.",
-                type: "integer",
-                enum: [0, 1],
-              },
-              delay_amount: {
-                description:
-                  "Amount the data feed is delayed (in minutes) due to Exchange licensing requirements. Only returned on `full` active symbols call.",
-                type: "integer",
-              },
-              display_name: {
-                description: "Display name.",
-                type: "string",
-              },
-              display_order: {
-                description: "Display order.",
-                type: "integer",
-              },
-              exchange_is_open: {
-                description: "`1` if market is currently open, `0` if closed.",
-                type: "integer",
-                enum: [0, 1],
-              },
-              exchange_name: {
-                description:
-                  "Exchange name (for underlyings listed on a Stock Exchange). Only returned on `full` active symbols call.",
-                type: "string",
-              },
-              intraday_interval_minutes: {
-                description:
-                  "Intraday interval minutes. Only returned on `full` active symbols call.",
-                type: "integer",
-              },
-              is_trading_suspended: {
-                description:
-                  "`1` indicates that trading is currently suspended, `0` if not.",
-                type: "integer",
-                enum: [0, 1],
-              },
-              market: {
-                description: "Market category (forex, indices, etc).",
-                type: "string",
-              },
-              market_display_name: {
-                description: "Translated market name.",
-                type: "string",
-              },
-              pip: {
-                description: "Pip size (i.e. minimum fluctuation amount).",
-                type: "number",
-              },
-              quoted_currency_symbol: {
-                description:
-                  "For stock indices, the underlying currency for that instrument. Only returned on `full` active symbols call.",
-                type: "string",
-              },
-              spot: {
-                description:
-                  "Latest spot price of the underlying. Only returned on `full` active symbols call.",
-                type: ["null", "number"],
-              },
-              spot_age: {
-                description:
-                  "Number of seconds elapsed since the last spot price. Only returned on `full` active symbols call.",
-                type: "string",
-              },
-              spot_percentage_change: {
-                description:
-                  "Daily percentage for a symbol. Only returned on 'full' active symbols call.",
-                type: "string",
-              },
-              spot_time: {
-                description:
-                  "Latest spot epoch time. Only returned on `full` active symbols call.",
-                type: "string",
-              },
-              subgroup: {
-                description: "Subgroup name.",
-                type: "string",
-              },
-              subgroup_display_name: {
-                description: "Translated subgroup name.",
-                type: "string",
-              },
-              submarket: {
-                description: "Submarket name.",
-                type: "string",
-              },
-              submarket_display_name: {
-                description: "Translated submarket name.",
-                type: "string",
-              },
-              symbol: {
-                description: "The symbol code for this underlying.",
-                type: "string",
-              },
-              symbol_type: {
-                description: "Symbol type (forex, commodities, etc).",
-                type: "string",
-              },
-            },
+            type: "string",
+          },
+          landing_company_short: {
+            description:
+              "[Optional] If you specify this field, only symbols available for trading by that landing company will be returned. If you are logged in, only symbols available for trading by your landing company will be returned regardless of what you specify in this field.",
+            enum: [
+              "iom",
+              "malta",
+              "maltainvest",
+              "svg",
+              "virtual",
+              "vanuatu",
+              "champion",
+              "champion-virtual",
+            ],
+            type: "string",
+          },
+          passthrough: {
+            description:
+              "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            maxSize: 3500,
+            type: "object",
+          },
+          product_type: {
+            description:
+              "[Optional] If you specify this field, only symbols that can be traded through that product type will be returned.",
+            enum: ["basic"],
+            type: "string",
+          },
+          req_id: {
+            description: "[Optional] Used to map request to response.",
+            type: "integer",
           },
         },
-        echo_req: {
-          description: "Echo of the request made.",
+        required: ["active_symbols"],
+        title: "Active Symbols (request)",
+        type: "object",
+      },
+      description:
+        "Retrieve a list of all currently active symbols (underlying markets upon which contracts are available for trading).",
+      properties: {
+        active_symbols: {
+          description:
+            "If you use `brief`, only a subset of fields will be returned.",
+          enum: ["brief", "full"],
+          type: "string",
+        },
+        landing_company: {
+          description: "Deprecated - replaced by landing_company_short.",
+          enum: [
+            "iom",
+            "malta",
+            "maltainvest",
+            "svg",
+            "virtual",
+            "vanuatu",
+            "champion",
+            "champion-virtual",
+          ],
+          type: "string",
+        },
+        landing_company_short: {
+          description:
+            "[Optional] If you specify this field, only symbols available for trading by that landing company will be returned. If you are logged in, only symbols available for trading by your landing company will be returned regardless of what you specify in this field.",
+          enum: [
+            "iom",
+            "malta",
+            "maltainvest",
+            "svg",
+            "virtual",
+            "vanuatu",
+            "champion",
+            "champion-virtual",
+          ],
+          type: "string",
+        },
+        passthrough: {
+          description:
+            "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+          maxSize: 3500,
           type: "object",
         },
-        msg_type: {
-          description: "Action name of the request made.",
+        product_type: {
+          description:
+            "[Optional] If you specify this field, only symbols that can be traded through that product type will be returned.",
+          enum: ["basic"],
           type: "string",
-          enum: ["active_symbols"],
         },
         req_id: {
-          description:
-            "Optional field sent in request to map to response, present only when request contains `req_id`.",
+          description: "[Optional] Used to map request to response.",
           type: "integer",
         },
       },
+      required: ["active_symbols"],
+      title: "Active Symbols (request)",
+      type: "object",
     });
   });
 });
