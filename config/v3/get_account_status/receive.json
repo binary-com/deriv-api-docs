@@ -1,365 +1,441 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Account Status (response)",
-  "description": "A message with Account Status",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "get_account_status": {
-      "title": "get_account_status",
-      "description": "Account status details",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "currency_config",
-        "p2p_status",
-        "prompt_client_to_authenticate",
-        "risk_classification",
-        "status"
-      ],
-      "properties": {
-        "authentication": {
-          "description": "This represents the authentication status of the user and it includes what authentication is needed.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["needs_verification"],
-          "properties": {
-            "attempts": {
-              "description": "POI attempts made by the client",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "count": {
-                  "description": "A number of POI attempts made by the client",
-                  "type": "integer"
-                },
-                "history": {
-                  "description": "A list of POI attempts made by the client in chronological descending order",
-                  "type": "array",
-                  "items": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Account Status (response)",
+    "description": "A message with Account Status",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "get_account_status": {
+            "title": "get_account_status",
+            "description": "Account status details",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "currency_config",
+                "p2p_status",
+                "prompt_client_to_authenticate",
+                "risk_classification",
+                "status"
+            ],
+            "properties": {
+                "authentication": {
+                    "description": "This represents the authentication status of the user and it includes what authentication is needed.",
                     "type": "object",
                     "additionalProperties": false,
+                    "required": [
+                        "needs_verification"
+                    ],
                     "properties": {
-                      "country_code": {
-                        "description": "2-letter country code used to request the attempt.",
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "The id of the attempt.",
-                        "type": "string"
-                      },
-                      "service": {
-                        "description": "The service used to make the verification.",
-                        "type": "string"
-                      },
-                      "status": {
-                        "description": "Status of the attempt.",
-                        "type": "string",
-                        "enum": ["verified", "rejected", "pending", "expired", "none"]
-                      },
-                      "timestamp": {
-                        "description": "The epoch of the attempt.",
-                        "type": "integer"
-                      }
+                        "attempts": {
+                            "description": "POI attempts made by the client",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "count": {
+                                    "description": "A number of POI attempts made by the client",
+                                    "type": "integer"
+                                },
+                                "history": {
+                                    "description": "A list of POI attempts made by the client in chronological descending order",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "country_code": {
+                                                "description": "2-letter country code used to request the attempt.",
+                                                "type": "string"
+                                            },
+                                            "document_type": {
+                                                "description": "The document type of the attempt.",
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "description": "The id of the attempt.",
+                                                "type": "string"
+                                            },
+                                            "service": {
+                                                "description": "The service used to make the verification.",
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "description": "Status of the attempt.",
+                                                "type": "string",
+                                                "enum": [
+                                                    "verified",
+                                                    "rejected",
+                                                    "pending",
+                                                    "expired",
+                                                    "none"
+                                                ]
+                                            },
+                                            "timestamp": {
+                                                "description": "The epoch of the attempt.",
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                },
+                                "latest": {
+                                    "description": "The latest POI attempt made by the client",
+                                    "type": [
+                                        "null",
+                                        "object"
+                                    ]
+                                }
+                            }
+                        },
+                        "document": {
+                            "description": "The authentication status for document.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "expiry_date": {
+                                    "description": "This is the epoch of the document expiry date.",
+                                    "type": "integer"
+                                },
+                                "status": {
+                                    "description": "This represents the current status of the proof of address document submitted for authentication.",
+                                    "type": "string",
+                                    "enum": [
+                                        "none",
+                                        "pending",
+                                        "rejected",
+                                        "verified",
+                                        "expired",
+                                        "suspected"
+                                    ]
+                                }
+                            }
+                        },
+                        "identity": {
+                            "description": "The authentication status for identity.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "expiry_date": {
+                                    "description": "This is the epoch of the document expiry date.",
+                                    "type": "integer"
+                                },
+                                "services": {
+                                    "description": "This shows the information about the authentication services implemented",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "idv": {
+                                            "description": "This shows the information related to IDV supported services",
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "expiry_date": {
+                                                    "description": "This is the epoch of the document expiry date.",
+                                                    "type": "integer"
+                                                },
+                                                "last_rejected": {
+                                                    "description": "Show the last IDV reported reasons for the rejected cases",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "reported_properties": {
+                                                    "description": "Shows the latest document properties detected and reported by IDVS",
+                                                    "type": "object"
+                                                },
+                                                "status": {
+                                                    "description": "This represents the status of the latest IDV check.",
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "none",
+                                                        "pending",
+                                                        "rejected",
+                                                        "verified",
+                                                        "expired"
+                                                    ]
+                                                },
+                                                "submissions_left": {
+                                                    "description": "This shows the number of IDV submissions left for the client",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "manual": {
+                                            "description": "This shows the information related to the manual POI checks",
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "status": {
+                                                    "description": "This represents the status of the current manual POI check.",
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "none",
+                                                        "pending",
+                                                        "rejected",
+                                                        "verified",
+                                                        "expired",
+                                                        "suspected"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "onfido": {
+                                            "description": "This shows the information related to Onfido supported services",
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "country_code": {
+                                                    "description": "3 letter country code for Onfide SDK",
+                                                    "type": "string",
+                                                    "pattern": "^[A-Z]{3}$"
+                                                },
+                                                "documents": {
+                                                    "description": "This shows the list of documents types supported by Onfido",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "examples": [
+                                                            "Driving Licence",
+                                                            "National Identity Card",
+                                                            "Passport"
+                                                        ]
+                                                    }
+                                                },
+                                                "documents_supported": {
+                                                    "description": "This shows the list of documents types supported.",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "is_country_supported": {
+                                                    "description": "This shows the information if the country is supported by Onfido",
+                                                    "type": "integer",
+                                                    "enum": [
+                                                        1,
+                                                        0
+                                                    ]
+                                                },
+                                                "last_rejected": {
+                                                    "description": "Show the last Onfido reported reasons for the rejected cases",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "reported_properties": {
+                                                    "description": "Shows the latest document properties detected and reported by Onfido",
+                                                    "type": "object"
+                                                },
+                                                "status": {
+                                                    "description": "This represents the status of the latest Onfido check.",
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "none",
+                                                        "pending",
+                                                        "rejected",
+                                                        "verified",
+                                                        "expired",
+                                                        "suspected"
+                                                    ]
+                                                },
+                                                "submissions_left": {
+                                                    "description": "This shows the number of Onfido submissions left for the client",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "status": {
+                                    "description": "This represent the current status for proof of identity document submitted for authentication.",
+                                    "type": "string",
+                                    "enum": [
+                                        "none",
+                                        "pending",
+                                        "rejected",
+                                        "verified",
+                                        "expired",
+                                        "suspected"
+                                    ]
+                                }
+                            }
+                        },
+                        "income": {
+                            "description": "The authentication status for source of income document.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "expiry_date": {
+                                    "description": "Epoch of the source of income document expiry date.",
+                                    "type": "integer"
+                                },
+                                "status": {
+                                    "description": "Current status of the proof of income document submitted for authentication.",
+                                    "type": "string",
+                                    "enum": [
+                                        "none",
+                                        "pending",
+                                        "rejected",
+                                        "verified",
+                                        "locked"
+                                    ]
+                                }
+                            }
+                        },
+                        "needs_verification": {
+                            "description": "An array containing the list of required authentication.",
+                            "type": "array",
+                            "items": {
+                                "description": "This represents the current type of authentication required, possible values are identity, document, income, and ownership.",
+                                "type": "string"
+                            }
+                        },
+                        "ownership": {
+                            "description": "The current state of the proof of ownership.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "requests": {
+                                    "description": "The list of proof of ownership requests to fullfil",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "creation_time": {
+                                                "description": "The request timestamp of creation",
+                                                "type": "string"
+                                            },
+                                            "documents_required": {
+                                                "description": "Number of documents required to be uploaded for proof of ownership",
+                                                "type": "number"
+                                            },
+                                            "id": {
+                                                "description": "The identifier of the proof of ownership request",
+                                                "type": "number"
+                                            },
+                                            "payment_method": {
+                                                "description": "The display name of the payment method being requested",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "status": {
+                                    "description": "This represents the current status of the proof of ownership",
+                                    "type": "string",
+                                    "enum": [
+                                        "none",
+                                        "pending",
+                                        "rejected",
+                                        "verified"
+                                    ]
+                                }
+                            }
+                        }
                     }
-                  }
                 },
-                "latest": {
-                  "description": "The latest POI attempt made by the client",
-                  "type": ["null", "object"]
-                }
-              }
-            },
-            "document": {
-              "description": "The authentication status for document.",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "expiry_date": {
-                  "description": "This is the epoch of the document expiry date.",
-                  "type": "integer"
-                },
-                "status": {
-                  "description": "This represents the current status of the proof of address document submitted for authentication.",
-                  "type": "string",
-                  "enum": ["none", "pending", "rejected", "verified", "expired", "suspected"]
-                }
-              }
-            },
-            "identity": {
-              "description": "The authentication status for identity.",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "expiry_date": {
-                  "description": "This is the epoch of the document expiry date.",
-                  "type": "integer"
-                },
-                "services": {
-                  "description": "This shows the information about the authentication services implemented",
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {
-                    "idv": {
-                      "description": "This shows the information related to IDV supported services",
-                      "type": "object",
-                      "additionalProperties": false,
-                      "properties": {
-                        "expiry_date": {
-                          "description": "This is the epoch of the document expiry date.",
-                          "type": "integer"
-                        },
-                        "last_rejected": {
-                          "description": "Show the last IDV reported reasons for the rejected cases",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "reported_properties": {
-                          "description": "Shows the latest document properties detected and reported by IDVS",
-                          "type": "object"
-                        },
-                        "status": {
-                          "description": "This represents the status of the latest IDV check.",
-                          "type": "string",
-                          "enum": ["none", "pending", "rejected", "verified", "expired"]
-                        },
-                        "submissions_left": {
-                          "description": "This shows the number of IDV submissions left for the client",
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "manual": {
-                      "description": "This shows the information related to the manual POI checks",
-                      "type": "object",
-                      "additionalProperties": false,
-                      "properties": {
-                        "status": {
-                          "description": "This represents the status of the current manual POI check.",
-                          "type": "string",
-                          "enum": [
-                            "none",
-                            "pending",
-                            "rejected",
-                            "verified",
-                            "expired",
-                            "suspected"
-                          ]
-                        }
-                      }
-                    },
-                    "onfido": {
-                      "description": "This shows the information related to Onfido supported services",
-                      "type": "object",
-                      "additionalProperties": false,
-                      "properties": {
-                        "country_code": {
-                          "description": "3 letter country code for Onfide SDK",
-                          "type": "string",
-                          "pattern": "^[A-Z]{3}$"
-                        },
-                        "documents": {
-                          "description": "This shows the list of documents types supported by Onfido",
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "examples": ["Driving Licence", "National Identity Card", "Passport"]
-                          }
-                        },
-                        "documents_supported": {
-                          "description": "This shows the list of documents types supported.",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "is_country_supported": {
-                          "description": "This shows the information if the country is supported by Onfido",
-                          "type": "integer",
-                          "enum": [1, 0]
-                        },
-                        "last_rejected": {
-                          "description": "Show the last Onfido reported reasons for the rejected cases",
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "reported_properties": {
-                          "description": "Shows the latest document properties detected and reported by Onfido",
-                          "type": "object"
-                        },
-                        "status": {
-                          "description": "This represents the status of the latest Onfido check.",
-                          "type": "string",
-                          "enum": [
-                            "none",
-                            "pending",
-                            "rejected",
-                            "verified",
-                            "expired",
-                            "suspected"
-                          ]
-                        },
-                        "submissions_left": {
-                          "description": "This shows the number of Onfido submissions left for the client",
-                          "type": "integer"
-                        }
-                      }
+                "cashier_missing_fields": {
+                    "description": "Contains missing profile fields required for cashier access.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
-                  }
                 },
-                "status": {
-                  "description": "This represent the current status for proof of identity document submitted for authentication.",
-                  "type": "string",
-                  "enum": ["none", "pending", "rejected", "verified", "expired", "suspected"]
-                }
-              }
-            },
-            "income": {
-              "description": "The authentication status for source of income document.",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "expiry_date": {
-                  "description": "Epoch of the source of income document expiry date.",
-                  "type": "integer"
+                "cashier_validation": {
+                    "description": "If the cashier is unavailble, this array contains one or more error codes for each reason.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
-                "status": {
-                  "description": "Current status of the proof of income document submitted for authentication.",
-                  "type": "string",
-                  "enum": ["none", "pending", "rejected", "verified", "locked"]
-                }
-              }
-            },
-            "needs_verification": {
-              "description": "An array containing the list of required authentication.",
-              "type": "array",
-              "items": {
-                "description": "This represents the current type of authentication required, possible values are identity, document, income, and ownership.",
-                "type": "string"
-              }
-            },
-            "ownership": {
-              "description": "The current state of the proof of ownership.",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "requests": {
-                  "description": "The list of proof of ownership requests to fullfil",
-                  "type": "array",
-                  "items": {
+                "currency_config": {
+                    "description": "Provides cashier details for client currency.",
                     "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                      "creation_time": {
-                        "description": "The request timestamp of creation",
-                        "type": "string"
-                      },
-                      "documents_required": {
-                        "description": "Number of documents required to be uploaded for proof of ownership",
-                        "type": "number"
-                      },
-                      "id": {
-                        "description": "The identifier of the proof of ownership request",
-                        "type": "number"
-                      },
-                      "payment_method": {
-                        "description": "The display name of the payment method being requested",
-                        "type": "string"
-                      }
+                    "minProperties": 0,
+                    "patternProperties": {
+                        "^[a-zA-Z0-9]{2,20}$": {
+                            "description": "Client currency",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "is_deposit_suspended": {
+                                    "description": "Deposit is allowed for currency or not",
+                                    "type": "integer",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "is_withdrawal_suspended": {
+                                    "description": "Withdrawal is allowed for currency or not",
+                                    "type": "integer",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                }
+                            }
+                        }
                     }
-                  }
+                },
+                "p2p_status": {
+                    "description": "Current P2P status of client.",
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "active",
+                        "temp_ban",
+                        "perm_ban"
+                    ]
+                },
+                "prompt_client_to_authenticate": {
+                    "description": "Indicates whether the client should be prompted to authenticate their account.",
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        0
+                    ]
+                },
+                "risk_classification": {
+                    "description": "Client risk classification: `low`, `standard`, `high`.",
+                    "type": "string"
+                },
+                "social_identity_provider": {
+                    "description": "Social identity provider a user signed up with.",
+                    "type": "string",
+                    "enum": [
+                        "google",
+                        "facebook",
+                        "apple"
+                    ]
                 },
                 "status": {
-                  "description": "This represents the current status of the proof of ownership",
-                  "type": "string",
-                  "enum": ["none", "pending", "rejected", "verified"]
+                    "description": "Account status. Possible status: \n- `address_verified`: client's address is verified by third party services. \n- `allow_document_upload`: client is allowed to upload documents. \n- `age_verification`: client is age-verified. \n- `authenticated`: client is fully authenticated. \n- `cashier_locked`: cashier is locked. \n- `crs_tin_information`: client has updated tax related information. \n- `deposit_locked`: deposit is not allowed. \n- `disabled`: account is disabled. \n- `document_expired`: client's submitted proof-of-identity documents have expired. \n- `document_expiring_soon`: client's submitted proof-of-identity documents are expiring within a month. \n- `dxtrade_password_not_set`: Deriv X password is not set. \n- `financial_assessment_not_complete`: client should complete their financial assessment. \n- `financial_information_not_complete`: client has not completed financial assessment. \n- `financial_risk_approval`: client has accepted financial risk disclosure. \n- `max_turnover_limit_not_set`: client has not set financial limits on their account. Applies to UK and Malta clients. \n- `mt5_password_not_set`: MT5 password is not set. \n- `mt5_withdrawal_locked`: MT5 deposits allowed, but withdrawal is not allowed. \n- `needs_affiliate_coc_approval`: user must approve the Affiliate's Code of Conduct Agreement. \n- `no_trading`: trading is disabled. \n- `no_withdrawal_or_trading`: client cannot trade or withdraw but can deposit. \n- `p2p_blocked_for_pa`: p2p is blocked for the current payment agent client. \n- `pa_withdrawal_explicitly_allowed`: withdrawal through payment agent is allowed. \n- `password_reset_required`: this client must reset their password.  \n- `professional`: this client has opted for a professional account. \n- `professional_requested`: this client has requested for a professional account. \n- `professional_rejected`: this client's request for a professional account has been rejected. \n- `social_signup`: this client is using social signup. \n- `trading_experience_not_complete`: client has not completed the trading experience questionnaire. \n- `ukgc_funds_protection`: client has acknowledged UKGC funds protection notice. \n- `unwelcome`: client cannot deposit or buy contracts, but can withdraw or sell contracts. \n- `withdrawal_locked`: deposits allowed but withdrawals are not allowed. \n- `deposit_attempt`: this prevent a client from changing the account currency after deposit attempt. \n- `poi_name_mismatch`: client POI documents name mismatch. \n- `allow_poa_resubmission`: the client can resubmit POA documents. \n- `allow_poi_resubmission`: the client can resubmit POI documents. \n- `shared_payment_method`: the client has been sharing payment methods. \n- `personal_details_locked`: client is not allowed to edit personal profile details. \n- `transfers_blocked`: it block any transfer between two accounts. \n- `df_deposit_requires_poi`: the DF deposit will be blocked until the client gets age verified. \n- `authenticated_with_idv_photoid`: the client has been fully authenticated by IDV. \n- `idv_revoked`: the client used to be fully authenticated by IDV but it was taken away due to compliance criteria. \n- `mt5_additional_kyc_required`: client tax information, place of birth and account opening reason is missing",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
-              }
             }
-          }
         },
-        "cashier_missing_fields": {
-          "description": "Contains missing profile fields required for cashier access.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
         },
-        "cashier_validation": {
-          "description": "If the cashier is unavailble, this array contains one or more error codes for each reason.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "get_account_status"
+            ]
         },
-        "currency_config": {
-          "description": "Provides cashier details for client currency.",
-          "type": "object",
-          "minProperties": 0,
-          "patternProperties": {
-            "^[a-zA-Z0-9]{2,20}$": {
-              "description": "Client currency",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "is_deposit_suspended": {
-                  "description": "Deposit is allowed for currency or not",
-                  "type": "integer",
-                  "enum": [0, 1]
-                },
-                "is_withdrawal_suspended": {
-                  "description": "Withdrawal is allowed for currency or not",
-                  "type": "integer",
-                  "enum": [0, 1]
-                }
-              }
-            }
-          }
-        },
-        "p2p_status": {
-          "description": "Current P2P status of client.",
-          "type": "string",
-          "enum": ["none", "active", "temp_ban", "perm_ban"]
-        },
-        "prompt_client_to_authenticate": {
-          "description": "Indicates whether the client should be prompted to authenticate their account.",
-          "type": "integer",
-          "enum": [1, 0]
-        },
-        "risk_classification": {
-          "description": "Client risk classification: `low`, `standard`, `high`.",
-          "type": "string"
-        },
-        "social_identity_provider": {
-          "description": "Social identity provider a user signed up with.",
-          "type": "string",
-          "enum": ["google", "facebook", "apple"]
-        },
-        "status": {
-          "description": "Account status. Possible status: \n- `address_verified`: client's address is verified by third party services. \n- `allow_document_upload`: client is allowed to upload documents. \n- `age_verification`: client is age-verified. \n- `authenticated`: client is fully authenticated. \n- `cashier_locked`: cashier is locked. \n- `crs_tin_information`: client has updated tax related information. \n- `deposit_locked`: deposit is not allowed. \n- `disabled`: account is disabled. \n- `document_expired`: client's submitted proof-of-identity documents have expired. \n- `document_expiring_soon`: client's submitted proof-of-identity documents are expiring within a month. \n- `dxtrade_password_not_set`: Deriv X password is not set. \n- `financial_assessment_not_complete`: client should complete their financial assessment. \n- `financial_information_not_complete`: client has not completed financial assessment. \n- `financial_risk_approval`: client has accepted financial risk disclosure. \n- `max_turnover_limit_not_set`: client has not set financial limits on their account. Applies to UK and Malta clients. \n- `mt5_password_not_set`: MT5 password is not set. \n- `mt5_withdrawal_locked`: MT5 deposits allowed, but withdrawal is not allowed. \n- `needs_affiliate_coc_approval`: user must approve the Affiliate's Code of Conduct Agreement. \n- `no_trading`: trading is disabled. \n- `no_withdrawal_or_trading`: client cannot trade or withdraw but can deposit. \n- `p2p_blocked_for_pa`: p2p is blocked for the current payment agent client. \n- `pa_withdrawal_explicitly_allowed`: withdrawal through payment agent is allowed. \n- `password_reset_required`: this client must reset their password.  \n- `professional`: this client has opted for a professional account. \n- `professional_requested`: this client has requested for a professional account. \n- `professional_rejected`: this client's request for a professional account has been rejected. \n- `social_signup`: this client is using social signup. \n- `trading_experience_not_complete`: client has not completed the trading experience questionnaire. \n- `ukgc_funds_protection`: client has acknowledged UKGC funds protection notice. \n- `unwelcome`: client cannot deposit or buy contracts, but can withdraw or sell contracts. \n- `withdrawal_locked`: deposits allowed but withdrawals are not allowed. \n- `deposit_attempt`: this prevent a client from changing the account currency after deposit attempt. \n- `poi_name_mismatch`: client POI documents name mismatch. \n- `allow_poa_resubmission`: the client can resubmit POA documents. \n- `allow_poi_resubmission`: the client can resubmit POI documents. \n- `shared_payment_method`: the client has been sharing payment methods. \n- `personal_details_locked`: client is not allowed to edit personal profile details. \n- `transfers_blocked`: it block any transfer between two accounts. \n- `df_deposit_requires_poi`: the DF deposit will be blocked until the client gets age verified.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["get_account_status"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

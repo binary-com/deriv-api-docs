@@ -1,36 +1,44 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Update Contract History (request)",
-  "description": "Request for contract update history.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["read"],
-  "additionalProperties": false,
-  "required": ["contract_update_history", "contract_id"],
-  "properties": {
-    "contract_update_history": {
-      "description": "Must be `1`",
-      "type": "integer",
-      "enum": [1]
-    },
-    "contract_id": {
-      "description": "Internal unique contract identifier.",
-      "type": "integer"
-    },
-    "limit": {
-      "description": "[Optional] Maximum number of historical updates to receive.",
-      "type": "number",
-      "default": 500,
-      "maximum": 999,
-      "minimum": 1
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Update Contract History (request)",
+    "description": "Request for contract update history.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "read"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "contract_update_history",
+        "contract_id"
+    ],
+    "properties": {
+        "contract_update_history": {
+            "description": "Must be `1`",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "contract_id": {
+            "description": "Internal unique contract identifier.",
+            "type": "integer"
+        },
+        "limit": {
+            "description": "[Optional] Maximum number of historical updates to receive.",
+            "type": "number",
+            "default": 500,
+            "maximum": 999,
+            "minimum": 1
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

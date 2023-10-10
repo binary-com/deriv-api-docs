@@ -1,367 +1,476 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Order Create (response)",
-  "description": "The information about the created P2P order.",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "p2p_order_create": {
-      "title": "p2p_order_create",
-      "description": "Information of the creates P2P order.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "account_currency",
-        "advert_details",
-        "advertiser_details",
-        "amount",
-        "amount_display",
-        "chat_channel_url",
-        "client_details",
-        "contact_info",
-        "created_time",
-        "dispute_details",
-        "expiry_time",
-        "id",
-        "is_incoming",
-        "is_reviewable",
-        "is_seen",
-        "local_currency",
-        "payment_info",
-        "price",
-        "price_display",
-        "rate",
-        "rate_display",
-        "status",
-        "type"
-      ],
-      "properties": {
-        "account_currency": {
-          "description": "The currency of order.",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9]{2,20}$",
-          "examples": ["USD"]
-        },
-        "advert_details": {
-          "title": "Advert Details",
-          "description": "Details of the advert for this order.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["description", "id", "payment_method", "type"],
-          "properties": {
-            "description": {
-              "description": "General information about the advert.",
-              "type": "string",
-              "sensitive": 1
-            },
-            "id": {
-              "description": "The unique identifier for the advert.",
-              "type": "string"
-            },
-            "payment_method": {
-              "description": "The payment method.",
-              "type": ["null", "string"]
-            },
-            "type": {
-              "description": "Type of the advert.",
-              "type": "string",
-              "enum": ["buy", "sell"]
-            }
-          }
-        },
-        "advertiser_details": {
-          "title": "Advertiser Details",
-          "description": "Details of the advertiser for this order.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["id", "is_online", "last_online_time", "loginid", "name"],
-          "properties": {
-            "first_name": {
-              "description": "The advertiser's first name.",
-              "type": "string",
-              "sensitive": 1
-            },
-            "id": {
-              "description": "The advertiser's unique identifier.",
-              "type": "string"
-            },
-            "is_online": {
-              "description": "Indicates if the advertiser is currently online.",
-              "type": "integer",
-              "enum": [0, 1]
-            },
-            "last_name": {
-              "description": "The advertiser's last name.",
-              "type": "string",
-              "sensitive": 1
-            },
-            "last_online_time": {
-              "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
-              "type": ["integer", "null"]
-            },
-            "loginid": {
-              "description": "The advertiser's account identifier.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The advertiser's displayed name.",
-              "type": "string",
-              "sensitive": 1
-            }
-          }
-        },
-        "amount": {
-          "description": "The amount of the order.",
-          "type": "number"
-        },
-        "amount_display": {
-          "description": "The amount of the order, formatted to appropriate decimal places.",
-          "type": "string"
-        },
-        "chat_channel_url": {
-          "description": "The URL to be used to initialise the chat for this order.",
-          "type": "string"
-        },
-        "client_details": {
-          "title": "Client Details",
-          "description": "Details of the client who created the order.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["id", "is_online", "last_online_time", "loginid", "name"],
-          "properties": {
-            "first_name": {
-              "description": "The client's first name.",
-              "type": "string",
-              "sensitive": 1
-            },
-            "id": {
-              "description": "The client's unique P2P identifier.",
-              "type": "string"
-            },
-            "is_online": {
-              "description": "Indicates if the advertiser is currently online.",
-              "type": "integer",
-              "enum": [0, 1]
-            },
-            "last_name": {
-              "description": "The client's last name.",
-              "type": "string",
-              "sensitive": 1
-            },
-            "last_online_time": {
-              "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
-              "type": ["integer", "null"]
-            },
-            "loginid": {
-              "description": "The client's account identifier.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The client's displayed name.",
-              "type": "string",
-              "sensitive": 1
-            }
-          }
-        },
-        "contact_info": {
-          "description": "Seller contact information.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "created_time": {
-          "description": "The epoch time of the order creation.",
-          "type": "integer"
-        },
-        "dispute_details": {
-          "title": "Dispute Details",
-          "description": "Details of the order dispute.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["dispute_reason", "disputer_loginid"],
-          "properties": {
-            "dispute_reason": {
-              "description": "The dispute reason",
-              "type": ["null", "string"]
-            },
-            "disputer_loginid": {
-              "description": "The loginid of the client who's raising the dispute",
-              "type": ["null", "string"]
-            }
-          }
-        },
-        "expiry_time": {
-          "description": "The epoch time in which the order will be expired.",
-          "type": "integer"
-        },
-        "id": {
-          "description": "The unique identifier for this order.",
-          "type": "string"
-        },
-        "is_incoming": {
-          "description": "`1` if the order is created for the advert of the current client, otherwise `0`.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "is_reviewable": {
-          "description": "`1` if a review can be given, otherwise `0`.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "is_seen": {
-          "description": "`1` if the latest order changes have been seen by the current client, otherwise `0`.",
-          "type": "integer",
-          "enum": [1, 0]
-        },
-        "local_currency": {
-          "description": "Local currency for this order.",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9]{2,20}$",
-          "examples": ["USD"]
-        },
-        "payment_info": {
-          "description": "Payment instructions.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "payment_method": {
-          "description": "Supported payment methods. Comma separated list.",
-          "type": ["null", "string"]
-        },
-        "payment_method_details": {
-          "description": "Details of available payment methods.",
-          "type": "object",
-          "additionalProperties": false,
-          "patternProperties": {
-            "^[0-9]{1,8}$": {
-              "description": "Unique identifier.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["fields", "is_enabled", "method", "type"],
-              "properties": {
-                "display_name": {
-                  "description": "Display name of payment method.",
-                  "type": "string"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Order Create (response)",
+    "description": "The information about the created P2P order.",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "p2p_order_create": {
+            "title": "p2p_order_create",
+            "description": "Information of the creates P2P order.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "account_currency",
+                "advert_details",
+                "advertiser_details",
+                "amount",
+                "amount_display",
+                "chat_channel_url",
+                "client_details",
+                "contact_info",
+                "created_time",
+                "dispute_details",
+                "expiry_time",
+                "id",
+                "is_incoming",
+                "is_reviewable",
+                "is_seen",
+                "local_currency",
+                "payment_info",
+                "price",
+                "price_display",
+                "rate",
+                "rate_display",
+                "status",
+                "type"
+            ],
+            "properties": {
+                "account_currency": {
+                    "description": "The currency of order.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9]{2,20}$",
+                    "examples": [
+                        "USD"
+                    ]
                 },
-                "fields": {
-                  "description": "Payment method fields.",
-                  "type": "object",
-                  "additionalProperties": false,
-                  "minProperties": 1,
-                  "patternProperties": {
-                    "^[a-z0-9_]{1,30}$": {
-                      "description": "Field identifier.",
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": ["display_name", "required", "type", "value"],
-                      "properties": {
-                        "display_name": {
-                          "description": "Display name of payment method field.",
-                          "type": "string"
+                "advert_details": {
+                    "title": "Advert Details",
+                    "description": "Details of the advert for this order.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "block_trade",
+                        "description",
+                        "id",
+                        "payment_method",
+                        "type"
+                    ],
+                    "properties": {
+                        "block_trade": {
+                            "description": "Indicates if this is block trade advert or not.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
                         },
-                        "required": {
-                          "description": "Is field required or optional.",
-                          "type": "integer"
+                        "description": {
+                            "description": "General information about the advert.",
+                            "type": "string",
+                            "sensitive": 1
+                        },
+                        "id": {
+                            "description": "The unique identifier for the advert.",
+                            "type": "string"
+                        },
+                        "payment_method": {
+                            "description": "The payment method.",
+                            "type": [
+                                "null",
+                                "string"
+                            ]
                         },
                         "type": {
-                          "description": "Field type.",
-                          "type": "string",
-                          "enum": ["text", "memo"]
-                        },
-                        "value": {
-                          "description": "Current value of payment method field.",
-                          "type": "string",
-                          "sensitive": 1
+                            "description": "Type of the advert.",
+                            "type": "string",
+                            "enum": [
+                                "buy",
+                                "sell"
+                            ]
                         }
-                      }
                     }
-                  }
                 },
-                "is_enabled": {
-                  "description": "Indicates whether method is enabled.",
-                  "type": "integer",
-                  "enum": [0, 1]
+                "advertiser_details": {
+                    "title": "Advertiser Details",
+                    "description": "Details of the advertiser for this order.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "id",
+                        "is_online",
+                        "last_online_time",
+                        "loginid",
+                        "name"
+                    ],
+                    "properties": {
+                        "first_name": {
+                            "description": "The advertiser's first name.",
+                            "type": "string",
+                            "sensitive": 1
+                        },
+                        "id": {
+                            "description": "The advertiser's unique identifier.",
+                            "type": "string"
+                        },
+                        "is_online": {
+                            "description": "Indicates if the advertiser is currently online.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "last_name": {
+                            "description": "The advertiser's last name.",
+                            "type": "string",
+                            "sensitive": 1
+                        },
+                        "last_online_time": {
+                            "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "loginid": {
+                            "description": "The advertiser's account identifier.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The advertiser's displayed name.",
+                            "type": "string",
+                            "sensitive": 1
+                        }
+                    }
                 },
-                "method": {
-                  "description": "Payment method identifier.",
-                  "type": "string"
+                "amount": {
+                    "description": "The amount of the order.",
+                    "type": "number"
+                },
+                "amount_display": {
+                    "description": "The amount of the order, formatted to appropriate decimal places.",
+                    "type": "string"
+                },
+                "chat_channel_url": {
+                    "description": "The URL to be used to initialise the chat for this order.",
+                    "type": "string"
+                },
+                "client_details": {
+                    "title": "Client Details",
+                    "description": "Details of the client who created the order.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "id",
+                        "is_online",
+                        "last_online_time",
+                        "loginid",
+                        "name"
+                    ],
+                    "properties": {
+                        "first_name": {
+                            "description": "The client's first name.",
+                            "type": "string",
+                            "sensitive": 1
+                        },
+                        "id": {
+                            "description": "The client's unique P2P identifier.",
+                            "type": "string"
+                        },
+                        "is_online": {
+                            "description": "Indicates if the advertiser is currently online.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "last_name": {
+                            "description": "The client's last name.",
+                            "type": "string",
+                            "sensitive": 1
+                        },
+                        "last_online_time": {
+                            "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        },
+                        "loginid": {
+                            "description": "The client's account identifier.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The client's displayed name.",
+                            "type": "string",
+                            "sensitive": 1
+                        }
+                    }
+                },
+                "contact_info": {
+                    "description": "Seller contact information.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "created_time": {
+                    "description": "The epoch time of the order creation.",
+                    "type": "integer"
+                },
+                "dispute_details": {
+                    "title": "Dispute Details",
+                    "description": "Details of the order dispute.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "dispute_reason",
+                        "disputer_loginid"
+                    ],
+                    "properties": {
+                        "dispute_reason": {
+                            "description": "The dispute reason",
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "disputer_loginid": {
+                            "description": "The loginid of the client who's raising the dispute",
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    }
+                },
+                "expiry_time": {
+                    "description": "The epoch time in which the order will be expired.",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "The unique identifier for this order.",
+                    "type": "string"
+                },
+                "is_incoming": {
+                    "description": "`1` if the order is created for the advert of the current client, otherwise `0`.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "is_reviewable": {
+                    "description": "`1` if a review can be given, otherwise `0`.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "is_seen": {
+                    "description": "`1` if the latest order changes have been seen by the current client, otherwise `0`.",
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        0
+                    ]
+                },
+                "local_currency": {
+                    "description": "Local currency for this order.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9]{2,20}$",
+                    "examples": [
+                        "USD"
+                    ]
+                },
+                "payment_info": {
+                    "description": "Payment instructions.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "payment_method": {
+                    "description": "Supported payment methods. Comma separated list.",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "payment_method_details": {
+                    "description": "Details of available payment methods.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                        "^[0-9]{1,8}$": {
+                            "description": "Unique identifier.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "fields",
+                                "is_enabled",
+                                "method",
+                                "type"
+                            ],
+                            "properties": {
+                                "display_name": {
+                                    "description": "Display name of payment method.",
+                                    "type": "string"
+                                },
+                                "fields": {
+                                    "description": "Payment method fields.",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "minProperties": 1,
+                                    "patternProperties": {
+                                        "^[a-z0-9_]{1,30}$": {
+                                            "description": "Field identifier.",
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "required": [
+                                                "display_name",
+                                                "required",
+                                                "type",
+                                                "value"
+                                            ],
+                                            "properties": {
+                                                "display_name": {
+                                                    "description": "Display name of payment method field.",
+                                                    "type": "string"
+                                                },
+                                                "required": {
+                                                    "description": "Is field required or optional.",
+                                                    "type": "integer"
+                                                },
+                                                "type": {
+                                                    "description": "Field type.",
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "text",
+                                                        "memo"
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "description": "Current value of payment method field.",
+                                                    "type": "string",
+                                                    "sensitive": 1
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "is_enabled": {
+                                    "description": "Indicates whether method is enabled.",
+                                    "type": "integer",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "method": {
+                                    "description": "Payment method identifier.",
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Payment method type.",
+                                    "type": "string",
+                                    "enum": [
+                                        "bank",
+                                        "ewallet",
+                                        "other"
+                                    ]
+                                },
+                                "used_by_adverts": {
+                                    "description": "IDs of adverts that use this payment method.",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "used_by_orders": {
+                                    "description": "IDs of orders that use this payment method.",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "price": {
+                    "description": "Cost in local currency.",
+                    "type": "number"
+                },
+                "price_display": {
+                    "description": "Cost in local currency, formatted to appropriate decimal places.",
+                    "type": "string"
+                },
+                "rate": {
+                    "description": "Conversion rate of the order.",
+                    "type": "number"
+                },
+                "rate_display": {
+                    "description": "Conversion rate of the order, formatted to appropriate decimal places.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the created order.",
+                    "type": "string",
+                    "enum": [
+                        "pending"
+                    ]
                 },
                 "type": {
-                  "description": "Payment method type.",
-                  "type": "string",
-                  "enum": ["bank", "ewallet", "other"]
-                },
-                "used_by_adverts": {
-                  "description": "IDs of adverts that use this payment method.",
-                  "type": ["array", "null"],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "used_by_orders": {
-                  "description": "IDs of orders that use this payment method.",
-                  "type": ["array", "null"],
-                  "items": {
-                    "type": "string"
-                  }
+                    "description": "Type of the order.",
+                    "type": "string",
+                    "enum": [
+                        "buy",
+                        "sell"
+                    ]
                 }
-              }
             }
-          }
         },
-        "price": {
-          "description": "Cost in local currency.",
-          "type": "number"
+        "subscription": {
+            "title": "Subscription information",
+            "description": "For subscription requests only.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
+                    "type": "string",
+                    "examples": [
+                        "c84a793b-8a87-7999-ce10-9b22f7ceead3"
+                    ]
+                }
+            }
         },
-        "price_display": {
-          "description": "Cost in local currency, formatted to appropriate decimal places.",
-          "type": "string"
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
         },
-        "rate": {
-          "description": "Conversion rate of the order.",
-          "type": "number"
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "p2p_order_create"
+            ]
         },
-        "rate_display": {
-          "description": "Conversion rate of the order, formatted to appropriate decimal places.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the created order.",
-          "type": "string",
-          "enum": ["pending"]
-        },
-        "type": {
-          "description": "Type of the order.",
-          "type": "string",
-          "enum": ["buy", "sell"]
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "subscription": {
-      "title": "Subscription information",
-      "description": "For subscription requests only.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id"],
-      "properties": {
-        "id": {
-          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
-          "type": "string",
-          "examples": ["c84a793b-8a87-7999-ce10-9b22f7ceead3"]
-        }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["p2p_order_create"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }
