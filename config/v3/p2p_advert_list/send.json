@@ -1,84 +1,115 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Advert List (request)",
-  "description": "Returns available adverts for use with `p2p_order_create` .",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["payments"],
-  "additionalProperties": false,
-  "required": ["p2p_advert_list"],
-  "properties": {
-    "p2p_advert_list": {
-      "description": "Must be 1",
-      "type": "integer",
-      "enum": [1]
-    },
-    "advertiser_id": {
-      "description": "[Optional] ID of the advertiser to list adverts for.",
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "advertiser_name": {
-      "description": "[Optional] Search for advertiser by name. Partial matches will be returned.",
-      "type": "string"
-    },
-    "amount": {
-      "description": "[Optional] How much to buy or sell, used to calculate prices.",
-      "type": "number"
-    },
-    "counterparty_type": {
-      "description": "[Optional] Filter the adverts by `counterparty_type`.",
-      "type": "string",
-      "enum": ["buy", "sell"]
-    },
-    "favourites_only": {
-      "description": "[Optional] Only show adverts from favourite advertisers. Default is 0.",
-      "type": "integer",
-      "enum": [0, 1]
-    },
-    "limit": {
-      "description": "[Optional] Used for paging.",
-      "type": "integer",
-      "default": 50
-    },
-    "local_currency": {
-      "description": "[Optional] Currency to conduct payment transaction in. If not provided, only ads from country of residence will be returned.",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{2,20}$"
-    },
-    "offset": {
-      "description": "[Optional] Used for paging.",
-      "type": "integer",
-      "default": 0
-    },
-    "payment_method": {
-      "description": "[Optional] Search by supported payment methods.",
-      "type": "array",
-      "items": {
-        "description": "Payment method identifer.",
-        "type": "string",
-        "pattern": "^[a-z0-9_]{1,30}$"
-      }
-    },
-    "sort_by": {
-      "description": "[Optional] How the results are sorted.",
-      "type": "string",
-      "default": "rate",
-      "enum": ["completion", "rate", "rating", "recommended"]
-    },
-    "use_client_limits": {
-      "description": "[Optional] If set to 1, ads that exceed this account's balance or turnover limits will not be shown.",
-      "type": "integer",
-      "default": 0,
-      "enum": [0, 1]
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Advert List (request)",
+    "description": "Returns available adverts for use with `p2p_order_create` .",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "payments"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "p2p_advert_list"
+    ],
+    "properties": {
+        "p2p_advert_list": {
+            "description": "Must be 1",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "advertiser_id": {
+            "description": "[Optional] ID of the advertiser to list adverts for.",
+            "type": "string",
+            "pattern": "^[0-9]+$"
+        },
+        "advertiser_name": {
+            "description": "[Optional] Search for advertiser by name. Partial matches will be returned.",
+            "type": "string"
+        },
+        "amount": {
+            "description": "[Optional] How much to buy or sell, used to calculate prices.",
+            "type": "number"
+        },
+        "block_trade": {
+            "description": "[Optional] Return block trade adverts when 1, non-block trade adverts when 0 (default).",
+            "type": "integer",
+            "default": 0,
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "counterparty_type": {
+            "description": "[Optional] Filter the adverts by `counterparty_type`.",
+            "type": "string",
+            "enum": [
+                "buy",
+                "sell"
+            ]
+        },
+        "favourites_only": {
+            "description": "[Optional] Only show adverts from favourite advertisers. Default is 0.",
+            "type": "integer",
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "limit": {
+            "description": "[Optional] Used for paging.",
+            "type": "integer",
+            "default": 50
+        },
+        "local_currency": {
+            "description": "[Optional] Currency to conduct payment transaction in. If not provided, only ads from country of residence will be returned.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{2,20}$"
+        },
+        "offset": {
+            "description": "[Optional] Used for paging.",
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+        },
+        "payment_method": {
+            "description": "[Optional] Search by supported payment methods.",
+            "type": "array",
+            "items": {
+                "description": "Payment method identifer.",
+                "type": "string",
+                "pattern": "^[a-z0-9_]{1,30}$"
+            }
+        },
+        "sort_by": {
+            "description": "[Optional] How the results are sorted.",
+            "type": "string",
+            "default": "rate",
+            "enum": [
+                "completion",
+                "rate",
+                "rating",
+                "recommended"
+            ]
+        },
+        "use_client_limits": {
+            "description": "[Optional] If set to 1, ads that exceed this account's balance or turnover limits will not be shown.",
+            "type": "integer",
+            "default": 0,
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

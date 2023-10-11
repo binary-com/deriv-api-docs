@@ -1,114 +1,202 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "MT5: Get Setting (response)",
-  "description": "Get MT5 user settings",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "mt5_get_settings": {
-      "title": "mt5_get_settings",
-      "description": "MT5 user account details",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "account_type": {
-          "description": "Account type.",
-          "type": "string",
-          "enum": ["demo", "real"]
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MT5: Get Setting (response)",
+    "description": "Get MT5 user settings",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "mt5_get_settings": {
+            "title": "mt5_get_settings",
+            "description": "MT5 user account details",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "account_type": {
+                    "description": "Account type.",
+                    "type": "string",
+                    "enum": [
+                        "demo",
+                        "real"
+                    ]
+                },
+                "address": {
+                    "description": "The address of the user. The maximum length of the address is 128 characters.",
+                    "type": "string"
+                },
+                "balance": {
+                    "description": "Balance of the Trading account.",
+                    "type": "number"
+                },
+                "city": {
+                    "description": "User's city of residence.",
+                    "type": "string"
+                },
+                "company": {
+                    "description": "Name of the client's company. The maximum length of the company name is 64 characters.",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "2-letter country code.",
+                    "type": "string"
+                },
+                "currency": {
+                    "description": "MT5 account currency (`USD` or `EUR`) that depends on the MT5 company (`vanuatu`, `svg`, `malta`).",
+                    "type": "string"
+                },
+                "display_balance": {
+                    "description": "Account balance, formatted to appropriate decimal places.",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Email address.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "group": {
+                    "description": "The group where account belongs to.",
+                    "type": "string"
+                },
+                "landing_company_short": {
+                    "description": "Landing company shortcode of the MT5 account.",
+                    "type": "string",
+                    "enum": [
+                        "bvi",
+                        "labuan",
+                        "malta",
+                        "maltainvest",
+                        "seychelles",
+                        "svg",
+                        "vanuatu"
+                    ]
+                },
+                "leverage": {
+                    "description": "Client leverage (from 1 to 1000).",
+                    "type": "number"
+                },
+                "login": {
+                    "description": "Login ID of the user's MT5 account.",
+                    "type": "string",
+                    "pattern": "^MT[DR]?[0-9]+$"
+                },
+                "market_type": {
+                    "description": "Market type",
+                    "type": "string",
+                    "enum": [
+                        "all",
+                        "financial",
+                        "synthetic"
+                    ]
+                },
+                "name": {
+                    "description": "Client's name. The maximum length of a client's symbol name is 128 characters.",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "User's phone number.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "phonePassword": {
+                    "description": "The user's phone password.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "server": {
+                    "description": "Trade server name of the MT5 account.",
+                    "type": "string"
+                },
+                "server_info": {
+                    "description": "Trade server information.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "environment": {
+                            "description": "The environment. E.g. Deriv-Server.",
+                            "type": "string",
+                            "enum": [
+                                "Deriv-Demo",
+                                "Deriv-Server",
+                                "Deriv-Server-02"
+                            ]
+                        },
+                        "geolocation": {
+                            "description": "Geographical location of the server.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "group": {
+                                    "description": "Internal server grouping.",
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "description": "Server location.",
+                                    "type": "string"
+                                },
+                                "region": {
+                                    "description": "Server region.",
+                                    "type": "string"
+                                },
+                                "sequence": {
+                                    "description": "Server sequence.",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "id": {
+                            "description": "Server id.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "state": {
+                    "description": "User's state (region) of residence.",
+                    "type": "string"
+                },
+                "sub_account_category": {
+                    "description": "Sub account category.",
+                    "type": "string",
+                    "enum": [
+                        "",
+                        "ibt",
+                        "lim",
+                        "stp",
+                        "swap_free",
+                        "swap_free_high_risk"
+                    ]
+                },
+                "sub_account_type": {
+                    "description": "Sub account type",
+                    "type": "string",
+                    "enum": [
+                        "derivez",
+                        "financial",
+                        "financial_stp",
+                        "standard"
+                    ]
+                },
+                "zipCode": {
+                    "description": "User's zip code.",
+                    "type": "string"
+                }
+            }
         },
-        "address": {
-          "description": "The address of the user. The maximum length of the address is 128 characters.",
-          "type": "string"
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
         },
-        "balance": {
-          "description": "Account balance.",
-          "type": "string"
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "mt5_get_settings"
+            ]
         },
-        "city": {
-          "description": "User's city of residence.",
-          "type": "string"
-        },
-        "company": {
-          "description": "Name of the client's company. The maximum length of the company name is 64 characters.",
-          "type": "string"
-        },
-        "country": {
-          "description": "2-letter country code.",
-          "type": "string"
-        },
-        "currency": {
-          "description": "MT5 account currency (`USD` or `EUR`) that depends on the MT5 company (`vanuatu`, `svg`, `malta`).",
-          "type": "string"
-        },
-        "email": {
-          "description": "Email address.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "group": {
-          "description": "The group where account belongs to.",
-          "type": "string"
-        },
-        "landing_company_short": {
-          "description": "Landing company shortcode of the MT5 account.",
-          "type": "string",
-          "enum": ["bvi", "labuan", "malta", "maltainvest", "svg", "vanuatu"]
-        },
-        "leverage": {
-          "description": "Client leverage (from 1 to 1000).",
-          "type": "number"
-        },
-        "login": {
-          "description": "Login ID of the user's MT5 account.",
-          "type": "string",
-          "pattern": "^MT[DR]?[0-9]+$"
-        },
-        "market_type": {
-          "description": "Market type",
-          "type": "string",
-          "enum": ["financial", "synthetic"]
-        },
-        "name": {
-          "description": "Client's name. The maximum length of a client's symbol name is 128 characters.",
-          "type": "string"
-        },
-        "phone": {
-          "description": "User's phone number.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "phonePassword": {
-          "description": "The user's phone password.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "state": {
-          "description": "User's state (region) of residence.",
-          "type": "string"
-        },
-        "sub_account_type": {
-          "description": "Sub account type",
-          "type": "string",
-          "enum": ["financial", "financial_stp"]
-        },
-        "zipCode": {
-          "description": "User's zip code.",
-          "type": "string"
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["mt5_get_settings"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

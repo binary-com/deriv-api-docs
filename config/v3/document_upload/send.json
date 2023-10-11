@@ -1,130 +1,153 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Document Upload (request)",
-  "description": "Request KYC information from client",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["admin"],
-  "additionalProperties": false,
-  "required": [
-    "document_upload",
-    "document_format",
-    "document_type",
-    "expected_checksum",
-    "file_size"
-  ],
-  "properties": {
-    "document_upload": {
-      "description": "Must be `1`",
-      "type": "integer",
-      "enum": [1]
-    },
-    "document_format": {
-      "description": "Document file format",
-      "type": "string",
-      "enum": ["PNG", "JPG", "JPEG", "GIF", "PDF"]
-    },
-    "document_id": {
-      "description": "[Optional] Document ID (required for Passport, Proof of ID and Driver's License)",
-      "type": "string",
-      "pattern": "^[\\w\\s-]{0,30}$"
-    },
-    "document_issuing_country": {
-      "description": "[Optional] 2-letter country code",
-      "type": "string",
-      "pattern": "^[a-z]{2}$"
-    },
-    "document_type": {
-      "description": "Document type",
-      "type": "string",
-      "enum": [
-        "passport",
-        "national_identity_card",
-        "driving_licence",
-        "utility_bill",
-        "bankstatement",
-        "power_of_attorney",
-        "amlglobalcheck",
-        "docverification",
-        "proofid",
-        "driverslicense",
-        "proofaddress",
-        "other",
-        "voter_card",
-        "student_card",
-        "nimc_slip",
-        "birth_certificate",
-        "pan_card",
-        "tax_photo_id",
-        "selfie_with_id",
-        "poi_others",
-        "insurance_bill",
-        "tax_receipt",
-        "phone_bill",
-        "poa_others",
-        "proof_of_ownership",
-        "tax_return",
-        "employment_contract",
-        "brokerage statement",
-        "payslip",
-        "edd_others",
-        "coi",
-        "business_poa",
-        "article_of_association",
-        "memorandum",
-        "authorisation_letter",
-        "declarations",
-        "business_documents_others"
-      ]
-    },
-    "expected_checksum": {
-      "description": "The checksum of the file to be uploaded",
-      "type": "string",
-      "pattern": "^[[:xdigit:]]{32}"
-    },
-    "expiration_date": {
-      "description": "[Optional] Document expiration date (required for Passport, Proof of ID and Driver's License)",
-      "type": "string",
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-    },
-    "file_size": {
-      "description": "Document size (should be less than 10MB)",
-      "type": "integer"
-    },
-    "lifetime_valid": {
-      "description": "[Optional] Boolean value that indicates whether this document is lifetime valid (only applies to POI document types, cancels out the expiration_date given if any)",
-      "type": "integer",
-      "enum": [0, 1]
-    },
-    "page_type": {
-      "description": "[Optional] To determine document side",
-      "type": "string",
-      "enum": ["front", "back", "photo"]
-    },
-    "proof_of_ownership": {
-      "description": "[Optional] It contains info about the proof of ownership being uploaded (mandatory for proof_of_ownership document type)",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["details", "id"],
-      "properties": {
-        "details": {
-          "description": "A collection of unspecific information related to the proof of ownership being uploaded",
-          "type": "object",
-          "required": ["payment_identifier"]
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Document Upload (request)",
+    "description": "Request KYC information from client",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "admin"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "document_upload",
+        "document_format",
+        "document_type",
+        "expected_checksum",
+        "file_size"
+    ],
+    "properties": {
+        "document_upload": {
+            "description": "Must be `1`",
+            "type": "integer",
+            "enum": [
+                1
+            ]
         },
-        "id": {
-          "description": "The id of the proof of ownership as shown in the /get_account_status proof of ownership list",
-          "type": "number"
+        "document_format": {
+            "description": "Document file format",
+            "type": "string",
+            "enum": [
+                "PNG",
+                "JPG",
+                "JPEG",
+                "GIF",
+                "PDF"
+            ]
+        },
+        "document_id": {
+            "description": "[Optional] Document ID (required for Passport, Proof of ID and Driver's License)",
+            "type": "string",
+            "pattern": "^[\\w\\s-]{0,30}$"
+        },
+        "document_issuing_country": {
+            "description": "2-letter country code, mandatory for POI only",
+            "type": "string",
+            "pattern": "^[a-z]{2}$"
+        },
+        "document_type": {
+            "description": "Document type",
+            "type": "string",
+            "enum": [
+                "passport",
+                "national_identity_card",
+                "driving_licence",
+                "utility_bill",
+                "bankstatement",
+                "power_of_attorney",
+                "amlglobalcheck",
+                "docverification",
+                "proofid",
+                "driverslicense",
+                "proofaddress",
+                "other",
+                "voter_card",
+                "student_card",
+                "nimc_slip",
+                "birth_certificate",
+                "pan_card",
+                "tax_photo_id",
+                "selfie_with_id",
+                "poi_others",
+                "insurance_bill",
+                "tax_receipt",
+                "phone_bill",
+                "poa_others",
+                "proof_of_ownership",
+                "tax_return",
+                "employment_contract",
+                "brokerage statement",
+                "payslip",
+                "edd_others",
+                "coi",
+                "business_poa",
+                "article_of_association",
+                "memorandum",
+                "authorisation_letter",
+                "declarations",
+                "business_documents_others"
+            ]
+        },
+        "expected_checksum": {
+            "description": "The checksum of the file to be uploaded",
+            "type": "string",
+            "pattern": "^[[:xdigit:]]{32}"
+        },
+        "expiration_date": {
+            "description": "[Optional] Document expiration date (required for Passport, Proof of ID and Driver's License)",
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "file_size": {
+            "description": "Document size (should be less than 10MB)",
+            "type": "integer"
+        },
+        "lifetime_valid": {
+            "description": "[Optional] Boolean value that indicates whether this document is lifetime valid (only applies to POI document types, cancels out the expiration_date given if any)",
+            "type": "integer",
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "page_type": {
+            "description": "[Optional] To determine document side",
+            "type": "string",
+            "enum": [
+                "front",
+                "back",
+                "photo"
+            ]
+        },
+        "proof_of_ownership": {
+            "description": "[Optional] It contains info about the proof of ownership being uploaded (mandatory for proof_of_ownership document type)",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "details",
+                "id"
+            ],
+            "properties": {
+                "details": {
+                    "description": "A collection of unspecific information related to the proof of ownership being uploaded",
+                    "type": "object",
+                    "required": [
+                        "payment_identifier"
+                    ]
+                },
+                "id": {
+                    "description": "The id of the proof of ownership as shown in the /get_account_status proof of ownership list",
+                    "type": "number"
+                }
+            }
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
         }
-      }
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
     }
-  }
 }

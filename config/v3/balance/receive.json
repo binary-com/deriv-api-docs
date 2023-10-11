@@ -1,199 +1,249 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Balance (response)",
-  "description": "Return details of user account balance",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "balance": {
-      "title": "balance",
-      "description": "Current balance of one or more accounts.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["balance", "currency", "loginid"],
-      "properties": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Balance (response)",
+    "description": "Return details of user account balance",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
         "balance": {
-          "description": "Balance of current account.",
-          "type": "number",
-          "minimum": 0
-        },
-        "accounts": {
-          "description": "List of active accounts.",
-          "type": "object",
-          "additionalProperties": false,
-          "patternProperties": {
-            "^.+[0-9]{3,}$": {
-              "description": "Individual accounts details.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
+            "title": "balance",
+            "description": "Current balance of one or more accounts.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
                 "balance",
-                "converted_amount",
                 "currency",
-                "demo_account",
-                "status",
-                "type"
-              ],
-              "properties": {
+                "loginid"
+            ],
+            "properties": {
                 "balance": {
-                  "description": "Account balance",
-                  "type": "number"
+                    "description": "Balance of current account.",
+                    "type": "number",
+                    "minimum": 0
                 },
-                "converted_amount": {
-                  "description": "Account balance converted the total currency.",
-                  "type": "number"
+                "accounts": {
+                    "description": "List of active accounts.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                        "^.+[0-9]{3,}$": {
+                            "description": "Individual accounts details.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "balance",
+                                "converted_amount",
+                                "currency",
+                                "demo_account",
+                                "status",
+                                "type"
+                            ],
+                            "properties": {
+                                "balance": {
+                                    "description": "Account balance",
+                                    "type": "number"
+                                },
+                                "converted_amount": {
+                                    "description": "Account balance converted the total currency.",
+                                    "type": "number"
+                                },
+                                "currency": {
+                                    "description": "Account currency.",
+                                    "type": "string",
+                                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                                    "examples": [
+                                        "USD"
+                                    ]
+                                },
+                                "demo_account": {
+                                    "description": "If set to 1, this is a demo account.",
+                                    "type": "integer",
+                                    "enum": [
+                                        0,
+                                        1
+                                    ]
+                                },
+                                "status": {
+                                    "description": "Boolean value of 1 or 0. Indicates the status of account. 1 indicates account is good and accessible.",
+                                    "type": "integer",
+                                    "enum": [
+                                        1,
+                                        0
+                                    ]
+                                },
+                                "type": {
+                                    "description": "Type of account.",
+                                    "type": "string",
+                                    "enum": [
+                                        "mt5",
+                                        "deriv"
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 },
                 "currency": {
-                  "description": "Account currency.",
-                  "type": "string",
-                  "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-                  "examples": ["USD"]
+                    "description": "Currency of current account.",
+                    "type": "string",
+                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                    "examples": [
+                        "USD"
+                    ]
                 },
-                "demo_account": {
-                  "description": "If set to 1, this is a demo account.",
-                  "type": "integer",
-                  "enum": [0, 1]
+                "id": {
+                    "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
+                    "type": "string",
+                    "examples": [
+                        "c84a793b-8a87-7999-ce10-9b22f7ceead3"
+                    ]
                 },
-                "status": {
-                  "description": "Boolean value of 1 or 0. Indicates the status of account. 1 indicates account is good and accessible.",
-                  "type": "integer",
-                  "enum": [1, 0]
+                "loginid": {
+                    "description": "Client loginid.",
+                    "type": "string",
+                    "pattern": "^[A-Z]{2,4}[0-9]{1,10}$",
+                    "examples": [
+                        "CR000000"
+                    ]
                 },
-                "type": {
-                  "description": "Type of account.",
-                  "type": "string",
-                  "enum": ["mt5", "deriv"]
+                "total": {
+                    "description": "Summary totals of accounts by type.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "deriv": {
+                            "description": "Total balance of all real money Deriv accounts.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "amount",
+                                "currency"
+                            ],
+                            "properties": {
+                                "amount": {
+                                    "description": "Total of balances.",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "currency": {
+                                    "description": "Currency of total.",
+                                    "type": "string",
+                                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                                    "examples": [
+                                        "USD"
+                                    ]
+                                }
+                            }
+                        },
+                        "deriv_demo": {
+                            "description": "Total balance of all demo Deriv accounts.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "amount",
+                                "currency"
+                            ],
+                            "properties": {
+                                "amount": {
+                                    "description": "Total of balances.",
+                                    "type": "number",
+                                    "minimum": 0
+                                },
+                                "currency": {
+                                    "description": "Currency of total.",
+                                    "type": "string",
+                                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                                    "examples": [
+                                        "USD"
+                                    ]
+                                }
+                            }
+                        },
+                        "mt5": {
+                            "description": "Total balance of all MT5 real money accounts.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "amount",
+                                "currency"
+                            ],
+                            "properties": {
+                                "amount": {
+                                    "description": "Total balance of all MT5 accounts",
+                                    "type": "number"
+                                },
+                                "currency": {
+                                    "description": "Currency of total.",
+                                    "type": "string",
+                                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                                    "examples": [
+                                        "USD"
+                                    ]
+                                }
+                            }
+                        },
+                        "mt5_demo": {
+                            "description": "Total balance of all MT5 demo accounts.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "amount",
+                                "currency"
+                            ],
+                            "properties": {
+                                "amount": {
+                                    "description": "Total of balances.",
+                                    "type": "number"
+                                },
+                                "currency": {
+                                    "description": "Currency of total.",
+                                    "type": "string",
+                                    "pattern": "^(|[a-zA-Z0-9]{2,20})$",
+                                    "examples": [
+                                        "USD"
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         },
-        "currency": {
-          "description": "Currency of current account.",
-          "type": "string",
-          "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-          "examples": ["USD"]
-        },
-        "id": {
-          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
-          "type": "string",
-          "examples": ["c84a793b-8a87-7999-ce10-9b22f7ceead3"]
-        },
-        "loginid": {
-          "description": "Client loginid.",
-          "type": "string",
-          "pattern": "^[A-Z]{2,4}[0-9]{1,10}$",
-          "examples": ["CR000000"]
-        },
-        "total": {
-          "description": "Summary totals of accounts by type.",
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "deriv": {
-              "description": "Total balance of all real money Deriv accounts.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["amount", "currency"],
-              "properties": {
-                "amount": {
-                  "description": "Total of balances.",
-                  "type": "number",
-                  "minimum": 0
-                },
-                "currency": {
-                  "description": "Currency of total.",
-                  "type": "string",
-                  "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-                  "examples": ["USD"]
+        "subscription": {
+            "title": "Subscription information",
+            "description": "For subscription requests only.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
+                    "type": "string",
+                    "examples": [
+                        "c84a793b-8a87-7999-ce10-9b22f7ceead3"
+                    ]
                 }
-              }
-            },
-            "deriv_demo": {
-              "description": "Total balance of all demo Deriv accounts.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["amount", "currency"],
-              "properties": {
-                "amount": {
-                  "description": "Total of balances.",
-                  "type": "number",
-                  "minimum": 0
-                },
-                "currency": {
-                  "description": "Currency of total.",
-                  "type": "string",
-                  "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-                  "examples": ["USD"]
-                }
-              }
-            },
-            "mt5": {
-              "description": "Total balance of all MT5 real money accounts.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["amount", "currency"],
-              "properties": {
-                "amount": {
-                  "description": "Total balance of all MT5 accounts",
-                  "type": "number"
-                },
-                "currency": {
-                  "description": "Currency of total.",
-                  "type": "string",
-                  "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-                  "examples": ["USD"]
-                }
-              }
-            },
-            "mt5_demo": {
-              "description": "Total balance of all MT5 demo accounts.",
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["amount", "currency"],
-              "properties": {
-                "amount": {
-                  "description": "Total of balances.",
-                  "type": "number"
-                },
-                "currency": {
-                  "description": "Currency of total.",
-                  "type": "string",
-                  "pattern": "^(|[a-zA-Z0-9]{2,20})$",
-                  "examples": ["USD"]
-                }
-              }
             }
-          }
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "balance"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "subscription": {
-      "title": "Subscription information",
-      "description": "For subscription requests only.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id"],
-      "properties": {
-        "id": {
-          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe.",
-          "type": "string",
-          "examples": ["c84a793b-8a87-7999-ce10-9b22f7ceead3"]
-        }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["balance"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }
