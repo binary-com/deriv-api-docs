@@ -1,110 +1,132 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Advert Create (request)",
-  "description": "Creates a P2P (Peer to Peer) advert. Can only be used by an approved P2P advertiser.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["payments"],
-  "additionalProperties": false,
-  "required": [
-    "p2p_advert_create",
-    "amount",
-    "max_order_amount",
-    "min_order_amount",
-    "rate",
-    "type"
-  ],
-  "properties": {
-    "p2p_advert_create": {
-      "description": "Must be 1",
-      "type": "integer",
-      "enum": [1]
-    },
-    "amount": {
-      "description": "The total amount of the advert, in advertiser's account currency.",
-      "type": "number",
-      "exclusiveMinimum": true,
-      "minimum": 0
-    },
-    "contact_info": {
-      "description": "[Optional] Advertiser contact information.",
-      "type": "string",
-      "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
-      "sensitive": 1
-    },
-    "description": {
-      "description": "[Optional] General information about the advert.",
-      "type": "string",
-      "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
-      "sensitive": 1
-    },
-    "local_currency": {
-      "description": "[Optional] Local currency for this advert. If not provided, will use the currency of client's residence by default.",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{2,20}$",
-      "examples": ["USD"]
-    },
-    "max_order_amount": {
-      "description": "Maximum allowed amount for the orders of this advert, in advertiser's `account_currency`. Should be more than or equal to `min_order_amount`",
-      "type": "number",
-      "exclusiveMinimum": true,
-      "minimum": 0
-    },
-    "min_order_amount": {
-      "description": "Minimum allowed amount for the orders of this advert, in advertiser's `account_currency`. Should be less than or equal to `max_order_amount`.",
-      "type": "number",
-      "exclusiveMinimum": true,
-      "minimum": 0
-    },
-    "payment_info": {
-      "description": "[Optional] Payment instructions.",
-      "type": "string",
-      "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
-      "sensitive": 1
-    },
-    "payment_method": {
-      "description": "[Optional] Payment method name (deprecated).",
-      "type": "string"
-    },
-    "payment_method_ids": {
-      "description": "IDs of previously saved payment methods as returned from p2p_advertiser_payment_methods, only applicable for sell ads.",
-      "type": "array",
-      "items": {
-        "type": "integer"
-      },
-      "maxItems": 3
-    },
-    "payment_method_names": {
-      "description": "Payment method identifiers as returned from p2p_payment_methods, only applicable for buy ads.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^[a-z0-9_]+$"
-      },
-      "maxItems": 3
-    },
-    "rate": {
-      "description": "Conversion rate from advertiser's account currency to `local_currency`. An absolute rate value (fixed), or percentage offset from current market rate (floating).",
-      "type": "number"
-    },
-    "rate_type": {
-      "description": "Type of rate, fixed or floating.",
-      "type": "string",
-      "default": "fixed",
-      "enum": ["fixed", "float"]
-    },
-    "type": {
-      "description": "The advertisement represents the intention to perform this action on your Deriv account funds.",
-      "type": "string",
-      "enum": ["buy", "sell"]
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Advert Create (request)",
+    "description": "Creates a P2P (Peer to Peer) advert. Can only be used by an approved P2P advertiser.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "payments"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "p2p_advert_create",
+        "amount",
+        "max_order_amount",
+        "min_order_amount",
+        "rate",
+        "type"
+    ],
+    "properties": {
+        "p2p_advert_create": {
+            "description": "Must be 1",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "amount": {
+            "description": "The total amount of the advert, in advertiser's account currency.",
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+        },
+        "block_trade": {
+            "description": "[Optional] Indicates if this is block trade ad or not. Default: 0.",
+            "type": "integer",
+            "default": 0,
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "contact_info": {
+            "description": "[Optional] Advertiser contact information.",
+            "type": "string",
+            "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
+            "sensitive": 1
+        },
+        "description": {
+            "description": "[Optional] General information about the advert.",
+            "type": "string",
+            "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
+            "sensitive": 1
+        },
+        "local_currency": {
+            "description": "[Optional] Local currency for this advert. If not provided, will use the currency of client's residence by default.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{2,20}$",
+            "examples": [
+                "USD"
+            ]
+        },
+        "max_order_amount": {
+            "description": "Maximum allowed amount for the orders of this advert, in advertiser's `account_currency`. Should be more than or equal to `min_order_amount`",
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+        },
+        "min_order_amount": {
+            "description": "Minimum allowed amount for the orders of this advert, in advertiser's `account_currency`. Should be less than or equal to `max_order_amount`.",
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+        },
+        "payment_info": {
+            "description": "[Optional] Payment instructions.",
+            "type": "string",
+            "pattern": "^[\\p{L}\\p{Nd}\\s'.,:;()@#/+-]{1,300}$",
+            "sensitive": 1
+        },
+        "payment_method": {
+            "description": "[Optional] Payment method name (deprecated).",
+            "type": "string"
+        },
+        "payment_method_ids": {
+            "description": "IDs of previously saved payment methods as returned from p2p_advertiser_payment_methods, only applicable for sell ads.",
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "maxItems": 3
+        },
+        "payment_method_names": {
+            "description": "Payment method identifiers as returned from p2p_payment_methods, only applicable for buy ads.",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+$"
+            },
+            "maxItems": 3
+        },
+        "rate": {
+            "description": "Conversion rate from advertiser's account currency to `local_currency`. An absolute rate value (fixed), or percentage offset from current market rate (floating).",
+            "type": "number"
+        },
+        "rate_type": {
+            "description": "Type of rate, fixed or floating.",
+            "type": "string",
+            "default": "fixed",
+            "enum": [
+                "fixed",
+                "float"
+            ]
+        },
+        "type": {
+            "description": "The advertisement represents the intention to perform this action on your Deriv account funds.",
+            "type": "string",
+            "enum": [
+                "buy",
+                "sell"
+            ]
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
+            "type": "object",
+            "maxSize": 3500
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

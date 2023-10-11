@@ -1,295 +1,390 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Advertiser Update (response)",
-  "description": "Returns latest information of the advertiser.",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "p2p_advertiser_update": {
-      "title": "p2p_advertiser_update",
-      "description": "P2P advertiser information.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "advert_rates",
-        "balance_available",
-        "basic_verification",
-        "blocked_by_count",
-        "buy_completion_rate",
-        "buy_orders_amount",
-        "buy_orders_count",
-        "buy_time_avg",
-        "cancel_time_avg",
-        "cancels_remaining",
-        "chat_token",
-        "chat_user_id",
-        "contact_info",
-        "created_time",
-        "default_advert_description",
-        "full_verification",
-        "id",
-        "is_approved",
-        "is_listed",
-        "is_online",
-        "last_online_time",
-        "name",
-        "partner_count",
-        "payment_info",
-        "rating_average",
-        "rating_count",
-        "recommended_average",
-        "recommended_count",
-        "release_time_avg",
-        "sell_completion_rate",
-        "sell_orders_amount",
-        "sell_orders_count",
-        "show_name",
-        "total_completion_rate",
-        "total_orders_count",
-        "total_turnover"
-      ],
-      "properties": {
-        "active_fixed_ads": {
-          "description": "Number of active fixed rate adverts belonging to the advertiser.",
-          "type": "integer"
-        },
-        "active_float_ads": {
-          "description": "Number of active floating rate adverts belonging to the advertiser.",
-          "type": "integer"
-        },
-        "advert_rates": {
-          "description": "Average difference of advert rate compared to the market rate over the past 30 days.",
-          "type": ["null", "number"]
-        },
-        "balance_available": {
-          "description": "Amount of funds available to sell on P2P. May be less than account balance according to deposit methods used.",
-          "type": "number"
-        },
-        "basic_verification": {
-          "description": "Boolean value: 1 or 0, indicating whether the advertiser's identify has been verified.",
-          "type": "integer",
-          "enum": [1, 0]
-        },
-        "blocked_by_count": {
-          "description": "The number of P2P users who have blocked this advertiser.",
-          "type": "integer"
-        },
-        "blocked_until": {
-          "description": "If a temporary bar was placed, this is the epoch time at which it will end.",
-          "type": "integer"
-        },
-        "buy_completion_rate": {
-          "description": "The percentage of completed orders out of total orders as a buyer within the past 30 days.",
-          "type": ["null", "number"]
-        },
-        "buy_orders_amount": {
-          "description": "Buy order volume in the past 30 days.",
-          "type": "string"
-        },
-        "buy_orders_count": {
-          "description": "The number of buy order completed within the past 30 days.",
-          "type": "integer"
-        },
-        "buy_time_avg": {
-          "description": "The average time in seconds taken to make payment as a buyer within the past 30 days.",
-          "type": ["integer", "null"]
-        },
-        "cancel_time_avg": {
-          "description": "The average time in seconds taken to cancel orders as a buyer within the past 30 days.",
-          "type": ["integer", "null"]
-        },
-        "cancels_remaining": {
-          "description": "The number of times the user may cancel orders before being temporarily blocked.",
-          "type": "integer"
-        },
-        "chat_token": {
-          "description": "The token to be used for authenticating the client for chat.",
-          "type": ["null", "string"],
-          "sensitive": 1
-        },
-        "chat_user_id": {
-          "description": "The unique identifier for the chat user.",
-          "type": ["null", "string"]
-        },
-        "contact_info": {
-          "description": "Advertiser's contact information.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "created_time": {
-          "description": "The epoch time that the client became an advertiser.",
-          "type": "integer"
-        },
-        "daily_buy": {
-          "description": "Total value of P2P buy transactions in the past 24 hours.",
-          "type": "string"
-        },
-        "daily_buy_limit": {
-          "description": "Maximum allowed value of P2P buy transactions in a 24 hour period.",
-          "type": "string"
-        },
-        "daily_sell": {
-          "description": "Total value of P2P sell transactions in the past 24 hours.",
-          "type": "string"
-        },
-        "daily_sell_limit": {
-          "description": "Maximum allowed value of P2P sell transactions in a 24 hour period.",
-          "type": "string"
-        },
-        "default_advert_description": {
-          "description": "Default description that can be used every time an advert is created.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "first_name": {
-          "description": "The advertiser's first name.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "full_verification": {
-          "description": "Boolean value: 1 or 0, indicating whether the advertiser's address has been verified.",
-          "type": "integer",
-          "enum": [1, 0]
-        },
-        "id": {
-          "description": "The advertiser's identification number.",
-          "type": "string"
-        },
-        "is_approved": {
-          "description": "The approval status of the advertiser.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "is_listed": {
-          "description": "Indicates if the advertiser's active adverts are listed. When `0`, adverts won't be listed regardless if they are active or not.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "is_online": {
-          "description": "Indicates if the advertiser is currently online.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "last_name": {
-          "description": "The advertiser's last name.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "last_online_time": {
-          "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
-          "type": ["integer", "null"]
-        },
-        "max_order_amount": {
-          "description": "Maximum order amount for adverts.",
-          "type": "string"
-        },
-        "min_balance": {
-          "description": "Sell ads will be hidden when your available balance or remaining daily sell limit falls beneath this value.",
-          "type": "string"
-        },
-        "min_order_amount": {
-          "description": "Minimum order amount for adverts.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The advertiser's displayed name.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "partner_count": {
-          "description": "Number of different users the advertiser has traded with since registration.",
-          "type": "integer"
-        },
-        "payment_info": {
-          "description": "Advertiser's payment information.",
-          "type": "string",
-          "sensitive": 1
-        },
-        "rating_average": {
-          "description": "Average rating of the advertiser, range is 1-5.",
-          "type": ["null", "number"],
-          "maximum": 5,
-          "minimum": 1
-        },
-        "rating_count": {
-          "description": "Number of ratings given to the advertiser.",
-          "type": "integer"
-        },
-        "recommended_average": {
-          "description": "Percentage of users who have recommended the advertiser.",
-          "type": ["null", "number"]
-        },
-        "recommended_count": {
-          "description": "Number of times the advertiser has been recommended.",
-          "type": ["integer", "null"]
-        },
-        "release_time_avg": {
-          "description": "The average time in seconds taken to release funds as a seller within the past 30 days.",
-          "type": ["integer", "null"]
-        },
-        "sell_completion_rate": {
-          "description": "The percentage of completed orders out of total orders as a seller within the past 30 days.",
-          "type": ["null", "number"]
-        },
-        "sell_orders_amount": {
-          "description": "Sell order volume in the past 30 days.",
-          "type": "string"
-        },
-        "sell_orders_count": {
-          "description": "The number of sell order orders completed within the past 30 days.",
-          "type": "integer"
-        },
-        "show_name": {
-          "description": "When `1`, the advertiser's real name will be displayed on to other users on adverts and orders.",
-          "type": "integer",
-          "enum": [0, 1]
-        },
-        "total_completion_rate": {
-          "description": "The percentage of completed orders out of all orders within the past 30 days.",
-          "type": ["null", "number"]
-        },
-        "total_orders_count": {
-          "description": "The total number of orders completed since advertiser registration.",
-          "type": "integer"
-        },
-        "total_turnover": {
-          "description": "Total order volume since advertiser registration.",
-          "type": "string"
-        },
-        "upgradable_daily_limits": {
-          "description": "New daily limits available.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["max_daily_buy", "max_daily_sell"],
-          "properties": {
-            "max_daily_buy": {
-              "description": "Upgradable daily buy limit.",
-              "type": "string"
-            },
-            "max_daily_sell": {
-              "description": "Upgradable daily sell limit.",
-              "type": "string"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Advertiser Update (response)",
+    "description": "Returns latest information of the advertiser.",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "p2p_advertiser_update": {
+            "title": "p2p_advertiser_update",
+            "description": "P2P advertiser information.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "advert_rates",
+                "balance_available",
+                "basic_verification",
+                "blocked_by_count",
+                "buy_completion_rate",
+                "buy_orders_amount",
+                "buy_orders_count",
+                "buy_time_avg",
+                "cancel_time_avg",
+                "cancels_remaining",
+                "chat_token",
+                "chat_user_id",
+                "contact_info",
+                "created_time",
+                "default_advert_description",
+                "full_verification",
+                "id",
+                "is_approved",
+                "is_listed",
+                "is_online",
+                "last_online_time",
+                "name",
+                "partner_count",
+                "payment_info",
+                "rating_average",
+                "rating_count",
+                "recommended_average",
+                "recommended_count",
+                "release_time_avg",
+                "sell_completion_rate",
+                "sell_orders_amount",
+                "sell_orders_count",
+                "show_name",
+                "total_completion_rate",
+                "total_orders_count",
+                "total_turnover"
+            ],
+            "properties": {
+                "active_fixed_ads": {
+                    "description": "Number of active fixed rate adverts belonging to the advertiser.",
+                    "type": "integer"
+                },
+                "active_float_ads": {
+                    "description": "Number of active floating rate adverts belonging to the advertiser.",
+                    "type": "integer"
+                },
+                "advert_rates": {
+                    "description": "Average difference of advert rate compared to the market rate over the past 30 days.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "balance_available": {
+                    "description": "Amount of funds available to sell on P2P. May be less than account balance according to deposit methods used.",
+                    "type": "number"
+                },
+                "basic_verification": {
+                    "description": "Boolean value: 1 or 0, indicating whether the advertiser's identify has been verified.",
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        0
+                    ]
+                },
+                "block_trade": {
+                    "description": "Block trading limits, if block trading is allowed.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "max_order_amount",
+                        "min_order_amount"
+                    ],
+                    "properties": {
+                        "max_order_amount": {
+                            "description": "Maximum order amount for block trade adverts.",
+                            "type": "string"
+                        },
+                        "min_order_amount": {
+                            "description": "Minimum order amount for block trade adverts.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "blocked_by_count": {
+                    "description": "The number of P2P users who have blocked this advertiser.",
+                    "type": "integer"
+                },
+                "blocked_until": {
+                    "description": "If a temporary bar was placed, this is the epoch time at which it will end.",
+                    "type": "integer"
+                },
+                "buy_completion_rate": {
+                    "description": "The percentage of completed orders out of total orders as a buyer within the past 30 days.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "buy_orders_amount": {
+                    "description": "Buy order volume in the past 30 days.",
+                    "type": "string"
+                },
+                "buy_orders_count": {
+                    "description": "The number of buy order completed within the past 30 days.",
+                    "type": "integer"
+                },
+                "buy_time_avg": {
+                    "description": "The average time in seconds taken to make payment as a buyer within the past 30 days.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "cancel_time_avg": {
+                    "description": "The average time in seconds taken to cancel orders as a buyer within the past 30 days.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "cancels_remaining": {
+                    "description": "The number of times the user may cancel orders before being temporarily blocked.",
+                    "type": "integer"
+                },
+                "chat_token": {
+                    "description": "The token to be used for authenticating the client for chat.",
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "sensitive": 1
+                },
+                "chat_user_id": {
+                    "description": "The unique identifier for the chat user.",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "contact_info": {
+                    "description": "Advertiser's contact information.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "created_time": {
+                    "description": "The epoch time that the client became an advertiser.",
+                    "type": "integer"
+                },
+                "daily_buy": {
+                    "description": "Total value of P2P buy transactions in the past 24 hours.",
+                    "type": "string"
+                },
+                "daily_buy_limit": {
+                    "description": "Maximum allowed value of P2P buy transactions in a 24 hour period.",
+                    "type": "string"
+                },
+                "daily_sell": {
+                    "description": "Total value of P2P sell transactions in the past 24 hours.",
+                    "type": "string"
+                },
+                "daily_sell_limit": {
+                    "description": "Maximum allowed value of P2P sell transactions in a 24 hour period.",
+                    "type": "string"
+                },
+                "default_advert_description": {
+                    "description": "Default description that can be used every time an advert is created.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "first_name": {
+                    "description": "The advertiser's first name.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "full_verification": {
+                    "description": "Boolean value: 1 or 0, indicating whether the advertiser's address has been verified.",
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        0
+                    ]
+                },
+                "id": {
+                    "description": "The advertiser's identification number.",
+                    "type": "string"
+                },
+                "is_approved": {
+                    "description": "The approval status of the advertiser.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "is_listed": {
+                    "description": "Indicates if the advertiser's active adverts are listed. When `0`, adverts won't be listed regardless if they are active or not.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "is_online": {
+                    "description": "Indicates if the advertiser is currently online.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "last_name": {
+                    "description": "The advertiser's last name.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "last_online_time": {
+                    "description": "Epoch of the latest time the advertiser was online, up to 6 months.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "max_order_amount": {
+                    "description": "Maximum order amount for adverts.",
+                    "type": "string"
+                },
+                "min_balance": {
+                    "description": "Sell ads will be hidden when your available balance or remaining daily sell limit falls beneath this value.",
+                    "type": "string"
+                },
+                "min_order_amount": {
+                    "description": "Minimum order amount for adverts.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The advertiser's displayed name.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "partner_count": {
+                    "description": "Number of different users the advertiser has traded with since registration.",
+                    "type": "integer"
+                },
+                "payment_info": {
+                    "description": "Advertiser's payment information.",
+                    "type": "string",
+                    "sensitive": 1
+                },
+                "rating_average": {
+                    "description": "Average rating of the advertiser, range is 1-5.",
+                    "type": [
+                        "null",
+                        "number"
+                    ],
+                    "maximum": 5,
+                    "minimum": 1
+                },
+                "rating_count": {
+                    "description": "Number of ratings given to the advertiser.",
+                    "type": "integer"
+                },
+                "recommended_average": {
+                    "description": "Percentage of users who have recommended the advertiser.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "recommended_count": {
+                    "description": "Number of times the advertiser has been recommended.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "release_time_avg": {
+                    "description": "The average time in seconds taken to release funds as a seller within the past 30 days.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "sell_completion_rate": {
+                    "description": "The percentage of completed orders out of total orders as a seller within the past 30 days.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "sell_orders_amount": {
+                    "description": "Sell order volume in the past 30 days.",
+                    "type": "string"
+                },
+                "sell_orders_count": {
+                    "description": "The number of sell order orders completed within the past 30 days.",
+                    "type": "integer"
+                },
+                "show_name": {
+                    "description": "When `1`, the advertiser's real name will be displayed on to other users on adverts and orders.",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "total_completion_rate": {
+                    "description": "The percentage of completed orders out of all orders within the past 30 days.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "total_orders_count": {
+                    "description": "The total number of orders completed since advertiser registration.",
+                    "type": "integer"
+                },
+                "total_turnover": {
+                    "description": "Total order volume since advertiser registration.",
+                    "type": "string"
+                },
+                "upgradable_daily_limits": {
+                    "description": "New daily limits available.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "max_daily_buy",
+                        "max_daily_sell"
+                    ],
+                    "properties": {
+                        "block_trade": {
+                            "description": "When `1`, upgrade will provide block trading.",
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        },
+                        "max_daily_buy": {
+                            "description": "Upgradable daily buy limit.",
+                            "type": "string"
+                        },
+                        "max_daily_sell": {
+                            "description": "Upgradable daily sell limit.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "withdrawal_limit": {
+                    "description": "Remaining withdrawal_limit of a non-fully authenticated advertiser.",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
             }
-          }
         },
-        "withdrawal_limit": {
-          "description": "Remaining withdrawal_limit of a non-fully authenticated advertiser.",
-          "type": ["null", "string"]
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "p2p_advertiser_update"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["p2p_advertiser_update"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }

@@ -1,157 +1,187 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Statement (response)",
-  "description": "A summary of account statement is received",
-  "type": "object",
-  "required": ["echo_req", "msg_type"],
-  "properties": {
-    "statement": {
-      "title": "statement",
-      "description": "Account statement.",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "count": {
-          "description": "Number of transactions returned in this call",
-          "type": "number"
-        },
-        "transactions": {
-          "description": "Array of returned transactions",
-          "type": "array",
-          "items": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Statement (response)",
+    "description": "A summary of account statement is received",
+    "type": "object",
+    "required": [
+        "echo_req",
+        "msg_type"
+    ],
+    "properties": {
+        "statement": {
+            "title": "statement",
+            "description": "Account statement.",
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "action_type": {
-                "description": "It is the type of action.",
-                "type": "string",
-                "enum": [
-                  "buy",
-                  "sell",
-                  "deposit",
-                  "withdrawal",
-                  "hold",
-                  "release",
-                  "adjustment",
-                  "virtual_credit",
-                  "transfer"
-                ]
-              },
-              "amount": {
-                "description": "It is the amount of transaction.",
-                "type": "number",
-                "examples": [-83.23]
-              },
-              "app_id": {
-                "description": "ID of the application where this contract was purchased.",
-                "type": ["integer", "null"]
-              },
-              "balance_after": {
-                "description": "It is the remaining balance.",
-                "type": "number",
-                "examples": [10150.13]
-              },
-              "contract_id": {
-                "description": "It is the contract ID.",
-                "type": ["integer", "null"],
-                "examples": [4867502908]
-              },
-              "fees": {
-                "description": "Contains details about fees used for transfer. It is present only when action type is transfer.",
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "amount": {
-                    "description": "Fees amount",
+                "count": {
+                    "description": "Number of transactions returned in this call",
                     "type": "number"
-                  },
-                  "currency": {
-                    "description": "Fees currency",
-                    "type": "string"
-                  },
-                  "minimum": {
-                    "description": "Minimum amount of fees",
-                    "type": "number"
-                  },
-                  "percentage": {
-                    "description": "Fees percentage",
-                    "type": "number"
-                  }
+                },
+                "transactions": {
+                    "description": "Array of returned transactions",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "action_type": {
+                                "description": "It is the type of action.",
+                                "type": "string",
+                                "enum": [
+                                    "buy",
+                                    "sell",
+                                    "deposit",
+                                    "withdrawal",
+                                    "hold",
+                                    "release",
+                                    "adjustment",
+                                    "virtual_credit",
+                                    "transfer"
+                                ]
+                            },
+                            "amount": {
+                                "description": "It is the amount of transaction.",
+                                "type": "number",
+                                "examples": [
+                                    -83.23
+                                ]
+                            },
+                            "app_id": {
+                                "description": "ID of the application where this contract was purchased.",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ]
+                            },
+                            "balance_after": {
+                                "description": "It is the remaining balance.",
+                                "type": "number",
+                                "examples": [
+                                    10150.13
+                                ]
+                            },
+                            "contract_id": {
+                                "description": "It is the contract ID.",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "examples": [
+                                    4867502908
+                                ]
+                            },
+                            "fees": {
+                                "description": "Contains details about fees used for transfer. It is present only when action type is transfer.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "amount": {
+                                        "description": "Fees amount",
+                                        "type": "number"
+                                    },
+                                    "currency": {
+                                        "description": "Fees currency",
+                                        "type": "string"
+                                    },
+                                    "minimum": {
+                                        "description": "Minimum amount of fees",
+                                        "type": "number"
+                                    },
+                                    "percentage": {
+                                        "description": "Fees percentage",
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "from": {
+                                "description": "Contains details of account from which amount was transferred. It is present only when action type is transfer.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "loginid": {
+                                        "description": "Login id of the account from which money was transferred.",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "longcode": {
+                                "description": "The description of contract purchased if description is set to `1`.",
+                                "type": "string"
+                            },
+                            "payout": {
+                                "description": "Payout price",
+                                "type": [
+                                    "null",
+                                    "number"
+                                ]
+                            },
+                            "purchase_time": {
+                                "description": "Time at which contract was purchased, present only for sell transaction",
+                                "type": "integer"
+                            },
+                            "reference_id": {
+                                "description": "Internal transaction identifier for the corresponding buy transaction ( set only for contract selling )",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ]
+                            },
+                            "shortcode": {
+                                "description": "Compact description of the contract purchased if description is set to `1`.",
+                                "type": [
+                                    "null",
+                                    "string"
+                                ]
+                            },
+                            "to": {
+                                "description": "Contains details of account to which amount was transferred. It is present only when action type is transfer.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "loginid": {
+                                        "description": "Login id of the account to which money was transferred.",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "transaction_id": {
+                                "description": "It is the transaction ID. In statement every contract (buy or sell) and every payment has a unique ID.",
+                                "type": "integer",
+                                "examples": [
+                                    10867502908
+                                ]
+                            },
+                            "transaction_time": {
+                                "description": "It is the time of transaction.",
+                                "type": "integer",
+                                "examples": [
+                                    1441175849
+                                ]
+                            },
+                            "withdrawal_details": {
+                                "description": "Additional withdrawal details such as typical processing times, if description is set to `1`.",
+                                "type": "string"
+                            }
+                        }
+                    }
                 }
-              },
-              "from": {
-                "description": "Contains details of account from which amount was transferred. It is present only when action type is transfer.",
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "loginid": {
-                    "description": "Login id of the account from which money was transferred.",
-                    "type": "string"
-                  }
-                }
-              },
-              "longcode": {
-                "description": "The description of contract purchased if description is set to `1`.",
-                "type": "string"
-              },
-              "payout": {
-                "description": "Payout price",
-                "type": ["null", "number"]
-              },
-              "purchase_time": {
-                "description": "Time at which contract was purchased, present only for sell transaction",
-                "type": "integer"
-              },
-              "reference_id": {
-                "description": "Internal transaction identifier for the corresponding buy transaction ( set only for contract selling )",
-                "type": ["integer", "null"]
-              },
-              "shortcode": {
-                "description": "Compact description of the contract purchased if description is set to `1`.",
-                "type": ["null", "string"]
-              },
-              "to": {
-                "description": "Contains details of account to which amount was transferred. It is present only when action type is transfer.",
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "loginid": {
-                    "description": "Login id of the account to which money was transferred.",
-                    "type": "string"
-                  }
-                }
-              },
-              "transaction_id": {
-                "description": "It is the transaction ID. In statement every contract (buy or sell) and every payment has a unique ID.",
-                "type": "integer",
-                "examples": [10867502908]
-              },
-              "transaction_time": {
-                "description": "It is the time of transaction.",
-                "type": "integer",
-                "examples": [1441175849]
-              },
-              "withdrawal_details": {
-                "description": "Additional withdrawal details such as typical processing times, if description is set to `1`.",
-                "type": "string"
-              }
             }
-          }
+        },
+        "echo_req": {
+            "description": "Echo of the request made.",
+            "type": "object"
+        },
+        "msg_type": {
+            "description": "Action name of the request made.",
+            "type": "string",
+            "enum": [
+                "statement"
+            ]
+        },
+        "req_id": {
+            "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
+            "type": "integer"
         }
-      }
-    },
-    "echo_req": {
-      "description": "Echo of the request made.",
-      "type": "object"
-    },
-    "msg_type": {
-      "description": "Action name of the request made.",
-      "type": "string",
-      "enum": ["statement"]
-    },
-    "req_id": {
-      "description": "Optional field sent in request to map to response, present only when request contains `req_id`.",
-      "type": "integer"
     }
-  }
 }
