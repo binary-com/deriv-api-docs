@@ -6,6 +6,5 @@ runs:
     - name: save_cache
       uses: actions/cache/save@v3
       with:
-        path: |-
-          node_modules
-        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+        path: ./node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('./package-lock.json') }}
