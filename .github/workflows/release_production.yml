@@ -1,0 +1,54 @@
+name: Deriv Api Docs Production Workflow
+on:
+  push:
+    tags:
+      - production_v*
+jobs:
+  build_and_publish:
+    name: Builds and Publishes to Cloudflare Pages Production
+    environment: Production
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    outputs:
+      RELEASE_VERSION: ${{ steps.extract_version.outputs.RELEASE_VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./.github/actions/setup_node
+      - name: Install dependencies
+        uses: ./.github/actions/npm_install_from_cache
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          NODE_ENV: production
+      - name: Versioning
+        uses: ./.github/actions/versioning
+        with:
+          RELEASE_TYPE: production
+      - name: Extract version
+        id: extract_version
+        run: echo "RELEASE_VERSION=$(cat build/version)" >> $GITHUB_OUTPUT
+      - name: Publish to Cloudflare Pages Production
+        uses: ./.github/actions/publish_to_pages_production
+        with:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  send_slack_notification:
+    name: Send Slack Notification
+    environment: Production
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    if: always()
+    needs:
+      - build_and_publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Conclusion
+        uses: technote-space/workflow-conclusion-action@v3
+      - name: Send Slack Notification
+        uses: ./.github/actions/notify_slack
+        with:
+          RELEASE_TYPE: Production
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          STATUS: ${{ env.WORKFLOW_CONCLUSION }}
+          version: ${{ needs.build_and_publish.outputs.RELEASE_VERSION}}

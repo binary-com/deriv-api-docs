@@ -1,0 +1,15 @@
+name: build
+description: Build Docusaurus project
+inputs:
+  NODE_ENV:
+    description: Node environment
+    required: false
+    default: staging
+runs:
+  using: composite
+  steps:
+    - name: Building Docusaurus project
+      env:
+        NODE_ENV: ${{ inputs.NODE_ENV }}
+      run: npm run build
+      shell: bash
