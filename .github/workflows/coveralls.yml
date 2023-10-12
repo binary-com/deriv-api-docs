@@ -20,7 +20,6 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
       - name: Run Tests
-        run: |
-          npm run test  -- --collectCoverage
+        run: npm run test  -- --collectCoverage
       - name: Coveralls
         uses: coverallsapp/github-action@v2
