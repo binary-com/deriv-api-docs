@@ -36,6 +36,7 @@ const CreateTokenField = ({
 }: TCreateTokenField) => {
   const { tokens } = useApiToken();
   const [input_value, setInputValue] = useState('');
+  const numberOfTokens = tokens.length;
 
   useEffect(() => {
     if (form_is_cleared) {
@@ -84,12 +85,19 @@ const CreateTokenField = ({
           type='text'
           name='name'
           {...register}
-          placeholder=' '
+          placeholder=''
         />
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
         {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
+        <label
+          htmlFor='playground-request'
+          className={styles.inlineLabel}
+          data-testid='token-count-label'
+        >
+          Token name (You&apos;ve created <b>{numberOfTokens}</b> out of 30 tokens )
+        </label>
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>
