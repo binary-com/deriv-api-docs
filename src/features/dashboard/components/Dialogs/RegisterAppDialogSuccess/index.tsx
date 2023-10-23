@@ -14,10 +14,11 @@ export const RegisterAppDialogSuccess = ({ onClose }: IRegisterAppDialogSuccessP
     () => [
       {
         id: 0,
-        text: 'Manage application',
+        text: 'Join our Telegram Community',
         color: 'primary',
         onClick: () => {
           updateCurrentTab('MANAGE_APPS');
+          window.open('https://t.me/deriv_apps', '_blank');
           onClose();
         },
       },
