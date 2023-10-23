@@ -29,7 +29,7 @@ describe('App Dialog Register Success', () => {
   });
 
   it('Should render buttons properly', () => {
-    const primaryButton = screen.getByRole('button', { name: /manage application/i });
+    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
     const secondaryButton = screen.getByRole('button', { name: /got it/i });
 
     expect(primaryButton).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('App Dialog Register Success', () => {
   });
 
   it('Should update current tab on primary button click to Manage Application', async () => {
-    const primaryButton = screen.getByRole('button', { name: /manage application/i });
+    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
 
     await userEvent.click(primaryButton);
 
