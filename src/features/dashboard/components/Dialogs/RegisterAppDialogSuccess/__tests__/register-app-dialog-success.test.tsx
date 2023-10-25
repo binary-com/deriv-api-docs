@@ -38,9 +38,7 @@ describe('App Dialog Register Success', () => {
 
   it('Should display correct content on the modal', () => {
     const textContent = screen.getByText(/^You have successfully registered/i);
-    expect(textContent).toHaveTextContent(
-      'You have successfully registered your application. You can now start using Deriv API.',
-    );
+    expect(textContent).toHaveTextContent('You have successfully registered your application.');
   });
 
   it('Should close the modal on Secondary button click', async () => {
