@@ -12,7 +12,7 @@ export const RegisterAppDialogSuccess = ({ onClose }: IRegisterAppDialogSuccessP
 
   const onSuccessfulClick = () => {
     updateCurrentTab('MANAGE_APPS');
-    window.open('https://t.me/deriv_apps', '_blank');
+    window.open('https://t.me/+g6FV5tFY1u9lZGE1', '_blank');
     onClose();
   };
 
