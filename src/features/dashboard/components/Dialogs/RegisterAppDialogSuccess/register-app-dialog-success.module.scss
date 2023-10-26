@@ -19,6 +19,9 @@
   @media (max-width: 768px) {
     padding: unset;
   }
+  @media (max-width: 425px) {
+    font-size: rem(1.2);
+  }
 
   .title {
     font-weight: bold;
