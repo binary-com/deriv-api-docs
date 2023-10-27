@@ -28,6 +28,7 @@ const generateApiList = async () => {
       const sendData = await fs.promises.readFile(sendJsonPath, 'utf8');
       const send = JSON.parse(sendData);
       if (!send.hidden) {
+        // Construct objects to be stored in the _data/v3.yml file
         const title = send.title.replace(/ \(request\)$/, '');
         methods.push({
           name: methodName,
@@ -43,7 +44,7 @@ const generateApiList = async () => {
         methods: methods,
       },
     };
-
+    // Store the list of api calls in the _data/v3.yml file
     await fs.promises.writeFile(path.join(ALL_CONFIG_PATH, '/v3.yml'), yamlDocument.toString());
   } catch (error) {
     logToFile(error);
