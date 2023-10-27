@@ -51,7 +51,6 @@ const generateApiList = async () => {
 };
 
 const logToFile = async (message) => {
-  console.log(message);
   const date = new Date();
   const logFileName = `logs/${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-logs.txt`;
   try {
