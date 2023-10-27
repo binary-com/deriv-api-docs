@@ -1,0 +1,101 @@
+permissions:
+  contents: write
+
+name: API Docs Schema Nightly Sync
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at midnight UTC
+
+jobs:
+  sync_api_docs_with_binary_websocket_api:
+    name: Nightly Sync API Docs with Binary Websocket API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          path: deriv-api-docs
+          ref: master
+
+      - name: Checkout binary-websocket-api Repository
+        uses: actions/checkout@v4
+        with:
+          repository: regentmarkets/binary-websocket-api
+          path: deriv-websockets-api
+          token: ${{ secrets.API_SYNC_PAT }} # TODO: Replace with correct Personal Access Token when provided
+          ref: master
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+
+      - name: Install Dependencies
+        run: |
+          npm install yaml
+          npm install fs-extra
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "PUT NAME HERE WHEN PROVIDED"
+          git config --global user.email "put_email_here@when_provided.com"
+
+      - name: Copy Files From Source to Destination
+        run: node deriv-api-docs/.github/scripts/get-web-socket-api-list.js
+
+      - name: Store the Diff
+        run: |
+          mkdir -p logs
+          filename="../logs/git_diff_$(date +'%Y-%m-%d-%H-%M-%S').txt"
+          cd deriv-api-docs/
+          git add -A ./_data
+          git add -A ./config/v3
+          git diff --name-only >> "$filename"
+
+      - name: Commit and push changes
+        run: |
+          filename="../logs/git_commit_$(date +'%Y-%m-%d-%H-%M-%S').txt"
+          cd deriv-api-docs/
+          if git commit -m "JSON Schema Update" 2> error.txt; then
+            git push origin master
+            echo "Commit successful." >> "$filename"
+          else
+            echo "Commit failed. Error message:"
+            cat error.txt >> "$filename"
+          fi
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: logs/*.txt
+
+  send_slack_notification:
+    name: Send Slack Notification
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - sync_api_docs_with_binary_websocket_api
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Conclusion
+        uses: technote-space/workflow-conclusion-action@v3
+
+      - name: Send Slack Notification on Success
+        if: ${{ env.WORKFLOW_CONCLUSION == 'success' }}
+        run: |-
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+          "text": "Api Sync Successful. Please check the logs for more details."
+          }' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}\
+
+      - name: Send Slack Notification on Failure
+        if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+        run: |-
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+          "text": "Api Sync Failed. Please check the logs for more details."
+          }' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}\
