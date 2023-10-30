@@ -14,34 +14,34 @@ const ALL_CONFIG_PATH = path.join(BASE_PATH, '_data/');
  */
 const generateApiList = async () => {
   console.log('Generating API list...');
-  const methods = [];
+  const apis = [];
   const yamlDocument = new YAML.Document();
   try {
     const filesAndFolders = await fs.promises.readdir(SOURCE_PATH, {
       withFileTypes: true,
     });
-    const methodNames = filesAndFolders
+    const apiNames = filesAndFolders
       .filter((fileOrFolder) => fileOrFolder.isDirectory())
       .map((directory) => directory.name);
-    for (const methodName of methodNames) {
-      const sendJsonPath = path.join(SOURCE_PATH, methodName, '/send.json');
+    for (const apiName of apiNames) {
+      const sendJsonPath = path.join(SOURCE_PATH, apiName, '/send.json');
       const sendData = await fs.promises.readFile(sendJsonPath, 'utf8');
       const send = JSON.parse(sendData);
       if (!send.hidden) {
         // Construct objects to be stored in the _data/v3.yml file
         const title = send.title.replace(/ \(request\)$/, '');
-        methods.push({
-          name: methodName,
+        apis.push({
+          name: apiName,
           title: title.toString(),
         });
-        await fs.copy(path.join(SOURCE_PATH, methodName), path.join(DESTINATION_PATH, methodName));
+        await fs.copy(path.join(SOURCE_PATH, apiName), path.join(DESTINATION_PATH, apiName));
       }
     }
 
     yamlDocument.contents = {
       groups: {
         label: 'All Calls',
-        methods: methods,
+        methods: apis,
       },
     };
     // Store the list of api calls in the _data/v3.yml file
