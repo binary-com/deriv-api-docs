@@ -44,7 +44,6 @@ const CreateTokenField = ({
       setFormIsCleared(false);
     }
   }, [form_is_cleared]);
-
   const getTokenNames = useMemo(() => {
     const token_names = [];
     for (const token_object of tokens) {
@@ -76,28 +75,30 @@ const CreateTokenField = ({
           </Text>
         </div>
       </div>
-      <div
-        onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
-        className={`${styles.customTextInput} ${error_border_active ? 'error-border' : ''}`}
-      >
-        <input
-          className={`${error_border_active ? 'error-border' : ''}`}
-          type='text'
-          name='name'
-          {...register}
-          placeholder=''
-        />
+      <div className={styles.tokenWrapper}>
+        <div
+          onChange={(e) => setInputValue((e.target as HTMLInputElement).value)}
+          className={`${styles.customTextInput} ${error_border_active ? 'error-border' : ''}`}
+        >
+          <input
+            className={`${error_border_active ? 'error-border' : ''}`}
+            type='text'
+            name='name'
+            {...register}
+            placeholder=''
+          />
+          {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
+          <label
+            htmlFor='playground-request'
+            className={styles.inlineLabel}
+            data-testid='token-count-label'
+          >
+            Token name (You&apos;ve created <b>{numberOfTokens}</b> out of 30 tokens )
+          </label>
+        </div>
         <Button disabled={disable_button} type='submit'>
           Create
         </Button>
-        {is_toggle && <TokenCreationDialogSuccess setToggleModal={setToggleModal} />}
-        <label
-          htmlFor='playground-request'
-          className={styles.inlineLabel}
-          data-testid='token-count-label'
-        >
-          Token name (You&apos;ve created <b>{numberOfTokens}</b> out of 30 tokens )
-        </label>
       </div>
       {errors && errors.name && (
         <Text as='span' type='paragraph-1' className='error-message'>
