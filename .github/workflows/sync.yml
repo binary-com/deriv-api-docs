@@ -43,32 +43,29 @@ jobs:
       - name: Copy Files From Source to Destination
         run: node deriv-api-docs/.github/scripts/get-web-socket-api-list.js
 
-      - name: Store the Diff
-        run: |
-          mkdir -p logs
-          filename="../logs/git_diff_$(date +'%Y-%m-%d-%H-%M-%S').txt"
-          cd deriv-api-docs/
-          git add -A ./_data
-          git add -A ./config/v3
-          git diff --name-only >> "$filename"
+      - name: Generate Branch Name
+        id: generateBranchName
+        run: echo "BRANCH=update-schema_$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      - name: Commit and push changes
-        run: |
-          filename="../logs/git_commit_$(date +'%Y-%m-%d-%H-%M-%S').txt"
-          cd deriv-api-docs/
-          if git commit -m "JSON Schema Update" 2> error.txt; then
-            git push origin master
-            echo "Commit successful." >> "$filename"
-          else
-            echo "Commit failed. Error message:"
-            cat error.txt >> "$filename"
-          fi
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Create Pull Request
+        id: createPullRequest
+        uses: peter-evans/create-pull-request@v5
         with:
-          name: logs
-          path: logs/*.txt
+          commit-message: JSON Schema Update
+          title: JSON Schema Update
+          body: JSON Schema Update
+          branch: ${{ steps.generateBranchName.outputs.BRANCH }}
+          base: master
+          token: ${{ secrets.TEST_API_PR_PAT }} # TODO: Replace with correct Personal Access Token when provided
+          path: deriv-api-docs
+          delete-branch: true
+
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.createPullRequest.outputs.pull-request-number }}
+          method: squash # merge rebase
 
   send_slack_notification:
     name: Send Slack Notification
