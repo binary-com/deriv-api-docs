@@ -67,6 +67,12 @@ jobs:
           number: ${{ steps.createPullRequest.outputs.pull-request-number }}
           method: squash # merge rebase
 
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: logs/*.txt
+
   send_slack_notification:
     name: Send Slack Notification
     runs-on: ubuntu-latest
