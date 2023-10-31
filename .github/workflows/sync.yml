@@ -60,7 +60,37 @@ jobs:
           path: deriv-api-docs
           delete-branch: true
 
+      - name: Wait for Checks
+        if: ${{ steps.createPullRequest.outputs.pull-request-head-sha != '' }}
+        id: waitForChecks
+        uses: actions/github-script@v6
+        with:
+          retries: 5
+          script: |
+            const owner = '${{ github.repository_owner }}'
+            const repo = '${{ github.event.repository.name }}'
+            const ref = '${{ steps.createPullRequest.outputs.pull-request-head-sha }}'
+            let checkRunsCount = 0;
+            let areChecksPending = true;
+            let haveChecksPassed = false;
+
+            do {
+              const checks = await github.rest.checks.listForRef({
+                owner,
+                repo,
+                ref,
+              });
+              checkRunsCount = checks.data.total_count;
+              const checkRuns = checks.data.check_runs;
+              haveChecksPassed = checkRuns.every((checkRun) => checkRun.status === 'completed' && checkRun.conclusion === 'success');
+              areChecksPending = checkRuns.some((checkRun) => checkRun.status === 'in_progress' || checkRun.status === 'queued');
+              await new Promise(resolve => setTimeout(resolve, 60 * 1000)); // Sleep for 1 minute before checking again
+            } while (checkRunsCount === 0 || areChecksPending);
+            // Set the output variable
+            core.setOutput('HAVE_CHECKS_PASSED', haveChecksPassed);
+
       - name: Merge Pull Request
+        if: ${{ steps.waitForChecks.outputs.HAVE_CHECKS_PASSED == 'true' }}
         uses: juliangruber/merge-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
