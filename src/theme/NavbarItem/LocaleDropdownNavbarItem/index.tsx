@@ -35,15 +35,31 @@ export default function LocaleDropdownNavbarItem({
     };
   });
 
+  const getShortNames = (locale) => {
+    switch (locale) {
+      case 'en':
+        return 'EN';
+      case 'es':
+        return 'ES';
+      case 'zh-Hans':
+        return '简体';
+      case 'zh-Hant':
+        return '繁體';
+      case 'fr':
+        return 'FR';
+      case 'de':
+        return 'DE';
+      case 'vi':
+        return 'VI';
+      case 'th':
+        return 'TH';
+      default:
+        return '';
+    }
+  };
+
   const items = [...dropdownItemsBefore, ...localeItems, ...dropdownItemsAfter];
+  const dropdownLabel = getShortNames(currentLocale);
 
-  const dropdownLabel = localeConfigs[currentLocale].label;
-
-  return (
-    <DropdownNavbarItem
-      {...props}
-      label={<>{dropdownLabel === 'English' ? 'EN' : 'ES'}</>}
-      items={items}
-    />
-  );
+  return <DropdownNavbarItem {...props} label={<>{dropdownLabel}</>} items={items} />;
 }

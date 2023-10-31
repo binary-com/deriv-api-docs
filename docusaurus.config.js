@@ -32,6 +32,18 @@ const config = {
       es: {
         label: 'Español',
       },
+      fr: {
+        label: 'Français',
+      },
+      de: {
+        label: 'Deutsch',
+      },
+      vi: {
+        label: 'Tiếng Việt',
+      },
+      th: {
+        label: 'Thai',
+      },
     },
   },
 
