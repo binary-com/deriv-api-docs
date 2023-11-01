@@ -35,11 +35,6 @@ jobs:
           npm install yaml
           npm install fs-extra
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "PUT NAME HERE WHEN PROVIDED"
-          git config --global user.email "put_email_here@when_provided.com"
-
       - name: Copy Files From Source to Destination
         run: node deriv-api-docs/.github/scripts/get-web-socket-api-list.js
 
@@ -56,7 +51,7 @@ jobs:
           body: JSON Schema Update
           branch: ${{ steps.generateBranchName.outputs.BRANCH }}
           base: master
-          token: ${{ secrets.TEST_API_PR_PAT }} # TODO: Replace with correct Personal Access Token when provided
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: deriv-api-docs
           delete-branch: true
 
