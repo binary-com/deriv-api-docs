@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen, within } from '@site/src/test-utils';
+import { cleanup, render, screen, waitFor, within } from '@site/src/test-utils';
 import userEvent from '@testing-library/user-event';
 import ApiTokenForm from '../api-token.form';
 import useCreateToken from '../../../hooks/useCreateToken';
@@ -134,6 +134,13 @@ describe('Home Page', () => {
       expect(adminCheckbox.checked).toBeTruthy();
     });
 
+    it('Should show dynamic token label', async () => {
+      const tokenLabel = screen.getByTestId('token-count-label');
+      await waitFor(() => {
+        expect(tokenLabel).toBeVisible();
+      });
+    });
+
     it('Should create token on form submit', async () => {
       const nameInput = screen.getByRole('textbox');
 
@@ -153,6 +160,20 @@ describe('Home Page', () => {
 
       const error = screen.getByText(/That name is taken. Choose another./i);
       expect(error).toBeVisible;
+    });
+
+    it('Should update token a value on create token', async () => {
+      const tokenLabel = screen.getByTestId('token-count-label');
+      const nameInput = screen.getByRole('textbox');
+
+      await userEvent.type(nameInput, 'test create token');
+
+      const submitButton = screen.getByRole('button', { name: /Create/i });
+      await userEvent.click(submitButton);
+
+      await waitFor(() => {
+        expect(tokenLabel).toHaveTextContent('2');
+      });
     });
 
     it('should hide restrictions if error is present', async () => {
