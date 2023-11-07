@@ -21,7 +21,7 @@ Please make sure you have all the requirements mentioned below to continue.
 
 ### Requirements
 
-1. Deriv account
+1. Deriv Client account
 2. Deriv API token with the appropriate access level
 3. Deriv app ID
 
