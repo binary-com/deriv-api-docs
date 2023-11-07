@@ -29,7 +29,7 @@ describe('App Dialog Register Success', () => {
   });
 
   it('Should render buttons properly', () => {
-    const primaryButton = screen.getByRole('button', { name: /manage application/i });
+    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
     const secondaryButton = screen.getByRole('button', { name: /got it/i });
 
     expect(primaryButton).toBeInTheDocument();
@@ -38,9 +38,7 @@ describe('App Dialog Register Success', () => {
 
   it('Should display correct content on the modal', () => {
     const textContent = screen.getByText(/^You have successfully registered/i);
-    expect(textContent).toHaveTextContent(
-      'You have successfully registered your application. You can now start using Deriv API.',
-    );
+    expect(textContent).toHaveTextContent('You have successfully registered your application.');
   });
 
   it('Should close the modal on Secondary button click', async () => {
@@ -52,7 +50,7 @@ describe('App Dialog Register Success', () => {
   });
 
   it('Should update current tab on primary button click to Manage Application', async () => {
-    const primaryButton = screen.getByRole('button', { name: /manage application/i });
+    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
 
     await userEvent.click(primaryButton);
 

@@ -99,8 +99,6 @@ const fakeApp: ApplicationObject = {
 };
 
 describe('Update App Dialog', () => {
-  const mockOnClose = jest.fn();
-
   let wsServer: WS;
 
   beforeEach(async () => {
@@ -198,11 +196,7 @@ describe('Update App Dialog', () => {
       req_id: 1,
     });
 
-    const successDialogContent = await screen.findByText(
-      'You have successfully registered your application. You can now start using Deriv API.',
-    );
-    expect(successDialogContent).toBeInTheDocument();
-    expect(successDialogContent).toBeVisible();
+    expect(screen.getByText('App information')).toBeInTheDocument();
   });
 
   it('Should render error on error response', async () => {
