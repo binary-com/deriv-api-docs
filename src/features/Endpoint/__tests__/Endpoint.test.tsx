@@ -21,7 +21,7 @@ describe('Endpoint', () => {
   });
 
   it('should have default values in input fields', () => {
-    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.derivws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     expect(server).toHaveValue('oauth.deriv.com');
 
@@ -40,7 +40,7 @@ describe('Endpoint', () => {
   });
 
   it('validate user inputs, and provides error messages for server field', async () => {
-    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.derivws.com');
 
     await userEvent.clear(server);
     await userEvent.type(server, 'qa10@deriv.com');
@@ -51,12 +51,12 @@ describe('Endpoint', () => {
   });
 
   it('should validate submit button functionality', async () => {
-    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.derivws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     const form = screen.getByRole('form');
 
     await userEvent.clear(server);
-    await userEvent.type(server, 'blue.binaryws.com');
+    await userEvent.type(server, 'blue.derivws.com');
 
     await userEvent.clear(app_id);
     await userEvent.type(app_id, '31063');
@@ -65,7 +65,7 @@ describe('Endpoint', () => {
       fireEvent.submit(form);
     });
 
-    expect(server).toHaveValue('blue.binaryws.com');
+    expect(server).toHaveValue('blue.derivws.com');
     expect(app_id).toHaveValue('31063');
   });
 
@@ -89,12 +89,12 @@ describe('Endpoint', () => {
   });
 
   it('Should have submit button enabled with no errors on the from', async () => {
-    const server = screen.getByPlaceholderText('e.g. ws.binaryws.com');
+    const server = screen.getByPlaceholderText('e.g. ws.derivws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
     const submit_button = screen.getByRole('button', { name: /submit/i });
 
     await userEvent.clear(server);
-    await userEvent.type(server, 'blue.binaryws.com');
+    await userEvent.type(server, 'blue.derivws.com');
 
     await userEvent.clear(app_id);
     await userEvent.type(app_id, '31063');

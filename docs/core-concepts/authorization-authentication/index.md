@@ -21,7 +21,7 @@ Please make sure you have all the requirements mentioned below to continue.
 
 ### Requirements
 
-1. Deriv account
+1. Deriv Client account
 2. Deriv API token with the appropriate access level
 3. Deriv app ID
 
@@ -59,7 +59,7 @@ Here is the visual representation of how the OAuth authorisation connection work
 
 ## The authentication process
 
-In order to authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application** tab in the **OAuth details** fields. Then, add a login button on your website or app and direct users to **`https://oauth.binary.com/oauth2/authorize?app_id=your_app_id`** where your_app_id is the ID of your app.
+In order to authenticate your user, specify the URL that will be used as the OAuth Redirect URL on the [Dashboard](/dashboard) page, **Register application** tab in the **OAuth details** fields. Then, add a login button on your website or app and direct users to **`https://oauth.deriv.com/oauth2/authorize?app_id=your_app_id`** where your_app_id is the ID of your app.
 
 ![Deriv OAuth Login](/img/oauth_login.png 'Deriv OAuth Login')
 
