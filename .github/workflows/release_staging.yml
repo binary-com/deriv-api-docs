@@ -21,6 +21,11 @@ jobs:
         uses: ./.github/actions/build
         with:
           NODE_ENV: staging
+      - name: Publish to Cloudflare Pages Staging
+        uses: ./.github/actions/publish_to_pages_staging
+        with:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Publish to Docker
         uses: ./.github/actions/publish_to_docker
         with:
@@ -35,8 +40,3 @@ jobs:
           K8S_VERSION: ${{ secrets.SHA1 }}
           K8S_NAMESPACE: 'deriv-com-api-staging'
           CA_CRT: ${{ secrets.CA_CRT }}
-      - name: Publish to Cloudflare Pages Staging
-        uses: ./.github/actions/publish_to_pages_staging
-        with:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
