@@ -1,11 +1,6 @@
 name: k8s_deploy
 description: Deploy to Kubernetes
 inputs:
-  TARGET:
-    description: Target environment
-    required: false
-    default: 'beta'
-    type: string
   K8S_VERSION:
     description: Kubernetes version
     required: true
