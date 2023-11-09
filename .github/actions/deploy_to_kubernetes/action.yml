@@ -8,7 +8,7 @@ inputs:
     type: string
   K8S_VERSION:
     description: Kubernetes version
-    required: false
+    required: true
     type: string
   K8S_NAMESPACE:
     description: Kubernetes namespace
