@@ -17,7 +17,7 @@ inputs:
     default: 'deriv-com-api-staging'
   CA_CRT:
     description: Kubernetes CA certificate
-    required: false
+    required: true
     type: string
 steps:
   - k8s/install-kubectl
