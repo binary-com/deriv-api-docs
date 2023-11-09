@@ -21,6 +21,20 @@ jobs:
         uses: ./.github/actions/build
         with:
           NODE_ENV: staging
+      - name: Publish to Docker
+        uses: ./.github/actions/publish_to_docker
+        with:
+          DOCKER_LATEST_IMAGE_TAG: 'latest-staging'
+          DOCKER_IMAGE_TAG: ${{ secrets.SHA1 }}
+          DOCKHUB_ORGANISATION: ${{ secrets.DOCKHUB_ORGANISATION }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Deploy to Kubernetes
+        uses: ./.github/actions/deploy_to_kubernetes
+        with:
+          K8S_VERSION: ${{ secrets.SHA1 }}
+          K8S_NAMESPACE: 'deriv-com-api-staging'
+          CA_CRT: ${{ secrets.CA_CRT }}
       - name: Publish to Cloudflare Pages Staging
         uses: ./.github/actions/publish_to_pages_staging
         with:

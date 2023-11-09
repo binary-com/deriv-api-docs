@@ -1,0 +1,36 @@
+name: docker_build_push
+description: Build and push Docker image to Docker Hub
+inputs:
+  DOCKER_LATEST_IMAGE_TAG:
+    description: Docker image tag
+    required: false
+    default: 'latest-staging'
+    type: string
+  DOCKER_IMAGE_TAG:
+    description: Docker image tag
+    required: false
+    type: string
+  DOCKHUB_ORGANISATION:
+    description: Docker Hub organisation
+    required: true
+    type: string
+  DOCKERHUB_USERNAME:
+    description: Docker Hub username
+    required: true
+    type: string
+  DOCKERHUB_PASSWORD:
+    description: Docker Hub password
+    required: true
+    type: string
+  steps:
+     - setup_remote_docker
+      - run:
+          name: Building docker image
+          command: |
+            docker build -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:<< ${{ inputs.DOCKER_IMAGE_TAG }} >> -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:<< ${{ inputs.DOCKER_LATEST_IMAGE_TAG }} >> .
+      - run:
+          name: Pushing Image to docker hub
+          command: |
+            echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u $${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
+            docker push ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:<< ${{ inputs.DOCKER_IMAGE_TAG }} >>
+            docker push ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:<< ${{ inputs.DOCKER_LATEST_IMAGE_TAG }} >>
