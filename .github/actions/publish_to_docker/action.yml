@@ -27,7 +27,7 @@ inputs:
       - run:
           name: Building docker image
           command: |
-            docker build -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}.
+            docker build -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
       - run:
           name: Pushing Image to docker hub
           command: |
