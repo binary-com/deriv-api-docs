@@ -22,10 +22,10 @@ inputs:
 steps:
   - k8s/install-kubectl
   - run:
-      name: Deploying to k8s cluster for service << ${{ inputs.K8S_NAMESPACE }} >>
+      name: Deploying to k8s cluster for service ${{ inputs.K8S_NAMESPACE }}
       command: |
-        export NAMESPACE=<< ${{ inputs.K8S_NAMESPACE }} >>
+        export NAMESPACE=${{ inputs.K8S_NAMESPACE }}
         git clone https://github.com/binary-com/devops-ci-scripts
         cd devops-ci-scripts/k8s-build_tools
         echo ${{ inputs.CA_CRT }} | base64 --decode > ca.crt
-        ./release.sh deriv-com-api << ${{ inputs.K8S_VERSION }} >>
+        ./release.sh deriv-com-api ${{ inputs.K8S_VERSION }}
