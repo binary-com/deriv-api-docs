@@ -32,9 +32,6 @@ export const RegisterAppDialogSuccess = ({ onClose }: IRegisterAppDialogSuccessP
               <Button color='secondary' onClick={onClose} className={styles.btn}>
                 Got it
               </Button>
-              <Button color='primary' onClick={onSuccessfulClick} className={styles.btn}>
-                Join our Telegram Community
-              </Button>
             </div>
           </Modal.PageContent>
         </div>

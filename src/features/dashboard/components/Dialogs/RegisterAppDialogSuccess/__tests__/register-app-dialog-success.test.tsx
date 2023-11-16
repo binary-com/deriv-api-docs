@@ -29,10 +29,7 @@ describe('App Dialog Register Success', () => {
   });
 
   it('Should render buttons properly', () => {
-    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
     const secondaryButton = screen.getByRole('button', { name: /got it/i });
-
-    expect(primaryButton).toBeInTheDocument();
     expect(secondaryButton).toBeInTheDocument();
   });
 
@@ -47,14 +44,5 @@ describe('App Dialog Register Success', () => {
     await userEvent.click(secondaryButton);
 
     expect(mockOnClose).toHaveBeenCalledTimes(1);
-  });
-
-  it('Should update current tab on primary button click to Manage Application', async () => {
-    const primaryButton = screen.getByRole('button', { name: /join our telegram community/i });
-
-    await userEvent.click(primaryButton);
-
-    expect(mockUpdateCurrentTab).toHaveBeenCalledTimes(1);
-    expect(mockUpdateCurrentTab).toHaveBeenCalledWith('MANAGE_APPS');
   });
 });
