@@ -5,37 +5,34 @@ inputs:
     description: Docker image tag
     required: false
     default: 'latest-staging'
-    type: string
   DOCKER_IMAGE_TAG:
     description: Docker image tag
     required: true
-    type: string
   DOCKERHUB_ORGANISATION:
     description: Docker Hub organisation
     required: true
-    type: string
   DOCKERHUB_USERNAME:
     description: Docker Hub username
     required: true
-    type: string
   DOCKERHUB_PASSWORD:
     description: Docker Hub password
     required: true
-    type: string
+runs: 
+  using: composite
   steps:
-     - setup_remote_docker
-      - run:
-          name: Building docker image 🐳
-          command: |
-            docker build -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
-      - name: Verify nginx image
-        run: |
-            set -e
-            docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
-            echo "docker image validated successfully"
-      - run:
-          name: Pushing Image to docker hub 🐳
-          command: |
-            echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u $${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
-            docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
-            docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
+    - name: Building docker image 🐳
+      run: |
+        docker build -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
+      shell: bash
+    - name: Verify nginx image
+      run: |
+          set -e
+          docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
+          echo "docker image validated successfully"
+      shell: bash
+    - name: Pushing Image to docker hub 🐳
+      run: |
+        echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u $${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
+        docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
+        docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
+      shell: bash
