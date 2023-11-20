@@ -31,7 +31,7 @@ inputs:
       - name: Verify nginx image
         run: |
             set -e
-            docker run --rm ${DOCKERHUB_ORGANISATION}/deriv-com-api:${{ github.ref_name }} nginx -t
+            docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
             echo "docker image validated successfully"
       - run:
           name: Pushing Image to docker hub 🐳
