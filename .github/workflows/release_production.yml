@@ -38,7 +38,7 @@ jobs:
         with:
           DOCKER_LATEST_IMAGE_TAG: 'latest'
           DOCKER_IMAGE_TAG: ${{ secrets.SHA1 }}
-          DOCKHUB_ORGANISATION: ${{ secrets.DOCKHUB_ORGANISATION }}
+          DOCKERHUB_ORGANISATION: ${{ secrets.DOCKERHUB_ORGANISATION }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Deploy to Kubernetes
