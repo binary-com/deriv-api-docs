@@ -44,7 +44,7 @@ jobs:
       - name: Deploy to Kubernetes
         uses: ./.github/actions/deploy_to_kubernetes
         with:
-          K8S_VERSION: ${{ secrets.SHA1 }}
+          K8S_VERSION: ${{ github.ref_name }}
           K8S_NAMESPACE: 'deriv-com-api-production'
           CA_CRT: ${{ secrets.CA_CRT }}
   send_slack_notification:
