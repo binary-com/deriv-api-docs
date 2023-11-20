@@ -1,0 +1,27 @@
+name: k8s_deploy
+description: Deploy to Kubernetes
+inputs:
+  K8S_VERSION:
+    description: Kubernetes version
+    required: true
+    type: string
+  K8S_NAMESPACE:
+    description: Kubernetes namespace
+    required: false
+    type: string
+    default: 'deriv-com-api-staging'
+  CA_CRT:
+    description: Kubernetes CA certificate
+    required: true
+    type: string
+steps:
+  - k8s/install-kubectl
+  - run:
+      name: Deploying to k8s cluster for service ${{ inputs.K8S_NAMESPACE }} 🚀
+      command: |
+        export NAMESPACE=${{ inputs.K8S_NAMESPACE }}
+        git clone https://github.com/binary-com/devops-ci-scripts
+        cd devops-ci-scripts/k8s-build_tools
+        echo ${{ inputs.CA_CRT }} | base64 --decode > ca.crt
+        export CA="ca.crt"
+        ./release.sh deriv-com-api ${{ inputs.K8S_VERSION }}
