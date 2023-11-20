@@ -10,7 +10,7 @@ inputs:
     description: Docker image tag
     required: true
     type: string
-  DOCKHUB_ORGANISATION:
+  DOCKERHUB_ORGANISATION:
     description: Docker Hub organisation
     required: true
     type: string
@@ -25,12 +25,17 @@ inputs:
   steps:
      - setup_remote_docker
       - run:
-          name: Building docker image
+          name: Building docker image 🐳
           command: |
-            docker build -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
+            docker build -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
+      - name: Verify nginx image
+        run: |
+            set -e
+            docker run --rm ${DOCKERHUB_ORGANISATION}/deriv-com-api:${{ github.ref_name }} nginx -t
+            echo "docker image validated successfully"
       - run:
-          name: Pushing Image to docker hub
+          name: Pushing Image to docker hub 🐳
           command: |
             echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u $${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
-            docker push ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
-            docker push ${{ inputs.DOCKHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
+            docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
+            docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
