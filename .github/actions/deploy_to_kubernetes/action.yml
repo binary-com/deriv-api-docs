@@ -26,7 +26,7 @@ runs:
         echo "KUBE_SERVER=${{ inputs.KUBE_SERVER }}" >> "$GITHUB_ENV"
         echo "SERVICEACCOUNT_TOKEN=${{ inputs.SERVICEACCOUNT_TOKEN }}" >> "$GITHUB_ENV"
         echo "CA_CRT=${{ inputs.CA_CRT }}" >> "$GITHUB_ENV"
-        echo "APP_NAME=deriv-api-docs" >> "$GITHUB_ENV"
+        echo "APP_NAME=deriv-com-api" >> "$GITHUB_ENV"
       shell: bash
     - name: Deploying to k8s cluster for service ${{ inputs.K8S_NAMESPACE }} 🚀
       run: |
