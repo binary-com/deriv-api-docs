@@ -40,3 +40,5 @@ jobs:
           K8S_VERSION: ${{ github.ref_name }}
           K8S_NAMESPACE: 'deriv-com-api-staging'
           CA_CRT: ${{ secrets.CA_CRT }}
+          SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
+          KUBE_SERVER: ${{ secrets.KUBE_SERVER }}

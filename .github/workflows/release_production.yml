@@ -47,6 +47,9 @@ jobs:
           K8S_VERSION: ${{ github.ref_name }}
           K8S_NAMESPACE: 'deriv-com-api-production'
           CA_CRT: ${{ secrets.CA_CRT }}
+          SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
+          KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
+
   send_slack_notification:
     name: Send Slack Notification
     environment: Production

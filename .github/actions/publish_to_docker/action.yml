@@ -17,7 +17,7 @@ inputs:
   DOCKERHUB_PASSWORD:
     description: Docker Hub password
     required: true
-runs: 
+runs:
   using: composite
   steps:
     - name: Building docker image 🐳
@@ -26,13 +26,13 @@ runs:
       shell: bash
     - name: Verify nginx image
       run: |
-          set -e
-          docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
-          echo "docker image validated successfully"
+        set -e
+        docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
+        echo "docker image validated successfully"
       shell: bash
     - name: Pushing Image to docker hub 🐳
       run: |
-        echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u $${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
+        echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u ${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
         docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
         docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
       shell: bash
