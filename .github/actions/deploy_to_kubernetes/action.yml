@@ -11,15 +11,28 @@ inputs:
   CA_CRT:
     description: Kubernetes CA certificate
     required: true
+  KUBE_SERVER:
+    description: Kubernetes server
+    required: true
+  SERVICEACCOUNT_TOKEN:
+    description: Kubernetes service account token
+    required: true
 runs:
   using: composite
   steps:
+    - name: Setup Environment variables
+      run: |
+        echo "NAMESPACE=${{ inputs.K8S_NAMESPACE }}" >> "$GITHUB_ENV"
+        echo "KUBE_SERVER=${{ inputs.KUBE_SERVER }}" >> "$GITHUB_ENV"
+        echo "SERVICEACCOUNT_TOKEN=${{ inputs.SERVICEACCOUNT_TOKEN }}" >> "$GITHUB_ENV"
+        echo "CA_CRT=${{ inputs.CA_CRT }}" >> "$GITHUB_ENV"
+        echo "APP_NAME=deriv-api-docs" >> "$GITHUB_ENV"
+      shell: bash
     - name: Deploying to k8s cluster for service ${{ inputs.K8S_NAMESPACE }} 🚀
-      run: | 
-          export NAMESPACE=${{ inputs.K8S_NAMESPACE }}
-          git clone https://github.com/binary-com/devops-ci-scripts
-          cd devops-ci-scripts/k8s-build_tools
-          echo ${{ inputs.CA_CRT }} | base64 --decode > ca.crt
-          export CA="ca.crt"
-          ./release.sh deriv-com-api ${{ inputs.K8S_VERSION }}
+      run: |
+        git clone https://github.com/binary-com/devops-ci-scripts
+        cd devops-ci-scripts/k8s-build_tools
+        echo ${{ inputs.CA_CRT }} | base64 --decode > ca.crt
+        export CA="ca.crt"
+        ./release.sh ${APP_NAME} ${{ inputs.K8S_VERSION }}
       shell: bash
