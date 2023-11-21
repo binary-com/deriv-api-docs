@@ -71,6 +71,18 @@
             "exclusiveMinimum": true,
             "minimum": 0
         },
+        "order_expiry_period": {
+            "description": "[Optional] Expiry period (seconds) for order created against this ad.",
+            "type": "integer",
+            "enum": [
+                900,
+                1800,
+                2700,
+                3600,
+                5400,
+                7200
+            ]
+        },
         "payment_info": {
             "description": "[Optional] Payment instructions.",
             "type": "string",
@@ -121,8 +133,7 @@
         },
         "passthrough": {
             "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
-            "type": "object",
-            "maxSize": 3500
+            "type": "object"
         },
         "req_id": {
             "description": "[Optional] Used to map request to response.",
