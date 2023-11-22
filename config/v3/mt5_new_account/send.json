@@ -90,6 +90,10 @@
             "pattern": "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])[ -~]{8,25}$",
             "sensitive": 1
         },
+        "migrate": {
+            "description": "[Optional] Indicates whether the user would like to migrate his account to other jurisdiction.",
+            "type": "boolean"
+        },
         "mt5_account_category": {
             "description": "[Optional] To choose whether account is conventional or swap_free. Unavailable for financial_stp MT5_account_type",
             "type": "string",
@@ -160,8 +164,7 @@
         },
         "passthrough": {
             "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
-            "type": "object",
-            "maxSize": 3500
+            "type": "object"
         },
         "req_id": {
             "description": "[Optional] Used to map request to response.",
