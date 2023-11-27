@@ -54,7 +54,7 @@ export default function LocaleDropdownNavbarItem({
       case 'th':
         return 'TH';
       default:
-        return '';
+        return 'EN';
     }
   };
 

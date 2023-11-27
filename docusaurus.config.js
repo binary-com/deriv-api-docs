@@ -26,21 +26,6 @@ const config = {
     defaultLocale: 'en',
     locales: ['en', 'es', 'zh-Hans', 'zh-Hant', 'fr', 'de', 'vi', 'th'],
     localeConfigs: {
-      en: {
-        label: 'English',
-      },
-      es: {
-        label: 'Español',
-      },
-      fr: {
-        label: 'Français',
-      },
-      de: {
-        label: 'Deutsch',
-      },
-      vi: {
-        label: 'Tiếng Việt',
-      },
       th: {
         label: 'Thai',
       },
