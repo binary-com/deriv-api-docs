@@ -6,7 +6,7 @@ import {
 } from '@site/src/configs/websocket/types';
 import { useCallback, useState } from 'react';
 
-const useWS = <T extends TSocketEndpointNames>(name: T) => {
+const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const [is_loading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>();
   const [data, setData] = useState<TSocketResponseData<T>>();
@@ -19,10 +19,20 @@ const useWS = <T extends TSocketEndpointNames>(name: T) => {
   }, []);
 
   const send = useCallback(
-    async (data?: Parameters<typeof apiManager.augmentedSend<T>>[1]) => {
+    async (data?: Parameters<typeof apiManager.augmentedSend<T>>[]) => {
+      let payload: any = data;
+      console.log();
+
+      if (name) {
+        payload = { ...payload, name: { [name]: 1 } };
+      } else {
+        payload = { ...payload };
+      }
+
       setIsLoading(true);
+
       try {
-        const response = await apiManager.augmentedSend(name, data);
+        const response = await apiManager.augmentedSend(payload);
         const key = response['msg_type'] ?? name;
         setData(response[key] as TSocketResponseData<T>);
         setFullResponse(response);
