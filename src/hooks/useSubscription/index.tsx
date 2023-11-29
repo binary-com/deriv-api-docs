@@ -36,10 +36,16 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
   }, []);
 
   const subscribe = useCallback(
-    (data: Parameters<typeof apiManager.augmentedSubscribe<T>>[1]) => {
+    (data: Parameters<typeof apiManager.augmentedSubscribe<T>>[]) => {
+      let payload: any = data;
+      if (name) {
+        console.log('name', name);
+
+        payload = { [name]: 1, ...payload };
+      }
       setIsLoading(true);
       setSubscribed(true);
-      const subscriber_ref = apiManager.augmentedSubscribe(name, data).subscribe(onData, onError);
+      const subscriber_ref = apiManager.augmentedSubscribe(payload).subscribe(onData, onError);
       setSubscriber(subscriber_ref);
       return subscriber_ref;
     },
