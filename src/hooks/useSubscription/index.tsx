@@ -39,9 +39,9 @@ const useSubscription = <T extends TSocketSubscribableEndpointNames>(name: T) =>
     (data: Parameters<typeof apiManager.augmentedSubscribe<T>>[]) => {
       let payload: any = data;
       if (name) {
-        console.log('name', name);
-
-        payload = { [name]: 1, ...payload };
+        payload = { [name]: 1, subscribe: 1, ...payload };
+      } else {
+        payload = { subscribe: 1, ...payload };
       }
       setIsLoading(true);
       setSubscribed(true);

@@ -21,10 +21,10 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const send = useCallback(
     async (data?: Parameters<typeof apiManager.augmentedSend<T>>[]) => {
       let payload: any = data;
-      console.log();
+      console.log(payload);
 
       if (name) {
-        payload = { ...payload, name: { [name]: 1 } };
+        payload = { [name]: 1, ...payload };
       } else {
         payload = { ...payload };
       }

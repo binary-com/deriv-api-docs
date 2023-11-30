@@ -48,7 +48,7 @@ export class ApiManager {
   public augmentedSubscribe<T extends TSocketSubscribableEndpointNames>(
     request?: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
   ): Observable<TSocketResponse<T>> {
-    return this.derivApi.subscribe({ subscribe: 1, request }) as Observable<TSocketResponse<T>>;
+    return this.derivApi.subscribe(request) as Observable<TSocketResponse<T>>;
   }
 
   public authorize(token: string) {
