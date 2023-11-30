@@ -60,7 +60,7 @@ describe('Use WS', () => {
     expect(result.current.error).toBeUndefined();
 
     await expect(wsServer).toReceiveMessage({
-      active_symbols: 1,
+      active_symbols: 'brief',
       product_type: 'basic',
       req_id: 1,
     });
@@ -168,7 +168,7 @@ describe('Use WS', () => {
     expect(result.current.error).toBeUndefined();
 
     await expect(wsServer).toReceiveMessage({
-      active_symbols: 1,
+      active_symbols: 'brief',
       product_type: 'basic',
       req_id: 1,
     });

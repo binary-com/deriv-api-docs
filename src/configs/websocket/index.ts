@@ -40,7 +40,7 @@ export class ApiManager {
   }
 
   public augmentedSend<T extends TSocketEndpointNames>(
-    request?: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
+    request: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
   ): Promise<TSocketResponse<T>> {
     return this.derivApi.send(request) as Promise<TSocketResponse<T>>;
   }
