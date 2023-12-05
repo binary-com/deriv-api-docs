@@ -32,6 +32,7 @@ const SchemaProperties = ({ jsonSchema }: TJsonSchemaType) => {
           is_open
           properties={jsonSchema.properties}
           value={jsonSchema.properties}
+          jsonSchema={jsonSchema}
         />
       )}
     </React.Fragment>

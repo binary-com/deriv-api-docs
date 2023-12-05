@@ -10,9 +10,17 @@ const ReactJson = React.lazy(() => import('react-json-view'));
 type TSchemaObjectContent = {
   key_value: string;
   properties: any;
+  jsonSchema?: any;
+  is_stream_types?: boolean;
 };
 
-export default function SchemaObjectContent({ key_value, properties }: TSchemaObjectContent) {
+//json schema also here full obj
+export default function SchemaObjectContent({
+  key_value,
+  properties,
+  jsonSchema,
+  is_stream_types = false,
+}: TSchemaObjectContent) {
   const [is_open_object, setIsOpenObject] = useState<boolean>(false);
   const [is_code_open, setIsCodeOpen] = useState<boolean>(false);
   const {
@@ -52,6 +60,7 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
           title={title}
           is_open_object={is_open_object}
           setIsOpenObject={setIsOpenObject}
+          is_stream_types={is_stream_types}
         />
         {/* Description */}
         <SchemaDescription description={description} />
@@ -68,6 +77,7 @@ export default function SchemaObjectContent({ key_value, properties }: TSchemaOb
             is_open={is_open_object}
             properties={value.properties || value?.items?.properties}
             value={value}
+            jsonSchema={jsonSchema}
           />
         )}
       </div>
