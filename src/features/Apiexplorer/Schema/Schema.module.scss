@@ -304,14 +304,44 @@
 }
 
 .streamTypesContainer {
-  border-radius: 6px;
   margin-top: rem(1);
   margin-bottom: rem(2.4);
+
+  &:hover {
+    > .sourceButtonMain {
+      opacity: 1;
+      margin: 10px;
+    }
+  }
+
+  .streamTypesHeader {
+    padding: rem(1);
+    border: none;
+    background: #151717;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    .streamTypesTitle {
+      font-size: rem(1.6);
+      color: var(--ifm-color-white);
+      font-weight: bold;
+    }
+    .streamTypesDescription {
+      display: flex;
+      padding: rem(0.5) 0;
+      gap: rem(2);
+      justify-content: space-between;
+      color: var(--ifm-color-white);
+      font-size: rem(1.4);
+    }
+  }
 
   .streamTypesBody {
     background-color: rgba(219, 219, 219, 0.05);
     display: flex;
     padding: rem(1);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
 
     .streamTypesObject {
       display: flex;
@@ -350,26 +380,6 @@
         border-radius: 4px;
         background-color: rgba(0, 255, 104, 0.16);
       }
-    }
-  }
-
-  .streamTypesHeader {
-    padding: rem(1);
-    border: none;
-    background: #151717;
-
-    .streamTypesTitle {
-      font-size: rem(1.6);
-      color: var(--ifm-color-white);
-      font-weight: bold;
-    }
-    .streamTypesDescription {
-      display: flex;
-      padding: rem(0.5) 0;
-      gap: rem(2);
-      justify-content: space-between;
-      color: var(--ifm-color-white);
-      font-size: rem(1.4);
     }
   }
 }

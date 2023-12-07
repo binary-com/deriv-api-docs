@@ -7,20 +7,22 @@ type TRecursiveProperties = {
   is_open: boolean;
   properties: any;
   value: any;
-  jsonSchema?: any;
+  jsonSchema: any;
 };
 
 const RecursiveProperties = ({ is_open, properties, value, jsonSchema }: TRecursiveProperties) => {
   const keys = properties && Object.keys(properties);
+
   if (!is_open) {
-    //if object is not open then ret null
     return null;
   }
-
-  if ('oneOf' in value) {
-    return <StreamTypesObject definitions={jsonSchema.definitions} />;
+  if (value && 'oneOf' in value) {
+    return (
+      <React.Fragment>
+        <StreamTypesObject definitions={jsonSchema.definitions} />
+      </React.Fragment>
+    );
   }
-  // this will be true when we are not inside properties obj? !!!!!!
   if (!keys) {
     return (
       <React.Fragment>
@@ -36,7 +38,6 @@ const RecursiveProperties = ({ is_open, properties, value, jsonSchema }: TRecurs
             {index === 0 && value?.items?.description && (
               <SchemaDescription description={value.items.description} />
             )}
-            {/* check if its forgetAll Request not response */}
             {key === 'forget_all' && 'oneOf' in value[key] ? (
               <SchemaObjectContent
                 key={key}

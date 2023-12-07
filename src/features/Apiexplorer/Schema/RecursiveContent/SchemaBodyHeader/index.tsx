@@ -12,7 +12,7 @@ type TSchemaBodyHeader = {
   setIsOpenObject: (boolean) => void;
   examples: string[];
   enum;
-  is_stream_types?: boolean;
+  is_stream_types: boolean;
 };
 
 const SchemaBodyHeader = ({

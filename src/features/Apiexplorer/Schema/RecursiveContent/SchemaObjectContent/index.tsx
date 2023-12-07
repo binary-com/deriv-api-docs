@@ -14,7 +14,6 @@ type TSchemaObjectContent = {
   is_stream_types?: boolean;
 };
 
-//json schema also here full obj
 export default function SchemaObjectContent({
   key_value,
   properties,
