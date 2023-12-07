@@ -21,6 +21,11 @@ jobs:
         uses: ./.github/actions/build
         with:
           NODE_ENV: staging
+      - name: Versioning
+        uses: ./.github/actions/versioning
+        with:
+          RELEASE_TAG: ${{ github.sha }}
+          RELEASE_TYPE: staging
       - name: Publish to Cloudflare Pages Staging
         uses: ./.github/actions/publish_to_pages_staging
         with:
