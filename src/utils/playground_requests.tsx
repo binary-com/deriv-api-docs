@@ -215,13 +215,6 @@ export const playground_requests = [
     },
   },
   {
-    name: 'crypto_config',
-    title: 'Cryptocurrency configuration',
-    body: {
-      crypto_config: 1,
-    },
-  },
-  {
     name: 'document_upload',
     title: 'Document Upload',
     body: {
