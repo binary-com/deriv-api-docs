@@ -31,11 +31,6 @@ describe('HeroHeader', () => {
     expect(community_link).toBeInTheDocument();
     expect(community_link).toHaveAttribute('href', 'https://deriv.vanillacommunity.com/');
   });
-  it('should render telegram link properly', () => {
-    const telegram_link = screen.getByRole('link', { name: 'Telegram' });
-    expect(telegram_link).toBeInTheDocument();
-    expect(telegram_link).toHaveAttribute('href', 'https://t.me/+g6FV5tFY1u9lZGE1');
-  });
   it('should render footer body texts properly', () => {
     const help_text = screen.getByText(/^we're here to help$/i);
     expect(help_text).toBeInTheDocument();

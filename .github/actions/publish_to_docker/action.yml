@@ -1,0 +1,38 @@
+name: docker_build_push
+description: Build and push Docker image to Docker Hub
+inputs:
+  DOCKER_LATEST_IMAGE_TAG:
+    description: Docker image tag
+    required: false
+    default: 'latest-staging'
+  DOCKER_IMAGE_TAG:
+    description: Docker image tag
+    required: true
+  DOCKERHUB_ORGANISATION:
+    description: Docker Hub organisation
+    required: true
+  DOCKERHUB_USERNAME:
+    description: Docker Hub username
+    required: true
+  DOCKERHUB_PASSWORD:
+    description: Docker Hub password
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Building docker image 🐳
+      run: |
+        docker build -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }} -t ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} .
+      shell: bash
+    - name: Verify nginx image
+      run: |
+        set -e
+        docker run --rm ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }} nginx -t
+        echo "docker image validated successfully"
+      shell: bash
+    - name: Pushing Image to docker hub 🐳
+      run: |
+        echo ${{ inputs.DOCKERHUB_PASSWORD }} | docker login -u ${{ inputs.DOCKERHUB_USERNAME }} --password-stdin
+        docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_IMAGE_TAG }}
+        docker push ${{ inputs.DOCKERHUB_ORGANISATION }}/deriv-com-api:${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
+      shell: bash

@@ -21,17 +21,6 @@ const Footer = () => {
           >
             <span>Join our community</span>
           </a>
-          <a
-            href='https://t.me/+g6FV5tFY1u9lZGE1'
-            target='_blank'
-            rel='noreferrer'
-            className={styles.communityButton}
-          >
-            <div className={styles.Telegram}>
-              <img src='/img/telegram.svg' className={styles.TelegramIcon} />
-              <p>Telegram</p>
-            </div>
-          </a>
         </div>
       </section>
       <section className={styles.FooterBody}>

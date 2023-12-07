@@ -114,7 +114,6 @@ describe('useDynamicImportJSON', () => {
   it('should have correct text area inputs inside dynamic imports correctly', () => {
     act(() => {
       result.current.dynamicImportJSON(result.current.text_data.selected_value);
-      console.log(result.current.request_info);
     });
     expect(result.current.request_info).toEqual({
       $schema: 'http://json-schema.org/draft-04/schema#',
@@ -161,10 +160,15 @@ describe('useDynamicImportJSON', () => {
             ],
             type: 'string',
           },
+          loginid: {
+            description:
+              "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
+            pattern: '^[A-Za-z]+[0-9]+$',
+            type: 'string',
+          },
           passthrough: {
             description:
               '[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.',
-            maxSize: 3500,
             type: 'object',
           },
           product_type: {
@@ -219,10 +223,15 @@ describe('useDynamicImportJSON', () => {
           ],
           type: 'string',
         },
+        loginid: {
+          description:
+            "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
+          pattern: '^[A-Za-z]+[0-9]+$',
+          type: 'string',
+        },
         passthrough: {
           description:
             '[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.',
-          maxSize: 3500,
           type: 'object',
         },
         product_type: {
