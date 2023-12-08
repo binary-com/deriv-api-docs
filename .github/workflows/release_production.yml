@@ -24,6 +24,7 @@ jobs:
       - name: Versioning
         uses: ./.github/actions/versioning
         with:
+          RELEASE_TAG: ${{ github.ref_name }}
           RELEASE_TYPE: production
       - name: Extract version
         id: extract_version
