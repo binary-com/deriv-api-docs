@@ -121,9 +121,9 @@ const SchemaBodyHeader = ({
 
             {is_stream_types && (
               <div className={styles.schemaObjectContent}>
-                <span className={styles.enumLabel}>{'one of'}</span>
-                <button onClick={() => setIsOpenObject(!is_open_object)}>{'stream_types'}</button>
-                <span className={`${styles.enumType} ${styles.array}`}>{'array'}</span>
+                <span className={styles.enumLabel}>one of</span>
+                <button onClick={() => setIsOpenObject(!is_open_object)}>stream_types</button>
+                <span className={`${styles.enumType} ${styles.array}`}>array</span>
               </div>
             )}
 

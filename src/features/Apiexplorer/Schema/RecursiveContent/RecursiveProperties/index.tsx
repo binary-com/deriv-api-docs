@@ -44,7 +44,7 @@ const RecursiveProperties = ({ is_open, properties, value, jsonSchema }: TRecurs
                 key_value={key}
                 properties={properties}
                 jsonSchema={jsonSchema}
-                is_stream_types={true}
+                is_stream_types
               />
             ) : (
               <SchemaObjectContent key={key} key_value={key} properties={properties} />
