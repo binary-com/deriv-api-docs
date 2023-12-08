@@ -165,7 +165,6 @@ describe('Update App Dialog', () => {
 
     await expect(wsServer).toReceiveMessage({
       app_markup_percentage: 0,
-      app_register: 1,
       name: 'test app name updated',
       redirect_uri: 'https://example.com',
       req_id: 1,
