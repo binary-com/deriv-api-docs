@@ -34,7 +34,6 @@ describe('Use Delete App', () => {
     expect(result.current.is_loading).toBeTruthy();
 
     await expect(wsServer).toReceiveMessage({
-      app_register: 1,
       name: 'app',
       redirect_uri: 'https://example.com',
       req_id: 1,
