@@ -1,29 +1,28 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen, render } from '@testing-library/react';
+import { TEnumStreamType } from '@site/src/types';
 import StreamTypesObject from '..';
 
 describe('StreamTypesObject', () => {
+  const _enum: TEnumStreamType = [
+    'balance',
+    'candles',
+    'cashier_payments',
+    'p2p_advert',
+    'p2p_advertiser',
+    'p2p_order',
+    'proposal',
+    'proposal_open_contract',
+    'ticks',
+    'transaction',
+    'website_status',
+  ];
   const json_schema = {
     stream_types: {
       description: 'This stream_types description',
       type: 'string',
-      enum: [
-        'balance',
-        'candles',
-        'cashier_payments',
-        'p2p_advert',
-        'p2p_advertiser',
-        'p2p_order',
-        'proposal',
-        'proposal_open_contract',
-        'ticks',
-        'transaction',
-        'trading_platform_asset_listing',
-        'website_status',
-        'p2p_settings',
-        'crypto_estimations',
-      ],
+      enum: _enum,
     },
   };
 

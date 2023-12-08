@@ -120,13 +120,11 @@ const SchemaBodyHeader = ({
             )}
 
             {is_stream_types && (
-              <React.Fragment>
-                <div className={styles.schemaObjectContent}>
-                  <span className={styles.enumLabel}>{'one of'}</span>
-                  <button onClick={() => setIsOpenObject(!is_open_object)}>{'stream_types'}</button>
-                  <span className={`${styles.enumType} ${styles.array}`}>{'array'}</span>
-                </div>
-              </React.Fragment>
+              <div className={styles.schemaObjectContent}>
+                <span className={styles.enumLabel}>{'one of'}</span>
+                <button onClick={() => setIsOpenObject(!is_open_object)}>{'stream_types'}</button>
+                <span className={`${styles.enumType} ${styles.array}`}>{'array'}</span>
+              </div>
             )}
 
             {pattern && (

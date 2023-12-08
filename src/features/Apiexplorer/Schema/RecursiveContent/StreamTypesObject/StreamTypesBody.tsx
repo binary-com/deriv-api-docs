@@ -1,24 +1,10 @@
 import React from 'react';
+import { TEnumStreamType } from '@site/src/types';
 import styles from '../../Schema.module.scss';
 
 type TStreamTypesBody = {
   type: string;
-  _enum: Array<
-    | 'balance'
-    | 'candles'
-    | 'cashier_payments'
-    | 'p2p_advert'
-    | 'p2p_advertiser'
-    | 'p2p_order'
-    | 'proposal'
-    | 'proposal_open_contract'
-    | 'ticks'
-    | 'transaction'
-    | 'trading_platform_asset_listing'
-    | 'website_status'
-    | 'p2p_settings'
-    | 'crypto_estimations'
-  >;
+  _enum: TEnumStreamType;
 };
 
 const StreamTypesBody = ({ type, _enum }: TStreamTypesBody) => {

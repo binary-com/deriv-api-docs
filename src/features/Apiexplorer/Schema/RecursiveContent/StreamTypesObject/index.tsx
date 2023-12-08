@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import StreamTypesHeader from './StreamTypesHeader';
 import StreamTypesBody from './StreamTypesBody';
 import SourceButton from '../../SourceButton/SourceButton';
+import { TEnumStreamType } from '@site/src/types';
 import styles from '../../Schema.module.scss';
 
 type TStreamTypesObject = {
@@ -9,7 +10,7 @@ type TStreamTypesObject = {
     stream_types: {
       description: string;
       type: string;
-      enum;
+      enum: TEnumStreamType;
     };
   };
 };
