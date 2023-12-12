@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-import styles from './HighlightCode.module.scss';
+import { useHistory, useLocation } from '@docusaurus/router';
 import { playground_requests } from '@site/src/utils/playground_requests';
 import { SchemaDescriptionTypes } from '../RecursiveContent/SchemaDescription';
-import { useHistory, useLocation } from '@docusaurus/router';
+import styles from './HighlightCode.module.scss';
 
 export const HighlightCode = ({ description }: SchemaDescriptionTypes) => {
   const { pathname } = useLocation();
@@ -13,10 +13,10 @@ export const HighlightCode = ({ description }: SchemaDescriptionTypes) => {
 
   const [first, code, ...rest] = description.split('`');
 
-  const api_call_object = playground_requests.find((el) => el.name === code);
-  const link_api_call = (obj) => {
+  const has_api_call = playground_requests.some((el) => el.name === code);
+  const link_api_call = (api_call_name) => {
     window.scrollTo(0, 0);
-    history.push(`${pathname}#${obj?.name}`);
+    history.push(`${pathname}#${api_call_name}`);
   };
 
   return (
@@ -24,8 +24,8 @@ export const HighlightCode = ({ description }: SchemaDescriptionTypes) => {
       {first}
       {code && (
         <span className={clsx(styles.schemaRole, styles.schemaCode)}>
-          {api_call_object ? (
-            <button onClick={() => link_api_call(api_call_object)} className={styles.schemaLink}>
+          {has_api_call ? (
+            <button onClick={() => link_api_call(code)} className={styles.schemaLink}>
               {code}
             </button>
           ) : (
