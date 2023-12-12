@@ -19,6 +19,16 @@ const fakeItem = {
   },
 };
 
+jest.mock('@docusaurus/router', () => ({
+  useLocation: () => ({
+    pathname: '',
+    hash: '',
+  }),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('RecursiveProperties', () => {
   it('should be able to render recursive items', async () => {
     render(

@@ -2,6 +2,16 @@ import React from 'react';
 import { HighlightCode } from '..';
 import { render, screen } from '@testing-library/react';
 
+jest.mock('@docusaurus/router', () => ({
+  useLocation: () => ({
+    pathname: '',
+    hash: '',
+  }),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 describe('HighlightCode', () => {
   it('should render HighlightCode properly', async () => {
     render(<HighlightCode description={'This is a `highlight` test'} />);
