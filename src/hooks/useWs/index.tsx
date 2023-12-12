@@ -23,7 +23,7 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
       let payload = data;
 
       if (name) {
-        if (payload === undefined || name == 'api_token') {
+        if (payload === undefined || name == 'api_token' || name == 'app_register') {
           payload = { [name]: 1, ...payload };
         }
       } else {
