@@ -165,6 +165,7 @@ describe('Update App Dialog', () => {
 
     await expect(wsServer).toReceiveMessage({
       app_markup_percentage: 0,
+      app_register: 1,
       name: 'test app name updated',
       redirect_uri: 'https://example.com',
       req_id: 1,
@@ -238,6 +239,7 @@ describe('Update App Dialog', () => {
 
     await expect(wsServer).toReceiveMessage({
       app_markup_percentage: 0,
+      app_register: 1,
       name: 'test app wrong name fake',
       redirect_uri: 'https://example.com',
       req_id: 1,
@@ -249,6 +251,7 @@ describe('Update App Dialog', () => {
       echo_req: {
         app_markup_percentage: 0,
         name: 'test app wrong name fake',
+        app_register: 1,
         redirect_uri: 'https://example.com',
         req_id: 1,
         scopes: [],
