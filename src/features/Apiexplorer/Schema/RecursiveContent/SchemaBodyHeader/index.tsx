@@ -12,6 +12,7 @@ type TSchemaBodyHeader = {
   setIsOpenObject: (boolean) => void;
   examples: string[];
   enum;
+  is_stream_types: boolean;
 };
 
 const SchemaBodyHeader = ({
@@ -24,6 +25,7 @@ const SchemaBodyHeader = ({
   title,
   is_open_object,
   setIsOpenObject,
+  is_stream_types,
 }: TSchemaBodyHeader) => {
   let typeClassName;
   switch (type) {
@@ -116,6 +118,15 @@ const SchemaBodyHeader = ({
             ) : (
               <></>
             )}
+
+            {is_stream_types && (
+              <div className={styles.schemaObjectContent}>
+                <span className={styles.enumLabel}>one of</span>
+                <button onClick={() => setIsOpenObject(!is_open_object)}>stream_types</button>
+                <span className={`${styles.enumType} ${styles.array}`}>array</span>
+              </div>
+            )}
+
             {pattern && (
               <div className={styles.schemaRegexContainer}>
                 <div className={styles.schemaBodyPattern}>{pattern}</div>

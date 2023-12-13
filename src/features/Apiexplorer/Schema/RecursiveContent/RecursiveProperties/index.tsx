@@ -1,17 +1,27 @@
 import React from 'react';
 import SchemaDescription from '../SchemaDescription';
 import SchemaObjectContent from '../SchemaObjectContent';
+import StreamTypesObject from '../StreamTypesObject';
 
 type TRecursiveProperties = {
   is_open: boolean;
   properties: any;
   value: any;
+  jsonSchema: any;
 };
 
-const RecursiveProperties = ({ is_open, properties, value }: TRecursiveProperties) => {
+const RecursiveProperties = ({ is_open, properties, value, jsonSchema }: TRecursiveProperties) => {
   const keys = properties && Object.keys(properties);
+
   if (!is_open) {
     return null;
+  }
+  if (value && 'oneOf' in value) {
+    return (
+      <React.Fragment>
+        <StreamTypesObject definitions={jsonSchema.definitions} />
+      </React.Fragment>
+    );
   }
   if (!keys) {
     return (
@@ -28,7 +38,17 @@ const RecursiveProperties = ({ is_open, properties, value }: TRecursivePropertie
             {index === 0 && value?.items?.description && (
               <SchemaDescription description={value.items.description} />
             )}
-            <SchemaObjectContent key={key} key_value={key} properties={properties} />
+            {key === 'forget_all' && 'oneOf' in value[key] ? (
+              <SchemaObjectContent
+                key={key}
+                key_value={key}
+                properties={properties}
+                jsonSchema={jsonSchema}
+                is_stream_types
+              />
+            ) : (
+              <SchemaObjectContent key={key} key_value={key} properties={properties} />
+            )}
           </React.Fragment>
         );
       })}
