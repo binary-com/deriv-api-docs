@@ -86,18 +86,6 @@ describe('RequestResponseRenderer', () => {
     expect(placeholder).toHaveLength(1);
   });
 
-  it('should disable text box if no api call is selected in the dropdown', () => {
-    const newProps = {
-      handleChange: jest.fn(),
-      request_example: '',
-      name: null as TSocketEndpointNames,
-      auth: 0,
-    };
-    render(<RequestJSONBox {...newProps} />);
-    const textarea = screen.getByLabelText('Request JSON');
-    expect(textarea).toBeDisabled();
-  });
-
   it('should disable text box if no api call is selected in the dropdown', async () => {
     const newProps = {
       handleChange: jest.fn(),
