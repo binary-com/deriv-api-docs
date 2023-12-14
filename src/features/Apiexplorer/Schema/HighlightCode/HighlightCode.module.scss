@@ -18,6 +18,9 @@
 }
 
 .schemaLink {
-  cursor: pointer;
   text-decoration: underline;
+  color: var(--ifm-link-white);
+  &:hover {
+    color: var(--ifm-link-white);
+  }
 }

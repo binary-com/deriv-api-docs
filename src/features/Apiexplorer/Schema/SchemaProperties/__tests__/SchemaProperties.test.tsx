@@ -3,16 +3,6 @@ import SchemaProperties from '..';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
-jest.mock('@docusaurus/router', () => ({
-  useLocation: () => ({
-    pathname: '',
-    hash: '',
-  }),
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-}));
-
 describe('SchemaProperties', () => {
   it('should throw an error when invalid JSON properties are passed', async () => {
     const consoleOutput = [];

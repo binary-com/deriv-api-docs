@@ -3,16 +3,6 @@ import SchemaObjectContent from '..';
 import userEvent from '@testing-library/user-event';
 import { screen, render } from '@testing-library/react';
 
-jest.mock('@docusaurus/router', () => ({
-  useLocation: () => ({
-    pathname: '',
-    hash: '',
-  }),
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-}));
-
 const fake_properties = {
   test_item: {
     description: 'test description',
