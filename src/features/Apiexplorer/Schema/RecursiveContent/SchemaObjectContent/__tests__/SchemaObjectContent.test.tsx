@@ -21,6 +21,37 @@ const fake_properties = {
   },
 };
 
+const stream_types_schema = {
+  properties: {
+    test_property: {
+      description: 'property description',
+      oneOf: 'this is oneOf key',
+    },
+  },
+  definitions: {
+    stream_types: {
+      description: 'This stream_types description',
+      type: 'string',
+      enum: [
+        'balance',
+        'candles',
+        'cashier_payments',
+        'p2p_advert',
+        'p2p_advertiser',
+        'p2p_order',
+        'proposal',
+        'proposal_open_contract',
+        'ticks',
+        'transaction',
+        'trading_platform_asset_listing',
+        'website_status',
+        'p2p_settings',
+        'crypto_estimations',
+      ],
+    },
+  },
+};
+
 describe('SchemaObjectContent', () => {
   it('should be able to open a nested object item', async () => {
     render(<SchemaObjectContent key_value='test_item' properties={fake_properties} />);
@@ -95,5 +126,25 @@ describe('SchemaObjectContent', () => {
 
     const schema = await screen.findByTitle('JSON');
     expect(schema).toBeVisible();
+  });
+
+  it('should open StreamTypesObject upon clicking stream_types button', async () => {
+    render(
+      <SchemaObjectContent
+        key='test_property'
+        key_value='test_property'
+        properties={stream_types_schema.properties}
+        jsonSchema={stream_types_schema}
+        is_stream_types={true}
+      />,
+    );
+
+    const button = await screen.findByRole('button', { name: /stream_types/i });
+    expect(button).toBeVisible();
+
+    await userEvent.click(button);
+
+    const streamTypesObject = await screen.getByTestId('dt_stream_types_object');
+    expect(streamTypesObject).toBeVisible();
   });
 });

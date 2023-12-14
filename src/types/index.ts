@@ -1,4 +1,4 @@
-import { ApiToken } from '@deriv/api-types';
+import { ApiToken, StreamTypes } from '@deriv/api-types';
 import { Column } from 'react-table';
 
 export type TTokensArrayType = ApiToken['tokens'];
@@ -15,3 +15,5 @@ export type TInfo = {
   auth_required?: number;
   auth_scopes?: string[];
 };
+
+export type TEnumStreamType = Array<StreamTypes>;

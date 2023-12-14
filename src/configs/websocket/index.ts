@@ -40,19 +40,15 @@ export class ApiManager {
   }
 
   public augmentedSend<T extends TSocketEndpointNames>(
-    name: T,
-    request?: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
+    request: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
   ): Promise<TSocketResponse<T>> {
-    return this.derivApi.send({ [name]: 1, ...request }) as Promise<TSocketResponse<T>>;
+    return this.derivApi.send(request) as Promise<TSocketResponse<T>>;
   }
 
   public augmentedSubscribe<T extends TSocketSubscribableEndpointNames>(
-    name: T,
     request?: TSocketRequestProps<T> extends never ? undefined : TSocketRequestProps<T>,
   ): Observable<TSocketResponse<T>> {
-    return this.derivApi.subscribe({ [name]: 1, subscribe: 1, ...request }) as Observable<
-      TSocketResponse<T>
-    >;
+    return this.derivApi.subscribe(request) as Observable<TSocketResponse<T>>;
   }
 
   public authorize(token: string) {

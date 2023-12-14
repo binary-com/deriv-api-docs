@@ -34,6 +34,7 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  gap: rem(0.8);
 
   p {
     color: var(--ifm-color-white);
@@ -91,6 +92,7 @@
   cursor: pointer;
   font-weight: 500;
   transition: opacity 0.2s ease-in-out;
+  z-index: 1;
 }
 
 .schemaBody {
@@ -300,4 +302,85 @@
 
 .reactJsonView {
   margin-bottom: rem(2.4);
+}
+
+.streamTypesContainer {
+  margin-top: rem(1);
+  margin-bottom: rem(2.4);
+
+  &:hover {
+    > .sourceButtonMain {
+      opacity: 1;
+      margin: rem(1);
+    }
+  }
+
+  .streamTypesHeader {
+    padding: rem(1);
+    border: none;
+    background: #151717;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+    .streamTypesTitle {
+      font-size: rem(1.6);
+      color: var(--ifm-color-white);
+      font-weight: bold;
+    }
+    .streamTypesDescription {
+      display: flex;
+      padding: rem(0.5) 0;
+      gap: rem(2);
+      justify-content: space-between;
+      color: var(--ifm-color-white);
+      font-size: rem(1.4);
+    }
+  }
+
+  .streamTypesBody {
+    background-color: rgba(219, 219, 219, 0.05);
+    display: flex;
+    padding: rem(1);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+
+    .streamTypesObject {
+      display: flex;
+      flex-wrap: wrap;
+      gap: rem(0.8);
+      align-items: center;
+
+      .enumLabel {
+        font-size: rem(1.4);
+        line-height: rem(1.4);
+        color: var(--ifm-color-emphasis-200);
+      }
+
+      .enumType {
+        font-size: rem(1.4);
+        &.string {
+          color: var(--schema-string);
+        }
+      }
+
+      .enumLabel,
+      .enumType {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .schemaEnums {
+        width: fit-content;
+        height: fit-content;
+        font-size: rem(1.4);
+        line-height: rem(1.4);
+        color: var(--ifm-color-success-light);
+        border: none;
+        padding: rem(0.6) rem(0.8);
+        border-radius: 4px;
+        background-color: rgba(0, 255, 104, 0.16);
+      }
+    }
+  }
 }

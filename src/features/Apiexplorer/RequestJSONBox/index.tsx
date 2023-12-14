@@ -22,15 +22,6 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
   const is_subscribe = useMemo(() => {
     return request_example?.includes('subscribe');
   }, [request_example]);
-  const [isdisabled, setIsDisabled] = useState(false);
-
-  useEffect(() => {
-    if (name === null) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
-  }, [name]);
 
   return (
     <div className={style.playgroundBox}>
@@ -44,7 +35,6 @@ function RequestJSONBox<T extends TSocketEndpointNames>({
           placeholder={'Request JSON'}
           onChange={handleChange}
           value={request_example}
-          disabled={isdisabled}
         ></textarea>
         {is_subscribe ? (
           <SubscribeRenderer
