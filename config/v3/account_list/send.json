@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "Get Financial Assessment (request)",
-    "description": "This call gets the financial assessment details. The 'financial assessment' is a questionnaire that clients of certain Landing Companies need to complete, due to regulatory and KYC (know your client) requirements.",
+    "title": "Account List (request)",
+    "description": "Returns all accounts belonging to the authorized user.",
     "type": "object",
     "auth_required": 1,
     "auth_scopes": [
@@ -9,20 +9,15 @@
     ],
     "additionalProperties": false,
     "required": [
-        "get_financial_assessment"
+        "account_list"
     ],
     "properties": {
-        "get_financial_assessment": {
+        "account_list": {
             "description": "Must be `1`",
             "type": "integer",
             "enum": [
                 1
             ]
-        },
-        "loginid": {
-            "description": "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
-            "type": "string",
-            "pattern": "^[A-Za-z]+[0-9]+$"
         },
         "passthrough": {
             "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",

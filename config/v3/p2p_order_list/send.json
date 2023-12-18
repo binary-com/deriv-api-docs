@@ -1,61 +1,77 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "P2P Order List (request)",
-  "description": "List active orders.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["payments"],
-  "additionalProperties": false,
-  "required": ["p2p_order_list"],
-  "properties": {
-    "p2p_order_list": {
-      "description": "Must be 1",
-      "type": "integer",
-      "enum": [1]
-    },
-    "active": {
-      "description": "[Optional] Should be 1 to list active, 0 to list inactive (historical).",
-      "type": "number",
-      "enum": [0, 1]
-    },
-    "advert_id": {
-      "description": "[Optional] If present, lists orders applying to a specific advert.",
-      "type": "string",
-      "pattern": "^[0-9]+$"
-    },
-    "date_from": {
-      "description": "[Optional] Filter the orders created after this date(included) format(epoch or YYYY-MM-DD)",
-      "type": "string",
-      "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])|[0-9]{10})$"
-    },
-    "date_to": {
-      "description": "[Optional] Filter the orders created before this date(included) format(epoch or YYYY-MM-DD)",
-      "type": "string",
-      "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])|[0-9]{10})$"
-    },
-    "limit": {
-      "description": "[Optional] Used for paging.",
-      "type": "integer",
-      "default": 50
-    },
-    "offset": {
-      "description": "[Optional] Used for paging.",
-      "type": "integer",
-      "default": 0,
-      "minimum": 0
-    },
-    "subscribe": {
-      "description": "[Optional] If set to 1, will send updates whenever there is a change to any order belonging to you.",
-      "type": "integer",
-      "enum": [1]
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "P2P Order List (request)",
+    "description": "List active orders.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "payments"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "p2p_order_list"
+    ],
+    "properties": {
+        "p2p_order_list": {
+            "description": "Must be 1",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "active": {
+            "description": "[Optional] Should be 1 to list active, 0 to list inactive (historical).",
+            "type": "number",
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "advert_id": {
+            "description": "[Optional] If present, lists orders applying to a specific advert.",
+            "type": "string",
+            "pattern": "^[0-9]+$"
+        },
+        "date_from": {
+            "description": "[Optional] Filter the orders created after this date(included) format(epoch or YYYY-MM-DD)",
+            "type": "string",
+            "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])|[0-9]{10})$"
+        },
+        "date_to": {
+            "description": "[Optional] Filter the orders created before this date(included) format(epoch or YYYY-MM-DD)",
+            "type": "string",
+            "pattern": "^([0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])|[0-9]{10})$"
+        },
+        "limit": {
+            "description": "[Optional] Used for paging.",
+            "type": "integer",
+            "default": 50
+        },
+        "offset": {
+            "description": "[Optional] Used for paging.",
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+        },
+        "subscribe": {
+            "description": "[Optional] If set to 1, will send updates whenever there is a change to any order belonging to you.",
+            "type": "integer",
+            "enum": [
+                1
+            ]
+        },
+        "loginid": {
+            "description": "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
+            "type": "string",
+            "pattern": "^[A-Za-z]+[0-9]+$"
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
+            "type": "object"
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }

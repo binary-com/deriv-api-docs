@@ -1,63 +1,86 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Cashier Information (request)",
-  "description": "Request the cashier info for the specified type.",
-  "type": "object",
-  "auth_required": 1,
-  "auth_scopes": ["payments"],
-  "additionalProperties": false,
-  "required": ["cashier"],
-  "properties": {
-    "cashier": {
-      "description": "Operation which needs to be requested from cashier",
-      "type": "string",
-      "default": "deposit",
-      "enum": ["deposit", "withdraw"]
-    },
-    "address": {
-      "description": "[Optional] Address for crypto withdrawal. Only applicable for `api` type.",
-      "type": "string"
-    },
-    "amount": {
-      "description": "[Optional] Amount for crypto withdrawal. Only applicable for `api` type.",
-      "type": "number",
-      "minimum": 0
-    },
-    "dry_run": {
-      "description": "[Optional] If set to `1`, only validation is performed. Only applicable for `withdraw` using `crypto` provider and `api` type.",
-      "type": "integer",
-      "default": 0,
-      "enum": [0, 1]
-    },
-    "provider": {
-      "description": "[Optional] Cashier provider. `crypto` will be default option for crypto currency accounts.",
-      "type": "string",
-      "default": "doughflow",
-      "enum": ["doughflow", "crypto"]
-    },
-    "type": {
-      "description": "[Optional] Data need to be returned from cashier. `api` is supported only for `crypto` provider.",
-      "type": "string",
-      "default": "url",
-      "enum": ["url", "api"]
-    },
-    "verification_code": {
-      "description": "[Optional] Email verification code (received from a `verify_email` call, which must be done first)",
-      "type": "string",
-      "pattern": "^\\w{8,128}$"
-    },
-    "loginid": {
-      "description": "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
-      "type": "string",
-      "pattern": "^[A-Za-z]+[0-9]+$"
-    },
-    "passthrough": {
-      "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field. Maximum size is 3500 bytes.",
-      "type": "object"
-    },
-    "req_id": {
-      "description": "[Optional] Used to map request to response.",
-      "type": "integer"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Cashier Information (request)",
+    "description": "Request the cashier info for the specified type.",
+    "type": "object",
+    "auth_required": 1,
+    "auth_scopes": [
+        "payments"
+    ],
+    "additionalProperties": false,
+    "required": [
+        "cashier"
+    ],
+    "properties": {
+        "cashier": {
+            "description": "Operation which needs to be requested from cashier",
+            "type": "string",
+            "default": "deposit",
+            "enum": [
+                "deposit",
+                "withdraw"
+            ]
+        },
+        "address": {
+            "description": "[Optional] Address for crypto withdrawal. Only applicable for `api` type.",
+            "type": "string"
+        },
+        "amount": {
+            "description": "[Optional] Amount for crypto withdrawal. Only applicable for `api` type.",
+            "type": "number",
+            "minimum": 0
+        },
+        "dry_run": {
+            "description": "[Optional] If set to `1`, only validation is performed. Only applicable for `withdraw` using `crypto` provider and `api` type.",
+            "type": "integer",
+            "default": 0,
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "estimated_fee_unique_id": {
+            "description": "[Optional] The `unique_id` of the estimated fee received from `crypto_estimations` call in case the client is willing to pay the returned fee in order to prioritise their withdrawal request.",
+            "type": "string",
+            "examples": [
+                "ltc-c84a793b-8a87-7999-ce10-9b22f7ceead3"
+            ]
+        },
+        "provider": {
+            "description": "[Optional] Cashier provider. `crypto` will be default option for crypto currency accounts.",
+            "type": "string",
+            "default": "doughflow",
+            "enum": [
+                "doughflow",
+                "crypto"
+            ]
+        },
+        "type": {
+            "description": "[Optional] Data is returned from the cashier. The `crypto` provider only supports `api` (not `url`) for crypto accounts.",
+            "type": "string",
+            "default": "url",
+            "enum": [
+                "url",
+                "api"
+            ]
+        },
+        "verification_code": {
+            "description": "[Optional] Email verification code (received from a `verify_email` call, which must be done first)",
+            "type": "string",
+            "pattern": "^\\w{8,128}$"
+        },
+        "loginid": {
+            "description": "[Optional] The login id of the user. If left unspecified, it defaults to the initial authorized token's login id.",
+            "type": "string",
+            "pattern": "^[A-Za-z]+[0-9]+$"
+        },
+        "passthrough": {
+            "description": "[Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.",
+            "type": "object"
+        },
+        "req_id": {
+            "description": "[Optional] Used to map request to response.",
+            "type": "integer"
+        }
     }
-  }
 }
