@@ -1,4 +1,3 @@
-import { useHistory, useLocation } from '@docusaurus/router';
 import apiManager from '@site/src/configs/websocket';
 import {
   TSocketEndpointNames,
@@ -12,8 +11,7 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const [error, setError] = useState<unknown>();
   const [data, setData] = useState<TSocketResponseData<T>>();
   const [full_response, setFullResponse] = useState<TSocketResponse<T>>();
-  const history = useHistory();
-  const { hash, pathname } = useLocation();
+  const hash = window.location.hash;
 
   const clear = useCallback(() => {
     setError(null);
