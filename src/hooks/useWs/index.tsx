@@ -4,6 +4,7 @@ import {
   TSocketResponse,
   TSocketResponseData,
 } from '@site/src/configs/websocket/types';
+import { getIsBrowser } from '@site/src/utils';
 import { useCallback, useState } from 'react';
 
 const useWS = <T extends TSocketEndpointNames>(name?: T) => {
@@ -11,7 +12,12 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const [error, setError] = useState<unknown>();
   const [data, setData] = useState<TSocketResponseData<T>>();
   const [full_response, setFullResponse] = useState<TSocketResponse<T>>();
-  const hash = location.hash;
+  let hash;
+
+  const isBrowser = getIsBrowser();
+  if (isBrowser) {
+    hash = window.location.hash;
+  }
 
   const clear = useCallback(() => {
     setError(null);
