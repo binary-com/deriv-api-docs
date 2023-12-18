@@ -11,7 +11,7 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const [error, setError] = useState<unknown>();
   const [data, setData] = useState<TSocketResponseData<T>>();
   const [full_response, setFullResponse] = useState<TSocketResponse<T>>();
-  const hash = window.location.hash;
+  const hash = location.hash;
 
   const clear = useCallback(() => {
     setError(null);
