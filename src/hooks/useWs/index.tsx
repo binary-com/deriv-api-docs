@@ -1,3 +1,4 @@
+import { useHistory, useLocation } from '@docusaurus/router';
 import apiManager from '@site/src/configs/websocket';
 import {
   TSocketEndpointNames,
@@ -11,6 +12,8 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const [error, setError] = useState<unknown>();
   const [data, setData] = useState<TSocketResponseData<T>>();
   const [full_response, setFullResponse] = useState<TSocketResponse<T>>();
+  const history = useHistory();
+  const { hash, pathname } = useLocation();
 
   const clear = useCallback(() => {
     setError(null);
@@ -21,10 +24,15 @@ const useWS = <T extends TSocketEndpointNames>(name?: T) => {
   const send = useCallback(
     async (data?: Parameters<typeof apiManager.augmentedSend<T>>[0]) => {
       let payload = data;
+      console.log(hash);
 
       if (name) {
         if (payload === undefined || name == 'api_token' || name == 'app_register') {
-          payload = { [name]: 1, ...payload };
+          if (hash === '#api_token') {
+            payload = { ...payload };
+          } else {
+            payload = { [name]: 1, ...payload };
+          }
         }
       } else {
         payload = { ...payload };
