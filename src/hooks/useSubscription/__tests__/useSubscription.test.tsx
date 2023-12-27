@@ -206,7 +206,22 @@ describe('Use WS', () => {
       },
     });
 
-    expect(result.current.error).toEqual({ message: 'this is an error' });
+    expect(result.current.error).toEqual({
+      echo_req: {
+        base_currency: 'USD',
+        exchange_rates: 1,
+        req_id: 1,
+        subscribe: 1,
+      },
+      error: {
+        message: 'this is an error',
+      },
+      msg_type: 'exchange_rates',
+      req_id: 1,
+      subscription: {
+        id: '2f39f7e7-d986-33f2-080a-b0ee50cfb85c',
+      },
+    });
     expect(result.current.is_loading).toBeFalsy();
   });
 });
