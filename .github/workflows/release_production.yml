@@ -46,7 +46,7 @@ jobs:
   send_slack_notification:
     name: Send Slack Notification
     environment: Production
-    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    runs-on: ubuntu-latest
     if: always()
     needs: [build_and_publish]
     steps:
