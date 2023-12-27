@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - production_v*
+env:
+  RELEASE_TYPE: Production
 jobs:
   build_and_publish:
     name: Builds and Publishes to Cloudflare Pages Production
@@ -25,7 +27,7 @@ jobs:
         uses: ./.github/actions/versioning
         with:
           RELEASE_TAG: ${{ github.ref_name }}
-          RELEASE_TYPE: production
+          RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
       - name: Extract version
         id: extract_version
         run: echo "RELEASE_VERSION=$(cat build/version)" >> $GITHUB_OUTPUT
@@ -34,7 +36,52 @@ jobs:
         with:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: .
+          retention-days: 1
+
+  send_slack_notification:
+    name: Send Slack Notification
+    environment: Production
+    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
+    if: always()
+    needs: [build_and_publish]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Conclusion
+        uses: technote-space/workflow-conclusion-action@v3
+      - name: Create Slack Message
+        id: create_slack_message
+        run: |
+          if [ "${{ env.WORKFLOW_CONCLUSION }}" == "success" ]; then
+            echo "MESSAGE=${{ env.RELEASE_TYPE }} Release succeeded for api.deriv.com with version *${{ needs.build_and_publish.outputs.RELEASE_VERSION }}*" >> $GITHUB_ENV
+          elif ["${{ env.WORKFLOW_CONCLUSION }}" == "failure"]; then
+            echo "MESSAGE=${{ env.RELEASE_TYPE }} Release failed for api.deriv.com with version *${{ needs.build_and_publish.outputs.RELEASE_VERSION }}*" >> $GITHUB_ENV
+          else
+            echo "MESSAGE=Unkown outcome" >> $GITHUB_ENV
+          fi
+      - name: Send Slack Notification
+        uses: ./.github/actions/notify_slack
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MESSAGE: ${{ steps.create_slack_message.outputs.MESSAGE }}
+
+  build_and_publish_to_docker_k8s:
+    name: Builds and Publishes image to Docker and Kubernetes
+    runs-on: ubuntu-latest
+    environment: Production
+    needs: [build_and_publish]
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
       - name: Publish to Docker
+        id: publish_to_docker
         uses: ./.github/actions/publish_to_docker
         with:
           DOCKER_LATEST_IMAGE_TAG: 'latest'
@@ -43,6 +90,7 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Deploy to Kubernetes
+        id: deploy_to_kubernetes
         uses: ./.github/actions/deploy_to_kubernetes
         with:
           K8S_VERSION: ${{ github.ref_name }}
@@ -51,23 +99,9 @@ jobs:
           SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
           KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
           DOCKERHUB_ORGANISATION: ${{ secrets.DOCKERHUB_ORGANISATION }}
-
-  send_slack_notification:
-    name: Send Slack Notification
-    environment: Production
-    runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
-    if: always()
-    needs:
-      - build_and_publish
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Conclusion
-        uses: technote-space/workflow-conclusion-action@v3
       - name: Send Slack Notification
+        if: ${{ steps.publish_to_docker.outcome != 'success' || steps.deploy_to_kubernetes.outcome != 'success' }}
         uses: ./.github/actions/notify_slack
         with:
-          RELEASE_TYPE: Production
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          STATUS: ${{ env.WORKFLOW_CONCLUSION }}
-          version: ${{ needs.build_and_publish.outputs.RELEASE_VERSION}}
+          RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
+          MESSAGE: "'${{ env.RELEASE_TYPE }}' Docker Publish and Kubernetes Deployment for api.deriv.com with version *'${{ needs.build_and_publish.outputs.RELEASE_VERSION }}'* has Failed *"
