@@ -3,15 +3,11 @@ on:
   push:
     branches:
       - master
-env:
-  RELEASE_TYPE: Staging
 jobs:
   build_and_publish:
     name: Builds and Publishes to Cloudflare Pages Staging
     runs-on: ubuntu-latest # TODO: Replace this with the appropriate runner for Deriv-Api-Docs when provided
     environment: Staging
-    outputs:
-      RELEASE_VERSION: ${{ steps.extract_version.outputs.RELEASE_VERSION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,30 +25,13 @@ jobs:
         uses: ./.github/actions/versioning
         with:
           RELEASE_TAG: ${{ github.sha }}
-          RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
-      - name: Extract version
-        id: extract_version
-        run: echo "RELEASE_VERSION=${version}" >> $GITHUB_OUTPUT
+          RELEASE_TYPE: staging
       - name: Publish to Cloudflare Pages Staging
         uses: ./.github/actions/publish_to_pages_staging
         with:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: .
-          retention-days: 1
-
-  build_and_publish_to_docker_k8s: 
-    name: Builds and Publishes image to Docker and Kubernetes
-    runs-on: ubuntu-latest
-    environment: Staging
-    needs: [build_and_publish]
-    steps:
       - name: Publish to Docker
-        id: publish_to_docker
         uses: ./.github/actions/publish_to_docker
         with:
           DOCKER_LATEST_IMAGE_TAG: 'latest-staging'
@@ -61,7 +40,6 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Deploy to Kubernetes
-        id: deploy_to_kubernetes
         uses: ./.github/actions/deploy_to_kubernetes
         with:
           K8S_VERSION: ${{ github.ref_name }}
@@ -70,9 +48,3 @@ jobs:
           SERVICEACCOUNT_TOKEN: ${{ secrets.SERVICEACCOUNT_TOKEN }}
           KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
           DOCKERHUB_ORGANISATION: ${{ secrets.DOCKERHUB_ORGANISATION }}
-      - name: Send Slack Notification
-        if: ${{ steps.publish_to_docker.outcome != 'success' || steps.deploy_to_kubernetes.outcome != 'success' }}
-        uses: ./.github/actions/notify_slack
-        with:
-          RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
-          MESSAGE: "'${{ env.RELEASE_TYPE }}' Docker Publish and Kubernetes Deployment for api.deriv.com with version *'${{ needs.build_and_publish.outputs.RELEASE_VERSION }}'* has Failed *"
