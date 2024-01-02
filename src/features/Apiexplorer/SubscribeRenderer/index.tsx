@@ -32,7 +32,12 @@ function SubscribeRenderer<T extends TSocketSubscribableEndpointNames>({
   const [is_not_valid, setIsNotValid] = useState(false);
 
   useEffect(() => {
-    if (error && error.code === 'AuthorizationRequired') {
+    if (
+      error &&
+      typeof error === 'object' &&
+      'code' in error &&
+      error.code === 'AuthorizationRequired'
+    ) {
       setToggleModal(true);
     }
   }, [error]);
