@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: .
+          path: build
           retention-days: 1
 
   send_slack_notification:
@@ -76,10 +76,13 @@ jobs:
     environment: Production
     needs: [build_and_publish]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: build
       - name: Publish to Docker
         id: publish_to_docker
         uses: ./.github/actions/publish_to_docker
