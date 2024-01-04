@@ -168,6 +168,7 @@
         width: fit-content;
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         .schemaBodyPattern {
           width: 100%;
@@ -261,6 +262,9 @@
       }
       &.number {
         color: var(--schema-number);
+      }
+      &.null {
+        color: var(--schema-null);
       }
     }
 

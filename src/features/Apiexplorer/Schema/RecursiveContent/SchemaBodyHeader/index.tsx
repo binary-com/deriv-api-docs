@@ -13,6 +13,7 @@ type TSchemaBodyHeader = {
   examples: string[];
   enum;
   is_stream_types: boolean;
+  items_type: string;
 };
 
 const SchemaBodyHeader = ({
@@ -26,6 +27,7 @@ const SchemaBodyHeader = ({
   is_open_object,
   setIsOpenObject,
   is_stream_types,
+  items_type,
 }: TSchemaBodyHeader) => {
   let typeClassName;
   switch (type) {
@@ -110,7 +112,7 @@ const SchemaBodyHeader = ({
                 <div className={styles.schemaObjectContent}>
                   <div>
                     <button onClick={() => setIsOpenObject(!is_open_object)}>
-                      {title ? key_value : 'object'}
+                      {title ? key_value : items_type ? items_type : 'object'}
                     </button>
                   </div>
                 </div>

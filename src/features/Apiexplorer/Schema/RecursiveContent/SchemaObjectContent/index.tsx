@@ -30,6 +30,7 @@ export default function SchemaObjectContent({
     examples,
     enum: _enum,
     title,
+    items,
   } = properties[key_value];
   const value = properties[key_value];
   let data;
@@ -60,6 +61,7 @@ export default function SchemaObjectContent({
           is_open_object={is_open_object}
           setIsOpenObject={setIsOpenObject}
           is_stream_types={is_stream_types}
+          items_type={items?.type}
         />
         {/* Description */}
         <SchemaDescription description={description} />
@@ -74,7 +76,7 @@ export default function SchemaObjectContent({
         {!is_code_open && (
           <RecursiveProperties
             is_open={is_open_object}
-            properties={value.properties || value?.items?.properties}
+            properties={value.properties || value?.items?.properties || value.patternProperties}
             value={value}
             jsonSchema={jsonSchema}
           />
