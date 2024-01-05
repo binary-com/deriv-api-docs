@@ -76,7 +76,7 @@ export default function SchemaObjectContent({
         {!is_code_open && (
           <RecursiveProperties
             is_open={is_open_object}
-            properties={value.properties || value?.items?.properties || value.patternProperties}
+            properties={value.properties || value?.items?.properties || value?.patternProperties}
             value={value}
             jsonSchema={jsonSchema}
           />
