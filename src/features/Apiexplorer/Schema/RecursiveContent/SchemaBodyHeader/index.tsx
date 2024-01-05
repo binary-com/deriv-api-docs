@@ -13,7 +13,7 @@ type TSchemaBodyHeader = {
   examples: string[];
   enum;
   is_stream_types: boolean;
-  items_type: string;
+  items_type?: string;
 };
 
 const SchemaBodyHeader = ({

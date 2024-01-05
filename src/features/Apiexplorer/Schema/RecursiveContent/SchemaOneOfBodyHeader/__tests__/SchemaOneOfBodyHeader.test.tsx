@@ -6,7 +6,7 @@ describe('SchemaOneOfBodyHeader', () => {
   it('should render SchemaOneOfBodyHeader with button having object type as display name', () => {
     render(
       <SchemaOneOfBodyHeader
-        key_title={'cashier'}
+        key_title='cashier'
         oneOf={[
           {
             description: 'description 1',
@@ -43,7 +43,7 @@ describe('SchemaOneOfBodyHeader', () => {
   it('should render SchemaOneOfBodyHeader with button having object type as display name', () => {
     render(
       <SchemaOneOfBodyHeader
-        key_title={'cashier'}
+        key_title='cashier'
         oneOf={[
           {
             description: 'description 1',
@@ -73,7 +73,7 @@ describe('SchemaOneOfBodyHeader', () => {
   it('should render SchemaOneOfBodyHeader with pattern', () => {
     render(
       <SchemaOneOfBodyHeader
-        key_title={'cashier'}
+        key_title='cashier'
         oneOf={[
           {
             type: 'integer',

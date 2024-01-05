@@ -17,7 +17,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText('number');
@@ -37,7 +36,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText('array');
@@ -57,7 +55,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText('integer');
@@ -77,7 +74,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText('string');
@@ -97,7 +93,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText(/number/i);
@@ -117,7 +112,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText(/string/i);
@@ -137,7 +131,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText(/array/i);
@@ -157,7 +150,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={undefined}
       />,
     );
     const type = await screen.findByText(/integer/i);
@@ -177,7 +169,6 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={true}
-        items_type={undefined}
       />,
     );
     const oneOfType = await screen.findByText(/one of/i);
@@ -192,7 +183,7 @@ describe('SchemaBodyHeader', () => {
     render(
       <SchemaBodyHeader
         key_value='test_key_value'
-        type={'array'}
+        type='array'
         defaultValue='default_test'
         pattern='some_test_pattern'
         examples={['example1', 'example2']}
@@ -201,7 +192,7 @@ describe('SchemaBodyHeader', () => {
         is_open_object
         setIsOpenObject={() => jest.fn()}
         is_stream_types={false}
-        items_type={'string'}
+        items_type='string'
       />,
     );
     const type = await screen.findByText(/string/i);
