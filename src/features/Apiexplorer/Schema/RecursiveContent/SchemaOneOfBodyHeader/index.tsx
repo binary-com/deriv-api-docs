@@ -4,11 +4,10 @@ import styles from '../../Schema.module.scss';
 type TSchemaOneOfBodyHeader = {
   key_title: string;
   oneOf: Record<string, any>[];
-  updateIndexArray;
+  updateIndexArray: (index: number) => void;
 };
 
 const SchemaOneOfBodyHeader = ({ key_title, oneOf, updateIndexArray }: TSchemaOneOfBodyHeader) => {
-  let previous_pattern = '';
   const generateClassName = (type) => {
     let typeClass;
     switch (type) {
@@ -44,12 +43,6 @@ const SchemaOneOfBodyHeader = ({ key_title, oneOf, updateIndexArray }: TSchemaOn
               oneOf.map((object, index) => {
                 const show_btn = object?.description || object?.properties;
                 const typeClassName = generateClassName(object?.type);
-                if (
-                  index !== 0 &&
-                  (object?.pattern || object?.item?.pattern) !== previous_pattern
-                ) {
-                  previous_pattern = object.pattern;
-                }
 
                 return (
                   <React.Fragment key={index}>
@@ -67,9 +60,7 @@ const SchemaOneOfBodyHeader = ({ key_title, oneOf, updateIndexArray }: TSchemaOn
                       )}
                       {'pattern' in object && (
                         <div className={styles.schemaRegexContainer}>
-                          {previous_pattern !== object.pattern && (
-                            <span className={styles.schemaBodyPattern}>{object.pattern}</span>
-                          )}
+                          <span className={styles.schemaBodyPattern}>{object.pattern}</span>
                         </div>
                       )}
                     </div>

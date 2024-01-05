@@ -2,9 +2,8 @@ import React, { Suspense, useState } from 'react';
 import RecursiveProperties from '../RecursiveProperties';
 import SchemaDescription from '../SchemaDescription';
 import SourceButton from '../../SourceButton/SourceButton';
-import styles from '../../Schema.module.scss';
-import clsx from 'clsx';
 import SchemaOneOfBodyHeader from '../SchemaOneOfBodyHeader';
+import styles from '../../Schema.module.scss';
 
 const ReactJson = React.lazy(() => import('react-json-view'));
 
@@ -46,7 +45,7 @@ export default function SchemaOneOfObjectContent({
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className={styles.schemaBodySignature}>
+      <div className={styles.schemaBodySignature} data-testid='dt_schema_oneof_object_content'>
         <SourceButton is_code_open={is_code_open} setIsCodeOpen={setIsCodeOpen} />
 
         {/* Header */}
@@ -65,20 +64,21 @@ export default function SchemaOneOfObjectContent({
         )}
 
         {!is_code_open && (
-          <>
+          <div className={styles.openOneOfObject}>
             {index_arr.map(
               (val, index) =>
                 val === true && (
-                  <RecursiveProperties
-                    is_open
-                    properties={oneOf[index]['properties']}
-                    value={oneOf[index]}
-                    jsonSchema={jsonSchema}
-                    key={index}
-                  />
+                  <div key={index} className={styles.oneOfObject}>
+                    <RecursiveProperties
+                      is_open
+                      properties={oneOf[index]['properties']}
+                      value={oneOf[index]}
+                      jsonSchema={jsonSchema}
+                    />
+                  </div>
                 ),
             )}
-          </>
+          </div>
         )}
       </div>
     </Suspense>

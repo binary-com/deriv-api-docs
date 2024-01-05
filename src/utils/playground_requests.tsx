@@ -215,6 +215,21 @@ export const playground_requests = [
     },
   },
   {
+    name: 'crypto_config',
+    title: 'Cryptocurrency configurations',
+    body: {
+      crypto_config: 1,
+    },
+  },
+  {
+    name: 'crypto_estimations',
+    title: 'Cryptocurrency Estimations',
+    body: {
+      crypto_estimations: 1,
+      currency_code: 'BTC',
+    },
+  },
+  {
     name: 'document_upload',
     title: 'Document Upload',
     body: {
