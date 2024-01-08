@@ -112,7 +112,7 @@ const SchemaBodyHeader = ({
                 <div className={styles.schemaObjectContent}>
                   <div>
                     <button onClick={() => setIsOpenObject(!is_open_object)}>
-                      {title ? key_value : items_type ? items_type : 'object'}
+                      {title ? key_value : items_type ?? 'object'}
                     </button>
                   </div>
                 </div>
