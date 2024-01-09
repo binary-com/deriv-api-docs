@@ -2,6 +2,7 @@ import React from 'react';
 import SchemaDescription from '../SchemaDescription';
 import SchemaObjectContent from '../SchemaObjectContent';
 import StreamTypesObject from '../StreamTypesObject';
+import SchemaOneOfObjectContent from '../SchemaOneOfObjectContent';
 
 type TRecursiveProperties = {
   is_open: boolean;
@@ -38,13 +39,19 @@ const RecursiveProperties = ({ is_open, properties, value, jsonSchema }: TRecurs
             {index === 0 && value?.items?.description && (
               <SchemaDescription description={value.items.description} />
             )}
-            {key === 'forget_all' && 'oneOf' in value[key] ? (
+            {key === 'forget_all' && 'oneOf' in properties[key] ? (
               <SchemaObjectContent
                 key={key}
                 key_value={key}
                 properties={properties}
                 jsonSchema={jsonSchema}
                 is_stream_types
+              />
+            ) : typeof properties[key] === 'object' && 'oneOf' in properties[key] ? (
+              <SchemaOneOfObjectContent
+                property={properties[key]}
+                key_title={key}
+                jsonSchema={jsonSchema}
               />
             ) : (
               <SchemaObjectContent key={key} key_value={key} properties={properties} />

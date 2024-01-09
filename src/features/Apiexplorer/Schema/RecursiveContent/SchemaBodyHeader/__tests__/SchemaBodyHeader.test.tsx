@@ -178,4 +178,24 @@ describe('SchemaBodyHeader', () => {
     expect(stream_types).toBeVisible();
     expect(array_type).toBeVisible();
   });
+
+  it('should render the SchemaBodyHeader for array with items type', async () => {
+    render(
+      <SchemaBodyHeader
+        key_value='test_key_value'
+        type='array'
+        defaultValue='default_test'
+        pattern='some_test_pattern'
+        examples={['example1', 'example2']}
+        enum={['test1', 'test2']}
+        title={undefined}
+        is_open_object
+        setIsOpenObject={() => jest.fn()}
+        is_stream_types={false}
+        items_type='string'
+      />,
+    );
+    const type = await screen.findByText(/string/i);
+    expect(type).toBeVisible();
+  });
 });

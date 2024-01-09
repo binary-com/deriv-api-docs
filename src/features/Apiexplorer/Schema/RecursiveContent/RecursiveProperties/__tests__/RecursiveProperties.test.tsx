@@ -20,6 +20,36 @@ const fakeItem = {
       description: 'This is recursive item 2',
       oneOf: 'This is oneOf key for recursive_item_2',
     },
+    recursive_item_3: {
+      description: 'This is recursive item 3',
+      oneOf: [
+        {
+          description: 'This is object 1',
+          type: 'string',
+        },
+        {
+          description: 'This is object 2',
+          type: 'object',
+          properties: {
+            property_1: {
+              description: 'item 1',
+              type: 'string',
+              enum: ['deposit', 'withdraw'],
+            },
+            property_2: {
+              description: 'item 2',
+              type: 'object',
+              properties: {
+                property_2_1: {
+                  description: 'item 3',
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
   },
   definitions: {
     stream_types: {
@@ -59,16 +89,19 @@ describe('RecursiveProperties', () => {
     expect(recursion_1_description).toBeVisible();
 
     const recursion_2_name = await screen.findByText(/recursive_item_1/i);
-    expect(recursion_2_name).toBeVisible();
-
     const recursion_2_description = await screen.findByText(/This is a recursive item/i);
+    expect(recursion_2_name).toBeVisible();
     expect(recursion_2_description).toBeVisible();
 
     const recursion_3_name = await screen.findByText(/recursive_item_2/i);
-    expect(recursion_3_name).toBeVisible();
-
     const recursion_3_description = await screen.findByText(/This is recursive item 2/i);
+    expect(recursion_3_name).toBeVisible();
     expect(recursion_3_description).toBeVisible();
+
+    const recursion_4_name = await screen.findByText(/recursive_item_3/i);
+    const recursion_4_description = await screen.findByText(/This is recursive item 3/i);
+    expect(recursion_4_name).toBeVisible();
+    expect(recursion_4_description).toBeVisible();
   });
 
   it('renders only the description (last item) if there are no nested items anymore', async () => {
@@ -79,7 +112,7 @@ describe('RecursiveProperties', () => {
     expect(item).toBeVisible();
   });
 
-  it('renders StreamTypesObject if value contains oneOf meaning its forgetAll api call', async () => {
+  it('renders StreamTypesObject for forgetAll api call', async () => {
     render(
       <RecursiveProperties
         is_open
@@ -90,5 +123,20 @@ describe('RecursiveProperties', () => {
     );
     const streamTypesObject = await screen.getByTestId('dt_stream_types_object');
     expect(streamTypesObject).toBeVisible();
+  });
+
+  it('renders SchemaOneOfObjectContent if the value of key inside property schema contains oneOf', async () => {
+    render(
+      <RecursiveProperties
+        is_open
+        properties={fakeItem.properties}
+        value={fakeItem.properties}
+        jsonSchema={fakeItem}
+      />,
+    );
+    const schemaOneOfObjectContent = await screen.getAllByTestId(
+      'dt_schema_oneof_object_content',
+    )[0];
+    expect(schemaOneOfObjectContent).toBeVisible();
   });
 });

@@ -34,11 +34,12 @@
   --schema-array: #ff8fc8;
   --schema-number: #acb2ff;
   --schema-integer: #f8c272;
+  --schema-null: #ff444f;
   --spinner-height: 100px;
   --spinner-width: 100px;
   --smoke: #414652;
-  --admin-text: #22BD41;
-  --admin-border: #33C9517A;
+  --admin-text: #22bd41;
+  --admin-border: #33c9517a;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -164,7 +165,7 @@ body {
   display: none !important;
 }
 
-.unofficial-host { 
+.unofficial-host {
   .hide-sidebar-item {
     display: none !important;
   }

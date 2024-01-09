@@ -120,6 +120,26 @@
 
     .schemaBodySignature {
       padding: 1rem 1.6rem;
+      background-color: rgba(219, 219, 219, 0.05) !important;
+      border-radius: 4px;
+      margin-bottom: rem(1);
+    }
+
+    .openOneOfObject {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .oneOfObject {
+      > .schemaBodyDescription {
+        text-indent: rem(1.6);
+        padding: rem(1);
+        background-color: rgba(219, 219, 219, 0.05) !important;
+        color: var(--ifm-color-emphasis-200);
+        border-radius: 4px;
+        width: 100%;
+      }
     }
 
     .schemaBodyHeader {
@@ -168,6 +188,7 @@
         width: fit-content;
         display: flex;
         flex-direction: row;
+        align-items: center;
 
         .schemaBodyPattern {
           width: 100%;
@@ -261,6 +282,9 @@
       }
       &.number {
         color: var(--schema-number);
+      }
+      &.null {
+        color: var(--schema-null);
       }
     }
 
