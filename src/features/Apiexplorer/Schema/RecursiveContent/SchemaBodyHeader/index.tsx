@@ -10,7 +10,7 @@ type TSchemaBodyHeader = {
   title: string;
   is_open_object: boolean;
   setIsOpenObject: (boolean) => void;
-  examples: string[];
+  examples: string[] | number;
   enum;
   is_stream_types: boolean;
   items_type?: string;
@@ -144,13 +144,17 @@ const SchemaBodyHeader = ({
             {examples && (
               <div className={styles.defaultValue}>
                 <span className={styles.defaultValueLabel}>example: </span>
-                {examples.map((el: string, i: number) => {
-                  return (
-                    <div key={i}>
-                      <span className={styles.schemaDefaultValue}>{el}</span>
-                    </div>
-                  );
-                })}
+                {Array.isArray(examples) ? (
+                  examples.map((el: string, i: number) => {
+                    return (
+                      <div key={i}>
+                        <span className={styles.schemaDefaultValue}>{el}</span>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <span className={styles.schemaDefaultValue}>{examples}</span>
+                )}
               </div>
             )}
           </div>
