@@ -145,13 +145,11 @@ const SchemaBodyHeader = ({
               <div className={styles.defaultValue}>
                 <span className={styles.defaultValueLabel}>example: </span>
                 {Array.isArray(examples) ? (
-                  examples.map((el: string, i: number) => {
-                    return (
-                      <div key={i}>
-                        <span className={styles.schemaDefaultValue}>{el}</span>
-                      </div>
-                    );
-                  })
+                  examples.map((el: string, i: number) => (
+                    <div key={i}>
+                      <span className={styles.schemaDefaultValue}>{el}</span>
+                    </div>
+                  ))
                 ) : (
                   <span className={styles.schemaDefaultValue}>{examples}</span>
                 )}
