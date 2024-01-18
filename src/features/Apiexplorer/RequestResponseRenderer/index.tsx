@@ -59,7 +59,7 @@ function RequestResponseRenderer<T extends TSocketEndpointNames>({
       <div className={styles.btnWrapper}>
         <Button
           color='primary'
-          disabled={disableSendRequest(auth) || reqData === ''}
+          // disabled={disableSendRequest(auth) || reqData === ''}
           onClick={handleClick}
         >
           Send Request

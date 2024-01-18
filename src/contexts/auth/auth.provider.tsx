@@ -17,6 +17,7 @@ type TAuthProviderProps = {
 
 if (getIsBrowser()) {
   apiManager.init();
+  console.log('auth provider');
 }
 
 const AuthProvider = ({ children }: TAuthProviderProps) => {
@@ -103,6 +104,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
       updateCurrentLoginAccount,
       userAccounts,
       user,
+      updateAuthorize,
     };
   }, [
     currentLoginAccount,
@@ -114,6 +116,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     updateLoginAccounts,
     userAccounts,
     user,
+    updateAuthorize,
   ]);
 
   return <AuthContext.Provider value={context_object}>{children}</AuthContext.Provider>;

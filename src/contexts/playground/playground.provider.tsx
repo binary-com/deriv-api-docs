@@ -11,6 +11,7 @@ type TPlaygroundProviderProps = {
 
 if (getIsBrowser()) {
   apiManager.init();
+  console.log('PlaygroundProvider');
 }
 
 const PlaygroundProvider = <T extends TSocketEndpointNames>({
