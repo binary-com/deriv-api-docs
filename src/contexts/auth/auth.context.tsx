@@ -19,7 +19,6 @@ export interface IAuthContext {
   updateCurrentLoginAccount: (userAccount: IUserLoginAccount) => void;
   userAccounts: IUserAccounts;
   user: IUser;
-  updateAuthorize;
 }
 
 export const AuthContext = React.createContext<IAuthContext | null>(null);

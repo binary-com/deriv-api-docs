@@ -8,7 +8,6 @@ import {
 } from './types';
 import { Observable } from 'rxjs';
 import { getIsBrowser, getServerConfig } from '@site/src/utils';
-import useAuthContext from '@site/src/hooks/useAuthContext';
 
 export type TDerivApi = {
   send: (...requestData: unknown[]) => Promise<unknown>;
@@ -19,14 +18,14 @@ export type TDerivApi = {
 let attempts = 10;
 const RECONNECT_INTERVAL = attempts * 1000;
 const PING_INTERVAL = 12000;
-const is_connected_before = false;
-// const { updateAuthorize } = useAuthContext();
 
 export class ApiManager {
   private socket: WebSocket;
   private derivApi: TDerivApi;
   private pingInterval: NodeJS.Timer;
   private reconnectInterval: NodeJS.Timer;
+  private websocket_connected: (connection_value) => boolean;
+  private websocket_authorize: (connection_value) => boolean;
 
   public static instance: ApiManager;
   public static getInstance() {
@@ -37,7 +36,6 @@ export class ApiManager {
   }
 
   public init() {
-    console.log('init called');
     if (!this.socket) {
       const { serverUrl, appId } = getServerConfig();
       this.socket = new WebSocket(`wss://${serverUrl}/websockets/v3?app_id=${appId}`);
@@ -58,7 +56,9 @@ export class ApiManager {
     return this.derivApi.subscribe(request) as Observable<TSocketResponse<T>>;
   }
 
-  public authorize(token: string) {
+  public authorize(token: string, setIsConnected, setIsAuthorized) {
+    this.websocket_connected = setIsConnected;
+    this.websocket_authorize = setIsAuthorized;
     return this.derivApi.authorize({ authorize: token });
   }
   public logout() {
@@ -73,16 +73,15 @@ export class ApiManager {
       clearInterval(this.reconnectInterval);
     }
     this.socket.addEventListener('open', () => {
+      this.websocket_connected(true);
       this.pingInterval = setInterval(() => {
         this.socket.send(JSON.stringify({ ping: 1 }));
       }, PING_INTERVAL);
-      // if(is_connected_before) updateAuthorize();
     });
 
     this.socket.onclose = () => {
-      //   if (!is_connected_before) {
-      //   is_connected_before = true;
-      // }
+      this.websocket_connected(false);
+      this.websocket_authorize(false);
       clearInterval(this.pingInterval);
       this.socket = null;
       if (attempts > 0) {
@@ -101,60 +100,6 @@ export class ApiManager {
     if (registerKeepAlive) {
       this.registerKeepAlive();
     }
-  }
-
-  // connection is made and all of a sudden server is down, two things happen -> we send ping to server repeatedly and check fo response -> if response received for that no. of attempts meaning server got up if not meaning server down show msg
-  // fe side, we send pings to keep ws alive, but when server goes down ping gives no response which causes ws to close
-  // In this case, we need to check the cause of closure
-  // To check if reason is server down, we need to make new ws, send pings if no response recieved ws may close on its own so we send again for x amount times
-  // once all attempts get exhausted, we conclude that server is down and show message
-  // but if in one of the attempts, server send back a request - we try to reconnect (how to reconnect?)
-  // handles reconnection if server goes down
-  // 1. triggers on connection closed -> 1. reattempt to connect first check if server is up -> ping 4-5 times, 2. if server down for long time show msg, 3. if server back up re-establish websocket connection
-
-  // trigger this function when socket is closed -> to check if server is down
-  public checkServerStatus() {
-    console.log('checkServerStatus');
-
-    // open new socket
-    this.createNewWebsocket();
-
-    // if WS is open, ping server for sometime, arbitary tries
-    if (this.socket.readyState == WebSocket.OPEN) {
-      console.log('ws is open');
-
-      while (attempts < 10) {
-        console.log('inside while');
-
-        this.reconnectInterval = setInterval(() => {
-          this.socket.send(JSON.stringify({ ping: 1 }));
-          attempts += 1;
-        }, 12000);
-
-        // listen for pongs
-        this.socket.addEventListener('pong', () => {
-          console.log('server is up');
-          clearInterval(this.reconnectInterval);
-          // break -> attempts = 4
-          attempts = 4;
-        });
-      }
-    }
-
-    if (attempts < 3) {
-      attempts = 0;
-      console.log('attempts < 3');
-      window.alert('server is down');
-    } else {
-      console.log('attempts > 3');
-      this.init();
-    }
-  }
-
-  public createNewWebsocket() {
-    const { serverUrl, appId } = getServerConfig();
-    this.socket = new WebSocket(`wss://${serverUrl}/websockets/v3?app_id=${appId}`);
-    this.derivApi = new DerivAPIBasic({ connection: this.socket });
   }
 
   set connection(newConnection: WebSocket) {

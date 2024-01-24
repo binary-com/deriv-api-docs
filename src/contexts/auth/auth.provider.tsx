@@ -17,13 +17,13 @@ type TAuthProviderProps = {
 
 if (getIsBrowser()) {
   apiManager.init();
-  console.log('auth provider');
 }
 
 const AuthProvider = ({ children }: TAuthProviderProps) => {
   const [is_logged_in, setIsLoggedIn] = useState(false);
   const [is_authorized, setIsAuthorized] = useState(false);
   const [is_switching_account, setisSwitchingAccount] = useState(false);
+  const [is_connected, setIsConnected] = useState(true);
 
   const [loginAccounts, setLoginAccounts] = useSessionStorage<IUserLoginAccount[]>(
     LOGIN_ACCOUNTS_SESSION_STORAGE_KEY,
@@ -46,7 +46,11 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
 
   const updateAuthorize = useCallback(async () => {
     if (currentLoginAccount.token) {
-      const { authorize } = await apiManager.authorize(currentLoginAccount.token);
+      const { authorize } = await apiManager.authorize(
+        currentLoginAccount.token,
+        setIsConnected,
+        setIsAuthorized,
+      );
       setIsAuthorized(true);
       setisSwitchingAccount(false);
       const { account_list, ...user } = authorize;
@@ -56,10 +60,10 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
   }, [currentLoginAccount.token, setUser, setUserAccounts]);
 
   useEffect(() => {
-    if (!is_authorized) {
+    if (!is_authorized && is_connected) {
       updateAuthorize();
     }
-  }, [is_authorized, updateAuthorize]);
+  }, [is_authorized, is_connected]);
 
   const updateLoginAccounts = useCallback(
     (loginAccounts: IUserLoginAccount[]) => {
@@ -104,7 +108,6 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
       updateCurrentLoginAccount,
       userAccounts,
       user,
-      updateAuthorize,
     };
   }, [
     currentLoginAccount,
@@ -116,7 +119,6 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     updateLoginAccounts,
     userAccounts,
     user,
-    updateAuthorize,
   ]);
 
   return <AuthContext.Provider value={context_object}>{children}</AuthContext.Provider>;

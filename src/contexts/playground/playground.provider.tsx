@@ -1,6 +1,4 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
-import apiManager from '@site/src/configs/websocket';
-import { getIsBrowser } from '@site/src/utils';
 import { PlaygroundContext } from './playground.context';
 import { TSocketResponseData } from '@site/src/configs/websocket/types';
 import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
@@ -8,11 +6,6 @@ import { TSocketEndpointNames } from '@site/src/configs/websocket/types';
 type TPlaygroundProviderProps = {
   children: ReactNode;
 };
-
-if (getIsBrowser()) {
-  apiManager.init();
-  console.log('PlaygroundProvider');
-}
 
 const PlaygroundProvider = <T extends TSocketEndpointNames>({
   children,
