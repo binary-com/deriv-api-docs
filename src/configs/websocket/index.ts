@@ -16,7 +16,7 @@ export type TDerivApi = {
 };
 
 let attempts = 10;
-const RECONNECT_INTERVAL = attempts * 1000;
+const RECONNECT_INTERVAL = attempts * 10000;
 const PING_INTERVAL = 12000;
 
 export class ApiManager {
