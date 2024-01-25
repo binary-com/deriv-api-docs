@@ -79,7 +79,7 @@ export class ApiManager {
       }, PING_INTERVAL);
     });
 
-    this.socket.onclose = () => {
+    this.socket.addEventListener('close', () => {
       this.websocket_connected && this.websocket_connected(false);
       this.websocket_authorize && this.websocket_authorize(false);
       clearInterval(this.pingInterval);
@@ -91,7 +91,11 @@ export class ApiManager {
         window.alert('server down!!!');
         clearInterval(this.reconnectInterval);
       }
-    };
+    });
+
+    this.socket.addEventListener('error', () => {
+      clearInterval(this.pingInterval);
+    });
   }
 
   public reset(appId: string, url: string, registerKeepAlive = false) {
