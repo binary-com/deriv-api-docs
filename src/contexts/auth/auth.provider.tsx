@@ -63,7 +63,7 @@ const AuthProvider = ({ children }: TAuthProviderProps) => {
     if (!is_authorized && is_connected) {
       updateAuthorize();
     }
-  }, [is_authorized, is_connected]);
+  }, [is_authorized, is_connected, updateAuthorize]);
 
   const updateLoginAccounts = useCallback(
     (loginAccounts: IUserLoginAccount[]) => {

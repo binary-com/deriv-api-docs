@@ -73,15 +73,15 @@ export class ApiManager {
       clearInterval(this.reconnectInterval);
     }
     this.socket.addEventListener('open', () => {
-      this.websocket_connected(true);
+      this.websocket_connected && this.websocket_connected(true);
       this.pingInterval = setInterval(() => {
         this.socket.send(JSON.stringify({ ping: 1 }));
       }, PING_INTERVAL);
     });
 
     this.socket.onclose = () => {
-      this.websocket_connected(false);
-      this.websocket_authorize(false);
+      this.websocket_connected && this.websocket_connected(false);
+      this.websocket_authorize && this.websocket_authorize(false);
       clearInterval(this.pingInterval);
       this.socket = null;
       if (attempts > 0) {
