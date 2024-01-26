@@ -25,7 +25,7 @@ export class ApiManager {
   private pingInterval: NodeJS.Timer;
   private reconnectInterval: NodeJS.Timer;
   private websocket_connected: (connection_value) => boolean;
-  private websocket_authorize: (connection_value) => boolean;
+  private is_websocket_authorized: (connection_value) => boolean;
 
   public static instance: ApiManager;
   public static getInstance() {
