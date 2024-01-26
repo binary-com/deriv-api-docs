@@ -24,7 +24,7 @@ export class ApiManager {
   private derivApi: TDerivApi;
   private pingInterval: NodeJS.Timer;
   private reconnectInterval: NodeJS.Timer;
-  private websocket_connected: (connection_value) => boolean;
+  private is_websocket_connected: (connection_value) => boolean;
   private is_websocket_authorized: (connection_value) => boolean;
 
   public static instance: ApiManager;
@@ -57,8 +57,8 @@ export class ApiManager {
   }
 
   public authorize(token: string, setIsConnected, setIsAuthorized) {
-    this.websocket_connected = setIsConnected;
-    this.websocket_authorize = setIsAuthorized;
+    this.is_websocket_connected = setIsConnected;
+    this.is_websocket_authorized = setIsAuthorized;
     return this.derivApi.authorize({ authorize: token });
   }
   public logout() {
@@ -73,15 +73,15 @@ export class ApiManager {
       clearInterval(this.reconnectInterval);
     }
     this.socket.addEventListener('open', () => {
-      this.websocket_connected && this.websocket_connected(true);
+      this.is_websocket_connected?.(true);
       this.pingInterval = setInterval(() => {
         this.socket.send(JSON.stringify({ ping: 1 }));
       }, PING_INTERVAL);
     });
 
     this.socket.addEventListener('close', () => {
-      this.websocket_connected && this.websocket_connected(false);
-      this.websocket_authorize && this.websocket_authorize(false);
+      this.is_websocket_connected?.(false);
+      this.is_websocket_authorized?.(false);
       clearInterval(this.pingInterval);
       this.socket = null;
       if (attempts > 0) {
