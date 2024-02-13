@@ -88,7 +88,9 @@ export class ApiManager {
         this.reconnectInterval = setTimeout(this.init.bind(this), RECONNECT_INTERVAL);
         attempts -= 1;
       } else {
-        window.alert('server down!!!');
+        window.alert(
+          'Sorry, the server is currently down. Please refresh the page or try again later',
+        );
         clearInterval(this.reconnectInterval);
       }
     });
