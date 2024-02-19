@@ -15,12 +15,17 @@ export type TDerivApi = {
   authorize: (requestData: AuthorizeRequest) => Promise<AuthorizeResponse>;
 };
 
+let attempts = 10;
+const RECONNECT_INTERVAL = attempts * 10000;
 const PING_INTERVAL = 12000;
 
 export class ApiManager {
   private socket: WebSocket;
   private derivApi: TDerivApi;
   private pingInterval: NodeJS.Timer;
+  private reconnectInterval: NodeJS.Timer;
+  private is_websocket_connected: (connection_value) => boolean;
+  private is_websocket_authorized: (connection_value) => boolean;
 
   public static instance: ApiManager;
   public static getInstance() {
@@ -51,7 +56,9 @@ export class ApiManager {
     return this.derivApi.subscribe(request) as Observable<TSocketResponse<T>>;
   }
 
-  public authorize(token: string) {
+  public authorize(token: string, setIsConnected, setIsAuthorized) {
+    this.is_websocket_connected = setIsConnected;
+    this.is_websocket_authorized = setIsAuthorized;
     return this.derivApi.authorize({ authorize: token });
   }
   public logout() {
@@ -62,14 +69,30 @@ export class ApiManager {
     if (this.pingInterval) {
       clearInterval(this.pingInterval);
     }
+    if (this.reconnectInterval) {
+      clearInterval(this.reconnectInterval);
+    }
     this.socket.addEventListener('open', () => {
+      this.is_websocket_connected?.(true);
       this.pingInterval = setInterval(() => {
         this.socket.send(JSON.stringify({ ping: 1 }));
       }, PING_INTERVAL);
     });
 
     this.socket.addEventListener('close', () => {
+      this.is_websocket_connected?.(false);
+      this.is_websocket_authorized?.(false);
       clearInterval(this.pingInterval);
+      this.socket = null;
+      if (attempts > 0) {
+        this.reconnectInterval = setTimeout(this.init.bind(this), RECONNECT_INTERVAL);
+        attempts -= 1;
+      } else {
+        window.alert(
+          'Sorry, the server is currently down. Please refresh the page or try again later',
+        );
+        clearInterval(this.reconnectInterval);
+      }
     });
 
     this.socket.addEventListener('error', () => {
