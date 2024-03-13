@@ -64,6 +64,6 @@ To create your application with the appropriate configuration options, select th
 
 Make sure the **Authorisation** and **Verification** URLs are correct based on your implementation.
 
-For example, if your domain is **`https://example.com`** and your **authorisation and authentication are handled by** `verfiy`, your URLs will be:
+For example, if your domain is **`https://example.com`** and your **authorisation and authentication are handled by** `verify`, your URLs will be:
 
 **`https://example.com/verify`**
