@@ -14,7 +14,7 @@ type TRootProps = {
 };
 
 if (siteConfig.customFields.trackJsToken) {
-  TrackJS.install({ token: siteConfig.customFields.trackJsToken });
+  TrackJS.install({ token: siteConfig.customFields.trackJsToken.toString() });
 } else {
   console.warn('trackjs is not installed due to a missing token');
 }
