@@ -49,7 +49,7 @@ const ManageDashboard = () => {
     [registerApp],
   );
 
-  if (!apps || is_loading)
+  if (!apps || is_loading || !tokens)
     return (
       <div className='manage_dashboard__spinner'>
         <Spinner />
