@@ -1,13 +1,9 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import useAuthContext from '@site/src/hooks/useAuthContext';
 // import DashboardTabs from './components/Tabs';
 import useAppManager from '@site/src/hooks/useAppManager';
-import Spinner from '@site/src/components/Spinner';
-
-const ManageDashboard = React.lazy(() => import('./manage-dashboard'));
-const Login = React.lazy(() =>
-  import('../Auth/Login/Login').then((module) => ({ default: module.Login })),
-);
+import MemoizedManageDashboard from './manage-dashboard';
+import { Login } from '../Auth/Login/Login';
 
 export const AppManager = () => {
   const { is_logged_in } = useAuthContext();
@@ -20,17 +16,5 @@ export const AppManager = () => {
     };
   }, [setIsDashboard]);
 
-  return (
-    <React.Fragment>
-      <Suspense
-        fallback={
-          <div style={{ height: '90vh' }}>
-            <Spinner />
-          </div>
-        }
-      >
-        {is_logged_in ? <ManageDashboard /> : <Login />}
-      </Suspense>
-    </React.Fragment>
-  );
+  return <React.Fragment>{is_logged_in ? <MemoizedManageDashboard /> : <Login />}</React.Fragment>;
 };
