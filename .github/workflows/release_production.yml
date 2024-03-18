@@ -23,6 +23,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           NODE_ENV: production
+          TRACKJS_TOKEN: ${{ secrets.TRACKJS_TOKEN }}
       - name: Versioning
         uses: ./.github/actions/versioning
         with:
