@@ -33,6 +33,7 @@ const mockUseAppManager = useAppManager as jest.MockedFunction<
 
 mockUseAppManager.mockImplementation(() => ({
   setIsDashboard: jest.fn(),
+  getApps: jest.fn(),
 }));
 
 jest.mock('react-table');
@@ -64,9 +65,8 @@ describe('AppManager', () => {
     mockUseAuthContext.mockImplementation(() => ({
       is_logged_in: true,
     }));
-
     render(<AppManager />);
-    const loader = screen.getByTestId('dt_manage_dashboard_spinner');
+    const loader = screen.getByTestId('dt_spinner');
     expect(loader).toBeInTheDocument();
   });
 
@@ -77,6 +77,7 @@ describe('AppManager', () => {
     mockUseAppManager.mockImplementation(() => ({
       setIsDashboard: jest.fn(),
       apps: [],
+      getApps: jest.fn(),
     }));
     mockUseApiToken.mockImplementation(() => ({
       tokens: [],
