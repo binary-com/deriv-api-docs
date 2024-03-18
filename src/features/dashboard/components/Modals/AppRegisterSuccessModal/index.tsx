@@ -1,6 +1,6 @@
 import React from 'react';
 import useAppManager from '@site/src/hooks/useAppManager';
-import SwippableBottomSheet from '@site/src/components/SwippableBottomSheet';
+import SwipeableBottomSheet from '@site/src/components/SwipeableBottomSheet';
 import { Heading } from '@deriv/quill-design';
 import './app-register-success-modal.scss';
 
@@ -19,7 +19,7 @@ export const AppRegisterSuccessModal = ({
 
   return (
     <div className='app_register_success_modal'>
-      <SwippableBottomSheet
+      <SwipeableBottomSheet
         action_sheet_open={app_register_modal_open}
         primary_action={{
           label: 'Configure now',
@@ -55,7 +55,7 @@ export const AppRegisterSuccessModal = ({
             </span>
           </div>
         </div>
-      </SwippableBottomSheet>
+      </SwipeableBottomSheet>
     </div>
   );
 };

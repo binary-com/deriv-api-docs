@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { a, useSpring, config } from '@react-spring/web';
 import { Button } from '@deriv/quill-design';
-import './swippable-bottom-sheet.scss';
+import './swipeable-bottom-sheet.scss';
 
-type SwippableBottomSheetProps = {
+type SwipeableBottomSheetProps = {
   action_sheet_open: boolean;
   is_desktop?: boolean;
   primary_action?: {
@@ -19,7 +19,7 @@ type SwippableBottomSheetProps = {
   on_close?: () => void;
 };
 
-const SwippableBottomSheet: React.FC<SwippableBottomSheetProps> = ({
+const SwipeableBottomSheet: React.FC<SwipeableBottomSheetProps> = ({
   action_sheet_open,
   children,
   disable_drag = false,
@@ -105,4 +105,4 @@ const SwippableBottomSheet: React.FC<SwippableBottomSheetProps> = ({
   );
 };
 
-export default SwippableBottomSheet;
+export default SwipeableBottomSheet;
