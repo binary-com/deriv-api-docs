@@ -1,0 +1,42 @@
+name: Deriv Api Docs Test/UAT Workflow
+on:
+  pull_request:
+    branches:
+      - uat
+  workflow_dispatch:
+
+env:
+  RELEASE_TYPE: Staging
+jobs:
+  build_and_publish:
+    name: Builds and Publishes to Cloudflare Pages Test
+    environment: Staging
+    runs-on: ubuntu-latest
+    outputs:
+      RELEASE_VERSION: ${{ steps.extract_version.outputs.RELEASE_VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - name: Setup Node
+        uses: ./.github/actions/setup_node
+      - name: Install dependencies
+        uses: ./.github/actions/npm_install_from_cache
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          NODE_ENV: staging
+          TRACKJS_TOKEN: ${{ secrets.TRACKJS_TOKEN }}
+      - name: Versioning
+        uses: ./.github/actions/versioning
+        with:
+          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
+      - name: Extract version
+        id: extract_version
+        run: echo "RELEASE_VERSION=$(cat build/version.txt)" >> $GITHUB_OUTPUT
+      - name: Publish to Cloudflare Pages Test
+        uses: ./.github/actions/publish_to_pages
+        with:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_BRANCH: test

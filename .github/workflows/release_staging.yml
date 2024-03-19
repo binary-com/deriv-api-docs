@@ -27,10 +27,11 @@ jobs:
           RELEASE_TAG: ${{ github.sha }}
           RELEASE_TYPE: staging
       - name: Publish to Cloudflare Pages Staging
-        uses: ./.github/actions/publish_to_pages_staging
+        uses: ./.github/actions/publish_to_pages
         with:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_BRANCH: staging
       - name: Publish to Docker
         uses: ./.github/actions/publish_to_docker
         with:
