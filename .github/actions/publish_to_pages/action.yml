@@ -1,11 +1,14 @@
-name: publish_to_pages_staging
-description: Publishes to cloudflare pages (staging)
+name: publish_to_pages
+description: Publishes to cloudflare pages
 inputs:
   CLOUDFLARE_ACCOUNT_ID:
     description: Cloudflare account id
     required: true
   CLOUDFLARE_API_TOKEN:
     description: Cloudflare token
+    required: true
+  CF_BRANCH:
+    description: Cloudflare branch
     required: true
 runs:
   using: composite
@@ -17,6 +20,6 @@ runs:
       run: |-
         npm i wrangler@3.10.1
         cd build
-        npx wrangler pages deploy . --project-name=deriv-developers-portal-pages --branch=staging
+        npx wrangler pages deploy . --project-name=deriv-developers-portal-pages --branch=${{ inputs.CF_BRANCH }}
         echo "New staging website - https://staging-api.deriv.com/"
       shell: bash
