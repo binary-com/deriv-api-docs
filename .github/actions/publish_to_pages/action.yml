@@ -10,6 +10,9 @@ inputs:
   CF_BRANCH:
     description: Cloudflare branch
     required: true
+  PROJECT_NAME:
+    description: Cloudflare project name
+    required: true
 runs:
   using: composite
   steps:
@@ -17,9 +20,11 @@ runs:
       env:
         CLOUDFLARE_ACCOUNT_ID: ${{ inputs.CLOUDFLARE_ACCOUNT_ID }}
         CLOUDFLARE_API_TOKEN: ${{ inputs.CLOUDFLARE_API_TOKEN }}
+        CF_BRANCH: ${{ inputs.CF_BRANCH }}
+        PROJECT_NAME: ${{ inputs.PROJECT_NAME }}
       run: |-
         npm i wrangler@3.10.1
         cd build
-        npx wrangler pages deploy . --project-name=deriv-developers-portal-pages --branch=${{ inputs.CF_BRANCH }}
-        echo "New staging website - https://staging-api.deriv.com/"
+        npx wrangler pages deploy . --project-name=${{ env.PROJECT_NAME }} --branch=${{ env.CF_BRANCH }}
+        echo "New staging website - https://${{ env.CF_BRANCH }}-api.deriv.com/"
       shell: bash
