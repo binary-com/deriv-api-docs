@@ -23,7 +23,7 @@ export const Header = () => {
             <Link to='https://deriv.com/who-we-are' className={styles.SubnavItems}>
               Who we are
             </Link>
-            <Link to='https://deriv.com/contact_us' className={styles.SubnavItems}>
+            <Link to='https://deriv.com/contact-us' className={styles.SubnavItems}>
               Contact us
             </Link>
           </div>
