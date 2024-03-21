@@ -15,7 +15,7 @@ type TRootProps = {
 
 if (siteConfig.customFields.trackJsToken) {
   TrackJS.install({
-    application: 'api.deriv.com',
+    application: 'api-deriv-com',
     token: siteConfig.customFields.trackJsToken.toString(),
   });
 } else {
