@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { a, useSpring, config } from '@react-spring/web';
 import { Button } from '@deriv/quill-design';
@@ -30,6 +30,7 @@ const SwipeableBottomSheet: React.FC<SwipeableBottomSheetProps> = ({
 }) => {
   const height = window.innerHeight - 124;
   const [{ y }, api] = useSpring(() => ({ y: height }));
+  const target = useRef(null);
 
   const open = ({ canceled }) => {
     api.start({ y: 0, immediate: false, config: canceled ? config.wobbly : config.stiff });
@@ -47,14 +48,20 @@ const SwipeableBottomSheet: React.FC<SwipeableBottomSheetProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [action_sheet_open]);
 
-  const bind = useDrag(
+  useDrag(
     ({ last, velocity: [, vy], direction: [, dy], offset: [, oy], cancel, canceled }) => {
       if (disable_drag) return;
       if (oy < -70) cancel();
       if (last) oy > height * 0.5 || (vy > 0.5 && dy > 0) ? close(vy) : open({ canceled });
       else api.start({ y: oy, immediate: true });
     },
-    { from: () => [0, y.get()], filterTaps: true, bounds: { top: 0 }, rubberband: true },
+    {
+      from: () => [0, y.get()],
+      filterTaps: true,
+      bounds: { top: 0 },
+      rubberband: true,
+      target,
+    },
   );
 
   const display = y.to((py) => (py < height ? 'block' : 'none'));
@@ -68,7 +75,11 @@ const SwipeableBottomSheet: React.FC<SwipeableBottomSheetProps> = ({
             style={{ display, bottom: !is_desktop ? 0 : '', y }}
           >
             {!is_desktop && !disable_drag && (
-              <div className='action_sheet__handler' {...bind()}>
+              <div
+                data-testid='dt_action_sheet_handler'
+                className='action_sheet__handler'
+                ref={target}
+              >
                 <div className='action_sheet__handler_icon' />
               </div>
             )}
