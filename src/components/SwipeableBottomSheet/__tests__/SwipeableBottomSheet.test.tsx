@@ -6,7 +6,7 @@ jest.useFakeTimers();
 
 function patchCreateEvent(createEvent: any) {
   // patching createEvent for pointer events to work from jsdom
-  for (let key in createEvent) {
+  for (const key in createEvent) {
     if (key.indexOf('pointer') === 0) {
       const fn = createEvent[key.replace('pointer', 'mouse')];
       if (!fn) continue;
@@ -77,7 +77,7 @@ describe('SwipeableBottomSheet', () => {
     expect(handlerElement).toBeInTheDocument();
   });
 
-  it('should close the bottom sheet on mobile if handler is dragged to the bottom', async () => {
+  it('should close the bottom sheet on mobile if handler is dragged to the bottom', () => {
     const component = renderComponent({ app_register_modal_open: true, on_close: onCancel });
     const { rerender } = render(component);
     rerender(component);
@@ -102,5 +102,17 @@ describe('SwipeableBottomSheet', () => {
     });
     jest.advanceTimersByTime(600);
     expect(onCancel).toBeCalled();
+  });
+
+  it('should not drag the bottom sheet on mobile if drag is disabled', () => {
+    const component = renderComponent({
+      app_register_modal_open: true,
+      on_close: onCancel,
+      disable_drag: true,
+    });
+    const { rerender } = render(component);
+    rerender(component);
+    const handlerElement = screen.queryByTestId('dt_action_sheet_handler');
+    expect(handlerElement).not.toBeInTheDocument();
   });
 });

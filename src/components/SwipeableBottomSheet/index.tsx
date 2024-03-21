@@ -50,7 +50,6 @@ const SwipeableBottomSheet: React.FC<SwipeableBottomSheetProps> = ({
 
   useDrag(
     ({ last, velocity: [, vy], direction: [, dy], offset: [, oy], cancel, canceled }) => {
-      if (disable_drag) return;
       if (oy < -70) cancel();
       if (last) oy > height * 0.5 || (vy > 0.5 && dy > 0) ? close(vy) : open({ canceled });
       else api.start({ y: oy, immediate: true });
