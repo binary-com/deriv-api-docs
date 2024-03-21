@@ -45,6 +45,16 @@
 
   &__tnc {
     margin-top: 24px;
+    &__label {
+      font-weight: 400;
+      font-size: 16px;
+      position: relative;
+      top: 8px;
+      @media screen and (max-width: 992px) {
+        font-size: 14px;
+        top: -4px;
+      }
+    }
   }
 }
 

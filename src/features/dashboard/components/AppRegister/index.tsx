@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Text, TextField } from '@deriv/quill-design';
-import CustomRadioButton from '@site/src/components/CustomRadioButton';
+import React from 'react';
+import { Button, TextField } from '@deriv/quill-design';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './app-register.scss';
@@ -12,28 +11,15 @@ import {
   baseAppRegisterSchema,
   error_map,
 } from './types';
+import CustomCheckbox from '@site/src/components/CustomCheckbox';
 
-const TermsAndConditions: React.FC<TTermsAndConditionsProps> = ({
-  setTermsConfirmation,
-  terms_confirmation,
-}) => {
-  const handleChange = () => {
-    setTermsConfirmation(true);
-  };
+const TermsAndConditions: React.FC<TTermsAndConditionsProps> = ({ register }) => {
   return (
     <div className='app_register_container__tnc'>
-      <CustomRadioButton
-        id='tnc_approval'
-        name='tnc_approval'
-        value='tnc_confirmed'
-        checked={terms_confirmation}
-        onChange={handleChange}
-      >
-        <Text size='md'>
-          <span>
-            By registering your application, you acknowledge that you&lsquo;ve read and accepted the
-            Deriv API{' '}
-          </span>
+      <CustomCheckbox id='tnc_approval' name='tnc_approval' register={register}>
+        <label htmlFor={'tnc_approval'} className='app_register_container__tnc__label'>
+          By registering your application, you acknowledge that you&lsquo;ve read and accepted the
+          Deriv API{' '}
           <a
             href='https://deriv.com/tnc/business-partners-api-user.pdf'
             target='_blank'
@@ -41,8 +27,8 @@ const TermsAndConditions: React.FC<TTermsAndConditionsProps> = ({
           >
             <span>terms and conditions</span>
           </a>
-        </Text>
-      </CustomRadioButton>
+        </label>
+      </CustomCheckbox>
     </div>
   );
 };
@@ -66,7 +52,6 @@ const RestrictionsComponent: React.FC<TRestrictionsComponentProps> = ({ error })
 };
 
 const AppRegister: React.FC<TAppRegisterProps> = ({ submit }) => {
-  const [terms_confirmation, setTermsConfirmation] = useState(false);
   const {
     register,
     handleSubmit,
@@ -75,7 +60,6 @@ const AppRegister: React.FC<TAppRegisterProps> = ({ submit }) => {
     mode: 'all',
     resolver: yupResolver(baseAppRegisterSchema),
   });
-
   const has_error = Object.entries(errors).length !== 0;
   return (
     <form role={'form'} onSubmit={handleSubmit(submit)}>
@@ -95,17 +79,15 @@ const AppRegister: React.FC<TAppRegisterProps> = ({ submit }) => {
               size='md'
               variant='primary'
               role='submit'
-              disabled={has_error || !terms_confirmation}
+              disabled={has_error}
             >
               Register now
             </Button>
           </div>
         </div>
+        <span className='error'>{errors?.tnc_approval?.message}</span>
         <RestrictionsComponent error={errors?.name?.message} />
-        <TermsAndConditions
-          setTermsConfirmation={setTermsConfirmation}
-          terms_confirmation={terms_confirmation}
-        />
+        <TermsAndConditions register={register('tnc_approval')} />
       </div>
     </form>
   );

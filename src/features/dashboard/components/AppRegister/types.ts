@@ -1,3 +1,4 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
 import * as yup from 'yup';
 
 export const error_map = {
@@ -22,11 +23,11 @@ export const base_registration_schema = {
         excludeEmptyString: true,
       },
     ),
+  tnc_approval: yup.boolean().oneOf([true], 'You must accept the terms and conditions.'),
 };
 
 export type TTermsAndConditionsProps = {
-  setTermsConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-  terms_confirmation: boolean;
+  register: UseFormRegisterReturn<'tnc_approval'>;
 };
 
 export const baseAppRegisterSchema = yup.object({

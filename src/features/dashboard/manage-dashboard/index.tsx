@@ -4,7 +4,6 @@ import AppRegister from '../components/AppRegister';
 import useAppManager from '@site/src/hooks/useAppManager';
 import useApiToken from '@site/src/hooks/useApiToken';
 import Spinner from '@site/src/components/Spinner';
-import { IRegisterAppForm } from '../types';
 import useWS from '@site/src/hooks/useWs';
 import useDeviceType from '@site/src/hooks/useDeviceType';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
@@ -39,7 +38,7 @@ const ManageDashboard = () => {
   }, [getApps]);
 
   const submit = useCallback(
-    (data: IRegisterAppForm) => {
+    (data) => {
       const { name } = data;
       registerApp({
         name,
