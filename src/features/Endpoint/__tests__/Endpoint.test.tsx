@@ -2,6 +2,7 @@ import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import React from 'react';
 import EndPoint from '../Endpoint';
 import userEvent from '@testing-library/user-event';
+import { DEFAULT_WS_SERVER } from '@site/src/utils/constants';
 
 describe('Endpoint', () => {
   beforeEach(() => {
@@ -23,7 +24,7 @@ describe('Endpoint', () => {
   it('should have default values in input fields', () => {
     const server = screen.getByPlaceholderText('e.g. ws.derivws.com');
     const app_id = screen.getByPlaceholderText('e.g. 9999');
-    expect(server).toHaveValue('oauth.deriv.com');
+    expect(server).toHaveValue(DEFAULT_WS_SERVER);
 
     expect(app_id).toHaveValue('35074');
   });
