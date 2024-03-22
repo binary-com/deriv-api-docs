@@ -23,11 +23,11 @@ export const AppRegisterSuccessModal = ({
         action_sheet_open={app_register_modal_open}
         primary_action={{
           label: 'Configure now',
-          onClick: onCancel,
+          onClick: onConfigure,
         }}
         secondary_action={{
           label: 'Maybe later',
-          onClick: onConfigure,
+          onClick: onCancel,
         }}
         is_desktop={is_desktop}
         disable_drag
@@ -36,7 +36,7 @@ export const AppRegisterSuccessModal = ({
         <div>
           {is_desktop && (
             <div className='app_register_success_modal__icon'>
-              <img src='/img/circle_check_regular_icon.svg' />
+              <img src='/img/circle_check_regular_icon.svg' alt='check icon' />
             </div>
           )}
           <Heading.H3 className='app_register_success_modal__header'>
