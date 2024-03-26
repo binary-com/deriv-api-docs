@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Text } from '@deriv/ui';
 import { getAppId } from '@site/src/utils';
-import { OAUTH_URL } from '@site/src/utils/constants';
+import { DEFAULT_WS_SERVER } from '@site/src/utils/constants';
 import styles from './Endpoint.module.scss';
 
 interface IEndpointFormValues {
@@ -12,7 +12,7 @@ interface IEndpointFormValues {
 const EndPoint = () => {
   const default_endpoint = {
     app_id: getAppId(),
-    server_url: OAUTH_URL,
+    server_url: DEFAULT_WS_SERVER,
   };
 
   const {
