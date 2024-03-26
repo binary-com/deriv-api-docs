@@ -1,9 +1,9 @@
 import React from 'react';
 import { CellProps } from 'react-table';
-import { TAppColumn } from '.';
 import styles from './cells.module.scss';
+import { ApplicationObject } from '@deriv/api-types';
 
-interface IAppActionsCellProps extends React.PropsWithChildren<CellProps<TAppColumn, string>> {
+interface IAppActionsCellProps extends CellProps<ApplicationObject> {
   openDeleteDialog: () => void;
   openEditDialog: () => void;
 }

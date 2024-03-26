@@ -66,10 +66,10 @@ export class ApiManager {
   }
 
   private registerKeepAlive() {
-    if (this.pingInterval) {
+    if (this.pingInterval && typeof this.pingInterval === 'number') {
       clearInterval(this.pingInterval);
     }
-    if (this.reconnectInterval) {
+    if (this.reconnectInterval && typeof this.reconnectInterval === 'number') {
       clearInterval(this.reconnectInterval);
     }
     this.socket.addEventListener('open', () => {
@@ -82,7 +82,9 @@ export class ApiManager {
     this.socket.addEventListener('close', () => {
       this.is_websocket_connected?.(false);
       this.is_websocket_authorized?.(false);
-      clearInterval(this.pingInterval);
+      if (this.pingInterval && typeof this.pingInterval === 'number') {
+        clearInterval(this.pingInterval);
+      }
       this.socket = null;
       if (attempts > 0) {
         this.reconnectInterval = setTimeout(this.init.bind(this), RECONNECT_INTERVAL);
@@ -91,12 +93,16 @@ export class ApiManager {
         window.alert(
           'Sorry, the server is currently down. Please refresh the page or try again later',
         );
-        clearInterval(this.reconnectInterval);
+        if (this.reconnectInterval && typeof this.reconnectInterval === 'number') {
+          clearInterval(this.reconnectInterval);
+        }
       }
     });
 
     this.socket.addEventListener('error', () => {
-      clearInterval(this.pingInterval);
+      if (this.pingInterval && typeof this.pingInterval === 'number') {
+        clearInterval(this.pingInterval);
+      }
     });
   }
 
