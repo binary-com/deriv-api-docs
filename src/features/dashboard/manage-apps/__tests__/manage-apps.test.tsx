@@ -3,7 +3,6 @@ import useAppManager from '@site/src/hooks/useAppManager';
 import { render, screen, cleanup } from '@site/src/test-utils';
 import React from 'react';
 import AppManagement from '..';
-import LoadingTable from '../../components/LoadingTable';
 
 jest.mock('@site/src/hooks/useAppManager');
 
@@ -53,6 +52,7 @@ describe('App Management', () => {
         scopes: ['admin', 'payments', 'read', 'trade', 'trading_information'],
         verification_uri: 'https://example.com',
         last_used: '',
+        official: 0,
       },
       {
         active: 1,
@@ -67,6 +67,7 @@ describe('App Management', () => {
         scopes: ['payments', 'read', 'trade', 'trading_information'],
         verification_uri: 'https://example.com',
         last_used: '',
+        official: 0,
       },
     ];
 

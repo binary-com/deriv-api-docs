@@ -34,6 +34,7 @@ const fakeApplications: ApplicationObject[] = [
     scopes: ['admin', 'payments', 'read', 'trade', 'trading_information'],
     verification_uri: 'https://example.com',
     last_used: '',
+    official: 0,
   },
   {
     active: 1,
@@ -48,6 +49,7 @@ const fakeApplications: ApplicationObject[] = [
     scopes: ['payments', 'read', 'trade', 'trading_information'],
     verification_uri: 'https://example.com',
     last_used: '',
+    official: 0,
   },
 ];
 

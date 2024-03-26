@@ -57,6 +57,7 @@ describe('App Form', () => {
         scopes: ['read', 'trade', 'trading_information'],
         verification_uri: 'https://example.com',
         last_used: '',
+        official: 0,
       },
       {
         active: 1,
@@ -71,6 +72,7 @@ describe('App Form', () => {
         scopes: ['read', 'trade'],
         verification_uri: 'https://example.com',
         last_used: '',
+        official: 0,
       },
     ];
     const mockGetApps = jest.fn();

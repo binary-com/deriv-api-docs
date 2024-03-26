@@ -83,21 +83,6 @@ mockUseAppManager.mockImplementation(() => ({
   getApps: mockGetApps,
 }));
 
-const fakeApp: ApplicationObject = {
-  active: 1,
-  app_id: 12345,
-  app_markup_percentage: 0,
-  appstore: '',
-  github: '',
-  googleplay: '',
-  homepage: '',
-  name: 'testApp',
-  redirect_uri: 'https://example.com',
-  scopes: ['read', 'trade', 'trading_information'],
-  verification_uri: 'https://example.com',
-  last_used: '',
-};
-
 describe('Update App Dialog', () => {
   let wsServer: WS;
 

@@ -67,6 +67,7 @@ const fakeApp: ApplicationObject = {
   scopes: ['read', 'trade', 'trading_information'],
   verification_uri: 'https://example.com',
   last_used: '',
+  official: 0,
 };
 
 describe('Update App Dialog', () => {
