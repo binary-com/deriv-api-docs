@@ -25,6 +25,6 @@ runs:
       run: |-
         npm i wrangler@3.10.1
         cd build
-        npx wrangler pages deploy . --project-name=${{ env.PROJECT_NAME }} --branch=${{ env.CF_BRANCH }}
-        echo "New staging website - https://${{ env.CF_BRANCH }}-api.deriv.com/"
+        npx wrangler pages deploy . --project-name=$PROJECT_NAME --branch=$CF_BRANCH
+        echo "New staging website - https://$CF_BRANCH-api.deriv.com/"
       shell: bash
