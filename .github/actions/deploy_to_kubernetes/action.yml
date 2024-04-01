@@ -31,7 +31,7 @@ runs:
         DOCKERHUB_ORGANISATION: ${{ inputs.DOCKERHUB_ORGANISATION }}
         CA_CRT: ${{ inputs.CA_CRT }}
         APP_NAME: deriv-com-api
-        K8S_VERSION: {{ inputs.K8S_VERSION }}
+        K8S_VERSION: ${{ inputs.K8S_VERSION }}
       run: |
         git clone https://github.com/binary-com/devops-ci-scripts
         cd devops-ci-scripts/k8s-build_tools
