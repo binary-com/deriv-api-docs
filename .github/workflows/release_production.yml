@@ -106,4 +106,4 @@ jobs:
         uses: ./.github/actions/notify_slack
         with:
           RELEASE_TYPE: ${{ env.RELEASE_TYPE }}
-          MESSAGE: "'${{ env.RELEASE_TYPE }}' Docker Publish and Kubernetes Deployment for api.deriv.com with version *'${{ needs.build_and_publish.outputs.RELEASE_VERSION }}'* has Failed *"
+          MESSAGE: "'${{ env.RELEASE_TYPE }}' Release succeeded for api.deriv.com with version *'${{ needs.build_and_publish.outputs.RELEASE_VERSION }}'* has Failed *"
