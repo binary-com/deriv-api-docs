@@ -35,7 +35,7 @@ runs:
         DOCKER_LATEST_IMAGE_TAG: ${{ inputs.DOCKER_LATEST_IMAGE_TAG }}
       run: |
         set -e
-        docker run --rm $inputs.DOCKERHUB_ORGANISATION/deriv-com-api:$DOCKER_LATEST_IMAGE_TAG nginx -t
+        docker run --rm $DOCKERHUB_ORGANISATION/deriv-com-api:$DOCKER_LATEST_IMAGE_TAG nginx -t
         echo "docker image validated successfully"
       shell: bash
 
