@@ -62,7 +62,7 @@ const AppRegister: React.FC<TAppRegisterProps> = ({ submit }) => {
   });
   const has_error = Object.entries(errors).length !== 0;
   return (
-    <form role={'form'} onSubmit={handleSubmit(submit)}>
+    <form role={'form'} onSubmit={handleSubmit(submit)} className='app_register_container_form'>
       <div className='app_register_container'>
         <div className={`${has_error && 'error-border'} app_register_container__fields`}>
           <div className='app_register_container__fields__input'>

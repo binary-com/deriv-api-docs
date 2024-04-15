@@ -1,6 +1,12 @@
 .app_register_container {
   margin-inline: 16px;
   margin-top: 60px;
+  max-width: 608px;
+
+  &_form {
+    display: flex;
+    justify-content: center;
+  }
 
   @media screen and (max-width: 992px) {
     margin-top: 48px;
