@@ -1,29 +1,36 @@
 import React from 'react';
-import { CellProps } from 'react-table';
-import { TAppColumn } from '.';
 import { LabelPairedPenSmRegularIcon, LabelPairedTrashSmRegularIcon } from '@deriv/quill-icons';
 import CustomTooltip from '@site/src/components/CustomTooltip';
+import clsx from 'clsx';
 import styles from './cells.module.scss';
 
-interface IAppActionsCellProps extends React.PropsWithChildren<CellProps<TAppColumn, string>> {
+type TAppActionsCellProps = {
   openDeleteDialog: () => void;
   openEditDialog: () => void;
-}
+  flex_end?: boolean;
+};
 
-const AppActionsCell = ({ openDeleteDialog, openEditDialog }: IAppActionsCellProps) => {
+const AppActionsCell = ({
+  openDeleteDialog,
+  openEditDialog,
+  flex_end = false,
+}: TAppActionsCellProps) => {
   return (
-    <div className={styles.appActions} data-testid={'app-action-cell'}>
-      <div onClick={openEditDialog} data-testid={'update-app-button'}>
+    <div
+      className={clsx(styles.appActions, { [styles.flex_end]: flex_end })}
+      data-testid={'app-action-cell'}
+    >
+      <span onClick={openEditDialog} data-testid={'update-app-button'}>
         <CustomTooltip text='Edit application details'>
           <LabelPairedPenSmRegularIcon />
         </CustomTooltip>
-      </div>
+      </span>
 
-      <div onClick={openDeleteDialog} data-testid={'delete-app-button'}>
+      <span onClick={openDeleteDialog} data-testid={'delete-app-button'}>
         <CustomTooltip text='Delete application'>
           <LabelPairedTrashSmRegularIcon />
         </CustomTooltip>
-      </div>
+      </span>
     </div>
   );
 };

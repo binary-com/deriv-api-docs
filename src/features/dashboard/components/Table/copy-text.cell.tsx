@@ -1,11 +1,12 @@
 import React from 'react';
-import { CellProps } from 'react-table';
 import { LabelPairedCopyLgRegularIcon } from '@deriv/quill-icons';
 import './copy-text.cell.scss';
 
-const CopyTextCell = <T extends object>({
-  cell,
-}: React.PropsWithChildren<CellProps<T, string[]>>) => {
+const CopyTextCell: React.FC<{
+  cell: {
+    value: React.ReactNode;
+  };
+}> = ({ cell }) => {
   return (
     <React.Fragment>
       {cell.value ? (

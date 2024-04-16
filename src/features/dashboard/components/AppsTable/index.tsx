@@ -1,15 +1,19 @@
 import { ApplicationObject } from '@deriv/api-types';
 import React, { HTMLAttributes, useCallback, useState } from 'react';
 import { Cell, Column } from 'react-table';
-import DeleteAppDialog from '../Dialogs/DeleteAppDialog';
-import UpdateAppDialog from '../Dialogs/UpdateAppDialog';
-import Table from '../Table';
-import ScopesCell from '../Table/scopes.cell';
-import AppActionsCell from './app-actions.cell';
-import CopyTextCell from '../Table/copy-text.cell';
 import { Button, Heading, Text } from '@deriv/quill-design';
 import { LabelPairedCirclePlusMdRegularIcon } from '@deriv/quill-icons';
+
 import useAppManager from '@site/src/hooks/useAppManager';
+import useDeviceType from '@site/src/hooks/useDeviceType';
+import ResponsiveTable from './responsive-table';
+import AppActionsCell from './app-actions.cell';
+import CopyTextCell from '../Table/copy-text.cell';
+import DeleteAppDialog from '../Dialogs/DeleteAppDialog';
+import ScopesCell from '../Table/scopes.cell';
+import Table from '../Table';
+import UpdateAppDialog from '../Dialogs/UpdateAppDialog';
+import clsx from 'clsx';
 import './apps-table.scss';
 
 export type TAppColumn = Column<ApplicationObject>;
@@ -52,11 +56,15 @@ interface AppsTableProps extends HTMLAttributes<HTMLTableElement> {
   apps: ApplicationObject[];
 }
 
-const AppsTableHeader = () => {
+const AppsTableHeader: React.FC<{ is_desktop: boolean }> = ({ is_desktop }) => {
   const { updateCurrentTab } = useAppManager();
 
   return (
-    <div className='apps_table__header'>
+    <div
+      className={clsx('apps_table__header', {
+        mobile: !is_desktop,
+      })}
+    >
       <div className='apps_table__header__texts'>
         <Heading.H3>App manager</Heading.H3>
         <Text size='md'>
@@ -71,6 +79,7 @@ const AppsTableHeader = () => {
         role='submit'
         iconPosition='start'
         icon={LabelPairedCirclePlusMdRegularIcon}
+        className='apps_table__header__button'
         onClick={() => {
           updateCurrentTab('REGISTER_APP');
         }}
@@ -85,20 +94,36 @@ const AppsTable = ({ apps }: AppsTableProps) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [actionRow, setActionRow] = useState<ApplicationObject>();
+  const { deviceType } = useDeviceType();
+  const is_desktop = deviceType === 'desktop';
 
-  const getCustomCellProps = useCallback((cell: Cell<ApplicationObject, unknown>) => {
+  const getActionObject = useCallback((item: ApplicationObject) => {
     return {
       openDeleteDialog: () => {
-        setActionRow(cell.row.original);
-        // setIsDeleteOpen(true);
+        setActionRow(item);
+        setIsDeleteOpen(true);
       },
 
       openEditDialog: () => {
-        setActionRow(cell.row.original);
-        // setIsEditOpen(true);
+        setActionRow(item);
+        setIsEditOpen(true);
       },
     };
   }, []);
+
+  const getCustomCellProps = useCallback(
+    (cell: Cell<ApplicationObject, unknown>) => {
+      return getActionObject(cell.row.original);
+    },
+    [getActionObject],
+  );
+
+  const accordionActions = useCallback(
+    (item: ApplicationObject) => {
+      return getActionObject(item);
+    },
+    [getActionObject],
+  );
 
   const onCloseEdit = () => {
     setActionRow(null);
@@ -110,20 +135,30 @@ const AppsTable = ({ apps }: AppsTableProps) => {
     setIsDeleteOpen(false);
   };
 
+  const renderTable = () => {
+    return is_desktop ? (
+      <Table
+        data={apps}
+        columns={appTableColumns}
+        getCustomCellProps={getCustomCellProps}
+        parentClass='apps_table'
+      />
+    ) : (
+      <ResponsiveTable apps={apps} accordionActions={accordionActions} />
+    );
+  };
+
   return (
-    <div className='apps_table'>
+    <div
+      className={clsx('apps_table', {
+        mobile: !is_desktop,
+      })}
+    >
       {isDeleteOpen && <DeleteAppDialog appId={actionRow.app_id} onClose={onCloseDelete} />}
       {isEditOpen && <UpdateAppDialog app={actionRow} onClose={onCloseEdit} />}
       <div>
-        <AppsTableHeader />
-        {apps?.length ? (
-          <Table
-            data={apps}
-            columns={appTableColumns}
-            getCustomCellProps={getCustomCellProps}
-            parentClass='apps_table'
-          />
-        ) : null}
+        <AppsTableHeader is_desktop={is_desktop} />
+        {apps?.length ? renderTable() : null}
       </div>
     </div>
   );

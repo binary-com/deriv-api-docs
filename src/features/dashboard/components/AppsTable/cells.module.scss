@@ -1,11 +1,15 @@
 @use 'src/styles/utility' as *;
 
 .appActions {
-  display: flex;
   width: 168px;
+  display: flex;
 
   svg {
     margin-inline: 8px;
     cursor: pointer;
   }
+}
+
+.flex_end {
+  justify-content: flex-end;
 }

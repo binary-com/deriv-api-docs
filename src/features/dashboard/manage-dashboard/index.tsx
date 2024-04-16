@@ -19,11 +19,7 @@ const ManageDashboard = () => {
   const [is_desktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
-    if (deviceType.includes('desktop')) {
-      setIsDesktop(true);
-    } else {
-      setIsDesktop(false);
-    }
+    setIsDesktop(deviceType.includes('desktop'));
   }, [deviceType]);
 
   useEffect(() => {
