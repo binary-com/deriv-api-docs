@@ -101,12 +101,12 @@ const AppsTable = ({ apps }: AppsTableProps) => {
     return {
       openDeleteDialog: () => {
         setActionRow(item);
-        setIsDeleteOpen(true);
+        // setIsDeleteOpen(true);
       },
 
       openEditDialog: () => {
         setActionRow(item);
-        setIsEditOpen(true);
+        // setIsEditOpen(true);
       },
     };
   }, []);
