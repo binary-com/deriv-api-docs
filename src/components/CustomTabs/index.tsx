@@ -9,10 +9,6 @@ const CustomTabs: React.FC<{
 }> = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
-  };
-
   return (
     <div className='tabs'>
       <div className='tabs_header'>
@@ -21,7 +17,7 @@ const CustomTabs: React.FC<{
             <div
               key={index}
               className={`tabs_header__item ${activeTab === index ? 'active' : ''}`}
-              onClick={() => handleTabClick(index)}
+              onClick={() => setActiveTab(index)}
             >
               {tab.label}
             </div>
