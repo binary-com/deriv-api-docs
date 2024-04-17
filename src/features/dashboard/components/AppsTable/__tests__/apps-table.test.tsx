@@ -1,14 +1,24 @@
 import { ApplicationObject } from '@deriv/api-types';
 import useAuthContext from '@site/src/hooks/useAuthContext';
-import { render, screen, cleanup, within } from '@site/src/test-utils';
+import { render, screen, within } from '@site/src/test-utils';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import AppsTable from '..';
+import useDeviceType from '@site/src/hooks/useDeviceType';
+import useAppManager from '@site/src/hooks/useAppManager';
 
 jest.mock('@site/src/hooks/useAuthContext');
 const mockUseAuthContext = useAuthContext as jest.MockedFunction<
   () => Partial<ReturnType<typeof useAuthContext>>
 >;
+
+jest.mock('@site/src/hooks/useDeviceType');
+const mockDeviceType = useDeviceType as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useDeviceType>>
+>;
+mockDeviceType.mockImplementation(() => ({
+  deviceType: 'desktop',
+}));
 
 mockUseAuthContext.mockImplementation(() => ({
   is_authorized: true,
@@ -17,6 +27,18 @@ mockUseAuthContext.mockImplementation(() => ({
     name: 'CR111111',
     token: 'first_token',
   },
+}));
+
+jest.mock('@site/src/hooks/useAppManager');
+const mockUseAppManager = useAppManager as jest.MockedFunction<
+  () => Partial<ReturnType<typeof useAppManager>>
+>;
+const mockUpdateCurrentTab = jest.fn();
+mockUseAppManager.mockImplementation(() => ({
+  getApps: jest.fn(),
+  apps: undefined,
+  tokens: undefined,
+  updateCurrentTab: mockUpdateCurrentTab,
 }));
 
 const fakeApplications: ApplicationObject[] = [
@@ -51,15 +73,12 @@ const fakeApplications: ApplicationObject[] = [
 ];
 
 describe('Apps Table', () => {
-  beforeEach(() => {
+  const renderAppTable = () => {
     render(<AppsTable apps={fakeApplications} />);
-  });
-
-  afterEach(() => {
-    cleanup();
-  });
+  };
 
   it('Should render all applications properly', () => {
+    renderAppTable();
     const rows = screen.getAllByRole('row');
     expect(rows.length).toBe(3);
   });
@@ -138,5 +157,29 @@ describe('Apps Table', () => {
 
     const updateDialogTitle = await screen.findByText('Update App');
     expect(updateDialogTitle).toBeInTheDocument();
+  });
+
+  it('Should render responsive view properly', () => {
+    mockDeviceType.mockImplementation(() => ({
+      deviceType: 'mobile',
+    }));
+    renderAppTable();
+    const accordion = screen.getAllByTestId('dt_accordion_root');
+    expect(accordion.length).toBe(1);
+  });
+
+  it('Should update current tab on clicking Register new application button', async () => {
+    renderAppTable();
+    const registerButton = screen.getByText('Register new application');
+    await userEvent.click(registerButton);
+    expect(mockUpdateCurrentTab).toBeCalled();
+  });
+
+  it('Should open first accordion on item click', async () => {
+    renderAppTable();
+    const item = screen.getByText('first app');
+    await userEvent.click(item);
+    const content = screen.getByText('11111');
+    expect(content).toBeInTheDocument();
   });
 });
