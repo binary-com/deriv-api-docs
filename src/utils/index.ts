@@ -14,6 +14,7 @@ const CURRENCY_MAP = new Map([
   ['Demo', { icon: 'demo', name: 'Demo' }],
   ['UST', { icon: 'tether', name: 'Tether Omni' }],
   ['eUSDT', { icon: 'tether', name: 'Tether ERC20' }],
+  ['tUSDT', { icon: 'tether', name: 'Tether TRC20' }],
   ['BTC', { icon: 'bitcoin', name: 'Bitcoin' }],
   ['ETH', { icon: 'ethereum', name: 'Ethereum' }],
   ['LTC', { icon: 'litecoin', name: 'Litecoin' }],
@@ -143,11 +144,13 @@ export const getServerConfig = () => {
   if (isBrowser) {
     const config_server_url = localStorage.getItem('config.server_url');
     const config_app_id = localStorage.getItem('config.app_id');
+    const is_qa_server = config_server_url?.toLowerCase().includes('qa');
+    const oauth = is_qa_server ? config_server_url : OAUTH_URL;
 
     return {
       serverUrl: config_server_url ?? DEFAULT_WS_SERVER,
       appId: config_app_id ?? getAppId(),
-      oauth: config_server_url ?? OAUTH_URL,
+      oauth,
     };
   } else {
     return {
