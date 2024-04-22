@@ -8,21 +8,18 @@ import useWS from '@site/src/hooks/useWs';
 import useDeviceType from '@site/src/hooks/useDeviceType';
 import { RegisterAppDialogError } from '../components/Dialogs/RegisterAppDialogError';
 import { AppRegisterSuccessModal } from '../components/Modals/AppRegisterSuccessModal';
+import AppManagement from '../manage-apps';
 import './manage-dashboard.scss';
 
 const ManageDashboard = () => {
-  const { apps, getApps, setAppRegisterModalOpen } = useAppManager();
+  const { apps, getApps, setAppRegisterModalOpen, currentTab, updateCurrentTab } = useAppManager();
   const { tokens } = useApiToken();
   const { send: registerApp, error, clear, data, is_loading } = useWS('app_register');
   const { deviceType } = useDeviceType();
   const [is_desktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
-    if (deviceType.includes('desktop')) {
-      setIsDesktop(true);
-    } else {
-      setIsDesktop(false);
-    }
+    setIsDesktop(deviceType.includes('desktop'));
   }, [deviceType]);
 
   useEffect(() => {
@@ -36,6 +33,14 @@ const ManageDashboard = () => {
   useEffect(() => {
     getApps();
   }, [getApps]);
+
+  useEffect(() => {
+    if (!apps?.length && !tokens?.length) {
+      updateCurrentTab('REGISTER_APP');
+    } else {
+      updateCurrentTab('MANAGE_APPS');
+    }
+  }, [tokens, apps, updateCurrentTab]);
 
   const submit = useCallback(
     (data) => {
@@ -54,6 +59,18 @@ const ManageDashboard = () => {
         <Spinner />
       </div>
     );
+
+  const renderScreen = () => {
+    switch (currentTab) {
+      case 'REGISTER_APP':
+        return <AppRegister submit={submit} />;
+      case 'MANAGE_APPS':
+        return <AppManagement />;
+      default:
+        return <AppRegister submit={submit} />;
+    }
+  };
+
   return (
     <React.Fragment>
       {error && <RegisterAppDialogError error={error} onClose={clear} />}
@@ -62,23 +79,7 @@ const ManageDashboard = () => {
         onCancel={() => setAppRegisterModalOpen(false)}
         onConfigure={() => setAppRegisterModalOpen(false)}
       />
-      <AppDashboardContainer>
-        {apps.length || tokens.length ? (
-          // will be handle in later phase
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              height: '80px',
-              alignItems: 'center',
-            }}
-          >
-            Component development in progress!
-          </div>
-        ) : (
-          <AppRegister submit={submit} />
-        )}
-      </AppDashboardContainer>
+      <AppDashboardContainer>{renderScreen()}</AppDashboardContainer>
     </React.Fragment>
   );
 };

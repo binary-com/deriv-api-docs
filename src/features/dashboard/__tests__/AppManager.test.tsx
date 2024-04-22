@@ -34,6 +34,7 @@ const mockUseAppManager = useAppManager as jest.MockedFunction<
 mockUseAppManager.mockImplementation(() => ({
   setIsDashboard: jest.fn(),
   getApps: jest.fn(),
+  updateCurrentTab: jest.fn(),
 }));
 
 jest.mock('react-table');
@@ -78,6 +79,7 @@ describe('AppManager', () => {
       setIsDashboard: jest.fn(),
       apps: [],
       getApps: jest.fn(),
+      updateCurrentTab: jest.fn(),
     }));
     mockUseApiToken.mockImplementation(() => ({
       tokens: [],

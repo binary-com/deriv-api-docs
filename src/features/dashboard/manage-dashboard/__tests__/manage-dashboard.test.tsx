@@ -14,6 +14,7 @@ mockUseAppManager.mockImplementation(() => ({
   getApps: jest.fn(),
   apps: undefined,
   tokens: undefined,
+  updateCurrentTab: jest.fn(),
 }));
 
 jest.mock('@site/src/hooks/useDeviceType');
@@ -45,6 +46,7 @@ describe('ManageDashboard', () => {
       apps: [],
       tokens: [],
       getApps: jest.fn(),
+      updateCurrentTab: jest.fn(),
     }));
     mockDeviceType.mockImplementation(() => ({
       deviceType: 'mobile',
@@ -60,6 +62,7 @@ describe('ManageDashboard', () => {
       apps: [],
       tokens: [],
       getApps: mockGetApps,
+      updateCurrentTab: jest.fn(),
     }));
     render(<MemoizedManageDashboard />);
 
@@ -105,6 +108,7 @@ describe('ManageDashboard', () => {
       apps: [],
       tokens: [],
       setAppRegisterModalOpen: mockModalOpenSetter,
+      updateCurrentTab: jest.fn(),
     }));
 
     render(<MemoizedManageDashboard />);
@@ -127,6 +131,7 @@ describe('ManageDashboard', () => {
       tokens: [],
       setAppRegisterModalOpen: mockModalOpenSetter,
       app_register_modal_open: true,
+      updateCurrentTab: jest.fn(),
     }));
 
     render(<MemoizedManageDashboard />);
@@ -145,6 +150,7 @@ describe('ManageDashboard', () => {
       tokens: [],
       setAppRegisterModalOpen: mockModalOpenSetter,
       app_register_modal_open: true,
+      updateCurrentTab: jest.fn(),
     }));
 
     render(<MemoizedManageDashboard />);
