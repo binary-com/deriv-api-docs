@@ -15,5 +15,5 @@ runs:
       env:
         NODE_ENV: ${{ inputs.NODE_ENV }}
         TRACKJS_TOKEN: ${{ inputs.TRACKJS_TOKEN }}
-      run: npm run build -- --locale fr
+      run: npm run build -- --locale en
       shell: bash
