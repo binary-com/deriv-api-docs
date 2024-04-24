@@ -474,12 +474,6 @@ main[class*='docMainContainer'] .container {
   color: var(--colors-coral500);
 }
 
-// removes language switcher from sidebar
-// docusaurus puts all navbaritems into sidebar in responsive design by default
-.menu__list-item:last-child {
-  display: none;
-}
-
 [class*='tocCollapsibleButton'] {
   box-sizing: border-box;
   &::after {
