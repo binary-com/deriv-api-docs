@@ -51,5 +51,9 @@ export default function LocaleDropdownNavbarItem({
   const items = [...dropdownItemsBefore, ...localeItems, ...dropdownItemsAfter];
   const dropdownLabel = getShortNames(currentLocale);
 
-  return <DropdownNavbarItem {...props} label={<>{dropdownLabel}</>} items={items} />;
+  return (
+    <div className='language_switcher'>
+      <DropdownNavbarItem {...props} label={<>{dropdownLabel}</>} items={items} />;
+    </div>
+  );
 }
