@@ -1,0 +1,8 @@
+{
+  "label": "Lenguajes",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Aprenda a utilizar las funciones de la Deriv WebSocket API con el lenguaje de su elección"
+  }
+}

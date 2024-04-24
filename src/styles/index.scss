@@ -237,7 +237,7 @@ div[class*='sidebarViewport'] {
     .search-overlay {
       display: none;
     }
-    &.search-closed + div[class*='searchBox'] {
+    &.search-closed ~ div[class*='searchBox'] {
       display: none;
     }
     &.search-open {
@@ -419,6 +419,65 @@ main[class*='docMainContainer'] .container {
 
 .menu__caret {
   margin-right: rem(3.3);
+}
+
+.dropdown > .navbar__link:after {
+  display: none;
+}
+
+.dropdown__menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: rem(1.6);
+  padding: rem(1.6) rem(1.6);
+  background-color: var(--colors-greyLight100);
+  border-radius: rem(0.8);
+  box-shadow: 0 0 rem(2) rgba(0, 0, 0, 0.05), 0 rem(1.6) rem(1.6) rgba(0, 0, 0, 0.05);
+  visibility: visible;
+}
+
+.navbar__items--right .dropdown__link {
+  font-weight: normal;
+  font-size: rem(1.6);
+  line-height: rem(2.4);
+  @media (max-width: 1201px) {
+    font-size: rem(1.4);
+  }
+}
+
+.navbar__items--right a {
+  @media (max-width: 1201px) {
+    font-size: rem(1.4);
+  }
+}
+
+.dropdown {
+  height: 100%;
+  padding-top: rem(2.5);
+  @media screen {
+    display: grid;
+  }
+}
+
+.dropdown:hover {
+  .navbar__link {
+    color: var(--colors-coral500);
+  }
+}
+
+.dropdown__link--active {
+  color: var(--colors-coral500);
+  background-color: var(--colors-greyLight100);
+}
+
+.dropdown__link--active:hover {
+  color: var(--colors-coral500);
+}
+
+// removes language switcher from sidebar
+// docusaurus puts all navbaritems into sidebar in responsive design by default
+.menu__list-item:last-child {
+  display: none;
 }
 
 [class*='tocCollapsibleButton'] {
