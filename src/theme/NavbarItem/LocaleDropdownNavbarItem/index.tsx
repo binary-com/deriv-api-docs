@@ -53,7 +53,7 @@ export default function LocaleDropdownNavbarItem({
 
   return (
     <div className='language_switcher'>
-      <DropdownNavbarItem {...props} label={<>{dropdownLabel}</>} items={items} />;
+      <DropdownNavbarItem {...props} label={<>{dropdownLabel}</>} items={items} />
     </div>
   );
 }
