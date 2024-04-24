@@ -6,6 +6,7 @@ import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import type { LinkLikeNavbarItemProps } from '@theme/NavbarItem';
 import type { Props } from '@theme/NavbarItem/LocaleDropdownNavbarItem';
 import classnames from 'classnames';
+import './locale-dropdown-navbar-item.scss';
 
 export default function LocaleDropdownNavbarItem({
   dropdownItemsBefore,
