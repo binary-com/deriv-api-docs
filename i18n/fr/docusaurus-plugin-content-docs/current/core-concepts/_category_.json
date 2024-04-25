@@ -1,8 +1,0 @@
-{
-  "label": "Concepts fondamentaux",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Découvrez les concepts fondamentaux du serveur Deriv API WebSocket et ses fonctionnalités"
-  }
-}

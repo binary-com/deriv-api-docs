@@ -1,8 +1,0 @@
-{
-  "label": "Conceptos fundamentales",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Aprenda los conceptos fundamentales del servidor WebSocket de la Deriv API y sus características"
-  }
-}
