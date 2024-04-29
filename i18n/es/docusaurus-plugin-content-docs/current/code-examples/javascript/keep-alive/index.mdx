@@ -1,0 +1,24 @@
+---
+title: Mantener Viva
+draft: false
+sidebar_label: Mantener Viva
+sidebar_position: 7
+tags:
+  - código
+  - ejemplo
+  - mantener
+  - vivo
+keywords:
+  - código
+  - ejemplo
+  - mantenga
+  - vivo
+description: Ejemplo de código de Mantener Viva
+---
+
+import SandboxIframe from '@site/src/components/SandboxIframe';
+import { sandboxes } from '@site/src/components/SandboxIframe/utility/sandboxes';
+
+En este ejemplo verá cómo mantener viva una conexión al obtener propuestas de contrato a través de la Deriv API. Este ejemplo mantiene viva la conexión enviando un ping cada 30 segundos.
+
+<SandboxIframe sandbox={sandboxes.keep_alive} />

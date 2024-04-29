@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "crowdin": "crowdin",
     "docusaurus": "docusaurus",
     "start:auth": "npx netlify-cms-proxy-server",
     "start": "docker compose up -d && docusaurus start --no-open",
@@ -60,6 +61,7 @@
     "@babel/preset-typescript": "^7.24.1",
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@crowdin/cli": "^3.19.2",
     "@deriv/api-types": "^1.0.80",
     "@docusaurus/module-type-aliases": "^2.4.0",
     "@testing-library/jest-dom": "^5.16.5",
