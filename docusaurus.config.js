@@ -17,7 +17,7 @@ const config = {
   organizationName: 'binary-com', // Usually your GitHub org/user name.
   projectName: 'deriv-api-docs', // Usually your repo name.
   trailingSlash: false,
-
+  onBrokenLinks: 'ignore',
   customFields: {
     trackJsToken: process.env.TRACKJS_TOKEN,
   },

@@ -1,0 +1,24 @@
+---
+title: Garder active
+draft: false
+sidebar_label: Garder active
+sidebar_position: 7
+tags:
+  - code
+  - exemple 
+  - garder
+  - active
+keywords:
+  - code
+  - exemple 
+  - garder
+  - active
+description: Exemple de code Garder active
+---
+
+import SandboxIframe from '@site/src/components/SandboxIframe';
+import { sandboxes } from '@site/src/components/SandboxIframe/utility/sandboxes';
+
+Dans cet exemple, vous verrez comment garder une connexion active lorsque vous obtenez des propositions de contrat au moyen de l'API Deriv. Ce code garde la connexion active en envoyant un ping toutes les 30 secondes.
+
+<SandboxIframe sandbox={sandboxes.keep_alive} />
