@@ -8,7 +8,7 @@ permissions: write-all
 jobs:
   crowdin:
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
