@@ -1,7 +1,7 @@
 {
   "version.label": {
     "message": "Next",
-    "description": "The label for version current"
+    "description": "The label for version current."
   },
   "sidebar.tutorialSidebar.category.Core concepts": {
     "message": "Core concepts",
