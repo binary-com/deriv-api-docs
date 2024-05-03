@@ -3,10 +3,11 @@ name: Crowdin Action
 on:
   workflow_dispatch:
 
-permissions: write-all
-
 jobs:
   crowdin:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     environment: Production
     steps:
