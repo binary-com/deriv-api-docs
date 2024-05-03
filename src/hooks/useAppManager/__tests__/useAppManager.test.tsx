@@ -50,9 +50,9 @@ describe('use App Manager', () => {
     await expect(wsServer).toReceiveMessage({ app_list: 1, req_id: 1 });
   });
 
-  it('Should have MANAGE_TOKENS as initial value for currentTab', () => {
+  it('Should have MANAGE_APPS as initial value for currentTab', () => {
     const { result } = renderHook(() => useAppManager(), { wrapper });
-    expect(result.current.currentTab).toBe('MANAGE_TOKENS');
+    expect(result.current.currentTab).toBe('MANAGE_APPS');
   });
 
   it('Should update currentTab value', () => {

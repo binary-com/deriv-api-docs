@@ -10,6 +10,8 @@ export type TAppManagerContext = {
   updateCurrentTab: (tab: TDashboardTab) => void;
   is_dashboard: boolean;
   setIsDashboard: Dispatch<SetStateAction<boolean>>;
+  app_register_modal_open: boolean;
+  setAppRegisterModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export const AppManagerContext = createContext<TAppManagerContext | null>(null);
