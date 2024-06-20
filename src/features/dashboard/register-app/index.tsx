@@ -36,7 +36,7 @@ const AppRegistration = () => {
       });
       setFormIsCleared(true);
     },
-    [registerApp],
+    [registerApp, currentLoginAccount.name],
   );
 
   return (
